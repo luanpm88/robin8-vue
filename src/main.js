@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
+import '@styles/iconfont.css'
 import '@styles/default.scss'
 
 Vue.config.productionTip = false
