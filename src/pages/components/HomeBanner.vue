@@ -1,10 +1,10 @@
 <template>
-  <div class="header"></div>
+  <div class="home-banner"></div>
 </template>
 
 <script>
 export default {
-  name: 'Header',
+  name: 'HomeBanner',
   data () {
     return {
 
@@ -14,5 +14,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.home-banner {
+  height: 200px;
+}
 </style>

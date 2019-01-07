@@ -1,10 +1,10 @@
 <template>
-  <div class="footer"></div>
+  <div class="page-footer"></div>
 </template>
 
 <script>
 export default {
-  name: 'Footer',
+  name: 'PageFooter',
   data () {
     return {
     }
