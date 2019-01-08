@@ -7,7 +7,29 @@
 
       <div class="home-container pull-right">
         <home-banner></home-banner>
-        <div class="mt20"></div>
+        <div class="icon-grid-panel mt20">
+          <router-link to="/" tag="div" class="item">
+            <div class="box">
+              <div class="iconfont icon-search"></div>
+              <h5 class="title">查找KOL</h5>
+              <h6 class="sub-title">Search Engine</h6>
+            </div>
+          </router-link>
+          <router-link to="/" tag="div" class="item">
+            <div class="box">
+              <div class="iconfont icon-doc"></div>
+              <h5 class="title">创建新活动</h5>
+              <h6 class="sub-title">Creat Campaign</h6>
+            </div>
+          </router-link>
+          <router-link to="/" tag="div" class="item">
+            <div class="box">
+              <div class="iconfont icon-trophy"></div>
+              <h5 class="title">活动列表</h5>
+              <h6 class="sub-title">Campaign List</h6>
+            </div>
+          </router-link>
+        </div>
         <div class="kols-container mt20"></div>
       </div>
     </div>
@@ -36,6 +58,39 @@ export default {
 <style lang="scss" scoped>
 .home-container {
   width: 980px;
+  .icon-grid-panel {
+    @include display-flex;
+    $height: 200px;
+    $gap: 10px;
+    & > .item {
+      @include display-flex;
+      @include flex(1);
+      height: $height;
+      margin-right: $gap;
+      align-items: center;
+      justify-content: center;
+      background-color: nth($cyan, 1);
+      cursor: pointer;
+      .box {
+        text-align: center;
+        color: #fff;
+      }
+      .iconfont {
+        height: 100px;
+        line-height: 100px;
+        font-size: 6rem;
+      }
+      .title {
+        font-size: 1.9rem;
+      }
+      .sub-title {
+        font-size: 1.4rem;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
   .kols-container {
     min-height: 500px;
     box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08);
