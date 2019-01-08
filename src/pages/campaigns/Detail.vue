@@ -17,7 +17,7 @@ import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 
 export default {
-  name: 'CreateCampaign',
+  name: 'CampaignDetail',
   components: {
     PageHeader,
     MainNav
