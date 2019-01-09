@@ -34,7 +34,7 @@ export default new Router({
           name: 'CampaignCreate',
           component: CampaignCreate,
           meta: {
-            title: '创建新活动 - 活动基本信息'
+            title: '创建新活动'
           }
         },
         {
@@ -50,7 +50,7 @@ export default new Router({
               name: 'CampaignPreview',
               component: CampaignPreview,
               meta: {
-                title: '创建新活动 - 活动基本信息'
+                title: '创建新活动'
               }
             },
             {
@@ -58,7 +58,7 @@ export default new Router({
               name: 'ChooseKols',
               component: ChooseKols,
               meta: {
-                title: '创建新活动 - KOL参与'
+                title: '创建新活动'
               }
             },
             {

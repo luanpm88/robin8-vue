@@ -5,8 +5,9 @@
     <div class="container mt50 clearfix">
       <main-nav class="pull-left"></main-nav>
 
-      <div class="home-container pull-right">
-
+      <div class="campaign-container pull-right">
+        <container-header></container-header>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -15,12 +16,14 @@
 <script>
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
+import ContainerHeader from './components/ContainerHeader'
 
 export default {
   name: 'Campaigns',
   components: {
     PageHeader,
-    MainNav
+    MainNav,
+    ContainerHeader
   },
   data () {
     return {
@@ -30,5 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.campaign-container {
+  width: 980px;
+}
 </style>

@@ -15,14 +15,14 @@
               <h6 class="sub-title">Search Engine</h6>
             </div>
           </router-link>
-          <router-link to="/campaigns/1/edit" tag="div" class="item">
+          <router-link to="/campaigns/create" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建新活动</h5>
               <h6 class="sub-title">Creat Campaign</h6>
             </div>
           </router-link>
-          <router-link to="/" tag="div" class="item">
+          <router-link to="/campaigns" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-trophy"></div>
               <h5 class="title">活动列表</h5>
