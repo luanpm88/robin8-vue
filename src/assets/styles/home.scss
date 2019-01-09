@@ -1,0 +1,20 @@
+// @import 'default.scss';
+.home-analytic{
+    padding: $font-lg-ns;
+}
+.h-analytic-title{
+    margin-bottom: $font-lg-s;
+    color: nth($purple, 1);
+    font-size: $font-lg-s;
+}
+.h-analytic-top{
+    // //    color: nth($gray, 1);
+    // //    background: lightgrey;
+    
+}
+.h-analytic-con{
+    margin-top: 20px;
+    #line-chart{
+        height: 325px !important;
+    }
+}

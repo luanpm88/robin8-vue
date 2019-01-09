@@ -8,7 +8,10 @@
       <div class="home-container pull-right">
         <home-banner></home-banner>
         <div class="mt20"></div>
-        <div class="kols-container mt20"></div>
+        <!-- analytics -->
+        <div class="kols-container mt20">
+          <home-analytic></home-analytic>
+        </div>
       </div>
     </div>
   </div>
@@ -18,13 +21,15 @@
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import HomeBanner from './components/HomeBanner'
+import HomeAnalytic from './components/HomeContent/Analytics'
 
 export default {
   name: 'Home',
   components: {
     PageHeader,
     MainNav,
-    HomeBanner
+    HomeBanner,
+    HomeAnalytic
   },
   data () {
     return {
@@ -42,4 +47,5 @@ export default {
     background-color: #fff;
   }
 }
+
 </style>

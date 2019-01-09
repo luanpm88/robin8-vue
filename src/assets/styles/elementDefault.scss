@@ -1,0 +1,36 @@
+// el-tabs style
+.el-tabs__item{
+    font-size: $font-sm;
+    height: $font-lg-b;
+    line-height: $font-lg-b;
+}
+.el-tabs--card>.el-tabs__header{
+    border: none;
+}
+.el-tabs--card>.el-tabs__header .el-tabs__nav{
+    border: 1px solid nth($purple, 1);
+    // border-bottom: none;
+    border-radius: $font-lg;
+    font-weight: normal;
+    overflow: hidden;
+}
+.el-tabs__item{
+    color: nth($purple, 1);
+    padding: 0 26px;
+}
+.el-tabs--card>.el-tabs__header .el-tabs__item{
+    border-left: 1px solid nth($purple, 1);
+    &:hover{
+        color: nth($purple, 1);
+    }
+}
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active{
+    border-bottom-color: transparent;
+    &:hover{
+        color: $white
+    }
+}
+.el-tabs__item.is-active{
+    background-color: nth($purple, 1);
+    color: $white
+}
