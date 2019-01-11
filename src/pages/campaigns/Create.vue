@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div class="campaign-create-container">
+    <campaign-create-process
+      :renderData="processStatus"
+      class="mt20"
+    ></campaign-create-process>
+
     <div class="panel default-panel mt20">
       <div class="panel-head">
         <h5 class="title text-center">基础信息</h5>
@@ -133,6 +138,9 @@
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <tags-list></tags-list>
+          </div>
           <div class="form-group clearfix">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
@@ -171,12 +179,33 @@
               <div class="form-tips">请填写期望的粉丝地域描述</div>
             </div>
           </div>
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-blue btn-outline" @click="">搜索大V</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="text-center">
-      <router-link to="/campaign/1/preview" tag="div" class="btn btn-cyan">下一步</router-link>
+    <div class="row mt20 clearfix">
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="为您推荐的大V"
+        ></kols-list-panel>
+      </div>
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="您可能感兴趣的大V"
+        ></kols-list-panel>
+      </div>
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="您收藏的大V"
+        ></kols-list-panel>
+      </div>
+    </div>
+
+    <div class="text-center create-btn-area">
+      <button type="button" class="btn btn-cyan next-btn" @click="bindNext">下一步</button>
     </div>
   </div>
 </template>
@@ -184,15 +213,27 @@
 <script>
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import TagsList from '@components/TagsList'
+import CampaignCreateProcess from './components/CampaignCreateProcess'
+import KolsListPanel from './components/KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 
 export default {
   name: 'CampaignCreate',
   components: {
+    TagsList,
+    CampaignCreateProcess,
+    KolsListPanel,
     VueCoreImageUpload
   },
   data () {
     return {
+      processStatus: {
+        length: 6,
+        current: 0,
+        index: 1,
+        title: '介绍你自己'
+      },
       uploadUrl: apiConfig.uploadUrl,
       pictures: [],
       loading: false
@@ -224,6 +265,9 @@ export default {
         this.pictures.splice(index, 1)
       }
       console.log(this.pictures)
+    },
+    bindNext () {
+      this.$router.push('/campaign/1/preview')
     }
   }
 }
@@ -268,6 +312,12 @@ export default {
     display: inline-block;
     font-size: 8rem;
     cursor: pointer;
+  }
+}
+.create-btn-area {
+  padding: 30px;
+  .next-btn {
+    width: 150px;
   }
 }
 .upload-imgs-list {
