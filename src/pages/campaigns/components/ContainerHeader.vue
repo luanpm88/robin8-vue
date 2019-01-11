@@ -19,18 +19,17 @@ export default {
     }
   },
   created () {
-    this.getMetaData()
+    this.getTitle()
   },
   methods: {
-    getMetaData () {
-      this.$route.matched.forEach((item, index) => {
-        this.$route.path === item.path ? this.title = item.meta.title : ''
-      })
+    getTitle () {
+      let routes = this.$route.matched
+      this.title = routes[routes.length - 1].meta.title
     }
   },
   watch: {
     $route () {
-      this.getMetaData()
+      this.getTitle()
     }
   }
 }
