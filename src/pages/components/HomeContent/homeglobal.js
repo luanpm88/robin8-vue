@@ -37,6 +37,28 @@ let oneData = {
             'Color',
             'RawTexture',
         ]
-    }
+    },
+    weiboList: [
+        {
+            name: 'Anna Strong',
+            describe: 'Visual Designer,Google Inc'
+        },
+        {
+            name: 'Milano Esco',
+            describe: 'Well-known car blogger'
+        },
+        {
+            name: 'Nick Bold',
+            describe: 'Web Developer, Facebook Inc'
+        },
+        {
+            name: 'Wiltor Delton',
+            describe: 'Project Manager'
+        },
+        {
+            name: 'Nick Stone',
+            describe: 'Visual Designer, Github Inc'
+        }
+    ]
 }
 export default oneData;

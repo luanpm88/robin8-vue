@@ -1,5 +1,7 @@
 // @import 'default.scss';
-
+span{
+    display: inline-block;
+}
 .h-analytic-title{
     color: nth($purple, 1);
     font-size: $font-lg-s;
@@ -27,9 +29,9 @@
     
 }
 #tags_ball{
-    width: 54%;
+    width: 64%;
     display: block;
-    margin: 10% auto 2%;
+    margin: 2% auto 2%;
 }
 .home-show{
     .h-analytic-title{
@@ -39,6 +41,60 @@
     }
 }
 // home-kol
-.home-kol{
-    
+.home-kol{}
+.home-kol-con{
+    margin: $font-lg $font-lg-ns;
+    padding-bottom: $font-lg-b;
+}
+.home-kol-img{
+    width: 56px;
+    height: 56px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    border-radius: 50%;
+}
+.home-kol-star{
+    display: inline-block;
+    width: 20px;
+    height: 19px;
+    background: #FFD666FF;
+    margin-top: $font-nm-l;
+}
+.home-kol-message{
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background: #B37FEBFF;
+    float: right;
+    margin-top: $font-nm-l;
+}
+.home-kol-clomn{
+    border-bottom:1px solid #0000001A;
+    padding: $font-nm 0px;
+    &:last-child{
+        border-bottom:1px solid transparent;
+    }
+}
+.home-kol-txt{
+    padding-top: 7px;
+    color: #575962FF;
+    strong{
+        color: #575962FF;
+        font-size: $font-nm-s;
+        font-weight: normal;
+    }
+}
+.home-kol-clomn-box{
+    padding-bottom: 40px;
+}
+.home-kol-clomn-btnbox{
+    text-align: center;
+}
+.home-kol-clomn-btn{
+    padding: 0 $font-nm-b;
+    line-height:$font-lg;
+    color:rgba(179,127,235,1);
+    border-radius: $font-lg-s;
+    border: 1px solid nth($purple, 1);
+    cursor: pointer;
 }

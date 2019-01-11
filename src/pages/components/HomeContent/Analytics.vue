@@ -17,14 +17,16 @@
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="Concept" name="second">
-            <el-col :xs="24" :sm="24" :md="12" :lg="12">
-              <tag-charts :tags="parentTags"></tag-charts>
-              <p class="h-analytic-type">微博</p>
-            </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="12">
-              <tag-charts :tags="parentTagsTwo"></tag-charts>
-              <p class="h-analytic-type">微信</p>
-            </el-col>
+            <el-row :gutter="70" class="h-analytic-con">
+              <el-col :xs="24" :sm="24" :md="12" :lg="12">
+                <tag-charts :tags="parentTags"></tag-charts>
+                <p class="h-analytic-type">微博</p>
+              </el-col>
+              <el-col :xs="24" :sm="24" :md="12" :lg="12">
+                <tag-charts :tags="parentTagsTwo"></tag-charts>
+                <p class="h-analytic-type">微信</p>
+              </el-col>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="Competitors" name="third">
             <el-row :gutter="70" class="h-analytic-con">
