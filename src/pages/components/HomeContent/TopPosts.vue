@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="home-kol">
-    <h5 class="h-analytic-title">Recommended Kols</h5>
+    <h5 class="h-analytic-title">Top Posts</h5>
     <div class="home-kol-con">
       <el-tabs v-model="kolActiveName" type="card" @tab-click="handleClick">
         <el-tab-pane label="微博" name="first">
