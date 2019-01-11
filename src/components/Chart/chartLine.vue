@@ -17,6 +17,11 @@ export default {
       required: true
     }
   },
+  watch: {
+    childData () {
+        this.fillData();
+    }
+  },
   data() {
     return {
       datacollection: null,

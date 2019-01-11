@@ -1,20 +1,44 @@
 // @import 'default.scss';
-.home-analytic{
-    padding: $font-lg-ns;
-}
+
 .h-analytic-title{
-    margin-bottom: $font-lg-s;
     color: nth($purple, 1);
     font-size: $font-lg-s;
 }
-.h-analytic-top{
-    // //    color: nth($gray, 1);
-    // //    background: lightgrey;
-    
+.home-analytic{
+    padding: $font-lg-ns;
+    .h-analytic-title{
+        margin-bottom: $font-lg-s;
+    }
+}
+.h-analytic-type{
+    text-align: center;
+    color: nth($purple, 1);
 }
 .h-analytic-con{
     margin-top: 20px;
     #line-chart, #bar-chart,#horizontalbar-chart{
         height: 325px !important;
     }
+    #pie-chart{
+        margin: 0px auto $font-sm;
+        width: 335px !important;
+        height: 325px !important;
+    }
+    
+}
+#tags_ball{
+    width: 54%;
+    display: block;
+    margin: 10% auto 2%;
+}
+.home-show{
+    .h-analytic-title{
+        border-bottom:1px solid #0000001A;
+        line-height: 60px;
+        padding: 0 $font-lg-ns;
+    }
+}
+// home-kol
+.home-kol{
+    
 }

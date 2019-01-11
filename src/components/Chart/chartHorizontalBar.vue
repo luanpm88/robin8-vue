@@ -66,6 +66,11 @@ export default {
       }
     };
   },
+  watch: {
+    childData () {
+        this.fillData();
+    }
+  },
   mounted() {
     this.fillData();
   },
