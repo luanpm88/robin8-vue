@@ -1,15 +1,15 @@
 <!--  -->
 <template>
   <div>
-    <line-chart :chart-data="datacollection" :options="chartOptions"></line-chart>
+    <pie-chart :chart-data="datacollection" :options="chartOptions"></pie-chart>
   </div>
 </template>
 
 <script>
-import LineChart from "../Chart/ChartCommnJs/LineChart.js";
+import PieChart from "../Chart/ChartCommnJs/PieChart.js";
 export default {
   components: {
-    LineChart
+    PieChart
   },
   props: {
     childData: {

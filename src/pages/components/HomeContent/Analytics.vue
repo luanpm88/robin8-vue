@@ -5,17 +5,28 @@
     <div class="h-analytic-top">
       <el-tabs v-model="topActiveName" type="card" @tab-click="handleClick">
         <el-tab-pane label="Trends" name="first">
-            <el-row :gutter="70" class="h-analytic-con">
-                <el-col :xs="24" :sm="24" :md="12" :lg="12">
-                    <line-charts :childData="onParentsData"></line-charts>
-                </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="12">
-                    <line-charts :childData="onParentsData"></line-charts>
-                </el-col>
-            </el-row>
+          <el-row :gutter="70" class="h-analytic-con">
+            <el-col :xs="24" :sm="24" :md="12" :lg="12">
+              <line-charts :childData="onParentsData"></line-charts>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="12" :lg="12">
+              <line-charts :childData="onParentsData"></line-charts>
+            </el-col>
+          </el-row>
         </el-tab-pane>
-        <el-tab-pane label="Concept" name="second">Concept</el-tab-pane>
-        <el-tab-pane label="Competitors" name="third">Competitors</el-tab-pane>
+        <el-tab-pane label="Concept" name="second">
+          
+        </el-tab-pane>
+        <el-tab-pane label="Competitors" name="third">
+          <el-row :gutter="70" class="h-analytic-con">
+            <el-col :xs="24" :sm="24" :md="12" :lg="12">
+              <bar-charts :childData="twoParentsData"></bar-charts>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="12" :lg="12">
+              <bar-charts :childData="twoParentsData"></bar-charts>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
         <el-tab-pane label="Sentiments" name="fourth">Sentiments</el-tab-pane>
       </el-tabs>
     </div>
@@ -23,21 +34,24 @@
 </template>
 
 <script>
-import homeDataJs from '../HomeContent/homeglobal.js';
+import homeDataJs from "../HomeContent/homeglobal.js";
 import LineCharts from "../../../components/Chart/chartLine";
+import BarCharts from "../../../components/Chart/chartHorizontalBar";
 export default {
   components: {
-    LineCharts
+    LineCharts,
+    BarCharts
   },
   data() {
     return {
-      topActiveName: "first",
-      onParentsData: homeDataJs.linData
+      topActiveName: "third",
+      onParentsData: homeDataJs.linData,
+      twoParentsData: homeDataJs.BarData
     };
   },
   methods: {
     handleClick(tab, event) {
-        console.log(homeDataJs.linData);
+      console.log(homeDataJs.linData);
       //   console.log(tab, event);
     }
   }
