@@ -153,11 +153,15 @@ export default {
     float: left;
     line-height: $font-lg-b;
     color: nth($purple, 1);
+    border-right: 1px solid nth($purple, 1);
     padding:0 20px;
     cursor: pointer;
     &.active{
       background: nth($purple, 1);
       color: $white;
+    }
+    &:last-child{
+      border-right: 1px solid transparent;
     }
   }
 }

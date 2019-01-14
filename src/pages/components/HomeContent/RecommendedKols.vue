@@ -13,26 +13,14 @@
       </ul>
       <div v-if="cur === 0" class>
         <div class="home-kol-clomn-box">
-          <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
-            <div class="home-kol-img">
-              <img src alt class>
-            </div>
-            <div class="home-kol-txt">
-              <strong>{{item.name}}</strong>
-              <p>{{item.describe}}</p>
-            </div>
-            <div class="home-kol-collection">
-              <span class="home-kol-star"></span>
-              <span class="home-kol-message"></span>
-            </div>
-          </div>
+          <kols-list-item v-for="(item, index) in weiboList" :key="index" :dataList="item"></kols-list-item>
         </div>
         <div class="home-kol-clomn-btnbox">
           <span class="home-kol-clomn-btn">查看更多</span>
         </div>
       </div>
       <div v-else class>
-         <div class="home-kol-clomn-box">
+         <!-- <div class="home-kol-clomn-box">
           <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
             <div class="home-kol-img">
               <img src alt class>
@@ -46,7 +34,7 @@
               <span class="home-kol-message"></span>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="home-kol-clomn-btnbox">
           <span class="home-kol-clomn-btn">查看更多</span>
         </div>
@@ -57,7 +45,11 @@
 
 <script>
 import homeDataJs from "../HomeContent/homeglobal.js";
+import KolsListItem from '../../campaigns/components/KolsListItem.1'
 export default {
+  components: {
+    KolsListItem
+  },
   data() {
     return {
       cur: 0,
@@ -107,11 +99,15 @@ span{
     float: left;
     line-height: 28px;
     color: nth($purple, 1);
+    border-right: 1px solid nth($purple, 1);
     padding: 0 20px;
     cursor: pointer;
     &.active {
       background: nth($purple, 1);
       color: $white;
+    }
+    &:last-child{
+      border-right: 1px solid transparent;
     }
   }
 }

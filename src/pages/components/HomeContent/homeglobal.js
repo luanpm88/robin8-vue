@@ -41,23 +41,28 @@ let oneData = {
     weiboList: [
         {
             name: 'Anna Strong',
-            describe: 'Visual Designer,Google Inc'
+            describe: 'Visual Designer,Google Inc',
+            isMsg: true
         },
         {
             name: 'Milano Esco',
-            describe: 'Well-known car blogger'
+            describe: 'Well-known car blogger',
+            isMsg: true
         },
         {
             name: 'Nick Bold',
-            describe: 'Web Developer, Facebook Inc'
+            describe: 'Web Developer, Facebook Inc',
+            isMsg: true
         },
         {
             name: 'Wiltor Delton',
-            describe: 'Project Manager'
+            describe: 'Project Manager',
+            isMsg: true
         },
         {
             name: 'Nick Stone',
-            describe: 'Visual Designer, Github Inc'
+            describe: 'Visual Designer, Github Inc',
+            isMsg: true
         }
     ]
 }
