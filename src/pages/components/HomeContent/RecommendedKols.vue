@@ -85,12 +85,14 @@ export default {
 span{
   display: inline-block;
 }
-.h-analytic-title {
-  color: nth($purple, 1);
-  font-size: $font-lg-s;
-  border-bottom: 1px solid #0000001a;
-  line-height: 60px;
-  padding: 0 $font-lg-ns;
+.home-kol{
+  .h-analytic-title {
+    color: nth($purple, 1);
+    font-size: $font-lg-s;
+    border-bottom: 1px solid #0000001a;
+    line-height: 60px;
+    padding: 0 $font-lg-ns;
+  }
 }
 .h-analytic-tabcon {
   padding: 30px 0px 0px;
