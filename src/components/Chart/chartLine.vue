@@ -110,4 +110,7 @@ export default {
 };
 </script>
 <style>
+#line-chart{
+    height: 325px !important;
+}
 </style>

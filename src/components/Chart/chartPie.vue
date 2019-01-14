@@ -18,8 +18,8 @@ export default {
     }
   },
   watch: {
-    childData () {
-        this.fillData();
+    childData() {
+      this.fillData();
     }
   },
   data() {
@@ -29,7 +29,7 @@ export default {
         xresponsive: true,
         legend: {
           display: true,
-          position: 'bottom',
+          position: "bottom"
         }
       }
     };
@@ -47,16 +47,16 @@ export default {
             data: this.childData.data,
             // fill: false,
             backgroundColor: [
-                'rgba(179,127,235,0.2)',
-                'rgba(179,127,235,0.3)',
-                'rgba(179,127,235,0.4)',
-                'rgba(179,127,235,0.5)',
-                'rgba(179,127,235,0.7)',
-                'rgba(179,127,235,0.9)'
+              "rgba(179,127,235,0.2)",
+              "rgba(179,127,235,0.3)",
+              "rgba(179,127,235,0.4)",
+              "rgba(179,127,235,0.5)",
+              "rgba(179,127,235,0.7)",
+              "rgba(179,127,235,0.9)"
             ],
-            pointBackgroundColor: 'yellow',
-            borderWidth:1,
-            textBaseline: 'bottom'
+            pointBackgroundColor: "yellow",
+            borderWidth: 1,
+            textBaseline: "bottom"
           }
         ]
       };
@@ -67,5 +67,10 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
+#pie-chart {
+  margin: 0px auto $font-sm;
+  width: 335px !important;
+  height: 325px !important;
+}
 </style>

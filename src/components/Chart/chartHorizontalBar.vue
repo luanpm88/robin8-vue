@@ -67,8 +67,8 @@ export default {
     };
   },
   watch: {
-    childData () {
-        this.fillData();
+    childData() {
+      this.fillData();
     }
   },
   mounted() {
@@ -91,4 +91,7 @@ export default {
 };
 </script>
 <style>
+#horizontalbar-chart {
+  height: 325px !important;
+}
 </style>

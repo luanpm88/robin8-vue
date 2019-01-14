@@ -28,22 +28,22 @@ export default {
         },
         {
           title: '营销数据',
-          icon: 'icon-home',
+          icon: 'icon-data',
           href: '/'
         },
         {
           title: '我收藏的大V',
-          icon: 'icon-home',
+          icon: 'icon-user',
           href: '/'
         },
         {
           title: '我的钱包',
-          icon: 'icon-home',
+          icon: 'icon-wallet',
           href: '/'
         },
         {
           title: '企业设置',
-          icon: 'icon-home',
+          icon: 'icon-setting',
           href: '/'
         },
       ]
@@ -63,8 +63,15 @@ export default {
     & > .item {
       height: $item-height;
       line-height: $item-height - 20;
-      padding: 10px;
+      padding: 10px 20px;
       cursor: pointer;
+      .iconfont {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: $font-nm-b;
+      }
     }
   }
 }

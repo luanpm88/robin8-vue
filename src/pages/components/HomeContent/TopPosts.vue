@@ -2,37 +2,47 @@
 <template>
   <div class="home-kol">
     <h5 class="h-analytic-title">Top Posts</h5>
-    <div class="home-kol-con">
-      <el-tabs v-model="kolActiveName" type="card" @tab-click="handleClick">
-        <el-tab-pane label="微博" name="first">
-          <div class="home-kol-clomn-box">
-            <el-row
-              :gutter="0"
-              class="home-kol-clomn"
-              v-for="(item, index) in weiboList"
-              :key="index"
-            >
-              <el-col :xs="24" :sm="24" :md="4" :lg="4">
-                <img src alt class="home-kol-img">
-              </el-col>
-              <el-col :xs="24" :sm="24" :md="16" :lg="16" class="home-kol-txt">
-                <strong>{{item.name}}</strong>
-                <p>{{item.describe}}</p>
-              </el-col>
-              <el-col :xs="3" :sm="3" :md="2" :lg="2">
-                <span class="home-kol-star"></span>
-              </el-col>
-              <el-col :xs="3" :sm="3" :md="2" :lg="2">
-                <span class="home-kol-message"></span>
-              </el-col>
-            </el-row>
+    <div class="home-kol-con home-post-con">
+      <ul class="h-analytic-tab clearfix">
+        <li
+          :class="{active:cur == item.cur}"
+          @click="tabClick(item.cur)"
+          v-for="(item, index) in tabList"
+          :key="index"
+        >{{item.name}}</li>
+      </ul>
+      <div v-if="cur === 0" class>
+        <div class="home-kol-clomn-box">
+          <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
+            <div class="home-kol-img">
+              <img src alt class>
+            </div>
+            <div class="home-kol-txt">
+              <strong>{{item.name}}</strong>
+              <p>{{item.describe}}</p>
+            </div>
           </div>
-          <div class="home-kol-clomn-btnbox">
-            <span class="home-kol-clomn-btn">查看更多</span>
+        </div>
+        <div class="home-kol-clomn-btnbox">
+          <span class="home-kol-clomn-btn">查看更多</span>
+        </div>
+      </div>
+      <div v-else class>
+         <div class="home-kol-clomn-box">
+          <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
+            <div class="home-kol-img">
+              <img src alt class>
+            </div>
+            <div class="home-kol-txt">
+              <strong>{{item.name}}4</strong>
+              <p>{{item.describe}}5</p>
+            </div>
           </div>
-        </el-tab-pane>
-        <el-tab-pane label="微信" name="second">微信</el-tab-pane>
-      </el-tabs>
+        </div>
+        <div class="home-kol-clomn-btnbox">
+          <span class="home-kol-clomn-btn">查看更多</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,14 +52,36 @@ import homeDataJs from "../HomeContent/homeglobal.js";
 export default {
   data() {
     return {
-      kolActiveName: "first",
+      cur: 0,
+      tabList: [
+        {
+          cur: 0,
+          name: "微博"
+        },
+        {
+          cur: 1,
+          name: "微信"
+        }
+      ],
       weiboList: homeDataJs.weiboList
     };
   },
   methods: {
-    handleClick(tab, event) {}
+    tabClick(num) {
+      this.cur = num;
+    }
   }
 };
 </script>
-<style>
+<style lang="scss" scoped>
+.home-post-con{
+  .home-kol-txt{
+    width: 84%;
+    p{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
 </style>
