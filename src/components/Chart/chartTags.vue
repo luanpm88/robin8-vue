@@ -244,6 +244,6 @@ export default {
 #tags_ball{
     width: 64%;
     display: block;
-    margin: 2% auto 2%;
+    margin: 0% auto 8%;
 }
 </style>
