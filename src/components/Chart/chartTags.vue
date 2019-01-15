@@ -242,7 +242,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #tags_ball{
-    width: 64%;
+    width: 60%;
     display: block;
     margin: 0% auto 8%;
 }

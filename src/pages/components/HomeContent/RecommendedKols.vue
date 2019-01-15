@@ -1,9 +1,12 @@
 <!--  -->
 <template>
   <div class="home-kol">
-    <h5 class="h-analytic-title">Recommended Kols</h5>
+    <h5 class="h-analytic-title">
+      <i class="iconfont icon-rocket"></i>
+      Recommended Kols
+    </h5>
     <div class="home-kol-con">
-      <ul class="h-analytic-tab clearfix">
+      <ul class="h-analytic-tab-two clearfix">
         <li
           :class="{active:cur == item.cur}"
           @click="tabClick(item.cur)"
@@ -108,24 +111,12 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+
+</style>
+
 <style lang="scss">
-span {
-  display: inline-block;
-}
-.home-kol {
-  .h-analytic-title {
-    color: nth($purple, 1);
-    font-size: $font-lg-s;
-    border-bottom: 1px solid #0000001a;
-    line-height: 60px;
-    padding: 0 $font-lg-ns;
-  }
-}
-.h-analytic-tabcon {
-  padding: 30px 0px 0px;
-  overflow: hidden;
-}
-.h-analytic-tab {
+.h-analytic-tab-two {
   display: inline-block;
   border: 1px solid #b37feb;
   border-radius: 16px;
@@ -146,6 +137,26 @@ span {
     }
   }
 }
+span {
+  display: inline-block;
+}
+.home-kol {
+  .h-analytic-title {
+    color: nth($purple, 1);
+    font-size: $font-lg-s;
+    border-bottom: 1px solid #0000001a;
+    line-height: 60px;
+    padding: 0 $font-lg-ns;
+    i{
+      font-size: $font-lg-s;
+    }
+  }
+}
+.h-analytic-tabcon {
+  padding: 30px 0px 0px;
+  overflow: hidden;
+}
+
 .home-kol-con {
   margin: $font-lg $font-lg-ns;
   padding-bottom: $font-lg-b;

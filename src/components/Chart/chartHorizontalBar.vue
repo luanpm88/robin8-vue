@@ -92,6 +92,6 @@ export default {
 </script>
 <style>
 #horizontalbar-chart {
-  height: 325px !important;
+  height: 390px !important;
 }
 </style>

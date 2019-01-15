@@ -3,56 +3,35 @@
   <div class="home-analytic">
     <h5 class="h-analytic-title">Analytics</h5>
     <div class="h-analytic-con">
-      <ul class="h-analytic-tab clearfix">
+      <ul class="h-analytic-tab">
         <li
           :class="{active:cur == item.cur}"
           @click="tabClick(item.cur)"
           v-for="(item, index) in tabList"
           :key="index"
-        >{{item.name}}</li>
+        >
+          {{item.name}}
+          <div :attr="item.cur" class="h-analytic-childTab">
+            <p @click="secondTab(item.cur, child)" v-for="(child, twoindex) in item.childList"
+          :key="twoindex">{{child.type}}</p>
+          </div>
+        </li>
       </ul>
       <div class="h-analytic-tabcon">
-        <div v-if="cur === 0">
-          <div class="col-xs-6">
+        <div v-if="cur === 0" class="h-analytic-tabbox">
             <line-charts :childData="oneParentsData"></line-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <line-charts :childData="oneParentsData"></line-charts>
-            <p class="h-analytic-type">微信</p>
-          </div>
         </div>
-        <div v-if="cur === 1">
-          <div class="col-xs-6">
-            <tag-charts :tags="parentTags"></tag-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
+        <div v-if="cur === 1" class="h-analytic-tabbox">
             <tag-charts :tags="parentTagsTwo"></tag-charts>
-            <p class="h-analytic-type">微信</p>
-          </div>
         </div>
-        <div v-if="cur === 2">
-          <div class="col-xs-6">
+        <div v-if="cur === 2" class="h-analytic-tabbox">
             <bar-charts :childData="threeParentsData"></bar-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <bar-charts :childData="threeParentsData"></bar-charts>
-            <p class="h-analytic-type">微信</p>
-          </div>
         </div>
-        <div v-if="cur === 3">
-          <div class="col-xs-6">
+        <div v-if="cur === 3" class="h-analytic-tabbox">
             <pie-charts :childData="fourParentsData"></pie-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <pie-charts :childData="fourParentsData"></pie-charts>
-            <p class="h-analytic-type">微信</p>
-          </div>
         </div>
       </div>
+      <p class="h-analytic-type">{{analyticsType}}</p>
     </div>
   </div>
 </template>
@@ -72,23 +51,64 @@ export default {
   },
   data() {
     return {
+      analyticsType: '微博',
       cur: 0,
       tabList: [
         {
           cur: 0,
-          name: "Trends"
+          name: "Trends",
+          childList: [
+            {
+              value: 0,
+              type: '微博'
+            },
+            {
+              value: 1,
+              type: '微信'
+            }
+          ]
         },
         {
           cur: 1,
-          name: "Concept"
+          name: "Concept",
+          childList: [
+            {
+              value: 0,
+              type: '微博'
+            },
+            {
+              value: 1,
+              type: '微信'
+            }
+          ]
         },
         {
           cur: 2,
-          name: "Competitors"
+          name: "Competitors",
+          childList: [
+            {
+              value: 0,
+              type: '微博'
+            },
+            {
+              value: 1,
+              type: '微信'
+            }
+          ]
         },
         {
           cur: 3,
-          name: "Sentiments"
+          name: "Sentiments",
+          childList: [
+            {
+              value: 0,
+              type: '微博'
+            },
+            {
+              value: 1,
+              type: '微信'
+            }
+          ]
         }
       ],
       topActiveName: "first",
@@ -121,6 +141,20 @@ export default {
     },
     tabClick(num) {
       this.cur = num;
+      let parentNode = document.getElementsByClassName('h-analytic-childTab')[num];
+      parentNode.style.display = 'block';
+    },
+    secondTab(cur, child, e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      } else {
+        window.event.returnValue = false;
+        window.event.cancelBubble = true;
+      }
+      let parentNode = document.getElementsByClassName('h-analytic-childTab')[cur];
+      parentNode.style.display = 'none';
+      this.analyticsType = child.type;
     }
   }
 };
@@ -142,13 +176,17 @@ export default {
 }
 .h-analytic-tabcon{
   padding: 30px 0px 0px;
-  overflow: hidden;
+  // overflow: hidden;
+}
+.h-analytic-tabbox{
+  width: 65%;
+  margin: 0px auto;
 }
 .h-analytic-tab {
   display: inline-block;
-  border: 1px solid #b37feb;
+  border: 1px solid nth($purple, 1);
   border-radius: 16px;
-  overflow: hidden;
+  // overflow: hidden;
   li {
     float: left;
     line-height: $font-lg-b;
@@ -156,13 +194,44 @@ export default {
     border-right: 1px solid nth($purple, 1);
     padding:0 20px;
     cursor: pointer;
+    position: relative;
     &.active{
       background: nth($purple, 1);
       color: $white;
     }
+    &:first-child{
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+    }
     &:last-child{
       border-right: 1px solid transparent;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
     }
+    div{
+      position: absolute;
+      z-index: 3;
+      background: $white;
+      border:  1px solid nth($purple, 1);
+      left: 0px;
+      top: 2.8rem;
+      width: 100%;
+      border-radius: 5px;
+      display: none;
+      p{
+        text-align: center;
+        color: nth($purple, 1);
+        &:hover{
+          background: nth($purple, 1);
+          color: $white;
+        }
+      }
+    }
+    // &:hover{
+    //   div{
+    //     display: block;
+    //   }
+    // }
   }
 }
 </style>

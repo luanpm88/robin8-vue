@@ -1,9 +1,12 @@
 <!--  -->
 <template>
   <div class="home-kol">
-    <h5 class="h-analytic-title">Top Posts</h5>
+    <h5 class="h-analytic-title">
+      <i class="iconfont icon-calendar"></i>
+      Top Posts
+    </h5>
     <div class="home-kol-con home-post-con">
-      <ul class="h-analytic-tab clearfix">
+      <ul class="h-analytic-tab-two clearfix">
         <li
           :class="{active:cur == item.cur}"
           @click="tabClick(item.cur)"
