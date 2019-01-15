@@ -141,8 +141,14 @@ export default {
     },
     tabClick(num) {
       this.cur = num;
-      let parentNode = document.getElementsByClassName('h-analytic-childTab')[num];
-      parentNode.style.display = 'block';
+      let parentNode = document.getElementsByClassName('h-analytic-childTab');
+      for (let i = 0; i < parentNode.length; i++) {
+        if (i=== num) {
+          parentNode[i].style.display = 'block';
+        } else {
+          parentNode[i].style.display = 'none';
+        }
+      }
     },
     secondTab(cur, child, e) {
       if (e) {
