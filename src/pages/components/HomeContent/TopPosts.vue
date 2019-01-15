@@ -13,32 +13,13 @@
       </ul>
       <div v-if="cur === 0" class>
         <div class="home-kol-clomn-box">
-          <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
-            <div class="home-kol-img">
-              <img src alt class>
-            </div>
-            <div class="home-kol-txt">
-              <strong>{{item.name}}</strong>
-              <p>{{item.describe}}</p>
-            </div>
-          </div>
+          <kols-list-item v-for="(item, index) in weiboList" :key="index" :dataList="item"></kols-list-item>
         </div>
         <div class="home-kol-clomn-btnbox">
           <span class="home-kol-clomn-btn">查看更多</span>
         </div>
       </div>
       <div v-else class>
-         <div class="home-kol-clomn-box">
-          <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
-            <div class="home-kol-img">
-              <img src alt class>
-            </div>
-            <div class="home-kol-txt">
-              <strong>{{item.name}}4</strong>
-              <p>{{item.describe}}5</p>
-            </div>
-          </div>
-        </div>
         <div class="home-kol-clomn-btnbox">
           <span class="home-kol-clomn-btn">查看更多</span>
         </div>
@@ -48,8 +29,11 @@
 </template>
 
 <script>
-import homeDataJs from "../HomeContent/homeglobal.js";
+import KolsListItem from "../../campaigns/components/KolsListItem.1";
 export default {
+  components: {
+    KolsListItem
+  },
   data() {
     return {
       cur: 0,
@@ -63,7 +47,43 @@ export default {
           name: "微信"
         }
       ],
-      weiboList: homeDataJs.weiboList
+      weiboList: [
+        {
+          name: "Anna Strong",
+          describe: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc",
+          isIcon: false,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Milano Esco",
+          describe: "Well-known car blogger",
+          isIcon: false,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Nick Bold",
+          describe: "Web Developer, Facebook Inc",
+          isIcon: false,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Wiltor Delton",
+          describe: "Project Manager",
+          isIcon: false,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Nick Stone",
+          describe: "Visual Designer, Github Inc",
+          isIcon: false,
+          isMsg: true,
+          isCheck: false
+        }
+      ]
     };
   },
   methods: {
@@ -74,10 +94,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.home-post-con{
-  .home-kol-txt{
+.home-post-con {
+  .home-kol-txt {
     width: 84%;
-    p{
+    p {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

@@ -20,7 +20,7 @@
         </div>
       </div>
       <div v-else class>
-         <!-- <div class="home-kol-clomn-box">
+        <!-- <div class="home-kol-clomn-box">
           <div class="home-kol-clomn clearfix" v-for="(item, index) in weiboList" :key="index">
             <div class="home-kol-img">
               <img src alt class>
@@ -34,7 +34,7 @@
               <span class="home-kol-message"></span>
             </div>
           </div>
-        </div> -->
+        </div>-->
         <div class="home-kol-clomn-btnbox">
           <span class="home-kol-clomn-btn">查看更多</span>
         </div>
@@ -44,8 +44,7 @@
 </template>
 
 <script>
-import homeDataJs from "../HomeContent/homeglobal.js";
-import KolsListItem from '../../campaigns/components/KolsListItem.1'
+import KolsListItem from "../../campaigns/components/KolsListItem.1";
 export default {
   components: {
     KolsListItem
@@ -63,7 +62,43 @@ export default {
           name: "微信"
         }
       ],
-      weiboList: homeDataJs.weiboList
+      weiboList: [
+        {
+          name: "Anna Strong",
+          describe: "Visual Designer,Google Inc",
+          isIcon: true,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Milano Esco",
+          describe: "Well-known car blogger",
+          isIcon: true,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Nick Bold",
+          describe: "Web Developer, Facebook Inc",
+          isIcon: true,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Wiltor Delton",
+          describe: "Project Manager",
+          isIcon: true,
+          isMsg: true,
+          isCheck: false
+        },
+        {
+          name: "Nick Stone",
+          describe: "Visual Designer, Github Inc",
+          isIcon: true,
+          isMsg: true,
+          isCheck: false
+        }
+      ]
     };
   },
   methods: {
@@ -74,10 +109,10 @@ export default {
 };
 </script>
 <style lang="scss">
-span{
+span {
   display: inline-block;
 }
-.home-kol{
+.home-kol {
   .h-analytic-title {
     color: nth($purple, 1);
     font-size: $font-lg-s;
@@ -106,7 +141,7 @@ span{
       background: nth($purple, 1);
       color: $white;
     }
-    &:last-child{
+    &:last-child {
       border-right: 1px solid transparent;
     }
   }
@@ -126,7 +161,7 @@ span{
     border-radius: 50%;
   }
 }
-.home-kol-collection{
+.home-kol-collection {
   width: 16%;
   float: right;
 }

@@ -42,27 +42,37 @@ let oneData = {
         {
             name: 'Anna Strong',
             describe: 'Visual Designer,Google Inc',
-            isMsg: true
+            isIcon:true,
+            isMsg: true,
+            isCheck: false
         },
         {
             name: 'Milano Esco',
             describe: 'Well-known car blogger',
-            isMsg: true
+            isIcon:true,
+            isMsg: true,
+            isCheck: false
         },
         {
             name: 'Nick Bold',
             describe: 'Web Developer, Facebook Inc',
-            isMsg: true
+            isIcon:true,
+            isMsg: true,
+            isCheck: false
         },
         {
             name: 'Wiltor Delton',
             describe: 'Project Manager',
-            isMsg: true
+            isIcon:true,
+            isMsg: true,
+            isCheck: false
         },
         {
             name: 'Nick Stone',
             describe: 'Visual Designer, Github Inc',
-            isMsg: true
+            isIcon:true,
+            isMsg: true,
+            isCheck: false
         }
     ]
 }

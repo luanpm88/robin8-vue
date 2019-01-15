@@ -3,14 +3,14 @@
     <div class="media-left">
       <div class="avatar">
         <img src="" alt="" class="avatar-img" />
-        <div class="iconfont icon-round-check-fill check-icon"></div>
+        <div v-if="dataList.isCheck" class="iconfont icon-round-check-fill check-icon"></div>
       </div>
     </div>
     <div class="media-body media-middle info">
       <h5 class="name">{{dataList.name}}</h5>
       <p class="desc">{{dataList.describe}}</p>
     </div>
-    <div class="media-right media-middle">
+    <div class="media-right media-middle" v-if="dataList.isIcon">
       <span class="iconfont icon-star-fill"></span>
       <span class="iconfont icon-msg" v-if="dataList.isMsg"></span>
     </div>
