@@ -71,35 +71,40 @@ export default {
           describe: "Visual Designer,Google Inc",
           isIcon: true,
           isMsg: true,
-          isCheck: false
+          isCheck: false,
+          isCollect: true
         },
         {
           name: "Milano Esco",
           describe: "Well-known car blogger",
           isIcon: true,
           isMsg: true,
-          isCheck: false
+          isCheck: false,
+          isCollect: false
         },
         {
           name: "Nick Bold",
           describe: "Web Developer, Facebook Inc",
           isIcon: true,
           isMsg: true,
-          isCheck: false
+          isCheck: false,
+          isCollect: true
         },
         {
           name: "Wiltor Delton",
           describe: "Project Manager",
           isIcon: true,
           isMsg: true,
-          isCheck: false
+          isCheck: false,
+          isCollect: true
         },
         {
           name: "Nick Stone",
           describe: "Visual Designer, Github Inc",
           isIcon: true,
           isMsg: true,
-          isCheck: false
+          isCheck: false,
+          isCollect: true
         }
       ]
     };
