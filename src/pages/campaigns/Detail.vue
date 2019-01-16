@@ -9,19 +9,19 @@
       <div class="panel-body">
         <div class="line-title">基础信息</div>
         <div class="form-horizontal campaign-create-form">
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动名称：</div>
             <div class="col-sm-10">
               <p class="form-control-static">圣罗兰唇釉圣诞活动</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动介绍：</div>
             <div class="col-sm-10">
               <p class="form-control-static">圣罗兰唇釉圣诞活动开始招募大V啦！圣诞期间参加活动的大V可以获得丰盛的礼品奖励哦～</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
               <p class="form-control-static">圣罗兰</p>
@@ -31,10 +31,10 @@
 
         <div class="line-title">活动信息</div>
         <div class="form-horizontal campaign-create-form">
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动平台：</div>
             <div class="col-sm-10">
-              <div class="row clearfix">
+              <div class="row">
                 <div class="col-sm-1 text-center">
                   <div class="check-icon checked">
                     <div class="iconfont icon-wechat-circle"></div>
@@ -54,7 +54,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动图片：</div>
             <div class="col-sm-10">
               <div class="upload-imgs-list">
@@ -64,31 +64,31 @@
               </div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动要求：</div>
             <div class="col-sm-10">
               <p class="form-control-static">微博 / 微信平台转发量4w次以上</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
               <p class="form-control-static">2018-12-21 ～ 2018-1-20</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">KOL数量：</div>
             <div class="col-sm-10">
               <p class="form-control-static">100</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动预算：</div>
             <div class="col-sm-10">
               <p class="form-control-static">128w</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
               <p class="form-control-static">大V粉丝量10k以上 / 微博平台认证大V / 小红书平台粉丝量20k以上</p>
@@ -98,31 +98,31 @@
 
         <div class="line-title">大V相关要求</div>
         <div class="form-horizontal campaign-create-form">
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">大V圈子：</div>
             <div class="col-sm-10">
               <p class="form-control-static">潮流时装博主 / 美妆达人 / 时尚达人</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
               <p class="form-control-static">10k~30k</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝年龄：</div>
             <div class="col-sm-10">
               <p class="form-control-static">18～40</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝性别：</div>
             <div class="col-sm-10">
               <p class="form-control-static">女</p>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝地域：</div>
             <div class="col-sm-10">
               <p class="form-control-static">北京 / 上海 / 深圳</p>

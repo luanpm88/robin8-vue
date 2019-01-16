@@ -11,21 +11,21 @@
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动名称：</div>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="" placeholder="请填写活动名称">
               <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动介绍：</div>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="" placeholder="请填写活动介绍">
               <div class="form-tips">请填写活动相关介绍</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
               <select class="form-control">
@@ -48,10 +48,10 @@
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动平台：</div>
             <div class="col-sm-10">
-              <div class="row clearfix">
+              <div class="row">
                 <div class="col-sm-1 text-center">
                   <div class="check-icon">
                     <div class="iconfont icon-wechat-circle"></div>
@@ -73,7 +73,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动图片：</div>
             <div class="col-sm-10">
               <div class="upload-imgs-list">
@@ -97,20 +97,20 @@
               </vue-core-image-upload>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动要求：</div>
             <div class="col-sm-10">
               <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动须知和要求，包括您的要求、转发内容链接等等"></textarea>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="" placeholder="">
               <div class="form-tips">请选择您预期的活动时间</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">KOL数量：</div>
             <div class="col-sm-4">
               <input type="number" class="form-control" id="" placeholder="请填写活动KOL数量">
@@ -122,7 +122,7 @@
               <div class="form-tips">请填写活动预算</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
               <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"></textarea>
@@ -141,14 +141,14 @@
           <div class="form-group">
             <tags-list></tags-list>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="" placeholder="请选择价格区间">
               <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝年龄：</div>
             <div class="col-sm-4">
               <select class="form-control">
@@ -172,7 +172,7 @@
               <div class="form-tips">请选择粉丝性别</div>
             </div>
           </div>
-          <div class="form-group clearfix">
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝地域：</div>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="" placeholder="请选择/填写粉丝的地域要求">
@@ -186,7 +186,7 @@
       </div>
     </div>
 
-    <div class="row mt20 clearfix">
+    <div class="row mt20">
       <div class="col-sm-4">
         <kols-list-panel
           title="为您推荐的大V"

@@ -1,30 +1,36 @@
-<!--  -->
 <template>
-  <div class="home-kol">
-    <h5 class="h-analytic-title">
-      <i class="iconfont icon-calendar"></i>
-      Top Posts
-    </h5>
-    <div class="home-kol-con home-post-con">
-      <ul class="h-analytic-tab-two clearfix">
-        <li
-          :class="{active:cur == item.cur}"
+  <div class="panel default-panel">
+    <div class="panel-head">
+      <h5 class="title purple">
+        <span class="iconfont icon-calendar"></span>
+        Top Posts
+      </h5>
+    </div>
+    <div class="panel-body list-content">
+      <div class="btn-group source-tab">
+        <div
+          :class="{'btn btn-outline btn-purple': true, 'active':cur == item.cur}"
           @click="tabClick(item.cur)"
           v-for="(item, index) in tabList"
           :key="index"
-        >{{item.name}}</li>
-      </ul>
-      <div v-if="cur === 0" class>
+        >{{item.name}}</div>
+      </div>
+
+      <div class="mt20" v-if="cur === 0">
         <div class="home-kol-clomn-box">
-          <kols-list-item v-for="(item, index) in weiboList" :key="index" :dataList="item"></kols-list-item>
+          <kols-list-item
+            v-for="(item, index) in weiboList"
+            :key="index"
+            :dataList="item"
+          ></kols-list-item>
         </div>
-        <div class="home-kol-clomn-btnbox">
-          <span class="home-kol-clomn-btn">查看更多</span>
+        <div class="text-center mt20">
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
         </div>
       </div>
-      <div v-else class>
-        <div class="home-kol-clomn-btnbox">
-          <span class="home-kol-clomn-btn">查看更多</span>
+      <div class="mt20" v-else>
+        <div class="text-center mt20">
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
         </div>
       </div>
     </div>
@@ -97,14 +103,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.home-post-con {
-  .home-kol-txt {
-    width: 84%;
-    p {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+.list-content {
+  padding: 20px;
+}
+.source-tab {
+  overflow: hidden;
+  & > .btn {
+    padding: 4px 12px;
+  }
+  & > .btn:first-child {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  & > .btn:last-child {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
 }
 </style>

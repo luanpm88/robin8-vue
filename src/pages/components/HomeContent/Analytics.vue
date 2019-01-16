@@ -1,6 +1,36 @@
-<!--  -->
 <template>
-  <div class="home-analytic">
+  <div class="panel default-panel">
+    <div class="panel-head">
+      <h5 class="title purple">Analytics</h5>
+    </div>
+    <div class="panel-body list-content">
+      <div class="btn-group source-tab">
+        <div
+          :class="{'btn btn-outline btn-purple': true, 'active':cur == item.cur}"
+          @click="tabClick(item.cur)"
+          v-for="(item, index) in tabList"
+          :key="index"
+        >{{item.name}}</div>
+      </div>
+
+      <div class="h-analytic-tabcon">
+        <div v-if="cur === 0" class="h-analytic-tabbox">
+          <line-charts :childData="oneParentsData"></line-charts>
+        </div>
+        <div v-if="cur === 1" class="h-analytic-tabbox">
+          <tag-charts :tags="parentTagsTwo"></tag-charts>
+        </div>
+        <div v-if="cur === 2" class="h-analytic-tabbox">
+          <bar-charts :childData="threeParentsData"></bar-charts>
+        </div>
+        <div v-if="cur === 3" class="h-analytic-tabbox">
+          <pie-charts :childData="fourParentsData"></pie-charts>
+        </div>
+      </div>
+      <p class="h-analytic-type">{{analyticsType}}</p>
+    </div>
+  </div>
+  <!-- <div class="home-analytic">
     <h5 class="h-analytic-title">Analytics</h5>
     <div class="h-analytic-con">
       <ul class="h-analytic-tab">
@@ -19,21 +49,21 @@
       </ul>
       <div class="h-analytic-tabcon">
         <div v-if="cur === 0" class="h-analytic-tabbox">
-            <line-charts :childData="oneParentsData"></line-charts>
+          <line-charts :childData="oneParentsData"></line-charts>
         </div>
         <div v-if="cur === 1" class="h-analytic-tabbox">
-            <tag-charts :tags="parentTagsTwo"></tag-charts>
+          <tag-charts :tags="parentTagsTwo"></tag-charts>
         </div>
         <div v-if="cur === 2" class="h-analytic-tabbox">
-            <bar-charts :childData="threeParentsData"></bar-charts>
+          <bar-charts :childData="threeParentsData"></bar-charts>
         </div>
         <div v-if="cur === 3" class="h-analytic-tabbox">
-            <pie-charts :childData="fourParentsData"></pie-charts>
+          <pie-charts :childData="fourParentsData"></pie-charts>
         </div>
       </div>
       <p class="h-analytic-type">{{analyticsType}}</p>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

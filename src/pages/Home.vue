@@ -32,19 +32,14 @@
           </router-link>
         </div>
         <!-- analytics -->
-        <div class="kols-container mt20">
-          <home-analytic></home-analytic>
-        </div>
-        <div class="home-show row">
-          <div class="col-xs-6" style="">
-             <div class="kols-container mt20">
-                <home-recommended-kols></home-recommended-kols>
-              </div>
+        <home-analytic class="mt20"></home-analytic>
+
+        <div class="home-show row mt20">
+          <div class="col-xs-6">
+            <home-recommended-kols></home-recommended-kols>
           </div>
-          <div  class="col-xs-6" style="">
-             <div class="kols-container mt20">
-                <home-top-posts></home-top-posts>
-              </div>
+          <div  class="col-xs-6">
+            <home-top-posts></home-top-posts>
           </div>
         </div>
       </div>
@@ -110,21 +105,6 @@ export default {
       &:last-child {
         margin-right: 0;
       }
-    }
-  }
-  .kols-container {
-    min-height: 500px;
-    box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08);
-    background-color: #fff;
-  }
-  .home-show{
-    &.row {
-      margin-right: -10px !important;
-      margin-left: -10px !important;;
-    }
-    .col-xs-6{
-      padding-left: 10px !important;
-      padding-right: 10px !important;
     }
   }
 }

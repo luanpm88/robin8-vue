@@ -115,7 +115,10 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 
 /*panel styles*/
 .panel { .panel-head { padding: 20px; background-color: #fff;
-    .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962; }
+    .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962;
+      .iconfont { display: inline-block; margin: -4px 4px 0 0; vertical-align: middle; font-size: 2rem; }
+      &.purple { color: nth($purple, 1); }
+    }
     & + .panel-body { margin-top: 1px; }
   }
   .panel-body { background-color: #fff;
