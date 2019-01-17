@@ -15,7 +15,6 @@
           :key="index"
         >{{item.name}}</div>
       </div>
-
       <div class="mt20" v-if="cur === 0">
         <div class="home-kol-clomn-box">
           <kols-list-item

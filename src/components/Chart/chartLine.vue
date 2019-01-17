@@ -39,10 +39,8 @@ export default {
                 fontColor: "#BBBBBBFF"
               },
               gridLines: {
-                // display: false
                 color:'#e5e9f2',
                 lineWidth:.5,
-                // drawTicks:false,
                 drawBorder:false,
                 zeroLineColor:'transparent'
               }
@@ -54,8 +52,6 @@ export default {
                 display: false
               },
               ticks: {
-                // min: 0,
-                // max: 100,
                 fontColor: "#BBBBBBFF",
                 autoSkip:false,
                 maxRotation:0,
@@ -80,8 +76,6 @@ export default {
     fillData() {
       let ctx = document.getElementById('line-chart');
       let gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
-
-      // gradient.addColorStop(0, '#026012');
       gradient.addColorStop(0, 'rgba(179,127,235,0.5)');
       gradient.addColorStop(0.3, 'rgba(179,127,235,0.4)');
       gradient.addColorStop(0.5, 'rgba(179,127,235,0.3)');
@@ -93,7 +87,6 @@ export default {
           {
             label: "Data One",
             data: this.childData.data,
-            // fill: false,
             backgroundColor: gradient,
             pointBackgroundColor: 'transparent',
             pointBorderColor: 'transparent',

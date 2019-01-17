@@ -34,10 +34,8 @@ export default {
                 fontColor: "#BBBBBBFF"
               },
               gridLines: {
-                // display: false
                 color: "#e5e9f2",
                 lineWidth: 0.5,
-                // drawTicks: false,
                 drawBorder: false,
                 zeroLineColor: "transparent"
               }
@@ -51,14 +49,12 @@ export default {
               ticks: {
                 min: 0,
                 fontColor: "#BBBBBBFF",
-                // fontSize:12,
                 callback: function(value) {
                   return value + "%";
                 }
               },
               scaleLabel: {
                 display: true
-                // labelString: "Count"
               }
             }
           ]
