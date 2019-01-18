@@ -7,6 +7,7 @@
 
       <div class="home-container pull-right">
         <home-banner></home-banner>
+        <div class="mt20"></div>
         <div class="icon-grid-panel mt20">
           <router-link to="/" tag="div" class="item">
             <div class="box">
@@ -30,7 +31,17 @@
             </div>
           </router-link>
         </div>
-        <div class="kols-container mt20"></div>
+        <!-- analytics -->
+        <home-analytic class="mt20"></home-analytic>
+
+        <div class="home-show row mt20">
+          <div class="col-xs-6">
+            <home-recommended-kols></home-recommended-kols>
+          </div>
+          <div  class="col-xs-6">
+            <home-top-posts></home-top-posts>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,13 +51,18 @@
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import HomeBanner from './components/HomeBanner'
-
+import HomeAnalytic from './components/HomeContent/Analytics'
+import HomeRecommendedKols from './components/HomeContent/RecommendedKols'
+import HomeTopPosts from './components/HomeContent/TopPosts'
 export default {
   name: 'Home',
   components: {
     PageHeader,
     MainNav,
-    HomeBanner
+    HomeBanner,
+    HomeAnalytic,
+    HomeRecommendedKols,
+    HomeTopPosts
   },
   data () {
     return {
@@ -90,11 +106,6 @@ export default {
         margin-right: 0;
       }
     }
-  }
-  .kols-container {
-    min-height: 500px;
-    box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08);
-    background-color: #fff;
   }
 }
 </style>

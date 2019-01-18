@@ -87,3 +87,16 @@ textarea.form-control {
   font-size: $font-sm;
   color: #7b7e8a;
 }
+
+.form-group {
+
+  &::before,
+  &::after {
+    display: table;
+    content: " ";
+  }
+
+  &::after {
+    clear: both;
+  }
+}
