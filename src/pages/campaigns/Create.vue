@@ -229,10 +229,8 @@ export default {
   data () {
     return {
       processStatus: {
-        length: 6,
-        current: 0,
-        index: 1,
-        title: '介绍你自己'
+        current: 1,
+        index: 0
       },
       uploadUrl: apiConfig.uploadUrl,
       pictures: [],
@@ -267,7 +265,7 @@ export default {
       console.log(this.pictures)
     },
     bindSubmit () {
-      this.$router.push('/campaigns/1')
+      this.$router.push('/campaigns/1/preview')
     }
   }
 }

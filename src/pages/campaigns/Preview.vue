@@ -1,74 +1,63 @@
 <template>
-  <div class="campaign-create-container">
+  <div>
     <campaign-create-process
       :renderData="processStatus"
       class="mt20"
     ></campaign-create-process>
 
     <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">基础信息</h5>
-      </div>
       <div class="panel-body">
+        <div class="campaign-status-panel">
+          <div class="iconfont icon-success success"></div>
+          <div class="info">
+            <h5 class="title">活动提交审核成功</h5>
+            <p>正在审核中，我们将在24小时之内完成审核</p>
+          </div>
+        </div>
+
+        <div class="line-title">基础信息</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
             <div class="col-sm-2 control-label">活动名称：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请填写活动名称">
-              <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
+              <p class="form-control-static">圣罗兰唇釉圣诞活动</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动介绍：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请填写活动介绍">
-              <div class="form-tips">请填写活动相关介绍</div>
+              <p class="form-control-static">圣罗兰唇釉圣诞活动开始招募大V啦！圣诞期间参加活动的大V可以获得丰盛的礼品奖励哦～</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
-              <select class="form-control">
-                <option>请选择品牌名称</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <div class="form-tips">请选择准确的品牌名称</div>
+              <p class="form-control-static">圣罗兰</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">活动信息</h5>
-      </div>
-      <div class="panel-body">
+        <div class="line-title">活动信息</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
             <div class="col-sm-2 control-label">活动平台：</div>
             <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-1 text-center">
-                  <div class="check-icon">
+                  <div class="check-icon checked">
                     <div class="iconfont icon-wechat-circle"></div>
-                    <div class="iconfont icon-check"></div>
                   </div>
                 </div>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" id="" placeholder="请填写微信期待曝光值">
+                  <p class="form-control-static">微信曝光值：30000</p>
                 </div>
                 <div class="col-sm-1 text-center">
                   <div class="check-icon">
                     <div class="iconfont icon-weibo-circle"></div>
-                    <div class="iconfont icon-check"></div>
                   </div>
                 </div>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" id="" placeholder="请填写微博期待曝光值">
+                  <p class="form-control-static">微博曝光值：30000</p>
                 </div>
               </div>
             </div>
@@ -79,133 +68,92 @@
               <div class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img src="" alt="" class="upload-img" />
-                  <div class="iconfont icon-close close-btn"></div>
                 </div>
               </div>
-              <vue-core-image-upload
-                :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                :crop="false"
-                @imageuploaded="imageuploaded"
-                @imageuploading="imageuploading"
-                inputOfFile="file"
-                text=""
-                :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
-                input-accept="image/*"
-                :url="uploadUrl" >
-              </vue-core-image-upload>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动要求：</div>
             <div class="col-sm-10">
-              <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动须知和要求，包括您的要求、转发内容链接等等"></textarea>
+              <p class="form-control-static">微博 / 微信平台转发量4w次以上</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="" placeholder="">
-              <div class="form-tips">请选择您预期的活动时间</div>
+              <p class="form-control-static">2018-12-21 ～ 2018-1-20</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">KOL数量：</div>
-            <div class="col-sm-4">
-              <input type="number" class="form-control" id="" placeholder="请填写活动KOL数量">
-              <div class="form-tips">请填写活动KOL数量</div>
+            <div class="col-sm-10">
+              <p class="form-control-static">100</p>
             </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-2 control-label">活动预算：</div>
-            <div class="col-sm-4">
-              <input type="number" class="form-control" id="" placeholder="请填写活动预算">
-              <div class="form-tips">请填写活动预算</div>
+            <div class="col-sm-10">
+              <p class="form-control-static">128w</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
-              <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"></textarea>
+              <p class="form-control-static">大V粉丝量10k以上 / 微博平台认证大V / 小红书平台粉丝量20k以上</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">大V 相关要求</h5>
-      </div>
-      <div class="panel-body">
+        <div class="line-title">大V相关要求</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <tags-list></tags-list>
+            <div class="col-sm-2 control-label">大V圈子：</div>
+            <div class="col-sm-10">
+              <p class="form-control-static">潮流时装博主 / 美妆达人 / 时尚达人</p>
+            </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请选择价格区间">
-              <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
+              <p class="form-control-static">10k~30k</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">粉丝年龄：</div>
-            <div class="col-sm-4">
-              <select class="form-control">
-                <option>请选择期望的粉丝年龄</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <div class="form-tips">请选择期望的粉丝年龄</div>
+            <div class="col-sm-10">
+              <p class="form-control-static">18～40</p>
             </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-2 control-label">粉丝性别：</div>
-            <div class="col-sm-4">
-              <select class="form-control">
-                <option>请选择粉丝性别</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <div class="form-tips">请选择粉丝性别</div>
+            <div class="col-sm-10">
+              <p class="form-control-static">女</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">粉丝地域：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请选择/填写粉丝的地域要求">
-              <div class="form-tips">请填写期望的粉丝地域描述</div>
+              <p class="form-control-static">北京 / 上海 / 深圳</p>
             </div>
           </div>
-          <div class="form-group text-center">
-            <button type="button" class="btn btn-blue btn-outline" @click="">搜索大V</button>
+        </div>
+
+        <div class="line-title">已选择的大V</div>
+        <div class="kols-list">
+          <div class="item">
+            <kols-list-item></kols-list-item>
+          </div>
+          <div class="item">
+            <kols-list-item></kols-list-item>
+          </div>
+          <div class="item">
+            <kols-list-item></kols-list-item>
+          </div>
+          <div class="item">
+            <kols-list-item></kols-list-item>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row mt20">
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="为您推荐的大V"
-        ></kols-list-panel>
-      </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您可能感兴趣的大V"
-        ></kols-list-panel>
-      </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您收藏的大V"
-        ></kols-list-panel>
-      </div>
-    </div>
-
-    <div class="text-center create-btn-area">
-      <button type="button" class="btn btn-cyan next-btn" @click="bindNext">下一步</button>
     </div>
   </div>
 </template>
@@ -213,94 +161,78 @@
 <script>
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import TagsList from '@components/TagsList'
 import CampaignCreateProcess from './components/CampaignCreateProcess'
-import KolsListPanel from './components/KolsListPanel'
-import VueCoreImageUpload from 'vue-core-image-upload'
+import KolsListItem from './components/KolsListItem'
 
 export default {
-  name: 'CampaignCreate',
+  name: 'CampaignPreview',
   components: {
-    TagsList,
     CampaignCreateProcess,
-    KolsListPanel,
-    VueCoreImageUpload
+    KolsListItem
   },
   data () {
     return {
       processStatus: {
-        length: 6,
-        current: 0,
-        index: 1,
-        title: '介绍你自己'
-      },
-      uploadUrl: apiConfig.uploadUrl,
-      pictures: [],
-      loading: false
+        current: 1,
+        index: 0
+      }
     }
   },
   methods: {
-    imageuploaded (res) {
-      if (this.pictures.length >= 5) {
-        alert('最多可上传5张图片')
-        return false
-      }
-      if (res.code == 0) {
-        this.pictures.push(res.data.base)
-        this.loading = false
-      } else {
-        alert('上传失败')
-        this.loading = false
-      }
-      console.log(this.pictures)
-    },
-    imageuploading (res) {
-      this.loading = true
-    },
-    delPhoto (e, url) {
-      console.log(url)
-      let index = this.pictures.indexOf(url)
-      let delConfirm = confirm('确定要删除此图片？')
-      if (delConfirm) {
-        this.pictures.splice(index, 1)
-      }
-      console.log(this.pictures)
-    },
-    bindNext () {
-      this.$router.push('/campaign/1/preview')
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.campaign-status-panel {
+  padding: 40px 100px;
+  text-align: center;
+  .iconfont {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    font-size: 5rem;
+    &.success {
+      color: nth($blue, 1);
+    }
+  }
+  .info {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-size: $font-nm-s;
+    .title {
+      font-size: $font-nm-l;
+      font-weight: 600;
+      color: #4a4a4a;
+    }
+  }
+}
+.line-title {
+  line-height: 20px;
+  padding: 20px;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  text-align: center;
+  font-size: $font-nm-l;
+  color: #575962;
+}
 .campaign-create-form {
   overflow: hidden;
   .form-group {
-    padding: 20px 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 13px 60px;
     .check-icon {
       display: inline-block;
       position: relative;
       cursor: pointer;
       .iconfont {
         font-size: $font-lg;
-        color: #d9d9d9;
+        color: nth($gray, 1);
       }
-      .icon-check {
-        position: absolute;
-        top: 0;
-        right: -4px;
-        z-index: 1;
-        width: 12px;
-        height: 12px;
-        line-height: 12px;
-        text-align: center;
-        font-size: $font-xs;
-        color: #fff;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        background-color: #d8d8d8;
+      &.checked {
+        .iconfont {
+          color: nth($blue, 1);
+        }
       }
     }
     &:last-child {
@@ -308,16 +240,13 @@ export default {
       border-bottom: none;
     }
   }
-  .upload-img-btn {
-    display: inline-block;
-    font-size: 8rem;
-    cursor: pointer;
-  }
 }
-.create-btn-area {
-  padding: 30px;
-  .next-btn {
-    width: 150px;
+.kols-list {
+  padding: 24px 60px;
+  font-size: 0;
+  & > .item {
+    display: inline-block;
+    width: 33.33333%;
   }
 }
 .upload-imgs-list {

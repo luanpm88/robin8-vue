@@ -5,8 +5,8 @@
         <div
           :class="{
             'item': true,
-            'active': renderData.current >= 0,
-            'current': renderData.current == 0
+            'active': renderData.index >= 0,
+            'current': renderData.current == 1
           }"
         >
           <div class="num">1</div>
@@ -15,8 +15,8 @@
         <div
           :class="{
             'item': true,
-            'active': renderData.current >= 1,
-            'current': renderData.current == 1
+            'active': renderData.index >= 1,
+            'current': renderData.current == 2
           }"
         >
           <div class="num">2</div>
@@ -25,8 +25,8 @@
         <div
           :class="{
             'item': true,
-            'active': renderData.current >= 2,
-            'current': renderData.current == 2
+            'active': renderData.index >= 2,
+            'current': renderData.current == 3
           }"
         >
           <div class="num">3</div>
@@ -35,8 +35,8 @@
         <div
           :class="{
             'item': true,
-            'active': renderData.current >= 3,
-            'current': renderData.current == 3
+            'active': renderData.index >= 3,
+            'current': renderData.current == 4
           }"
         >
           <div class="num">4</div>
@@ -85,7 +85,7 @@ export default {
       vertical-align: middle;
       color: $color;
     }
-    &.active.current {
+    &.active, &.current {
       .num {
         background-color: $active;
       }
