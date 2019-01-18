@@ -273,79 +273,15 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-create-form {
-  overflow: hidden;
   .form-group {
     padding: 20px 60px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
-    .check-icon {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      .iconfont {
-        font-size: $font-lg;
-        color: nth($gray, 1);
-      }
-      .icon-check {
-        position: absolute;
-        top: 0;
-        right: -4px;
-        z-index: 1;
-        width: 12px;
-        height: 12px;
-        line-height: 12px;
-        text-align: center;
-        font-size: $font-xs;
-        color: #fff;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        background-color: #d8d8d8;
-      }
-    }
-    &:last-child {
-      margin-bottom: 0;
-      border-bottom: none;
-    }
-  }
-  .upload-img-btn {
-    display: inline-block;
-    font-size: 8rem;
-    cursor: pointer;
   }
 }
 .create-btn-area {
   padding: 30px;
   .next-btn {
     width: 150px;
-  }
-}
-.upload-imgs-list {
-  width: 100%;
-  .upload-img-item {
-    display: inline-block;
-    position: relative;
-    width: 96px;
-    height: 96px;
-    padding: 1px;
-    margin: 0 6px 6px 0;
-    border: 1px solid rgba(0, 0, 0, .5);
-    overflow: hidden;
-    .upload-img {
-      position: absolute;
-      top: 1px;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 92px;
-    }
-    .close-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 24px;
-      height: 24px;
-      text-align: center;
-      font-size: 2rem;
-      cursor: pointer;
-    }
   }
 }
 </style>

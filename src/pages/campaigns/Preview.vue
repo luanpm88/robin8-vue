@@ -184,99 +184,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.campaign-status-panel {
-  padding: 40px 100px;
-  text-align: center;
-  .iconfont {
-    display: inline-block;
-    margin-right: 10px;
-    vertical-align: middle;
-    font-size: 5rem;
-    &.success {
-      color: nth($blue, 1);
-    }
-  }
-  .info {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    font-size: $font-nm-s;
-    .title {
-      font-size: $font-nm-l;
-      font-weight: 600;
-      color: #4a4a4a;
-    }
-  }
-}
-.line-title {
-  line-height: 20px;
-  padding: 20px;
-  border-top: 1px solid rgba(0, 0, 0, .1);
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  text-align: center;
-  font-size: $font-nm-l;
-  color: #575962;
-}
-.campaign-create-form {
-  overflow: hidden;
-  .form-group {
-    padding: 13px 60px;
-    .check-icon {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      .iconfont {
-        font-size: $font-lg;
-        color: nth($gray, 1);
-      }
-      &.checked {
-        .iconfont {
-          color: nth($blue, 1);
-        }
-      }
-    }
-    &:last-child {
-      margin-bottom: 0;
-      border-bottom: none;
-    }
-  }
-}
 .kols-list {
   padding: 24px 60px;
   font-size: 0;
   & > .item {
     display: inline-block;
     width: 33.33333%;
-  }
-}
-.upload-imgs-list {
-  width: 100%;
-  .upload-img-item {
-    display: inline-block;
-    position: relative;
-    width: 96px;
-    height: 96px;
-    padding: 1px;
-    margin: 0 6px 6px 0;
-    border: 1px solid rgba(0, 0, 0, .5);
-    overflow: hidden;
-    .upload-img {
-      position: absolute;
-      top: 1px;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 92px;
-    }
-    .close-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 24px;
-      height: 24px;
-      text-align: center;
-      font-size: 2rem;
-      cursor: pointer;
-    }
   }
 }
 </style>
