@@ -43,6 +43,9 @@
   opacity: 0.65;
   -webkit-box-shadow: none;
   box-shadow: none;
+  color: #fff !important;
+  border-color: nth($gray, 1) !important;
+  background-color: nth($gray, 1) !important;
 }
 
 a.btn.disabled, fieldset[disabled] a.btn {

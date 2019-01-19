@@ -20,18 +20,27 @@
           <p>合计：<span class="price">¥20000.00</span></p>
           <p>微信公众号 | 发帖数：10 | 报价：￥10000.00 | 曝光值：30000</p>
           <p>微博 | 发帖数：10 | 报价：￥10000.00 | 曝光值：20000</p>
+
+          <articles-list></articles-list>
         </div>
       </div>
       <div class="media-right media-middle kol-ctrl">
         <input type="radio" name="kol" />
+        <button type="button" class="btn btn-sm btn-outline btn-blue btn-circle">满意</button>
+        <button type="button" disabled="true" class="btn btn-sm btn-outline btn-blue btn-circle disabled">已支付</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ArticlesList from './ArticlesList'
+
 export default {
   name: 'KolItem',
+  components: {
+    ArticlesList
+  },
   props: {
   }
 }
