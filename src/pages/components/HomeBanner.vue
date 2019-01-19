@@ -1,5 +1,7 @@
 <template>
-  <div class="home-banner"></div>
+  <div class="home-banner">
+    <img src="@images/_temp/banner.jpg" alt="" class="banner-img" />
+  </div>
 </template>
 
 <script>
@@ -15,6 +17,8 @@ export default {
 
 <style lang="scss" scoped>
 .home-banner {
-  height: 200px;
+  .banner-img {
+    width: 100%;
+  }
 }
 </style>

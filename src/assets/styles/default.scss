@@ -92,7 +92,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 }
 
 /*checkbox styles*/
-input[type=checkbox], input[type=radio] { display: inline-block; width: 20px; height: 20px; padding: 0; margin: -2px 4px 0; border: 0; outline: 0 !important; vertical-align: middle; text-align: center; background-color: transparent; @include no-appearance; }
+input[type=checkbox], input[type=radio] { display: inline-block; width: 20px; height: 20px; padding: 0; margin: -2px 4px 0; border: 0; outline: 0 !important; vertical-align: middle; text-align: center; background-color: transparent; @include no-appearance; cursor: pointer; }
 input[type=checkbox]:before, input[type=radio]:before { font-family: 'iconfont' !important; font-size: 20px; font-weight: 400; line-height: 1; text-decoration: none; color: nth($gray, 1); border-radius: 0; background: 0 0; -webkit-font-smoothing: antialiased; }
 input[type=checkbox]:checked:before, input[type=radio]:checked:before { color: nth($blue, 1); }
 input[type=checkbox]:before { content: $icon-check; }
@@ -124,9 +124,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
   .panel-body { background-color: #fff;
     & + .panel-foot { margin-top: 1px; }
   }
-  .panel-foot { @include display-flex; padding: 8px 10px; background-color: #fff; align-items: center;
-    .info-area { @include flex(1); }
-  }
+  .panel-foot { padding: 10px; background-color: #fff; }
   &.default-panel { border-radius: 0; box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08); }
   &.radius-panel { border-radius: 10px; overflow: hidden; }
 }

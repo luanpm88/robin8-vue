@@ -11,7 +11,7 @@
       <p class="desc">{{dataList.describe}}</p>
     </div>
     <div class="media-right media-middle" v-if="dataList.isIcon">
-      <span :class="{'iconfont':true, 'icon-star-fill': true, 'icon-star-active': dataList.isCollect}"></span>
+      <span :class="{'iconfont': true, 'icon-star-fill': true, 'icon-star-active': dataList.isCollect}"></span>
       <span class="iconfont icon-msg" v-if="dataList.isMsg"></span>
     </div>
   </div>
