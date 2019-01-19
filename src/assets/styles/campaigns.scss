@@ -78,35 +78,6 @@
   }
 }
 
-.campaign-status-panel {
-  padding: 40px 100px;
-  text-align: center;
-
-  .iconfont {
-    display: inline-block;
-    margin-right: 10px;
-    vertical-align: middle;
-    font-size: 5rem;
-
-    &.success {
-      color: nth($blue, 1);
-    }
-  }
-
-  .info {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    font-size: $font-nm-s;
-
-    .title {
-      font-size: $font-nm-l;
-      font-weight: 600;
-      color: #4a4a4a;
-    }
-  }
-}
-
 .line-title {
   line-height: 20px;
   padding: 20px;

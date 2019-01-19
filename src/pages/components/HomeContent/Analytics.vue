@@ -3,6 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">Analytics</h5>
     </div>
+
     <div class="panel-body list-content">
       <div class="btn-group source-tab">
         <div
@@ -13,30 +14,31 @@
         >{{item.name}}</div>
       </div>
 
-      <div class="h-analytic-tabcon">
-        <div v-if="cur === 0" class="h-analytic-tabbox">
+      <div class="mt30">
+        <div v-if="cur === 0" class="analytic-box">
           <line-charts :childData="oneParentsData"></line-charts>
         </div>
-        <div v-if="cur === 1" class="h-analytic-tabbox">
+        <div v-if="cur === 1" class="analytic-box">
           <tag-charts :tags="parentTagsTwo"></tag-charts>
         </div>
-        <div v-if="cur === 2" class="h-analytic-tabbox">
+        <div v-if="cur === 2" class="analytic-box">
           <bar-charts :childData="threeParentsData"></bar-charts>
         </div>
-        <div v-if="cur === 3" class="h-analytic-tabbox">
+        <div v-if="cur === 3" class="analytic-box">
           <pie-charts :childData="fourParentsData"></pie-charts>
         </div>
       </div>
-      <p class="h-analytic-type">{{analyticsType}}</p>
+      <p class="analytic-type">{{analyticsType}}</p>
     </div>
   </div>
 </template>
 
 <script>
-import LineCharts from "../../../components/Chart/chartLine";
-import BarCharts from "../../../components/Chart/chartHorizontalBar";
-import PieCharts from "../../../components/Chart/chartPie";
-import TagCharts from "../../../components/Chart/chartTags";
+import LineCharts from "@components/Chart/chartLine";
+import BarCharts from "@components/Chart/chartHorizontalBar";
+import PieCharts from "@components/Chart/chartPie";
+import TagCharts from "@components/Chart/chartTags";
+
 export default {
   components: {
     LineCharts,
@@ -44,7 +46,7 @@ export default {
     PieCharts,
     TagCharts
   },
-  data() {
+  data () {
     return {
       analyticsType: "微博",
       cur: 0,
@@ -149,7 +151,7 @@ export default {
     };
   },
   methods: {
-    tabClick(num) {
+    tabClick (num) {
       this.cur = num;
       let parentNode = document.getElementsByClassName("h-analytic-childTab");
       for (let i = 0; i < parentNode.length; i++) {
@@ -160,7 +162,7 @@ export default {
         }
       }
     },
-    secondTab(cur, child, e) {
+    secondTab (cur, child, e) {
       if (e) {
         e.stopPropagation();
         e.preventDefault();
@@ -177,72 +179,31 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
-.h-analytic-title {
-  color: nth($purple, 1);
-  font-size: $font-lg-s;
+.list-content {
+  padding: 20px;
 }
-.home-analytic {
-  padding: $font-lg-ns;
-  .h-analytic-title {
-    margin-bottom: $font-lg-s;
+.source-tab {
+  overflow: hidden;
+  & > .btn {
+    padding: 4px 12px;
+  }
+  & > .btn:first-child {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  & > .btn:last-child {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
 }
-.h-analytic-type {
-  text-align: center;
-  color: nth($purple, 1);
-}
-.h-analytic-tabcon {
-  padding: 30px 0px 0px;
-}
-.h-analytic-tabbox {
+.analytic-box {
   width: 65%;
   margin: 0px auto;
 }
-.h-analytic-tab {
-  display: inline-block;
-  border: 1px solid nth($purple, 1);
-  border-radius: 16px;
-  li {
-    float: left;
-    line-height: $font-lg-b;
-    color: nth($purple, 1);
-    border-right: 1px solid nth($purple, 1);
-    padding: 0 20px;
-    cursor: pointer;
-    position: relative;
-    &.active {
-      background: nth($purple, 1);
-      color: $white;
-    }
-    &:first-child {
-      border-top-left-radius: 16px;
-      border-bottom-left-radius: 16px;
-    }
-    &:last-child {
-      border-right: 1px solid transparent;
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
-    }
-    div {
-      position: absolute;
-      z-index: 3;
-      background: $white;
-      border: 1px solid nth($purple, 1);
-      left: 0px;
-      top: 2.8rem;
-      width: 100%;
-      border-radius: 5px;
-      display: none;
-      p {
-        text-align: center;
-        color: nth($purple, 1);
-        &:hover {
-          background: nth($purple, 1);
-          color: $white;
-        }
-      }
-    }
-  }
+.analytic-type {
+  text-align: center;
+  color: nth($purple, 1);
 }
 </style>

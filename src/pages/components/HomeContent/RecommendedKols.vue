@@ -6,6 +6,7 @@
         Recommended Kols
       </h5>
     </div>
+
     <div class="panel-body list-content">
       <div class="btn-group source-tab">
         <div
@@ -16,11 +17,14 @@
         >{{item.name}}</div>
       </div>
       <div class="mt20" v-if="cur === 0">
-        <div class="home-kol-clomn-box">
+        <div class="kols-list">
           <kols-list-item
             v-for="(item, index) in weiboList"
             :key="index"
-            :dataList="item"
+            :hasLiked="kolHasLiked"
+            :hasMsg="kolHasMsg"
+            :hasChecked="kolHasChecked"
+            :renderData="item"
           ></kols-list-item>
         </div>
         <div class="text-center mt20">
@@ -28,6 +32,16 @@
         </div>
       </div>
       <div class="mt20" v-else>
+        <div class="kols-list">
+          <kols-list-item
+            v-for="(item, index) in weiboList"
+            :key="index"
+            :hasLiked="kolHasLiked"
+            :hasMsg="kolHasMsg"
+            :hasChecked="kolHasChecked"
+            :renderData="item"
+          ></kols-list-item>
+        </div>
         <div class="text-center mt20">
           <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
         </div>
@@ -37,13 +51,17 @@
 </template>
 
 <script>
-import KolsListItem from "../../campaigns/components/KolsListItem.1";
+import KolsListItem from "../../campaigns/components/KolsListItem"
+
 export default {
   components: {
     KolsListItem
   },
-  data() {
+  data () {
     return {
+      kolHasLiked: true,
+      kolHasMsg: true,
+      kolHasChecked: false,
       cur: 0,
       tabList: [
         {
@@ -58,59 +76,36 @@ export default {
       weiboList: [
         {
           name: "Anna Strong",
-          describe: "Visual Designer,Google Inc",
-          isIcon: true,
-          isMsg: true,
-          isCheck: false,
-          isCollect: true
+          desc: "Visual Designer,Google Inc"
         },
         {
           name: "Milano Esco",
-          describe: "Well-known car blogger",
-          isIcon: true,
-          isMsg: true,
-          isCheck: false,
-          isCollect: false
+          desc: "Well-known car blogger"
         },
         {
           name: "Nick Bold",
-          describe: "Web Developer, Facebook Inc",
-          isIcon: true,
-          isMsg: true,
-          isCheck: false,
-          isCollect: true
+          desc: "Web Developer, Facebook Inc"
         },
         {
           name: "Wiltor Delton",
-          describe: "Project Manager",
-          isIcon: true,
-          isMsg: true,
-          isCheck: false,
-          isCollect: true
+          desc: "Project Manager"
         },
         {
           name: "Nick Stone",
-          describe: "Visual Designer, Github Inc",
-          isIcon: true,
-          isMsg: true,
-          isCheck: false,
-          isCollect: true
+          desc: "Visual Designer, Github Inc"
         }
       ]
-    };
+    }
   },
   methods: {
-    tabClick(num) {
-      this.cur = num;
+    tabClick (num) {
+      this.cur = num
     }
   }
-};
+}
 </script>
-<style  lang="scss" scoped>
 
-</style>
-
-<style lang="scss">
+<style lang="scss" scoped>
 .list-content {
   padding: 20px;
 }

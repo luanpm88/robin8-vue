@@ -7,13 +7,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-body">
-        <div class="campaign-status-panel">
-          <div class="iconfont icon-success success"></div>
-          <div class="info">
-            <h5 class="title">活动提交审核成功</h5>
-            <p>正在审核中，我们将在24小时之内完成审核</p>
-          </div>
-        </div>
+        <campaign-status-area></campaign-status-area>
 
         <div class="line-title">基础信息</div>
         <div class="form-horizontal campaign-create-form">
@@ -140,17 +134,17 @@
 
         <div class="line-title">已选择的大V</div>
         <div class="kols-list">
-          <div class="item">
-            <kols-list-item></kols-list-item>
-          </div>
-          <div class="item">
-            <kols-list-item></kols-list-item>
-          </div>
-          <div class="item">
-            <kols-list-item></kols-list-item>
-          </div>
-          <div class="item">
-            <kols-list-item></kols-list-item>
+          <div
+            class="item"
+            v-for="(item, index) in kolsList"
+            :key="index"
+          >
+            <kols-list-item
+              :hasLiked="kolHasLiked"
+              :hasMsg="kolHasMsg"
+              :hasChecked="kolHasChecked"
+              :renderData="item"
+            ></kols-list-item>
           </div>
         </div>
       </div>
@@ -162,12 +156,14 @@
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import CampaignCreateProcess from './components/CampaignCreateProcess'
+import CampaignStatusArea from './components/CampaignStatusArea'
 import KolsListItem from './components/KolsListItem'
 
 export default {
   name: 'CampaignDetail',
   components: {
     CampaignCreateProcess,
+    CampaignStatusArea,
     KolsListItem
   },
   data () {
@@ -175,7 +171,32 @@ export default {
       processStatus: {
         current: 1,
         index: 0
-      }
+      },
+      kolHasLiked: true,
+      kolHasMsg: false,
+      kolHasChecked: true,
+      kolsList: [
+        {
+          name: "Anna Strong",
+          desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
+        },
+        {
+          name: "Milano Esco",
+          desc: "Well-known car blogger"
+        },
+        {
+          name: "Nick Bold",
+          desc: "Web Developer, Facebook Inc"
+        },
+        {
+          name: "Wiltor Delton",
+          desc: "Project Manager"
+        },
+        {
+          name: "Nick Stone",
+          desc: "Visual Designer, Github Inc"
+        }
+      ]
     }
   },
   methods: {

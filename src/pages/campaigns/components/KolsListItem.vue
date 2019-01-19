@@ -1,27 +1,32 @@
 <template>
-  <div class="kols-list-item media checked">
+  <div class="kols-list-item media">
     <div class="media-left">
       <div class="avatar">
         <img src="" alt="" class="avatar-img" />
-        <div class="iconfont icon-round-check-fill check-icon"></div>
+        <div v-if="hasChecked" class="iconfont icon-round-check-fill check-icon"></div>
       </div>
     </div>
     <div class="media-body media-middle info">
-      <h5 class="name">Anna Strong</h5>
-      <p class="desc">Visual Designer,Google Inc</p>
+      <h5 class="name">{{renderData.name}}</h5>
+      <p class="desc">{{renderData.desc}}</p>
     </div>
-    <div class="media-right media-middle">
-      <span class="iconfont icon-star-fill"></span>
+    <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
+      <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
+      <span v-if="hasMsg" class="iconfont icon-msg"></span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'KolsListItem',
+  name: "KolsListItem",
   props: {
+    hasLiked: Boolean,
+    hasMsg: Boolean,
+    hasChecked: Boolean,
+    renderData: Object
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +61,19 @@ export default {
     }
     .desc {
       @include limit-line(1);
-      font-size: .8rem;
+      font-size: 0.8rem;
+    }
+  }
+  .operation-area {
+    .iconfont {
+      margin-left: 10px;
+      cursor: pointer;
+      &.icon-msg {
+        color: nth($purple, 1);
+      }
+      &.icon-star-fill.active {
+        color: nth($yellow, 1);
+      }
     }
   }
   &.checked {
