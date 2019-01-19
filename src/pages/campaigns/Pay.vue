@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="campaign-pay-container">
     <campaign-create-process
       :renderData="processStatus"
       class="mt20"
@@ -19,17 +19,19 @@
         <div class="pay-method">
           <h5 class="title">支付方式：</h5>
           <ul class="method-list">
-            <li class="item media">
-              <div class="media-left media-middle">
-                <input type="radio" name="payMethod" value="alipay" />
-              </div>
-              <div class="media-body media-middle">
-                <div class="pay-icon iconfont icon-alipay"></div>
-                <div class="info">
-                  <div class="method">支付宝</div>
-                  <div class="desc">使用支付宝线上支付安全放心</div>
+            <li class="item">
+              <label class="media">
+                <div class="media-left media-middle">
+                  <input type="radio" name="payMethod" value="alipay" />
                 </div>
-              </div>
+                <div class="media-body media-middle">
+                  <div class="pay-icon iconfont icon-alipay"></div>
+                  <div class="info">
+                    <div class="method">支付宝</div>
+                    <div class="desc">使用支付宝线上支付安全放心</div>
+                  </div>
+                </div>
+              </label>
             </li>
           </ul>
         </div>
@@ -94,6 +96,9 @@ export default {
 .method-list {
   & > .item {
     padding: 10px 0;
+    label {
+      cursor: pointer;
+    }
     .pay-icon {
       display: inline-block;
       width: auto;

@@ -205,7 +205,7 @@
     </div>
 
     <div class="text-center create-btn-area">
-      <button type="button" class="btn btn-cyan next-btn" @click="bindSubmit">提交</button>
+      <button type="button" class="btn btn-cyan next-btn" @click="doSubmit">提交</button>
     </div>
   </div>
 </template>
@@ -264,8 +264,8 @@ export default {
       }
       console.log(this.pictures)
     },
-    bindSubmit () {
-      this.$router.push('/campaigns/1/preview')
+    doSubmit () {
+      this.$router.push('/campaigns/1')
     }
   }
 }

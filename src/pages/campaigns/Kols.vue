@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="campaign-kols-container">
     <campaign-create-process
       :renderData="processStatus"
       class="mt20"
@@ -37,7 +37,7 @@
       </div>
       <div class="panel-foot clearfix">
         <div class="select-statistics pull-left">微博总曝光值：<span class="num">9999</span> | 微信总曝光值：<span class="num">9999</span> | 总报价：<span class="num">9999</span></div>
-        <button type="button" class="btn btn-cyan pull-right">确认合作，立即支付</button>
+        <button type="button" class="btn btn-cyan pull-right" @click="doPay">确认合作，立即支付</button>
       </div>
     </div>
 
@@ -65,7 +65,12 @@ export default {
     }
   },
   methods: {
-
+    doPay () {
+      this.$router.push('/campaigns/1/pay')
+    }
+  },
+  mounted () {
+    console.log(this.$route.params.id)
   }
 }
 </script>
