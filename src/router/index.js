@@ -7,6 +7,7 @@ import CampaignPreview from '@/pages/campaigns/Preview'
 import CampaignEdit from '@/pages/campaigns/Edit'
 import CampaignDetail from '@/pages/campaigns/Detail'
 import ChooseKols from '@/pages/campaigns/Kols'
+import CampaignPay from '@/pages/campaigns/CampaignPay'
 
 Vue.use(Router)
 
@@ -57,6 +58,14 @@ export default new Router({
               path: 'kols',
               name: 'ChooseKols',
               component: ChooseKols,
+              meta: {
+                title: '创建新活动'
+              }
+            },
+            {
+              path: 'pay',
+              name: 'CampaignPay',
+              component: CampaignPay,
               meta: {
                 title: '创建新活动'
               }
