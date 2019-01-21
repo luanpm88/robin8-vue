@@ -8,54 +8,35 @@
     </div>
 
     <div class="panel-body list-content">
-      <div class="btn-group source-tab">
-        <div
-          :class="{'btn btn-outline btn-purple': true, 'active':cur == item.cur}"
-          @click="tabClick(item.cur)"
-          v-for="(item, index) in tabList"
-          :key="index"
-        >{{item.name}}</div>
-      </div>
+      <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
+        <keep-alive>
+          <div class="mt20">
+            <kols-list-item
+              v-for="(item, index) in currentList"
+              :key="index"
+              :hasLiked="kolHasLiked"
+              :hasMsg="kolHasMsg"
+              :hasChecked="kolHasChecked"
+              :renderData="item"
+            ></kols-list-item>
 
-      <div class="mt20" v-if="cur === 0">
-        <div class="kols-list">
-          <kols-list-item
-            v-for="(item, index) in weiboList"
-            :key="index"
-            :hasLiked="kolHasLiked"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :renderData="item"
-          ></kols-list-item>
-        </div>
-        <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
-        </div>
-      </div>
-      <div class="mt20" v-else>
-        <div class="kols-list">
-          <kols-list-item
-            v-for="(item, index) in weiboList"
-            :key="index"
-            :hasLiked="kolHasLiked"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :renderData="item"
-          ></kols-list-item>
-        </div>
-        <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
-        </div>
-      </div>
+            <div class="text-center mt20">
+              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
+            </div>
+          </div>
+        </keep-alive>
+      </default-tabs>
     </div>
   </div>
 </template>
 
 <script>
+import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "../../campaigns/components/KolsListItem"
 
 export default {
   components: {
+    DefaultTabs,
     KolsListItem
   },
   data () {
@@ -63,18 +44,8 @@ export default {
       kolHasLiked: true,
       kolHasMsg: true,
       kolHasChecked: false,
-      cur: 0,
-      tabList: [
-        {
-          cur: 0,
-          name: "微博"
-        },
-        {
-          cur: 1,
-          name: "微信"
-        }
-      ],
-      weiboList: [
+      tabIndex: 0,
+      currentList: [
         {
           name: "Anna Strong",
           desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
@@ -95,12 +66,67 @@ export default {
           name: "Nick Stone",
           desc: "Visual Designer, Github Inc"
         }
+      ],
+      tabList: [
+        {
+          index: 0,
+          name: '微博',
+          data: [
+            {
+              name: "Anna Strong",
+              desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
+            },
+            {
+              name: "Milano Esco",
+              desc: "Well-known car blogger"
+            },
+            {
+              name: "Nick Bold",
+              desc: "Web Developer, Facebook Inc"
+            },
+            {
+              name: "Wiltor Delton",
+              desc: "Project Manager"
+            },
+            {
+              name: "Nick Stone",
+              desc: "Visual Designer, Github Inc"
+            }
+          ]
+        },
+        {
+          index: 1,
+          name: '微信',
+          data: [
+            {
+              name: "1 Strong",
+              desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
+            },
+            {
+              name: "2 Esco",
+              desc: "Well-known car blogger"
+            },
+            {
+              name: "3 Bold",
+              desc: "Web Developer, Facebook Inc"
+            },
+            {
+              name: "4 Delton",
+              desc: "Project Manager"
+            },
+            {
+              name: "5 Stone",
+              desc: "Visual Designer, Github Inc"
+            }
+          ]
+        }
       ]
     }
   },
   methods: {
-    tabClick (num) {
-      this.cur = num
+    changeTab (tab) {
+      this.tabIndex = tab.index
+      this.currentList = tab.data
     }
   }
 }
@@ -109,19 +135,5 @@ export default {
 <style lang="scss" scoped>
 .list-content {
   padding: 20px;
-}
-.source-tab {
-  overflow: hidden;
-  & > .btn {
-    padding: 4px 12px;
-  }
-  & > .btn:first-child {
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-  }
-  & > .btn:last-child {
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
 }
 </style>
