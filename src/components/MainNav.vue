@@ -9,7 +9,7 @@
         class="item title-bar"
       >
         <div :class="'iconfont ' + item.icon"></div>
-        <div class="title">{{item.title}}</div>
+        <div class="title">{{$t('lang.' + item.title)}}</div>
       </router-link>
     </ul>
   </div>
@@ -22,27 +22,27 @@ export default {
     return {
       navData: [
         {
-          title: '首页',
+          title: 'home',
           icon: 'icon-home',
           href: '/'
         },
         {
-          title: '营销数据',
+          title: 'campaignsData',
           icon: 'icon-data',
           href: '/'
         },
         {
-          title: '我收藏的大V',
+          title: 'myKols',
           icon: 'icon-user',
           href: '/'
         },
         {
-          title: '我的钱包',
+          title: 'myWallet',
           icon: 'icon-wallet',
           href: '/'
         },
         {
-          title: '企业设置',
+          title: 'settings',
           icon: 'icon-setting',
           href: '/'
         },

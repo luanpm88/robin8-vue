@@ -20,7 +20,7 @@
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建新活动</h5>
-              <h6 class="sub-title">Creat Campaign</h6>
+              <h6 class="sub-title">Create Campaign</h6>
             </div>
           </router-link>
           <router-link to="/campaigns" tag="div" class="item">
