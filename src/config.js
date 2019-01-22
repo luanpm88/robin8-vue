@@ -8,6 +8,9 @@ const config = {
   // 活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 
+  // 基本信息 tags and trademarks get
+  baseInfosUrl: `${host}/base_infos`,
+
   // 待合作列表get
   pendingTendersUrl: `${host}/kols/pending_tenders`,
 

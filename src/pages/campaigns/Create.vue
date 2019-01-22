@@ -14,26 +14,40 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">活动名称：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请填写活动名称">
+              <input
+                type="text"
+                class="form-control"
+                v-model="submitData.name"
+                placeholder="请填写活动名称"
+              >
               <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动介绍：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请填写活动介绍">
+              <input
+                type="text"
+                class="form-control"
+                v-model="submitData.description"
+                placeholder="请填写活动介绍"
+              >
               <div class="form-tips">请填写活动相关介绍</div>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
-              <select class="form-control">
-                <option>请选择品牌名称</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select
+                class="form-control"
+                v-model="submitData.trademark_id"
+              >
+                <option value="">请选择品牌名称</option>
+                <option
+                  v-for="item in brandsList"
+                  :key="item.id"
+                  :value="item.id"
+                >{{item.name}}</option>
               </select>
               <div class="form-tips">请选择准确的品牌名称</div>
             </div>
@@ -98,12 +112,6 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动要求：</div>
-            <div class="col-sm-10">
-              <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动须知和要求，包括您的要求、转发内容链接等等"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="" placeholder="">
@@ -113,19 +121,35 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">KOL数量：</div>
             <div class="col-sm-4">
-              <input type="number" class="form-control" id="" placeholder="请填写活动KOL数量">
+              <input
+                type="number"
+                class="form-control"
+                v-model="submitData.pre_kols_count"
+                placeholder="请填写活动KOL数量"
+              >
               <div class="form-tips">请填写活动KOL数量</div>
             </div>
             <div class="col-sm-2 control-label">活动预算：</div>
             <div class="col-sm-4">
-              <input type="number" class="form-control" id="" placeholder="请填写活动预算">
+              <input
+                type="number"
+                class="form-control"
+                v-model="submitData.pre_amount"
+                placeholder="请填写活动预算"
+              >
               <div class="form-tips">请填写活动预算</div>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
-              <textarea name="" id="" class="form-control" rows="6" placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"></textarea>
+              <textarea
+                name=""
+                v-model="submitData.notice"
+                class="form-control"
+                rows="6"
+                placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"
+              ></textarea>
             </div>
           </div>
         </div>
@@ -139,12 +163,29 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <tags-list></tags-list>
+            <tags-list
+              :renderData="tagsList"
+              @checkTag="checkTag"
+            ></tags-list>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请选择价格区间">
+              <div class="input-group">
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="submitData.price_from"
+                  placeholder="最低价格"
+                >
+                <span class="input-group-addon">-</span>
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="submitData.price_to"
+                  placeholder="最高价格"
+                >
+              </div>
               <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
             </div>
           </div>
@@ -211,6 +252,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import TagsList from '@components/TagsList'
@@ -232,12 +274,49 @@ export default {
         current: 1,
         index: 0
       },
+      brandsList: [],
+      tagsList: [],
       uploadUrl: apiConfig.uploadUrl,
       pictures: [],
-      loading: false
+      loading: false,
+      submitData: {
+        name: '',
+        description: '',
+        trademark_id: '',
+        start_at: '',
+        end_at: '',
+        pre_kols_count: '',
+        pre_amount: '',
+        img_url: '',
+        terrace_id: '',
+        exposure_value: '',
+        category: '',
+        price_from: '',
+        price_to: ''
+      }
     }
   },
   methods: {
+    getBaseData () {
+      axios.get(apiConfig.baseInfosUrl)
+        .then(this.handleGetBaseDataSucc)
+    },
+    handleGetBaseDataSucc (res) {
+      console.log(res)
+      if (res.status == 200 && res.data) {
+        const data = res.data
+        this.brandsList = data.trademarks_list
+
+        let _tagsList = data.tags_list
+        for (let i = 0; i < _tagsList.length; i++) {
+          _tagsList[i].checked = false
+        }
+        this.tagsList = _tagsList
+      }
+    },
+    checkTag (data) {
+      console.log(data)
+    },
     imageuploaded (res) {
       if (this.pictures.length >= 5) {
         alert('最多可上传5张图片')
@@ -267,6 +346,9 @@ export default {
     doSubmit () {
       this.$router.push('/campaigns/1')
     }
+  },
+  mounted () {
+    this.getBaseData()
   }
 }
 </script>
