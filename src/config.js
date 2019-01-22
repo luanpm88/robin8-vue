@@ -10,6 +10,9 @@ const config = {
   // 活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 
+  // 上传图片post 参数image
+  uploadImageUrl: `${host}/creations/upload_image`,
+
   // 基本信息 tags and trademarks get
   baseInfosUrl: `${host}/base_infos`,
 

@@ -120,13 +120,13 @@
                 crop-ratio="4:3"
                 @imageuploaded="imageuploaded"
                 @imageuploading="imageuploading"
-                inputOfFile="file"
+                inputOfFile="image"
                 text=""
                 :max-file-size="5242880"
                 :compress="30"
                 :max-width="200"
                 input-accept="image/*"
-                :url="uploadUrl">
+                :url="uploadImageUrl">
               </vue-core-image-upload>
             </div>
           </div>
@@ -311,7 +311,7 @@ export default {
       },
       brandsList: [],
       tagsList: [],
-      uploadUrl: apiConfig.uploadUrl,
+      uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
       loading: false,
       checkedWechat: false,
