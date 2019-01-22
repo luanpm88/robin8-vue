@@ -21,7 +21,7 @@
             ></kols-list-item>
 
             <div class="text-center mt20">
-              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">{{$t('lang.more')}}</button>
+              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
             </div>
           </div>
         </keep-alive>
