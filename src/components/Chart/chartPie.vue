@@ -70,7 +70,7 @@ export default {
 <style lang="scss">
 #pie-chart {
   margin: 0px auto $font-sm;
-  width: 404px !important;
-  height: 386px !important;
+  width: 330px !important;
+  height: 325px !important;
 }
 </style>

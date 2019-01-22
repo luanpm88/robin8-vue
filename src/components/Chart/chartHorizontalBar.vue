@@ -88,6 +88,6 @@ export default {
 </script>
 <style>
 #horizontalbar-chart {
-  height: 390px !important;
+  height: 325px !important;
 }
 </style>

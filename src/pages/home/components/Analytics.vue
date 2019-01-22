@@ -5,30 +5,50 @@
     </div>
 
     <div class="panel-body list-content">
-      <div class="btn-group source-tab">
-        <div
-          :class="{'btn btn-outline btn-purple': true, 'active':cur == item.cur}"
-          @click="tabClick(item.cur)"
-          v-for="(item, index) in tabList"
-          :key="index"
-        >{{item.name}}</div>
-      </div>
-
+      <tab :tabList="tabList" :tabIndex="cur"  @changeTab="tabClick"></tab>
       <div class="mt30">
         <div v-if="cur === 0" class="analytic-box">
-          <line-charts :childData="oneParentsData"></line-charts>
+          <div class="col-xs-6">
+            <line-charts :childData="oneParentsData"></line-charts>
+            <p class="h-analytic-type">微博</p>
+          </div>
+          <div class="col-xs-6">
+            <line-charts :childData="oneParentsData"></line-charts>
+            <p class="h-analytic-type">微信</p>
+          </div>
         </div>
         <div v-if="cur === 1" class="analytic-box">
-          <tag-charts :tags="parentTagsTwo"></tag-charts>
+          <div class="col-xs-6">
+            <tag-charts :tags="parentTags"></tag-charts>
+            <p class="h-analytic-type">微博</p>
+          </div>
+          <div class="col-xs-6">
+            <tag-charts :tags="parentTagsTwo"></tag-charts>
+            <p class="h-analytic-type">微信</p>
+          </div>
         </div>
         <div v-if="cur === 2" class="analytic-box">
-          <bar-charts :childData="threeParentsData"></bar-charts>
+          <div class="col-xs-6">
+            <bar-charts :childData="threeParentsData"></bar-charts>
+            <p class="h-analytic-type">微博</p>
+          </div>
+          <div class="col-xs-6">
+            <bar-charts :childData="threeParentsData"></bar-charts>
+            <p class="h-analytic-type">微信</p>
+          </div>
         </div>
         <div v-if="cur === 3" class="analytic-box">
-          <pie-charts :childData="fourParentsData"></pie-charts>
+          <div class="col-xs-6">
+            <pie-charts :childData="fourParentsData"></pie-charts>
+            <p class="h-analytic-type">微博</p>
+          </div>
+          <div class="col-xs-6">
+            <pie-charts :childData="fourParentsData"></pie-charts>
+            <p class="h-analytic-type">微信</p>
+          </div>
         </div>
       </div>
-      <p class="analytic-type">{{analyticsType}}</p>
+      <p class="analytic-type">&nbsp;</p>
     </div>
   </div>
 </template>
@@ -38,13 +58,15 @@ import LineCharts from "@components/Chart/chartLine";
 import BarCharts from "@components/Chart/chartHorizontalBar";
 import PieCharts from "@components/Chart/chartPie";
 import TagCharts from "@components/Chart/chartTags";
-
+import Tab from "@components/DefaultTabs";
+let key = '&application_id=local-001&application_key=vue-001';
 export default {
   components: {
     LineCharts,
     BarCharts,
     PieCharts,
-    TagCharts
+    TagCharts,
+    Tab
   },
   data () {
     return {
@@ -52,7 +74,7 @@ export default {
       cur: 0,
       tabList: [
         {
-          cur: 0,
+          index: 0,
           name: "Trends",
           childList: [
             {
@@ -66,7 +88,7 @@ export default {
           ]
         },
         {
-          cur: 1,
+          index: 1,
           name: "Concept",
           childList: [
             {
@@ -80,7 +102,7 @@ export default {
           ]
         },
         {
-          cur: 2,
+          index: 2,
           name: "Competitors",
           childList: [
             {
@@ -94,7 +116,7 @@ export default {
           ]
         },
         {
-          cur: 3,
+          index: 3,
           name: "Sentiments",
           childList: [
             {
@@ -150,17 +172,57 @@ export default {
       tagColor: "purple"
     };
   },
+  //  mounted() {
+  //   let params = {
+  //     "start_date": "2018-08-09",
+  //     "end_date": "2018-08-29",
+  //     "industries": ["airline", "appliances"],
+  //     "page_no": 0,
+  //     "page_size": 5,
+  //     "price_from": 0,
+  //     "price_to": 1000
+  //   }
+  //   this.$axios.post('http://api_beta.robin8.net:8080/api/v1/r1/price/price/kol_search?'+ key,
+  //   {
+  //       start_date: "2018-08-09",
+  //       end_date: "2018-08-29",
+  //       industries: ["airline", "appliances"],
+  //       page_no: 0,
+  //       page_size: 5,
+  //       price_from: 1000,
+  //       price_to: 9000
+  //     })
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+
+  //     });
+  //   this.$axios({
+  //     methods: "POST",
+  //     headers: { 'content-type': 'application/x-www-form-urlencoded' },
+  //     data: {
+  //       start_date: "2018-08-09",
+  //       end_date: "2018-08-29",
+  //       industries: ["airline", "appliances"],
+  //       page_no: 0,
+  //       page_size: 5,
+  //       price_from: 1000,
+  //       price_to: 9000
+  //     },
+  //     url: "http://api_beta.robin8.net:8080/api/v1/r1/price/price/kol_search?" + key,
+  //   })
+  //     .then(response => {
+  //       console.log(response);
+  //     })
+  //     .catch(function(err) {
+  //       console.log(err);
+  //     });
+  // },
   methods: {
-    tabClick (num) {
-      this.cur = num;
-      let parentNode = document.getElementsByClassName("h-analytic-childTab");
-      for (let i = 0; i < parentNode.length; i++) {
-        if (i === num) {
-          parentNode[i].style.display = "block";
-        } else {
-          parentNode[i].style.display = "none";
-        }
-      }
+    tabClick (tab) {
+      this.cur = tab.index;
     },
     secondTab (cur, child, e) {
       if (e) {
@@ -199,10 +261,10 @@ export default {
   }
 }
 .analytic-box {
-  width: 65%;
-  margin: 0px auto;
+  // width: 65%;
+  // margin: 0px auto;
 }
-.analytic-type {
+.h-analytic-type {
   text-align: center;
   color: nth($purple, 1);
 }
