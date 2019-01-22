@@ -67,22 +67,40 @@
             <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-1 text-center">
-                  <div class="check-icon">
+                  <div
+                    class="check-icon"
+                    :class="[checkedWechat ? 'checked' : '']"
+                    @click="terraceWechat"
+                  >
                     <div class="iconfont icon-wechat-circle"></div>
                     <div class="iconfont icon-check"></div>
                   </div>
                 </div>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" id="" placeholder="请填写微信期待曝光值">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model="exposureWechat"
+                    placeholder="请填写微信期待曝光值"
+                  >
                 </div>
                 <div class="col-sm-1 text-center">
-                  <div class="check-icon">
+                  <div
+                    class="check-icon"
+                    :class="[checkedWeibo ? 'checked' : '']"
+                    @click="terraceWeibo"
+                  >
                     <div class="iconfont icon-weibo-circle"></div>
                     <div class="iconfont icon-check"></div>
                   </div>
                 </div>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" id="" placeholder="请填写微博期待曝光值">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model="exposureWeibo"
+                    placeholder="请填写微博期待曝光值"
+                  >
                 </div>
               </div>
             </div>
@@ -98,7 +116,8 @@
               </div>
               <vue-core-image-upload
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                :crop="false"
+                crop="local"
+                crop-ratio="4:3"
                 @imageuploaded="imageuploaded"
                 @imageuploading="imageuploading"
                 inputOfFile="file"
@@ -107,14 +126,28 @@
                 :compress="30"
                 :max-width="200"
                 input-accept="image/*"
-                :url="uploadUrl" >
+                :url="uploadUrl">
               </vue-core-image-upload>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="" placeholder="">
+              <div class="input-group">
+                <datepicker
+                  input-class="form-control"
+                  format="yyyy-MM-dd"
+                  placeholder="选择开始时间"
+                  v-model="submitData.start_at"
+                ></datepicker>
+                <span class="input-group-addon">-</span>
+                <datepicker
+                  input-class="form-control"
+                  format="yyyy-MM-dd"
+                  placeholder="选择结束时间"
+                  v-model="submitData.end_at"
+                ></datepicker>
+              </div>
               <div class="form-tips">请选择您预期的活动时间</div>
             </div>
           </div>
@@ -255,6 +288,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
 import CampaignCreateProcess from './components/CampaignCreateProcess'
 import KolsListPanel from './components/KolsListPanel'
@@ -263,6 +297,7 @@ import VueCoreImageUpload from 'vue-core-image-upload'
 export default {
   name: 'CampaignCreate',
   components: {
+    Datepicker,
     TagsList,
     CampaignCreateProcess,
     KolsListPanel,
@@ -279,6 +314,10 @@ export default {
       uploadUrl: apiConfig.uploadUrl,
       pictures: [],
       loading: false,
+      checkedWechat: false,
+      checkedWeibo: false,
+      exposureWechat: '',
+      exposureWeibo: '',
       submitData: {
         name: '',
         description: '',
@@ -290,7 +329,7 @@ export default {
         img_url: '',
         terrace_id: '',
         exposure_value: '',
-        category: '',
+        industries: '',
         price_from: '',
         price_to: ''
       }
@@ -306,16 +345,13 @@ export default {
       if (res.status == 200 && res.data) {
         const data = res.data
         this.brandsList = data.trademarks_list
-
-        let _tagsList = data.tags_list
-        for (let i = 0; i < _tagsList.length; i++) {
-          _tagsList[i].checked = false
-        }
-        this.tagsList = _tagsList
+        this.tagsList = data.tags_list
       }
     },
     checkTag (data) {
-      console.log(data)
+      let _checkedTags = data.checkedTags
+      console.log(_checkedTags.toString())
+      this.submitData.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
       if (this.pictures.length >= 5) {
@@ -343,8 +379,24 @@ export default {
       }
       console.log(this.pictures)
     },
+    terraceWechat () {
+      this.checkedWechat = true
+      this.checkedWeibo = false
+      this.submitData.terrace_id = 1
+    },
+    terraceWeibo () {
+      this.checkedWechat = false
+      this.checkedWeibo = true
+      this.submitData.terrace_id = 3
+    },
     doSubmit () {
-      this.$router.push('/campaigns/1')
+      if (this.checkedWechat) {
+        this.submitData.exposure_value = this.exposureWechat
+      } else if (this.checkedWeibo) {
+        this.submitData.exposure_value = this.exposureWeibo
+      }
+      console.log(this.submitData)
+      // this.$router.push('/campaigns/1')
     }
   },
   mounted () {

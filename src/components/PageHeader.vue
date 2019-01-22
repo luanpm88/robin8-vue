@@ -32,6 +32,7 @@ export default {
   background-color: #3e3b4f;
   .container {
     padding: 20px;
+    background-color: #3e3b4f;
     .logo {
       height: 40px;
       .logo-img {
