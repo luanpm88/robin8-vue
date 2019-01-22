@@ -2,7 +2,7 @@
   <div class="kols-list-item media">
     <div class="media-left">
       <div class="avatar">
-        <img src="" alt="" class="avatar-img" />
+        <!-- <img :src="{{renderData.avatar}}" alt="" class="avatar-img" /> -->
         <div v-if="hasChecked" class="iconfont icon-round-check-fill check-icon"></div>
       </div>
     </div>

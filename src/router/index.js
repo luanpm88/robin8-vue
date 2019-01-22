@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/pages/Home'
+import Login from '@/pages/Login'
+import Home from '@/pages/home/Home'
 import Campaigns from '@/pages/campaigns/Campaigns'
 import CampaignCreate from '@/pages/campaigns/Create'
 import CampaignEdit from '@/pages/campaigns/Edit'
@@ -19,6 +20,14 @@ export default new Router({
       component: Home,
       meta: {
         title: 'ROBIN8'
+      }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      meta: {
+        title: '登录'
       }
     },
     {

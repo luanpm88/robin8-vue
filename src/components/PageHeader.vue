@@ -2,7 +2,9 @@
   <div class="page-header">
     <div class="container clearfix">
       <h1 class="logo pull-left">
-        <img src="" alt="ROBIN8" />
+        <router-link to="/">
+          <img src="@images/logo.png" alt="ROBIN8" class="logo-img" />
+        </router-link>
       </h1>
 
       <div class="pull-right">
@@ -30,6 +32,12 @@ export default {
   background-color: #3e3b4f;
   .container {
     padding: 20px;
+    .logo {
+      height: 40px;
+      .logo-img {
+        height: 100%;
+      }
+    }
     .avatar {
       width: 40px;
       height: 40px;

@@ -51,9 +51,9 @@
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import HomeBanner from './components/HomeBanner'
-import HomeAnalytic from './components/HomeContent/Analytics'
-import HomeRecommendedKols from './components/HomeContent/RecommendedKols'
-import HomeTopPosts from './components/HomeContent/TopPosts'
+import HomeAnalytic from './components/Analytics'
+import HomeRecommendedKols from './components/RecommendedKols'
+import HomeTopPosts from './components/TopPosts'
 export default {
   name: 'Home',
   components: {
