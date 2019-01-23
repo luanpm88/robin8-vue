@@ -11,21 +11,14 @@
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
         <keep-alive>
           <div class="mt20">
-            <!-- <kols-list-item
+            <kols-list-item
               v-for="(item, index) in currentList"
               :key="index"
               :hasLiked="kolHasLiked"
               :hasMsg="kolHasMsg"
               :hasChecked="kolHasChecked"
               :renderData="item"
-            ></kols-list-item> -->
-            <!-- <ul>
-              <li v-for="(item, index) in postList" :key="index">
-                <img :src="item.avatar_url" alt="">
-                <img :src="item.title" alt="">
-                <p>{{item.avatar_url}}</p>
-              </li>
-            </ul> -->
+            ></kols-list-item>
             <div class="home-post">
               
             </div>
@@ -163,7 +156,7 @@ export default {
       axios
         .post(apiConfig.topPostWeibo, params)
         .then(function(res) {
-          console.log("我是微博接口", res);
+          // console.log("我是微博接口", res);
           _that.postList = res.data.data;
         })
         .catch(function(error) {
@@ -176,7 +169,7 @@ export default {
       axios
         .post(apiConfig.topPostWeixin, params)
         .then(function(res) {
-          console.log("我是微信接口", res);
+          // console.log("我是微信接口", res);
         })
         .catch(function(error) {
           console.log(error);

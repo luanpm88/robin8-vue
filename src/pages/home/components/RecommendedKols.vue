@@ -150,17 +150,8 @@ export default {
       }
     },
     intoKolDetail(item){
-      console.log(4444);
-      // this.$router.push('./kolDetail/Index.vue');
-      // this.$router.push('/kol/'+ id);
-      this.$router.push({
-        path: "./kolDetail/Index.vue",
-        name: "kolDetail",
-        params: {
-          items: item
-        },
-        // query: { profile_id: item.profile_id, industry: "" } 
-      });
+      console.log(item);
+      this.$router.push('/kol/'+ item.profile_id);
     },
     // 微博的接口
     weiboKol(params) {
