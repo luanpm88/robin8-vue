@@ -1,20 +1,17 @@
 <template>
   <div class="panel default-panel">
     <div class="panel-head">
-      <h5 class="title purple">Analytics</h5>
+      <h5 class="title purple">
+        <span class="iconfont icon-101"></span>
+        Analytics <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab></h5>
     </div>
 
     <div class="panel-body list-content">
-      <tab :tabList="tabList" :tabIndex="cur" @changeTab="tabClick"></tab>
+      
       <div class="mt30">
         <div v-if="cur === 0" class="analytic-box">
-          <div class="col-xs-6">
-            <line-charts :childData="trendsWeiboList"></line-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <line-charts :childData="trendsWeixinList"></line-charts>
-            <p class="h-analytic-type">微信</p>
+          <div class="analytic-chart">
+              <line-charts :childData="trendsWeiboList"></line-charts>
           </div>
         </div>
         <div v-if="cur === 1" class="analytic-box">
@@ -28,13 +25,8 @@
           </div>
         </div>
         <div v-if="cur === 2" class="analytic-box">
-          <div class="col-xs-6">
-            <bar-charts :childData="competiteWeiboList"></bar-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <bar-charts :childData="competiteWeixinList"></bar-charts>
-            <p class="h-analytic-type">微信</p>
+          <div class="analytic-chart">
+              <bar-charts :childData="competiteWeiboList"></bar-charts>
           </div>
         </div>
         <div v-if="cur === 3" class="analytic-box">
@@ -48,6 +40,7 @@
           </div>
         </div>
       </div>
+      <tab :tabList="tabList" :tabIndex="cur" @changeTab="tabClick" class="analytic-bottom-tab"></tab>
       <p class="analytic-type">&nbsp;</p>
     </div>
   </div>
@@ -72,6 +65,7 @@ export default {
   },
   data() {
     return {
+      topTabCur: 0,
       cur: 0,
       trendParams: {
         start_date: "2018-08-09",
@@ -90,48 +84,28 @@ export default {
         end_date: "2018-08-29",
         brand_keywords: "BMW"
       },
+      topTab:[
+        {
+          index: 0,
+          name: "微博"
+        },
+        {
+          index: 1,
+          name: "微信"
+        }
+      ],
       tabList: [
         {
           index: 0,
           name: "Trends",
-          childList: [
-            {
-              value: 0,
-              type: "微博"
-            },
-            {
-              value: 1,
-              type: "微信"
-            }
-          ]
         },
         {
           index: 1,
           name: "Concept",
-          childList: [
-            {
-              value: 0,
-              type: "微博"
-            },
-            {
-              value: 1,
-              type: "微信"
-            }
-          ]
         },
         {
           index: 2,
           name: "Competitors",
-          childList: [
-            {
-              value: 0,
-              type: "微博"
-            },
-            {
-              value: 1,
-              type: "微信"
-            }
-          ]
         },
         {
           index: 3,
@@ -229,27 +203,48 @@ export default {
     this.sentimentWeixin(this.sentimentParams);
   },
   methods: {
+    topTabClick(topTab) {
+      this.topTabCur = topTab.index;
+      if (this.cur === 0 && topTab.index === 0) {
+        // trend 微博
+        this.trendsWeibo(this.trendParams);
+      }
+      if (this.cur === 0 && topTab.index === 1) {
+        // trend 微信
+        this.trendsWeixin(this.trendParams);
+      }
+      this.topTabCur = topTab.index;
+      if (this.cur === 2 && topTab.index === 0) {
+        // competitor 微博
+        this.competitorWeibo(this.competitorParams);
+      }
+      if (this.cur === 2 && topTab.index === 1) {
+        // competitor 微信
+        this.competitorWeixin(this.competitorParams);
+      }
+    },
     tabClick(tab) {
       this.cur = tab.index;
+      this.topTabCur = 0;
       // console.log(999999);
       if (tab.index === 0) {
         // console.log(7777);
         // trend 微博
         this.trendsWeibo(this.trendParams);
         // trend 微信
-        this.trendsWeixin(this.trendParams);
+        // this.trendsWeixin(this.trendParams);
       }
       if (tab.index === 2) {
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
-        // competitor 微信
-        this.competitorWeixin(this.competitorParams);
+        // // competitor 微信
+        // this.competitorWeixin(this.competitorParams);
       }
       if (tab.index === 3) {
         // sentiment 微博
         this.sentimentWeibo(this.sentimentParams);
         // sentiment 微信
-        this.sentimentWeixin(this.sentimentParams);
+        // this.sentimentWeixin(this.sentimentParams);
       }
     },
     // trend 微博
@@ -275,8 +270,8 @@ export default {
         .post(apiConfig.trendsWeixin, params)
         .then(function(res) {
           // console.log("我是微信", res);
-          _that.trendsWeixinList.dataList = [{ data: res.data.data }];
-          _that.trendsWeixinList.labels = res.data.labels;
+          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
+          _that.trendsWeiboList.labels = res.data.labels;
         })
         .catch(function(error) {
           console.log(error);
@@ -302,9 +297,9 @@ export default {
       axios
         .post(apiConfig.competitorWeixin, params)
         .then(function(res) {
-          // console.log("我是微信", res);
-          _that.competiteWeixinList.dataList = [{ data: res.data.data }];
-          _that.competiteWeixinList.labels = res.data.labels;
+          // console.log("我是微博", res);
+          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+          _that.competiteWeiboList.labels = res.data.labels;
         })
         .catch(function(error) {
           console.log(error);
@@ -341,7 +336,13 @@ export default {
   }
 };
 </script>
-
+<style lang="scss">
+.analytic-chart{
+  #line-chart {
+    height: 400px !important;
+  }
+}
+</style>
 <style lang="scss" scoped>
 .list-content {
   padding: 20px;
@@ -360,12 +361,23 @@ export default {
     border-bottom-right-radius: 16px;
   }
 }
-.analytic-box {
-  // width: 65%;
-  // margin: 0px auto;
+.analytic-chart{
+   width: 70%;
+  margin: 0px auto;
 }
 .h-analytic-type {
   text-align: center;
   color: nth($purple, 1);
+}
+.panel-head{
+  position: relative;
+}
+.panel-tab{
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
+.analytic-bottom-tab{
+  text-align: center;
 }
 </style>

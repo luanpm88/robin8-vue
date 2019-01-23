@@ -1,5 +1,5 @@
 <template>
-  <div class="panel default-panel">
+  <div class="panel default-panel home-topPost">
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-calendar"></span>
@@ -8,26 +8,43 @@
     </div>
 
     <div class="panel-body list-content">
-      <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
-        <keep-alive>
-          <div class="mt20">
-            <kols-list-item
-              v-for="(item, index) in currentList"
-              :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :renderData="item"
-            ></kols-list-item>
-            <div class="home-post">
-              
+      <default-tabs
+        :tabList="tabList"
+        :tabIndex="tabIndex"
+        @changeTab="changeTab"
+        class="panel-tab"
+      >
+        <div>
+          <div class="home-post" v-for="(item, index) in postList" :key="index">
+            <p class="home-post-title">{{item.title}}</p>
+            <div class="home-post-detail">
+              <img :src="item.avatar_url" alt class>
+              <div>
+                <strong>{{item.profile_name}}</strong>
+                <p>{{item.post_time}}</p>
+              </div>
             </div>
-
-            <div class="text-center mt20">
-              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
+            <p class="home-post-content">{{item.content}}</p>
+            <div class="home-post-form">
+              <span>
+                <i class="iconfont icon-like"></i>
+                <b>{{item.post_influence.likes}}</b>
+              </span>
+              <span>
+                <i class="iconfont icon-share"></i>
+                <b>{{item.post_influence.shares}}</b>
+              </span>
+              <span>
+                <i class="iconfont icon-pinglun"></i>
+                <b>{{item.post_influence.comments}}</b>
+              </span>
             </div>
           </div>
-        </keep-alive>
+
+          <div class="text-center mt20 home-topPost-more">
+            <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
+          </div>
+        </div>
       </default-tabs>
     </div>
   </div>
@@ -142,13 +159,20 @@ export default {
   created() {
     // 微博
     this.topPostWeibo(this.topPostParams);
-    // 微信
-    this.topPostWeixin(this.topPostParams);
+    // // 微信
+    // this.topPostWeixin(this.topPostParams);
   },
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index;
-      this.currentList = tab.data;
+      // this.currentList = tab.data;
+      if (tab.index === 0) {
+        // 微博
+        this.topPostWeibo(this.topPostParams);
+      } else {
+        // 微信
+        this.topPostWeixin(this.topPostParams);
+      }
     },
     // 微博的接口
     topPostWeibo(params) {
@@ -157,7 +181,8 @@ export default {
         .post(apiConfig.topPostWeibo, params)
         .then(function(res) {
           // console.log("我是微博接口", res);
-          _that.postList = res.data.data;
+          _that.postList = res.data.data.slice(0, 2);
+          console.log(_that.postList);
         })
         .catch(function(error) {
           console.log(error);
@@ -170,6 +195,7 @@ export default {
         .post(apiConfig.topPostWeixin, params)
         .then(function(res) {
           // console.log("我是微信接口", res);
+          _that.postList = res.data.data.slice(0, 2);
         })
         .catch(function(error) {
           console.log(error);
@@ -181,6 +207,81 @@ export default {
 
 <style lang="scss" scoped>
 .list-content {
-  padding: 20px;
+  padding: 0px 20px 20px;
+  min-height: 450px;
+}
+.home-post {
+  padding: 10px 0px 2px;
+  border-bottom: 1px solid #ddd;
+}
+.home-post-detail {
+  padding: 12px 0px;
+  img {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  div {
+    display: inline-block;
+    vertical-align: middle;
+    strong {
+      font-weight: normal;
+      font-size: $font-nm-s;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}
+.home-post-title {
+  color: nth($purple, 1);
+  @include limit-line(1);
+  font-size: $font-nm-s;
+}
+.home-post-content {
+  @include limit-line(3);
+  font-size: $font-sm;
+  line-height: 20px;
+}
+
+.home-post-form {
+  padding: 10px 0px 0px;
+  span {
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    &:nth-child(1) {
+      text-align: center;
+    }
+  }
+  i {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  b {
+    font-weight: normal;
+    vertical-align: middle;
+    color: #ddd;
+  }
 }
 </style>
+<style lang="scss">
+.home-topPost {
+  .pills-btn {
+    position: absolute !important;
+    right: 30px !important;
+    top: 16px !important;
+  }
+  .home-topPost-more{
+    position: absolute;
+    width: 100%;
+    bottom:20px;
+  }
+}
+</style>
+
+

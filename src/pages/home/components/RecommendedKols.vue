@@ -1,5 +1,5 @@
 <template>
-  <div class="panel default-panel">
+  <div class="panel default-panel home-topPost">
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-rocket"></span>
@@ -9,24 +9,24 @@
 
     <div class="panel-body list-content">
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
-        <keep-alive>
-          <div class="mt20">
-            <kols-list-item
-              v-for="(item, index) in currentList"
-              :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :renderData="item"
-              @detail="intoKolDetail(item)"
-            ></kols-list-item>
-            <div>
-            </div>
-            <div class="text-center mt20">
-              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="intoKolDetail(tabList)">查看更多</button>
-            </div>
+        <div>
+          <kols-list-item
+            v-for="(item, index) in currentList"
+            :key="index"
+            :hasLiked="kolHasLiked"
+            :hasMsg="kolHasMsg"
+            :hasChecked="kolHasChecked"
+            :renderData="item"
+            @detail="intoKolDetail(item)"
+          ></kols-list-item>
+          <div></div>
+          <div class="text-center mt20">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline btn-circle btn-purple"
+            >查看更多</button>
           </div>
-        </keep-alive>
+        </div>
       </default-tabs>
     </div>
   </div>
@@ -80,57 +80,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "微博",
-          data: [
-            {
-              name: "",
-              desc:
-                ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            }
-          ]
+          name: "微博"
         },
         {
           index: 1,
-          name: "微信",
-          data: [
-            {
-              name: "",
-              desc:
-                ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            },
-            {
-              name: "",
-              desc: ""
-            }
-          ]
+          name: "微信"
         }
       ]
     };
@@ -149,9 +103,9 @@ export default {
         this.weixinKol(this.params);
       }
     },
-    intoKolDetail(item){
+    intoKolDetail(item) {
       console.log(item);
-      this.$router.push('/kol/'+ item.profile_id);
+      this.$router.push("/kol/" + item.profile_id);
     },
     // 微博的接口
     weiboKol(params) {
@@ -193,6 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 .list-content {
-  padding: 20px;
+  padding: 0px 20px 20px;
+  min-height: 450px;
 }
 </style>
