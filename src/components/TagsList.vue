@@ -2,11 +2,11 @@
   <ul class="tags-list">
     <li
       class="item"
-      :class="[item.checked ? 'active' : '']"
+      :class="[checkedTag(item.id) ? 'active' : '']"
       v-for="(item, index) in renderData"
       :key="item.id"
       :data-val="item.name"
-      @click="checkTag(item.id)"
+      @click="checkTag(item.id, item.name)"
     >{{item.label}}</li>
   </ul>
 </template>
@@ -20,32 +20,30 @@ export default {
   data () {
     return {
       tags: [],
-      tagsData: this.renderData
+      tagsName: []
     }
   },
   methods: {
-    checkTag (id) {
+    checkTag (id, name) {
       console.log(id)
-      this.$emit('checkTag', {
-        'id': id
-      })
-    },
-    addTags (e, id, index) {
-      console.log(id)
+      console.log(name)
       let _index = this.tags.indexOf(id)
-      let _tagsData = this.renderData
-
       if (_index == -1) {
         this.tags.push(id)
-        _tagsData[index].checked = true
+        this.tagsName.push(name)
       } else {
         this.tags.splice(_index, 1)
-        _tagsData[index].checked = false
+        this.tagsName.splice(_index, 1)
       }
-      this.tagsData = _tagsData
-      this.tags.sort()
-      console.log(this.tags)
+      let _tagsName = this.tagsName
+      console.log(_tagsName)
+      this.$emit('checkTag', {
+        'checkedTags': _tagsName
+      })
     },
+    checkedTag (id) {
+      return this.tags.indexOf(id) != -1
+    }
   }
 }
 </script>
