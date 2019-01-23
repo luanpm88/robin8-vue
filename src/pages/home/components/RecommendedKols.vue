@@ -18,10 +18,12 @@
               :hasMsg="kolHasMsg"
               :hasChecked="kolHasChecked"
               :renderData="item"
+              @detail="intoKolDetail(item)"
             ></kols-list-item>
-
+            <div>
+            </div>
             <div class="text-center mt20">
-              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
+              <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="intoKolDetail(tabList)">查看更多</button>
             </div>
           </div>
         </keep-alive>
@@ -31,11 +33,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-import apiConfig from '@/config';
+import axios from "axios";
+import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import KolsListItem from "../../campaigns/components/KolsListItem";
-// let key = "&application_id=local-001&application_key=vue-001";
+import KolsListItem from "@/pages/campaigns/components/KolsListItem";
 export default {
   components: {
     DefaultTabs,
@@ -47,6 +48,12 @@ export default {
       kolHasMsg: true,
       kolHasChecked: false,
       tabIndex: 0,
+      params: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW",
+        order_by: "doc_count"
+      },
       currentList: [
         {
           name: "Anna Strong",
@@ -76,25 +83,25 @@ export default {
           name: "微博",
           data: [
             {
-              name: "Anna Strong",
+              name: "",
               desc:
-                "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
+                ""
             },
             {
-              name: "Milano Esco",
-              desc: "Well-known car blogger"
+              name: "",
+              desc: ""
             },
             {
-              name: "Nick Bold",
-              desc: "Web Developer, Facebook Inc"
+              name: "",
+              desc: ""
             },
             {
-              name: "Wiltor Delton",
-              desc: "Project Manager"
+              name: "",
+              desc: ""
             },
             {
-              name: "Nick Stone",
-              desc: "Visual Designer, Github Inc"
+              name: "",
+              desc: ""
             }
           ]
         },
@@ -103,25 +110,25 @@ export default {
           name: "微信",
           data: [
             {
-              name: "1 Strong",
+              name: "",
               desc:
-                "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
+                ""
             },
             {
-              name: "2 Esco",
-              desc: "Well-known car blogger"
+              name: "",
+              desc: ""
             },
             {
-              name: "3 Bold",
-              desc: "Web Developer, Facebook Inc"
+              name: "",
+              desc: ""
             },
             {
-              name: "4 Delton",
-              desc: "Project Manager"
+              name: "",
+              desc: ""
             },
             {
-              name: "5 Stone",
-              desc: "Visual Designer, Github Inc"
+              name: "",
+              desc: ""
             }
           ]
         }
@@ -129,26 +136,59 @@ export default {
     };
   },
   created() {
-    this.weiboKol();
+    this.weiboKol(this.params);
   },
   methods: {
     changeTab(tab) {
-      // console.log(tab);
       this.tabIndex = tab.index;
-      // this.currentList = tab.data;
+      if (tab.index === 0) {
+        // 微博接口
+        this.weiboKol(this.params);
+      } else {
+        // 微信接口
+        this.weixinKol(this.params);
+      }
     },
-    weiboKol() {
+    intoKolDetail(item){
+      console.log(4444);
+      // this.$router.push('./kolDetail/Index.vue');
+      // this.$router.push('/kol/'+ id);
+      this.$router.push({
+        path: "./kolDetail/Index.vue",
+        name: "kolDetail",
+        params: {
+          items: item
+        },
+        // query: { profile_id: item.profile_id, industry: "" } 
+      });
+    },
+    // 微博的接口
+    weiboKol(params) {
       const _that = this;
-      axios.post(apiConfig.kolsWeibo,{
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
-        brand_keywords: "BMW",
-        order_by: 'doc_count'
-      }).then(function(res) {
+      axios
+        .post(apiConfig.kolsWeibo, params)
+        .then(function(res) {
           res.data.forEach(element => {
             element.name = element.profile_name;
             element.desc = element.description_raw;
-            element.url = element.avatar_url;
+            element.avatar = element.avatar_url;
+          });
+          _that.currentList = res.data.slice(0, 5);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 微信的接口
+    weixinKol(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.kolsWeixin, params)
+        .then(function(res) {
+          res.data.forEach(element => {
+            element.name = element.profile_name;
+            element.desc = element.description_raw;
+            element.avatar = element.avatar_url;
           });
           _that.currentList = res.data.slice(0, 5);
         })

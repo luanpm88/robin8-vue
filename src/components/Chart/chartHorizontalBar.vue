@@ -78,10 +78,17 @@ export default {
           {
             label: "Data One",
             backgroundColor: "rgba(179,127,235,0.4)",
-            data: this.childData.data
+            data: []
           }
         ]
       };
+      if (this.childData.dataList) {
+        this.childData.dataList.forEach((items, index) => {
+          this.datacollection.datasets[index].data = items.data;
+          this.datacollection.datasets[index].label = "Data" + index;
+          this.datacollection.datasets[index].backgroundColor = "rgba(179,127,235,0.4)";
+        });
+      }
     }
   }
 };

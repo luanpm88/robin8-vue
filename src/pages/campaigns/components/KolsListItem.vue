@@ -1,5 +1,5 @@
 <template>
-  <div class="kols-list-item media">
+  <div class="kols-list-item media" @click="detail(renderData)">
     <div class="media-left">
       <div class="avatar">
         <!-- <img :src="{{renderData.avatar}}" alt="" class="avatar-img" /> -->
@@ -25,6 +25,11 @@ export default {
     hasMsg: Boolean,
     hasChecked: Boolean,
     renderData: Object
+  },
+  methods: {
+    detail(item) {
+      this.$emit('detail', item);
+    }
   }
 };
 </script>

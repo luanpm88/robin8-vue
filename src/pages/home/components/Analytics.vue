@@ -5,15 +5,15 @@
     </div>
 
     <div class="panel-body list-content">
-      <tab :tabList="tabList" :tabIndex="cur"  @changeTab="tabClick"></tab>
+      <tab :tabList="tabList" :tabIndex="cur" @changeTab="tabClick"></tab>
       <div class="mt30">
         <div v-if="cur === 0" class="analytic-box">
           <div class="col-xs-6">
-            <line-charts :childData="oneParentsData"></line-charts>
+            <line-charts :childData="trendsWeiboList"></line-charts>
             <p class="h-analytic-type">微博</p>
           </div>
           <div class="col-xs-6">
-            <line-charts :childData="oneParentsData"></line-charts>
+            <line-charts :childData="trendsWeixinList"></line-charts>
             <p class="h-analytic-type">微信</p>
           </div>
         </div>
@@ -29,21 +29,21 @@
         </div>
         <div v-if="cur === 2" class="analytic-box">
           <div class="col-xs-6">
-            <bar-charts :childData="threeParentsData"></bar-charts>
+            <bar-charts :childData="competiteWeiboList"></bar-charts>
             <p class="h-analytic-type">微博</p>
           </div>
           <div class="col-xs-6">
-            <bar-charts :childData="threeParentsData"></bar-charts>
+            <bar-charts :childData="competiteWeixinList"></bar-charts>
             <p class="h-analytic-type">微信</p>
           </div>
         </div>
         <div v-if="cur === 3" class="analytic-box">
           <div class="col-xs-6">
-            <pie-charts :childData="fourParentsData"></pie-charts>
+            <pie-charts :childData="sentimentWeiboList"></pie-charts>
             <p class="h-analytic-type">微博</p>
           </div>
           <div class="col-xs-6">
-            <pie-charts :childData="fourParentsData"></pie-charts>
+            <pie-charts :childData="sentimentWeixinList"></pie-charts>
             <p class="h-analytic-type">微信</p>
           </div>
         </div>
@@ -54,12 +54,14 @@
 </template>
 
 <script>
+import axios from "axios";
+import apiConfig from "@/config";
 import LineCharts from "@components/Chart/chartLine";
 import BarCharts from "@components/Chart/chartHorizontalBar";
 import PieCharts from "@components/Chart/chartPie";
 import TagCharts from "@components/Chart/chartTags";
 import Tab from "@components/DefaultTabs";
-let key = '&application_id=local-001&application_key=vue-001';
+let key = "&application_id=local-001&application_key=vue-001";
 export default {
   components: {
     LineCharts,
@@ -68,10 +70,26 @@ export default {
     TagCharts,
     Tab
   },
-  data () {
+  data() {
     return {
-      analyticsType: "微博",
       cur: 0,
+      trendParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW",
+        type: "doc"
+      },
+      competitorParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        cb_names: ["C1 BMW", "C2 Audi", "C3 Honda"],
+        cb_keywords: ["BMW", "Audi", "Honda"]
+      },
+      sentimentParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW"
+      },
       tabList: [
         {
           index: 0,
@@ -130,7 +148,30 @@ export default {
           ]
         }
       ],
-      topActiveName: "first",
+      trendsWeiboList: {
+        labels: [],
+        dataList: []
+      },
+      trendsWeixinList: {
+        labels: [],
+        dataList: []
+      },
+      competiteWeiboList: {
+        labels: [],
+        dataList: []
+      },
+      competiteWeixinList: {
+        labels: [],
+        dataList: []
+      },
+      sentimentWeiboList: {
+        data: [],
+        labels: []
+      },
+      sentimentWeixinList: {
+        data: [],
+        labels: []
+      },
       oneParentsData: {
         data: [16, 3, 16, 61, 4, 6, 2],
         labels: ["07/12", "08/12", "09/12", "10/12", "11/12", "12/12", "13/12"]
@@ -172,71 +213,130 @@ export default {
       tagColor: "purple"
     };
   },
-  //  mounted() {
-  //   let params = {
-  //     "start_date": "2018-08-09",
-  //     "end_date": "2018-08-29",
-  //     "industries": ["airline", "appliances"],
-  //     "page_no": 0,
-  //     "page_size": 5,
-  //     "price_from": 0,
-  //     "price_to": 1000
-  //   }
-  //   this.$axios.post('http://api_beta.robin8.net:8080/api/v1/r1/price/price/kol_search?'+ key,
-  //   {
-  //       start_date: "2018-08-09",
-  //       end_date: "2018-08-29",
-  //       industries: ["airline", "appliances"],
-  //       page_no: 0,
-  //       page_size: 5,
-  //       price_from: 1000,
-  //       price_to: 9000
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-
-  //     });
-  //   this.$axios({
-  //     methods: "POST",
-  //     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-  //     data: {
-  //       start_date: "2018-08-09",
-  //       end_date: "2018-08-29",
-  //       industries: ["airline", "appliances"],
-  //       page_no: 0,
-  //       page_size: 5,
-  //       price_from: 1000,
-  //       price_to: 9000
-  //     },
-  //     url: "http://api_beta.robin8.net:8080/api/v1/r1/price/price/kol_search?" + key,
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(function(err) {
-  //       console.log(err);
-  //     });
-  // },
+  created() {
+    // trend 微博
+    this.trendsWeibo(this.trendParams);
+    // trend 微信
+    this.trendsWeixin(this.trendParams);
+    // this.cur === 0;
+    // competitor 微博
+    this.competitorWeibo(this.competitorParams);
+    // competitor 微信
+    this.competitorWeixin(this.competitorParams);
+    // sentiment 微博
+    this.sentimentWeibo(this.sentimentParams);
+    // sentiment 微信
+    this.sentimentWeixin(this.sentimentParams);
+  },
   methods: {
-    tabClick (tab) {
+    tabClick(tab) {
       this.cur = tab.index;
-    },
-    secondTab (cur, child, e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      } else {
-        window.event.returnValue = false;
-        window.event.cancelBubble = true;
+      // console.log(999999);
+      if (tab.index === 0) {
+        // console.log(7777);
+        // trend 微博
+        this.trendsWeibo(this.trendParams);
+        // trend 微信
+        this.trendsWeixin(this.trendParams);
       }
-      let parentNode = document.getElementsByClassName("h-analytic-childTab")[
-        cur
-      ];
-      parentNode.style.display = "none";
-      this.analyticsType = child.type;
+      if (tab.index === 2) {
+        // competitor 微博
+        this.competitorWeibo(this.competitorParams);
+        // competitor 微信
+        this.competitorWeixin(this.competitorParams);
+      }
+      if (tab.index === 3) {
+        // sentiment 微博
+        this.sentimentWeibo(this.sentimentParams);
+        // sentiment 微信
+        this.sentimentWeixin(this.sentimentParams);
+      }
+    },
+    // trend 微博
+    trendsWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.trendsWeibo, params)
+        .then(function(res) {
+          // console.log("我是微博", res);
+          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
+          _that.trendsWeiboList.labels = res.data.labels;
+          // console.log(_that.trendsWeiboList);
+          // console.log(66);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // trend 微信
+    trendsWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.trendsWeixin, params)
+        .then(function(res) {
+          // console.log("我是微信", res);
+          _that.trendsWeixinList.dataList = [{ data: res.data.data }];
+          _that.trendsWeixinList.labels = res.data.labels;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // competitor 微博
+    competitorWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.competitorWeibo, params)
+        .then(function(res) {
+          // console.log("我是微博", res);
+          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+          _that.competiteWeiboList.labels = res.data.labels;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // competitor 微信
+    competitorWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.competitorWeixin, params)
+        .then(function(res) {
+          // console.log("我是微信", res);
+          _that.competiteWeixinList.dataList = [{ data: res.data.data }];
+          _that.competiteWeixinList.labels = res.data.labels;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // sentiment 微博
+    sentimentWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.sentimentWeibo, params)
+        .then(function(res) {
+          // console.log("我是微博", res);
+          _that.sentimentWeiboList.labels = res.data.labels;
+          _that.sentimentWeiboList.data = res.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // sentiment 微信
+    sentimentWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.sentimentWeixin, params)
+        .then(function(res) {
+          // console.log("我是微信", res);
+          _that.sentimentWeixinList.labels = res.data.labels;
+          _that.sentimentWeixinList.data = res.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

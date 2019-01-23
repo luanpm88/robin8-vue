@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/Login'
 import Home from '@/pages/home/Home'
+import KolList from '@/pages/kolList/List'
+import KolDetail from '@/pages/kolList/Detail'
+import HomeKolDetal from '@/pages/home/components/kolDetail/Index'
 import Campaigns from '@/pages/campaigns/Campaigns'
 import CampaignCreate from '@/pages/campaigns/Create'
 import CampaignEdit from '@/pages/campaigns/Edit'
@@ -20,7 +23,17 @@ export default new Router({
       component: Home,
       meta: {
         title: 'ROBIN8'
-      }
+      },
+      children: [
+        {
+          path: '/kolDetail',
+          name: 'kolDetail',
+          component: HomeKolDetal,
+          meta: {
+            title: 'koldetail'
+          }
+        }
+      ]
     },
     {
       path: '/login',
@@ -79,6 +92,22 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/kol/list',
+      name: 'KolList',
+      component: KolList,
+      meta: {
+        title: 'KolList'
+      }
+    },
+    {
+      path: '/kol/:id',
+      name: 'KolDetail',
+      component: KolDetail,
+      meta: {
+        title: 'KolDetail'
+      }
     }
   ]
 })

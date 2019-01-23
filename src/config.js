@@ -26,8 +26,35 @@ const config = {
   // payTendersUrl: `${host}/tenders/:creation_id/tender`
 
   // 首页接口开始------------------------
-  // Recommended Kols 微博接口
-  kolsWeibo: `${searchHost}//weibo/brand/recommended_kols?${searchHostKey}`
+  // analytics trend 微博
+  trendsWeibo: `${searchHost}/weibo/brand/trend?${searchHostKey}`,
+
+  // analytics trend 微信
+  trendsWeixin: `${searchHost}/weixin/brand/trend?${searchHostKey}`,
+
+  // analytics competitor 微博
+  competitorWeibo: `${searchHost}/weibo/brand/competitors?${searchHostKey}`,
+
+  // analytics competitor 微信
+  competitorWeixin: `${searchHost}/weixin/brand/competitors?${searchHostKey}`,
+
+  // analytics sentiment 微博
+  sentimentWeibo: `${searchHost}/weibo/brand/sentiments?${searchHostKey}`,
+
+  // analytics sentiment 微信
+  sentimentWeixin: `${searchHost}/weixin/brand/sentiments?${searchHostKey}`,
+
+  // Recommended Kols 微博
+  kolsWeibo: `${searchHost}/weibo/brand/recommended_kols?${searchHostKey}`,
+
+  // Recommended Kols 微信
+  kolsWeixin: `${searchHost}/weixin/brand/recommended_kols?${searchHostKey}`,
+
+  // top post 微博
+  topPostWeibo: `${searchHost}/weibo/brand/top_posts?${searchHostKey}`,
+
+  // top post 微信
+  topPostWeixin: `${searchHost}/weixin/brand/top_posts?${searchHostKey}`,
 
   // 首页接口结束------------------------
 }

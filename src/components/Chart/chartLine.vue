@@ -18,8 +18,8 @@ export default {
     }
   },
   watch: {
-    childData () {
-        this.fillData();
+    childData() {
+      this.fillData();
     }
   },
   data() {
@@ -39,10 +39,10 @@ export default {
                 fontColor: "#BBBBBBFF"
               },
               gridLines: {
-                color:'#e5e9f2',
-                lineWidth:.5,
-                drawBorder:false,
-                zeroLineColor:'transparent'
+                color: "#e5e9f2",
+                lineWidth: 0.5,
+                drawBorder: false,
+                zeroLineColor: "transparent"
               }
             }
           ],
@@ -53,14 +53,14 @@ export default {
               },
               ticks: {
                 fontColor: "#BBBBBBFF",
-                autoSkip:false,
-                maxRotation:0,
+                autoSkip: false,
+                maxRotation: 80,
                 callback: function(value) {
                   return value;
                 }
               },
               scaleLabel: {
-                display: true,
+                display: true
                 // labelString: "Count"
               }
             }
@@ -74,27 +74,40 @@ export default {
   },
   methods: {
     fillData() {
-      let ctx = document.getElementById('line-chart');
-      let gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
-      gradient.addColorStop(0, 'rgba(179,127,235,0.5)');
-      gradient.addColorStop(0.3, 'rgba(179,127,235,0.4)');
-      gradient.addColorStop(0.5, 'rgba(179,127,235,0.3)');
-      gradient.addColorStop(0.7, 'rgba(179,127,235,0.2)');
-      gradient.addColorStop(1, 'rgba(179,127,235,0.1)');
+      let ctx = document.getElementById("line-chart");
+      let gradient = ctx.getContext("2d").createLinearGradient(0, 0, 0, 200);
+      gradient.addColorStop(0, "rgba(179,127,235,0.5)");
+      gradient.addColorStop(0.3, "rgba(179,127,235,0.4)");
+      gradient.addColorStop(0.5, "rgba(179,127,235,0.3)");
+      gradient.addColorStop(0.7, "rgba(179,127,235,0.2)");
+      gradient.addColorStop(1, "rgba(179,127,235,0.1)");
       this.datacollection = {
         labels: this.childData.labels,
         datasets: [
           {
             label: "Data One",
-            data: this.childData.data,
+            data: [],
             backgroundColor: gradient,
-            pointBackgroundColor: 'transparent',
-            pointBorderColor: 'transparent',
-            pointHoverBackgroundColor: 'rgba(0,0,0, .5)',
-            borderWidth:2,
+            pointBackgroundColor: "transparent",
+            pointBorderColor: "transparent",
+            pointHoverBackgroundColor: "rgba(0,0,0, .5)",
+            borderWidth: 2
           }
         ]
       };
+      if (this.childData.dataList) {
+        this.childData.dataList.forEach((items, index) => {
+          this.datacollection.datasets[index].data = items.data;
+          this.datacollection.datasets[index].label = "Data" + index;
+          this.datacollection.datasets[index].backgroundColor = gradient;
+          this.datacollection.datasets[index].pointBackgroundColor =
+            "transparent";
+          this.datacollection.datasets[index].pointBorderColor = "transparent";
+          this.datacollection.datasets[index].pointHoverBackgroundColor =
+            "rgba(0,0,0, .5)";
+          this.datacollection.datasets[index].borderWidth = 2;
+        });
+      }
     },
     getRandomInt() {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
@@ -103,7 +116,7 @@ export default {
 };
 </script>
 <style>
-#line-chart{
+#line-chart {
   height: 325px !important;
 }
 </style>
