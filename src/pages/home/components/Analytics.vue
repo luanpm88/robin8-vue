@@ -9,34 +9,12 @@
     <div class="panel-body list-content">
       
       <div class="mt30">
-        <div v-if="cur === 0" class="analytic-box">
+        <div class="analytic-box">
           <div class="analytic-chart">
-              <line-charts :childData="trendsWeiboList"></line-charts>
-          </div>
-        </div>
-        <div v-if="cur === 1" class="analytic-box">
-          <div class="col-xs-6">
-            <tag-charts :tags="parentTags"></tag-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <tag-charts :tags="parentTagsTwo"></tag-charts>
-            <p class="h-analytic-type">微信</p>
-          </div>
-        </div>
-        <div v-if="cur === 2" class="analytic-box">
-          <div class="analytic-chart">
-              <bar-charts :childData="competiteWeiboList"></bar-charts>
-          </div>
-        </div>
-        <div v-if="cur === 3" class="analytic-box">
-          <div class="col-xs-6">
-            <pie-charts :childData="sentimentWeiboList"></pie-charts>
-            <p class="h-analytic-type">微博</p>
-          </div>
-          <div class="col-xs-6">
-            <pie-charts :childData="sentimentWeixinList"></pie-charts>
-            <p class="h-analytic-type">微信</p>
+              <line-charts :childData="trendsWeiboList" v-if="cur === 0" ></line-charts>
+              <tag-charts :tags="parentTags" v-if="cur === 1"></tag-charts>
+              <bar-charts :childData="competiteWeiboList" v-if="cur === 2"></bar-charts>
+              <pie-charts :childData="sentimentWeiboList" v-if="cur === 3"></pie-charts>
           </div>
         </div>
       </div>
@@ -110,23 +88,9 @@ export default {
         {
           index: 3,
           name: "Sentiments",
-          childList: [
-            {
-              value: 0,
-              type: "微博"
-            },
-            {
-              value: 1,
-              type: "微信"
-            }
-          ]
         }
       ],
       trendsWeiboList: {
-        labels: [],
-        dataList: []
-      },
-      trendsWeixinList: {
         labels: [],
         dataList: []
       },
@@ -134,55 +98,10 @@ export default {
         labels: [],
         dataList: []
       },
-      competiteWeixinList: {
-        labels: [],
-        dataList: []
-      },
       sentimentWeiboList: {
         data: [],
         labels: []
       },
-      sentimentWeixinList: {
-        data: [],
-        labels: []
-      },
-      oneParentsData: {
-        data: [16, 3, 16, 61, 4, 6, 2],
-        labels: ["07/12", "08/12", "09/12", "10/12", "11/12", "12/12", "13/12"]
-      },
-      threeParentsData: {
-        data: [33.27, 30.55, 28.72, 27.82, 26.38, 24.95],
-        labels: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"]
-      },
-      fourParentsData: {
-        data: [33.27, 30.55, 28.72, 27.82, 26.38, 24.95],
-        labels: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"]
-      },
-      parentTagsTwo: [
-        "Boy",
-        "TVDrama",
-        "LyricWriting",
-        "MusicArrangement",
-        "TheLover",
-        "Composition",
-        "Environment",
-        "FreshTexture",
-        "Head",
-        "World",
-        "Daytime",
-        "Night",
-        "Evening",
-        "Dusk",
-        "Light",
-        "Husband",
-        "Advertising",
-        "Book",
-        "Dish",
-        "MobilePhone",
-        "WenZhang",
-        "Color",
-        "RawTexture"
-      ],
       parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
       tagColor: "purple"
     };
@@ -326,8 +245,8 @@ export default {
         .post(apiConfig.sentimentWeixin, params)
         .then(function(res) {
           // console.log("我是微信", res);
-          _that.sentimentWeixinList.labels = res.data.labels;
-          _that.sentimentWeixinList.data = res.data.data;
+          _that.sentimentWeiboList.labels = res.data.labels;
+          _that.sentimentWeiboList.data = res.data.data;
         })
         .catch(function(error) {
           console.log(error);
