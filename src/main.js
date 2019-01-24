@@ -11,6 +11,7 @@ import '@styles/btn.scss'
 import '@styles/grid.scss'
 import '@styles/form.scss'
 import '@styles/default.scss'
+import '@styles/login.scss'
 import '@styles/campaigns.scss'
 
 Vue.use(VueI18n)
