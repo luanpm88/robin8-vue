@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/Login'
+import Reg from '@/pages/Reg'
+import ForgetPassword from '@/pages/ForgetPassword'
+import ChangePassword from '@/pages/ChangePassword'
 import Home from '@/pages/home/Home'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
@@ -31,6 +34,30 @@ export default new Router({
       component: Login,
       meta: {
         title: '登录'
+      }
+    },
+    {
+      path: '/reg',
+      name: 'Reg',
+      component: Reg,
+      meta: {
+        title: '注册'
+      }
+    },
+    {
+      path: '/forget_password',
+      name: 'ForgetPassword',
+      component: ForgetPassword,
+      meta: {
+        title: '忘记密码'
+      }
+    },
+    {
+      path: '/change_password',
+      name: 'ChangePassword',
+      component: ChangePassword,
+      meta: {
+        title: '重置密码'
       }
     },
     {

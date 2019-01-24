@@ -114,10 +114,23 @@
                   <div class="iconfont icon-close close-btn"></div>
                 </div>
               </div>
-              <vue-core-image-upload
+              <!-- <vue-core-image-upload
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 crop="local"
                 crop-ratio="4:3"
+                @imageuploaded="imageuploaded"
+                @imageuploading="imageuploading"
+                inputOfFile="image"
+                text=""
+                :max-file-size="5242880"
+                :compress="30"
+                :max-width="200"
+                input-accept="image/*"
+                :url="uploadImageUrl">
+              </vue-core-image-upload> -->
+              <vue-core-image-upload
+                :class="['upload-img-btn', 'iconfont', 'icon-image']"
+                :crop="false"
                 @imageuploaded="imageuploaded"
                 @imageuploading="imageuploading"
                 inputOfFile="image"
@@ -358,6 +371,7 @@ export default {
         alert('最多可上传5张图片')
         return false
       }
+      console.log(res)
       if (res.code == 0) {
         this.pictures.push(res.data.base)
         this.loading = false

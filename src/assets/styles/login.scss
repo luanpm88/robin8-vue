@@ -1,0 +1,109 @@
+.login-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  margin-top: -220px;
+  margin-left: -250px;
+
+  .panel-body {
+    height: 440px;
+  }
+
+  .banner {
+    position: relative;
+    height: 140px;
+
+    .banner-img {
+      height: 100%;
+    }
+
+    .logo {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      width: 160px;
+      height: 38px;
+      margin-top: -19px;
+      margin-left: -80px;
+    }
+  }
+
+  .login-container {
+    width: 260px;
+    margin: 40px auto 0;
+
+    .tabs {
+      font-size: 0;
+
+      .item {
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        font-size: $font-sm;
+        font-weight: 400;
+
+        a {
+          display: inline-block;
+          color: #333;
+        }
+
+        &.active {
+          a {
+            padding-bottom: 4px;
+            border-bottom: 2px solid nth($cyan, 1);
+          }
+        }
+      }
+    }
+
+    .login-form {
+      .form-group {
+        margin-top: 14px;
+      }
+
+      .link {
+        color: nth($cyan, 1);
+      }
+
+      .confirm-btn {
+        width: 90px;
+      }
+    }
+  }
+}
+
+.forget-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 320px;
+  margin-top: -160px;
+  margin-left: -250px;
+
+  .panel-body {
+    height: 260px;
+  }
+
+  .forget-container {
+    width: 300px;
+    padding-top: 40px;
+    margin: 0 auto;
+
+    .forget-form {
+      .form-group {
+        margin-bottom: 14px;
+      }
+
+      .link {
+        color: nth($cyan, 1);
+      }
+
+      .confirm-btn {
+        width: 90px;
+      }
+    }
+  }
+}
