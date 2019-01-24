@@ -231,6 +231,7 @@ export default {
     strong {
       font-weight: normal;
       font-size: $font-nm-s;
+      color: #575962FF;
     }
     p {
       font-size: 0.8rem;
@@ -261,11 +262,15 @@ export default {
   i {
     vertical-align: middle;
     margin-right: 5px;
+    color: #999;
+  }
+  .icon-pinglun{
+    font-weight: 600;
   }
   b {
     font-weight: normal;
     vertical-align: middle;
-    color: #ddd;
+    color: #b9b7b7;
   }
 }
 </style>

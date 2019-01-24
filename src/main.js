@@ -6,12 +6,14 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import "ant-design-vue/lib/table/style/css";
 import '@styles/iconfont.css'
 import '@styles/btn.scss'
 import '@styles/grid.scss'
 import '@styles/form.scss'
 import '@styles/default.scss'
 import '@styles/campaigns.scss'
+import '@styles/defaultAnt.scss'
 
 Vue.use(VueI18n)
 Vue.config.productionTip = false

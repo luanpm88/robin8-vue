@@ -98,9 +98,11 @@ export default {
       }
       .title {
         font-size: 1.9rem;
+        color: $white;
       }
       .sub-title {
         font-size: 1.4rem;
+        color: $white;
       }
       &:last-child {
         margin-right: 0;
