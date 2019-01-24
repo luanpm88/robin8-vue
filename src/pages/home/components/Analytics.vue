@@ -12,9 +12,13 @@
       <div class="mt30">
         <div class="analytic-box">
           <div class="analytic-chart">
-            <line-charts :childData="trendsWeiboList" ref="tendsChart" v-if="cur === 0"></line-charts>
+            <div v-if="cur === 0" class="analytic-chart-box">
+              <line-charts :childData="trendsWeiboList" ref="tendsChart"></line-charts>
+            </div>
             <tag-charts :tags="parentTags" v-if="cur === 1"></tag-charts>
-            <bar-charts :childData="competiteWeiboList" v-if="cur === 2" ref="competiteChart"></bar-charts>
+            <div v-if="cur === 2" class="analytic-chart-box">
+              <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
+            </div>
             <pie-charts :childData="sentimentWeiboList" ref="sentimentChart" v-if="cur === 3"></pie-charts>
           </div>
         </div>
@@ -63,6 +67,12 @@ export default {
         end_date: "2018-08-29",
         brand_keywords: "BMW"
       },
+      conceptParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW",
+        language: "en"
+      },
       topTab: [
         {
           index: 0,
@@ -103,7 +113,8 @@ export default {
         data: [],
         labels: []
       },
-      parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
+      parentTags: [],
+      // parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
       tagColor: "purple"
     };
   },
@@ -121,6 +132,14 @@ export default {
       if (this.cur === 0 && topTab.index === 1) {
         // trend 微信
         this.trendsWeixin(this.trendParams);
+      }
+      if (this.cur === 1 && topTab.index === 0) {
+        // concept 微博
+        this.conceptWeibo(this.conceptParams);
+      }
+      if (this.cur === 1 && topTab.index === 1) {
+        // concept 微信
+        this.conceptWeixin(this.conceptParams);
       }
       this.topTabCur = topTab.index;
       if (this.cur === 2 && topTab.index === 0) {
@@ -143,11 +162,13 @@ export default {
     tabClick(tab) {
       this.cur = tab.index;
       this.topTabCur = 0;
-      // console.log(999999);
       if (tab.index === 0) {
-        // console.log(7777);
         // trend 微博
         this.trendsWeibo(this.trendParams);
+      }
+      if (tab.index === 1) {
+        // concept 微博
+        this.conceptWeibo(this.conceptParams);
       }
       if (tab.index === 2) {
         // competitor 微博
@@ -185,6 +206,33 @@ export default {
           _that.trendsWeiboList.dataList = [{ data: res.data.data }];
           _that.trendsWeiboList.labels = res.data.labels;
           _that.$refs.tendsChart.fillData();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // concept 微博
+    conceptWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.conceptWeibo, params)
+        .then(function(res) {
+          _that.parentTags = [];
+          _that.parentTags = res.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // concept 微信
+    conceptWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.conceptWeixin, params)
+        .then(function(res) {
+          _that.parentTags = [];
+          _that.parentTags = res.data.slice(0, 80);
+          // console.log("我是微信", res);
         })
         .catch(function(error) {
           console.log(error);
@@ -254,10 +302,19 @@ export default {
 };
 </script>
 <style lang="scss">
+.analytic-chart-box {
+  width: 70%;
+  margin: 0px auto;
+}
 .analytic-chart {
   #line-chart,
-  #horizontalbar-chart{
+  #horizontalbar-chart {
     height: 400px !important;
+  }
+  #pie-chart {
+    margin: 0px auto $font-sm;
+    width: 390px !important;
+    height: 375px !important;
   }
 }
 </style>
@@ -280,7 +337,7 @@ export default {
   }
 }
 .analytic-chart {
-  width: 70%;
+  // width: 70%;
   margin: 0px auto;
 }
 .h-analytic-type {

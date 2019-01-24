@@ -35,6 +35,12 @@ const config = {
   // analytics trend 微信
   trendsWeixin: `${searchHost}/weixin/brand/trend?${searchHostKey}`,
 
+  // analytics concept 微博
+  conceptWeibo: `${searchHost}/weibo/brand/tag_cloud_distribution?${searchHostKey}`,
+
+   // analytics concept 微信
+   conceptWeixin: `${searchHost}/weixin/brand/tag_cloud_distribution?${searchHostKey}`,
+
   // analytics competitor 微博
   competitorWeibo: `${searchHost}/weibo/brand/competitors?${searchHostKey}`,
 

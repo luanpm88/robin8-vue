@@ -182,7 +182,7 @@ export default {
         .then(function(res) {
           // console.log("我是微博接口", res);
           _that.postList = res.data.data.slice(0, 2);
-          console.log(_that.postList);
+          // console.log(_that.postList);
         })
         .catch(function(error) {
           console.log(error);

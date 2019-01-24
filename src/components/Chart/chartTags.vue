@@ -1,17 +1,21 @@
 <template>
-  <canvas :width="width" :height="height" id="tags_ball">您的浏览器暂时不支持canvas</canvas>
+<div class="chart-tag">
+  <svg :width="width" :height="height">
+    <a v-for="(tag,index) in tags" :key="index" style="cursor:none;" @mousemove='listener($event)'>
+      <text
+        :x="tag.x"
+        :y="tag.y"
+        :font-size="20 * (600/(800-tag.z))"
+        :fill-opacity="((400+tag.z)/600)"
+        :fill="colorList[index]"
+      >{{tag.text}}</text>
+    </a>
+  </svg>
+</div>
 </template>
-
-<style scoped>
-#tags_ball {
-  border-radius: 20px;
-  /* border: 2px solid #66ccff; */
-}
-</style>
-
 <script>
 import TagsBall from "vue-tags-ball";
-var Color = require("color");
+// var Color = require("color");
 let Animation = function() {
   this.running = false;
 };
@@ -24,226 +28,157 @@ export default {
   install: function(vue) {
     vue.component(this.name, this);
   },
-  components: { TagsBall },
-  data() {
-    return {
-      animation: new Animation()
-    };
-  },
   props: {
-    stop: {
-      type: Boolean,
-      default: true
-    },
     tags: {
       type: Array,
       default: []
-    },
-    width: {
-      type: Number,
-      default: 200
-    },
-    height: {
-      type: Number,
-      default: 200
-    },
-    radius: {
-      type: Number,
-      default: 100
-    },
-    fontMax: {
-      type: Number,
-      default: 60
-    },
-    font: {
-      type: String,
-      default: "12px monaco"
-    },
-    color: {
-      type: String,
-      default: "purple"
     }
   },
-  methods: {
-    init_ball: function() {
-      let canvas = this.$el;
-      let tags = this.tags;
-      let Radius = this.radius;
-      let fontMax = this.fontMax;
-      let color = Color(this.color);
-      let ctx = canvas.getContext("2d");
-      ctx.font = this.font;
-      let angleX = Math.PI / 100 / 2;
-      let angleY = Math.PI / 100 / 2;
-      const hx = canvas.width / 2;
-      const hy = canvas.height / 2;
-      let count = tags.length;
-      if (count == 0) {
-        return;
-      }
-      canvas.addEventListener("mousemove", function(event) {
-        let x = event.layerX - hx;
-        let y = event.layerY - hy;
-        // console.log("x y =",x,y)
-        angleY = -x * 0.0001;
-        angleX = -y * 0.0001;
-      });
-      let points = [];
-      let ve3 = function(x, y, z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-      };
-      ve3.prototype = {
-        getm: function() {
-          return Math.sqrt(
-            Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2)
-          );
-        },
-        resize: function(R) {
-          let pm = this.getm();
-          this.x = this.x * (R / pm);
-          this.y = this.y * (R / pm);
-          this.z = this.z * (R / pm);
-          return this;
-        }
-      };
-      function create() {
-        //golden cut
-        //ref: https://zhuanlan.zhihu.com/p/25988652
-        //soucre: https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#26127012
-        const gold = (Math.sqrt(5.0) - 1) / 2;
-        for (let i = 1; i <= count; i++) {
-          let z = (2 * i - 1) / count - 1;
-          let x =
-            Math.sqrt(1 - Math.pow(z, 2)) * Math.cos(2 * Math.PI * i * gold);
-          let y =
-            Math.sqrt(1 - Math.pow(z, 2)) * Math.sin(2 * Math.PI * i * gold);
-          let p = new ve3(x, y, z);
-          points.push(p.resize(Radius));
-          // console.log(p.x,p.y,p.z)
-        }
-      }
-      create();
-      let labels = [];
-      let label = function(x, y, z, str, width, max) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.str = str;
-        this.width = width;
-        this.max = max;
-      };
-      label.prototype = {
-        paint: function() {
-          ctx.save();
-          let alpha = (this.z + Radius) / (2 * Radius);
-          // ctx.fillStyle = "rgba("+color+ (alpha + 0.5) + ")";
-          ctx.fillStyle = "rgba(179,127,235,1)";
-          //   ctx.fillStyle=color.alpha(alpha+0.5).toString()
-          ctx.fillText(
-            this.str,
-            hx + this.x - Math.min(this.max, this.width) / 2,
-            hy + this.y,
-            this.max
-          );
-          ctx.restore();
-        }
-      };
-      function rotateX() {
-        let cos = Math.cos(angleX);
-        let sin = Math.sin(angleX);
-        for (let i = 0; i < labels.length; i++) {
-          let y1 = labels[i].y * cos - labels[i].z * sin;
-          let z1 = labels[i].z * cos + labels[i].y * sin;
-          labels[i].y = y1;
-          labels[i].z = z1;
-        }
-      }
-      function rotateY() {
-        let cos = Math.cos(angleY);
-        let sin = Math.sin(angleY);
-        for (let i = 0; i < labels.length; i++) {
-          let x1 = labels[i].x * cos - labels[i].z * sin;
-          let z1 = labels[i].z * cos + labels[i].x * sin;
-          labels[i].x = x1;
-          labels[i].z = z1;
-        }
-      }
-      function rotateZ() {
-        let cos = Math.cos(angleY);
-        let sin = Math.sin(angleY);
-        for (let i = 0; i < labels.length; i++) {
-          let x1 = labels[i].x * cos - labels[i].y * sin;
-          let y1 = labels[i].y * cos + labels[i].x * sin;
-          labels[i].x = x1;
-          labels[i].y = y1;
-        }
-      }
-      let init = function() {
-        for (let i = 0; i < points.length; i++) {
-          let t = ctx.measureText(tags[i]);
-          labels.push(
-            new label(
-              points[i].x,
-              points[i].y,
-              points[i].z,
-              tags[i],
-              t.width,
-              fontMax
-            )
-          );
-        }
-      };
-      init();
-      let animation = this.animation;
-      let animate = function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        rotateX();
-        rotateY();
-        rotateZ();
-        for (let i = 0; i < labels.length; i++) {
-          labels[i].paint();
-        }
-        if (animation.running) {
-          requestAnimationFrame(animate);
-        }
-      };
-      this.animation.start = function() {
-        animation.running = true;
-        animate();
-      };
-      this.animation.stop = function() {
-        animation.running = false;
-      };
-      this.animation.start();
-    }
-  },
-  mounted: function() {
-    this.init_ball();
+  // components: { TagsBall },
+  data() {
+    return {
+      width: 940,
+      height: 520,
+      tagsNum: 20,
+      RADIUS: 300,
+      speedX: Math.PI / 360,
+      speedY: Math.PI / 360,
+      // tags: [],
+      animation: new Animation(),
+      colorList: [
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF"
+      ]
+    };
   },
   computed: {
-    // tags:function(){
-    // }
+    CX() {
+      return this.width / 2;
+    },
+    CY() {
+      return this.height / 2;
+    }
+  },
+  created() {
+    this.init_ball(this.tags);
   },
   watch: {
-    tags: function(t) {
-      this.init_ball();
+    tags: function(valTag) {
+      this.init_ball(valTag);
     },
-    stop: function(t) {
-      if (t) {
-        this.animation.stop();
-      } else {
-        this.animation.start();
+  },
+  mounted() {
+    // //使球开始旋转
+    // setInterval(() => {
+    //   this.rotateX(this.speedX);
+    //   this.rotateY(this.speedY);
+    // }, 17);
+  },
+  methods: {
+    init_ball(valTag) {
+      valTag.forEach((item, index) => {
+        item.text = item.text;
+        let k = -1 + (2 * (index + 1) - 1) / valTag.length;
+        let a = Math.acos(k);
+        let b = a * Math.sqrt(valTag.length * Math.PI);
+        item.x = this.CX + this.RADIUS * 1.3 * Math.sin(a) * Math.cos(b);
+        item.y = this.CY + this.RADIUS / 1.3 * Math.sin(a) * Math.sin(b);
+        item.z = this.RADIUS / 10 * Math.cos(a);
+      });
+    },
+    rotateX(speedX) {
+      var cos = Math.cos(speedX);
+      var sin = Math.sin(speedX);
+      for (let tag of this.tags) {
+        var y1 = (tag.y - this.CY) * cos - tag.z * sin + this.CY;
+        var z1 = tag.z * cos + (tag.y - this.CY) * sin;
+        tag.y = y1;
+        tag.z = z1;
       }
+    },
+    rotateY(speedY) {
+      var cos = Math.cos(speedY);
+      var sin = Math.sin(speedY);
+      for (let tag of this.tags) {
+        var x1 = (tag.x - this.CX) * cos - tag.z * sin + this.CX;
+        var z1 = tag.z * cos + (tag.x - this.CX) * sin;
+        tag.x = x1;
+        tag.z = z1;
+      }
+    },
+    listener(event) {
+      //响应鼠标移动
+      var x = event.clientX - this.CX;
+      var y = event.clientY - this.CY;
+      this.speedX =
+        x * 0.0001 > 0
+          ? Math.min(this.RADIUS * 0.00002, x * 0.0001)
+          : Math.max(-this.RADIUS * 0.00002, x * 0.0001);
+      this.speedY =
+        y * 0.0001 > 0
+          ? Math.min(this.RADIUS * 0.00002, y * 0.0001)
+          : Math.max(-this.RADIUS * 0.00002, y * 0.0001);
     }
   }
 };
 </script>
-<style lang="scss" scoped>
-#tags_ball{
-    width: 60%;
-    display: block;
-    margin: 0% auto 8%;
+<style>
+.chart-tag{
+  width: 940;
+  margin: 0px auto;
 }
 </style>
+
