@@ -29,7 +29,12 @@ export default {
         xresponsive: true,
         legend: {
           display: true,
-          position: "bottom"
+          position: "bottom",
+          labels: {
+            fontSize: 30,
+            padding: 50,
+            fontColor: "#999",
+          }
         }
       }
     };

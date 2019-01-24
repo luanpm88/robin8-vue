@@ -31,7 +31,8 @@ export default {
               ticks: {
                 beginAtZero: true,
                 xmax: 20,
-                fontColor: "#BBBBBBFF"
+                fontColor: "#999",
+                fontSize:16
               },
               gridLines: {
                 color: "#e5e9f2",
@@ -48,9 +49,11 @@ export default {
               },
               ticks: {
                 min: 0,
-                fontColor: "#BBBBBBFF",
+                fontColor: "#999",
+                fontSize:16,
                 callback: function(value) {
-                  return value + "%";
+                  // return value + "%";
+                  return value;
                 }
               },
               scaleLabel: {
@@ -93,8 +96,3 @@ export default {
   }
 };
 </script>
-<style>
-#horizontalbar-chart {
-  height: 325px !important;
-}
-</style>
