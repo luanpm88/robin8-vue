@@ -3,18 +3,19 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-101"></span>
-        Analytics <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab></h5>
+        Analytics
+        <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
+      </h5>
     </div>
 
     <div class="panel-body list-content">
-      
       <div class="mt30">
         <div class="analytic-box">
           <div class="analytic-chart">
-              <line-charts :childData="trendsWeiboList" v-if="cur === 0" ></line-charts>
-              <tag-charts :tags="parentTags" v-if="cur === 1"></tag-charts>
-              <bar-charts :childData="competiteWeiboList" v-if="cur === 2"></bar-charts>
-              <pie-charts :childData="sentimentWeiboList" v-if="cur === 3"></pie-charts>
+            <line-charts :childData="trendsWeiboList" ref="tendsChart" v-if="cur === 0"></line-charts>
+            <tag-charts :tags="parentTags" v-if="cur === 1"></tag-charts>
+            <bar-charts :childData="competiteWeiboList" v-if="cur === 2" ref="competiteChart"></bar-charts>
+            <pie-charts :childData="sentimentWeiboList" ref="sentimentChart" v-if="cur === 3"></pie-charts>
           </div>
         </div>
       </div>
@@ -62,7 +63,7 @@ export default {
         end_date: "2018-08-29",
         brand_keywords: "BMW"
       },
-      topTab:[
+      topTab: [
         {
           index: 0,
           name: "微博"
@@ -75,19 +76,19 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "Trends",
+          name: "Trends"
         },
         {
           index: 1,
-          name: "Concept",
+          name: "Concept"
         },
         {
           index: 2,
-          name: "Competitors",
+          name: "Competitors"
         },
         {
           index: 3,
-          name: "Sentiments",
+          name: "Sentiments"
         }
       ],
       trendsWeiboList: {
@@ -109,17 +110,6 @@ export default {
   created() {
     // trend 微博
     this.trendsWeibo(this.trendParams);
-    // trend 微信
-    this.trendsWeixin(this.trendParams);
-    // this.cur === 0;
-    // competitor 微博
-    this.competitorWeibo(this.competitorParams);
-    // competitor 微信
-    this.competitorWeixin(this.competitorParams);
-    // sentiment 微博
-    this.sentimentWeibo(this.sentimentParams);
-    // sentiment 微信
-    this.sentimentWeixin(this.sentimentParams);
   },
   methods: {
     topTabClick(topTab) {
@@ -141,6 +131,14 @@ export default {
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
+      if (this.cur === 3 && topTab.index === 0) {
+        // sentiment 微博
+        this.sentimentWeibo(this.sentimentParams);
+      }
+      if (this.cur === 3 && topTab.index === 1) {
+        // sentiment 微信
+        this.sentimentWeixin(this.sentimentParams);
+      }
     },
     tabClick(tab) {
       this.cur = tab.index;
@@ -150,20 +148,14 @@ export default {
         // console.log(7777);
         // trend 微博
         this.trendsWeibo(this.trendParams);
-        // trend 微信
-        // this.trendsWeixin(this.trendParams);
       }
       if (tab.index === 2) {
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
-        // // competitor 微信
-        // this.competitorWeixin(this.competitorParams);
       }
       if (tab.index === 3) {
         // sentiment 微博
         this.sentimentWeibo(this.sentimentParams);
-        // sentiment 微信
-        // this.sentimentWeixin(this.sentimentParams);
       }
     },
     // trend 微博
@@ -177,6 +169,7 @@ export default {
           _that.trendsWeiboList.labels = res.data.labels;
           // console.log(_that.trendsWeiboList);
           // console.log(66);
+          _that.$refs.tendsChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -191,6 +184,7 @@ export default {
           // console.log("我是微信", res);
           _that.trendsWeiboList.dataList = [{ data: res.data.data }];
           _that.trendsWeiboList.labels = res.data.labels;
+          _that.$refs.tendsChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -205,6 +199,7 @@ export default {
           // console.log("我是微博", res);
           _that.competiteWeiboList.dataList = [{ data: res.data.data }];
           _that.competiteWeiboList.labels = res.data.labels;
+          _that.$refs.competiteChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -219,6 +214,7 @@ export default {
           // console.log("我是微博", res);
           _that.competiteWeiboList.dataList = [{ data: res.data.data }];
           _that.competiteWeiboList.labels = res.data.labels;
+          _that.$refs.competiteChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -233,6 +229,7 @@ export default {
           // console.log("我是微博", res);
           _that.sentimentWeiboList.labels = res.data.labels;
           _that.sentimentWeiboList.data = res.data.data;
+          _that.$refs.sentimentChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -247,6 +244,7 @@ export default {
           // console.log("我是微信", res);
           _that.sentimentWeiboList.labels = res.data.labels;
           _that.sentimentWeiboList.data = res.data.data;
+          _that.$refs.sentimentChart.fillData();
         })
         .catch(function(error) {
           console.log(error);
@@ -256,8 +254,9 @@ export default {
 };
 </script>
 <style lang="scss">
-.analytic-chart{
-  #line-chart {
+.analytic-chart {
+  #line-chart,
+  #horizontalbar-chart{
     height: 400px !important;
   }
 }
@@ -280,23 +279,23 @@ export default {
     border-bottom-right-radius: 16px;
   }
 }
-.analytic-chart{
-   width: 70%;
+.analytic-chart {
+  width: 70%;
   margin: 0px auto;
 }
 .h-analytic-type {
   text-align: center;
   color: nth($purple, 1);
 }
-.panel-head{
+.panel-head {
   position: relative;
 }
-.panel-tab{
+.panel-tab {
   position: absolute;
   right: 30px;
   top: 15px;
 }
-.analytic-bottom-tab{
+.analytic-bottom-tab {
   text-align: center;
 }
 </style>

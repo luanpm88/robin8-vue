@@ -36,7 +36,8 @@ export default {
               display: true,
               ticks: {
                 xmax: 20,
-                fontColor: "#BBBBBBFF"
+                fontColor: "#999",
+                fontSize:16,
               },
               gridLines: {
                 color: "#e5e9f2",
@@ -52,7 +53,8 @@ export default {
                 display: false
               },
               ticks: {
-                fontColor: "#BBBBBBFF",
+                fontColor: "#999",
+                fontSize:16,
                 autoSkip: false,
                 maxRotation: 80,
                 callback: function(value) {
