@@ -15,7 +15,7 @@
             <div v-if="cur === 0" class="analytic-chart-box">
               <line-charts :childData="trendsWeiboList" ref="tendsChart"></line-charts>
             </div>
-            <tag-charts :tags="parentTags" v-if="cur === 1"></tag-charts>
+            <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
               <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
             </div>
@@ -231,7 +231,7 @@ export default {
         .post(apiConfig.conceptWeixin, params)
         .then(function(res) {
           _that.parentTags = [];
-          _that.parentTags = res.data.slice(0, 80);
+          _that.parentTags = res.data.slice(0, 100);
           // console.log("我是微信", res);
         })
         .catch(function(error) {
@@ -315,6 +315,10 @@ export default {
     margin: 0px auto $font-sm;
     width: 390px !important;
     height: 375px !important;
+  }
+  .chart-tag {
+    width: 940;
+    margin: 0px auto 25px;
   }
 }
 </style>

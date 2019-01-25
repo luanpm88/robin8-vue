@@ -1,50 +1,41 @@
 <template>
-<div class="chart-tag">
-  <svg :width="width" :height="height">
-    <a v-for="(tag,index) in tags" :key="index" style="cursor:none;" @mousemove='listener($event)'>
-      <text
-        :x="tag.x"
-        :y="tag.y"
-        :font-size="20 * (600/(800-tag.z))"
-        :fill-opacity="((400+tag.z)/600)"
-        :fill="colorList[index]"
-      >{{tag.text}}</text>
-    </a>
-  </svg>
-</div>
+  <div class="chart-tag">
+    <svg :width="width" :height="height">
+      <a v-for="(tag,index) in tags" :key="index">
+        <text
+          :x="tag.x"
+          :y="tag.y"
+          :font-size="20 * (600/(800-tag.z))"
+          :fill-opacity="((400+tag.z)/600)"
+          :fill="colorList[index]"
+        >{{tag.text}}</text>
+      </a>
+    </svg>
+  </div>
 </template>
 <script>
-import TagsBall from "vue-tags-ball";
-// var Color = require("color");
-let Animation = function() {
-  this.running = false;
-};
-Animation.prototype = {
-  stop: function() {},
-  start: function() {}
-};
 export default {
   name: "tags-ball",
-  install: function(vue) {
-    vue.component(this.name, this);
-  },
   props: {
-    tags: {
+    taglist: {
       type: Array,
       default: []
+    },
+    width: {
+      type: Number,
+      required: true
+    },
+    height: {
+      type: Number,
+      required: true
     }
   },
-  // components: { TagsBall },
   data() {
     return {
-      width: 940,
-      height: 520,
-      tagsNum: 20,
       RADIUS: 300,
       speedX: Math.PI / 360,
       speedY: Math.PI / 360,
-      // tags: [],
-      animation: new Animation(),
+      tags: [],
       colorList: [
         "#272F93FF",
         "#272F9380",
@@ -73,7 +64,6 @@ export default {
         "#272F93FF",
         "#272F9380",
         "#7F3BC0FF",
-
         "#272F93FF",
         "#272F9380",
         "#7F3BC0FF",
@@ -82,6 +72,52 @@ export default {
         "#7F3BC0FF",
         "#272F93FF",
         "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
+        "#272F93FF",
+        "#272F9380",
+        "#7F3BC0FF",
         "#7F3BC0FF",
         "#272F93FF",
         "#272F9380",
@@ -113,31 +149,37 @@ export default {
     }
   },
   created() {
-    this.init_ball(this.tags);
+    //初始化标签位置
+    this.init_ball(this.taglist);
+  },
+  mounted() {
+    //使球开始旋转
+    setInterval(() => {
+      this.rotateX(this.speedX);
+      this.rotateY(this.speedY);
+    }, 17);
   },
   watch: {
-    tags: function(valTag) {
+    taglist: function(valTag) {
       this.init_ball(valTag);
     },
   },
-  mounted() {
-    // //使球开始旋转
-    // setInterval(() => {
-    //   this.rotateX(this.speedX);
-    //   this.rotateY(this.speedY);
-    // }, 17);
-  },
   methods: {
     init_ball(valTag) {
-      valTag.forEach((item, index) => {
-        item.text = item.text;
-        let k = -1 + (2 * (index + 1) - 1) / valTag.length;
+      let tags = [];
+      for (let i = 0; i < valTag.length; i++) {
+        let tag = {};
+        let k = -1 + (2 * (i + 1) - 1) / valTag.length;
         let a = Math.acos(k);
         let b = a * Math.sqrt(valTag.length * Math.PI);
-        item.x = this.CX + this.RADIUS * 1.3 * Math.sin(a) * Math.cos(b);
-        item.y = this.CY + this.RADIUS / 1.3 * Math.sin(a) * Math.sin(b);
-        item.z = this.RADIUS / 10 * Math.cos(a);
-      });
+        tag.text = valTag[i].text;
+        tag.x = this.CX + this.RADIUS * Math.sin(a) * Math.cos(b);
+        tag.y = this.CY + this.RADIUS * Math.sin(a) * Math.sin(b);
+        tag.z = this.RADIUS * Math.cos(a);
+        tag.href = "https://imgss.github.io";
+        tags.push(tag);
+      }
+      this.tags = tags;
     },
     rotateX(speedX) {
       var cos = Math.cos(speedX);
@@ -175,10 +217,4 @@ export default {
   }
 };
 </script>
-<style>
-.chart-tag{
-  width: 940;
-  margin: 0px auto;
-}
-</style>
 
