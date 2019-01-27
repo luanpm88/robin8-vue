@@ -1,13 +1,13 @@
 <template>
   <div class="campaign-detail-container">
-    <campaign-create-process
+    <create-process
       :renderData="processStatus"
       class="mt20"
-    ></campaign-create-process>
+    ></create-process>
 
     <div class="panel default-panel mt20">
       <div class="panel-body">
-        <campaign-status-area></campaign-status-area>
+        <status-area></status-area>
 
         <div class="line-title">基础信息</div>
         <div class="form-horizontal campaign-create-form">
@@ -152,15 +152,15 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import CampaignCreateProcess from './components/CampaignCreateProcess'
-import CampaignStatusArea from './components/CampaignStatusArea'
+import CreateProcess from './components/CreateProcess'
+import StatusArea from './components/StatusArea'
 import KolsListItem from './components/KolsListItem'
 
 export default {
-  name: 'CampaignDetail',
+  name: 'CreationDetail',
   components: {
-    CampaignCreateProcess,
-    CampaignStatusArea,
+    CreateProcess,
+    StatusArea,
     KolsListItem
   },
   data () {

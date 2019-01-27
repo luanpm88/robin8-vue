@@ -8,12 +8,12 @@ import Home from '@/pages/home/Home'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
 
-import Campaigns from '@/pages/campaigns/Campaigns'
-import CampaignCreate from '@/pages/campaigns/Create'
-import CampaignEdit from '@/pages/campaigns/Edit'
-import CampaignDetail from '@/pages/campaigns/Detail'
-import ChooseKols from '@/pages/campaigns/Kols'
-import CampaignPay from '@/pages/campaigns/Pay'
+import Creations from '@/pages/creations/Creations'
+import CreationCreate from '@/pages/creations/Create'
+import CreationEdit from '@/pages/creations/Edit'
+import CreationDetail from '@/pages/creations/Detail'
+import ChooseKols from '@/pages/creations/Kols'
+import CreationPay from '@/pages/creations/Pay'
 
 Vue.use(Router)
 
@@ -61,33 +61,33 @@ export default new Router({
       }
     },
     {
-      path: '/campaigns',
-      name: 'Campaigns',
-      component: Campaigns,
+      path: '/creations',
+      name: 'Creations',
+      component: Creations,
       meta: {
         title: '活动'
       },
       children: [
         {
           path: 'create',
-          name: 'CampaignCreate',
-          component: CampaignCreate,
+          name: 'CreationCreate',
+          component: CreationCreate,
           meta: {
             title: '创建新活动'
           }
         },
         {
           path: ':id',
-          name: 'CampaignDetail',
-          component: CampaignDetail,
+          name: 'CreationDetail',
+          component: CreationDetail,
           meta: {
             title: '活动详情'
           }
         },
         {
           path: ':id/edit',
-          name: 'CampaignEdit',
-          component: CampaignEdit,
+          name: 'CreationEdit',
+          component: CreationEdit,
           meta: {
             title: '活动编辑'
           }
@@ -102,8 +102,8 @@ export default new Router({
         },
         {
           path: ':id/pay',
-          name: 'CampaignPay',
-          component: CampaignPay,
+          name: 'CreationPay',
+          component: CreationPay,
           meta: {
             title: '创建新活动'
           }

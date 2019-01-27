@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 .kols-list-item {
-  border-bottom: 1px solid #ebedf2;
+  position: relative;
   .inner {
     height: 76px;
     padding: 16px 0;
@@ -91,6 +91,16 @@ export default {
         color: nth($blue, 1);
       }
     }
+  }
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background-color: #ebedf2;
+    overflow: hidden;
   }
 }
 </style>

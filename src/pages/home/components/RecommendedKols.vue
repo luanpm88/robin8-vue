@@ -1,5 +1,5 @@
 <template>
-  <div class="panel default-panel home-topPost">
+  <div class="panel default-panel home-top-post">
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-rocket"></span>
@@ -9,7 +9,7 @@
 
     <div class="panel-body list-content">
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
-        <div>
+        <div class="list-content-inner">
           <kols-list-item
             v-for="(item, index) in currentList"
             :key="index"
@@ -18,13 +18,12 @@
             :hasChecked="kolHasChecked"
             :renderData="item"
           ></kols-list-item>
-          <div></div>
-          <div class="text-center mt20">
-            <button
-              type="button"
-              class="btn btn-sm btn-outline btn-circle btn-purple"
-            >查看更多</button>
-          </div>
+        </div>
+        <div class="text-center mt20">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline btn-circle btn-purple"
+          >查看更多</button>
         </div>
       </default-tabs>
     </div>
@@ -35,7 +34,7 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import KolsListItem from "@/pages/campaigns/components/KolsListItem";
+import KolsListItem from "@/pages/creations/components/KolsListItem";
 export default {
   components: {
     DefaultTabs,
@@ -53,29 +52,7 @@ export default {
         brand_keywords: "BMW",
         order_by: "doc_count"
       },
-      currentList: [
-        {
-          name: "Anna Strong",
-          desc:
-            "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-        },
-        {
-          name: "Milano Esco",
-          desc: "Well-known car blogger"
-        },
-        {
-          name: "Nick Bold",
-          desc: "Web Developer, Facebook Inc"
-        },
-        {
-          name: "Wiltor Delton",
-          desc: "Project Manager"
-        },
-        {
-          name: "Nick Stone",
-          desc: "Visual Designer, Github Inc"
-        }
-      ],
+      currentList: [],
       tabList: [
         {
           index: 0,
@@ -145,8 +122,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-top-post /deep/ .pills-btn {
+  position: absolute !important;
+  right: 30px !important;
+  top: 16px !important;
+}
 .list-content {
   padding: 0px 20px 20px;
   min-height: 450px;
+}
+.list-content-inner {
+  height: 380px;
+  overflow-y: auto;
 }
 </style>

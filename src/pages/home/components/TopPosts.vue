@@ -1,5 +1,5 @@
 <template>
-  <div class="panel default-panel home-topPost">
+  <div class="panel default-panel home-top-post">
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-calendar"></span>
@@ -14,7 +14,7 @@
         @changeTab="changeTab"
         class="panel-tab"
       >
-        <div>
+        <div class="list-content-inner">
           <div class="home-post" v-for="(item, index) in postList" :key="index">
             <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
             <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
@@ -41,10 +41,9 @@
               </span>
             </div>
           </div>
-
-          <div class="text-center mt20 home-topPost-more">
-            <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
-          </div>
+        </div>
+        <div class="text-center mt20">
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
         </div>
       </default-tabs>
     </div>
@@ -55,7 +54,7 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import KolsListItem from "../../campaigns/components/KolsListItem";
+import KolsListItem from "@/pages/creations/components/KolsListItem";
 
 export default {
   components: {
@@ -80,60 +79,14 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "微博",
-          data: [
-            {
-              name: "Anna Strong",
-              desc:
-                "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-            },
-            {
-              name: "Milano Esco",
-              desc: "Well-known car blogger"
-            },
-            {
-              name: "Nick Bold",
-              desc: "Web Developer, Facebook Inc"
-            },
-            {
-              name: "Wiltor Delton",
-              desc: "Project Manager"
-            },
-            {
-              name: "Nick Stone",
-              desc: "Visual Designer, Github Inc"
-            }
-          ]
+          name: "微博"
         },
         {
           index: 1,
-          name: "微信",
-          data: [
-            {
-              name: "1 Strong",
-              desc:
-                "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-            },
-            {
-              name: "2 Esco",
-              desc: "Well-known car blogger"
-            },
-            {
-              name: "3 Bold",
-              desc: "Web Developer, Facebook Inc"
-            },
-            {
-              name: "4 Delton",
-              desc: "Project Manager"
-            },
-            {
-              name: "5 Stone",
-              desc: "Visual Designer, Github Inc"
-            }
-          ]
+          name: "微信"
         }
       ]
-      
+
     };
   },
   created() {
@@ -188,6 +141,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-top-post /deep/ .pills-btn {
+  position: absolute !important;
+  right: 30px !important;
+  top: 16px !important;
+}
 .list-content {
   padding: 0px 20px 20px;
   min-height: 450px;
@@ -255,20 +213,8 @@ export default {
     color: #b9b7b7;
   }
 }
-</style>
-<style lang="scss">
-.home-topPost {
-  .pills-btn {
-    position: absolute !important;
-    right: 30px !important;
-    top: 16px !important;
-  }
-  .home-topPost-more{
-    position: absolute;
-    width: 100%;
-    bottom:20px;
-  }
+.list-content-inner {
+  height: 380px;
+  overflow-y: auto;
 }
 </style>
-
-
