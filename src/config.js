@@ -1,4 +1,4 @@
-const host = 'http://192.168.50.105:3000/brand_api/v2'
+const host = 'http://192.168.50.50:3001/brand_api/v2'
 const domain = ''
 const searchHost = 'http://api_beta.robin8.net:8080/api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'

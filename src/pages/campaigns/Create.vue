@@ -16,9 +16,12 @@
             <div class="col-sm-10">
               <input
                 type="text"
+                name="name"
                 class="form-control"
+                :class="[errors.has('name') ? 'danger' : '']"
                 v-model="submitData.name"
                 placeholder="请填写活动名称"
+                v-validate="'required'"
               >
               <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
             </div>
@@ -28,9 +31,12 @@
             <div class="col-sm-10">
               <input
                 type="text"
+                name="desc"
                 class="form-control"
+                :class="[errors.has('desc') ? 'danger' : '']"
                 v-model="submitData.description"
                 placeholder="请填写活动介绍"
+                v-validate="'required'"
               >
               <div class="form-tips">请填写活动相关介绍</div>
             </div>
@@ -39,8 +45,11 @@
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
               <select
+                name="brand"
                 class="form-control"
+                :class="[errors.has('brand') ? 'danger' : '']"
                 v-model="submitData.trademark_id"
+                v-validate="'required'"
               >
                 <option value="">请选择品牌名称</option>
                 <option
@@ -66,41 +75,48 @@
             <div class="col-sm-2 control-label">活动平台：</div>
             <div class="col-sm-10">
               <div class="row">
-                <div class="col-sm-1 text-center">
-                  <div
-                    class="check-icon"
-                    :class="[checkedWechat ? 'checked' : '']"
-                    @click="terraceWechat"
-                  >
-                    <div class="iconfont icon-wechat-circle"></div>
-                    <div class="iconfont icon-check"></div>
+                <div
+                  v-for="item of terracesList"
+                  :key="item.id"
+                  class="col-sm-6"
+                >
+                  <div class="col-sm-2 text-center">
+                    <div
+                      class="check-icon"
+                      :class="[item.checked ? 'checked' : '']"
+                      @click="terraceCtrl(item.id)"
+                    >
+                      <div
+                        :class="'iconfont ' + item.iconClass"
+                      ></div>
+                      <div class="iconfont icon-check"></div>
+                    </div>
+                  </div>
+                  <div class="col-sm-10">
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="item.val"
+                      @change="exposureCtrl(item.id)"
+                      :placeholder="'请填写'+ item.name +'期待曝光值'"
+                    >
                   </div>
                 </div>
-                <div class="col-sm-5">
-                  <input
-                    type="number"
-                    class="form-control"
-                    v-model="exposureWechat"
-                    placeholder="请填写微信期待曝光值"
-                  >
-                </div>
-                <div class="col-sm-1 text-center">
+                <input
+                  type="hidden"
+                  name="terrace"
+                  v-model="submitData.terraces"
+                  v-validate="'required'"
+                >
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
                   <div
-                    class="check-icon"
-                    :class="[checkedWeibo ? 'checked' : '']"
-                    @click="terraceWeibo"
+                    class="form-tips text-right danger"
+                    v-show="errors.has('terrace')"
                   >
-                    <div class="iconfont icon-weibo-circle"></div>
-                    <div class="iconfont icon-check"></div>
+                    {{ errors.first('terrace') }}
                   </div>
-                </div>
-                <div class="col-sm-5">
-                  <input
-                    type="number"
-                    class="form-control"
-                    v-model="exposureWeibo"
-                    placeholder="请填写微博期待曝光值"
-                  >
                 </div>
               </div>
             </div>
@@ -141,6 +157,19 @@
                 input-accept="image/*"
                 :url="uploadImageUrl">
               </vue-core-image-upload>
+              <!-- <input
+                type="hidden"
+                name="img_url"
+                v-model="submitData.img_url"
+                v-validate="'required'"
+              > -->
+
+              <div
+                class="form-tips text-right danger"
+                v-show="errors.has('img_url')"
+              >
+                {{ errors.first('img_url') }}
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -148,20 +177,29 @@
             <div class="col-sm-10">
               <div class="input-group">
                 <datepicker
+                  name="start_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
                   placeholder="选择开始时间"
                   v-model="submitData.start_at"
+                  v-validate="'required'"
                 ></datepicker>
                 <span class="input-group-addon">-</span>
                 <datepicker
+                  name="end_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
                   placeholder="选择结束时间"
                   v-model="submitData.end_at"
+                  v-validate="'required'"
                 ></datepicker>
               </div>
-              <div class="form-tips">请选择您预期的活动时间</div>
+              <div
+                class="form-tips text-right danger"
+                v-show="errors.has('start_at') || errors.has('end_at')"
+              >
+                请选择您预期的活动时间
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -169,9 +207,12 @@
             <div class="col-sm-4">
               <input
                 type="number"
+                name="kols_count"
                 class="form-control"
-                v-model="submitData.pre_kols_count"
+                :class="[errors.has('kols_count') ? 'danger' : '']"
+                v-model.number="submitData.pre_kols_count"
                 placeholder="请填写活动KOL数量"
+                v-validate="'required'"
               >
               <div class="form-tips">请填写活动KOL数量</div>
             </div>
@@ -179,9 +220,12 @@
             <div class="col-sm-4">
               <input
                 type="number"
+                name="pre_amount"
                 class="form-control"
-                v-model="submitData.pre_amount"
+                :class="[errors.has('pre_amount') ? 'danger' : '']"
+                v-model.number="submitData.pre_amount"
                 placeholder="请填写活动预算"
+                v-validate="'required'"
               >
               <div class="form-tips">请填写活动预算</div>
             </div>
@@ -190,7 +234,7 @@
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
               <textarea
-                name=""
+                name="notice"
                 v-model="submitData.notice"
                 class="form-control"
                 rows="6"
@@ -213,6 +257,18 @@
               :renderData="tagsList"
               @checkTag="checkTag"
             ></tags-list>
+            <input
+              type="hidden"
+              name="tags"
+              v-model="submitData.target.industries"
+              v-validate="'required'"
+            >
+            <div
+              class="form-tips danger"
+              v-show="errors.has('tags')"
+            >
+              情选择一个标签
+            </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
@@ -220,16 +276,22 @@
               <div class="input-group">
                 <input
                   type="number"
+                  name="price_from"
                   class="form-control"
-                  v-model="submitData.price_from"
+                  :class="[errors.has('price_from') ? 'danger' : '']"
+                  v-model.number="submitData.target.price_from"
                   placeholder="最低价格"
+                  v-validate="'required'"
                 >
                 <span class="input-group-addon">-</span>
                 <input
                   type="number"
+                  name="price_to"
                   class="form-control"
-                  v-model="submitData.price_to"
+                  :class="[errors.has('price_to') ? 'danger' : '']"
+                  v-model.number="submitData.target.price_to"
                   placeholder="最高价格"
+                  v-validate="'required'"
                 >
               </div>
               <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
@@ -273,7 +335,12 @@
       </div>
     </div>
 
-    <div class="row mt20">
+    <kols-list-panel
+      class="mt20"
+      title="为您推荐的大V"
+    ></kols-list-panel>
+
+    <!-- <div class="row mt20">
       <div class="col-sm-4">
         <kols-list-panel
           title="为您推荐的大V"
@@ -289,10 +356,10 @@
           title="您收藏的大V"
         ></kols-list-panel>
       </div>
-    </div>
+    </div> -->
 
     <div class="text-center create-btn-area">
-      <button type="button" class="btn btn-cyan next-btn" @click="doSubmit">提交</button>
+      <button type="button" class="btn btn-cyan next-btn" @click="doConfirm">提交</button>
     </div>
   </div>
 </template>
@@ -324,13 +391,10 @@ export default {
       },
       brandsList: [],
       tagsList: [],
+      terracesList: [],
       uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
       loading: false,
-      checkedWechat: false,
-      checkedWeibo: false,
-      exposureWechat: '',
-      exposureWeibo: '',
       submitData: {
         name: '',
         description: '',
@@ -340,12 +404,14 @@ export default {
         pre_kols_count: '',
         pre_amount: '',
         img_url: '',
-        terrace_id: '',
-        exposure_value: '',
-        industries: '',
-        price_from: '',
-        price_to: ''
-      }
+        target: {
+          industries: '',
+          price_from: '',
+          price_to: ''
+        },
+        terraces: []
+      },
+      canSubmit: true
     }
   },
   methods: {
@@ -359,16 +425,34 @@ export default {
         const data = res.data
         this.brandsList = data.trademarks_list
         this.tagsList = data.tags_list
+
+        let _terracesList = data.terraces_list
+        for (let i = 0; i < _terracesList.length; i++) {
+          let _shortName = _terracesList[i].short_name
+          switch (_shortName) {
+            case 'public_wechat_account':
+              _terracesList[i].iconClass = 'icon-wechat-circle'
+              break
+            case 'weibo':
+              _terracesList[i].iconClass = 'icon-weibo-circle'
+              break
+            default:
+              _terracesList[i].iconClass = ''
+          }
+          _terracesList[i].checked = false
+          _terracesList[i].val = ''
+        }
+        this.terracesList = _terracesList
       }
     },
     checkTag (data) {
       let _checkedTags = data.checkedTags
       console.log(_checkedTags.toString())
-      this.submitData.industries = _checkedTags.toString()
+      this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      if (this.pictures.length >= 5) {
-        alert('最多可上传5张图片')
+      if (this.pictures.length >= 1) {
+        alert('最多可上传1张图片')
         return false
       }
       console.log(res)
@@ -379,6 +463,7 @@ export default {
         alert('上传失败')
         this.loading = false
       }
+      this.submitData.img_url = this.pictures
       console.log(this.pictures)
     },
     imageuploading (res) {
@@ -393,24 +478,90 @@ export default {
       }
       console.log(this.pictures)
     },
-    terraceWechat () {
-      this.checkedWechat = true
-      this.checkedWeibo = false
-      this.submitData.terrace_id = 1
+    terraceCtrl (id) {
+      let _terraces = this.submitData.terraces
+      let _terracesList = this.terracesList
+      let _terraceItem = commonJs.buildObjData('terrace_id', id)
+      console.log(_terraceItem)
+      let result = _terraces.some(item => {
+        if (item.terrace_id == id) {
+          return true
+        }
+      })
+      if (!result) {
+        _terraces.push(_terraceItem)
+        for (let i = 0; i < _terracesList.length; i++) {
+          if (_terracesList[i].id == _terraceItem.terrace_id) {
+            _terracesList[i].checked = true
+            for (let j = 0; j < _terracesList.length; j++) {
+              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
+                _terraces[j].exposure_value = _terracesList[i].val
+              }
+            }
+          }
+        }
+      } else {
+        for (let i = 0; i < _terraces.length; i++) {
+          if (_terraces[i].terrace_id == _terraceItem.terrace_id) {
+            let _index = _terraces.indexOf(_terraces[i])
+            _terraces.splice(_index, 1)
+          }
+        }
+        for (let i = 0; i < _terracesList.length; i++) {
+          if (_terracesList[i].id == _terraceItem.terrace_id) {
+            _terracesList[i].checked = false
+            for (let j = 0; j < _terracesList.length; j++) {
+              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
+                _terraces[j].exposure_value = _terracesList[i].val
+              }
+            }
+          }
+        }
+      }
+      console.log(this.submitData.terraces)
     },
-    terraceWeibo () {
-      this.checkedWechat = false
-      this.checkedWeibo = true
-      this.submitData.terrace_id = 3
+    exposureCtrl (id) {
+      console.log(id)
+      let _terraces = this.submitData.terraces
+      let _terracesList = this.terracesList
+      console.log(_terracesList)
+      for (let i = 0; i < _terracesList.length; i++) {
+        if (_terracesList[i].id == id) {
+          for (let j = 0; j < _terracesList.length; j++) {
+            if (!!_terraces[j] && _terraces[j].terrace_id == id) {
+              _terraces[j].exposure_value = _terracesList[i].val
+            }
+          }
+        }
+      }
+      console.log(_terraces)
     },
     doSubmit () {
-      if (this.checkedWechat) {
-        this.submitData.exposure_value = this.exposureWechat
-      } else if (this.checkedWeibo) {
-        this.submitData.exposure_value = this.exposureWeibo
+      this.canSubmit = false
+      axios.post(apiConfig.creationsUrl, {
+        'creation': this.submitData
+      }).then(this.handleDoSubmitSucc)
+    },
+    handleDoSubmitSucc (res) {
+      if (res.status == 201) {
+        let resData = res.data
+        console.log(resData)
+        // this.$router.push('/campaigns/' + resData.id)
+      } else {
+        alert('提交失败，请重新提交')
       }
+      this.canSubmit = true
+    },
+    doConfirm () {
       console.log(this.submitData)
-      // this.$router.push('/campaigns/1')
+
+      this.$validator.validateAll().then((msg) => {
+        console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          this.doSubmit()
+        }
+      })
     }
   },
   mounted () {
@@ -430,6 +581,15 @@ export default {
   padding: 30px;
   .next-btn {
     width: 150px;
+  }
+}
+.campaign-create-container /deep/ .kols-list {
+  padding: 24px 60px;
+  font-size: 0;
+  & > .kols-list-item {
+    display: inline-block;
+    width: 33.33333%;
+    padding: 0 10px;
   }
 }
 </style>

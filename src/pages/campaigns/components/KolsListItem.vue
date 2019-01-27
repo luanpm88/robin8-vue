@@ -1,18 +1,20 @@
 <template>
-  <div class="kols-list-item media" @click="detail(renderData)">
-    <div class="media-left">
-      <div class="avatar">
-        <img :src="renderData.avatar" alt="" class="avatar-img" />
-        <div v-if="hasChecked" class="iconfont icon-round-check-fill check-icon"></div>
+  <div class="kols-list-item" @click="detail(renderData)">
+    <div class="media inner">
+      <div class="media-left">
+        <div class="avatar">
+          <img :src="{{renderData.avatar}}" alt="" class="avatar-img" />
+          <div v-if="hasChecked" class="iconfont icon-round-check-fill check-icon"></div>
+        </div>
       </div>
-    </div>
-    <div class="media-body media-middle info">
-      <h5 class="name">{{renderData.name}}</h5>
-      <p class="desc">{{renderData.desc}}</p>
-    </div>
-    <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
-      <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
-      <span v-if="hasMsg" class="iconfont icon-msg"></span>
+      <div class="media-body media-middle info">
+        <h5 class="name">{{renderData.name}}</h5>
+        <p class="desc">{{renderData.desc}}</p>
+      </div>
+      <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
+        <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
+        <span v-if="hasMsg" class="iconfont icon-msg"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -36,10 +38,12 @@ export default {
 
 <style lang="scss" scoped>
 .kols-list-item {
-  height: 76px;
-  padding: 16px 0;
   border-bottom: 1px solid #ebedf2;
-  color: #d8d8d8;
+  .inner {
+    height: 76px;
+    padding: 16px 0;
+    color: #d8d8d8;
+  }
   .avatar {
     position: relative;
     width: 44px;

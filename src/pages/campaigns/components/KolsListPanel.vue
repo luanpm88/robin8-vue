@@ -4,7 +4,7 @@
       <h5 class="title text-center">{{title}}</h5>
     </div>
     <div class="panel-body">
-      <div class="kols-list">
+      <div class="kols-list clearfix">
         <kols-list-item
           v-for="(item, index) in kolsList"
           :key="index"

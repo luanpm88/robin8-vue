@@ -134,18 +134,14 @@
 
         <div class="line-title">已选择的大V</div>
         <div class="kols-list">
-          <div
-            class="item"
+          <kols-list-item
             v-for="(item, index) in kolsList"
             :key="index"
-          >
-            <kols-list-item
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :renderData="item"
-            ></kols-list-item>
-          </div>
+            :hasLiked="kolHasLiked"
+            :hasMsg="kolHasMsg"
+            :hasChecked="kolHasChecked"
+            :renderData="item"
+          ></kols-list-item>
         </div>
       </div>
     </div>
@@ -209,9 +205,10 @@ export default {
 .kols-list {
   padding: 24px 60px;
   font-size: 0;
-  & > .item {
+  & > .kols-list-item {
     display: inline-block;
     width: 33.33333%;
+    padding: 0 10px;
   }
 }
 </style>
