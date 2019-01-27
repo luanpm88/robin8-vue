@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <div class="row">
                 <div
-                  v-for="item of terracesList"
+                  v-for="item in terracesList"
                   :key="item.id"
                   class="col-sm-6"
                 >
@@ -84,7 +84,7 @@
                     <div
                       class="check-icon"
                       :class="[item.checked ? 'checked' : '']"
-                      @click="terraceCtrl(item.id)"
+                      @click="terraceCheck(item.id)"
                     >
                       <div
                         :class="'iconfont ' + item.iconClass"
@@ -97,7 +97,6 @@
                       type="number"
                       class="form-control"
                       v-model="item.val"
-                      @change="exposureCtrl(item.id)"
                       :placeholder="'请填写'+ item.name +'期待曝光值'"
                     >
                   </div>
@@ -427,21 +426,21 @@ export default {
         this.tagsList = data.tags_list
 
         let _terracesList = data.terraces_list
-        for (let i = 0; i < _terracesList.length; i++) {
-          let _shortName = _terracesList[i].short_name
+        _terracesList.forEach(item => {
+          let _shortName = item.short_name
           switch (_shortName) {
             case 'public_wechat_account':
-              _terracesList[i].iconClass = 'icon-wechat-circle'
+              item.iconClass = 'icon-wechat-circle'
               break
             case 'weibo':
-              _terracesList[i].iconClass = 'icon-weibo-circle'
+              item.iconClass = 'icon-weibo-circle'
               break
             default:
-              _terracesList[i].iconClass = ''
+              item.iconClass = ''
           }
-          _terracesList[i].checked = false
-          _terracesList[i].val = ''
-        }
+          item.checked = false
+          item.val = ''
+        })
         this.terracesList = _terracesList
       }
     },
@@ -478,7 +477,7 @@ export default {
       }
       console.log(this.pictures)
     },
-    terraceCtrl (id) {
+    terraceCheck (id) {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
@@ -488,53 +487,20 @@ export default {
           return true
         }
       })
-      if (!result) {
-        _terraces.push(_terraceItem)
-        for (let i = 0; i < _terracesList.length; i++) {
-          if (_terracesList[i].id == _terraceItem.terrace_id) {
-            _terracesList[i].checked = true
-            for (let j = 0; j < _terracesList.length; j++) {
-              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-                _terraces[j].exposure_value = _terracesList[i].val
-              }
-            }
-          }
-        }
-      } else {
-        for (let i = 0; i < _terraces.length; i++) {
-          if (_terraces[i].terrace_id == _terraceItem.terrace_id) {
-            let _index = _terraces.indexOf(_terraces[i])
+
+      _terracesList.forEach(item => {
+        if (item.id == _terraceItem.terrace_id) {
+          if (!result) {
+            _terraces.push(_terraceItem)
+            item.checked = true
+          } else {
+            let _index = _terraces.indexOf(item)
             _terraces.splice(_index, 1)
+            item.checked = false
           }
         }
-        for (let i = 0; i < _terracesList.length; i++) {
-          if (_terracesList[i].id == _terraceItem.terrace_id) {
-            _terracesList[i].checked = false
-            for (let j = 0; j < _terracesList.length; j++) {
-              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-                _terraces[j].exposure_value = _terracesList[i].val
-              }
-            }
-          }
-        }
-      }
+      })
       console.log(this.submitData.terraces)
-    },
-    exposureCtrl (id) {
-      console.log(id)
-      let _terraces = this.submitData.terraces
-      let _terracesList = this.terracesList
-      console.log(_terracesList)
-      for (let i = 0; i < _terracesList.length; i++) {
-        if (_terracesList[i].id == id) {
-          for (let j = 0; j < _terracesList.length; j++) {
-            if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-              _terraces[j].exposure_value = _terracesList[i].val
-            }
-          }
-        }
-      }
-      console.log(_terraces)
     },
     doSubmit () {
       this.canSubmit = false
@@ -543,16 +509,27 @@ export default {
       }).then(this.handleDoSubmitSucc)
     },
     handleDoSubmitSucc (res) {
+      console.log(res)
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        // this.$router.push('/campaigns/' + resData.id)
+        this.$router.push('/creations/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
       }
       this.canSubmit = true
     },
     doConfirm () {
+      let _terraces = this.submitData.terraces
+      let _terracesList = this.terracesList
+      _terraces.forEach(item => {
+        console.log(item)
+        _terracesList.forEach(originalItem => {
+          if (!!item && item.terrace_id == originalItem.id) {
+            item.exposure_value = originalItem.val
+          }
+        })
+      })
       console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {

@@ -7,26 +7,26 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-body">
-        <status-area></status-area>
+        <status-area :statusData="detailData.status"></status-area>
 
         <div class="line-title">基础信息</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
             <div class="col-sm-2 control-label">活动名称：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰唇釉圣诞活动</p>
+              <p class="form-control-static">{{detailData.name}}</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动介绍：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰唇釉圣诞活动开始招募大V啦！圣诞期间参加活动的大V可以获得丰盛的礼品奖励哦～</p>
+              <p class="form-control-static">{{detailData.description}}</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">品牌名称：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰</p>
+              <p class="form-control-static">{{detailData.trademark_name}}</p>
             </div>
           </div>
         </div>
@@ -37,21 +37,19 @@
             <div class="col-sm-2 control-label">活动平台：</div>
             <div class="col-sm-10">
               <div class="row">
-                <div class="col-sm-1 text-center">
-                  <div class="check-icon checked">
-                    <div class="iconfont icon-wechat-circle"></div>
+                <div
+                  v-for="item in detailData.terraces"
+                  :key="item.terrace_id"
+                  class="col-sm-6"
+                >
+                  <div class="col-sm-2 text-center">
+                    <div class="check-icon checked">
+                      <div :class="'iconfont ' + item.iconClass"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-5">
-                  <p class="form-control-static">微信曝光值：30000</p>
-                </div>
-                <div class="col-sm-1 text-center">
-                  <div class="check-icon">
-                    <div class="iconfont icon-weibo-circle"></div>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{item.name}}曝光值：{{item.exposure_value}}</p>
                   </div>
-                </div>
-                <div class="col-sm-5">
-                  <p class="form-control-static">微博曝光值：30000</p>
                 </div>
               </div>
             </div>
@@ -61,39 +59,33 @@
             <div class="col-sm-10">
               <div class="upload-imgs-list">
                 <div class="upload-img-item">
-                  <img src="" alt="" class="upload-img" />
+                  <img :src="detailData.img_url" alt="" class="upload-img" />
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动要求：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">微博 / 微信平台转发量4w次以上</p>
-            </div>
-          </div>
-          <div class="form-group">
             <div class="col-sm-2 control-label">活动时间：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">2018-12-21 ～ 2018-1-20</p>
+              <p class="form-control-static">{{detailData.time_range}}</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">KOL数量：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">100</p>
+              <p class="form-control-static">{{detailData.pre_kols_count}}</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">活动预算：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">128w</p>
+              <p class="form-control-static">{{detailData.pre_amount}}</p>
             </div>
           </div>
-          <div class="form-group">
+          <div v-if="detailData.notice" class="form-group">
             <div class="col-sm-2 control-label">注意事项：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">大V粉丝量10k以上 / 微博平台认证大V / 小红书平台粉丝量20k以上</p>
+              <p class="form-control-static">{{detailData.notice}}</p>
             </div>
           </div>
         </div>
@@ -103,13 +95,13 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">大V圈子：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">潮流时装博主 / 美妆达人 / 时尚达人</p>
+              <p class="form-control-static">{{detailData.industries}}</p>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">价格要求：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">10k~30k</p>
+              <p class="form-control-static">{{detailData.price_range}}</p>
             </div>
           </div>
           <div class="form-group">
@@ -169,6 +161,7 @@ export default {
         current: 1,
         index: 0
       },
+      detailData: {},
       kolHasLiked: true,
       kolHasMsg: false,
       kolHasChecked: true,
@@ -202,13 +195,27 @@ export default {
         .then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
-      let resData = res.data
       console.log(res)
-      // if (resData.code == 0 && resData.data) {
-      //   const data = resData.data
-      //   console.log(data)
-      //   this.ambassadorData = data
-      // }
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        console.log(resData)
+        this.detailData = resData
+        let _terraces = resData.terraces
+
+        _terraces.forEach(item => {
+          console.log(item)
+          switch (item.short_name) {
+            case 'public_wechat_account':
+              item.iconClass = 'icon-wechat-circle'
+              break
+            case 'weibo':
+              item.iconClass = 'icon-weibo-circle'
+              break
+            default:
+              item.iconClass = ''
+          }
+        })
+      }
     },
   },
   mounted () {
