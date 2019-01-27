@@ -69,6 +69,14 @@ function checkObj (obj) {
   return false
 }
 
+const verifyPhone = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57]|19[89])[0-9]{8}$/
+
+function buildObjData(key, value) {
+  var obj = {}
+  obj[key] = value
+  return obj
+}
+
 module.exports = {
   setLocalData,
   getLocalData,
@@ -76,5 +84,7 @@ module.exports = {
   clearLocalData,
   checkObj,
   isWeixin,
-  isAndroid
+  isAndroid,
+  verifyPhone,
+  buildObjData
 }

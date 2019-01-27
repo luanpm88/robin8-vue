@@ -7,6 +7,7 @@ import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import "ant-design-vue/lib/table/style/css";
+import '@javascripts/validate.js'
 import '@styles/iconfont.css'
 import '@styles/btn.scss'
 import '@styles/grid.scss'
