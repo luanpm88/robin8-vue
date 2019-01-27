@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <div class="row">
                 <div
-                  v-for="item of terracesList"
+                  v-for="item in terracesList"
                   :key="item.id"
                   class="col-sm-6"
                 >

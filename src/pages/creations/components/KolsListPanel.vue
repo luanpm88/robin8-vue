@@ -35,8 +35,8 @@ export default {
   },
   data () {
     return {
-      kolHasLiked: true,
-      kolHasMsg: true,
+      kolHasLiked: false,
+      kolHasMsg: false,
       kolHasChecked: true,
       kolsList: [
         {
