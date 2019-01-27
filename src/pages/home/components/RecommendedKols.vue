@@ -123,9 +123,9 @@ export default {
 
 <style lang="scss" scoped>
 .home-top-post /deep/ .pills-btn {
-  position: absolute !important;
-  right: 30px !important;
-  top: 16px !important;
+  position: absolute;
+  right: 30px;
+  top: 16px;
 }
 .list-content {
   padding: 0px 20px 20px;
