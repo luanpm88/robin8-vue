@@ -147,6 +147,7 @@ export default {
 <style lang="scss" scoped>
 .list-content {
   padding: 0px 20px 20px;
-  min-height: 450px;
+  height: 450px;
+  overflow: hidden;
 }
 </style>

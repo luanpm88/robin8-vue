@@ -160,7 +160,7 @@ export default {
       axios
         .post(apiConfig.topPostWeibo, params)
         .then(function(res) {
-          console.log("我是微博接口", res);
+          // console.log("我是微博接口", res);
           _that.postType = 0;
           _that.postList = res.data.data.slice(0, 2);
           // console.log(_that.postList);
@@ -190,7 +190,8 @@ export default {
 <style lang="scss" scoped>
 .list-content {
   padding: 0px 20px 20px;
-  min-height: 450px;
+  height: 450px;
+  overflow: hidden;
 }
 .home-post {
   padding: 10px 0px 2px;
@@ -258,6 +259,7 @@ export default {
 </style>
 <style lang="scss">
 .home-topPost {
+  // height: 450px;
   .pills-btn {
     position: absolute !important;
     right: 30px !important;
