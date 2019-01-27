@@ -17,7 +17,6 @@
             :hasMsg="kolHasMsg"
             :hasChecked="kolHasChecked"
             :renderData="item"
-            @detail="intoKolDetail(item)"
           ></kols-list-item>
           <div></div>
           <div class="text-center mt20">

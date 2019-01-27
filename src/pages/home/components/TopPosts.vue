@@ -16,7 +16,8 @@
       >
         <div>
           <div class="home-post" v-for="(item, index) in postList" :key="index">
-            <p class="home-post-title">{{item.title}}</p>
+            <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
+            <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
             <div class="home-post-detail">
               <img :src="item.avatar_url" alt class>
               <div>
@@ -30,7 +31,7 @@
                 <i class="iconfont icon-like"></i>
                 <b>{{item.post_influence.likes}}</b>
               </span>
-              <span>
+              <span v-if="postType === 0">
                 <i class="iconfont icon-share"></i>
                 <b>{{item.post_influence.shares}}</b>
               </span>
@@ -75,29 +76,7 @@ export default {
         page_size: 6
       },
       postList: [],
-      currentList: [
-        {
-          name: "Anna Strong",
-          desc:
-            "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-        },
-        {
-          name: "Milano Esco",
-          desc: "Well-known car blogger"
-        },
-        {
-          name: "Nick Bold",
-          desc: "Web Developer, Facebook Inc"
-        },
-        {
-          name: "Wiltor Delton",
-          desc: "Project Manager"
-        },
-        {
-          name: "Nick Stone",
-          desc: "Visual Designer, Github Inc"
-        }
-      ],
+      postType: 0,
       tabList: [
         {
           index: 0,
@@ -154,6 +133,7 @@ export default {
           ]
         }
       ]
+      
     };
   },
   created() {
@@ -180,9 +160,10 @@ export default {
       axios
         .post(apiConfig.topPostWeibo, params)
         .then(function(res) {
-          // console.log("我是微博接口", res);
+          console.log("我是微博接口", res);
+          _that.postType = 0;
           _that.postList = res.data.data.slice(0, 2);
-          console.log(_that.postList);
+          // console.log(_that.postList);
         })
         .catch(function(error) {
           console.log(error);
@@ -195,6 +176,7 @@ export default {
         .post(apiConfig.topPostWeixin, params)
         .then(function(res) {
           // console.log("我是微信接口", res);
+          _that.postType = 1;
           _that.postList = res.data.data.slice(0, 2);
         })
         .catch(function(error) {
