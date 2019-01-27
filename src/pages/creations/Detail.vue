@@ -93,7 +93,7 @@
         <div class="line-title">大V相关要求</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">大V圈子：</div>
+            <div class="col-sm-2 control-label">所属标签：</div>
             <div class="col-sm-10">
               <p class="form-control-static">{{detailData.industries}}</p>
             </div>
