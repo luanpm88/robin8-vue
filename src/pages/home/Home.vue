@@ -9,7 +9,7 @@
         <home-banner></home-banner>
         <div class="mt20"></div>
         <div class="icon-grid-panel mt20">
-          <router-link to="/" tag="div" class="item">
+          <router-link to="/kol/list" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-search"></div>
               <h5 class="title">查找KOL</h5>

@@ -129,7 +129,8 @@ export default {
 }
 .list-content {
   padding: 0px 20px 20px;
-  min-height: 450px;
+  height: 450px;
+  overflow: hidden;
 }
 .list-content-inner {
   height: 380px;
