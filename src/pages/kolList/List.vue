@@ -6,8 +6,8 @@
       <main-nav class="pull-left"></main-nav>
 
       <div class="campaign-container pull-right">
-        <container-header></container-header>
-        <router-view></router-view>
+        <!-- <container-header></container-header> -->
+        <!-- <router-view></router-view> -->
       </div>
     </div>
   </div>
