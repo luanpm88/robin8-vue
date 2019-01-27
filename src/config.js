@@ -7,6 +7,18 @@ const config = {
   host,
   domain,
 
+  // 登陆 
+  loginUrl: `${host}/sessions/sign_in`,
+
+  // 注册
+  regUrl: `${host}/sessions/sign_up`,
+
+  // 获取手机验证码
+  phoneCodeUrl: `${host}/codes/get_phone_code`,
+
+  // 获取邮箱验证码
+  emailCodeUrl: `${host}/codes/get_email_code`,
+
   // 活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 
