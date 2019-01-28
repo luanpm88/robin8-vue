@@ -12,37 +12,49 @@
 </template>
 
 <script>
+import commonJs from '@javascripts/common.js'
+
 export default {
   name: 'TagsList',
   props: {
-    renderData: Array
+    renderData: Array,
+    checkedIds: Array
   },
   data () {
     return {
-      tags: [],
-      tagsName: []
+      tags: []
     }
   },
   methods: {
-    checkTag (id, name) {
-      console.log(id)
-      console.log(name)
-      let _index = this.tags.indexOf(id)
-      if (_index == -1) {
-        this.tags.push(id)
-        this.tagsName.push(name)
-      } else {
-        this.tags.splice(_index, 1)
-        this.tagsName.splice(_index, 1)
+    renderCheckedData (checkedIds) {
+      if (!!checkedIds && checkedIds.length > 0) {
+        this.tags = this.checkedIds
       }
-      let _tagsName = this.tagsName
-      console.log(_tagsName)
+    },
+    checkTag (id, name) {
+      console.log(this.checkedIds)
+      let _tags = this.tags
+      let _index = _tags.indexOf(id)
+      if (_index == -1) {
+        _tags.push(id)
+      } else {
+        _tags.splice(_index, 1)
+      }
+      console.log(_tags)
       this.$emit('checkTag', {
-        'checkedTags': _tagsName
+        'ids': _tags
       })
     },
     checkedTag (id) {
       return this.tags.indexOf(id) != -1
+    }
+  },
+  mounted () {
+    this.tags = this.checkedIds
+  },
+  watch: {
+    checkedIds (newVal, oldVal) {
+      this.renderCheckedData(newVal)
     }
   }
 }

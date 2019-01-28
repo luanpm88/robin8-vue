@@ -254,6 +254,7 @@
           <div class="form-group">
             <tags-list
               :renderData="tagsList"
+              :checkedIds="checkedIds"
               @checkTag="checkTag"
             ></tags-list>
             <input
@@ -372,6 +373,7 @@ export default {
       },
       brandsList: [],
       tagsList: [],
+      checkedIds: [],
       terracesList: [],
       uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
@@ -390,7 +392,8 @@ export default {
           price_from: '',
           price_to: ''
         },
-        terraces: []
+        terraces: [],
+        notice: ''
       },
       canSubmit: true
     }
@@ -435,27 +438,59 @@ export default {
       let resData = res.data
       if (res.status == 200 && resData) {
         console.log(resData)
-        // this.detailData = resData
-        // let _terraces = resData.terraces
+        this.submitData.name = resData.name
+        this.submitData.description = resData.description
+        this.submitData.trademark_id = resData.trademark_id
+        this.submitData.start_at = resData.start_at
+        this.submitData.end_at = resData.end_at
+        this.submitData.pre_kols_count = resData.pre_kols_count
+        this.submitData.pre_amount = resData.pre_amount
+        this.submitData.notice = resData.notice
+        this.submitData.target.industries = resData.targets_hash.industries
+        this.submitData.target.price_from = resData.targets_hash.price_from
+        this.submitData.target.price_to = resData.targets_hash.price_to
+        this.submitData.terraces = resData.terraces
 
-        // _terraces.forEach(item => {
-        //   console.log(item)
-        //   switch (item.short_name) {
-        //     case 'public_wechat_account':
-        //       item.iconClass = 'icon-wechat-circle'
-        //       break
-        //     case 'weibo':
-        //       item.iconClass = 'icon-weibo-circle'
-        //       break
-        //     default:
-        //       item.iconClass = ''
-        //   }
-        // })
+        let _terracesList = this.terracesList
+        _terracesList.forEach(item => {
+          resData.terraces.forEach(e => {
+            if (item.id == e.terrace_id) {
+              item.checked = true
+              item.val = e.exposure_value
+            }
+          })
+        })
+        console.log(_terracesList)
+
+        let _tagsList = this.tagsList
+        let _checkedData = resData.targets_hash.industries
+        let _checkedArr = _checkedData.split(',')
+        let _checkedIds = []
+        _tagsList.forEach(item => {
+          _checkedArr.forEach(e => {
+            if (item.name == e) {
+              _checkedIds.push(item.id)
+            }
+          })
+        })
+
+        this.checkedIds = _checkedIds
+        console.log(this.checkedIds)
       }
     },
     checkTag (data) {
-      let _checkedTags = data.checkedTags
-      console.log(_checkedTags.toString())
+      let _ids = data.ids
+      let _tagsList = this.tagsList
+      let _checkedTags = []
+
+      _ids.forEach(item => {
+        _tagsList.forEach(e => {
+          if (e.id == item) {
+            _checkedTags.push(e.name)
+          }
+        })
+      })
+      console.log(_checkedTags)
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {

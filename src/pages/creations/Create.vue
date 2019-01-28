@@ -254,6 +254,7 @@
           <div class="form-group">
             <tags-list
               :renderData="tagsList"
+              :checkedIds="checkedIds"
               @checkTag="checkTag"
             ></tags-list>
             <input
@@ -390,6 +391,7 @@ export default {
       },
       brandsList: [],
       tagsList: [],
+      checkedIds: [],
       terracesList: [],
       uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
@@ -408,7 +410,8 @@ export default {
           price_from: '',
           price_to: ''
         },
-        terraces: []
+        terraces: [],
+        notice: ''
       },
       canSubmit: true
     }
@@ -445,8 +448,18 @@ export default {
       }
     },
     checkTag (data) {
-      let _checkedTags = data.checkedTags
-      console.log(_checkedTags.toString())
+      let _ids = data.ids
+      let _tagsList = this.tagsList
+      let _checkedTags = []
+
+      _ids.forEach(item => {
+        _tagsList.forEach(e => {
+          if (e.id == item) {
+            _checkedTags.push(e.name)
+          }
+        })
+      })
+      console.log(_checkedTags)
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
