@@ -20,8 +20,22 @@
           <div class="form-horizontal default-form login-form">
             <div class="form-group">
               <div class="col-sm-12">
-                <a-input v-if="flag" placeholder="输入手机号" v-model="typeVal"/>
-                <a-input v-else placeholder="输入邮箱" v-model="typeVal"/>
+                <input
+                  v-if="flag"
+                  type="text"
+                  name="typeVal"
+                  class="form-control"
+                  v-model="typeVal"
+                  placeholder="输入手机号"
+                >
+                <input
+                  v-else
+                  type="text"
+                  name="typeVal"
+                  class="form-control"
+                  v-model="typeVal"
+                  placeholder="输入邮箱"
+                >
                 <div class="form-tips text-right" v-if="flag">或使用
                   <span class="link" @click="checkType">邮箱注册</span>
                 </div>
@@ -32,7 +46,13 @@
             </div>
             <div class="form-group">
               <div class="col-sm-6">
-                <a-input placeholder="输入短信验证码" v-model="code"/>
+                <input
+                  type="text"
+                  name="code"
+                  class="form-control"
+                  v-model="code"
+                  placeholder="输入验证码"
+                >
               </div>
               <div class="col-sm-6">
                 <button class="btn btn-block btn-cyan" :disabled="disabled" @click="codeUrl">{{btntxt}}</button>
@@ -40,7 +60,13 @@
             </div>
             <div class="form-group">
               <div class="col-sm-12">
-                <a-input placeholder="输入您的密码" v-model="password"/>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  v-model="password"
+                  placeholder="输入您的密码"
+                >
               </div>
             </div>
             <div class="form-group text-center">
@@ -56,10 +82,8 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
-import { Input, Button } from "ant-design-vue";
 export default {
   name: "Reg",
-  components: { AInput: Input, AButton: Button },
   data() {
     return {
       flag: true,
