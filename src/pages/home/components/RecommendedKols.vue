@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
-import DefaultTabs from "@components/DefaultTabs";
-import KolsListItem from "@/pages/creations/components/KolsListItem";
+import axios from "axios"
+import apiConfig from "@/config"
+import DefaultTabs from "@components/DefaultTabs"
+import KolsListItem from "@/pages/creations/components/KolsListItem"
 export default {
   components: {
     DefaultTabs,
@@ -63,62 +63,62 @@ export default {
           name: "微信"
         }
       ]
-    };
+    }
   },
   created() {
-    this.weiboKol(this.params);
+    this.weiboKol(this.params)
   },
   methods: {
     changeTab(tab) {
-      this.tabIndex = tab.index;
+      this.tabIndex = tab.index
       if (tab.index === 0) {
         // 微博接口
-        this.weiboKol(this.params);
+        this.weiboKol(this.params)
       } else {
         // 微信接口
-        this.weixinKol(this.params);
+        this.weixinKol(this.params)
       }
     },
     intoKolDetail(item) {
-      console.log(item);
-      this.$router.push("/kol/" + item.profile_id);
+      console.log(item)
+      this.$router.push("/kol/" + item.profile_id)
     },
     // 微博的接口
     weiboKol(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.kolsWeibo, params)
         .then(function(res) {
           res.data.forEach(element => {
-            element.name = element.profile_name;
-            element.desc = element.description_raw;
-            element.avatar = element.avatar_url;
-          });
-          _that.currentList = res.data.slice(0, 5);
+            element.name = element.profile_name
+            element.desc = element.description_raw
+            element.avatar = element.avatar_url
+          })
+          _that.currentList = res.data.slice(0, 5)
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     // 微信的接口
     weixinKol(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.kolsWeixin, params)
         .then(function(res) {
           res.data.forEach(element => {
-            element.name = element.profile_name;
-            element.desc = element.description_raw;
-            element.avatar = element.avatar_url;
-          });
-          _that.currentList = res.data.slice(0, 5);
+            element.name = element.profile_name
+            element.desc = element.description_raw
+            element.avatar = element.avatar_url
+          })
+          _that.currentList = res.data.slice(0, 5)
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

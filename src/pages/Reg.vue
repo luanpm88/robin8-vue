@@ -81,8 +81,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
+import axios from "axios"
+import apiConfig from "@/config"
 import { mapMutations } from 'vuex'
 export default {
   name: "Reg",
@@ -97,15 +97,15 @@ export default {
       disabled: true,
       time: 0,
       loginStatus: false
-    };
+    }
   },
   watch:{
    typeVal:{
     handler:function(){
       if (this.typeVal) {
-        this.disabled = false;
+        this.disabled = false
       } else {
-        this.disabled = true;
+        this.disabled = true
       }
     },
     deep:true
@@ -116,114 +116,114 @@ export default {
     // 邮箱和手机注册切换
     checkType() {
       if (this.flag === true) {
-        this.typeVal = "";
-        this.flag = false;
+        this.typeVal = ""
+        this.flag = false
       } else {
-        this.typeVal = "";
-        this.flag = true;
+        this.typeVal = ""
+        this.flag = true
       }
     },
     timer: function() {
       if (this.time > 0) {
-        this.time--;
-        this.btntxt = "重获验证码" + this.time;
-        setTimeout(this.timer, 1000);
+        this.time--
+        this.btntxt = "重获验证码" + this.time
+        setTimeout(this.timer, 1000)
       } else {
-        this.time = 0;
-        this.btntxt = "获取验证码";
-        this.disabled = false;
+        this.time = 0
+        this.btntxt = "获取验证码"
+        this.disabled = false
       }
     },
     // reg joggle
     regUrl(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.regUrl, params)
         .then(function(res) {
           if (res.data.error) {
             alert(res.data.detail)
           } else {
-            this.setAuthorization(res.data.access_token)
+            _that.setAuthorization(res.data.access_token)
             if (params.type === 'email') {
-              this.setAccount(params.login)
+              _that.setAccount(params.login)
             } else {
-              this.setMobile(params.login)
+              _that.setMobile(params.login)
             }
-            _that.$router.push("/");
+            _that.$router.push("/")
           }
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     // phoneCodeUrl
     phoneCodeUrl(params) {
-      const _that = this;
+      const _that = this
       axios
         .get(apiConfig.phoneCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
-            _that.time = 0;
-            _that.btntxt = "获取验证码";
-            _that.disabled = false;
+            _that.time = 0
+            _that.btntxt = "获取验证码"
+            _that.disabled = false
             alert(res.data.detail)
           }
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     // emailCodeUrl
     emailCodeUrl(params) {
-      const _that = this;
+      const _that = this
       axios
         .get(apiConfig.emailCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
-            _that.time = 0;
-            _that.btntxt = "获取验证码";
-            _that.disabled = false;
+            _that.time = 0
+            _that.btntxt = "获取验证码"
+            _that.disabled = false
             alert(res.data.detail)
           }
         })
         .catch(function(error) {
-          console.log('woshierror', error);
-        });
+          console.log('woshierror', error)
+        })
     },
     reg() {
       let params = {
         login: this.typeVal,
         code: this.code,
         password: this.password
-      };
-      if (this.flag) {
-        params.type = "mobile_number";
-      } else {
-        params.type = "email";
       }
-      console.log(params);
+      if (this.flag) {
+        params.type = "mobile_number"
+      } else {
+        params.type = "email"
+      }
+      console.log(params)
       // 调用注册接口
-      this.regUrl(params);
+      this.regUrl(params)
     },
     codeUrl() {
-      this.time = 60;
-      this.disabled = true;
-      this.timer();
+      this.time = 60
+      this.disabled = true
+      this.timer()
       let params = {
         login_type: 'sign_up'
-      };
+      }
       if (this.flag) {
-        params.mobile_number = this.typeVal;
+        params.mobile_number = this.typeVal
         // 调用手机的接口
-        this.phoneCodeUrl(params);
+        this.phoneCodeUrl(params)
       } else {
-        params.email = this.typeVal;
+        params.email = this.typeVal
         // 调用邮箱的接口
-        this.emailCodeUrl(params);
+        this.emailCodeUrl(params)
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

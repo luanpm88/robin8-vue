@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
-import commonJs from "@javascripts/common.js";
+import axios from "axios"
+import apiConfig from "@/config"
+import commonJs from "@javascripts/common.js"
 import { mapMutations } from 'vuex'
 
 export default {
@@ -67,17 +67,17 @@ export default {
       userName: "",
       password: "",
       loginStatus: false
-    };
+    }
   },
   methods: {
     ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
     // login joggle
     loginUrl(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
-          let resData = res.data;
+          let resData = res.data
           console.log(resData)
           if (res.data.error) {
             alert(res.data.detail)
@@ -90,17 +90,17 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     login() {
-      this.loginStatus = true;
+      this.loginStatus = true
       let params = {
         login: this.userName,
         password: this.password
-      };
-      this.loginUrl(params);
+      }
+      this.loginUrl(params)
     }
   }
-};
+}
 </script>
