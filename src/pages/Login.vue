@@ -90,8 +90,8 @@ export default {
             //   691200
             // );
 
-            this.setAuthorization(resData.access_token)
-            this.setAccount(params.login)
+            _that.setAuthorization(resData.access_token)
+            _that.setAccount(params.login)
             _that.$router.push("/");
           }
         })

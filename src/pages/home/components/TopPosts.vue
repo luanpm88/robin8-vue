@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
-import DefaultTabs from "@components/DefaultTabs";
-import KolsListItem from "@/pages/creations/components/KolsListItem";
+import axios from "axios"
+import apiConfig from "@/config"
+import DefaultTabs from "@components/DefaultTabs"
+import KolsListItem from "@/pages/creations/components/KolsListItem"
 
 export default {
   components: {
@@ -87,57 +87,57 @@ export default {
         }
       ]
 
-    };
+    }
   },
   created() {
     // 微博
-    this.topPostWeibo(this.topPostParams);
+    this.topPostWeibo(this.topPostParams)
     // // 微信
-    // this.topPostWeixin(this.topPostParams);
+    // this.topPostWeixin(this.topPostParams)
   },
   methods: {
     changeTab(tab) {
-      this.tabIndex = tab.index;
-      // this.currentList = tab.data;
+      this.tabIndex = tab.index
+      // this.currentList = tab.data
       if (tab.index === 0) {
         // 微博
-        this.topPostWeibo(this.topPostParams);
+        this.topPostWeibo(this.topPostParams)
       } else {
         // 微信
-        this.topPostWeixin(this.topPostParams);
+        this.topPostWeixin(this.topPostParams)
       }
     },
     // 微博的接口
     topPostWeibo(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.topPostWeibo, params)
         .then(function(res) {
-          // console.log("我是微博接口", res);
-          _that.postType = 0;
-          _that.postList = res.data.data.slice(0, 2);
-          // console.log(_that.postList);
+          // console.log("我是微博接口", res)
+          _that.postType = 0
+          _that.postList = res.data.data.slice(0, 2)
+          // console.log(_that.postList)
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     // 微信的接口
     topPostWeixin(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.topPostWeixin, params)
         .then(function(res) {
-          // console.log("我是微信接口", res);
-          _that.postType = 1;
-          _that.postList = res.data.data.slice(0, 2);
+          // console.log("我是微信接口", res)
+          _that.postType = 1
+          _that.postList = res.data.data.slice(0, 2)
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { Table } from "ant-design-vue";
+import { Table } from "ant-design-vue"
 export default {
   name: "KolDetail",
   components: { ATable: Table },
@@ -236,9 +236,9 @@ export default {
           clients: 2
         }
       ],
-    };
+    }
   }
-};
+}
 </script>
 <style  lang="scss" scoped>
 .kol-detail-wrap {
