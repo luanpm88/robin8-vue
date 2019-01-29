@@ -216,7 +216,7 @@ export default {
           }
         })
       }
-    },
+    }
   },
   mounted () {
     this.getDetailData()

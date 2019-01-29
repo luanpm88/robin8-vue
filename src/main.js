@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './store'
 import "ant-design-vue/lib/table/style/css";
 import '@javascripts/validate.js'
 import '@styles/iconfont.css'
@@ -45,6 +46,7 @@ new Vue({
   el: '#app',
   i18n,
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

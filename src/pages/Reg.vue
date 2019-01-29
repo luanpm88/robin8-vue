@@ -20,8 +20,23 @@
           <div class="form-horizontal default-form login-form">
             <div class="form-group">
               <div class="col-sm-12">
-                <input type="text" class="form-control" v-if="flag" placeholder="输入手机号" v-model="typeVal"/>
-                <input type="text" class="form-control" v-else placeholder="输入邮箱" v-model="typeVal"/>
+                <input
+                  v-if="flag"
+                  type="text"
+                  name="typeVal"
+                  class="form-control"
+                  v-model="typeVal"
+                  placeholder="输入手机号"
+                  ref="type1"
+                >
+                <input
+                  v-else
+                  type="text"
+                  name="typeVal"
+                  class="form-control"
+                  v-model="typeVal"
+                  placeholder="输入邮箱"
+                >
                 <div class="form-tips text-right" v-if="flag">或使用
                   <span class="link" @click="checkType">邮箱注册</span>
                 </div>
@@ -32,7 +47,13 @@
             </div>
             <div class="form-group">
               <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="输入短信验证码" v-model="code"/>
+                <input
+                  type="text"
+                  name="code"
+                  class="form-control"
+                  v-model="code"
+                  placeholder="输入验证码"
+                >
               </div>
               <div class="col-sm-6">
                 <button class="btn btn-block btn-cyan" :disabled="disabled" @click="codeUrl">{{btntxt}}</button>
@@ -40,7 +61,13 @@
             </div>
             <div class="form-group">
               <div class="col-sm-12">
-                <input type="password" class="form-control" placeholder="输入您的密码" v-model="password"/>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  v-model="password"
+                  placeholder="输入您的密码"
+                >
               </div>
             </div>
             <div class="form-group text-center">
@@ -56,6 +83,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import { mapMutations } from 'vuex'
 export default {
   name: "Reg",
   data() {
@@ -66,12 +94,25 @@ export default {
       password: "",
       btntxt: "获取验证码",
       isCheck: false,
-      disabled: false,
+      disabled: true,
       time: 0,
       loginStatus: false
     };
   },
+  watch:{
+   typeVal:{
+    handler:function(){
+      if (this.typeVal) {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
+    },
+    deep:true
+   }
+  },
   methods: {
+    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
     // 邮箱和手机注册切换
     checkType() {
       if (this.flag === true) {
@@ -102,6 +143,12 @@ export default {
           if (res.data.error) {
             alert(res.data.detail)
           } else {
+            this.setAuthorization(res.data.access_token)
+            if (params.type === 'email') {
+              this.setAccount(params.login)
+            } else {
+              this.setMobile(params.login)
+            }
             _that.$router.push("/");
           }
         })

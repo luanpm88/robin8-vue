@@ -7,7 +7,7 @@ const config = {
   host,
   domain,
 
-  // 登陆 
+  // 登陆
   loginUrl: `${host}/sessions/sign_in`,
 
   // 注册
