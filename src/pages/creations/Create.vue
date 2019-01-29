@@ -332,7 +332,7 @@
             <button
               type="button"
               class="btn btn-blue btn-outline"
-              @click=""
+              @click="searchWxKol"
             >搜索大V</button>
           </div>
         </div>
@@ -455,6 +455,20 @@ export default {
         })
         this.terracesList = _terracesList
       }
+    },
+    searchWxKol () {
+      axios.post(apiConfig.kolWxSearchUrl, {
+        start_date: this.submitData.start_at,
+        end_date: this.submitData.start_end,
+        industries: ['airline'],
+        page_no: 0,
+        page_size: 10,
+        price_from: this.submitData.target.price_from,
+        price_to: this.submitData.target.price_to
+      }).then(this.handleSearchWxKolSucc)
+    },
+    handleSearchWxKolSucc (res) {
+      console.log(res)
     },
     checkTag (data) {
       let _ids = data.ids

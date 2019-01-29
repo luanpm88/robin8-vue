@@ -67,46 +67,40 @@ export default {
       userName: "",
       password: "",
       loginStatus: false
-    };
+    }
   },
   methods: {
     ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
     // login joggle
     loginUrl(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
-          let resData = res.data;
+          let resData = res.data
+          console.log(resData)
           if (res.data.error) {
-            alert(res.data.detail);
-            _that.loginStatus = false;
+            alert(res.data.detail)
+            _that.loginStatus = false
           } else {
-            _that.loginStatus = false;
-            // commonJs.setLocalData("userName", params.login, 691200);
-            // commonJs.setLocalData(
-            //   "Authorization",
-            //   resData.access_token,
-            //   691200
-            // );
-
             _that.setAuthorization(resData.access_token)
             _that.setAccount(params.login)
-            _that.$router.push("/");
+            _that.loginStatus = false
+            _that.$router.push("/")
           }
         })
         .catch(function(error) {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     login() {
-      this.loginStatus = true;
+      this.loginStatus = true
       let params = {
         login: this.userName,
         password: this.password
-      };
-      this.loginUrl(params);
+      }
+      this.loginUrl(params)
     }
   }
-};
+}
 </script>

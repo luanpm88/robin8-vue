@@ -1,4 +1,5 @@
 const host = 'http://192.168.50.50:3001/brand_api/v2'
+// const host = 'http://qa.robin8.net/brand_api/v2'
 const domain = ''
 const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
@@ -39,6 +40,12 @@ const config = {
 
   // 立即支付post
   // payTendersUrl: `${host}/tenders/:creation_id/tender`
+
+  // kol微信搜索
+  kolWxSearchUrl: `${searchHost}/price/price/kol_search?${searchHostKey}`,
+
+  // kol微博搜索
+  kolWbSearchUrl: `${searchHost}/price/weibo/price/kol_search?${searchHostKey}`,
 
   // 首页接口开始------------------------
   // analytics trend 微博
