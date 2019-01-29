@@ -15,9 +15,33 @@
         border-bottom: 1px solid transparent;
     }
 }
+.kol-data-table{
+    .ant-table{
+        font-size: $font-sm;
+    }
+    .ant-table-thead > tr > th{
+        padding: 5px 0px;
+    }
+    .ant-table-tbody > tr > td {
+        padding: 16px 5px;
+    }
+}
 .page{
     .ant-input{
         height: 34px;
         font-size: 13px;
     }
+}
+.ant-progress-inner{
+    margin: 0px auto;
+}
+.ant-progress-inner{
+    position: relative;
+}
+.ant-progress-text{
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

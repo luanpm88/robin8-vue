@@ -35,6 +35,7 @@ import axios from "axios"
 import apiConfig from "@/config"
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
+import { mapState } from 'vuex'
 export default {
   components: {
     DefaultTabs,
@@ -65,6 +66,9 @@ export default {
       ]
     }
   },
+  computed: {
+     ...mapState(['authorization'])
+  },
   created() {
     this.weiboKol(this.params)
   },
@@ -87,7 +91,11 @@ export default {
     weiboKol(params) {
       const _that = this
       axios
-        .post(apiConfig.kolsWeibo, params)
+        .post(apiConfig.kolsWeibo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           res.data.forEach(element => {
             element.name = element.profile_name
@@ -104,7 +112,11 @@ export default {
     weixinKol(params) {
       const _that = this
       axios
-        .post(apiConfig.kolsWeixin, params)
+        .post(apiConfig.kolsWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           res.data.forEach(element => {
             element.name = element.profile_name

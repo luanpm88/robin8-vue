@@ -55,7 +55,7 @@ import axios from "axios"
 import apiConfig from "@/config"
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
-
+import { mapState } from 'vuex'
 export default {
   components: {
     DefaultTabs,
@@ -89,6 +89,9 @@ export default {
 
     }
   },
+  computed: {
+    ...mapState(['authorization'])
+  },
   created() {
     // 微博
     this.topPostWeibo(this.topPostParams)
@@ -111,7 +114,11 @@ export default {
     topPostWeibo(params) {
       const _that = this
       axios
-        .post(apiConfig.topPostWeibo, params)
+        .post(apiConfig.topPostWeibo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微博接口", res)
           _that.postType = 0
@@ -126,7 +133,11 @@ export default {
     topPostWeixin(params) {
       const _that = this
       axios
-        .post(apiConfig.topPostWeixin, params)
+        .post(apiConfig.topPostWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微信接口", res)
           _that.postType = 1
