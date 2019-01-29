@@ -123,9 +123,6 @@ export default {
     // trend 微博
     this.trendsWeibo(this.trendParams);
   },
-  mounted() {
-    console.log(this.authorization)
-  },
   computed: {
      ...mapState(['authorization'])
   },
@@ -192,7 +189,7 @@ export default {
       axios
         .post(apiConfig.trendsWeibo, params, {
           headers: {
-            'Authorization': this.authorization
+            'Authorization': _that.authorization
           }
         })
         .then(function(res) {
@@ -211,7 +208,11 @@ export default {
     trendsWeixin(params) {
       const _that = this
       axios
-        .post(apiConfig.trendsWeixin, params)
+        .post(apiConfig.trendsWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微信", res)
           _that.trendsWeiboList.dataList = [{ data: res.data.data }]
@@ -226,7 +227,11 @@ export default {
     conceptWeibo(params) {
       const _that = this
       axios
-        .post(apiConfig.conceptWeibo, params)
+        .post(apiConfig.conceptWeibo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           _that.parentTags = []
           _that.parentTags = res.data
@@ -239,7 +244,11 @@ export default {
     conceptWeixin(params) {
       const _that = this
       axios
-        .post(apiConfig.conceptWeixin, params)
+        .post(apiConfig.conceptWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           _that.parentTags = []
           _that.parentTags = res.data.slice(0, 100)
@@ -253,7 +262,11 @@ export default {
     competitorWeibo(params) {
       const _that = this
       axios
-        .post(apiConfig.competitorWeibo, params)
+        .post(apiConfig.competitorWeibo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微博", res)
           _that.competiteWeiboList.dataList = [{ data: res.data.data }]
@@ -268,7 +281,11 @@ export default {
     competitorWeixin(params) {
       const _that = this
       axios
-        .post(apiConfig.competitorWeixin, params)
+        .post(apiConfig.competitorWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微博", res)
           _that.competiteWeiboList.dataList = [{ data: res.data.data }]
@@ -283,7 +300,11 @@ export default {
     sentimentWeibo(params) {
       const _that = this
       axios
-        .post(apiConfig.sentimentWeibo, params)
+        .post(apiConfig.sentimentWeibo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微博", res)
           _that.sentimentWeiboList.labels = res.data.labels
@@ -298,7 +319,11 @@ export default {
     sentimentWeixin(params) {
       const _that = this
       axios
-        .post(apiConfig.sentimentWeixin, params)
+        .post(apiConfig.sentimentWeixin, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
         .then(function(res) {
           // console.log("我是微信", res)
           _that.sentimentWeiboList.labels = res.data.labels
@@ -312,12 +337,12 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.analytic-chart-box {
+<style lang="scss" scoped>
+.analytic-chart-box /deep/ {
   width: 70%;
   margin: 0px auto;
 }
-.analytic-chart {
+.analytic-chart /deep/ {
   #line-chart,
   #horizontalbar-chart {
     height: 400px !important;
@@ -332,8 +357,6 @@ export default {
     margin: 0px auto 25px;
   }
 }
-</style>
-<style lang="scss" scoped>
 .list-content {
   padding: 20px;
 }

@@ -9,6 +9,7 @@
         <!-- <router-view></router-view> -->
         <!-- kol search 页面 -->
         <kol-search></kol-search>
+        <kol-data></kol-data>
       </div>
     </div>
   </div>
@@ -18,12 +19,14 @@
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import KolSearch from './KolSearch'
+import KolData from './KolData'
 export default {
   name: 'kolDetail',
   components: {
     PageHeader,
     MainNav,
-    KolSearch
+    KolSearch,
+    KolData
   },
   data () {
     return {
