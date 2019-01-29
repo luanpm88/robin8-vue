@@ -42,7 +42,7 @@ export default {
   },
   data () {
     return {
-      checked: false
+      checked: ''
     }
   },
   methods: {
@@ -50,11 +50,14 @@ export default {
       this.$emit('detail', item)
     },
     handleCheck (id) {
+      this.checked = !this.checked
       this.$emit('handleCheck', {
         'id': id
       })
-      this.checked = !this.checked
     }
+  },
+  mounted () {
+    this.checked = this.renderData.checked
   }
 };
 </script>

@@ -123,8 +123,8 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">活动图片：</div>
             <div class="col-sm-10">
-              <div class="upload-imgs-list">
-                <div v-if="submitData.img_url != ''" class="upload-img-item">
+              <div v-if="submitData.img_url != ''" class="upload-imgs-list">
+                <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
                   <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
@@ -144,6 +144,7 @@
                 :url="uploadImageUrl">
               </vue-core-image-upload> -->
               <vue-core-image-upload
+                v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 :crop="false"
                 @imageuploaded="imageuploaded"
@@ -339,7 +340,7 @@
     </div>
 
     <kols-list-panel
-      v-if="showKolsList"
+      v-if="kolsList.length > 0"
       class="mt20"
       title="为您推荐的大V"
       :kolsList="kolsList"
@@ -406,12 +407,10 @@ export default {
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
-      showKolsList: false,
       kolsParams: {},
       kolsList: [],
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
-      pictures: [],
       loading: false,
       submitData: {
         name: '',
@@ -466,8 +465,11 @@ export default {
       }
     },
     searchKols (postUrl) {
-      axios.post(postUrl, this.kolsParams)
-        .then(this.handleSearchKolsSucc)
+      axios.post(postUrl, this.kolsParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleSearchKolsSucc)
     },
     handleSearchKolsSucc (res) {
       console.log(res)
@@ -480,7 +482,6 @@ export default {
           item.checked = false
         })
       }
-      this.showKolsList = true
     },
     searchKolsCtrl () {
       let _terraces = this.submitData.terraces
@@ -560,10 +561,6 @@ export default {
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      if (this.pictures.length >= 1) {
-        alert('最多可上传1张图片')
-        return false
-      }
       console.log(res)
       this.submitData.img_url = res
     },

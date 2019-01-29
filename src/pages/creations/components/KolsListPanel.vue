@@ -18,7 +18,7 @@
 
       <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
 
-      <div v-if="kolsList.length > 10" class="btn-area">
+      <div v-if="kolsList.length >= 12" class="btn-area">
         <button type="button" class="btn btn-blue btn-outline btn-sm" @click="">下一页</button>
       </div>
     </div>
@@ -73,10 +73,15 @@ export default {
         _kolItem.id = item.profile_id
         _kolItem.name = item.profile_name
         _kolItem.desc = item.description_raw
-        _kolItem.checked = false
+        _kolItem.checked = item.checked
+        if (item.checked) {
+          this.checkedIds.push(item.profile_id)
+        }
         this.kols.push(_kolItem)
       })
       console.log(this.kols)
+
+      console.log(this.checkedIds)
     }
   },
   created () {

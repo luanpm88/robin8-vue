@@ -123,12 +123,26 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">活动图片：</div>
             <div class="col-sm-10">
-              <div class="upload-imgs-list">
+              <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
-                  <img src="" alt="" class="upload-img" />
-                  <div class="iconfont icon-close close-btn"></div>
+                  <img :src="submitData.img_url" alt="" class="upload-img" />
+                  <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
+              <vue-core-image-upload
+                v-else
+                :class="['upload-img-btn', 'iconfont', 'icon-image']"
+                :crop="false"
+                @imageuploaded="imageuploaded"
+                @imageuploading="imageuploading"
+                inputOfFile="image"
+                text=""
+                :max-file-size="5242880"
+                :compress="30"
+                :max-width="200"
+                input-accept="image/*"
+                :url="uploadImageUrl">
+              </vue-core-image-upload>
               <!-- <vue-core-image-upload
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 crop="local"
@@ -143,26 +157,12 @@
                 input-accept="image/*"
                 :url="uploadImageUrl">
               </vue-core-image-upload> -->
-              <vue-core-image-upload
-                :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                :crop="false"
-                @imageuploaded="imageuploaded"
-                @imageuploading="imageuploading"
-                inputOfFile="image"
-                text=""
-                :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
-                input-accept="image/*"
-                :url="uploadImageUrl">
-              </vue-core-image-upload>
-              <!-- <input
+              <input
                 type="hidden"
                 name="img_url"
                 v-model="submitData.img_url"
                 v-validate="'required'"
-              > -->
-
+              >
               <div
                 class="form-tips text-right danger"
                 v-show="errors.has('img_url')"
@@ -332,7 +332,7 @@
             <button
               type="button"
               class="btn btn-blue btn-outline"
-              @click=""
+              @click="searchKolsCtrl"
             >搜索大V</button>
           </div>
         </div>
@@ -340,10 +340,11 @@
     </div>
 
     <kols-list-panel
-      v-if="showKolsList"
+      v-if="kolsList.length > 0"
       class="mt20"
       title="为您推荐的大V"
       :kolsList="kolsList"
+      @checkedKols="checkedKols"
     ></kols-list-panel>
 
     <div class="text-center create-btn-area">
@@ -366,6 +367,7 @@ import TagsList from '@components/TagsList'
 import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreationEdit',
@@ -387,10 +389,9 @@ export default {
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
-      showKolsList: false,
+      kolsParams: {},
       kolsList: [],
       uploadImageUrl: apiConfig.uploadImageUrl,
-      pictures: [],
       loading: false,
       submitData: {
         name: '',
@@ -407,6 +408,7 @@ export default {
           price_to: ''
         },
         terraces: [],
+        selected_kols: [],
         notice: ''
       },
       canSubmit: true
@@ -444,8 +446,11 @@ export default {
       }
     },
     getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id)
-        .then(this.handleGetDetailDataSucc)
+      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
       console.log(res)
@@ -459,11 +464,13 @@ export default {
         this.submitData.end_at = resData.end_at
         this.submitData.pre_kols_count = resData.pre_kols_count
         this.submitData.pre_amount = resData.pre_amount
-        this.submitData.notice = resData.notice
+        this.submitData.img_url = resData.img_url
         this.submitData.target.industries = resData.targets_hash.industries
         this.submitData.target.price_from = resData.targets_hash.price_from
         this.submitData.target.price_to = resData.targets_hash.price_to
         this.submitData.terraces = resData.terraces
+        this.submitData.selected_kols = resData.selected_kols
+        this.submitData.notice = resData.notice
 
         let _terracesList = this.terracesList
         _terracesList.forEach(item => {
@@ -480,17 +487,110 @@ export default {
         let _checkedData = resData.targets_hash.industries
         let _checkedArr = _checkedData.split(',')
         let _checkedIds = []
+        let _checkedTags = []
         _tagsList.forEach(item => {
           _checkedArr.forEach(e => {
             if (item.name == e) {
               _checkedIds.push(item.id)
+              _checkedTags.push(item.name)
             }
           })
         })
 
+        this.checkedTags = _checkedTags
+        console.log(this.checkedTags)
         this.checkedIds = _checkedIds
         console.log(this.checkedIds)
+
+        this.searchKolsCtrl()
+        // console.log(this.kolsList)
       }
+    },
+    searchKols (postUrl) {
+      axios.post(postUrl, this.kolsParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleSearchKolsSucc)
+    },
+    handleSearchKolsSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+      this.kolsList = []
+      this.kolsList = resData.data
+
+      let _selectedKols = this.submitData.selected_kols
+      console.log(_selectedKols)
+      _selectedKols.forEach(item => {
+        this.kolsList.forEach(e => {
+          if (item.plateform_uuid == e.profile_id) {
+            e.checked = true
+          }
+        })
+      })
+      console.log(this.kolsList)
+    },
+    searchKolsCtrl () {
+      let _terraces = this.submitData.terraces
+      console.log(_terraces)
+      console.log(this.checkedTags)
+      this.kolsParams = {
+        start_date: this.submitData.start_at,
+        end_date: this.submitData.start_end,
+        industries: this.checkedTags,
+        page_no: 0,
+        page_size: 12,
+        price_from: this.submitData.target.price_from,
+        price_to: this.submitData.target.price_to
+      }
+
+      this.$validator.validateAll().then((msg) => {
+        console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          if (_terraces.length > 0) {
+            let hasWechat = _terraces.some(item => {
+              if (item.short_name == 'public_wechat_account') {
+                return true
+              } else {
+                return false
+              }
+            })
+            if (hasWechat) {
+              this.searchKols(apiConfig.kolWxSearchUrl)
+              this.plateformName = 'public_wechat_account'
+            } else {
+              this.searchKols(apiConfig.kolWbSearchUrl)
+              this.plateformName = 'weibo'
+            }
+          } else {
+            this.searchKols(apiConfig.kolWxSearchUrl)
+            this.plateformName = 'public_wechat_account'
+          }
+        }
+      })
+    },
+    checkedKols (data) {
+      let _ids = data.ids
+      console.log(_ids)
+      let _kolsList = this.kolsList
+      let _checkedKols = []
+      let _kolItem
+      _ids.forEach(item => {
+        _kolsList.forEach(e => {
+          if (e.profile_id == item) {
+            _kolItem = commonJs.buildObjData('plateform_uuid', item)
+            _kolItem.plateform_name = this.plateformName
+            _kolItem.name = e.profile_name
+            _kolItem.avatar_url = e.avatar_url
+            _kolItem.desc = e.description_raw
+            _checkedKols.push(_kolItem)
+          }
+        })
+      })
+      console.log(_checkedKols)
+      this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
       let _ids = data.ids
@@ -509,32 +609,17 @@ export default {
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      if (this.pictures.length >= 1) {
-        alert('最多可上传1张图片')
-        return false
-      }
       console.log(res)
-      if (res.code == 0) {
-        this.pictures.push(res.data.base)
-        this.loading = false
-      } else {
-        alert('上传失败')
-        this.loading = false
-      }
-      this.submitData.img_url = this.pictures
-      console.log(this.pictures)
+      this.submitData.img_url = res
     },
     imageuploading (res) {
       this.loading = true
     },
-    delPhoto (e, url) {
-      console.log(url)
-      let index = this.pictures.indexOf(url)
+    delPhoto () {
       let delConfirm = confirm('确定要删除此图片？')
       if (delConfirm) {
-        this.pictures.splice(index, 1)
+        this.submitData.img_url = ''
       }
-      console.log(this.pictures)
     },
     terraceCheck (id) {
       let _terraces = this.submitData.terraces
@@ -569,7 +654,7 @@ export default {
         'creation': this.submitData
       }, {
         headers: {
-          'Authorization': 'this.authorization'
+          'Authorization': this.authorization
         }
       }).then(this.handleDoSubmitSucc)
     },
@@ -609,6 +694,9 @@ export default {
   mounted () {
     this.getBaseData()
     this.getDetailData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>
