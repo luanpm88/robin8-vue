@@ -78,21 +78,15 @@ export default {
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
           let resData = res.data;
+          console.log(resData)
           if (res.data.error) {
-            alert(res.data.detail);
-            _that.loginStatus = false;
+            alert(res.data.detail)
+            _that.loginStatus = false
           } else {
-            _that.loginStatus = false;
-            // commonJs.setLocalData("userName", params.login, 691200);
-            // commonJs.setLocalData(
-            //   "Authorization",
-            //   resData.access_token,
-            //   691200
-            // );
-
             this.setAuthorization(resData.access_token)
             this.setAccount(params.login)
-            _that.$router.push("/");
+            _that.loginStatus = false
+            _that.$router.push("/")
           }
         })
         .catch(function(error) {
