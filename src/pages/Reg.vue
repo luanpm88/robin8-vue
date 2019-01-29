@@ -20,8 +20,8 @@
           <div class="form-horizontal default-form login-form">
             <div class="form-group">
               <div class="col-sm-12">
-                <a-input v-if="flag" placeholder="输入手机号" v-model="typeVal"/>
-                <a-input v-else placeholder="输入邮箱" v-model="typeVal"/>
+                <input type="text" class="form-control" v-if="flag" placeholder="输入手机号" v-model="typeVal"/>
+                <input type="text" class="form-control" v-else placeholder="输入邮箱" v-model="typeVal"/>
                 <div class="form-tips text-right" v-if="flag">或使用
                   <span class="link" @click="checkType">邮箱注册</span>
                 </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
               <div class="col-sm-6">
-                <a-input placeholder="输入短信验证码" v-model="code"/>
+                <input type="text" class="form-control" placeholder="输入短信验证码" v-model="code"/>
               </div>
               <div class="col-sm-6">
                 <button class="btn btn-block btn-cyan" :disabled="disabled" @click="codeUrl">{{btntxt}}</button>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
               <div class="col-sm-12">
-                <a-input placeholder="输入您的密码" v-model="password"/>
+                <input type="password" class="form-control" placeholder="输入您的密码" v-model="password"/>
               </div>
             </div>
             <div class="form-group text-center">
@@ -56,10 +56,8 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
-import { Input, Button } from "ant-design-vue";
 export default {
   name: "Reg",
-  components: { AInput: Input, AButton: Button },
   data() {
     return {
       flag: true,
@@ -118,6 +116,9 @@ export default {
         .get(apiConfig.phoneCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
+            _that.time = 0;
+            _that.btntxt = "获取验证码";
+            _that.disabled = false;
             alert(res.data.detail)
           }
         })
@@ -132,6 +133,9 @@ export default {
         .get(apiConfig.emailCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
+            _that.time = 0;
+            _that.btntxt = "获取验证码";
+            _that.disabled = false;
             alert(res.data.detail)
           }
         })
@@ -146,7 +150,7 @@ export default {
         password: this.password
       };
       if (this.flag) {
-        params.type = "mobile";
+        params.type = "mobile_number";
       } else {
         params.type = "email";
       }
@@ -158,7 +162,9 @@ export default {
       this.time = 60;
       this.disabled = true;
       this.timer();
-      let params = {};
+      let params = {
+        login_type: 'sign_up'
+      };
       if (this.flag) {
         params.mobile_number = this.typeVal;
         // 调用手机的接口

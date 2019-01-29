@@ -19,10 +19,10 @@
 
           <div class="default-form login-form">
             <div class="form-group">
-              <a-input placeholder="输入邮箱或手机号" v-model="userName"/>
+              <input type="text" class="form-control" placeholder="输入邮箱或手机号" v-model="userName"/>
             </div>
             <div class="form-group">
-              <a-input placeholder="输入您的密码" v-model="password"/>
+              <input type="password" class="form-control" placeholder="输入您的密码" v-model="password"/>
               <div class="form-tips text-right">
                 <router-link to="/forget_password">忘记密码？</router-link>
               </div>
@@ -46,10 +46,8 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import commonJs from "@javascripts/common.js";
-import { Input } from "ant-design-vue";
 export default {
   name: "Login",
-  components: { AInput: Input },
   data() {
     return {
       userName: "",
