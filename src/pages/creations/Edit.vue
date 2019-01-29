@@ -340,8 +340,10 @@
     </div>
 
     <kols-list-panel
+      v-if="showKolsList"
       class="mt20"
       title="为您推荐的大V"
+      :kolsList="kolsList"
     ></kols-list-panel>
 
     <div class="text-center create-btn-area">
@@ -383,7 +385,10 @@ export default {
       brandsList: [],
       tagsList: [],
       checkedIds: [],
+      checkedTags: [],
       terracesList: [],
+      showKolsList: false,
+      kolsList: [],
       uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
       loading: false,
@@ -500,6 +505,7 @@ export default {
         })
       })
       console.log(_checkedTags)
+      this.checkedTags = _checkedTags
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
@@ -544,6 +550,7 @@ export default {
       _terracesList.forEach(item => {
         if (item.id == _terraceItem.terrace_id) {
           if (!result) {
+            _terraceItem.short_name = item.short_name
             _terraces.push(_terraceItem)
             item.checked = true
           } else {
