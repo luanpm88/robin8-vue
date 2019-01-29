@@ -6,6 +6,12 @@
     ></create-process>
 
     <div class="panel default-panel mt20">
+      <div class="panel-body">
+        <status-area :statusData="detailData.status"></status-area>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
       <div class="panel-head">
         <h5 class="title text-center">基础信息</h5>
       </div>
@@ -366,6 +372,7 @@ import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
 import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
+import StatusArea from './components/StatusArea'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
@@ -376,6 +383,7 @@ export default {
     TagsList,
     CreateProcess,
     KolsListPanel,
+    StatusArea,
     VueCoreImageUpload
   },
   data () {
@@ -384,6 +392,7 @@ export default {
         current: 1,
         index: 0
       },
+      detailData: {},
       brandsList: [],
       tagsList: [],
       checkedIds: [],
@@ -457,6 +466,7 @@ export default {
       let resData = res.data
       if (res.status == 200 && resData) {
         console.log(resData)
+        this.detailData = resData
         this.submitData.name = resData.name
         this.submitData.description = resData.description
         this.submitData.trademark_id = resData.trademark_id

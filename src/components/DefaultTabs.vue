@@ -2,8 +2,8 @@
   <div class="default-tabs">
     <div class="btn-group pills-btn">
       <div
-        class="btn btn-outline btn-purple"
-        :class="[tabIndex == tab.index ? 'active' : '']"
+        class="btn btn-outline "
+        :class="[tabIndex == tab.index ? 'active' : '', !!theme && theme != '' ? 'btn-' + theme : 'btn-purple']"
         v-for="(tab, index) in tabList"
         :key="index"
         @click="changeTab(tab)"
@@ -20,7 +20,8 @@ export default {
   name: 'DefaultTabs',
   props: {
     tabList: Array,
-    tabIndex: Number
+    tabIndex: Number,
+    theme: String
   },
   data() {
     return {}

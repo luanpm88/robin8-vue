@@ -80,7 +80,6 @@ export default {
         this.kols.push(_kolItem)
       })
       console.log(this.kols)
-
       console.log(this.checkedIds)
     }
   },

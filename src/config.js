@@ -29,14 +29,14 @@ const config = {
   // 基本信息 tags and trademarks get
   baseInfosUrl: `${host}/base_infos`,
 
-  // 待合作列表get
+  // 待合作列表get 参数creation_id
   pendingTendersUrl: `${host}/kols/pending_tenders`,
 
-  // 合作中列表get
-  unpayTendersUrl: `${host}/kols/unpay_tenders`,
+  // 合作中列表get 参数creation_id
+  cooperationTendersUrl: `${host}/kols/cooperation_tenders`,
 
-  // 已完成列表get
-  paidTendersUrl: `${host}/kols/paid_tenders`,
+  // 已完成列表get 参数creation_id
+  finishedTendersUrl: `${host}/kols/finished_tenders`,
 
   // 立即支付post
   // payTendersUrl: `${host}/tenders/:creation_id/tender`
