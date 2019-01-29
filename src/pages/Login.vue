@@ -58,6 +58,8 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import commonJs from "@javascripts/common.js";
+import { mapMutations } from 'vuex'
+
 export default {
   name: "Login",
   data() {
@@ -68,6 +70,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
     // login joggle
     loginUrl(params) {
       const _that = this;
@@ -80,12 +83,15 @@ export default {
             _that.loginStatus = false;
           } else {
             _that.loginStatus = false;
-            commonJs.setLocalData("userName", params.login, 691200);
-            commonJs.setLocalData(
-              "Authorization",
-              resData.access_token,
-              691200
-            );
+            // commonJs.setLocalData("userName", params.login, 691200);
+            // commonJs.setLocalData(
+            //   "Authorization",
+            //   resData.access_token,
+            //   691200
+            // );
+
+            this.setAuthorization(resData.access_token)
+            this.setAccount(params.login)
             _that.$router.push("/");
           }
         })

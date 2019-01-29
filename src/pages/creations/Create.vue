@@ -329,7 +329,11 @@
             </div>
           </div>
           <div class="form-group text-center">
-            <button type="button" class="btn btn-blue btn-outline" @click="">搜索大V</button>
+            <button
+              type="button"
+              class="btn btn-blue btn-outline"
+              @click=""
+            >搜索大V</button>
           </div>
         </div>
       </div>
@@ -359,7 +363,12 @@
     </div> -->
 
     <div class="text-center create-btn-area">
-      <button type="button" class="btn btn-cyan next-btn" @click="doConfirm">提交</button>
+      <button
+        type="button"
+        class="btn btn-cyan next-btn"
+        @click="doConfirm"
+        :disabled="canSubmit ? false : true"
+      >提交</button>
     </div>
   </div>
 </template>
@@ -519,6 +528,10 @@ export default {
       this.canSubmit = false
       axios.post(apiConfig.creationsUrl, {
         'creation': this.submitData
+      }, {
+        headers: {
+          'Authorization': 'this.authorization'
+        }
       }).then(this.handleDoSubmitSucc)
     },
     handleDoSubmitSucc (res) {
