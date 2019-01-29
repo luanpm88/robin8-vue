@@ -4,18 +4,21 @@
       <h5 class="title text-center">{{title}}</h5>
     </div>
     <div class="panel-body">
-      <div class="kols-list clearfix">
+      <div v-if="kolsList.length > 0" class="kols-list clearfix">
         <kols-list-item
-          v-for="(item, index) in kolsList"
+          v-for="(item, index) in kols"
           :key="index"
           :hasLiked="kolHasLiked"
           :hasMsg="kolHasMsg"
           :hasChecked="kolHasChecked"
           :renderData="item"
+          @handleCheck="handleCheck"
         ></kols-list-item>
       </div>
 
-      <div class="btn-area">
+      <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
+
+      <div v-if="kolsList.length > 10" class="btn-area">
         <button type="button" class="btn btn-blue btn-outline btn-sm" @click="">下一页</button>
       </div>
     </div>
@@ -23,6 +26,7 @@
 </template>
 
 <script>
+import commonJs from '@javascripts/common.js'
 import KolsListItem from './KolsListItem'
 
 export default {
@@ -31,35 +35,56 @@ export default {
     KolsListItem
   },
   props: {
-    title: String
+    title: String,
+    kolsList: Array
   },
   data () {
     return {
       kolHasLiked: false,
       kolHasMsg: false,
       kolHasChecked: true,
-      kolsList: [
-        {
-          name: "Anna Strong",
-          desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-        },
-        {
-          name: "Milano Esco",
-          desc: "Well-known car blogger"
-        },
-        {
-          name: "Nick Bold",
-          desc: "Web Developer, Facebook Inc"
-        },
-        {
-          name: "Wiltor Delton",
-          desc: "Project Manager"
-        },
-        {
-          name: "Nick Stone",
-          desc: "Visual Designer, Github Inc"
-        }
-      ]
+      kols: [],
+      checkedIds: []
+    }
+  },
+  methods: {
+    handleCheck (data) {
+      let _id = data.id
+      console.log(_id)
+      let _kols = this.kols
+      let _index = this.checkedIds.indexOf(_id)
+      if (_index == -1) {
+        this.checkedIds.push(_id)
+      } else {
+        this.checkedIds.splice(_index, 1)
+      }
+      let _checkedIds = this.checkedIds
+      console.log(_checkedIds)
+      this.$emit('checkedKols', {
+        'ids': _checkedIds
+      })
+    },
+    renderData (kolsList) {
+      let _kolsList = kolsList
+      let _kolItem
+      this.kols = []
+      _kolsList.forEach(item => {
+        _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
+        _kolItem.id = item.profile_id
+        _kolItem.name = item.profile_name
+        _kolItem.desc = item.description_raw
+        _kolItem.checked = false
+        this.kols.push(_kolItem)
+      })
+      console.log(this.kols)
+    }
+  },
+  created () {
+    this.renderData(this.kolsList)
+  },
+  watch: {
+    kolsList (newVal, oldVal) {
+      this.renderData(newVal)
     }
   }
 }
@@ -68,6 +93,9 @@ export default {
 <style lang="scss" scoped>
 .kols-list {
   padding: 0 16px;
+}
+.empty-area {
+  padding: 60px 0;
 }
 .btn-area {
   padding: 30px;

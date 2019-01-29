@@ -124,9 +124,9 @@
             <div class="col-sm-2 control-label">活动图片：</div>
             <div class="col-sm-10">
               <div class="upload-imgs-list">
-                <div class="upload-img-item">
-                  <img src="" alt="" class="upload-img" />
-                  <div class="iconfont icon-close close-btn"></div>
+                <div v-if="submitData.img_url != ''" class="upload-img-item">
+                  <img :src="submitData.img_url" alt="" class="upload-img" />
+                  <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
               <!-- <vue-core-image-upload
@@ -156,15 +156,14 @@
                 input-accept="image/*"
                 :url="uploadImageUrl">
               </vue-core-image-upload>
-              <!-- <input
+              <input
                 type="hidden"
                 name="img_url"
                 v-model="submitData.img_url"
                 v-validate="'required'"
-              > -->
-
+              >
               <div
-                class="form-tips text-right danger"
+                class="form-tips danger"
                 v-show="errors.has('img_url')"
               >
                 {{ errors.first('img_url') }}
@@ -332,7 +331,7 @@
             <button
               type="button"
               class="btn btn-blue btn-outline"
-              @click="searchWxKol"
+              @click="searchKolsCtrl"
             >搜索大V</button>
           </div>
         </div>
@@ -340,8 +339,11 @@
     </div>
 
     <kols-list-panel
+      v-if="showKolsList"
       class="mt20"
       title="为您推荐的大V"
+      :kolsList="kolsList"
+      @checkedKols="checkedKols"
     ></kols-list-panel>
 
     <!-- <div class="row mt20">
@@ -382,6 +384,7 @@ import TagsList from '@components/TagsList'
 import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreationCreate',
@@ -401,7 +404,12 @@ export default {
       brandsList: [],
       tagsList: [],
       checkedIds: [],
+      checkedTags: [],
       terracesList: [],
+      showKolsList: false,
+      kolsParams: {},
+      kolsList: [],
+      plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       pictures: [],
       loading: false,
@@ -420,6 +428,7 @@ export default {
           price_to: ''
         },
         terraces: [],
+        selected_kols: [],
         notice: ''
       },
       canSubmit: true
@@ -456,19 +465,83 @@ export default {
         this.terracesList = _terracesList
       }
     },
-    searchWxKol () {
-      axios.post(apiConfig.kolWxSearchUrl, {
+    searchKols (postUrl) {
+      axios.post(postUrl, this.kolsParams)
+        .then(this.handleSearchKolsSucc)
+    },
+    handleSearchKolsSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+      this.kolsList = []
+      this.kolsList = resData.data
+      if (resData.data.length > 0) {
+        this.kolsList.forEach(item => {
+          item.checked = false
+        })
+      }
+      this.showKolsList = true
+    },
+    searchKolsCtrl () {
+      let _terraces = this.submitData.terraces
+      console.log(_terraces)
+      this.kolsParams = {
         start_date: this.submitData.start_at,
         end_date: this.submitData.start_end,
-        industries: ['airline'],
+        industries: this.checkedTags,
         page_no: 0,
-        page_size: 10,
+        page_size: 12,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
-      }).then(this.handleSearchWxKolSucc)
+      }
+
+      this.$validator.validateAll().then((msg) => {
+        console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          if (_terraces.length > 0) {
+            let hasWechat = _terraces.some(item => {
+              if (item.short_name == 'public_wechat_account') {
+                return true
+              } else {
+                return false
+              }
+            })
+            if (hasWechat) {
+              this.searchKols(apiConfig.kolWxSearchUrl)
+              this.plateformName = 'public_wechat_account'
+            } else {
+              this.searchKols(apiConfig.kolWbSearchUrl)
+              this.plateformName = 'weibo'
+            }
+          } else {
+            this.searchKols(apiConfig.kolWxSearchUrl)
+            this.plateformName = 'public_wechat_account'
+          }
+        }
+      })
     },
-    handleSearchWxKolSucc (res) {
-      console.log(res)
+    checkedKols (data) {
+      let _ids = data.ids
+      console.log(_ids)
+      let _kolsList = this.kolsList
+      let _checkedKols = []
+      let _kolItem
+
+      _ids.forEach(item => {
+        _kolsList.forEach(e => {
+          if (e.profile_id == item) {
+            _kolItem = commonJs.buildObjData('plateform_uuid', item)
+            _kolItem.plateform_name = this.plateformName
+            _kolItem.name = e.profile_name
+            _kolItem.avatar_url = e.avatar_url
+            _kolItem.desc = e.description_raw
+            _checkedKols.push(_kolItem)
+          }
+        })
+      })
+      console.log(_checkedKols)
+      this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
       let _ids = data.ids
@@ -483,6 +556,7 @@ export default {
         })
       })
       console.log(_checkedTags)
+      this.checkedTags = _checkedTags
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
@@ -491,27 +565,16 @@ export default {
         return false
       }
       console.log(res)
-      if (res.code == 0) {
-        this.pictures.push(res.data.base)
-        this.loading = false
-      } else {
-        alert('上传失败')
-        this.loading = false
-      }
-      this.submitData.img_url = this.pictures
-      console.log(this.pictures)
+      this.submitData.img_url = res
     },
     imageuploading (res) {
       this.loading = true
     },
-    delPhoto (e, url) {
-      console.log(url)
-      let index = this.pictures.indexOf(url)
+    delPhoto () {
       let delConfirm = confirm('确定要删除此图片？')
       if (delConfirm) {
-        this.pictures.splice(index, 1)
+        this.submitData.img_url = ''
       }
-      console.log(this.pictures)
     },
     terraceCheck (id) {
       let _terraces = this.submitData.terraces
@@ -527,6 +590,7 @@ export default {
       _terracesList.forEach(item => {
         if (item.id == _terraceItem.terrace_id) {
           if (!result) {
+            _terraceItem.short_name = item.short_name
             _terraces.push(_terraceItem)
             item.checked = true
           } else {
@@ -544,7 +608,7 @@ export default {
         'creation': this.submitData
       }, {
         headers: {
-          'Authorization': 'this.authorization'
+          'Authorization': this.authorization
         }
       }).then(this.handleDoSubmitSucc)
     },
@@ -583,6 +647,9 @@ export default {
   },
   mounted () {
     this.getBaseData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>

@@ -124,16 +124,18 @@
           </div>
         </div>
 
-        <div class="line-title">已选择的大V</div>
-        <div class="kols-list">
-          <kols-list-item
-            v-for="(item, index) in kolsList"
-            :key="index"
-            :hasLiked="kolHasLiked"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :renderData="item"
-          ></kols-list-item>
+        <div v-if="kolsList.length > 0">
+          <div class="line-title">已选择的大V</div>
+          <div class="kols-list">
+            <kols-list-item
+              v-for="(item, index) in kolsList"
+              :key="index"
+              :hasLiked="kolHasLiked"
+              :hasMsg="kolHasMsg"
+              :hasChecked="kolHasChecked"
+              :renderData="item"
+            ></kols-list-item>
+          </div>
         </div>
       </div>
     </div>
@@ -162,31 +164,10 @@ export default {
         index: 0
       },
       detailData: {},
-      kolHasLiked: true,
+      kolHasLiked: false,
       kolHasMsg: false,
-      kolHasChecked: true,
-      kolsList: [
-        {
-          name: "Anna Strong",
-          desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-        },
-        {
-          name: "Milano Esco",
-          desc: "Well-known car blogger"
-        },
-        {
-          name: "Nick Bold",
-          desc: "Web Developer, Facebook Inc"
-        },
-        {
-          name: "Wiltor Delton",
-          desc: "Project Manager"
-        },
-        {
-          name: "Nick Stone",
-          desc: "Visual Designer, Github Inc"
-        }
-      ]
+      kolHasChecked: false,
+      kolsList: []
     }
   },
   methods: {
@@ -200,8 +181,20 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
-        let _terraces = resData.terraces
 
+        let _kolsList = this.kolsList
+        let _kolItem
+        resData.selected_kols.forEach(item => {
+          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
+          _kolItem.id = item.plateform_uuid
+          _kolItem.name = item.name
+          _kolItem.desc = item.desc
+          _kolItem.checked = false
+          _kolsList.push(_kolItem)
+        })
+        console.log(_kolsList)
+
+        let _terraces = resData.terraces
         _terraces.forEach(item => {
           console.log(item)
           switch (item.short_name) {

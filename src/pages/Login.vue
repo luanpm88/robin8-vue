@@ -83,8 +83,8 @@ export default {
             alert(res.data.detail)
             _that.loginStatus = false
           } else {
-            this.setAuthorization(resData.access_token)
-            this.setAccount(params.login)
+            _that.setAuthorization(resData.access_token)
+            _that.setAccount(params.login)
             _that.loginStatus = false
             _that.$router.push("/")
           }

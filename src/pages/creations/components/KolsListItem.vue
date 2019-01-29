@@ -1,14 +1,26 @@
 <template>
-  <div class="kols-list-item" @click="detail(renderData)">
+  <div
+    class="kols-list-item"
+    :class="[checked ? 'checked' : '']"
+  >
     <div class="media inner">
       <div class="media-left">
         <div class="avatar">
-          <img :src="renderData.avatar" alt="" class="avatar-img" />
-          <div v-if="hasChecked" class="iconfont icon-round-check-fill check-icon"></div>
+          <img
+            :src="renderData.avatar"
+            alt=""
+            class="avatar-img"
+            @click="toDetail(renderData)"
+          />
+          <div
+            v-if="hasChecked"
+            class="iconfont icon-round-check-fill check-icon"
+            @click="handleCheck(renderData.id)"
+          ></div>
         </div>
       </div>
       <div class="media-body media-middle info">
-        <h5 class="name">{{renderData.name}}</h5>
+        <h5 class="name" @click="toDetail(renderData)">{{renderData.name}}</h5>
         <p class="desc">{{renderData.desc}}</p>
       </div>
       <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
@@ -28,9 +40,20 @@ export default {
     hasChecked: Boolean,
     renderData: Object
   },
+  data () {
+    return {
+      checked: false
+    }
+  },
   methods: {
-    detail(item) {
-      this.$emit('detail', item);
+    toDetail (item) {
+      this.$emit('detail', item)
+    },
+    handleCheck (id) {
+      this.$emit('handleCheck', {
+        'id': id
+      })
+      this.checked = !this.checked
     }
   }
 };
@@ -59,6 +82,7 @@ export default {
       right: 0;
       bottom: 0;
       color: #d8d8d8;
+      cursor: pointer;
     }
   }
   .info {
