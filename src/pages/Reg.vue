@@ -27,6 +27,7 @@
                   class="form-control"
                   v-model="typeVal"
                   placeholder="输入手机号"
+                  ref="type1"
                 >
                 <input
                   v-else
@@ -82,6 +83,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import { mapMutations } from 'vuex'
 export default {
   name: "Reg",
   data() {
@@ -92,12 +94,25 @@ export default {
       password: "",
       btntxt: "获取验证码",
       isCheck: false,
-      disabled: false,
+      disabled: true,
       time: 0,
       loginStatus: false
     };
   },
+  watch:{
+   typeVal:{
+    handler:function(){
+      if (this.typeVal) {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
+    },
+    deep:true
+   }
+  },
   methods: {
+    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
     // 邮箱和手机注册切换
     checkType() {
       if (this.flag === true) {
@@ -128,6 +143,12 @@ export default {
           if (res.data.error) {
             alert(res.data.detail)
           } else {
+            this.setAuthorization(res.data.access_token)
+            if (params.type === 'email') {
+              this.setAccount(params.login)
+            } else {
+              this.setMobile(params.login)
+            }
             _that.$router.push("/");
           }
         })
@@ -142,6 +163,9 @@ export default {
         .get(apiConfig.phoneCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
+            _that.time = 0;
+            _that.btntxt = "获取验证码";
+            _that.disabled = false;
             alert(res.data.detail)
           }
         })
@@ -156,6 +180,9 @@ export default {
         .get(apiConfig.emailCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
+            _that.time = 0;
+            _that.btntxt = "获取验证码";
+            _that.disabled = false;
             alert(res.data.detail)
           }
         })
@@ -170,7 +197,7 @@ export default {
         password: this.password
       };
       if (this.flag) {
-        params.type = "mobile";
+        params.type = "mobile_number";
       } else {
         params.type = "email";
       }
@@ -182,7 +209,9 @@ export default {
       this.time = 60;
       this.disabled = true;
       this.timer();
-      let params = {};
+      let params = {
+        login_type: 'sign_up'
+      };
       if (this.flag) {
         params.mobile_number = this.typeVal;
         // 调用手机的接口
