@@ -21,17 +21,27 @@
         >
           <div class="kols-list-container">
             <kol-item
+              v-if="currentList.length > 0"
               v-for="item in currentList"
               :key="item.profile.creation_selected_kol_id"
               :renderData="item"
+              :checkedIds="kolsCheckedIds"
+              @selectKol="selectKol"
             ></kol-item>
+
+            <div v-else class="empty-area text-center">暂无内容</div>
           </div>
         </default-tabs>
       </div>
 
       <div class="panel-foot clearfix">
-        <div class="select-statistics pull-left">微博总曝光值：<span class="num">9999</span> | 微信总曝光值：<span class="num">9999</span> | 总报价：<span class="num">9999</span></div>
-        <button type="button" class="btn btn-cyan pull-right" @click="doPay">确认合作，立即支付</button>
+        <div class="select-statistics pull-left">微博总曝光值：<span class="num">0</span> | 微信总曝光值：<span class="num">0</span> | 总报价：<span class="num">{{totalPrice}}</span></div>
+        <button
+          type="button"
+          class="btn btn-cyan pull-right"
+          :disabled="!kolsCheckedIds.length > 0"
+          @click="doPay"
+        >确认合作，立即支付</button>
       </div>
     </div>
 
@@ -62,8 +72,8 @@ export default {
         current: 2,
         index: 1
       },
-      // creationId: this.$route.params.id,
-      creationId: 1,
+      creationId: this.$route.params.id,
+      totalPrice: 0,
       detailData: {},
       tabIndex: 0,
       tabList: [
@@ -80,7 +90,9 @@ export default {
           name: '已完成'
         }
       ],
-      currentList: []
+      currentList: [],
+      kolsCheckedIds: [],
+      canSubmit: true
     }
   },
   methods: {
@@ -118,21 +130,56 @@ export default {
       this.tabIndex = tab.index
       if (tab.index === 0) {
         this.getTendersData(apiConfig.pendingTendersUrl)
-        console.log('待合作', this.currentList)
+        console.log(this.currentList)
       } else if (tab.index === 1) {
         this.getTendersData(apiConfig.cooperationTendersUrl)
-        console.log('合作中', this.currentList)
+        console.log(this.currentList)
       } else {
         this.getTendersData(apiConfig.finishedTendersUrl)
-        console.log('已完成', this.currentList)
+        console.log(this.currentList)
       }
     },
+    selectKol (data) {
+      console.log(data)
+      let _price = parseInt(data.price)
+      let _id = parseInt(data.id)
+      let _kolsCheckedIds = this.kolsCheckedIds
+      let _index = _kolsCheckedIds.indexOf(_id)
+      if (_index == -1) {
+        _kolsCheckedIds.push(_id)
+        this.totalPrice += _price
+      } else {
+        _kolsCheckedIds.splice(_index, 1)
+        this.totalPrice -= _price
+      }
+      console.log(_kolsCheckedIds)
+    },
     doPay () {
-      this.$router.push('/creations/'+ this.creationId +'/pay')
+      if (!this.canSubmit) {
+        return false
+      }
+      this.canSubmit = false
+      axios.post(apiConfig.payTendersUrl, {
+        'creation_id': this.creationId,
+        'tenders_ary': this.kolsCheckedIds
+      }, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoPaySucc)
+    },
+    handleDoPaySucc (res) {
+      let resData = res.data
+      console.log(res)
+      this.canSubmit = true
+      if (res.status == 201) {
+        this.$router.push('/creations/'+ this.creationId +'/pay')
+      }
     }
   },
   mounted () {
     this.getDetailData()
+    this.getTendersData(apiConfig.pendingTendersUrl)
   },
   computed: {
     ...mapState(['authorization'])

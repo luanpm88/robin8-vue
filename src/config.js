@@ -38,8 +38,11 @@ const config = {
   // 已完成列表get 参数creation_id
   finishedTendersUrl: `${host}/kols/finished_tenders`,
 
-  // 立即支付post
-  // payTendersUrl: `${host}/tenders/:creation_id/tender`
+  // 验收满意post 参数creation_id
+  updateStatusUrl: `${host}/tenders/update_status`,
+
+  // 立即支付post 参数creation_id tenders_ary
+  payTendersUrl: `${host}/tenders/create`,
 
   // kol微信搜索
   kolWxSearchUrl: `${searchHost}/price/price/kol_search?${searchHostKey}`,

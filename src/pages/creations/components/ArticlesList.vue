@@ -3,6 +3,7 @@
     <li
       v-for="item in articles"
       :key="item.id"
+      v-if="!!item.title && item.title != ''"
       class="item"
     >
       <span
