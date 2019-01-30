@@ -25,7 +25,8 @@ export default new Router({
       name: 'Home',
       component: Home,
       meta: {
-        title: 'ROBIN8'
+        title: 'ROBIN8',
+        auth: true
       }
     },
     {
@@ -61,11 +62,21 @@ export default new Router({
       }
     },
     {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      meta: {
+        title: 'ROBIN8',
+        auth: true
+      }
+    },
+    {
       path: '/creations',
       name: 'Creations',
       component: Creations,
       meta: {
-        title: '活动'
+        title: '活动',
+        auth: true
       },
       children: [
         {
@@ -73,7 +84,8 @@ export default new Router({
           name: 'CreationCreate',
           component: CreationCreate,
           meta: {
-            title: '创建新活动'
+            title: '创建新活动',
+            auth: true
           }
         },
         {
@@ -81,7 +93,8 @@ export default new Router({
           name: 'CreationDetail',
           component: CreationDetail,
           meta: {
-            title: '活动详情'
+            title: '活动详情',
+            auth: true
           }
         },
         {
@@ -89,7 +102,8 @@ export default new Router({
           name: 'CreationEdit',
           component: CreationEdit,
           meta: {
-            title: '活动编辑'
+            title: '活动编辑',
+            auth: true
           }
         },
         {
@@ -97,7 +111,8 @@ export default new Router({
           name: 'ChooseKols',
           component: ChooseKols,
           meta: {
-            title: '创建新活动'
+            title: '创建新活动',
+            auth: true
           }
         },
         {
@@ -105,7 +120,8 @@ export default new Router({
           name: 'CreationPay',
           component: CreationPay,
           meta: {
-            title: '创建新活动'
+            title: '创建新活动',
+            auth: true
           }
         }
       ]
@@ -115,7 +131,8 @@ export default new Router({
       name: 'KolList',
       component: KolList,
       meta: {
-        title: 'KolList'
+        title: 'KolList',
+        auth: true
       }
     },
     {
@@ -123,7 +140,8 @@ export default new Router({
       name: 'KolDetail',
       component: KolDetail,
       meta: {
-        title: 'KolDetail'
+        title: 'KolDetail',
+        auth: true
       }
     }
   ]

@@ -34,11 +34,26 @@ const i18n = new VueI18n({
 })
 
 router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
   if (to.meta.title) {
     document.title = to.meta.title
   }
-  next()
+  if (to.matched.some( m => m.meta.auth)) {
+    // 已经登陆
+    if (!!store.state.authorization && store.state.authorization != '') {
+      // 正常跳转到你设置好的页面
+      next()
+    } else {
+      // 未登录则跳转到登陆界面，query:{ Rurl: to.fullPath}表示把当前路由信息传递过去方便登录后跳转回来
+      next({
+        path: '/login',
+        // query: {
+        //   Rurl: to.fullPath
+        // }
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 /* eslint-disable no-new */
