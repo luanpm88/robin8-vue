@@ -90,6 +90,12 @@ const config = {
   // top post 微信
   topPostWeixin: `${searchHost}/weixin/brand/top_posts?${searchHostKey}`,
 
+  // kollist 表格weibo接口
+  kollistWeiboTable: `${searchHost}/weibo/profile/kol_search_profile?${searchHostKey}`,
+
+  // kollist 表格微信接口
+  kollistWeixinTable: `${searchHost}/weixin/profile/kol_search_profile?${searchHostKey}`,
+
   // 首页接口结束------------------------
 }
 
