@@ -1,16 +1,41 @@
 <template>
   <div class="main-nav">
     <ul class="nav-list">
-      <router-link
+      <li
         v-for="(item, index) of navData"
         :key="index"
-        :to="item.href"
-        tag="li"
-        class="item title-bar"
+        class="item"
       >
-        <div :class="'iconfont ' + item.icon"></div>
-        <div class="title">{{$t('lang.' + item.title)}}</div>
-      </router-link>
+        <router-link
+          v-if="!item.subNav || item.subNav.length < 0"
+          class="title-bar"
+          :to="item.href"
+          tag="div"
+        >
+          <div :class="'iconfont ' + item.icon"></div>
+          <div class="title">{{$t('lang.' + item.title)}}</div>
+        </router-link>
+
+        <div
+          v-else
+          class="title-bar"
+          :class="[!!item.subNav && item.subNav.length > 0 ? 'with-arr' : '']"
+        >
+          <div :class="'iconfont ' + item.icon"></div>
+          <div class="title">{{$t('lang.' + item.title)}}</div>
+        </div>
+        <div v-if="!!item.subNav && item.subNav.length > 0" class="sub-nav">
+          <router-link
+            v-for="(subItem, index) in item.subNav"
+            :key="index"
+            :to="subItem.href"
+            class="item"
+          >
+            {{subItem.title}}
+          </router-link>
+        </div>
+
+      </li>
     </ul>
   </div>
 </template>
@@ -24,28 +49,42 @@ export default {
         {
           title: 'home',
           icon: 'icon-home',
-          href: '/'
+          href: '/home'
         },
         {
           title: 'campaignsData',
           icon: 'icon-data',
-          href: '/'
+          href: '/campaigns'
         },
         {
           title: 'myKols',
           icon: 'icon-user',
-          href: '/'
+          href: '/my_kols'
         },
         {
           title: 'myWallet',
           icon: 'icon-wallet',
-          href: '/'
+          href: '/my_wallet'
         },
         {
           title: 'settings',
           icon: 'icon-setting',
-          href: '/'
-        },
+          href: '/settings',
+          subNav: [
+            {
+              title: '基本信息',
+              href: '/settings/company_info'
+            },
+            {
+              title: '我的品牌',
+              href: '/settings/my_brands'
+            },
+            {
+              title: '我的竞争品牌',
+              href: '/settings/my_competition_brands'
+            }
+          ]
+        }
       ]
     }
   }
@@ -61,16 +100,42 @@ export default {
   background-color: #fff;
   .nav-list {
     & > .item {
-      height: $item-height;
-      line-height: $item-height - 20;
-      padding: 10px 20px;
-      cursor: pointer;
-      .iconfont {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        text-align: center;
-        font-size: $font-nm-b;
+      .title-bar {
+        height: $item-height;
+        line-height: $item-height - 20;
+        padding: 10px 20px;
+        cursor: pointer;
+        .iconfont {
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          text-align: center;
+          font-size: $font-nm-b;
+        }
+        &.with-arr:after {
+          right: 20px;
+        }
+        &.active, &.router-link-active {
+          .title {
+            font-weight: 500;
+            color: nth($blue, 1);
+          }
+        }
+      }
+      .sub-nav {
+        & > .item {
+          display: block;
+          height: $item-height;
+          line-height: $item-height;
+          padding-left: 40px;
+          border-left: 2px solid transparent;
+          &:hover, &.active, &.router-link-active {
+            border-left-color: nth($blue, 1);
+            font-weight: bold;
+            color: nth($blue, 1);
+            background-color: #fbfaff;
+          }
+        }
       }
     }
   }

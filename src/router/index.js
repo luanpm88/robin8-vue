@@ -15,6 +15,12 @@ import CreationDetail from '@/pages/creations/Detail'
 import ChooseKols from '@/pages/creations/Kols'
 import CreationPay from '@/pages/creations/Pay'
 
+import Settings from '@/pages/settings/Settings'
+import CompanyInfo from '@/pages/settings/CompanyInfo'
+import MyBrands from '@/pages/settings/myBrands/MyBrands'
+import MyBrandsCreate from '@/pages/settings/myBrands/Create'
+import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
+
 Vue.use(Router)
 
 export default new Router({
@@ -69,6 +75,53 @@ export default new Router({
         title: 'ROBIN8',
         auth: true
       }
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings,
+      meta: {
+        title: '企业设置',
+        auth: true
+      },
+      children: [
+        {
+          path: 'company_info',
+          name: 'CompanyInfo',
+          component: CompanyInfo,
+          meta: {
+            title: '基本信息',
+            auth: true
+          }
+        },
+        {
+          path: 'my_brands',
+          name: 'MyBrands',
+          component: MyBrands,
+          meta: {
+            title: '我的品牌',
+            auth: true
+          }
+        },
+        {
+          path: 'my_brands/create',
+          name: 'MyBrandsCreate',
+          component: MyBrandsCreate,
+          meta: {
+            title: '我的品牌',
+            auth: true
+          }
+        },
+        {
+          path: 'my_competition_brands',
+          name: 'MyCompetitionBrands',
+          component: MyCompetitionBrands,
+          meta: {
+            title: '我的竞争品牌',
+            auth: true
+          }
+        }
+      ]
     },
     {
       path: '/creations',

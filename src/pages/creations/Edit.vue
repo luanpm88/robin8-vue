@@ -661,6 +661,9 @@ export default {
       console.log(this.submitData.terraces)
     },
     doSubmit () {
+      if (!this.canSubmit) {
+        return false
+      }
       this.canSubmit = false
       axios.post(apiConfig.creationsUrl, {
         'id': this.$route.params.id,

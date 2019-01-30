@@ -136,6 +136,9 @@ export default {
       let resData = res.data
       console.log(res)
       this.canSubmit = true
+      if (res.status == 201) {
+        window.location.href = resData.alipay_recharge_url
+      }
     }
   },
   mounted () {

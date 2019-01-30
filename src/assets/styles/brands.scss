@@ -1,0 +1,11 @@
+.brand-create-form {
+  overflow: hidden;
+
+  .form-group {
+    padding: 12px 60px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

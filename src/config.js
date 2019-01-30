@@ -50,6 +50,9 @@ const config = {
   // 支付post 参数tender_id pay_type
   transactionsUrl: `${host}/transactions`,
 
+  // 创建品牌post 参数name, description
+  createBrandUrl: `${host}/users/trademark`,
+
   // kol微信搜索
   kolWxSearchUrl: `${searchHost}/price/price/kol_search?${searchHostKey}`,
 
