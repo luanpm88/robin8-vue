@@ -161,7 +161,7 @@ export default {
       this.canSubmit = false
       axios.post(apiConfig.payTendersUrl, {
         'creation_id': this.creationId,
-        'tenders_ary': this.kolsCheckedIds
+        'csk_ary': this.kolsCheckedIds
       }, {
         headers: {
           'Authorization': this.authorization
@@ -173,7 +173,8 @@ export default {
       console.log(res)
       this.canSubmit = true
       if (res.status == 201) {
-        this.$router.push('/creations/'+ this.creationId +'/pay')
+        let tenderId = resData.id
+        this.$router.push('/creations/'+ this.creationId +'/pay/'+ tenderId)
       }
     }
   },

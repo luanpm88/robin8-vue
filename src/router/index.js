@@ -101,7 +101,7 @@ export default new Router({
           }
         },
         {
-          path: ':id/pay',
+          path: ':id/pay/:tenderId',
           name: 'CreationPay',
           component: CreationPay,
           meta: {

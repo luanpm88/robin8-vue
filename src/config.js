@@ -44,6 +44,9 @@ const config = {
   // 立即支付post 参数creation_id tenders_ary
   payTendersUrl: `${host}/tenders/create`,
 
+  // 支付页面get 参数id
+  showTenderUrl: `${host}/tenders/show`,
+
   // kol微信搜索
   kolWxSearchUrl: `${searchHost}/price/price/kol_search?${searchHostKey}`,
 

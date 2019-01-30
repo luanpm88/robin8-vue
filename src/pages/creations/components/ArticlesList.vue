@@ -14,7 +14,7 @@
       <div class="article-title">
         <router-link :to="item.link">文章标题：{{item.title}}</router-link>
       </div>
-      <button type="button" class="btn btn-xs btn-outline btn-blue link-btn">查看报告</button>
+      <!-- <button type="button" class="btn btn-xs btn-outline btn-blue link-btn">查看报告</button> -->
     </li>
   </ul>
 </template>
@@ -29,9 +29,6 @@ export default {
     return {
       iconClass: ''
     }
-  },
-  mounted () {
-    // from_terrace
   }
 }
 </script>

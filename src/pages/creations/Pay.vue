@@ -11,24 +11,36 @@
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>邀请KOL人数：10人</p>
-          <p>KOL总价：¥20000.00 | 平台服务费：¥20000.00</p>
-          <p>支付总额：<span class="price">¥<i class="num">20000.00</i></span></p>
+          <p>邀请KOL人数：{{detailData.kols_count}}人</p>
+          <p>KOL总价：¥{{detailData.price}} | 平台服务费：¥{{detailData.fee}}</p>
+          <p>支付总额：<span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
           <h5 class="title">支付方式：</h5>
           <ul class="method-list">
-            <li class="item">
+            <li
+              v-for="item in payMethods"
+              :key="item.id"
+              class="item"
+            >
               <label class="media">
                 <div class="media-left media-middle">
-                  <input type="radio" name="payMethod" value="alipay" />
+                  <input
+                    type="radio"
+                    name="payMethod"
+                    :value="item.val"
+                    :checked="item.checked"
+                  />
                 </div>
                 <div class="media-body media-middle">
-                  <div class="pay-icon iconfont icon-alipay"></div>
+                  <div
+                    class="pay-icon iconfont "
+                    :class="item.iconClass"
+                  ></div>
                   <div class="info">
-                    <div class="method">支付宝</div>
-                    <div class="desc">使用支付宝线上支付安全放心</div>
+                    <div class="method">{{item.name}}</div>
+                    <div class="desc">{{item.desc}}</div>
                   </div>
                 </div>
               </label>
@@ -37,7 +49,10 @@
         </div>
 
         <div class="pay-operation-area">
-          <button type="button" class="btn btn-cyan">立即付款</button>
+          <button
+            type="button"
+            class="btn btn-cyan"
+          >立即付款</button>
         </div>
       </div>
     </div>
@@ -46,9 +61,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import CreateProcess from './components/CreateProcess'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreationPay',
@@ -60,11 +77,71 @@ export default {
       processStatus: {
         current: 3,
         index: 2
-      }
+      },
+      tenderId: this.$route.params.tenderId,
+      detailData: {},
+      payMethods: [
+        {
+          id: '0',
+          val: 'alipay',
+          name: '支付宝',
+          desc: '使用支付宝线上支付安全放心',
+          iconClass: 'icon-alipay',
+          checked: true
+        },
+        // {
+        //   id: '1',
+        //   val: 'wechatpay',
+        //   name: '微信支付',
+        //   desc: '使用微信支付线上支付安全放心',
+        //   iconClass: 'icon-wechat',
+        //   checked: false
+        // }
+      ],
+      canSubmit: true
     }
   },
   methods: {
-
+    getDetailData () {
+      axios.get(apiConfig.showTenderUrl, {
+        params: {
+          'id': this.tenderId
+        },
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetDetailDataSucc)
+    },
+    handleGetDetailDataSucc (res) {
+      console.log(res)
+      let resData = res.data
+      this.detailData = resData
+    },
+    doPay () {
+      if (!this.canSubmit) {
+        return false
+      }
+      this.canSubmit = false
+      axios.post(apiConfig.payTendersUrl, {
+        'creation_id': this.creationId,
+        'csk_ary': this.kolsCheckedIds
+      }, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoPaySucc)
+    },
+    handleDoPaySucc (res) {
+      let resData = res.data
+      console.log(res)
+      this.canSubmit = true
+    }
+  },
+  mounted () {
+    this.getDetailData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>
@@ -106,6 +183,9 @@ export default {
       font-size: 4rem;
       &.icon-alipay {
         color: #1296db;
+      }
+      &.icon-wechat {
+        color: #53e05b;
       }
     }
     .info {
