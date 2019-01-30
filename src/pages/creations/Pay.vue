@@ -52,6 +52,7 @@
           <button
             type="button"
             class="btn btn-cyan"
+            @click="doPay"
           >立即付款</button>
         </div>
       </div>
@@ -122,9 +123,9 @@ export default {
         return false
       }
       this.canSubmit = false
-      axios.post(apiConfig.payTendersUrl, {
-        'creation_id': this.creationId,
-        'csk_ary': this.kolsCheckedIds
+      axios.post(apiConfig.transactionsUrl, {
+        'tender_id': this.tenderId,
+        'pay_type': 'alipay'
       }, {
         headers: {
           'Authorization': this.authorization

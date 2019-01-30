@@ -425,8 +425,11 @@ export default {
   },
   methods: {
     getBaseData () {
-      axios.get(apiConfig.baseInfosUrl)
-        .then(this.handleGetBaseDataSucc)
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetBaseDataSucc)
     },
     handleGetBaseDataSucc (res) {
       console.log(res)

@@ -149,6 +149,7 @@ import commonJs from '@javascripts/common.js'
 import CreateProcess from './components/CreateProcess'
 import StatusArea from './components/StatusArea'
 import KolsListItem from './components/KolsListItem'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreationDetail',
@@ -172,8 +173,11 @@ export default {
   },
   methods: {
     getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id)
-        .then(this.handleGetDetailDataSucc)
+      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
       console.log(res)
@@ -213,6 +217,9 @@ export default {
   },
   mounted () {
     this.getDetailData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>

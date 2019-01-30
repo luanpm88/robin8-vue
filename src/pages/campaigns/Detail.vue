@@ -198,8 +198,11 @@ export default {
   },
   methods: {
     getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id)
-        .then(this.handleGetDetailDataSucc)
+      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
       let resData = res.data
