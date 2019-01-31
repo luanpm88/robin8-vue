@@ -432,7 +432,7 @@ export default {
       }).then(this.handleGetBaseDataSucc)
     },
     handleGetBaseDataSucc (res) {
-      console.log(res)
+      // console.log(res)
       if (res.status == 200 && res.data) {
         const data = res.data
         this.brandsList = data.trademarks_list
@@ -465,10 +465,10 @@ export default {
       }).then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
-      console.log(res)
+      // console.log(res)
       let resData = res.data
       if (res.status == 200 && resData) {
-        console.log(resData)
+        // console.log(resData)
         this.detailData = resData
         this.submitData.name = resData.name
         this.submitData.description = resData.description
@@ -494,7 +494,7 @@ export default {
             }
           })
         })
-        console.log(_terracesList)
+        // console.log(_terracesList)
 
         let _tagsList = this.tagsList
         let _checkedData = resData.targets_hash.industries
@@ -511,9 +511,9 @@ export default {
         })
 
         this.checkedTags = _checkedTags
-        console.log(this.checkedTags)
+        // console.log(this.checkedTags)
         this.checkedIds = _checkedIds
-        console.log(this.checkedIds)
+        // console.log(this.checkedIds)
 
         this.searchKolsCtrl()
         // console.log(this.kolsList)
@@ -527,14 +527,14 @@ export default {
       }).then(this.handleSearchKolsSucc)
     },
     handleSearchKolsSucc (res) {
-      console.log(res)
+      // console.log(res)
       let resData = res.data
-      console.log(resData)
+      // console.log(resData)
       this.kolsList = []
       this.kolsList = resData.data
 
       let _selectedKols = this.submitData.selected_kols
-      console.log(_selectedKols)
+      // console.log(_selectedKols)
       _selectedKols.forEach(item => {
         this.kolsList.forEach(e => {
           if (item.plateform_uuid == e.profile_id) {
@@ -546,8 +546,8 @@ export default {
     },
     searchKolsCtrl () {
       let _terraces = this.submitData.terraces
-      console.log(_terraces)
-      console.log(this.checkedTags)
+      // console.log(_terraces)
+      // console.log(this.checkedTags)
       this.kolsParams = {
         start_date: this.submitData.start_at,
         end_date: this.submitData.start_end,
@@ -559,9 +559,9 @@ export default {
       }
 
       this.$validator.validateAll().then((msg) => {
-        console.log(msg)
+        // console.log(msg)
         if (msg) {
-          console.log('验证通过')
+          // console.log('验证通过')
           if (_terraces.length > 0) {
             let hasWechat = _terraces.some(item => {
               if (item.short_name == 'public_wechat_account') {
@@ -586,7 +586,7 @@ export default {
     },
     checkedKols (data) {
       let _ids = data.ids
-      console.log(_ids)
+      // console.log(_ids)
       let _kolsList = this.kolsList
       let _checkedKols = []
       let _kolItem
@@ -602,7 +602,7 @@ export default {
           }
         })
       })
-      console.log(_checkedKols)
+      // console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
@@ -622,7 +622,7 @@ export default {
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      console.log(res)
+      // console.log(res)
       this.submitData.img_url = res
     },
     imageuploading (res) {
@@ -638,7 +638,7 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      console.log(_terraceItem)
+      // console.log(_terraceItem)
       let result = _terraces.some(item => {
         if (item.terrace_id == id) {
           return true
@@ -658,7 +658,7 @@ export default {
           }
         }
       })
-      console.log(this.submitData.terraces)
+      // console.log(this.submitData.terraces)
     },
     doSubmit () {
       if (!this.canSubmit) {
@@ -675,10 +675,10 @@ export default {
       }).then(this.handleDoSubmitSucc)
     },
     handleDoSubmitSucc (res) {
-      console.log(res)
+      // console.log(res)
       if (res.status == 201) {
         let resData = res.data
-        console.log(resData)
+        // console.log(resData)
         this.$router.push('/creations/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
@@ -689,19 +689,19 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       _terraces.forEach(item => {
-        console.log(item)
+        // console.log(item)
         _terracesList.forEach(originalItem => {
           if (!!item && item.terrace_id == originalItem.id) {
             item.exposure_value = originalItem.val
           }
         })
       })
-      console.log(this.submitData)
+      // console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {
-        console.log(msg)
+        // console.log(msg)
         if (msg) {
-          console.log('验证通过')
+          // console.log('验证通过')
           this.doSubmit()
         }
       })

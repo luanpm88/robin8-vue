@@ -34,6 +34,7 @@
           <td>
             <p class="campaign-info-detail">
               <span @click="detail(item.id)">详情</span>
+              <span v-if="item.status === 'pending' || item.status === 'rejected'" @click="edit(item.id)">编辑</span>
             </p>
           </td>
         </tr>
@@ -90,6 +91,9 @@ export default {
     },
     detail(id) {
       this.$router.push('/creations/' + id);
+    },
+    edit(id) {
+      this.$router.push('/creations/' + id + '/edit');
     }
   },
   mounted () {
@@ -144,6 +148,13 @@ export default {
     color: nth($purple, 1);
     &:hover{
       border-bottom: 1px solid nth($purple, 1);
+    }
+    &:nth-child(2) {
+      margin-left: 8px;
+      color: #565cca;
+      &:hover{
+        border-bottom: 1px solid #565cca;
+      }
     }
   }
 }
