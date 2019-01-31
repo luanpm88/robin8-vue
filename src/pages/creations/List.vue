@@ -154,6 +154,7 @@ export default {
       color: #6168e6;
       &:hover{
         border-bottom: 1px solid #6168e6;
+        
       }
     }
   }
