@@ -10,7 +10,7 @@
         >
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
-          <td>{{item.description}}</td>
+          <td>{{item.price_range}}</td>
         </tr>
       </table>
     </div>
@@ -49,7 +49,15 @@ export default {
         resData.items.forEach(item => {
           _creationItem = commonJs.buildObjData('id', item.id)
           _creationItem.name = item.name
-          _creationItem.description = item.description
+          _creationItem.img_url = item.img_url
+          _creationItem.pre_amount = item.pre_amount
+          _creationItem.pre_kols_count = item.pre_kols_count
+          _creationItem.price_range = item.price_range
+          _creationItem.time_range = item.time_range
+          _creationItem.status = item.status
+          _creationItem.status_zh = item.status_zh
+          _creationItem.quote_count = item.quote_count
+          _creationItem.actual_amount = item.actual_amount
 
           _creationsList.push(_creationItem)
         })
