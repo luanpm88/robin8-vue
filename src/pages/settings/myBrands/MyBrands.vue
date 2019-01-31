@@ -83,11 +83,14 @@ export default {
 }
 .com-brand-table{
   width: 100%;
+  color: #333;
   tr{
     border-bottom: 1px solid #ddd;
     th{
       color: #333;
       font-size: $font-nm-b;
+       text-align: center;
+      padding: 5px 0px;
       &:nth-child(1){
         width: 8%;
       }
@@ -96,9 +99,15 @@ export default {
       }
     }
   }
-  th,td{
+  td{
     text-align: center;
     padding: 16px 0px;
+    &:nth-child(1){
+      width: 8%;
+    }
+    &:nth-child(2){
+      width: 20%;
+    }
   }
 }
 </style>

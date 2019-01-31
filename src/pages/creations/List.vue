@@ -1,16 +1,41 @@
 <template>
-  <div class="panel default-panel">
+  <div class="panel default-panel mt20">
     <div class="panel-body">
-      <hr/>
-      <table class="table table-striped">
+      <table class="com-brand-table">
+        <tr>
+          <th>Profile</th>
+          <th>Active</th>
+          <th>Price List</th>
+          <th>Operation</th>
+        </tr>
         <tr
           v-for="(item, index) in CreationsList"
           :key="index"
           class="item"
         >
-          <td>{{item.id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.price_range}}</td>
+          <td>
+            <div class="campaign-info">
+              <img :src="item.img_url" alt="" class="campaign-info-left">
+              <div class="campaign-info-right">
+                <p>预算：{{item.pre_amount}}</p>
+                <p>预招人数：{{item.pre_kols_count}}</p>
+                <p>价格：{{item.pre_amount}}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p>活动时间：{{item.time_range}}</p>
+            <p>状态：{{item.status_zh}}</p>
+          </td>
+          <td>
+            <p>已消耗：{{item.quote_count}}</p>
+            <p>已招募：{{item.actual_amount}}</p>
+          </td>
+          <td>
+            <p class="campaign-info-detail">
+              <span @click="detail(item.id)">详情</span>
+            </p>
+          </td>
         </tr>
       </table>
     </div>
@@ -63,6 +88,9 @@ export default {
         })
       }
     },
+    detail(id) {
+      this.$router.push('/creations/' + id);
+    }
   },
   mounted () {
     this.getListData()
@@ -74,5 +102,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.default-panel {
+  padding: 30px;
+  background: $white;
+}
+.com-brand-table{
+  width: 100%;
+  color: #333;
+  tr{
+    border-bottom: 1px solid #ddd;
+    th{
+      font-size: $font-nm-b;
+      text-align: center;
+      padding: 5px 0px;
+    }
+  }
+  td{
+    text-align: center;
+    padding: 16px 10px;
+    p{
+      line-height: 22px;
+    }
+  }
+}
+.campaign-info{
+  text-align: left;
+  img{
+    display: inline-block;
+    width: 80px;
+    vertical-align: middle;
+    margin-right: 15px;
+  }
+  .campaign-info-right{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+.campaign-info-detail{
+  span{
+    cursor: pointer;
+    color: nth($purple, 1);
+    &:hover{
+      border-bottom: 1px solid nth($purple, 1);
+    }
+  }
+}
 </style>

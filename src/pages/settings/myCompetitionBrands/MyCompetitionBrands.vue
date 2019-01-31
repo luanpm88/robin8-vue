@@ -68,17 +68,32 @@ export default {
   box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
 }
 .com-brand-table{
+  color: #333;
   width: 100%;
   tr{
     border-bottom: 1px solid #ddd;
     th{
       color: #333;
       font-size: $font-nm-b;
+       text-align: center;
+      padding: 5px 0px;
+      &:nth-child(1){
+        width: 8%;
+      }
+      &:nth-child(2){
+        width: 20%;
+      }
     }
   }
-  th,td{
+  td{
     text-align: center;
     padding: 16px 0px;
+    &:nth-child(1){
+      width: 8%;
+    }
+    &:nth-child(2){
+      width: 20%;
+    }
   }
 }
 </style>
