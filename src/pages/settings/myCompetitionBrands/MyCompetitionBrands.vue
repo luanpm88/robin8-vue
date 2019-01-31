@@ -1,7 +1,7 @@
 <template>
   <div class="com-brand">
     <div class="com-add">
-      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">New Competitor</router-link></span>
+      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">新建我的品牌</router-link></span>
     </div>
     <table class="com-brand-table">
       <tr>

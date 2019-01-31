@@ -157,7 +157,7 @@ export default {
     setInterval(() => {
       this.rotateX(this.speedX);
       this.rotateY(this.speedY);
-    }, 17);
+    }, 100);
   },
   watch: {
     taglist: function(valTag) {

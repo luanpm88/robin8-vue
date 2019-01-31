@@ -21,7 +21,7 @@
               <option value="beauty">beauty</option>
               <option value="books">books</option>
               <option value="camera">camera</option>
-              <option value="ce">ce</option>
+              <option value="ce">Electronics</option>
               <option value="digital">digital</option>
               <option value="education">education</option>
               <option value="entertainment">entertainment</option>
@@ -126,7 +126,7 @@
                   :width="100"
                   :strokeWidth="9"
                   strokeColor="#b37feb"
-                  :format="() => item.influence + '%'"
+                  :format="() => item.stats.avg_post_influence"
                 />
               </li>
               <li>
@@ -272,7 +272,7 @@ export default {
     jogDataInit(data) {
       const _that = this;
       data.forEach(element => {
-        element.influence = parseInt(element.influence * 100);
+        element.influence = parseInt(element.stats.avg_post_influence / 999 * 100);
         element.correlation = parseInt(element.correlation * 100);
       });
       _that.searchList = data;

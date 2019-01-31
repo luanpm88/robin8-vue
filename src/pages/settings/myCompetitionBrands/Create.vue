@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="form-add">
-          <span class="iconfont icon-edit" @click="addBrand">&nbsp;添加品牌</span>
+          <span class="iconfont icon-edit" @click="addBrand">&nbsp;添加我的竞争品牌</span>
         </div>
       </div>
       <div class="text-center create-btn-area">
