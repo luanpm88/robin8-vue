@@ -35,6 +35,7 @@
             <p class="campaign-info-detail">
               <span @click="detail(item.id)">详情</span>
               <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">编辑</span>
+              <span v-else @click="kols(item.id)" >查看报价</span>
             </p>
           </td>
         </tr>
@@ -94,6 +95,9 @@ export default {
     },
     edit(id) {
       this.$router.push('/creations/' + id + '/edit');
+    },
+    kols(id) {
+      this.$router.push('/creations/' + id + '/kols');
     }
   },
   mounted () {
