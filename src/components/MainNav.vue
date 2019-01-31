@@ -54,7 +54,7 @@ export default {
         {
           title: 'campaignsData',
           icon: 'icon-data',
-          href: '/campaigns'
+          href: '/creations/list'
         },
         {
           title: 'myKols',

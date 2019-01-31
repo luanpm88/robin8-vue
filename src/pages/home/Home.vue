@@ -23,7 +23,7 @@
               <h6 class="sub-title">Create Campaign</h6>
             </div>
           </router-link>
-          <router-link to="/creations" tag="div" class="item">
+          <router-link to="/creations/list" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-trophy"></div>
               <h5 class="title">活动列表</h5>

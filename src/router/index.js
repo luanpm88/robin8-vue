@@ -9,6 +9,7 @@ import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
 
 import Creations from '@/pages/creations/Creations'
+import CreationList from '@/pages/creations/list'
 import CreationCreate from '@/pages/creations/Create'
 import CreationEdit from '@/pages/creations/Edit'
 import CreationDetail from '@/pages/creations/Detail'
@@ -132,6 +133,15 @@ export default new Router({
         auth: true
       },
       children: [
+        {
+          path: 'list',
+          name: 'CreationList',
+          component: CreationList,
+          meta: {
+            title: '创作活动列表',
+            auth: true
+          }
+        },
         {
           path: 'create',
           name: 'CreationCreate',
