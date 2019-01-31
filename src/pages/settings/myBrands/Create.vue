@@ -81,7 +81,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        // this.$router.push('/creations/' + resData.id)
+        this.$router.push("/settings/my_brands")
       } else {
         alert('提交失败，请重新提交')
       }

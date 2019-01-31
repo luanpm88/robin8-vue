@@ -1,6 +1,7 @@
 <template>
   <div class="panel default-panel mt20">
     <div class="panel-body brand-create-body">
+      <div>添加您的竞争对手，我们会帮助您更清晰地了解您与竞争品牌的差异哦</div>
       <div class="form-horizontal brand-create-form">
         <div class="form-group" v-for="(item, index) in brandList" :key="index">
           <div class="col-sm-2 control-label">品牌名称：</div>
@@ -18,7 +19,7 @@
               type="text"
               name="name"
               class="form-control"
-              placeholder="请填写品牌描述"
+              placeholder="请填写品牌简称"
               v-model="item.short_name"
             >
           </div>
