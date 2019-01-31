@@ -104,12 +104,12 @@
                     <div class="desc">{{item.description_raw}}</div>
                     <div>
                       <span>
-                        <i class="iconfont icon-like"></i>
+                        <i class="iconfont icon-icon-test1"></i>
                         {{item.stats.avg_likes}}
                       </span>
                       <span>
                         <i class="iconfont icon-app"></i>
-                        {{item.stats.total_reads}}
+                        {{item.stats.total_sum_engagement}}
                       </span>
                     </div>
                   </div>
@@ -498,12 +498,12 @@ span {
   }
   div {
     span {
-      width: 25%;
+      padding-right: 11px;
       display: inline-block;
       margin: 10px 0px 0px;
       i {
-        margin-right: 2px;
         vertical-align: -1px;
+        font-size: 16px;
       }
     }
   }
