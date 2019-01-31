@@ -34,7 +34,7 @@
           <td>
             <p class="campaign-info-detail">
               <span @click="detail(item.id)">详情</span>
-              <span v-if="item.status === 'pending' || item.status === 'rejected'" @click="edit(item.id)">编辑</span>
+              <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">编辑</span>
             </p>
           </td>
         </tr>
@@ -154,7 +154,7 @@ export default {
       color: #6168e6;
       &:hover{
         border-bottom: 1px solid #6168e6;
-        
+
       }
     }
   }

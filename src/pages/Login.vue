@@ -36,7 +36,7 @@
                 placeholder="输入您的密码"
               >
               <div class="form-tips text-right">
-                <router-link to="/forget_password">忘记密码？</router-link>
+                <!-- <router-link to="/forget_password">忘记密码？</router-link> -->
               </div>
             </div>
             <div class="form-group text-center">
