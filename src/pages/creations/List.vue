@@ -151,9 +151,9 @@ export default {
     }
     &:nth-child(2) {
       margin-left: 8px;
-      color: #565cca;
+      color: #6168e6;
       &:hover{
-        border-bottom: 1px solid #565cca;
+        border-bottom: 1px solid #6168e6;
       }
     }
   }

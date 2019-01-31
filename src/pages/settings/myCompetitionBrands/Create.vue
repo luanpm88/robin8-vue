@@ -128,16 +128,11 @@ export default {
   text-align: right;
   padding-right: 30%;
   span{
-    color: nth($purple, 1);
+    color: #40c1b8;
     cursor: pointer;
   }
 }
 .create-btn-area{
   padding-top: 30px;
-  .btn-cyan {
-      color: #fff;
-      background-color: #d1b5f7;
-      border-color: #bd95f2;
-  }
 }
 </style>
