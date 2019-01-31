@@ -29,6 +29,13 @@ export default {
       commonJs.setLocalData('robin8Account', account, 604700)
     } catch (e) {}
   },
+  setAvatarImgUrl (state, avatarImgUrl) {
+    console.log(avatarImgUrl)
+    state.avatarImgUrl = avatarImgUrl
+    try {
+      commonJs.setLocalData('robin8AvatarImgUrl', avatarImgUrl, 604700)
+    } catch (e) {}
+  },
   removeAuthorization (state) {
     state.authorization = ''
     try {
@@ -51,6 +58,12 @@ export default {
     state.account = ''
     try {
       commonJs.removeLocalData('robin8Account')
+    } catch (e) {}
+  },
+  removeAvatarImgUrl (state) {
+    state.avatarImgUrl = ''
+    try {
+      commonJs.removeLocalData('robin8AvatarImgUrl')
     } catch (e) {}
   }
 }

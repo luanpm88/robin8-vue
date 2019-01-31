@@ -36,9 +36,20 @@ try {
   }
 } catch (e) {}
 
+
+let avatarImgUrl = ''
+let localImgUrl = commonJs.getLocalData('robin8AvatarImgUrl')
+console.log('当前avatarImgUrl：' + localImgUrl)
+try {
+  if (!!localImgUrl && localImgUrl != '') {
+    avatarImgUrl = localImgUrl
+  }
+} catch (e) {}
+
 export default {
   authorization,
   nickname,
   mobile,
-  account
+  account,
+  avatarImgUrl
 }

@@ -54,6 +54,7 @@ import HomeBanner from './components/HomeBanner'
 import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -63,6 +64,9 @@ export default {
     HomeAnalytic,
     HomeRecommendedKols,
     HomeTopPosts
+  },
+  computed: {
+     ...mapState(['authorization'])
   },
   data () {
     return {

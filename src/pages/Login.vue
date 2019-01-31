@@ -70,7 +70,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile"]),
+    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile", 'setAvatarImgUrl']),
     // login joggle
     loginUrl(params) {
       const _that = this
@@ -78,6 +78,7 @@ export default {
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
           let resData = res.data
+          console.log(res);
           console.log(resData)
           if (res.data.error) {
             alert(res.data.detail)
@@ -85,6 +86,7 @@ export default {
           } else {
             _that.setAuthorization(resData.access_token)
             _that.setAccount(params.login)
+            _that.setAvatarImgUrl(resData.avatar_url)
             _that.loginStatus = false
             _that.$router.push("/")
           }
