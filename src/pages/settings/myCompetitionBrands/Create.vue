@@ -1,7 +1,7 @@
 <template>
   <div class="panel default-panel mt20">
     <div class="panel-body brand-create-body">
-      <div>添加您的竞争对手，我们会帮助您更清晰地了解您与竞争品牌的差异哦</div>
+      <div class="creat-txt">添加您的竞争对手，我们会帮助您更清晰地了解您与竞争品牌的差异哦!</div>
       <div class="form-horizontal brand-create-form">
         <div class="form-group" v-for="(item, index) in brandList" :key="index">
           <div class="col-sm-2 control-label">品牌名称：</div>
@@ -46,17 +46,10 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'MyCompetitionBrandsCreate',
-  // props: {
-  //   isHomeSubmit: {
-  //     type: String,
-  //     required: true
-  //   }
-  // },
   props: ['status'],
   data () {
     return {
-      // isHomeSubmit: '',
-      // isHomeSubmit: '',
+      chageHomeShow: true,
       brandList: [
         {
           name: '',
@@ -90,7 +83,8 @@ export default {
           // console.log(res);
           if (res.status === 201) {
             if (_that.status) {
-              _that.$router.push("/");
+              // _that.$router.push("/");
+              _that.$emit('childStatus', _that.chageHomeShow)
             } else {
               _that.$router.push("/settings/my_competition_brands");
             }
@@ -119,6 +113,12 @@ export default {
 <style lang="scss" scoped>
 .brand-create-body{
     padding: 60px 0;
+}
+.creat-txt{
+  color: #3c3939;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: $font-nm-b;
 }
 .icon-delete{
   line-height: 34px;

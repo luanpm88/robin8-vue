@@ -47,7 +47,7 @@
         </div>
         <!-- 没有品牌渲染提交接口 -->
         <div v-else>
-          <brand-submit :status='isHomeStatus'></brand-submit>
+          <brand-submit :status='isHomeStatus' @childStatus='changeHomStatus'></brand-submit>
         </div>
       </div>
     </div>
@@ -106,6 +106,11 @@ export default {
           }
         }
       })
+    },
+    changeHomStatus(type) {
+      if (type) {
+        this.isCompetitors = true;
+      }
     }
   }
 }
