@@ -1,13 +1,13 @@
 <template>
   <div class="com-brand">
     <div class="com-add">
-      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">新建我的品牌</router-link></span>
+      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">New Competitor</router-link></span>
     </div>
     <table class="com-brand-table">
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Description</th>
+        <th>Short Name</th>
       </tr>
       <tr v-for="(key, index) in dataListBox" :key="index">
         <td>{{key.id}}</td>

@@ -98,11 +98,11 @@ export default {
       }).then(function(res) {
         // console.log('我是competition', res);
         if (res.status === 200) {
-          if (res.data.competitors) {
+          if (res.data.competitors.length == 0) {
             // console.log(1)
-            _that.isCompetitors = true;
-          } else {
             _that.isCompetitors = false;
+          } else {
+            _that.isCompetitors = true;
           }
         }
       })
