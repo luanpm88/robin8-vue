@@ -18,12 +18,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'PageHeader',
   computed: {
      ...mapState(['avatarImgUrl']),
-     ...mapMutations(["removeNickname", "removeMobile", "removeAccount", "removeAvatarImgUrl", 'removeAuthorization'])
   },
   created() {
     // console.log(this.avatarImgUrl);
@@ -35,12 +34,8 @@ export default {
   },
   methods: {
     sinUp() {
-      this.$router.replace("/");
-      // this.removeNickname();
-      // this.removeMobile();
-      // this.removeAccount();
-      // this.removeAvatarImgUrl();
-      // this.removeAuthorization();
+      window.localStorage.clear();
+      this.$router.replace("/login");
     }
   }
 }

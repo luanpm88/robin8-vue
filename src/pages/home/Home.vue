@@ -32,15 +32,22 @@
           </router-link>
         </div>
         <!-- analytics -->
-        <home-analytic class="mt20"></home-analytic>
+        <!-- 假如有品牌渲染图表 -->
+        <div v-if="isCompetitors">
+          <home-analytic class="mt20"></home-analytic>
 
-        <div class="home-show row mt20">
-          <div class="col-xs-6">
-            <home-recommended-kols></home-recommended-kols>
+          <div class="home-show row mt20">
+            <div class="col-xs-6">
+              <home-recommended-kols></home-recommended-kols>
+            </div>
+            <div  class="col-xs-6">
+              <home-top-posts></home-top-posts>
+            </div>
           </div>
-          <div  class="col-xs-6">
-            <home-top-posts></home-top-posts>
-          </div>
+        </div>
+        <!-- 没有品牌渲染提交接口 -->
+        <div v-else>
+          <brand-submit :status='isHomeStatus'></brand-submit>
         </div>
       </div>
     </div>
@@ -48,12 +55,15 @@
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import HomeBanner from './components/HomeBanner'
 import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
+import brandSubmit from '@/pages/settings/myCompetitionBrands/Create'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
@@ -63,13 +73,39 @@ export default {
     HomeBanner,
     HomeAnalytic,
     HomeRecommendedKols,
-    HomeTopPosts
+    HomeTopPosts,
+    brandSubmit
   },
   computed: {
      ...mapState(['authorization'])
   },
   data () {
     return {
+      isCompetitors: true,
+      isHomeStatus: 'Yes'
+    }
+  },
+  created() {
+    this.getBaseData();
+  },
+  methods: {
+    getBaseData () {
+      const _that = this
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': _that.authorization
+        }
+      }).then(function(res) {
+        // console.log('我是competition', res);
+        if (res.status === 200) {
+          if (res.data.competitors) {
+            // console.log(1)
+            _that.isCompetitors = true;
+          } else {
+            _that.isCompetitors = false;
+          }
+        }
+      })
     }
   }
 }

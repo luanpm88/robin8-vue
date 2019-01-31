@@ -59,7 +59,7 @@ export default {
         {
           title: 'myKols',
           icon: 'icon-user',
-          href: '/my_kols'
+          href: '/kol/list'
         },
         {
           title: 'myWallet',

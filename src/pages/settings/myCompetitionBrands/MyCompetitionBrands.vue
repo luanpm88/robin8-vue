@@ -46,7 +46,7 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        console.log('我是competition', res);
+        // console.log('我是competition', res);
         if (res.status === 200) {
           _that.dataListBox = res.data.competitors;
         }

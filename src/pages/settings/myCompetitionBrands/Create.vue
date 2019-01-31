@@ -45,10 +45,17 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'MyCompetitionBrandsCreate',
-  components: {
-  },
+  // props: {
+  //   isHomeSubmit: {
+  //     type: String,
+  //     required: true
+  //   }
+  // },
+  props: ['status'],
   data () {
     return {
+      // isHomeSubmit: '',
+      // isHomeSubmit: '',
       brandList: [
         {
           name: '',
@@ -66,7 +73,7 @@ export default {
       this.brandList.push(params);
     },
     delBrand(index) {
-      console.log(index);
+      // console.log(index);
       this.brandList.splice(index, 1);
     },
     // 我的竞争品牌 增加品牌 提交接口
@@ -81,7 +88,11 @@ export default {
         .then(function(res) {
           // console.log(res);
           if (res.status === 201) {
-            _that.$router.push("/settings/my_competition_brands");
+            if (_that.status) {
+              _that.$router.push("/");
+            } else {
+              _that.$router.push("/settings/my_competition_brands");
+            }
           }
         })
         .catch(function(error) {
@@ -89,11 +100,13 @@ export default {
         })
     },
     submit() {
-      // console.log(this.brandList);
       let params = {
         competitors: this.brandList
       }
       this.submitCreatedCompetitor(params);
+    },
+    parentHome() {
+      
     }
   },
   computed: {
