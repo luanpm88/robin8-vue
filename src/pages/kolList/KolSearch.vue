@@ -126,7 +126,7 @@
                   :width="100"
                   :strokeWidth="9"
                   strokeColor="#b37feb"
-                  :format="() => item.influence + '%'"
+                  :format="() => item.stats.avg_post_influence"
                 />
               </li>
               <li>
@@ -272,7 +272,7 @@ export default {
     jogDataInit(data) {
       const _that = this;
       data.forEach(element => {
-        element.influence = parseInt(element.influence * 100);
+        element.influence = parseInt(element.stats.avg_post_influence / 999 * 100);
         element.correlation = parseInt(element.correlation * 100);
       });
       _that.searchList = data;
