@@ -1,5 +1,6 @@
 <template>
   <div class="panel default-panel mt20">
+    <!-- <page></page> -->
     <div class="panel-body">
       <table class="com-brand-table">
         <tr>
@@ -47,11 +48,13 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import Page from '@components/Page'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CreationsList',
   components: {
+    Page
   },
   data () {
     return {
