@@ -1,18 +1,18 @@
 <template>
   <div class="com-brand">
     <div class="com-add">
-      <span>新建</span>
+      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">新建我的品牌</router-link></span>
     </div>
-    <table class="com-brand-table" v-for="(item, index) in dataListBox" :key="index">
+    <table class="com-brand-table">
       <tr>
         <th>Id</th>
         <th>Name</th>
         <th>Description</th>
       </tr>
-      <tr v-for="(key, twoindex) in item" :key="twoindex">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.short_name}}</td>
+      <tr v-for="(key, index) in dataListBox" :key="index">
+        <td>{{key.id}}</td>
+        <td>{{key.name}}</td>
+        <td>{{key.short_name}}</td>
       </tr>
     </table>
   </div>
@@ -46,11 +46,9 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        // console.log(res);
+        console.log('我是competition', res);
         if (res.status === 200) {
-          if (res.competitors) {
-            _that.dataListBox = res.competitors;
-          }
+          _that.dataListBox = res.data.competitors;
         }
       })
     }
@@ -59,18 +57,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.com-add{
+.com-add {
   text-align: right;
-  span{
-    cursor: pointer;
-    color: rgba(97, 104, 230, 1);
-    font-size: $font-nm-s;
-    &:hover{
-      color: rgba(97, 104, 230, 0.6);
-    }
-  }
 }
-.com-brand{
+.com-brand {
   min-height: 500px;
   background: $white;
   padding: 30px;
