@@ -20,6 +20,7 @@ import CompanyInfo from '@/pages/settings/CompanyInfo'
 import MyBrands from '@/pages/settings/myBrands/MyBrands'
 import MyBrandsCreate from '@/pages/settings/myBrands/Create'
 import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
+import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
 
 Vue.use(Router)
 
@@ -118,6 +119,15 @@ export default new Router({
           component: MyCompetitionBrands,
           meta: {
             title: '我的竞争品牌',
+            auth: true
+          }
+        },
+        {
+          path: 'my_competition_brands/create',
+          name: 'MyCompetitionBrandsCreate',
+          component: MyCompetitionBrandsCreate,
+          meta: {
+            title: '我的竞争品牌增加',
             auth: true
           }
         }
