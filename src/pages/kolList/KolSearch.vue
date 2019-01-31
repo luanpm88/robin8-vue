@@ -21,7 +21,7 @@
               <option value="beauty">beauty</option>
               <option value="books">books</option>
               <option value="camera">camera</option>
-              <option value="ce">ce</option>
+              <option value="ce">Electronics</option>
               <option value="digital">digital</option>
               <option value="education">education</option>
               <option value="entertainment">entertainment</option>
