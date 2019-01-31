@@ -372,7 +372,7 @@ import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
 import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
-import StatusArea from './components/StatusArea'
+// import StatusArea from './components/StatusArea'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
@@ -383,7 +383,7 @@ export default {
     TagsList,
     CreateProcess,
     KolsListPanel,
-    StatusArea,
+ //   StatusArea,
     VueCoreImageUpload
   },
   data () {
