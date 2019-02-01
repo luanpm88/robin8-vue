@@ -7,24 +7,21 @@
         <div class="kol-infobox mb10">
           <p class="kol-info-topbg"></p>
           <img
-            src="https://tva4.sinaimg.cn/crop.0.0.512.512.50/7d9dcce2jw8fbdpbjg039j20e80e874h.jpg"
+            :src="infoList.img"
             alt
           >
           <div class="kol-info">
             <p>
-              Janna Lipenkova
-              <i class="iconfont icon-nvxing"></i>
+              {{infoList.name}}
+              <!-- <i class="iconfont icon-nvxing"></i> -->
             </p>
-            <p>35 years old</p>
+            <p>{{infoList.age}}</p>
             <p>
-              <i class="iconfont icon-weizhi"></i>Berlin
+              <i class="iconfont icon-weizhi"></i>{{infoList.region}}
             </p>
           </div>
           <ul class="clearfix">
-            <li>Makeups</li>
-            <li>Car</li>
-            <li>Food</li>
-            <li>AI</li>
+            <li v-for="(item, index) in dec" :key='index'>{{item.name}}</li>
           </ul>
         </div>
         <div class="kol-card kol-brand mb10">
@@ -39,9 +36,12 @@
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Top industry</p>
+          <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
         </div>
         <div class="kol-card mb10">
-          <p class="kol-cloumn">Keywords</p>
+          <p class="kol-cloumn">Keywords
+          </p>
+          <tag-charts :width="100" :height="200" :taglist="parentTags"></tag-charts>
         </div>
       </div>
       <div class="kol-detail-con">
@@ -81,12 +81,32 @@
 </template>
 
 <script>
+import axios from "axios"
+import apiConfig from "@/config"
 import { Table } from "ant-design-vue"
+import BarCharts from "@components/Chart/chartHorizontalBar"
+import TagCharts from "@components/Chart/chartTags"
 export default {
   name: "KolDetail",
-  components: { ATable: Table },
+  components: { ATable: Table , BarCharts, TagCharts},
   data() {
     return {
+      competiteWeiboList: {
+        labels: [],
+        dataList: []
+      },
+      infoList: {
+        img: 'https://tva4.sinaimg.cn/crop.0.0.512.512.50/7d9dcce2jw8fbdpbjg039j20e80e874h.jpg',
+        name: '-',
+        age: 'N/A',
+        region: 'N/A'
+      },
+      dec: [
+        {
+          name: '-'
+        }
+      ],
+      parentTags: [],
       activeColumns: [
         {
           title: "#",
@@ -237,6 +257,191 @@ export default {
         }
       ],
     }
+  },
+  created() {
+    // console.log(this.$route.params.id);
+    // console.log(this.$route.params.type);
+    let totalParams = {
+      profile_id : this.$route.params.id,
+      language: "en"
+    }
+    if (this.$route.params.type === '0') {
+      // 微博相关接口
+      this.kolWeiboInfo(totalParams)
+      this.kolWeiboIndustry(totalParams)
+      // this.kolWeiboKeyword(totalParams)
+    } else {
+      // weixin
+      this.kolWeiXinInfo(totalParams)
+      this.kolWeiXinIndustry(totalParams)
+      this.kolWeiXinKeyword(totalParams)
+      // this.kolWeixinSocial(totalParams)
+    }
+  },
+  methods: {
+    // info 微博的接口
+    kolWeiboInfo(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiboInfo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          console.log(res);
+          if (res.status === 200) {
+            _that.infoList.img = res.data.avatar_url;
+            _that.infoList.name = res.data.profile_name;
+            // _that.infoList.age = res.data.gender;
+            // _that.infoList.region = res.data.profile_name;
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // info weixin的接口
+    kolWeiXinInfo(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiXinInfo, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weixin ', res);
+          if (res.status === 200) {
+            _that.infoList.img = res.data.avatar_url;
+            _that.infoList.name = res.data.profile_name;
+            // _that.infoList.age = res.data.profile_name;
+            // _that.infoList.region = res.data.profile_name;
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // industry weibo
+    kolWeiboIndustry(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiboIndustry, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weibo ', res);
+          if (res.status === 200) {
+            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+            _that.competiteWeiboList.labels = res.data.labels;
+            _that.$refs.competiteChart.fillData();
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    kolWeiXinIndustry(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiXinIndustry, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weixin ', res);
+          if (res.status === 200) {
+            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+            _that.competiteWeiboList.labels = res.data.labels;
+            _that.$refs.competiteChart.fillData();
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // Keyword weibo
+    kolWeiboKeyword(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiboKeyword, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          console.log('weibo ', res);
+          if (res.status === 200) {
+            console.log(res);
+            // _that.parentTags = [];
+            // _that.parentTags = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    kolWeiXinKeyword(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiXinKeyword, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weixin ', res);
+          if (res.status === 200) {
+            _that.parentTags = [];
+            _that.parentTags = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // kolWeixinSocial weibo
+    kolWeiboSocial(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeiboSocial, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weibo ', res);
+          if (res.status === 200) {
+            
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // kolWeixinSocial
+    kolWeixinSocial(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolWeixinSocial, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          console.log('weixin ', res);
+          if (res.status === 200) {
+            
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
   }
 }
 </script>

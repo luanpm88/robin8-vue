@@ -61,6 +61,7 @@ export default {
     DefaultTabs,
     KolsListItem
   },
+  props: ['childKeyList'],
   data() {
     return {
       kolHasLiked: true,
@@ -92,7 +93,20 @@ export default {
   computed: {
     ...mapState(['authorization'])
   },
+  watch: {
+    childKeyList: {
+      handler() {
+        this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
+        // 微博
+        this.topPostWeibo(this.topPostParams)
+        // // 微信
+        // this.topPostWeixin(this.topPostParams)
+      },
+      deep: true
+    }
+  },
   created() {
+    this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
     // 微博
     this.topPostWeibo(this.topPostParams)
     // // 微信

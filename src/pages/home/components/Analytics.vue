@@ -30,16 +30,17 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
-import LineCharts from "@components/Chart/chartLine"
-import BarCharts from "@components/Chart/chartHorizontalBar"
-import PieCharts from "@components/Chart/chartPie"
-import TagCharts from "@components/Chart/chartTags"
-import Tab from "@components/DefaultTabs"
-import { mapState } from 'vuex'
-let key = "&application_id=local-001&application_key=vue-001"
+import axios from "axios";
+import apiConfig from "@/config";
+import LineCharts from "@components/Chart/chartLine";
+import BarCharts from "@components/Chart/chartHorizontalBar";
+import PieCharts from "@components/Chart/chartPie";
+import TagCharts from "@components/Chart/chartTags";
+import Tab from "@components/DefaultTabs";
+import { mapState } from "vuex";
+let key = "&application_id=local-001&application_key=vue-001";
 export default {
+  props: ["childKeyList"],
   components: {
     LineCharts,
     BarCharts,
@@ -119,12 +120,34 @@ export default {
       tagColor: "purple"
     };
   },
+  watch: {
+    childKeyList: {
+      handler() {
+        this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
+        this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
+        this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
+        this.competitorParams.cb_names = this.childKeyList.cb_keywords;
+        this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
+        // trend 微博
+        this.trendsWeibo(this.trendParams);
+        this.getNowFormatDate();
+      },
+      deep: true
+    }
+  },
   created() {
+    this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
+    this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
+    this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
+    this.competitorParams.cb_names = this.childKeyList.cb_keywords;
+    this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
     // trend 微博
     this.trendsWeibo(this.trendParams);
+    this.getNowFormatDate();
+    // console.log(this.childKeyList);
   },
   computed: {
-     ...mapState(['authorization'])
+    ...mapState(["authorization"])
   },
   methods: {
     topTabClick(topTab) {
@@ -185,157 +208,172 @@ export default {
     },
     // trend 微博
     trendsWeibo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.trendsWeibo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微博", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data }]
-          _that.trendsWeiboList.labels = res.data.labels
+          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
+          _that.trendsWeiboList.labels = res.data.labels;
           // console.log(_that.trendsWeiboList)
           // console.log(66)
-          _that.$refs.tendsChart.fillData()
+          _that.$refs.tendsChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // trend 微信
     trendsWeixin(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.trendsWeixin, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微信", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data }]
-          _that.trendsWeiboList.labels = res.data.labels
-          _that.$refs.tendsChart.fillData()
+          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
+          _that.trendsWeiboList.labels = res.data.labels;
+          _that.$refs.tendsChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // concept 微博
     conceptWeibo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.conceptWeibo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
-          _that.parentTags = []
-          _that.parentTags = res.data
+          _that.parentTags = [];
+          _that.parentTags = res.data;
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // concept 微信
     conceptWeixin(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.conceptWeixin, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
-          _that.parentTags = []
-          _that.parentTags = res.data.slice(0, 100)
+          _that.parentTags = [];
+          _that.parentTags = res.data.slice(0, 100);
           // console.log("我是微信", res)
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // competitor 微博
     competitorWeibo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.competitorWeibo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微博", res)
-          _that.competiteWeiboList.dataList = [{ data: res.data.data }]
-          _that.competiteWeiboList.labels = res.data.labels
-          _that.$refs.competiteChart.fillData()
+          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+          _that.competiteWeiboList.labels = res.data.labels;
+          _that.$refs.competiteChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
         });
     },
     // competitor 微信
     competitorWeixin(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.competitorWeixin, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微博", res)
-          _that.competiteWeiboList.dataList = [{ data: res.data.data }]
-          _that.competiteWeiboList.labels = res.data.labels
-          _that.$refs.competiteChart.fillData()
+          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+          _that.competiteWeiboList.labels = res.data.labels;
+          _that.$refs.competiteChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // sentiment 微博
     sentimentWeibo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.sentimentWeibo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微博", res)
-          _that.sentimentWeiboList.labels = res.data.labels
-          _that.sentimentWeiboList.data = res.data.data
-          _that.$refs.sentimentChart.fillData()
+          _that.sentimentWeiboList.labels = res.data.labels;
+          _that.sentimentWeiboList.data = res.data.data;
+          _that.$refs.sentimentChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // sentiment 微信
     sentimentWeixin(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.sentimentWeixin, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           // console.log("我是微信", res)
-          _that.sentimentWeiboList.labels = res.data.labels
-          _that.sentimentWeiboList.data = res.data.data
-          _that.$refs.sentimentChart.fillData()
+          _that.sentimentWeiboList.labels = res.data.labels;
+          _that.sentimentWeiboList.data = res.data.data;
+          _that.$refs.sentimentChart.fillData();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
+    },
+    getNowFormatDate() {
+      var date = new Date();
+      var seperator1 = "-";
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      var currentdate = year + seperator1 + month + seperator1 + strDate;
+      return currentdate;
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .analytic-chart-box /deep/ {

@@ -107,6 +107,33 @@ const config = {
   // 我的竞争品牌 增加品牌 提交接口
   // brand_api/v2/users/competitor
   submitCreatedCompetitor: `${host}/users/competitor`,
+
+  // kol detail 页面
+
+  // info weibo
+  kolWeiboInfo: `${searchHost}/weibo/profile/info?${searchHostKey}`,
+
+  // info weixin
+  kolWeiXinInfo: `${searchHost}/weixin/profile/info?${searchHostKey}`,
+
+  // top industry
+  // industry weibo
+  kolWeiboIndustry: `${searchHost}/weibo/profile/tag_distribution?${searchHostKey}`,
+
+  // industry weixin
+  kolWeiXinIndustry: `${searchHost}/weixin/profile/tag_distribution?${searchHostKey}`,
+
+  // Keyword weibo
+  kolWeiboKeyword: `${searchHost}/weibo/profile/tag_cloud_distribution?${searchHostKey}`,
+
+  // Keyword weixin
+  kolWeiXinKeyword: `${searchHost}/weixin/profile/tag_cloud_distribution?${searchHostKey}`,
+
+  // kolWeibo
+  kolWeiboSocial: `${searchHost}/price/weibo/price/kol_info?${searchHostKey}`,
+
+  // kolWeixin
+  kolWeixinSocial: `${searchHost}/price/price/kol_info?${searchHostKey}`,
 }
 
 module.exports = config
