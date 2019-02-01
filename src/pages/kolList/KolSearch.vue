@@ -89,7 +89,7 @@
           <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
             <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
               <li>
-                <div class="kol-profile clearfix">
+                <div class="kol-profile clearfix" @click="intoKolDetail(item)">
                   <img :src="item.avatar_url" alt>
                   <div class="kol-show">
                     <p>
@@ -298,7 +298,19 @@ export default {
       this.searchListBox = [];
       // 接口
       this.paramsInit(this.tabIndex);
-    }
+    },
+    intoKolDetail(item) {
+      // console.log(item)
+      // this.$router.push("/kol/" + item.profile_id)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+          type: this.tabIndex
+        },
+      });
+    },
   }
 };
 </script>

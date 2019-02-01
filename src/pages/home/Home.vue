@@ -34,14 +34,14 @@
         <!-- analytics -->
         <!-- 假如有品牌渲染图表 -->
         <div v-if="isCompetitors">
-          <home-analytic class="mt20"></home-analytic>
+          <home-analytic class="mt20" :childKeyList='keyList'></home-analytic>
 
           <div class="home-show row mt20">
             <div class="col-xs-6">
-              <home-recommended-kols></home-recommended-kols>
+              <home-recommended-kols  :childKeyList='keyList'></home-recommended-kols>
             </div>
             <div  class="col-xs-6">
-              <home-top-posts></home-top-posts>
+              <home-top-posts  :childKeyList='keyList'></home-top-posts>
             </div>
           </div>
         </div>
@@ -82,7 +82,11 @@ export default {
   data () {
     return {
       isCompetitors: true,
-      isHomeStatus: 'Yes'
+      isHomeStatus: 'Yes',
+      keyList: {
+        brand_keywords: '',
+        cb_keywords: [],
+      }
     }
   },
   created() {
@@ -103,6 +107,11 @@ export default {
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;
+            _that.keyList.brand_keywords = res.data.trademarks_list[0].name;
+            res.data.competitors.forEach(element => {
+              _that.keyList.cb_keywords.push(element.short_name);
+            });
+            // console.log(_that.keyList);
           }
         }
       })

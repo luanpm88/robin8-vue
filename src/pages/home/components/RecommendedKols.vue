@@ -17,6 +17,7 @@
             :hasMsg="kolHasMsg"
             :hasChecked="kolHasChecked"
             :renderData="item"
+            @detail="intoKolDetail"
           ></kols-list-item>
         </div>
         <div class="text-center mt20">
@@ -37,6 +38,7 @@ import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
 import { mapState } from 'vuex'
 export default {
+  props: ['childKeyList'],
   components: {
     DefaultTabs,
     KolsListItem
@@ -69,7 +71,17 @@ export default {
   computed: {
      ...mapState(['authorization'])
   },
+  watch: {
+    childKeyList: {
+      handler(newValue, oldValue) {
+        this.params.brand_keywords = this.childKeyList.brand_keywords
+        this.weiboKol(this.params)
+      },
+      deep: true
+    }
+  },
   created() {
+    this.params.brand_keywords = this.childKeyList.brand_keywords;
     this.weiboKol(this.params)
   },
   methods: {
@@ -84,8 +96,16 @@ export default {
       }
     },
     intoKolDetail(item) {
-      console.log(item)
-      this.$router.push("/kol/" + item.profile_id)
+      // console.log(item)
+      // this.$router.push("/kol/" + item.profile_id)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+          type: this.tabIndex
+        },
+      });
     },
     // 微博的接口
     weiboKol(params) {
