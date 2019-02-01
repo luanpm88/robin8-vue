@@ -13,11 +13,19 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
+              <p class="analytic-chart-title">Trends Over past 7 days</p>
               <line-charts :childData="trendsWeiboList" ref="tendsChart"></line-charts>
+            </div>
+            <div v-if="cur === 1">
+              <p  class="analytic-chart-title">Top Keywords</p>
             </div>
             <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
+              <p class="analytic-chart-title">Top 3 Competitors</p>
               <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
+            </div>
+            <div v-if="cur === 3">
+              <p  class="analytic-chart-title">Sentiment</p>
             </div>
             <pie-charts :childData="sentimentWeiboList" ref="sentimentChart" v-if="cur === 3"></pie-charts>
           </div>
@@ -217,8 +225,8 @@ export default {
         })
         .then(function(res) {
           // console.log("我是微博", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
-          _that.trendsWeiboList.labels = res.data.labels;
+          _that.trendsWeiboList.dataList = [{ data: res.data.data.slice(0, 7) }];
+          _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
           // console.log(_that.trendsWeiboList)
           // console.log(66)
           _that.$refs.tendsChart.fillData();
@@ -238,8 +246,8 @@ export default {
         })
         .then(function(res) {
           // console.log("我是微信", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data }];
-          _that.trendsWeiboList.labels = res.data.labels;
+          _that.trendsWeiboList.dataList = [{ data: res.data.data.slice(0, 7) }];
+          _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
           _that.$refs.tendsChart.fillData();
         })
         .catch(function(error) {
@@ -257,7 +265,7 @@ export default {
         })
         .then(function(res) {
           _that.parentTags = [];
-          _that.parentTags = res.data;
+          _that.parentTags = res.data.slice(0, 100);
         })
         .catch(function(error) {
           console.log(error);
@@ -430,5 +438,11 @@ export default {
 }
 .analytic-bottom-tab {
   text-align: center;
+}
+.analytic-chart-title{
+  line-height: 35px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
 }
 </style>

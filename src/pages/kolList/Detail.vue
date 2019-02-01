@@ -72,7 +72,26 @@
         <div class="kol-card mb10">
           <p class="kol-cloumn">Social data</p>
           <div class="activity-table">
-            <a-table :columns="socalColumns" :dataSource="socalData" :pagination="false"></a-table>
+            <table class="com-brand-table">
+              <tr>
+                <th>Platform</th>
+                <th>Followers</th>
+                <th>Likes</th>
+                <th>Shards</th>
+                <th>Comments</th>
+                <th>Post-last 21 days</th>
+                <th>Impact score</th>
+              </tr>
+              <tr>
+                <td>{{dataListBox.platform}}</td>
+                <td>{{dataListBox.fans_number}}</td>
+                <td>{{dataListBox.stats.avg_shares}}</td>
+                <td>{{dataListBox.stats.avg_reads}}</td>
+                <td>{{dataListBox.stats.avg_comments}}</td>
+                <td>{{dataListBox.stats.avg_daily_posts}}</td>
+                <td>{{dataListBox.stats.avg_post_influences}}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
@@ -107,6 +126,15 @@ export default {
         }
       ],
       parentTags: [],
+      dataListBox: {
+        fans_number: '',
+        stats: {
+          avg_shares: '',
+          avg_reads: '',
+          avg_daily_posts: '',
+          avg_post_influences: ''
+        }
+      },
       activeColumns: [
         {
           title: "#",
@@ -268,13 +296,14 @@ export default {
     if (this.$route.params.type === '0') {
       // 微博相关接口
       this.kolWeiboInfo(totalParams)
-      this.kolWeiboIndustry(totalParams)
+      // this.kolWeiboIndustry(totalParams)
       // this.kolWeiboKeyword(totalParams)
+      // this.kolWeiboSocial(totalParams)
     } else {
       // weixin
       this.kolWeiXinInfo(totalParams)
-      this.kolWeiXinIndustry(totalParams)
-      this.kolWeiXinKeyword(totalParams)
+      // this.kolWeiXinIndustry(totalParams)
+      // this.kolWeiXinKeyword(totalParams)
       // this.kolWeixinSocial(totalParams)
     }
   },
@@ -311,7 +340,7 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin ', res);
+          console.log('weixin ', res);
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
@@ -414,9 +443,13 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weibo ', res);
+          console.log('weibo ', res);
           if (res.status === 200) {
-            
+            _that.dataListBox = res.data;
+            _that.dataListBox.platform = 'weixbo';
+            if (!_that.dataListBox.stats.avg_shares) {
+              _that.dataListBox.stats.avg_shares = ''
+            }
           }
         })
         .catch(function(error) {
@@ -433,9 +466,13 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weixin ', res);
+          // console.log('weixin ', res);
           if (res.status === 200) {
-            
+            _that.dataListBox = res.data;
+            _that.dataListBox.platform = 'weixin';
+            if (!_that.dataListBox.stats.avg_shares) {
+              _that.dataListBox.stats.avg_shares = ''
+            }
           }
         })
         .catch(function(error) {
@@ -539,5 +576,34 @@ export default {
   color: #A347C9FF;
   line-height: 32px;
   font-size: $font-nm-b
+}
+.com-brand-table{
+  color: #333;
+  width: 100%;
+  tr{
+    border-bottom: 1px solid #ddd;
+    th{
+      color: #333;
+      font-size: 14px;
+       text-align: center;
+      padding: 5px 0px;
+      &:nth-child(1){
+        width: 8%;
+      }
+      &:nth-child(2){
+        width: 20%;
+      }
+    }
+  }
+  td{
+    text-align: center;
+    padding: 5px 0px;
+    &:nth-child(1){
+      width: 8%;
+    }
+    &:nth-child(2){
+      width: 20%;
+    }
+  }
 }
 </style>

@@ -75,7 +75,7 @@ export default {
       if (res.status == 200 && resData) {
         let _creationsList = this.CreationsList
         let _creationItem
-        console.log(resData)
+        // console.log(resData)
         resData.items.forEach(item => {
           _creationItem = commonJs.buildObjData('id', item.id)
           _creationItem.name = item.name
