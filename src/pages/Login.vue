@@ -10,10 +10,10 @@
         <div class="login-container">
           <div class="tabs">
             <div class="item active">
-              <router-link to="/login">登录</router-link>
+              <router-link to="/login">Log In</router-link>
             </div>
             <div class="item">
-              <router-link to="/reg">注册</router-link>
+              <router-link to="/reg">Sign Up</router-link>
             </div>
           </div>
 
@@ -24,7 +24,7 @@
                 name="userName"
                 class="form-control"
                 v-model="userName"
-                placeholder="输入邮箱或手机号"
+                placeholder="Account"
               >
             </div>
             <div class="form-group">
@@ -33,10 +33,10 @@
                 name="password"
                 class="form-control"
                 v-model="password"
-                placeholder="输入您的密码"
+                placeholder="Password"
               >
               <div class="form-tips text-right">
-                <!-- <router-link to="/forget_password">忘记密码？</router-link> -->
+                <!-- <router-link to="/forget_password">Forgot Password？</router-link> -->
               </div>
             </div>
             <div class="form-group text-center">
@@ -45,7 +45,7 @@
                 class="btn btn-cyan confirm-btn"
                 @click="login"
                 :disabled="loginStatus"
-              >登录</button>
+              >Sign In</button>
             </div>
           </div>
         </div>

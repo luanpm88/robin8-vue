@@ -10,10 +10,10 @@
         <div class="login-container">
           <div class="tabs">
             <div class="item">
-              <router-link to="/login">登录</router-link>
+              <router-link to="/login">Log In</router-link>
             </div>
             <div class="item active">
-              <router-link to="/reg">注册</router-link>
+              <router-link to="/reg">Sign Up</router-link>
             </div>
           </div>
 
@@ -26,7 +26,7 @@
                   name="typeVal"
                   class="form-control"
                   v-model="typeVal"
-                  placeholder="输入手机号"
+                  placeholder="Enter your mobile number"
                   ref="type1"
                 >
                 <input
@@ -35,13 +35,13 @@
                   name="typeVal"
                   class="form-control"
                   v-model="typeVal"
-                  placeholder="输入邮箱"
+                  placeholder="Enter your email"
                 >
-                <div class="form-tips text-right" v-if="flag">或使用
-                  <span class="link" @click="checkType">邮箱注册</span>
+                <div class="form-tips text-right" v-if="flag">or
+                  <span class="link" @click="checkType">sign up with email</span>
                 </div>
-                <div class="form-tips text-right" v-else>或使用
-                  <span class="link" @click="checkType">手机注册</span>
+                <div class="form-tips text-right" v-else>or
+                  <span class="link" @click="checkType">sign up with mobile number</span>
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@
                   name="code"
                   class="form-control"
                   v-model="code"
-                  placeholder="输入验证码"
+                  placeholder="Enter valid code"
                 >
               </div>
               <div class="col-sm-6">
@@ -66,12 +66,12 @@
                   name="password"
                   class="form-control"
                   v-model="password"
-                  placeholder="输入您的密码"
+                  placeholder="Enter your password"
                 >
               </div>
             </div>
             <div class="form-group text-center">
-              <button type="button" class="btn btn-cyan confirm-btn" @click="reg" :disabled="loginStatus">注册</button>
+              <button type="button" class="btn btn-cyan confirm-btn" @click="reg" :disabled="loginStatus">Sign Up</button>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default {
       typeVal: "",
       code: "",
       password: "",
-      btntxt: "获取验证码",
+      btntxt: "Get valid code",
       isCheck: false,
       disabled: true,
       time: 0,
@@ -126,11 +126,11 @@ export default {
     timer: function() {
       if (this.time > 0) {
         this.time--
-        this.btntxt = "重获验证码" + this.time
+        this.btntxt = "Get valid code again" + this.time
         setTimeout(this.timer, 1000)
       } else {
         this.time = 0
-        this.btntxt = "获取验证码"
+        this.btntxt = "Get valid code"
         this.disabled = false
       }
     },
@@ -165,7 +165,7 @@ export default {
         .then(function(res) {
           if (res.data.error) {
             _that.time = 0
-            _that.btntxt = "获取验证码"
+            _that.btntxt = "Get valid code"
             _that.disabled = false
             alert(res.data.detail)
           }
@@ -182,7 +182,7 @@ export default {
         .then(function(res) {
           if (res.data.error) {
             _that.time = 0
-            _that.btntxt = "获取验证码"
+            _that.btntxt = "Get valid code"
             _that.disabled = false
             alert(res.data.detail)
           }
