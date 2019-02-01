@@ -72,15 +72,15 @@ export default {
           href: '/settings',
           subNav: [
             {
-              title: '基本信息',
+              title: 'Basic Information',
               href: '/settings/company_info'
             },
             {
-              title: '我的品牌',
+              title: 'My Brands',
               href: '/settings/my_brands'
             },
             {
-              title: '我的竞争品牌',
+              title: 'My Competitive Brands',
               href: '/settings/my_competition_brands'
             }
           ]
