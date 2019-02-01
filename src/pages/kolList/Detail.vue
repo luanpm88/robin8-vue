@@ -47,26 +47,48 @@
       <div class="kol-detail-con">
         <div class="kol-card mb10">
           <p class="kol-cloumn mb10">Activity</p>
-          <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-          <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>
+          <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
+          <p class="activity-color">AI expert has taken the following campaigns for your brands.</p> -->
           <div class="activity-table">
-            <a-table :columns="activeColumns" :dataSource="activeData" :pagination="false"></a-table>
+            <table class="com-brand-table">
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Performance</th>
+              </tr>
+              <tr v-for="(key, index) in activeList.creations_list" :key="index">
+                <td>{{key.id}}</td>
+                <td>{{key.title}}</td>
+                <td>{{key.date}}</td>
+                <td>{{key.amount}}</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Analytics</p>
-          <div class="analytic-table">
-            <a-table :columns="analyticColumns" :dataSource="analyticData" :pagination="false">
-              <template slot="campaingns" slot-scope="campaingns">
-                <p class="activity-border">{{campaingns.num}} ({{campaingns.camPercent}})</p>
-              </template>
-              <template slot="performance" slot-scope="performance">
-                <p class="activity-border">{{performance.num}} ({{performance.perPercent}})</p>
-              </template>
-              <template slot="clients" slot-scope="text">
-                <p class="activity-border">{{text}}</p>
-              </template>
-            </a-table>
+          <div class="activity-contable">
+            <table class="com-brand-table">
+              <tr>
+                <th></th>
+                <th>no.of camppaingns(CPc)</th>
+                <th>Performance(CPc)</th>
+                <th>Number of Clients</th>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td v-for="(item, index) in activeList.total_info" :key='index'>
+                  <p class="activity-border">{{item}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Last 30 days</td>
+                <td v-for="(item, index) in activeList.last_30_days_info" :key='index'>
+                  <p class="activity-border">{{item}}</p>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
         <div class="kol-card mb10">
@@ -105,6 +127,7 @@ import apiConfig from "@/config"
 import { Table } from "ant-design-vue"
 import BarCharts from "@components/Chart/chartHorizontalBar"
 import TagCharts from "@components/Chart/chartTags"
+import { mapState } from 'vuex'
 export default {
   name: "KolDetail",
   components: { ATable: Table , BarCharts, TagCharts},
@@ -135,6 +158,7 @@ export default {
           avg_post_influences: ''
         }
       },
+      activeList: {},
       activeColumns: [
         {
           title: "#",
@@ -306,6 +330,10 @@ export default {
       // this.kolWeiXinKeyword(totalParams)
       // this.kolWeixinSocial(totalParams)
     }
+    this.kolActivityUrl(totalParams);
+  },
+  computed: {
+    ...mapState(['authorization'])
   },
   methods: {
     // info 微博的接口
@@ -469,9 +497,34 @@ export default {
           // console.log('weixin ', res);
           if (res.status === 200) {
             _that.dataListBox = res.data;
-            _that.dataListBox.platform = 'weixin';
+            // _that.dataListBox.platform = 'weixin';
             if (!_that.dataListBox.stats.avg_shares) {
               _that.dataListBox.stats.avg_shares = ''
+            }
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    // kolWeixinSocial
+    kolActivityUrl(params) {
+      const _that = this
+      axios
+        .get(apiConfig.kolActivityUrl + '/' + this.$route.params.id + '/big_v_details', params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('weixin activy', res);
+          if (res.status === 200) {
+            _that.activeList = res.data;
+            // console.log(_that.activeList);
+            if (_that.activeList.total_info.length === 0) {
+              _that.activeList.total_info[0] = '-';
+              _that.activeList.total_info[1] = '-';
+              _that.activeList.total_info[2] = '-';
             }
           }
         })
@@ -597,12 +650,24 @@ export default {
   }
   td{
     text-align: center;
-    padding: 5px 0px;
+    padding: 5px 10px;
     &:nth-child(1){
       width: 8%;
     }
     &:nth-child(2){
       width: 20%;
+    }
+  }
+}
+.activity-contable{
+  table{
+    th{
+      &:nth-child(1){
+        width: 20%;
+      }
+    }
+    td{
+      padding: 10px;
     }
   }
 }

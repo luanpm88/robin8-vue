@@ -134,6 +134,9 @@ const config = {
 
   // kolWeixin
   kolWeixinSocial: `${searchHost}/price/price/kol_info?${searchHostKey}`,
+
+  // activity
+  kolActivityUrl: `${host}/creation_selected_kols`,
 }
 
 module.exports = config
