@@ -15,35 +15,37 @@
         class="panel-tab"
       >
         <div class="list-content-inner">
-          <div class="home-post" v-for="(item, index) in postList" :key="index">
-            <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
-            <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
-            <div class="home-post-detail" @click="intoKolDetail(item)">
-              <img :src="item.avatar_url" alt class>
-              <div>
-                <strong>{{item.profile_name}}</strong>
-                <p>{{item.post_time}}</p>
+          <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
+            <div class="home-post" v-for="(item, index) in key" :key="index">
+              <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
+              <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
+              <div class="home-post-detail" @click="intoKolDetail(item)">
+                <img :src="item.avatar_url" alt class>
+                <div>
+                  <strong>{{item.profile_name}}</strong>
+                  <p>{{item.post_time}}</p>
+                </div>
               </div>
-            </div>
-            <p class="home-post-content">{{item.content}}</p>
-            <div class="home-post-form">
-              <span>
-                <i class="iconfont icon-like"></i>
-                <b>{{item.post_influence.likes}}</b>
-              </span>
-              <span v-if="postType === 0">
-                <i class="iconfont icon-share"></i>
-                <b>{{item.post_influence.shares}}</b>
-              </span>
-              <span>
-                <i class="iconfont icon-pinglun"></i>
-                <b>{{item.post_influence.comments}}</b>
-              </span>
+              <p class="home-post-content">{{item.content}}</p>
+              <div class="home-post-form">
+                <span>
+                  <i class="iconfont icon-like"></i>
+                  <b>{{item.post_influence.likes}}</b>
+                </span>
+                <span v-if="postType === 0">
+                  <i class="iconfont icon-share"></i>
+                  <b>{{item.post_influence.shares}}</b>
+                </span>
+                <span>
+                  <i class="iconfont icon-pinglun"></i>
+                  <b>{{item.post_influence.comments}}</b>
+                </span>
+              </div>
             </div>
           </div>
         </div>
         <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple">查看更多</button>
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="PostShowMore">查看更多</button>
         </div>
       </default-tabs>
     </div>
@@ -67,14 +69,17 @@ export default {
       kolHasLiked: true,
       kolHasMsg: true,
       kolHasChecked: false,
+      postWeiboCurrentPage: 0,
+      postWeixinCurrentPage: 0,
       tabIndex: 0,
       topPostParams: {
         start_date: "2018-08-09",
         end_date: "2018-08-29",
         brand_keywords: "BMW",
         page_no: 0,
-        page_size: 6
+        page_size: 2
       },
+      postListBox: [],
       postList: [],
       postType: 0,
       tabList: [
@@ -96,6 +101,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        this.topPostParams.page_no = this.postWeiboCurrentPage;
         this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
         // 微博
         this.topPostWeibo(this.topPostParams)
@@ -105,12 +111,14 @@ export default {
   },
   created() {
     this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
+    this.topPostParams.page_no = this.postWeiboCurrentPage;
     // 微博
     this.topPostWeibo(this.topPostParams)
   },
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
+      this.postListBox = [];
       // this.currentList = tab.data
       if (tab.index === 0) {
         // 微博
@@ -132,8 +140,8 @@ export default {
         .then(function(res) {
           // console.log("我是微博接口", res)
           _that.postType = 0
-          _that.postList = res.data.data.slice(0, 2)
-          // console.log(_that.postList)
+          _that.postListBox.push(res.data.data);
+          _that.postWeiboCurrentPage ++;
         })
         .catch(function(error) {
           console.log(error)
@@ -151,7 +159,8 @@ export default {
         .then(function(res) {
           // console.log("我是微信接口", res)
           _that.postType = 1
-          _that.postList = res.data.data.slice(0, 2)
+          _that.postListBox.push(res.data.data);
+          _that.postWeixinCurrentPage ++;
         })
         .catch(function(error) {
           console.log(error)
@@ -170,6 +179,17 @@ export default {
         },
       });
     },
+    PostShowMore() {
+      if (this.tabIndex === 0) {
+        this.topPostParams.page_no = this.postWeiboCurrentPage;
+        // 微博
+        this.topPostWeibo(this.topPostParams)
+      } else {
+        this.topPostParams.page_no = this.postWeixinCurrentPage;
+        // 微信
+        this.topPostWeixin(this.topPostParams)
+      }
+    }
   }
 }
 </script>

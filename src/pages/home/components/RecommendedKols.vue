@@ -90,6 +90,7 @@ export default {
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
+      this.currentList = [];
       if (tab.index === 0) {
         // 微博接口
         this.weiboKol(this.params)

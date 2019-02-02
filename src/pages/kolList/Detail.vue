@@ -42,7 +42,7 @@
         <div class="kol-card mb10">
           <p class="kol-cloumn">Keywords
           </p>
-          <tag-charts :width="100" :height="100" :taglist="parentTags"></tag-charts>
+          <tag-charts :width="150" :height="180" :taglist="parentTags"></tag-charts>
         </div>
       </div>
       <div class="kol-detail-con">
@@ -454,7 +454,7 @@ export default {
           if (res.status === 200) {
             // console.log('kolWeiboKeyword weibo ', res);
             _that.parentTags = [];
-            _that.parentTags = res.data.slice(0, 100);
+            _that.parentTags = res.data.slice(0, 20);
             // _that.parentTags = [];
             // _that.parentTags = res.data;
           }
