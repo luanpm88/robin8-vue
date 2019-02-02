@@ -162,6 +162,7 @@ export default {
     AProgress: Progress,
     DefaultTabs
   },
+  props: ['keyWord'],
   data() {
     return {
       keyword: "",
@@ -193,8 +194,25 @@ export default {
   },
   created() {
     // 接口
-    this.paramsInit(0);
+    this.paramsInit(0)
+    console.log(this.keyWord.brand_keywords)
+    if (this.keyWord.brand_keywords) {
+      // console.log(1)
+      this.keyword = this.keyWord.brand_keywords
+      this.paramsInit(this.keyWord.type)
+    } else {
+      this.paramsInit(0)
+    }
   },
+  // watch: {
+  //   keyWord: {
+  //     handler() {
+  //       // console.log(this.keyWord);
+  //       this.paramsInit(this.keyWord.type);
+  //     },
+  //     deep: true
+  //   }
+  // },
   computed: {
     ...mapState(["authorization"])
   },

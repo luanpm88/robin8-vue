@@ -24,6 +24,7 @@
         <p class="desc">{{renderData.desc}}</p>
       </div>
       <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
+        <span v-if="hasInflunce" class="media-right-txt">{{renderData.influnce}}</span>
         <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
         <span v-if="hasMsg" class="iconfont icon-msg"></span>
       </div>
@@ -38,7 +39,8 @@ export default {
     hasLiked: Boolean,
     hasMsg: Boolean,
     hasChecked: Boolean,
-    renderData: Object
+    renderData: Object,
+    hasInflunce: Boolean
   },
   data () {
     return {
@@ -129,5 +131,8 @@ export default {
     background-color: #ebedf2;
     overflow: hidden;
   }
+}
+.media-right-txt{
+  color:#333;
 }
 </style>

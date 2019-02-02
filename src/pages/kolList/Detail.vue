@@ -346,7 +346,7 @@ export default {
           }
         })
         .then(function(res) {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
@@ -368,8 +368,9 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weixin ', res);
+          // console.log('weixin ', res);
           if (res.status === 200) {
+            // console.log('weixin ', res);
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
             // _that.infoList.age = res.data.profile_name;
@@ -517,7 +518,7 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin activy', res);
+          console.log('weixin activy', res);
           if (res.status === 200) {
             _that.activeList = res.data;
             // console.log(_that.activeList);

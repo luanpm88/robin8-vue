@@ -8,7 +8,7 @@
       <div class="campaign-container pull-right">
         <!-- <router-view></router-view> -->
         <!-- kol search 页面 -->
-        <kol-search></kol-search>
+        <kol-search :keyWord='keyList'></kol-search>
       </div>
     </div>
   </div>
@@ -19,14 +19,22 @@ import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import KolSearch from './KolSearch'
 export default {
-  name: 'kolDetail',
+  name: 'KolList',
   components: {
     PageHeader,
     MainNav,
     KolSearch
   },
+  created() {
+    // console.log(this.$route.params.brand_keywords);
+    // console.log(this.$route.params.type);
+  },
   data () {
     return {
+      keyList: {
+        brand_keywords: this.$route.params.brand_keywords,
+        type: this.$route.params.type
+      } 
     }
   }
 }

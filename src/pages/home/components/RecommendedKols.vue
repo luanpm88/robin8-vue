@@ -14,6 +14,7 @@
             v-for="(item, index) in currentList"
             :key="index"
             :hasLiked="kolHasLiked"
+            :hasInflunce="KolHasInflunce"
             :hasMsg="kolHasMsg"
             :hasChecked="kolHasChecked"
             :renderData="item"
@@ -24,6 +25,7 @@
           <button
             type="button"
             class="btn btn-sm btn-outline btn-circle btn-purple"
+            @click="intoKolDetailMore"
           >查看更多</button>
         </div>
       </default-tabs>
@@ -45,7 +47,8 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: true,
+      kolHasLiked: false,
+      KolHasInflunce: true,
       kolHasMsg: true,
       kolHasChecked: false,
       tabIndex: 0,
@@ -73,7 +76,7 @@ export default {
   },
   watch: {
     childKeyList: {
-      handler(newValue, oldValue) {
+      handler() {
         this.params.brand_keywords = this.childKeyList.brand_keywords
         this.weiboKol(this.params)
       },
@@ -107,6 +110,17 @@ export default {
         },
       });
     },
+    // 跳转kol list
+    intoKolDetailMore() {
+      this.$router.push({
+        path: '/kol/list',
+        name: 'KolList',
+        params: {
+          brand_keywords: this.childKeyList.brand_keywords,
+          type: this.tabIndex
+        }
+      });
+    },
     // 微博的接口
     weiboKol(params) {
       const _that = this
@@ -121,6 +135,7 @@ export default {
             element.name = element.profile_name
             element.desc = element.description_raw
             element.avatar = element.avatar_url
+            element.influnce = element.avg_post_influences
           })
           _that.currentList = res.data.slice(0, 5)
         })
@@ -138,6 +153,7 @@ export default {
           }
         })
         .then(function(res) {
+          // console.log(res);
           res.data.forEach(element => {
             element.name = element.profile_name
             element.desc = element.description_raw
