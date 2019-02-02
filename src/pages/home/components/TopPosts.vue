@@ -18,7 +18,7 @@
           <div class="home-post" v-for="(item, index) in postList" :key="index">
             <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
             <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
-            <div class="home-post-detail">
+            <div class="home-post-detail" @click="intoKolDetail(item)">
               <img :src="item.avatar_url" alt class>
               <div>
                 <strong>{{item.profile_name}}</strong>
@@ -99,8 +99,6 @@ export default {
         this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
         // 微博
         this.topPostWeibo(this.topPostParams)
-        // // 微信
-        // this.topPostWeixin(this.topPostParams)
       },
       deep: true
     }
@@ -109,8 +107,6 @@ export default {
     this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
     // 微博
     this.topPostWeibo(this.topPostParams)
-    // // 微信
-    // this.topPostWeixin(this.topPostParams)
   },
   methods: {
     changeTab(tab) {
@@ -160,7 +156,20 @@ export default {
         .catch(function(error) {
           console.log(error)
         })
-    }
+    },
+     // 跳转 kol detail
+    intoKolDetail(item) {
+      // console.log(item)
+      // this.$router.push("/kol/" + item.profile_id)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+          type: this.tabIndex
+        },
+      });
+    },
   }
 }
 </script>
@@ -181,6 +190,7 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 .home-post-detail {
+  cursor: pointer;
   padding: 12px 0px;
   img {
     display: inline-block;
