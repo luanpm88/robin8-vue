@@ -138,7 +138,6 @@ export default {
         this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
         // trend 微博
         this.trendsWeibo(this.trendParams);
-        this.getNowFormatDate();
       },
       deep: true
     }
@@ -151,7 +150,7 @@ export default {
     this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
     // trend 微博
     this.trendsWeibo(this.trendParams);
-    this.getNowFormatDate();
+    // this.getNowFormatDate();
     // console.log(this.childKeyList);
   },
   computed: {
@@ -360,26 +359,12 @@ export default {
           _that.sentimentWeiboList.labels = res.data.labels;
           _that.sentimentWeiboList.data = res.data.data;
           _that.$refs.sentimentChart.fillData();
+          _that.$emit('childSentiment', _that.sentimentWeiboList.data)
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    getNowFormatDate() {
-      var date = new Date();
-      var seperator1 = "-";
-      var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      var strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-        month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      var currentdate = year + seperator1 + month + seperator1 + strDate;
-      return currentdate;
-    }
   }
 };
 </script>

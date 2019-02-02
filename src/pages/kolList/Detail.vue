@@ -13,7 +13,8 @@
           <div class="kol-info">
             <p>
               {{infoList.name}}
-              <!-- <i class="iconfont icon-nvxing"></i> -->
+              <i class="iconfont icon-nvxing" v-if="infoList.gender == 'm'"></i>
+              <i class="iconfont icon-nanxing" v-if="infoList.gender == 'f'"></i>
             </p>
             <p>{{infoList.age}}</p>
             <p>
@@ -21,27 +22,27 @@
             </p>
           </div>
           <ul class="clearfix">
-            <li v-for="(item, index) in dec" :key='index'>{{item.name}}</li>
+            <li v-for="(item, index) in dec" :key='index'>{{item}}</li>
           </ul>
         </div>
         <div class="kol-card kol-brand mb10">
           <p class="clearfix">
-            <span>Brand mentions</span>
-            <b>48</b>
+            <span>Brand Mentions</span>
+            <b>{{MentionsNum}}</b>
           </p>
           <p class="clearfix">
-            <span>Brand sesiment</span>
-            <b>48</b>
+            <span>Brand Sentiment</span>
+            <b>{{Sentiment}}</b>
           </p>
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Top industry</p>
-          <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
+          <bar-charts class="kol-bar-chart" :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Keywords
           </p>
-          <tag-charts :width="100" :height="200" :taglist="parentTags"></tag-charts>
+          <tag-charts :width="100" :height="100" :taglist="parentTags"></tag-charts>
         </div>
       </div>
       <div class="kol-detail-con">
@@ -72,7 +73,7 @@
             <table class="com-brand-table">
               <tr>
                 <th></th>
-                <th>no.of camppaingns(CPc)</th>
+                <th>no.of Campaigns (CPC)</th>
                 <th>Performance(CPc)</th>
                 <th>Number of Clients</th>
               </tr>
@@ -99,7 +100,7 @@
                 <th>Platform</th>
                 <th>Followers</th>
                 <th>Likes</th>
-                <th>Shards</th>
+                <th>Shares</th>
                 <th>Comments</th>
                 <th>Post-last 21 days</th>
                 <th>Impact score</th>
@@ -126,13 +127,14 @@ import axios from "axios"
 import apiConfig from "@/config"
 import { Table } from "ant-design-vue"
 import BarCharts from "@components/Chart/chartHorizontalBar"
-import TagCharts from "@components/Chart/chartTags"
+import TagCharts from "@components/Chart/chartTagsTwo"
 import { mapState } from 'vuex'
 export default {
   name: "KolDetail",
   components: { ATable: Table , BarCharts, TagCharts},
   data() {
     return {
+      Sentiment: 0,
       competiteWeiboList: {
         labels: [],
         dataList: []
@@ -143,11 +145,7 @@ export default {
         age: 'N/A',
         region: 'N/A'
       },
-      dec: [
-        {
-          name: '-'
-        }
-      ],
+      dec: ['-'],
       parentTags: [],
       dataListBox: {
         fans_number: '',
@@ -159,6 +157,19 @@ export default {
         }
       },
       activeList: {},
+      sentimentParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW"
+      },
+      trendParams: {
+        start_date: "2018-08-09",
+        end_date: "2018-08-29",
+        brand_keywords: "BMW",
+        type: "doc"
+      },
+      MentionsList: [],
+      MentionsNum: 0,
       activeColumns: [
         {
           title: "#",
@@ -312,23 +323,29 @@ export default {
   },
   created() {
     // console.log(this.$route.params.id);
-    // console.log(this.$route.params.type);
+    // console.log(this.$route.params.brand_keywords)
+    this.trendParams.brand_keywords = this.$route.params.brand_keywords
+    this.sentimentParams.brand_keywords = this.$route.params.brand_keywords
     let totalParams = {
-      profile_id : this.$route.params.id,
+      profile_id : Number(this.$route.params.id),
       language: "en"
     }
-    if (this.$route.params.type === '0') {
+    if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
-      this.kolWeiboInfo(totalParams)
-      // this.kolWeiboIndustry(totalParams)
-      // this.kolWeiboKeyword(totalParams)
-      // this.kolWeiboSocial(totalParams)
+      this.kolWeiboIndustry(totalParams)
+      this.kolWeiboKeyword(totalParams)
+      this.kolWeiboSocial(totalParams)
+      // 获取sentiment
+      this.sentimentWeibo(this.sentimentParams);
+      // trend 微博
+      this.trendsWeibo(this.trendParams);
     } else {
       // weixin
-      this.kolWeiXinInfo(totalParams)
-      // this.kolWeiXinIndustry(totalParams)
-      // this.kolWeiXinKeyword(totalParams)
-      // this.kolWeixinSocial(totalParams)
+      this.kolWeiXinIndustry(totalParams)
+      this.kolWeiXinKeyword(totalParams)
+      this.kolWeixinSocial(totalParams)
+      // 获取sentiment
+      this.sentimentWeibo(this.sentimentParams);
     }
     this.kolActivityUrl(totalParams);
   },
@@ -346,10 +363,12 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log(res);
+          // console.log('我是furgsInfo weibo', res);
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
+            _that.infoList.gender = res.data.gender;
+            _that.dec = Object.keys(res.data.industries).slice(0, 3);
             // _that.infoList.age = res.data.gender;
             // _that.infoList.region = res.data.profile_name;
           }
@@ -368,11 +387,11 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin ', res);
+          // console.log('我是furgsInfo weixin ', res);
           if (res.status === 200) {
-            // console.log('weixin ', res);
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
+            _that.infoList.gender = '-';
             // _that.infoList.age = res.data.profile_name;
             // _that.infoList.region = res.data.profile_name;
           }
@@ -391,7 +410,7 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weibo ', res);
+          // console.log('weibo kolWeiboIndustry', res);
           if (res.status === 200) {
             _that.competiteWeiboList.dataList = [{ data: res.data.data }];
             _that.competiteWeiboList.labels = res.data.labels;
@@ -411,7 +430,7 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin ', res);
+          // console.log('kolWeiXinIndustry ', res);
           if (res.status === 200) {
             _that.competiteWeiboList.dataList = [{ data: res.data.data }];
             _that.competiteWeiboList.labels = res.data.labels;
@@ -432,9 +451,10 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weibo ', res);
           if (res.status === 200) {
-            console.log(res);
+            // console.log('kolWeiboKeyword weibo ', res);
+            _that.parentTags = [];
+            _that.parentTags = res.data.slice(0, 100);
             // _that.parentTags = [];
             // _that.parentTags = res.data;
           }
@@ -472,13 +492,9 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weibo ', res);
           if (res.status === 200) {
             _that.dataListBox = res.data;
             _that.dataListBox.platform = 'weixbo';
-            if (!_that.dataListBox.stats.avg_shares) {
-              _that.dataListBox.stats.avg_shares = ''
-            }
           }
         })
         .catch(function(error) {
@@ -495,20 +511,16 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin ', res);
           if (res.status === 200) {
             _that.dataListBox = res.data;
-            // _that.dataListBox.platform = 'weixin';
-            if (!_that.dataListBox.stats.avg_shares) {
-              _that.dataListBox.stats.avg_shares = ''
-            }
+            _that.dataListBox.platform = 'weixin';
           }
         })
         .catch(function(error) {
           console.log(error)
         })
     },
-    // kolWeixinSocial
+    // activity analytics 还有info 假如没有info 调用 Fergus的info 接口
     kolActivityUrl(params) {
       const _that = this
       axios
@@ -518,20 +530,103 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weixin activy', res);
           if (res.status === 200) {
             _that.activeList = res.data;
-            // console.log(_that.activeList);
             if (_that.activeList.total_info.length === 0) {
               _that.activeList.total_info[0] = '-';
               _that.activeList.total_info[1] = '-';
               _that.activeList.total_info[2] = '-';
+            }
+            if (res.data.data === null) {
+              if (Number(_that.$route.params.type) === 0) {
+                // 调用Fergus 微博info
+                _that.kolWeiboInfo(params)
+              } else {
+                // 调用Fergus weixin info
+                _that.kolWeiXinInfo(params)
+              }
+            } else {
+              _that.infoList.img = res.data.data.avatar_url
+              _that.infoList.name = res.data.data.profile_name
+              _that.infoList.gender = '-'
+              _that.dec = res.data.data.industries
             }
           }
         })
         .catch(function(error) {
           console.log(error)
         })
+    },
+    // sentiment 微博
+    sentimentWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.sentimentWeibo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.Sentiment = res.data.data[0];
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // sentiment 微信
+    sentimentWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.sentimentWeixin, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.Sentiment = res.data.data[0];
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // trend 微博
+    trendsWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.trendsWeibo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log(res.data.data.slice(res.data.data.length-8, res.data.data.length-1));
+          _that.MentionsList.push(res.data.data.slice(res.data.data.length-8, res.data.data.length-1));
+          _that.MentionsList.forEach(item => {
+            _that.MentionsNum += parseInt(item);
+          })
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // trend 微信
+    trendsWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.trendsWeixin, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.MentionsList.push(res.data.data.slice(res.data.data.length-8, res.data.data.length-1))
+          _that.MentionsList.forEach(item => {
+            _that.MentionsNum += parseInt(item)
+          })
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
   }
 }
@@ -671,5 +766,8 @@ export default {
       padding: 10px;
     }
   }
+}
+.kol-bar-chart{
+  margin-top: 20px;
 }
 </style>

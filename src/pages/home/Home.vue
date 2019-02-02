@@ -83,9 +83,10 @@ export default {
     return {
       isCompetitors: true,
       isHomeStatus: 'Yes',
+      parentSentiment: '',
       keyList: {
         brand_keywords: '',
-        cb_keywords: [],
+        cb_keywords: []
       }
     }
   },
