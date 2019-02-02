@@ -73,79 +73,85 @@
       </div>
     </div>
     <div class="kol-data-wrap mt20">
-      <default-tabs
-        :tabList="tabList"
-        :tabIndex="tabIndex"
-        @changeTab="changeTab"
-        class="panel-tab"
-      >
-        <div class="kol-data">
-          <ul class="kol-data-tab clearfix">
-            <li>Profile</li>
-            <li>R8 KOL</li>
-            <li>Influence</li>
-            <li>Relevance</li>
-          </ul>
-          <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
-            <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
-              <li>
-                <div class="kol-profile clearfix" @click="intoKolDetail(item)">
-                  <img :src="item.avatar_url" alt>
-                  <div class="kol-show">
-                    <p>
-                      {{item.profile_name}}
-                      <!-- <i
-                      v-if="profile.sex === 0"
-                      class="iconfont icon-nanxing"
-                      style="color:#096dd9;"
-                    ></i>
-                      <i v-else class="iconfont icon-nvxing" style="color:#f36dbb"></i>-->
-                    </p>
-                    <div class="desc">{{item.description_raw}}</div>
-                    <div>
-                      <span>
-                        <i class="iconfont icon-icon-test1"></i>
-                        {{item.stats.avg_likes}}
-                      </span>
-                      <span>
-                        <i class="iconfont icon-app"></i>
-                        {{item.stats.total_sum_engagement}}
-                      </span>
+      <p class="kol-list-topnum">
+        <span v-for="(item, index) in topNumList" :key="index
+        ">{{item}}</span>
+      </p>
+      <div class="">
+        <default-tabs
+          :tabList="tabList"
+          :tabIndex="tabIndex"
+          @changeTab="changeTab"
+          class="panel-tab"
+        >
+          <div class="kol-data">
+            <ul class="kol-data-tab clearfix">
+              <li>Profile</li>
+              <li>R8 KOL</li>
+              <li>Influence</li>
+              <li>Relevance</li>
+            </ul>
+            <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
+              <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
+                <li>
+                  <div class="kol-profile clearfix" @click="intoKolDetail(item)">
+                    <img :src="item.avatar_url" alt>
+                    <div class="kol-show">
+                      <p>
+                        {{item.profile_name}}
+                        <!-- <i
+                        v-if="profile.sex === 0"
+                        class="iconfont icon-nanxing"
+                        style="color:#096dd9;"
+                      ></i>
+                        <i v-else class="iconfont icon-nvxing" style="color:#f36dbb"></i>-->
+                      </p>
+                      <div class="desc">{{item.description_raw}}</div>
+                      <div>
+                        <span>
+                          <i class="iconfont icon-icon-test1"></i>
+                          {{item.stats.avg_likes}}
+                        </span>
+                        <span>
+                          <i class="iconfont icon-app"></i>
+                          {{item.stats.total_sum_engagement}}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
-                <p class="kol-data-r8" v-else>No</p>
-              </li>
-              <li>
-                <a-progress
-                  type="circle"
-                  :percent="item.influence"
-                  :width="100"
-                  :strokeWidth="9"
-                  strokeColor="#b37feb"
-                  :format="() => item.stats.avg_post_influence"
-                />
-              </li>
-              <li>
-                <a-progress
-                  type="circle"
-                  :percent="item.correlation"
-                  :width="100"
-                  :strokeWidth="9"
-                  strokeColor="#b37feb"
-                  :format="() => item.correlation + '%'"
-                />
-              </li>
-            </ul>
+                </li>
+                <li>
+                  <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
+                  <p class="kol-data-r8" v-else>No</p>
+                </li>
+                <li>
+                  <a-progress
+                    type="circle"
+                    :percent="item.influence"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#b37feb"
+                    :format="() => item.stats.avg_post_influence"
+                  />
+                </li>
+                <li>
+                  <a-progress
+                    type="circle"
+                    :percent="item.correlation"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#b37feb"
+                    :format="() => item.correlation + '%'"
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="form-group text-center">
-          <button type="button" class="btn btn-blue btn-outline" @click="showMore">Show more</button>
-        </div>
-      </default-tabs>
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-blue btn-outline" @click="showMore">Show more</button>
+          </div>
+        </default-tabs>
+      </div>
     </div>
   </div>
 </template>
@@ -177,6 +183,7 @@ export default {
       kolOnlyText: "N",
       currentPage: 0,
       advancedSearch: false,
+      topNumList: ['weixin - big data profile - 5564575', 'weibo - big data profile - 65860968', 'weixin - R8 managed - 3189', 'weibo - R8 managed - 1026'],
       tabList: [
         {
           index: 0,
@@ -226,6 +233,7 @@ export default {
       } else {
         this.kolOnlyText = "N";
       }
+      console.log(this.kolOnly);
       let params = {
         page_no: this.currentPage,
         page_size: 10,
@@ -261,7 +269,7 @@ export default {
             }
           })
           .then(function(res) {
-            // console.log("我是weibo接口", res);
+            console.log("我是weibo接口", res);
             if (res.status === 200) {
               _that.jogDataInit(res.data.data)
             }
@@ -537,6 +545,19 @@ span {
         font-size: 16px;
       }
     }
+  }
+}
+.kol-list-topnum{
+  height: 40px;
+  margin-bottom: 10px;
+  clear: both;
+  span{
+    float: left;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #333;
   }
 }
 </style>
