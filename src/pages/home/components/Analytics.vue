@@ -13,15 +13,15 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trends Over past 7 days</p>
+              <p class="analytic-chart-title">Trends over past 7 days</p>
               <line-charts :childData="trendsWeiboList" ref="tendsChart" :brandKey='brandKeyWord'></line-charts>
             </div>
             <div v-if="cur === 1">
-              <p  class="analytic-chart-title">Top Keywords</p>
+              <p  class="analytic-chart-title">Top keywords</p>
             </div>
             <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
-              <p class="analytic-chart-title">Top 3 Competitors</p>
+              <p class="analytic-chart-title">Top 3 competitors</p>
               <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
             </div>
             <div v-if="cur === 3">
