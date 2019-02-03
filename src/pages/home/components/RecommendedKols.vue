@@ -3,7 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-rocket"></span>
-        Recommended Kols
+        Recommended KOLs
       </h5>
     </div>
 
@@ -155,11 +155,12 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log(res);
+          console.log(res);
           res.data.forEach(element => {
             element.name = element.profile_name
             element.desc = element.description_raw
             element.avatar = element.avatar_url
+            element.influnce = element.avg_post_influences
           })
           _that.currentList = res.data.slice(0, 5)
         })
