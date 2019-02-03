@@ -73,9 +73,9 @@
             <table class="com-brand-table">
               <tr>
                 <th></th>
-                <th>no.of Campaigns (CPC)</th>
-                <th>Performance(CPc)</th>
-                <th>Number of Clients</th>
+                <th>No. of Campaigns</th>
+                <th>Performance (CPC)</th>
+                <th>No. of Clients</th>
               </tr>
               <tr>
                 <td>Total</td>
@@ -494,7 +494,7 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.dataListBox = res.data;
-            _that.dataListBox.platform = 'weixbo';
+            _that.dataListBox.platform = 'weibo';
           }
         })
         .catch(function(error) {
@@ -531,6 +531,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            console.log('', res.data);
             _that.activeList = res.data;
             if (_that.activeList.total_info.length === 0) {
               _that.activeList.total_info[0] = '-';

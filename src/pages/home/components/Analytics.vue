@@ -14,7 +14,7 @@
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
               <p class="analytic-chart-title">Trends Over past 7 days</p>
-              <line-charts :childData="trendsWeiboList" ref="tendsChart"></line-charts>
+              <line-charts :childData="trendsWeiboList" ref="tendsChart" :brandKey='brandKeyWord'></line-charts>
             </div>
             <div v-if="cur === 1">
               <p  class="analytic-chart-title">Top Keywords</p>
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       topTabCur: 0,
+      brandKeyWord: '',
       cur: 0,
       trendParams: {
         start_date: "2018-08-09",
@@ -136,6 +137,7 @@ export default {
         this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
         this.competitorParams.cb_names = this.childKeyList.cb_keywords;
         this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
+        this.brandKeyWord = this.childKeyList.brand_keywords;
         // trend 微博
         this.trendsWeibo(this.trendParams);
       },
@@ -148,6 +150,7 @@ export default {
     this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
     this.competitorParams.cb_names = this.childKeyList.cb_keywords;
     this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
+    this.brandKeyWord = this.childKeyList.brand_keywords;
     // trend 微博
     this.trendsWeibo(this.trendParams);
     // this.getNowFormatDate();
@@ -376,7 +379,10 @@ export default {
 .analytic-chart /deep/ {
   #line-chart,
   #horizontalbar-chart {
-    height: 400px !important;
+    height: 464px !important;
+  }
+  #line-chart{
+    margin-bottom: 10px;
   }
   #pie-chart {
     margin: 0px auto $font-sm;
@@ -426,8 +432,10 @@ export default {
 }
 .analytic-chart-title{
   line-height: 35px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
+  color: #7b7878;
+  font-weight: bold;
 }
 </style>

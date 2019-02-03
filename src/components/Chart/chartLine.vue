@@ -15,6 +15,10 @@ export default {
     childData: {
       type: Object,
       required: true
+    },
+    brandKey: {
+      type: String,
+      required: true
     }
   },
   watch: {
@@ -27,8 +31,19 @@ export default {
       datacollection: null,
       chartOptions: {
         xresponsive: true,
+        title: {
+          // display: true,
+          // fontSize: 20,
+					// text: 'Trends Over past 7 days'
+				},
         legend: {
-          display: false
+          display: true,
+          position: "top",
+          labels: {
+            fontSize: 20,
+            fontColor: "#7b7878",
+            // padding: 50,
+          }
         },
         scales: {
           yAxes: [
@@ -36,24 +51,31 @@ export default {
               display: true,
               ticks: {
                 xmax: 20,
-                fontColor: "#999",
+                // fontColor: "#999",
                 fontSize:16,
               },
               gridLines: {
-                color: "#e5e9f2",
+                // color: "#e5e9f2", 
                 lineWidth: 0.5,
                 drawBorder: false,
                 zeroLineColor: "transparent"
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "No.  of  Mentioned(s)",
+                fontSize:20,
+                padding: 20,
+                fontColor: "#7b7878",
               }
             }
           ],
           xAxes: [
             {
               gridLines: {
-                display: false
+                display: true
               },
               ticks: {
-                fontColor: "#999",
+                // fontColor: "#999",
                 fontSize:16,
                 autoSkip: false,
                 maxRotation: 80,
@@ -62,8 +84,11 @@ export default {
                 }
               },
               scaleLabel: {
-                display: true
-                // labelString: "Count"
+                display: true,
+                labelString: "Day",
+                fontSize:20,
+                // padding: 10,
+                fontColor: "#7b7878",
               }
             }
           ]
@@ -88,12 +113,22 @@ export default {
         datasets: [
           {
             label: "Data One",
+            // fill: true,
             data: [],
             backgroundColor: gradient,
-            pointBackgroundColor: "transparent",
-            pointBorderColor: "transparent",
-            pointHoverBackgroundColor: "rgba(0,0,0, .5)",
-            borderWidth: 2
+            //曲线的填充颜色
+            fillColor : "rgba(220,220,220,0.5)",  
+            //填充块的边框线的颜色
+            strokeColor : "rgba(220,220,220,1)", 
+            //表示数据的圆圈的颜色
+            pointColor : "rgba(220,220,220,1)",  
+            //表示数据的圆圈的边的颜色
+            pointStrokeColor : "#fff",
+            // pointBackgroundColor: "transparent",
+            // pointBorderColor: "transparent",
+            // pointHoverBackgroundColor: "rgba(146,142,142, .5)",
+            borderWidth: 3,
+            label:'月销售量'
           }
         ]
       };
@@ -102,12 +137,25 @@ export default {
           this.datacollection.datasets[index].data = items.data;
           this.datacollection.datasets[index].label = "Data" + index;
           this.datacollection.datasets[index].backgroundColor = gradient;
-          this.datacollection.datasets[index].pointBackgroundColor =
-            "transparent";
-          this.datacollection.datasets[index].pointBorderColor = "transparent";
-          this.datacollection.datasets[index].pointHoverBackgroundColor =
-            "rgba(0,0,0, .5)";
+          // this.datacollection.datasets[index].pointBackgroundColor =
+          //   "transparent";
+          // this.datacollection.datasets[index].pointBorderColor = "transparent";
+          // this.datacollection.datasets[index].pointHoverBackgroundColor =
+          //   "rgba(221,221,221, .5)";
+            //曲线的填充颜色
+            this.datacollection.datasets[index].fillColor  = "rgba(179,127,235,0.5)" 
+          //填充块的边框线的颜色
+            this.datacollection.datasets[index].strokeColor = "rgba(220,220,220,1)"
+          //表示数据的圆圈的颜色
+            this.datacollection.datasets[index].pointColor = "blue"  
+          //表示数据的圆圈的边的颜色
+            this.datacollection.datasets[index].pointStrokeColor = "#fff"
           this.datacollection.datasets[index].borderWidth = 2;
+
+            this.datacollection.datasets[index].pointStrokeColor = "#fff"
+            this.datacollection.datasets[index].pointBorderWidth = 2.5
+            this.datacollection.datasets[index].pointRadius = 4
+          this.datacollection.datasets[index].label = this.brandKey
         });
       }
     },

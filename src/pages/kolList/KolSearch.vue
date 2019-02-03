@@ -233,7 +233,6 @@ export default {
       } else {
         this.kolOnlyText = "N";
       }
-      console.log(this.kolOnly);
       let params = {
         page_no: this.currentPage,
         page_size: 10,
@@ -302,6 +301,8 @@ export default {
         element.correlation = parseInt(element.correlation * 100);
       });
       _that.searchList = data;
+      // console.log('woshidata', data);
+      // // console.log(data.r8_id);
       _that.searchListBox.push(_that.searchList);
       _that.currentPage = _that.currentPage + 1;
     },
