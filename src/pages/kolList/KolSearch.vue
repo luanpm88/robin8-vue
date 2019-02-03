@@ -355,7 +355,7 @@ export default {
           id: item.profile_id,
           type: this.tabIndex,
           brand_keywords: this.keyWord.brand_keywords
-          
+
         }
       });
     },
@@ -528,7 +528,7 @@ span {
 .kol-data-tab {
   li {
     text-align: center;
-    line-height: 55px;
+    line-height: 42px;
     color: #333;
     font-size: 14px;
   }
@@ -600,7 +600,6 @@ span {
 .kol-data-rank {
   padding: 0px;
   display: inline-block;
-  vertical-align: 17px;
   line-height: 20px;
   cursor: pointer;
   i {
@@ -608,6 +607,7 @@ span {
     height: 0;
     border-style: solid;
     &:nth-child(1) {
+      display: block;
       border-width: 0 8px 8px;
       border-color: transparent transparent #a7a5a5;
     }
@@ -615,7 +615,7 @@ span {
       display: block;
       border-width: 8px 8px 0;
       border-color: #a7a5a5 transparent transparent;
-      margin: 7px auto 0;
+      margin: 1px auto 0;
     }
   }
   .active {
