@@ -497,7 +497,7 @@ export default {
           if (res.status === 200) {
             _that.dataListBox = res.data;
             _that.dataListBox.platform = 'weibo';
-             console.log('weibo ', res.data);
+            //  console.log('weibo ', res.data);
           }
         })
         .catch(function(error) {

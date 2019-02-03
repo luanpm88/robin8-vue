@@ -77,7 +77,7 @@
         <span v-for="(item, index) in topNumList" :key="index
         ">{{item}}</span>
       </p>
-      <div class="">
+      <div class>
         <default-tabs
           :tabList="tabList"
           :tabIndex="tabIndex"
@@ -89,8 +89,20 @@
               <li>Profile</li>
               <li>Price</li>
               <li>R8 KOL</li>
-              <li>Influence</li>
-              <li>Relevance</li>
+              <li>
+                Influence
+                <span class="kol-data-rank" @click="rank">
+                  <i :class="{active: isactive}"></i>
+                  <i :class="{active: !isactive}"></i>
+                </span>
+              </li>
+              <li>
+                Relevance
+                <span class="kol-data-rank" @click="rank">
+                  <i :class="{active: isactive}"></i>
+                  <i :class="{active: !isactive}"></i>
+                </span>
+              </li>
             </ul>
             <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
               <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
@@ -122,8 +134,7 @@
                   </div>
                 </li>
                 <li>
-                  <p class="kol-data-r8">
-                {{item.pricing.direct_price}}</p>
+                  <p class="kol-data-r8">{{item.pricing.direct_price}}</p>
                 </li>
                 <li>
                   <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
@@ -173,9 +184,11 @@ export default {
     AProgress: Progress,
     DefaultTabs
   },
-  props: ['keyWord'],
+  props: ["keyWord"],
   data() {
     return {
+      profileSort: 1,
+      isactive: false,
       keyword: "",
       industry: "",
       engagementFrom: "",
@@ -188,7 +201,12 @@ export default {
       kolOnlyText: "N",
       currentPage: 0,
       advancedSearch: false,
-      topNumList: ['weixin - big data profile - 5,564,575', 'weibo - big data profile - 65,860,968', 'weixin - R8 managed - 3,189', 'weibo - R8 managed - 1,026'],
+      topNumList: [
+        "weixin - big data profile - 5,564,575",
+        "weibo - big data profile - 65,860,968",
+        "weixin - R8 managed - 3,189",
+        "weibo - R8 managed - 1,026"
+      ],
       tabList: [
         {
           index: 0,
@@ -206,25 +224,15 @@ export default {
   },
   created() {
     // 接口
-    this.paramsInit(0)
-    console.log(this.keyWord.brand_keywords)
+    console.log(this.keyWord.brand_keywords);
     if (this.keyWord.brand_keywords) {
       // console.log(1)
-      this.keyword = this.keyWord.brand_keywords
-      this.paramsInit(this.keyWord.type)
+      this.keyword = this.keyWord.brand_keywords;
+      this.paramsInit(this.keyWord.type);
     } else {
-      this.paramsInit(0)
+      this.paramsInit(0);
     }
   },
-  // watch: {
-  //   keyWord: {
-  //     handler() {
-  //       // console.log(this.keyWord);
-  //       this.paramsInit(this.keyWord.type);
-  //     },
-  //     deep: true
-  //   }
-  // },
   computed: {
     ...mapState(["authorization"])
   },
@@ -249,11 +257,12 @@ export default {
         keywords: this.keyword,
         profile_sort_col: 0,
         profile_sort_dir: "desc",
-        r8_registered_kol_only: this.kolOnlyText,
-      }
+        r8_registered_kol_only: this.kolOnlyText
+      };
       if (type === 0) {
-        params.folllower_from =  this.followerFrom
-        params.follower_to = this.followerTo
+        params.folllower_from = this.followerFrom;
+        params.follower_to = this.followerTo;
+        params.profile_sort_col = this.profileSort;
         // 微博的接口
         this.kollistJoggle(type, params);
       } else {
@@ -275,7 +284,7 @@ export default {
           .then(function(res) {
             console.log("我是weibo接口", res);
             if (res.status === 200) {
-              _that.jogDataInit(res.data.data)
+              _that.jogDataInit(res.data.data);
             }
           })
           .catch(function(error) {
@@ -301,15 +310,15 @@ export default {
     // 处理数据函数
     jogDataInit(data) {
       const _that = this;
-      data.forEach(element => {
-        element.influence = parseInt(element.stats.avg_post_influence / 999 * 100);
+      data.forEach((element, index) => {
+        element.influence = element.stats.avg_post_influence;
         element.correlation = parseInt(element.correlation * 100);
         if (!element.pricing) {
-          element.pricing = {},
-          element.pricing.direct_price = 'N/A'
+          (element.pricing = {}), (element.pricing.direct_price = "N/A");
         }
       });
       _that.searchList = data;
+
       // console.log('woshidata', data);
       // console.log('woshidata', data.pricing);
       // // console.log(data.r8_id);
@@ -340,15 +349,28 @@ export default {
       // console.log(item)
       // this.$router.push("/kol/" + item.profile_id)
       this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
+        path: "/kol/",
+        name: "KolDetail",
         params: {
           id: item.profile_id,
           type: this.tabIndex,
           brand_keywords: this.keyWord.brand_keywords
-        },
+          
+        }
       });
     },
+    // rank
+    rank(){
+      this.searchListBox = [];
+      this.isactive = !this.isactive;
+      if (this.isactive) {
+        this.profileSort = 0;
+        this.paramsInit(this.tabIndex);
+      } else {
+        this.profileSort = 1;
+        this.paramsInit(this.tabIndex);
+      }
+    }
   }
 };
 </script>
@@ -506,8 +528,9 @@ span {
 .kol-data-tab {
   li {
     text-align: center;
-    padding: 5px 0;
+    line-height: 55px;
     color: #333;
+    font-size: 14px;
   }
 }
 .kol-data-content {
@@ -561,11 +584,11 @@ span {
     }
   }
 }
-.kol-list-topnum{
+.kol-list-topnum {
   height: 40px;
   margin-bottom: 10px;
   clear: both;
-  span{
+  span {
     float: left;
     border: 1px solid #ddd;
     margin-right: 10px;
@@ -573,5 +596,36 @@ span {
     padding: 5px 10px;
     color: #333;
   }
+}
+.kol-data-rank {
+  padding: 0px;
+  display: inline-block;
+  vertical-align: 17px;
+  line-height: 20px;
+  cursor: pointer;
+  i {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    &:nth-child(1) {
+      border-width: 0 8px 8px;
+      border-color: transparent transparent #a7a5a5;
+    }
+    &:nth-child(2) {
+      display: block;
+      border-width: 8px 8px 0;
+      border-color: #a7a5a5 transparent transparent;
+      margin: 7px auto 0;
+    }
+  }
+  .active {
+    &:nth-child(1) {
+      border-color: transparent transparent #b180ef ;
+    }
+    &:nth-child(2) {
+      border-color: #b180ef  transparent transparent; 
+    }
+  }
+
 }
 </style>
