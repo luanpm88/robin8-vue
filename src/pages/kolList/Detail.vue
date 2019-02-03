@@ -6,10 +6,7 @@
         <!-- info -->
         <div class="kol-infobox mb10">
           <p class="kol-info-topbg"></p>
-          <img
-            :src="infoList.img"
-            alt
-          >
+          <img :src="infoList.img" alt>
           <div class="kol-info">
             <p>
               {{infoList.name}}
@@ -18,11 +15,12 @@
             </p>
             <p>{{infoList.age}}</p>
             <p>
-              <i class="iconfont icon-weizhi"></i>{{infoList.region}}
+              <i class="iconfont icon-weizhi"></i>
+              {{infoList.region}}
             </p>
           </div>
           <ul class="clearfix">
-            <li v-for="(item, index) in dec" :key='index'>{{item}}</li>
+            <li v-for="(item, index) in dec" :key="index">{{item}}</li>
           </ul>
         </div>
         <div class="kol-card kol-brand mb10">
@@ -40,8 +38,7 @@
           <bar-charts class="kol-bar-chart" :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
         </div>
         <div class="kol-card mb10">
-          <p class="kol-cloumn">Keywords
-          </p>
+          <p class="kol-cloumn">Keywords</p>
           <tag-charts :width="150" :height="180" :taglist="parentTags"></tag-charts>
         </div>
       </div>
@@ -49,7 +46,7 @@
         <div class="kol-card mb10">
           <p class="kol-cloumn mb10">Activity</p>
           <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-          <p class="activity-color">AI expert has taken the following campaigns for your brands.</p> -->
+          <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
           <div class="activity-table">
             <table class="com-brand-table">
               <tr>
@@ -79,13 +76,13 @@
               </tr>
               <tr>
                 <td>Total</td>
-                <td v-for="(item, index) in activeList.total_info" :key='index'>
+                <td v-for="(item, index) in activeList.total_info" :key="index">
                   <p class="activity-border">{{item}}</p>
                 </td>
               </tr>
               <tr>
                 <td>Last 30 days</td>
-                <td v-for="(item, index) in activeList.last_30_days_info" :key='index'>
+                <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
                   <p class="activity-border">{{item}}</p>
                 </td>
               </tr>
@@ -98,7 +95,7 @@
             <table class="com-brand-table">
               <tr>
                 <th>Platform</th>
-                <!-- <th>Price</th> -->
+                <th>Price</th>
                 <th>Followers</th>
                 <th>Likes</th>
                 <th>Shares</th>
@@ -108,7 +105,7 @@
               </tr>
               <tr>
                 <td>{{dataListBox.platform}}</td>
-                <!-- <td>{{dataListBox.pricing.direct_price}}</td> -->
+                <td>{{dataListBox.pricing.direct_price}}</td>
                 <td>{{dataListBox.fans_number}}</td>
                 <td>{{dataListBox.stats.avg_shares}}</td>
                 <td>{{dataListBox.stats.avg_reads}}</td>
@@ -125,15 +122,15 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
-import { Table } from "ant-design-vue"
-import BarCharts from "@components/Chart/chartHorizontalBar"
-import TagCharts from "@components/Chart/chartTagsTwo"
-import { mapState } from 'vuex'
+import axios from "axios";
+import apiConfig from "@/config";
+import { Table } from "ant-design-vue";
+import BarCharts from "@components/Chart/chartHorizontalBar";
+import TagCharts from "@components/Chart/chartTagsTwo";
+import { mapState } from "vuex";
 export default {
   name: "KolDetail",
-  components: { ATable: Table , BarCharts, TagCharts},
+  components: { ATable: Table, BarCharts, TagCharts },
   data() {
     return {
       Sentiment: 0,
@@ -142,20 +139,21 @@ export default {
         dataList: []
       },
       infoList: {
-        img: 'https://tva4.sinaimg.cn/crop.0.0.512.512.50/7d9dcce2jw8fbdpbjg039j20e80e874h.jpg',
-        name: '-',
-        age: 'N/A',
-        region: 'N/A'
+        img:
+          "https://tva4.sinaimg.cn/crop.0.0.512.512.50/7d9dcce2jw8fbdpbjg039j20e80e874h.jpg",
+        name: "-",
+        age: "N/A",
+        region: "N/A"
       },
-      dec: ['-'],
+      dec: ["-"],
       parentTags: [],
       dataListBox: {
-        fans_number: '',
+        fans_number: "",
         stats: {
-          avg_shares: '',
-          avg_reads: '',
-          avg_daily_posts: '',
-          avg_post_influences: ''
+          avg_shares: "",
+          avg_reads: "",
+          avg_daily_posts: "",
+          avg_post_influences: ""
         }
       },
       activeList: {},
@@ -253,16 +251,17 @@ export default {
       ],
       socalData: [
         {
-          platform: 'weixin',
-          followers: 'IOK',
+          platform: "weixin",
+          followers: "IOK",
           likes: 20,
           shards: 8,
           comment: 234,
           post: 10,
           impact: 900
-        },{
-          platform: 'weibo',
-          followers: 'None',
+        },
+        {
+          platform: "weibo",
+          followers: "None",
           likes: 30,
           shards: 89,
           comment: 534,
@@ -280,88 +279,88 @@ export default {
           title: "no.of camppaingns(CPc)",
           align: "center",
           dataIndex: "campaingns",
-          scopedSlots: { customRender: 'campaingns' },
+          scopedSlots: { customRender: "campaingns" }
         },
         {
           title: "Performance(CPc)",
           align: "center",
           dataIndex: "performance",
-          scopedSlots: { customRender: 'performance' }
+          scopedSlots: { customRender: "performance" }
         },
         {
           title: "Number of Clients",
           align: "center",
           dataIndex: "clients",
-          scopedSlots: { customRender: 'clients' }
+          scopedSlots: { customRender: "clients" }
         }
       ],
       analyticData: [
         {
-          name: 'Total',
+          name: "Total",
           campaingns: {
             num: 20,
-            camPercent: '',
+            camPercent: ""
           },
           performance: {
             num: 5,
-            perPercent: '',
+            perPercent: ""
           },
           clients: 5
         },
         {
-          name: 'Last 30 days',
+          name: "Last 30 days",
           campaingns: {
             num: 20,
-            camPercent: '30%',
+            camPercent: "30%"
           },
           performance: {
             num: 5,
-            perPercent: '0.2%',
+            perPercent: "0.2%"
           },
           clients: 2
         }
-      ],
-    }
+      ]
+    };
   },
   created() {
     // console.log(this.$route.params.id);
     // console.log(this.$route.params.brand_keywords)
-    this.trendParams.brand_keywords = this.$route.params.brand_keywords
-    this.sentimentParams.brand_keywords = this.$route.params.brand_keywords
+    this.trendParams.brand_keywords = this.$route.params.brand_keywords;
+    this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
     let totalParams = {
-      profile_id : Number(this.$route.params.id),
+      profile_id: Number(this.$route.params.id),
       language: "en"
-    }
+    };
     if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
-      this.kolWeiboIndustry(totalParams)
-      this.kolWeiboKeyword(totalParams)
-      this.kolWeiboSocial(totalParams)
+      this.kolWeiboIndustry(totalParams);
+      this.kolWeiboKeyword(totalParams);
+      this.kolWeiboSocial(totalParams);
       // 获取sentiment
       this.sentimentWeibo(this.sentimentParams);
       // trend 微博
       this.trendsWeibo(this.trendParams);
     } else {
       // weixin
-      this.kolWeiXinIndustry(totalParams)
-      this.kolWeiXinKeyword(totalParams)
-      this.kolWeixinSocial(totalParams)
+      this.kolWeiXinIndustry(totalParams);
+      this.kolWeiXinKeyword(totalParams);
+      this.kolWeixinSocial(totalParams);
       // 获取sentiment
       this.sentimentWeibo(this.sentimentParams);
     }
     this.kolActivityUrl(totalParams);
   },
   computed: {
-    ...mapState(['authorization'])
+    ...mapState(["authorization"])
   },
   methods: {
     // info 微博的接口
     kolWeiboInfo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiboInfo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -376,16 +375,16 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // info weixin的接口
     kolWeiXinInfo(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiXinInfo, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -393,22 +392,22 @@ export default {
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
-            _that.infoList.gender = '-';
+            _that.infoList.gender = "-";
             // _that.infoList.age = res.data.profile_name;
             // _that.infoList.region = res.data.profile_name;
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // industry weibo
     kolWeiboIndustry(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiboIndustry, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -420,15 +419,15 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     kolWeiXinIndustry(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiXinIndustry, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -440,16 +439,16 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // Keyword weibo
     kolWeiboKeyword(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiboKeyword, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -462,15 +461,15 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     kolWeiXinKeyword(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiXinKeyword, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
@@ -481,91 +480,107 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // kolWeixinSocial weibo
     kolWeiboSocial(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeiboSocial, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           if (res.status === 200) {
+            if (!res.data.pricing) {
+              res.data.pricing = {};
+              res.data.pricing.direct_price = "N/A";
+            }
             _that.dataListBox = res.data;
-            _that.dataListBox.platform = 'weibo';
+            // console.log(res);
+            _that.dataListBox.platform = "weibo";
             //  console.log('weibo ', res.data);
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // kolWeixinSocial
     kolWeixinSocial(params) {
-      const _that = this
+      const _that = this;
       axios
         .post(apiConfig.kolWeixinSocial, params, {
           headers: {
-            'Authorization': _that.authorization
+            Authorization: _that.authorization
           }
         })
         .then(function(res) {
           if (res.status === 200) {
+            if (!res.data.pricing) {
+              res.data.pricing = {};
+              res.data.pricing.direct_price = "N/A";
+            }
             _that.dataListBox = res.data;
-            _that.dataListBox.platform = 'weixin';
+            _that.dataListBox.platform = "weixin";
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口
     kolActivityUrl(params) {
-      const _that = this
+      const _that = this;
       axios
-        .get(apiConfig.kolActivityUrl + '/' + this.$route.params.id + '/big_v_details', params, {
-          headers: {
-            'Authorization': _that.authorization
+        .get(
+          apiConfig.kolActivityUrl +
+            "/" +
+            this.$route.params.id +
+            "/big_v_details",
+          params,
+          {
+            headers: {
+              Authorization: _that.authorization
+            }
           }
-        })
+        )
         .then(function(res) {
           if (res.status === 200) {
             _that.activeList = res.data;
             if (_that.activeList.total_info.length === 0) {
-              _that.activeList.total_info[0] = 'N/A';
-              _that.activeList.total_info[1] = 'N/A';
-              _that.activeList.total_info[2] = 'N/A';
+              _that.activeList.total_info[0] = "N/A";
+              _that.activeList.total_info[1] = "N/A";
+              _that.activeList.total_info[2] = "N/A";
             }
             if (_that.activeList.creations_list.length === 0) {
-              _that.activeList.creations_list[0] = {}
-              _that.activeList.creations_list[0].id = 'N/A'
-              _that.activeList.creations_list[0].title = 'N/A'
-              _that.activeList.creations_list[0].date = 'N/A'
-              _that.activeList.creations_list[0].amount = 'N/A'
+              _that.activeList.creations_list[0] = {};
+              _that.activeList.creations_list[0].id = "N/A";
+              _that.activeList.creations_list[0].title = "N/A";
+              _that.activeList.creations_list[0].date = "N/A";
+              _that.activeList.creations_list[0].amount = "N/A";
             }
             if (res.data.data === null) {
               if (Number(_that.$route.params.type) === 0) {
                 // 调用Fergus 微博info
-                _that.kolWeiboInfo(params)
+                _that.kolWeiboInfo(params);
               } else {
                 // 调用Fergus weixin info
-                _that.kolWeiXinInfo(params)
+                _that.kolWeiXinInfo(params);
               }
             } else {
-              _that.infoList.img = res.data.data.avatar_url
-              _that.infoList.name = res.data.data.profile_name
-              _that.infoList.gender = '-'
-              _that.dec = res.data.data.industries
+              _that.infoList.img = res.data.data.avatar_url;
+              _that.infoList.name = res.data.data.profile_name;
+              _that.infoList.gender = "-";
+              _that.dec = res.data.data.industries;
             }
           }
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     // sentiment 微博
     sentimentWeibo(params) {
@@ -610,10 +625,15 @@ export default {
         })
         .then(function(res) {
           // console.log(res.data.data.slice(res.data.data.length-8, res.data.data.length-1));
-          _that.MentionsList.push(res.data.data.slice(res.data.data.length-8, res.data.data.length-1));
+          _that.MentionsList.push(
+            res.data.data.slice(
+              res.data.data.length - 8,
+              res.data.data.length - 1
+            )
+          );
           _that.MentionsList.forEach(item => {
             _that.MentionsNum += parseInt(item);
-          })
+          });
         })
         .catch(function(error) {
           console.log(error);
@@ -629,17 +649,22 @@ export default {
           }
         })
         .then(function(res) {
-          _that.MentionsList.push(res.data.data.slice(res.data.data.length-8, res.data.data.length-1))
+          _that.MentionsList.push(
+            res.data.data.slice(
+              res.data.data.length - 8,
+              res.data.data.length - 1
+            )
+          );
           _that.MentionsList.forEach(item => {
-            _that.MentionsNum += parseInt(item)
-          })
+            _that.MentionsNum += parseInt(item);
+          });
         })
         .catch(function(error) {
           console.log(error);
         });
-    },
+    }
   }
-}
+};
 </script>
 <style  lang="scss" scoped>
 .kol-detail-wrap {
@@ -727,57 +752,57 @@ export default {
   line-height: 30px;
   color: nth($purple, 1);
 }
-.activity-table{
+.activity-table {
   margin: 16px 0px 20px;
 }
-.activity-border{
-  border: 1px solid #A347C9FF;
-  color: #A347C9FF;
+.activity-border {
+  border: 1px solid #a347c9ff;
+  color: #a347c9ff;
   line-height: 32px;
-  font-size: $font-nm-b
+  font-size: $font-nm-b;
 }
-.com-brand-table{
+.com-brand-table {
   color: #333;
   width: 100%;
-  tr{
+  tr {
     border-bottom: 1px solid #ddd;
-    th{
+    th {
       color: #333;
       font-size: 14px;
-       text-align: center;
+      text-align: center;
       padding: 5px 0px;
-      &:nth-child(1){
+      &:nth-child(1) {
         width: 8%;
       }
-      &:nth-child(2){
+      &:nth-child(2) {
         width: 20%;
       }
     }
   }
-  td{
+  td {
     text-align: center;
     padding: 5px 10px;
-    &:nth-child(1){
+    &:nth-child(1) {
       width: 8%;
     }
-    &:nth-child(2){
+    &:nth-child(2) {
       width: 20%;
     }
   }
 }
-.activity-contable{
-  table{
-    th{
-      &:nth-child(1){
+.activity-contable {
+  table {
+    th {
+      &:nth-child(1) {
         width: 20%;
       }
     }
-    td{
+    td {
       padding: 10px;
     }
   }
 }
-.kol-bar-chart{
+.kol-bar-chart {
   margin-top: 20px;
 }
 </style>

@@ -268,6 +268,7 @@ export default {
       } else {
         // weixin的接口
         this.kollistJoggle(type, params);
+        
       }
     },
     // 微博和微信的接口
@@ -311,6 +312,10 @@ export default {
     jogDataInit(data) {
       const _that = this;
       data.forEach((element, index) => {
+        if (element.description_raw.length > 60) {
+          element.description_raw = element.description_raw.substr(0, 63) + '...'
+        }
+        // console.log();
         element.influence = element.stats.avg_post_influence;
         element.correlation = parseInt(element.correlation * 100);
         if (!element.pricing) {
