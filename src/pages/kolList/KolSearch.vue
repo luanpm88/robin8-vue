@@ -87,6 +87,7 @@
           <div class="kol-data">
             <ul class="kol-data-tab clearfix">
               <li>Profile</li>
+              <li>Price</li>
               <li>R8 KOL</li>
               <li>Influence</li>
               <li>Relevance</li>
@@ -119,6 +120,10 @@
                       </div>
                     </div>
                   </div>
+                </li>
+                <li>
+                  <p class="kol-data-r8">
+                {{item.pricing.direct_price}}</p>
                 </li>
                 <li>
                   <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
@@ -299,9 +304,14 @@ export default {
       data.forEach(element => {
         element.influence = parseInt(element.stats.avg_post_influence / 999 * 100);
         element.correlation = parseInt(element.correlation * 100);
+        if (!element.pricing) {
+          element.pricing = {},
+          element.pricing.direct_price = 'N/A'
+        }
       });
       _that.searchList = data;
       // console.log('woshidata', data);
+      // console.log('woshidata', data.pricing);
       // // console.log(data.r8_id);
       _that.searchListBox.push(_that.searchList);
       _that.currentPage = _that.currentPage + 1;
@@ -482,7 +492,10 @@ span {
       width: 40%;
     }
     &:nth-child(2) {
-      width: 22%;
+      width: 11%;
+    }
+    &:nth-child(2) {
+      width: 11%;
     }
     &:nth-child(3),
     &:nth-child(4) {

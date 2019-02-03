@@ -98,6 +98,7 @@
             <table class="com-brand-table">
               <tr>
                 <th>Platform</th>
+                <!-- <th>Price</th> -->
                 <th>Followers</th>
                 <th>Likes</th>
                 <th>Shares</th>
@@ -107,6 +108,7 @@
               </tr>
               <tr>
                 <td>{{dataListBox.platform}}</td>
+                <!-- <td>{{dataListBox.pricing.direct_price}}</td> -->
                 <td>{{dataListBox.fans_number}}</td>
                 <td>{{dataListBox.stats.avg_shares}}</td>
                 <td>{{dataListBox.stats.avg_reads}}</td>
@@ -495,6 +497,7 @@ export default {
           if (res.status === 200) {
             _that.dataListBox = res.data;
             _that.dataListBox.platform = 'weibo';
+             console.log('weibo ', res.data);
           }
         })
         .catch(function(error) {
@@ -531,12 +534,18 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('', res.data);
             _that.activeList = res.data;
             if (_that.activeList.total_info.length === 0) {
-              _that.activeList.total_info[0] = '-';
-              _that.activeList.total_info[1] = '-';
-              _that.activeList.total_info[2] = '-';
+              _that.activeList.total_info[0] = 'N/A';
+              _that.activeList.total_info[1] = 'N/A';
+              _that.activeList.total_info[2] = 'N/A';
+            }
+            if (_that.activeList.creations_list.length === 0) {
+              _that.activeList.creations_list[0] = {}
+              _that.activeList.creations_list[0].id = 'N/A'
+              _that.activeList.creations_list[0].title = 'N/A'
+              _that.activeList.creations_list[0].date = 'N/A'
+              _that.activeList.creations_list[0].amount = 'N/A'
             }
             if (res.data.data === null) {
               if (Number(_that.$route.params.type) === 0) {
