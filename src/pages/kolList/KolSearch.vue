@@ -62,7 +62,7 @@
             <div class="kol-type">
               <label>
                 <input type="checkbox" v-model="kolOnly">
-                <span>Only display KOLs that are registered at Robin8</span>
+                <span>Only display KOLs that have prices at Robin8</span>
               </label>
             </div>
           </div>
@@ -183,7 +183,7 @@ export default {
       kolOnlyText: "N",
       currentPage: 0,
       advancedSearch: false,
-      topNumList: ['weixin - big data profile - 5564575', 'weibo - big data profile - 65860968', 'weixin - R8 managed - 3189', 'weibo - R8 managed - 1026'],
+      topNumList: ['weixin - big data profile - 5,564,575', 'weibo - big data profile - 65,860,968', 'weixin - R8 managed - 3,189', 'weibo - R8 managed - 1,026'],
       tabList: [
         {
           index: 0,

@@ -26,7 +26,7 @@
       <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
         <span v-if="hasInflunce" class="media-right-txt">{{renderData.influnce}}</span>
         <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
-        <span v-if="hasMsg" class="iconfont icon-msg"></span>
+        <span v-if="hasMsg" class="iconfont icon-msg" @click="alertMessage"></span>
       </div>
     </div>
   </div>
@@ -56,6 +56,9 @@ export default {
       this.$emit('handleCheck', {
         'id': id
       })
+    },
+    alertMessage() {
+      alert('敬请期待');
     }
   },
   mounted () {
