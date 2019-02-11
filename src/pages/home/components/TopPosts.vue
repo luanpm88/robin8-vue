@@ -55,6 +55,7 @@
 <script>
 import axios from "axios"
 import apiConfig from "@/config"
+import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
 import { mapState } from 'vuex'
@@ -73,8 +74,8 @@ export default {
       postWeixinCurrentPage: 0,
       tabIndex: 0,
       topPostParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW",
         page_no: 0,
         page_size: 4

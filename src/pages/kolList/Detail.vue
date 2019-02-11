@@ -1,6 +1,6 @@
 <template>
   <div class="kol-detail-wrap">
-    <p class="kol-detail-title">AI EXPECT DETAIL PAGE</p>
+    <p class="kol-detail-title">{{infoList.name}}</p>
     <div class="kol-detail clearfix">
       <div class="kol-detail-side">
         <!-- info -->
@@ -34,7 +34,7 @@
           </p>
         </div>
         <div class="kol-card mb10">
-          <p class="kol-cloumn">Top industry</p>
+          <p class="kol-cloumn">Top Industries</p>
           <bar-charts class="kol-bar-chart" :childData="competiteWeiboList"
           :display='false' :labelSize='12' ref="competiteChart"></bar-charts>
         </div>
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="kol-card mb10">
-          <p class="kol-cloumn">Social data</p>
+          <p class="kol-cloumn">Social Data</p>
           <div class="activity-table">
             <table class="com-brand-table">
               <tr>
@@ -102,14 +102,14 @@
                 <th>Shares</th>
                 <th>Comments</th>
                 <th>Post-last 21 days</th>
-                <th>Impact score</th>
+                <th>Influence Score</th>
               </tr>
               <tr>
                 <td>{{dataListBox.platform}}</td>
                 <td>{{dataListBox.pricing.direct_price}}</td>
                 <td>{{dataListBox.fans_number}}</td>
+                <td>{{dataListBox.stats.avg_likes}}</td>
                 <td>{{dataListBox.stats.avg_shares}}</td>
-                <td>{{dataListBox.stats.avg_reads}}</td>
                 <td>{{dataListBox.stats.avg_comments}}</td>
                 <td>{{dataListBox.stats.avg_daily_posts}}</td>
                 <td>{{dataListBox.stats.avg_post_influences}}</td>
@@ -125,6 +125,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import commonJs from '@javascripts/common.js';
 import { Table } from "ant-design-vue";
 import BarCharts from "@components/Chart/chartHorizontalBar";
 import TagCharts from "@components/Chart/chartTagsTwo";
@@ -149,183 +150,36 @@ export default {
       dec: ["-"],
       parentTags: [],
       dataListBox: {
-        fans_number: "",
+        fans_number: 'N/A',
         stats: {
-          avg_shares: "",
-          avg_reads: "",
-          avg_daily_posts: "",
-          avg_post_influences: ""
+          avg_shares: 'N/A',
+          avg_reads: 'N/A',
+          avg_daily_posts: 'N/A',
+          avg_post_influences: 'N/A',
+          avg_comments: 'N/A'
+        },
+        pricing: {
+          direct_price: 'N/A'
         }
       },
       activeList: {},
       sentimentParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW"
       },
       trendParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW",
         type: "doc"
       },
       MentionsList: [],
-      MentionsNum: 0,
-      activeColumns: [
-        {
-          title: "#",
-          align: "center",
-          dataIndex: "kley"
-        },
-        {
-          title: "Title",
-          align: "center",
-          dataIndex: "title"
-        },
-        {
-          title: "Date",
-          align: "center",
-          dataIndex: "data"
-        },
-        {
-          title: "Performance",
-          align: "center",
-          dataIndex: "performance"
-        }
-      ],
-      activeData: [
-        {
-          kley: 1,
-          title: "title-1",
-          data: "2018-01-1",
-          performance: "books"
-        },
-        {
-          kley: 2,
-          title: "title-2",
-          data: "2018-01-2",
-          performance: "books2"
-        },
-        {
-          kley: 3,
-          title: "title-3",
-          data: "2018-01-3",
-          performance: "books3"
-        }
-      ],
-      socalColumns: [
-        {
-          title: "Platform",
-          align: "center",
-          dataIndex: "platform"
-        },
-        {
-          title: "Followers",
-          align: "center",
-          dataIndex: "followers"
-        },
-        {
-          title: "Likes",
-          align: "center",
-          dataIndex: "likes"
-        },
-        {
-          title: "Shards",
-          align: "center",
-          dataIndex: "shards"
-        },
-        {
-          title: "Comments",
-          align: "center",
-          dataIndex: "comment"
-        },
-        {
-          title: "Post-last 30 days",
-          align: "center",
-          dataIndex: "post"
-        },
-        {
-          title: "Impact score",
-          align: "center",
-          dataIndex: "impact"
-        }
-      ],
-      socalData: [
-        {
-          platform: "weixin",
-          followers: "IOK",
-          likes: 20,
-          shards: 8,
-          comment: 234,
-          post: 10,
-          impact: 900
-        },
-        {
-          platform: "weibo",
-          followers: "None",
-          likes: 30,
-          shards: 89,
-          comment: 534,
-          post: 60,
-          impact: 890
-        }
-      ],
-      analyticColumns: [
-        {
-          title: "",
-          align: "center",
-          dataIndex: "name"
-        },
-        {
-          title: "no.of camppaingns(CPc)",
-          align: "center",
-          dataIndex: "campaingns",
-          scopedSlots: { customRender: "campaingns" }
-        },
-        {
-          title: "Performance(CPc)",
-          align: "center",
-          dataIndex: "performance",
-          scopedSlots: { customRender: "performance" }
-        },
-        {
-          title: "Number of Clients",
-          align: "center",
-          dataIndex: "clients",
-          scopedSlots: { customRender: "clients" }
-        }
-      ],
-      analyticData: [
-        {
-          name: "Total",
-          campaingns: {
-            num: 20,
-            camPercent: ""
-          },
-          performance: {
-            num: 5,
-            perPercent: ""
-          },
-          clients: 5
-        },
-        {
-          name: "Last 30 days",
-          campaingns: {
-            num: 20,
-            camPercent: "30%"
-          },
-          performance: {
-            num: 5,
-            perPercent: "0.2%"
-          },
-          clients: 2
-        }
-      ]
+      MentionsNum: 0
     };
   },
   created() {
     // console.log(this.$route.params.id);
-    // console.log(this.$route.params.brand_keywords)
     this.trendParams.brand_keywords = this.$route.params.brand_keywords;
     this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
     let totalParams = {
@@ -495,14 +349,31 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            if (!res.data.pricing) {
-              res.data.pricing = {};
-              res.data.pricing.direct_price = "N/A";
-            }
             _that.dataListBox = res.data;
-            // console.log(res);
+            if (!_that.dataListBox.pricing) {
+              _that.dataListBox.pricing = {};
+              _that.dataListBox.pricing.direct_price = "N/A";
+            }
+            if (_that.dataListBox.fans_number === '') {
+              _that.dataListBox.fans_number = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_shares === '') {
+              _that.dataListBox.stats.avg_shares = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_likes === '') {
+              _that.dataListBox.stats.avg_likes = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_comments === '') {
+              _that.dataListBox.stats.avg_comments = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_daily_posts === '') {
+              _that.dataListBox.stats.avg_daily_posts = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_post_influences === '') {
+              _that.dataListBox.stats.avg_post_influences = 'N/A'
+            }
             _that.dataListBox.platform = "weibo";
-            //  console.log('weibo ', res.data);
+            _that.dataListBox.pricing.direct_price = commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
           }
         })
         .catch(function(error) {
@@ -520,11 +391,29 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            if (!res.data.pricing) {
-              res.data.pricing = {};
-              res.data.pricing.direct_price = "N/A";
-            }
             _that.dataListBox = res.data;
+            if (!_that.dataListBox.pricing) {
+              _that.dataListBox.pricing = {};
+              _that.dataListBox.pricing.direct_price = "N/A";
+            }
+            if (_that.dataListBox.fans_number === '') {
+              _that.dataListBox.fans_number = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_shares === '') {
+              _that.dataListBox.stats.avg_shares = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_likes === '') {
+              _that.dataListBox.stats.avg_likes = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_comments === '') {
+              _that.dataListBox.stats.avg_comments = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_daily_posts === '') {
+              _that.dataListBox.stats.avg_daily_posts = 'N/A'
+            }
+            if (_that.dataListBox.stats.avg_post_influences === '') {
+              _that.dataListBox.stats.avg_post_influences = 'N/A'
+            }
             _that.dataListBox.platform = "weixin";
           }
         })

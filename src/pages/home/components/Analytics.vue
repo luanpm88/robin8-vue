@@ -48,6 +48,7 @@ import TagCharts from "@components/Chart/chartTags";
 import Tab from "@components/DefaultTabs";
 import { mapState } from "vuex";
 let key = "&application_id=local-001&application_key=vue-001";
+import commonJs from '@javascripts/common.js'
 export default {
   props: ["childKeyList"],
   components: {
@@ -63,25 +64,25 @@ export default {
       brandKeyWord: '',
       cur: 0,
       trendParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW",
         type: "doc"
       },
       competitorParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         cb_names: ["C1 BMW", "C2 Audi", "C3 Honda"],
         cb_keywords: ["BMW", "Audi", "Honda"]
       },
       sentimentParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW"
       },
       conceptParams: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW",
         language: "en"
       },

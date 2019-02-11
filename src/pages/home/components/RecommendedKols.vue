@@ -37,6 +37,7 @@
 <script>
 import axios from "axios"
 import apiConfig from "@/config"
+import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
 import { mapState } from 'vuex'
@@ -54,8 +55,8 @@ export default {
       kolHasChecked: false,
       tabIndex: 0,
       params: {
-        start_date: "2018-08-09",
-        end_date: "2018-08-29",
+        start_date: commonJs.commonStartDate,
+        end_date: commonJs.commonEndDate,
         brand_keywords: "BMW",
         order_by: "doc_count"
       },

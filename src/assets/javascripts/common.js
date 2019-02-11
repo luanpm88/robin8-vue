@@ -1,6 +1,13 @@
 /**
  * 公用方法
  */
+// 初始化时间
+const moment = require('moment')
+// import moment from 'moment';
+let commonEndDate = moment(new Date(new Date().getTime() - 36 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let commonNow = new Date(commonEndDate.replace(/\-/g, "/"));
+let commonStartDate = moment(new Date(commonNow.setMonth(commonNow.getMonth() - 1))).format("YYYY-MM-DD");
+
 // 格式化数字
 function formatNumber (n) {
   n = n.toString()
@@ -77,6 +84,60 @@ function buildObjData(key, value) {
   return obj
 }
 
+// 计算数字 3位逗号分割
+function threeFormatter(num, digits) {
+  var enabled = false;
+  if (!enabled) {
+    return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+  num = "" + num;
+  // alert("current locale = "+ _current_locale);
+  if (_current_locale == "zh") {
+    num = num.replace(/,/g, "");
+    var si = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "千" },
+      { value: 1e4, symbol: "万" },
+      { value: 1e6, symbol: "百万" },
+      { value: 1e7, symbol: "千万" },
+      { value: 1e8, symbol: "亿" },
+      { value: 1e10, symbol: "百亿" },
+      { value: 1e11, symbol: "千亿" }
+    ];
+    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var i;
+    for (i = si.length - 1; i > 0; i--) {
+      if (num >= si[i].value) {
+        break;
+      }
+    }
+    return (
+      (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol
+    );
+  } else {
+    num = num.replace(/,/g, "");
+    var si = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var i;
+    for (i = si.length - 1; i > 0; i--) {
+      if (num >= si[i].value) {
+        break;
+      }
+    }
+    return (
+      (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol
+    );
+  }
+}
+
 module.exports = {
   setLocalData,
   getLocalData,
@@ -86,5 +147,8 @@ module.exports = {
   isWeixin,
   isAndroid,
   verifyPhone,
-  buildObjData
+  buildObjData,
+  threeFormatter,
+  commonStartDate,
+  commonEndDate
 }
