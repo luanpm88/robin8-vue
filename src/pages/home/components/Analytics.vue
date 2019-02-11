@@ -22,7 +22,8 @@
             <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
               <p class="analytic-chart-title">Top 3 competitors</p>
-              <bar-charts :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
+              <bar-charts :childData="competiteWeiboList" ref="competiteChart"
+              :display='true' :labelSize='16'></bar-charts>
             </div>
             <div v-if="cur === 3">
               <p  class="analytic-chart-title">Sentiment</p>

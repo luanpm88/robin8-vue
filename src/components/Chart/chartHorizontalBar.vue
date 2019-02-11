@@ -15,6 +15,14 @@ export default {
     childData: {
       type: Object,
       required: true
+    },
+    display: {
+      type: Boolean,
+      required: true
+    },
+    labelSize: {
+      type: Number,
+      required: true
     }
   },
   data() {
@@ -32,13 +40,20 @@ export default {
                 beginAtZero: true,
                 xmax: 20,
                 fontColor: "#999",
-                fontSize:16
+                fontSize: this.labelSize
               },
               gridLines: {
                 color: "#e5e9f2",
                 lineWidth: 0.5,
                 drawBorder: false,
                 zeroLineColor: "transparent"
+              },
+              scaleLabel: {
+                display: this.display,
+                labelString: "Brand   Name",
+                fontSize:20,
+                padding: 20,
+                fontColor: "#7b7878",
               }
             }
           ],
@@ -50,14 +65,18 @@ export default {
               ticks: {
                 min: 0,
                 fontColor: "#999",
-                fontSize:16,
+                fontSize: this.labelSize,
                 callback: function(value) {
                   // return value + "%";
                   return value;
                 }
               },
               scaleLabel: {
-                display: true
+                display: this.display,
+                labelString: "No.  of  Mention(s)",
+                fontSize:20,
+                padding: 20,
+                fontColor: "#7b7878",
               }
             }
           ]

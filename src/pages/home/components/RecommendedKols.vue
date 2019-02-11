@@ -8,6 +8,7 @@
     </div>
 
     <div class="panel-body list-content">
+      <span class="kol-score">Influence Score</span>
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
         <div class="list-content-inner">
           <kols-list-item
@@ -155,7 +156,7 @@ export default {
           }
         })
         .then(function(res) {
-          console.log(res);
+          // console.log(res);
           res.data.forEach(element => {
             element.name = element.profile_name
             element.desc = element.description_raw
@@ -179,12 +180,17 @@ export default {
   top: 16px;
 }
 .list-content {
-  padding: 0px 20px 20px;
-  height: 450px;
+  padding: 10px 20px 20px;
+  height: 460px;
   overflow: hidden;
 }
 .list-content-inner {
   height: 380px;
   overflow-y: auto;
+}
+.kol-score{
+  position: absolute;
+  right: 30px;
+  color: #333;
 }
 </style>

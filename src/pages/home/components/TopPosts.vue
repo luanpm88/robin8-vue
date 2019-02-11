@@ -77,7 +77,7 @@ export default {
         end_date: "2018-08-29",
         brand_keywords: "BMW",
         page_no: 0,
-        page_size: 2
+        page_size: 4
       },
       postListBox: [],
       postList: [],
@@ -201,8 +201,8 @@ export default {
   top: 16px;
 }
 .list-content {
-  padding: 0px 20px 20px;
-  height: 450px;
+  padding: 10px 20px 20px;
+  height: 460px;
   overflow: hidden;
 }
 .home-post {

@@ -62,7 +62,7 @@ export default {
               },
               scaleLabel: {
                 display: true,
-                labelString: "No.  of  Mentioned(s)",
+                labelString: "No.  of  Mention(s)",
                 fontSize:20,
                 padding: 20,
                 fontColor: "#7b7878",

@@ -35,7 +35,8 @@
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Top industry</p>
-          <bar-charts class="kol-bar-chart" :childData="competiteWeiboList" ref="competiteChart"></bar-charts>
+          <bar-charts class="kol-bar-chart" :childData="competiteWeiboList"
+          :display='false' :labelSize='12' ref="competiteChart"></bar-charts>
         </div>
         <div class="kol-card mb10">
           <p class="kol-cloumn">Keywords</p>
