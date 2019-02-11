@@ -153,6 +153,7 @@ export default {
         fans_number: 'N/A',
         stats: {
           avg_shares: 'N/A',
+          avg_likes: 'N/A',
           avg_reads: 'N/A',
           avg_daily_posts: 'N/A',
           avg_post_influences: 'N/A',
@@ -182,12 +183,11 @@ export default {
     // console.log(this.$route.params.id);
     this.trendParams.brand_keywords = this.$route.params.brand_keywords;
     this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
-    let totalParams = {
-      profile_id: Number(this.$route.params.id),
-      language: "en"
-    };
+    let totalParams = {};
     if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
+      totalParams.profile_id = Number(this.$route.params.id);
+      totalParams.language = "en";
       this.kolWeiboIndustry(totalParams);
       this.kolWeiboKeyword(totalParams);
       this.kolWeiboSocial(totalParams);
@@ -197,6 +197,9 @@ export default {
       this.trendsWeibo(this.trendParams);
     } else {
       // weixin
+      // 微博相关接口
+      totalParams.profile_id = this.$route.params.id;
+      totalParams.language = "en";
       this.kolWeiXinIndustry(totalParams);
       this.kolWeiXinKeyword(totalParams);
       this.kolWeixinSocial(totalParams);
@@ -230,7 +233,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // info weixin的接口
@@ -253,7 +256,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // industry weibo
@@ -274,7 +277,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     kolWeiXinIndustry(params) {
@@ -294,7 +297,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // Keyword weibo
@@ -310,13 +313,13 @@ export default {
           if (res.status === 200) {
             // console.log('kolWeiboKeyword weibo ', res);
             _that.parentTags = [];
-            _that.parentTags = res.data.slice(0, 20);
+            _that.parentTags = res.data.slice(0, 25);
             // _that.parentTags = [];
             // _that.parentTags = res.data;
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     kolWeiXinKeyword(params) {
@@ -331,11 +334,11 @@ export default {
           // console.log('weixin ', res);
           if (res.status === 200) {
             _that.parentTags = [];
-            _that.parentTags = res.data;
+            _that.parentTags = res.data.slice(0, 25);
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // kolWeixinSocial weibo
@@ -377,7 +380,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // kolWeixinSocial
@@ -391,21 +394,31 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            // console.log('wishiweixn', res)
             _that.dataListBox = res.data;
             if (!_that.dataListBox.pricing) {
               _that.dataListBox.pricing = {};
               _that.dataListBox.pricing.direct_price = "N/A";
             }
+            if (_that.dataListBox.status === 'error') {
+              _that.dataListBox.stats = {}
+              _that.dataListBox.stats.avg_shares = 'N/A'
+              _that.dataListBox.stats.avg_likes = 'N/A'
+              _that.dataListBox.stats.avg_reads = 'N/A'
+              _that.dataListBox.stats.avg_daily_posts = 'N/A'
+              _that.dataListBox.stats.avg_post_influences = 'N/A'
+              _that.dataListBox.stats.avg_comments = 'N/A'
+            }
             if (_that.dataListBox.fans_number === '') {
               _that.dataListBox.fans_number = 'N/A'
             }
-            if (_that.dataListBox.stats.avg_shares === '') {
+            if (!_that.dataListBox.stats.avg_shares) {
               _that.dataListBox.stats.avg_shares = 'N/A'
             }
             if (_that.dataListBox.stats.avg_likes === '') {
               _that.dataListBox.stats.avg_likes = 'N/A'
             }
-            if (_that.dataListBox.stats.avg_comments === '') {
+            if (!_that.dataListBox.stats.avg_comments) {
               _that.dataListBox.stats.avg_comments = 'N/A'
             }
             if (_that.dataListBox.stats.avg_daily_posts === '') {
@@ -415,10 +428,11 @@ export default {
               _that.dataListBox.stats.avg_post_influences = 'N/A'
             }
             _that.dataListBox.platform = "weixin";
+            _that.dataListBox.pricing.direct_price = commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口
@@ -469,7 +483,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // sentiment 微博
@@ -485,7 +499,7 @@ export default {
           _that.Sentiment = res.data.data[0];
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // sentiment 微信
@@ -501,7 +515,7 @@ export default {
           _that.Sentiment = res.data.data[0];
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // trend 微博
@@ -514,7 +528,6 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log(res.data.data.slice(res.data.data.length-8, res.data.data.length-1));
           _that.MentionsList.push(
             res.data.data.slice(
               res.data.data.length - 8,
@@ -526,7 +539,7 @@ export default {
           });
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // trend 微信
@@ -550,7 +563,7 @@ export default {
           });
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   }

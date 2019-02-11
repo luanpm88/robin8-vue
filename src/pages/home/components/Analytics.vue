@@ -14,19 +14,23 @@
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
               <p class="analytic-chart-title">Trends over past 7 days</p>
-              <line-charts :childData="trendsWeiboList" ref="tendsChart" :brandKey='brandKeyWord'></line-charts>
+              <line-charts :childData="trendsWeiboList" ref="tendsChart" :brandKey="brandKeyWord"></line-charts>
             </div>
             <div v-if="cur === 1">
-              <p  class="analytic-chart-title">Top keywords</p>
+              <p class="analytic-chart-title">Top keywords</p>
             </div>
             <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
               <p class="analytic-chart-title">Top 3 competitors</p>
-              <bar-charts :childData="competiteWeiboList" ref="competiteChart"
-              :display='true' :labelSize='16'></bar-charts>
+              <bar-charts
+                :childData="competiteWeiboList"
+                ref="competiteChart"
+                :display="true"
+                :labelSize="16"
+              ></bar-charts>
             </div>
             <div v-if="cur === 3">
-              <p  class="analytic-chart-title">Sentiment</p>
+              <p class="analytic-chart-title">Sentiment</p>
             </div>
             <pie-charts :childData="sentimentWeiboList" ref="sentimentChart" v-if="cur === 3"></pie-charts>
           </div>
@@ -48,7 +52,7 @@ import TagCharts from "@components/Chart/chartTags";
 import Tab from "@components/DefaultTabs";
 import { mapState } from "vuex";
 let key = "&application_id=local-001&application_key=vue-001";
-import commonJs from '@javascripts/common.js'
+import commonJs from "@javascripts/common.js";
 export default {
   props: ["childKeyList"],
   components: {
@@ -61,7 +65,7 @@ export default {
   data() {
     return {
       topTabCur: 0,
-      brandKeyWord: '',
+      brandKeyWord: "",
       cur: 0,
       trendParams: {
         start_date: commonJs.commonStartDate,
@@ -228,15 +232,17 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微博", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data.slice(0, 7) }];
-          _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
-          // console.log(_that.trendsWeiboList)
-          // console.log(66)
-          _that.$refs.tendsChart.fillData();
+          // console.log("我是微博", res);
+          if (res.status === 200) {
+            _that.trendsWeiboList.dataList = [
+              { data: res.data.data.slice(0, 7) }
+            ];
+            _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
+            _that.$refs.tendsChart.fillData();
+          }
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     },
     // trend 微信
@@ -250,7 +256,9 @@ export default {
         })
         .then(function(res) {
           // console.log("我是微信", res)
-          _that.trendsWeiboList.dataList = [{ data: res.data.data.slice(0, 7) }];
+          _that.trendsWeiboList.dataList = [
+            { data: res.data.data.slice(0, 7) }
+          ];
           _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
           _that.$refs.tendsChart.fillData();
         })
@@ -364,12 +372,12 @@ export default {
           _that.sentimentWeiboList.labels = res.data.labels;
           _that.sentimentWeiboList.data = res.data.data;
           _that.$refs.sentimentChart.fillData();
-          _that.$emit('childSentiment', _that.sentimentWeiboList.data)
+          _that.$emit("childSentiment", _that.sentimentWeiboList.data);
         })
         .catch(function(error) {
           console.log(error);
         });
-    },
+    }
   }
 };
 </script>
@@ -383,7 +391,7 @@ export default {
   #horizontalbar-chart {
     height: 464px !important;
   }
-  #line-chart{
+  #line-chart {
     margin-bottom: 10px;
   }
   #pie-chart {
@@ -432,7 +440,7 @@ export default {
 .analytic-bottom-tab {
   text-align: center;
 }
-.analytic-chart-title{
+.analytic-chart-title {
   line-height: 35px;
   margin-bottom: 10px;
   text-align: center;

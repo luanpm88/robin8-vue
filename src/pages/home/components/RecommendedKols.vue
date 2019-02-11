@@ -144,7 +144,7 @@ export default {
           _that.currentList = res.data.slice(0, 5)
         })
         .catch(function(error) {
-          console.log(error)
+          // console.log(error)
         })
     },
     // 微信的接口
