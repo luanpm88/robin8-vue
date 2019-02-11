@@ -147,7 +147,9 @@ export default {
         age: "N/A",
         region: "N/A"
       },
-      dec: ["-"],
+      dec: [],
+      decValue: [],
+      decKey: [],
       parentTags: [],
       dataListBox: {
         fans_number: 'N/A',
@@ -183,7 +185,6 @@ export default {
     // console.log(this.$route.params.id);
     this.trendParams.brand_keywords = this.$route.params.brand_keywords;
     this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
-    console.log(this.$route.params.brand_keywords);
     let totalParams = {};
     if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
@@ -192,21 +193,20 @@ export default {
       this.kolWeiboIndustry(totalParams);
       this.kolWeiboKeyword(totalParams);
       this.kolWeiboSocial(totalParams);
-      // 获取sentiment
+      // 计算sentiment
       this.sentimentWeibo(this.sentimentParams);
-      // trend 微博
+      // 计算Mentions
       this.trendsWeibo(this.trendParams);
     } else {
-      // weixin
       // 微博相关接口
       totalParams.profile_id = this.$route.params.id;
       totalParams.language = "en";
       this.kolWeiXinIndustry(totalParams);
       this.kolWeiXinKeyword(totalParams);
       this.kolWeixinSocial(totalParams);
-      // 获取sentiment
+      // 计算sentiment
       this.sentimentWeibo(this.sentimentParams);
-      // trend 微信
+      // 计算Mentions
       this.trendsWeixin(this.trendParams);
     }
     this.kolActivityUrl(totalParams);
@@ -225,14 +225,20 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('我是furgsInfo weibo', res);
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
             _that.infoList.gender = res.data.gender;
-            _that.dec = Object.keys(res.data.industries).slice(0, 3);
-            // _that.infoList.age = res.data.gender;
-            // _that.infoList.region = res.data.profile_name;
+            _that.decValue =  Object.values(res.data.industries);
+            _that.decKey = Object.keys(res.data.industries);
+            _that.decValue.forEach((item, index) => {
+              item.keyName = _that.decKey[index];
+            });
+            _that.decValue.forEach((item, index) => {
+              if (item.n_posts === 1) {
+                _that.dec.push(item.keyName);
+              }
+            });
           }
         })
         .catch(function(error) {
@@ -249,13 +255,10 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('我是furgsInfo weixin ', res);
           if (res.status === 200) {
             _that.infoList.img = res.data.avatar_url;
             _that.infoList.name = res.data.profile_name;
             _that.infoList.gender = "-";
-            // _that.infoList.age = res.data.profile_name;
-            // _that.infoList.region = res.data.profile_name;
           }
         })
         .catch(function(error) {
@@ -272,7 +275,6 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weibo kolWeiboIndustry', res);
           if (res.status === 200) {
             _that.competiteWeiboList.dataList = [{ data: res.data.data }];
             _that.competiteWeiboList.labels = res.data.labels;
@@ -292,7 +294,6 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('kolWeiXinIndustry ', res);
           if (res.status === 200) {
             _that.competiteWeiboList.dataList = [{ data: res.data.data }];
             _that.competiteWeiboList.labels = res.data.labels;
@@ -314,11 +315,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            // console.log('kolWeiboKeyword weibo ', res);
             _that.parentTags = [];
             _that.parentTags = res.data.slice(0, 25);
-            // _that.parentTags = [];
-            // _that.parentTags = res.data;
           }
         })
         .catch(function(error) {
@@ -555,7 +553,6 @@ export default {
           }
         })
         .then(function(res) {
-            console.log('woshiweixin', res);
           if (res.status === 200) {
             _that.MentionsList = res.data.data.slice(
               res.data.data.length - 8,
