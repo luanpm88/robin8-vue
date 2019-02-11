@@ -23,9 +23,6 @@ Vue.use(VueI18n)
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
-Vue.filter('dateformat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
-  return moment(dataStr).format(pattern)
-})
 
 const i18n = new VueI18n({
   // locale: 'zh-CN', // 设置语言
