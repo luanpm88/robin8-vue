@@ -209,7 +209,7 @@ export default new Router({
       }
     },
     {
-      path: '/kol/:id/:type',
+      path: '/kol&id=:id&type=:type&brand_keywords=:brand_keywords',
       name: 'KolDetail',
       component: KolDetail,
       meta: {

@@ -183,6 +183,7 @@ export default {
     // console.log(this.$route.params.id);
     this.trendParams.brand_keywords = this.$route.params.brand_keywords;
     this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
+    console.log(this.$route.params.brand_keywords);
     let totalParams = {};
     if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
@@ -205,6 +206,8 @@ export default {
       this.kolWeixinSocial(totalParams);
       // 获取sentiment
       this.sentimentWeibo(this.sentimentParams);
+      // trend 微信
+      this.trendsWeixin(this.trendParams);
     }
     this.kolActivityUrl(totalParams);
   },
@@ -528,15 +531,15 @@ export default {
           }
         })
         .then(function(res) {
-          _that.MentionsList.push(
-            res.data.data.slice(
-              res.data.data.length - 8,
-              res.data.data.length - 1
-            )
-          );
-          _that.MentionsList.forEach(item => {
-            _that.MentionsNum += parseInt(item);
-          });
+          if (res.status === 200) {
+            _that.MentionsList = res.data.data.slice(
+                res.data.data.length - 8,
+                res.data.data.length - 1
+              );
+            _that.MentionsList.forEach(item => {
+              _that.MentionsNum += parseInt(item);
+            });
+          }
         })
         .catch(function(error) {
           // console.log(error);
@@ -552,15 +555,16 @@ export default {
           }
         })
         .then(function(res) {
-          _that.MentionsList.push(
-            res.data.data.slice(
+            console.log('woshiweixin', res);
+          if (res.status === 200) {
+            _that.MentionsList = res.data.data.slice(
               res.data.data.length - 8,
               res.data.data.length - 1
-            )
-          );
-          _that.MentionsList.forEach(item => {
-            _that.MentionsNum += parseInt(item);
-          });
+            );
+            _that.MentionsList.forEach(item => {
+              _that.MentionsNum += parseInt(item);
+            });
+          }
         })
         .catch(function(error) {
           // console.log(error);
@@ -663,6 +667,12 @@ export default {
   color: #a347c9ff;
   line-height: 32px;
   font-size: $font-nm-b;
+}
+.icon-nvxing{
+  color: #a347c9ff;
+}
+.icon-nanxing{
+  color: blue;
 }
 .com-brand-table {
   color: #333;
