@@ -681,23 +681,11 @@ export default {
       font-size: 14px;
       text-align: center;
       padding: 5px 0px;
-      &:nth-child(1) {
-        width: 8%;
-      }
-      &:nth-child(2) {
-        width: 20%;
-      }
     }
   }
   td {
     text-align: center;
     padding: 5px 10px;
-    &:nth-child(1) {
-      width: 8%;
-    }
-    &:nth-child(2) {
-      width: 20%;
-    }
   }
 }
 .activity-contable {

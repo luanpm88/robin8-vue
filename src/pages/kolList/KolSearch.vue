@@ -190,6 +190,7 @@ export default {
       profileSort: 1,
       isactive: false,
       keyword: "",
+      totalKeywords: '',
       industry: "",
       engagementFrom: "",
       engagementTo: "",
@@ -223,8 +224,8 @@ export default {
     };
   },
   created() {
-    // 接口
-    console.log(this.keyWord.brand_keywords);
+    // 获取keywords
+    this.getBaseData();
     if (this.keyWord.brand_keywords) {
       // console.log(1)
       this.keyword = this.keyWord.brand_keywords;
@@ -283,7 +284,6 @@ export default {
             }
           })
           .then(function(res) {
-            console.log("我是weibo接口", res);
             if (res.status === 200) {
               _that.jogDataInit(res.data.data);
             }
@@ -351,21 +351,33 @@ export default {
       this.paramsInit(this.tabIndex);
     },
     intoKolDetail(item) {
-      // console.log(item)
-      // this.$router.push("/kol/" + item.profile_id)
       this.$router.push({
         path: "/kol/",
         name: "KolDetail",
         params: {
           id: item.profile_id,
           type: this.tabIndex,
-          brand_keywords: this.keyWord.brand_keywords
-
+          brand_keywords: this.totalKeywords
         }
       });
     },
+    // 获取keyword
+    getBaseData () {
+      const _that = this
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': _that.authorization
+        }
+      }).then(function(res) {
+        if (res.status === 200) {
+          if (!res.data.competitors.length == 0) {
+            _that.totalKeywords = res.data.trademarks_list[0].name;
+          }
+        }
+      })
+    },
     // rank
-    rank(){
+    rank() {
       this.searchListBox = [];
       this.isactive = !this.isactive;
       if (this.isactive) {
