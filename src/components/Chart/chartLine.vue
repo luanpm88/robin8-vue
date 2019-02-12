@@ -55,10 +55,7 @@ export default {
                 fontSize:16,
               },
               gridLines: {
-                // color: "#e5e9f2", 
-                lineWidth: 0.5,
-                drawBorder: false,
-                zeroLineColor: "transparent"
+                display: true
               },
               scaleLabel: {
                 display: true,

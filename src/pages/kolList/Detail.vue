@@ -141,8 +141,7 @@ export default {
         dataList: []
       },
       infoList: {
-        img:
-          "https://tva4.sinaimg.cn/crop.0.0.512.512.50/7d9dcce2jw8fbdpbjg039j20e80e874h.jpg",
+        img: "",
         name: "-",
         age: "N/A",
         region: "N/A"

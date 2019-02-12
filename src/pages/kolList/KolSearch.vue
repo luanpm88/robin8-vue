@@ -625,12 +625,12 @@ span {
     border-style: solid;
     &:nth-child(1) {
       display: block;
-      border-width: 0 8px 8px;
+      border-width: 0 5px 6px;
       border-color: transparent transparent #a7a5a5;
     }
     &:nth-child(2) {
       display: block;
-      border-width: 8px 8px 0;
+      border-width: 6px 5px 0;
       border-color: #a7a5a5 transparent transparent;
       margin: 1px auto 0;
     }

@@ -45,8 +45,8 @@ export default {
               gridLines: {
                 color: "#e5e9f2",
                 lineWidth: 0.5,
-                drawBorder: false,
-                zeroLineColor: "transparent"
+                // zeroLineColor: "transparent",
+                // drawBorder: false
               },
               scaleLabel: {
                 display: this.display,
@@ -60,7 +60,7 @@ export default {
           xAxes: [
             {
               gridLines: {
-                display: false
+                display: true
               },
               ticks: {
                 min: 0,
