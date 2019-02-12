@@ -128,7 +128,7 @@ export default {
             // pointBorderColor: "transparent",
             // pointHoverBackgroundColor: "rgba(146,142,142, .5)",
             borderWidth: 3,
-            label:'月销售量'
+            label:''
           }
         ]
       };

@@ -4,10 +4,9 @@
 // 初始化时间
 const moment = require('moment')
 // import moment from 'moment';
-let commonEndDate = moment(new Date(new Date().getTime() - 36 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let commonEndDate = moment(new Date()).format("YYYY-MM-DD");
 let commonNow = new Date(commonEndDate.replace(/\-/g, "/"));
 let commonStartDate = moment(new Date(commonNow.setMonth(commonNow.getMonth() - 1))).format("YYYY-MM-DD");
-
 // 格式化数字
 function formatNumber (n) {
   n = n.toString()

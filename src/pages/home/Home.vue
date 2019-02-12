@@ -101,18 +101,15 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        // console.log('我是competition', res);
         if (res.status === 200) {
           if (res.data.competitors.length == 0) {
-            // console.log(1)
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;
             _that.keyList.brand_keywords = res.data.trademarks_list[0].name;
             res.data.competitors.forEach(element => {
-              _that.keyList.cb_keywords.push(element.short_name);
+              _that.keyList.cb_keywords.push(element.name);
             });
-            // console.log(_that.keyList);
           }
         }
       })

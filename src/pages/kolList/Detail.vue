@@ -377,7 +377,7 @@ export default {
               _that.dataListBox.stats.avg_post_influences = 'N/A'
             }
             _that.dataListBox.platform = "weibo";
-            _that.dataListBox.pricing.direct_price = commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
+            _that.dataListBox.pricing.direct_price = '¥' + commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
           }
         })
         .catch(function(error) {
@@ -429,7 +429,7 @@ export default {
               _that.dataListBox.stats.avg_post_influences = 'N/A'
             }
             _that.dataListBox.platform = "weixin";
-            _that.dataListBox.pricing.direct_price = commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
+            _that.dataListBox.pricing.direct_price = '¥' + commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
           }
         })
         .catch(function(error) {
