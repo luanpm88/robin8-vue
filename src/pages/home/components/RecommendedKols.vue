@@ -55,8 +55,8 @@ export default {
       kolHasChecked: false,
       tabIndex: 0,
       params: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         order_by: "doc_count"
       },

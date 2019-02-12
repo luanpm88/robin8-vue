@@ -74,8 +74,8 @@ export default {
       postWeixinCurrentPage: 0,
       tabIndex: 0,
       topPostParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         page_no: 0,
         page_size: 4

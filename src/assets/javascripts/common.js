@@ -3,10 +3,18 @@
  */
 // 初始化时间
 const moment = require('moment')
-// import moment from 'moment';
-let commonEndDate = moment(new Date()).format("YYYY-MM-DD");
-let commonNow = new Date(commonEndDate.replace(/\-/g, "/"));
-let commonStartDate = moment(new Date(commonNow.setMonth(commonNow.getMonth() - 1))).format("YYYY-MM-DD");
+// 获取过去36小时
+let cPastOneday = moment(new Date(new Date().getTime() - 36 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let cNow = new Date(cPastOneday.replace(/\-/g, "/"));
+// 获取过去一个月
+let cPastOneMonth = moment(new Date(cNow.setMonth(cNow.getMonth() - 1))).format("YYYY-MM-DD");
+// 获取当天日子
+let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
+// 获取过去七天
+let cPastSevenDays = moment(new Date(new Date().getTime() - 144 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+// 获取过去14天
+let cPastFourteenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+
 // 格式化数字
 function formatNumber (n) {
   n = n.toString()
@@ -148,6 +156,9 @@ module.exports = {
   verifyPhone,
   buildObjData,
   threeFormatter,
-  commonStartDate,
-  commonEndDate
+  cPastOneday,
+  cPastOneMonth,
+  cCurrentDay,
+  cPastSevenDays,
+  cPastFourteenDays
 }

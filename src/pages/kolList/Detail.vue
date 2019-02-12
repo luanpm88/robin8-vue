@@ -167,13 +167,13 @@ export default {
       },
       activeList: {},
       sentimentParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW"
       },
       trendParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         type: "doc"
       },

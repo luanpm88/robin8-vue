@@ -69,25 +69,25 @@ export default {
       brandKeyWord: "",
       cur: 0,
       trendParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastSevenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         type: "doc"
       },
       competitorParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         cb_names: ["C1 BMW", "C2 Audi", "C3 Honda"],
         cb_keywords: ["BMW", "Audi", "Honda"]
       },
       sentimentParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW"
       },
       conceptParams: {
-        start_date: commonJs.commonStartDate,
-        end_date: commonJs.commonEndDate,
+        start_date: commonJs.cPastFourteenDays,
+        end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         language: "en"
       },
