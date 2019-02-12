@@ -21,7 +21,7 @@
             </div>
             <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
-              <p class="analytic-chart-title">Top 3 competitors</p>
+              <p class="analytic-chart-title">Top {{competitorsNum}} competitors</p>
               <bar-charts
                 :childData="competiteWeiboList"
                 ref="competiteChart"
@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      competitorsNum: '',
       topTabCur: 0,
       brandKeyWord: "",
       cur: 0,
@@ -311,10 +312,12 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微博", res)
-          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
-          _that.competiteWeiboList.labels = res.data.labels;
-          _that.$refs.competiteChart.fillData();
+          if (res.status === 200) {
+            _that.competitorsNum = res.data.data.length;
+            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+            _that.competiteWeiboList.labels = res.data.labels;
+            _that.$refs.competiteChart.fillData();
+          }
         })
         .catch(function(error) {
           console.log(error);
@@ -330,10 +333,12 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微博", res)
-          _that.competiteWeiboList.dataList = [{ data: res.data.data }];
-          _that.competiteWeiboList.labels = res.data.labels;
-          _that.$refs.competiteChart.fillData();
+          if (res.status === 200) {
+            _that.competitorsNum = res.data.data.length;
+            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
+            _that.competiteWeiboList.labels = res.data.labels;
+            _that.$refs.competiteChart.fillData();
+          }
         })
         .catch(function(error) {
           console.log(error);
