@@ -12,6 +12,7 @@ const MockData = {
 			]
 		},
 		grid: {
+			top: "8%",
 			left: "5%",
 			right: "4%",
 			bottom: "15%",
@@ -134,6 +135,7 @@ const MockData = {
 			]
 		},
 		grid: {
+			top: "8%",
 			left: "6%",
 			right: "4%",
 			bottom: "15%",

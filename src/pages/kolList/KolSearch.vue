@@ -313,7 +313,7 @@ export default {
       const _that = this;
       data.forEach((element, index) => {
         if (element.description_raw.length > 60) {
-          element.description_raw = element.description_raw.substr(0, 63) + '...'
+          element.description_raw = element.description_raw.substr(0, 58) + '...'
         }
         // console.log();
         element.influence = element.stats.avg_post_influence;
@@ -554,7 +554,7 @@ span {
   li {
     text-align: center;
     padding: 16px 0;
-    height: 131px;
+    height: 148px;
     .kol-data-r8 {
       line-height: 95px;
     }
@@ -577,7 +577,9 @@ span {
   width: 75%;
   height: 111px;
   p {
-    line-height: 25px;
+    line-height: 30px;
+    color: #333;
+    font-size: 16px;
     i {
       vertical-align: -1px;
     }
