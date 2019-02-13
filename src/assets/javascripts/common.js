@@ -13,7 +13,7 @@ let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
 // 获取过去七天
 let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去14天
-let cPastFourteenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let cPastFourteenDays = moment(new Date(new Date().getTime() - 336 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 
 // 格式化数字
 function formatNumber (n) {
