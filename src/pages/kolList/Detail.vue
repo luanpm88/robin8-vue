@@ -1,119 +1,122 @@
 <template>
-  <div class="kol-detail-wrap">
-    <p class="kol-detail-title">{{infoList.name}}</p>
-    <div class="kol-detail clearfix">
-      <div class="kol-detail-side">
-        <!-- info -->
-        <div class="kol-infobox mb10">
-          <p class="kol-info-topbg"></p>
-          <img :src="infoList.img" alt>
-          <div class="kol-info">
-            <p>
-              {{infoList.name}}
-              <i class="iconfont icon-nvxing" v-if="infoList.gender == 'm'"></i>
-              <i class="iconfont icon-nanxing" v-if="infoList.gender == 'f'"></i>
+  <div class="page">
+    <page-header></page-header>
+    <div class="container mt50 clearfix">
+      <p class="kol-detail-title">{{infoList.name}}</p>
+      <div class="kol-detail clearfix">
+        <div class="kol-detail-side">
+          <!-- info -->
+          <div class="kol-infobox mb10">
+            <p class="kol-info-topbg"></p>
+            <img :src="infoList.img" alt>
+            <div class="kol-info">
+              <p>
+                {{infoList.name}}
+                <i class="iconfont icon-nvxing" v-if="infoList.gender == 'm'"></i>
+                <i class="iconfont icon-nanxing" v-if="infoList.gender == 'f'"></i>
+              </p>
+              <p>{{infoList.age}}</p>
+              <p>
+                <i class="iconfont icon-weizhi"></i>
+                {{infoList.region}}
+              </p>
+            </div>
+            <ul class="clearfix">
+              <li v-for="(item, index) in dec" :key="index">{{item}}</li>
+            </ul>
+          </div>
+          <div class="kol-card kol-brand mb10">
+            <p class="clearfix">
+              <span>Brand Mentions</span>
+              <b>{{MentionsNum}}</b>
             </p>
-            <p>{{infoList.age}}</p>
-            <p>
-              <i class="iconfont icon-weizhi"></i>
-              {{infoList.region}}
+            <p class="clearfix">
+              <span>Brand Sentiment</span>
+              <b>{{Sentiment}}</b>
             </p>
           </div>
-          <ul class="clearfix">
-            <li v-for="(item, index) in dec" :key="index">{{item}}</li>
-          </ul>
-        </div>
-        <div class="kol-card kol-brand mb10">
-          <p class="clearfix">
-            <span>Brand Mentions</span>
-            <b>{{MentionsNum}}</b>
-          </p>
-          <p class="clearfix">
-            <span>Brand Sentiment</span>
-            <b>{{Sentiment}}</b>
-          </p>
-        </div>
-        <div class="kol-card mb10">
-          <p class="kol-cloumn">Top Industries</p>
-          <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
-        </div>
-        <div class="kol-card mb10">
-          <p class="kol-cloumn">Keywords</p>
-          <tag-charts :width="150" :height="180" :taglist="parentTags"></tag-charts>
-        </div>
-      </div>
-      <div class="kol-detail-con">
-        <div class="kol-card mb10">
-          <p class="kol-cloumn mb10">Activity</p>
-          <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-          <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
-          <div class="activity-table">
-            <table class="com-brand-table">
-              <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Performance</th>
-              </tr>
-              <tr v-for="(key, index) in activeList.creations_list" :key="index">
-                <td>{{key.id}}</td>
-                <td>{{key.title}}</td>
-                <td>{{key.date}}</td>
-                <td>{{key.amount}}</td>
-              </tr>
-            </table>
+          <div class="kol-card mb10">
+            <p class="kol-cloumn">Top Industries</p>
+            <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
+          </div>
+          <div class="kol-card mb10">
+            <p class="kol-cloumn">Keywords</p>
+            <tag-charts :width="240" :height="180" :taglist="parentTags"></tag-charts>
           </div>
         </div>
-        <div class="kol-card mb10">
-          <p class="kol-cloumn">Analytics</p>
-          <div class="activity-contable">
-            <table class="com-brand-table">
-              <tr>
-                <th></th>
-                <th>No. of Campaigns</th>
-                <th>Performance (CPC)</th>
-                <th>No. of Clients</th>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td v-for="(item, index) in activeList.total_info" :key="index">
-                  <p class="activity-border">{{item}}</p>
-                </td>
-              </tr>
-              <tr>
-                <td>Last 30 days</td>
-                <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
-                  <p class="activity-border">{{item}}</p>
-                </td>
-              </tr>
-            </table>
+        <div class="kol-detail-con">
+          <div class="kol-card mb10">
+            <p class="kol-cloumn mb10">Activity</p>
+            <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
+            <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
+            <div class="activity-table">
+              <table class="com-brand-table">
+                <tr>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Performance</th>
+                </tr>
+                <tr v-for="(key, index) in activeList.creations_list" :key="index">
+                  <td>{{key.id}}</td>
+                  <td>{{key.title}}</td>
+                  <td>{{key.date}}</td>
+                  <td>{{key.amount}}</td>
+                </tr>
+              </table>
+            </div>
           </div>
-        </div>
-        <div class="kol-card mb10">
-          <p class="kol-cloumn">Social Data</p>
-          <div class="activity-table">
-            <table class="com-brand-table">
-              <tr>
-                <th>Platform</th>
-                <th>Price</th>
-                <th>Followers</th>
-                <th>Likes</th>
-                <th>Shares</th>
-                <th>Comments</th>
-                <th>Post-last 21 days</th>
-                <th>Influence Score</th>
-              </tr>
-              <tr>
-                <td>{{dataListBox.platform}}</td>
-                <td>{{dataListBox.pricing.direct_price}}</td>
-                <td>{{dataListBox.fans_number}}</td>
-                <td>{{dataListBox.stats.avg_likes}}</td>
-                <td>{{dataListBox.stats.avg_shares}}</td>
-                <td>{{dataListBox.stats.avg_comments}}</td>
-                <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                <td>{{dataListBox.stats.avg_post_influences}}</td>
-              </tr>
-            </table>
+          <div class="kol-card mb10">
+            <p class="kol-cloumn">Analytics</p>
+            <div class="activity-contable">
+              <table class="com-brand-table">
+                <tr>
+                  <th></th>
+                  <th>No. of Campaigns</th>
+                  <th>Performance (CPC)</th>
+                  <th>No. of Clients</th>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td v-for="(item, index) in activeList.total_info" :key="index">
+                    <p class="activity-border">{{item}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Last 30 days</td>
+                  <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
+                    <p class="activity-border">{{item}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="kol-card mb10">
+            <p class="kol-cloumn">Social Data</p>
+            <div class="activity-table">
+              <table class="com-brand-table">
+                <tr>
+                  <th>Platform</th>
+                  <th>Price</th>
+                  <th>Followers</th>
+                  <th>Likes</th>
+                  <th>Shares</th>
+                  <th>Comments</th>
+                  <th>Post-last 21 days</th>
+                  <th>Influence Score</th>
+                </tr>
+                <tr>
+                  <td>{{dataListBox.platform}}</td>
+                  <td>{{dataListBox.pricing.direct_price}}</td>
+                  <td>{{dataListBox.fans_number}}</td>
+                  <td>{{dataListBox.stats.avg_likes}}</td>
+                  <td>{{dataListBox.stats.avg_shares}}</td>
+                  <td>{{dataListBox.stats.avg_comments}}</td>
+                  <td>{{dataListBox.stats.avg_daily_posts}}</td>
+                  <td>{{dataListBox.stats.avg_post_influences}}</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -124,6 +127,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import PageHeader from '@components/PageHeader'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from '@javascripts/common.js';
@@ -132,7 +136,11 @@ import TagCharts from "@components/Chart/chartTagsTwo";
 import { mapState } from "vuex";
 export default {
   name: "KolDetail",
-  components: { TagCharts, Echarts },
+  components: { 
+    TagCharts, 
+    Echarts,
+    PageHeader 
+  },
   data() {
     return {
       Sentiment: 0,
@@ -584,13 +592,12 @@ export default {
   margin: 13px 0px;
 }
 .kol-detail-side {
-  width: 200px;
-  margin-right: 10px;
+  width: 280px;
   float: left;
 }
 .kol-detail-con {
-  width: 690px;
-  float: left;
+  width: 980px;
+  float: right;
 }
 .kol-infobox {
   position: relative;

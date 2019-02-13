@@ -313,7 +313,7 @@ export default {
       const _that = this;
       data.forEach((element, index) => {
         if (element.description_raw.length > 60) {
-          element.description_raw = element.description_raw.substr(0, 58) + '...'
+          element.description_raw = element.description_raw.substr(0, 30) + '...'
         }
         // console.log();
         element.influence = element.stats.avg_post_influence;
