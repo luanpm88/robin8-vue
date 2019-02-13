@@ -11,7 +11,7 @@ let cPastOneMonth = moment(new Date(cNow.setMonth(cNow.getMonth() - 1))).format(
 // 获取当天日子
 let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
 // 获取过去七天
-let cPastSevenDays = moment(new Date(new Date().getTime() - 144 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去14天
 let cPastFourteenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 

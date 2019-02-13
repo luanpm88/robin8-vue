@@ -554,7 +554,7 @@ span {
   li {
     text-align: center;
     padding: 16px 0;
-    height: 148px;
+    height: 134px;
     .kol-data-r8 {
       line-height: 95px;
     }
