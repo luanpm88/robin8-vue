@@ -14,25 +14,20 @@
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
               <p class="analytic-chart-title">Trends over past 7 days</p>
-              <line-charts :childData="trendsWeiboList" ref="tendsChart" :brandKey="brandKeyWord"></line-charts>
+              <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">
               <p class="analytic-chart-title">Top keywords</p>
+              <tag-charts :width="830" :height="480" :taglist="parentTags"></tag-charts>
             </div>
-            <tag-charts :width="830" :height="480" :taglist="parentTags" v-if="cur === 1"></tag-charts>
             <div v-if="cur === 2" class="analytic-chart-box">
               <p class="analytic-chart-title">Top {{competitorsNum}} competitors</p>
-              <bar-charts
-                :childData="competiteWeiboList"
-                ref="competiteChart"
-                :display="true"
-                :labelSize="16"
-              ></bar-charts>
+              <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
             </div>
             <div v-if="cur === 3">
               <p class="analytic-chart-title">Sentiment</p>
             </div>
-            <pie-charts :childData="sentimentWeiboList" ref="sentimentChart" v-if="cur === 3"></pie-charts>
+            <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
           </div>
         </div>
       </div>
@@ -45,29 +40,45 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
-import LineCharts from "@components/Chart/chartLine";
-import BarCharts from "@components/Chart/chartHorizontalBar";
-import PieCharts from "@components/Chart/chartPie";
+import Echarts from "@components/Chart/GlobalEcharts";
+import ChartOption from "@components/Chart/GlobalChartOption";
 import TagCharts from "@components/Chart/chartTags";
 import Tab from "@components/DefaultTabs";
 import { mapState } from "vuex";
 let key = "&application_id=local-001&application_key=vue-001";
 import commonJs from "@javascripts/common.js";
+let colorList = ['rgba(179,127,235,0.5)', 'rgba(179,127,235,0.4)', 'rgba(179,127,235,0.3)', 'rgba(179,127,235,0.2)', 'rgba(179,127,235,0.1)']
 export default {
   props: ["childKeyList"],
   components: {
-    LineCharts,
-    BarCharts,
-    PieCharts,
     TagCharts,
-    Tab
+    Tab,
+    Echarts
   },
   data() {
     return {
-      competitorsNum: '',
+      competitorsNum: "",
       topTabCur: 0,
       brandKeyWord: "",
       cur: 0,
+      trendsList: {
+        options: ChartOption.trendOptions,
+        chartsStyle: {
+          height: "400px"
+        }
+      },
+      competitorList: {
+        options: ChartOption.competitorsOptions,
+        chartsStyle: {
+          height: "400px"
+        }
+      },
+      SentimentList: {
+        options: ChartOption.SentimentOptions,
+        chartsStyle: {
+          height: "400px"
+        }
+      },
       trendParams: {
         start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
@@ -235,11 +246,11 @@ export default {
         .then(function(res) {
           // console.log("我是微博", res);
           if (res.status === 200) {
-            _that.trendsWeiboList.dataList = [
-              { data: res.data.data.slice(0, 7) }
-            ];
-            _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
-            _that.$refs.tendsChart.fillData();
+            _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7);
+            _that.trendsList.options.series[0].data = res.data.data.slice(0, 7);
+            _that.trendsList.options.series[0].name = _that.brandKeyWord;
+            _that.trendsList.options.legend.data[0].name = _that.brandKeyWord;
+            _that.$refs.tendsEChart.updateOptions(_that.trendsList.options);
           }
         })
         .catch(function(error) {
@@ -256,12 +267,11 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微信", res)
-          _that.trendsWeiboList.dataList = [
-            { data: res.data.data.slice(0, 7) }
-          ];
-          _that.trendsWeiboList.labels = res.data.labels.slice(0, 7);
-          _that.$refs.tendsChart.fillData();
+          _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7);
+          _that.trendsList.options.series[0].data = res.data.data.slice(0, 7);
+          _that.trendsList.options.series[0].name = _that.brandKeyWord;
+          _that.trendsList.options.legend.data[0].name = _that.brandKeyWord;
+          _that.$refs.tendsEChart.updateOptions(_that.trendsList.options);
         })
         .catch(function(error) {
           console.log(error);
@@ -314,9 +324,9 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
-            _that.competiteWeiboList.labels = res.data.labels;
-            _that.$refs.competiteChart.fillData();
+            _that.competitorList.options.yAxis.data = res.data.labels;
+            _that.competitorList.options.series[0].data = res.data.data;
+            _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
         .catch(function(error) {
@@ -335,9 +345,9 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competiteWeiboList.dataList = [{ data: res.data.data }];
-            _that.competiteWeiboList.labels = res.data.labels;
-            _that.$refs.competiteChart.fillData();
+            _that.competitorList.options.yAxis.data = res.data.labels;
+            _that.competitorList.options.series[0].data = res.data.data;
+            _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
         .catch(function(error) {
@@ -354,10 +364,17 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微博", res)
-          _that.sentimentWeiboList.labels = res.data.labels;
-          _that.sentimentWeiboList.data = res.data.data;
-          _that.$refs.sentimentChart.fillData();
+          if (res.status === 200) {
+            let newArr = res.data.labels.map((item, index) => {
+              let json = {};
+              json.name = item;
+              json.value = res.data.data[index];
+              json.itemStyle = {color: colorList[index]}
+              return json;
+            });
+            _that.SentimentList.options.series[0].data = newArr;
+            _that.$refs.sentimentChart.updateOptions(_that.SentimentList.options);
+          }
         })
         .catch(function(error) {
           console.log(error);
@@ -373,11 +390,18 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微信", res)
-          _that.sentimentWeiboList.labels = res.data.labels;
-          _that.sentimentWeiboList.data = res.data.data;
-          _that.$refs.sentimentChart.fillData();
-          _that.$emit("childSentiment", _that.sentimentWeiboList.data);
+          if (res.status === 200) {
+            _that.SentimentList.options.series[0].data = [];
+            let newArr = res.data.labels.map((item, index) => {
+              let json = {};
+              json.name = item;
+              json.value = res.data.data[index];
+              json.itemStyle = {color: colorList[index + 1]}
+              return json;
+            });
+            _that.SentimentList.options.series[0].data = newArr;
+            _that.$refs.sentimentChart.updateOptions(_that.SentimentList.options);
+          }
         })
         .catch(function(error) {
           console.log(error);
