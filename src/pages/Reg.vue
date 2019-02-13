@@ -3,7 +3,7 @@
     <div class="panel default-panel login-panel">
       <div class="panel-body">
         <div class="banner">
-          <img src alt class="banner-img">
+          <img src="@images/login_banner.jpg" alt class="banner-img">
           <img src="@images/logo.png" alt class="logo">
         </div>
 
