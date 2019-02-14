@@ -76,6 +76,8 @@
       <p class="kol-list-topnum">
         <span v-for="(item, index) in topNumList" :key="index
         ">{{item}}</span>
+        <span>weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
+        <span>weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
       </p>
       <div class>
         <default-tabs
@@ -178,6 +180,7 @@ import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
 import { Table, Progress } from "ant-design-vue";
 import { mapState } from "vuex";
+import commonJs from '@javascripts/common.js';
 export default {
   components: {
     ATable: Table,
@@ -204,9 +207,7 @@ export default {
       advancedSearch: false,
       topNumList: [
         "weixin - big data profile - 5,564,575",
-        "weibo - big data profile - 65,860,968",
-        "weixin - R8 managed - 3,189",
-        "weibo - R8 managed - 1,026"
+        "weibo - big data profile - 65,860,968"
       ],
       tabList: [
         {
@@ -220,10 +221,12 @@ export default {
       ],
       tabIndex: 0,
       searchListBox: [],
-      searchList: {}
+      searchList: {},
+      r8List: []
     };
   },
   created() {
+    this.r8Kol();
     // 获取keywords
     this.getBaseData();
     if (this.keyWord.brand_keywords) {
@@ -382,6 +385,19 @@ export default {
         this.profileSort = 1;
         this.paramsInit(this.tabIndex);
       }
+    },
+    // top头部微信的数字
+    r8Kol() {
+      const _that = this
+      axios.get(apiConfig.r8_kols, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(function (res) {
+        _that.r8List = res.data
+        _that.r8List.wechat_kols_count = commonJs.threeFormatter(_that.r8List.wechat_kols_count, 2);
+        _that.r8List.weibo_kols_count = commonJs.threeFormatter(_that.r8List.weibo_kols_count, 2);
+      })
     }
   }
 };

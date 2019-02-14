@@ -62,6 +62,9 @@ const config = {
   // kol微博搜索
   kolWbSearchUrl: `${searchHost}/price/weibo/price/kol_search?${searchHostKey}`,
 
+  // kol search r8头部的东西
+  r8_kols: `${host}/base_infos/r8_kols`,
+
   // 首页接口开始------------------------
   // analytics trend 微博
   trendsWeibo: `${searchHost}/weibo/brand/trend?${searchHostKey}`,
