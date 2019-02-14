@@ -295,7 +295,7 @@ const MockData = {
 			},
 			//网格线
 			splitLine: {
-				show: false,
+				show: true,
 				lineStyle: {
 					color: "#00000014"
 				}
@@ -320,7 +320,7 @@ const MockData = {
 				lineStyle: {
 					color: "#00000014"
 				}
-			},
+			}
 		},
 		series: [
 			{
