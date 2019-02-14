@@ -6,7 +6,7 @@
       <div class="kol-detail clearfix">
         <div class="kol-detail-side">
           <!-- info -->
-          <div class="kol-infobox mb10">
+          <div class="kol-infobox">
             <p class="kol-info-topbg"></p>
             <img :src="infoList.img" alt>
             <div class="kol-info">
@@ -25,7 +25,7 @@
               <li v-for="(item, index) in dec" :key="index">{{item}}</li>
             </ul>
           </div>
-          <div class="kol-card kol-brand mb10">
+          <div class="kol-card kol-brand">
             <p class="clearfix">
               <span>Brand Mentions</span>
               <b>{{MentionsNum}}</b>
@@ -35,18 +35,18 @@
               <b>{{Sentiment}}</b>
             </p>
           </div>
-          <div class="kol-card mb10">
+          <div class="kol-card">
             <p class="kol-cloumn">Top Industries</p>
             <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
           </div>
-          <div class="kol-card mb10">
+          <div class="kol-card">
             <p class="kol-cloumn">Keywords</p>
             <tag-charts :width="240" :height="180" :taglist="parentTags"></tag-charts>
           </div>
         </div>
         <div class="kol-detail-con">
           <span class="kol-back-btn" @click="goback">返回上一级</span>
-          <div class="kol-card mb10">
+          <div class="kol-card">
             <p class="kol-cloumn mb10">Activity</p>
             <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
             <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
@@ -67,7 +67,7 @@
               </table>
             </div>
           </div>
-          <div class="kol-card mb10">
+          <div class="kol-card">
             <p class="kol-cloumn">Analytics</p>
             <div class="activity-contable">
               <table class="com-brand-table">
@@ -92,7 +92,7 @@
               </table>
             </div>
           </div>
-          <div class="kol-card mb10">
+          <div class="kol-card">
             <p class="kol-cloumn">Social Data</p>
             <div class="activity-table">
               <table class="com-brand-table">
@@ -651,6 +651,8 @@ export default {
 .kol-card {
   background: $white;
   padding: 10px 20px;
+  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
 }
 .kol-brand {
   p {
