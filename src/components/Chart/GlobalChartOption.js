@@ -191,6 +191,15 @@ const MockData = {
 					color: "#00000014"
 				}
 			},
+			axisLabel: { 
+				formatter: function(value) {
+					if (value.length > 8) { 
+						return value.substring(0, 5) + "..."; 
+					} else { 
+						return value; 
+					} 
+				}
+			},
 			//网格线
 			splitLine: {
 				show: true,

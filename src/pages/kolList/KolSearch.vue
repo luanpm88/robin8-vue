@@ -315,7 +315,6 @@ export default {
         if (element.description_raw.length > 60) {
           element.description_raw = element.description_raw.substr(0, 30) + '...'
         }
-        // console.log();
         element.influence = element.stats.avg_post_influence;
         element.correlation = parseInt(element.correlation * 100);
         if (!element.pricing) {
@@ -323,10 +322,6 @@ export default {
         }
       });
       _that.searchList = data;
-
-      // console.log('woshidata', data);
-      // console.log('woshidata', data.pricing);
-      // // console.log(data.r8_id);
       _that.searchListBox.push(_that.searchList);
       _that.currentPage = _that.currentPage + 1;
     },

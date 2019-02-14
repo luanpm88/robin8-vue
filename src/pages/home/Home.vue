@@ -102,13 +102,14 @@ export default {
         }
       }).then(function(res) {
         if (res.status === 200) {
+          // console.log(res.data);
           if (res.data.competitors.length == 0) {
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;
             _that.keyList.brand_keywords = res.data.trademarks_list[0].name;
             res.data.competitors.forEach(element => {
-              _that.keyList.cb_keywords.push(element.name);
+              _that.keyList.cb_keywords.push(element.short_name);
             });
           }
         }
