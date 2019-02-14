@@ -176,7 +176,8 @@ export default {
         name: 'KolDetail',
         params: {
           id: item.profile_id,
-          type: this.tabIndex
+          type: this.tabIndex,
+          brand_keywords: this.childKeyList.brand_keywords
         },
       });
     },

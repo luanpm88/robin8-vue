@@ -45,6 +45,7 @@
           </div>
         </div>
         <div class="kol-detail-con">
+          <span class="kol-back-btn" @click="goback">返回上一级</span>
           <div class="kol-card mb10">
             <p class="kol-cloumn mb10">Activity</p>
             <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
@@ -575,11 +576,22 @@ export default {
         .catch(function(error) {
           // console.log(error);
         });
+    },
+    goback() {
+      this.$router.go(-1);
     }
   }
 };
 </script>
 <style  lang="scss" scoped>
+.kol-back-btn{
+  cursor: pointer;
+  line-height: 35px;
+  text-decoration: underline;
+  &:hover{
+    color: #a347c9ff;
+  }
+}
 .kol-detail-wrap {
   width: 900px;
   margin: 0px auto;
