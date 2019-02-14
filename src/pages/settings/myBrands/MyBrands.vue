@@ -17,8 +17,7 @@
       class="item"
     >
       <td>
-        <input type="checkbox" v-model="isCheck" @click="checkItem(item)" v-if="item.status === 1">
-        {{item.status}}
+        <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
       </td>
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
@@ -62,23 +61,20 @@ export default {
     handelGetListDataSucc(res){
       let resData = res.data
       if (res.status == 200 && resData){
-        let _brandsList = [];
+        let _brandsList = this.brandsList;
         let _brandItem
-        console.log(res)
         resData.trademarks_list.forEach(item => {
           _brandItem = commonJs.buildObjData('id', item.id)
           if (item.status === 0) {
-            item.isCheck = false
+            _brandItem.isCheck = false
           } else {
-            item.isCheck = true
+            _brandItem.isCheck = true
           }
+          _brandItem.status = item.status
           _brandItem.name = item.name
           _brandItem.description = item.description
-          _brandsList.push(_brandItem)
+          this.brandsList.push(_brandItem)
         })
-        this.brandsList = JSON.parse(JSON.stringify(_brandsList));
-        // this.$set(this.brandsList, _brandsList)
-        // this.brandsList = _brandsList;
       }
     },
     // 编辑和修改的接口
@@ -103,9 +99,9 @@ export default {
         id: item.id
       }
       if (item.isCheck) {
-        params.status = 1
-      } else {
         params.status = 0
+      } else {
+        params.status = 1
       }
       this.totalJoggle(item, params)
     },
