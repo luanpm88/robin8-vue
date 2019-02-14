@@ -35,6 +35,9 @@
       <div class="text-center create-btn-area">
         <button
           type="button"
+          class="btn btn-cyan submit-btn mr10" @click="backList">返回</button>
+        <button
+          type="button"
           class="btn btn-cyan submit-btn"
           @click="doConfirm"
           :disabled="canSubmit ? false : true"
@@ -64,17 +67,38 @@ export default {
       canSubmit: true
     }
   },
+  created() {
+    if (this.$route.params.itemList) {
+      this.submitData.name = this.$route.params.itemList.name
+      this.submitData.description = this.$route.params.itemList.description
+    }
+  },
   methods: {
     doSubmit () {
       if (!this.canSubmit) {
         return false
       }
       this.canSubmit = false
-      axios.post(apiConfig.createBrandUrl, this.submitData, {
-        headers: {
-          'Authorization': this.authorization
+      if (!this.$route.params.itemList) {
+        axios.post(apiConfig.createBrandUrl, this.submitData, {
+          headers: {
+            'Authorization': this.authorization
+          }
+        }).then(this.handleDoSubmitSucc)
+      } else {
+        let params = {
+          id: this.$route.params.itemList.id,
+          name: this.submitData.name,
+          description: this.submitData.description
         }
-      }).then(this.handleDoSubmitSucc)
+        // 编辑修改接口
+        axios.post(apiConfig.createBrandUrl + '/' + this.$route.params.itemList.id, params, {
+          headers: {
+            'Authorization': this.authorization
+          }
+        }).then(this.handleDoSubmitSucc);
+      }
+      
     },
     handleDoSubmitSucc (res) {
       console.log(res)
@@ -96,6 +120,9 @@ export default {
           this.doSubmit()
         }
       })
+    },
+    backList() {
+      this.$router.go(-1);
     }
   },
   computed: {

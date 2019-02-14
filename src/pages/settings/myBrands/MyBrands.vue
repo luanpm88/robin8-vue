@@ -5,18 +5,30 @@
   </div>
   <table class="com-brand-table">
     <tr>
+      <th>Check</th>
       <th>Id</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Operation</th>
     </tr>
     <tr
       v-for="(item, index) in brandsList"
       :key="index"
       class="item"
     >
+      <td>
+        <input type="checkbox" v-model="isCheck" @click="checkItem(item)" v-if="item.status === 1">
+        {{item.status}}
+      </td>
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
       <td>{{item.description}}</td>
+      <td>
+        <p class="campaign-info-detail">
+          <span @click="toDetail(item)">编辑</span>
+          <span @click="toDelete(item)">删除</span>
+        </p>
+      </td>
     </tr>
   </table>
 </div>
@@ -34,7 +46,9 @@ export default {
   },
   data () {
     return {
-      brandsList: []
+      brandsList: [],
+      isCheck: true,
+      isFalse: false
     }
   },
   methods: {
@@ -48,17 +62,67 @@ export default {
     handelGetListDataSucc(res){
       let resData = res.data
       if (res.status == 200 && resData){
-        let _brandsList = this.brandsList
+        let _brandsList = [];
         let _brandItem
+        console.log(res)
         resData.trademarks_list.forEach(item => {
-          // console.log(item)
           _brandItem = commonJs.buildObjData('id', item.id)
+          if (item.status === 0) {
+            item.isCheck = false
+          } else {
+            item.isCheck = true
+          }
           _brandItem.name = item.name
           _brandItem.description = item.description
-
           _brandsList.push(_brandItem)
         })
+        this.brandsList = JSON.parse(JSON.stringify(_brandsList));
+        // this.$set(this.brandsList, _brandsList)
+        // this.brandsList = _brandsList;
       }
+    },
+    // 编辑和修改的接口
+    totalJoggle(item, params) {
+      const _that = this
+      axios.post(apiConfig.createBrandUrl + '/' + item.id, params, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(function(res) {
+        // console.log(res);
+        if (res.status === 201) {
+          _that.brandsList = []
+          _that.getMyBrandList()
+        }
+      })
+    },
+    // 选中一条
+    checkItem(item) {
+      // console.log(item);
+      let params = {
+        id: item.id
+      }
+      if (item.isCheck) {
+        params.status = 1
+      } else {
+        params.status = 0
+      }
+      this.totalJoggle(item, params)
+    },
+    toDetail(item) {
+      this.$router.push({
+        path: "/settings/my_brands/create",
+        name: "MyBrandsCreate",
+        params: {
+          itemList: item
+        }
+      });
+    },
+    toDelete(item) {
+      let params = {
+        status: -1
+      }
+      this.totalJoggle(item, params);
     }
   },
   mounted(){
@@ -73,6 +137,7 @@ export default {
 <style lang="scss" scoped>
 .com-add {
   text-align: right;
+  margin-bottom: 20px;
 }
 .com-brand {
   min-height: 500px;
@@ -90,24 +155,27 @@ export default {
       color: #333;
       font-size: $font-nm-b;
        text-align: center;
-      padding: 5px 0px;
-      &:nth-child(1){
-        width: 8%;
-      }
-      &:nth-child(2){
-        width: 20%;
-      }
+        padding: 5px 10px;
     }
   }
   td{
     text-align: center;
-    padding: 16px 0px;
-    &:nth-child(1){
-      width: 8%;
+    padding: 16px 10px;
+  }
+}
+.campaign-info-detail{
+  line-height: 22px;
+  span{
+    cursor: pointer;
+    color: #b37feb;
+    &:hover{
+      text-decoration: underline;
     }
-    &:nth-child(2){
-      width: 20%;
+    &:nth-child(2) {
+        margin-left: 8px;
+        color: #6168e6;
     }
   }
+
 }
 </style>
