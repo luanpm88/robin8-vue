@@ -283,14 +283,6 @@ const MockData = {
 		xAxis: {
 			splitNumber: 0.5,
 			boundaryGap: [0, 0.01],
-			name: "No. of Mention(s)",
-			nameLocation: "middle",
-			nameTextStyle: {
-				fontSize: 16,
-				padding: [20, 0, 0, 0]
-				// padding: [20],
-				// shadowOffsetY: 30,
-			},
 			axisLine: {
 				lineStyle: {
 					color: "#999"
@@ -310,14 +302,6 @@ const MockData = {
 			},
 		},
 		yAxis: {
-			name: "Brand  Name",
-			nameLocation: "middle",
-			nameTextStyle: {
-				fontSize: 16,
-				padding: [0, 0, 60, 0]
-				// padding: [20],
-				// shadowOffsetY: 30,
-			},
 			type: 'category',
 			data: [],
 			axisLine: {
