@@ -6,5 +6,8 @@ export const lang = {
   settings: 'Settings',
   wechat: 'Wechat',
   weibo: 'Weibo',
-  more: 'load more'
+  more: 'load more',
+  edit: 'edit',
+  delete: 'delete',
+  detail: 'detail'
 }

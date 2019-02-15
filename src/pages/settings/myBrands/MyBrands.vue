@@ -17,7 +17,7 @@
       class="item"
     >
       <td>
-        <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
+        <input type="checkbox" name="checkboxName" v-model="item.isCheck" @click="checkItem(item)">
       </td>
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>

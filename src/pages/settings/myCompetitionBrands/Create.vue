@@ -32,6 +32,9 @@
         </div>
       </div>
       <div class="text-center create-btn-area">
+        <button
+          type="button"
+          class="btn btn-cyan submit-btn mr10" @click="backList">返回</button>
         <button type="button" class="btn btn-cyan submit-btn" @click="submit">提交</button>
       </div>
     </div>
@@ -56,6 +59,13 @@ export default {
           short_name: ''
         }
       ]
+    }
+  },
+  created() {
+    // console.log(this.$route.params.itemList);
+    if (this.$route.params.itemList) {
+      this.brandList[0].name = this.$route.params.itemList.name
+      this.brandList[0].short_name = this.$route.params.itemList.short_name
     }
   },
   methods: {
@@ -94,14 +104,45 @@ export default {
           console.log(error)
         })
     },
-    submit() {
-      let params = {
-        competitors: this.brandList
-      }
-      this.submitCreatedCompetitor(params);
+    // 编辑提交的接口
+    editSubmit(params, item) {
+      const _that = this
+      axios
+        .post(apiConfig.submitCreatedCompetitor + '/' + item.id, params, {
+          headers: {
+            'Authorization': _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 201) {
+            if (_that.status) {
+              _that.$emit('childStatus', _that.chageHomeShow)
+            } else {
+              _that.$router.push("/settings/my_competition_brands");
+            }
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     },
-    parentHome() {
-      
+    submit() {
+      if (!this.$route.params.itemList) {
+        let params = {
+          competitors: this.brandList
+        }
+        this.submitCreatedCompetitor(params);
+      } else {
+        let params = {
+          id: this.$route.params.itemList.id,
+          name: this.brandList[0].name,
+          short_name: this.brandList[0].short_name
+        }
+        this.editSubmit(params, this.$route.params.itemList);
+      }
+    },
+    backList() {
+      this.$router.go(-1);
     }
   },
   computed: {

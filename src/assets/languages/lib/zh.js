@@ -6,5 +6,8 @@ export const lang = {
   settings: '企业设置',
   wechat: '微信',
   weibo: '微博',
-  more: '查看更多'
+  more: '查看更多',
+  edit: '编辑',
+  delete: '删除',
+  detail: '详情'
 }
