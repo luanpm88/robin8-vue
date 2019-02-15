@@ -86,12 +86,19 @@ export default {
       parentSentiment: '',
       keyList: {
         brand_keywords: '',
-        cb_keywords: []
+        cb_keywords: [],
+        tabIndex: 0
       }
     }
   },
   created() {
     this.getBaseData();
+    if (this.$route.params.currentBrand) {
+      this.keyList.tabIndex = 0;
+    }
+    if (this.$route.params.curentCompittor) {
+      this.keyList.tabIndex = 2;
+    }
   },
   methods: {
     getBaseData () {
@@ -102,15 +109,42 @@ export default {
         }
       }).then(function(res) {
         if (res.status === 200) {
-          // console.log(res.data);
           if (res.data.competitors.length == 0) {
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;
-            _that.keyList.brand_keywords = res.data.trademarks_list[0].name;
-            res.data.competitors.forEach(element => {
-              _that.keyList.cb_keywords.push(element.short_name);
-            });
+            if (JSON.stringify(_that.$route.params) == "{}") {
+              _that.keyList.brand_keywords = '';
+              res.data.trademarks_list.forEach(element => {
+                if (element.status === 1) {
+                  _that.keyList.brand_keywords = element.name;
+                }
+              })
+              
+              res.data.competitors.forEach(element => {
+                if (element.status === 1) {
+                  _that.keyList.cb_keywords.push(element.short_name);
+                }
+              });
+            } else {
+              if (_that.$route.params.currentBrand) {
+                _that.keyList.brand_keywords = _that.$route.params.currentBrand;
+                res.data.competitors.forEach(element => {
+                  if (element.status === 1) {
+                    _that.keyList.cb_keywords.push(element.short_name);
+                  }
+                });
+              }
+              if (_that.$route.params.curentCompittor) {
+                res.data.trademarks_list.forEach(element => {
+                  if (element.status === 1) {
+                    _that.keyList.brand_keywords = element.name;
+                  }
+                })
+                // 对比competitor
+                _that.keyList.cb_keywords = _that.$route.params.curentCompittor
+              }
+            }
           }
         }
       })

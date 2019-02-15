@@ -26,6 +26,9 @@
       </td>
       </tr>
     </table>
+    <div class="com-add mt20">
+      <span @click="checkInsight">Selected view</span>
+    </div>
   </div>
 </template>
 
@@ -44,6 +47,7 @@ export default {
     return {
       dataList: {},
       dataListBox: [],
+      currentCheckList: [],
     }
   },
   created() {
@@ -113,6 +117,28 @@ export default {
         status: -1
       }
       this.totalJoggle(item, params);
+    },
+    checkInsight() {
+      this.currentCheckList = [];
+      this.dataListBox.forEach(key => {
+        // console.log(key);
+        if (key.status === 1) {
+          this.currentCheckList.push(key.short_name);
+        }
+      });
+      if (this.currentCheckList.length > 0) {
+        // 把当前选的竞争者 带到home页面
+        this.$router.push({
+          path: "/",
+          name: "Home",
+          params: {
+            curentCompittor: this.currentCheckList
+          }
+        });
+      } else {
+        alert('您没有选择对比的品牌');
+      }
+      
     }
   }
 }
@@ -122,6 +148,12 @@ export default {
 .com-add {
   text-align: right;
   margin-bottom: 20px;
+  span{
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline
+    }
+  }
 }
 .com-brand {
   min-height: 500px;

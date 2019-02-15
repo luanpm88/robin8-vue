@@ -17,7 +17,7 @@
       class="item"
     >
       <td>
-        <input type="checkbox" name="checkboxName" v-model="item.isCheck" @click="checkItem(item)">
+        <input type="checkbox"  v-model="item.isCheck" @click="checkItem(item)">
       </td>
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
@@ -30,6 +30,9 @@
       </td>
     </tr>
   </table>
+  <div class="com-add mt20">
+    <span @click="checkInsight">Selected view</span>
+  </div>
 </div>
 </template>
 
@@ -46,8 +49,7 @@ export default {
   data () {
     return {
       brandsList: [],
-      isCheck: true,
-      isFalse: false
+      currentCheck: {}
     }
   },
   methods: {
@@ -69,6 +71,8 @@ export default {
             _brandItem.isCheck = false
           } else {
             _brandItem.isCheck = true
+            // 把当前的值存起来
+            this.currentCheck = item;
           }
           _brandItem.status = item.status
           _brandItem.name = item.name
@@ -119,6 +123,21 @@ export default {
         status: -1
       }
       this.totalJoggle(item, params);
+    },
+    checkInsight() {
+      console.log(this.currentCheck.name);
+      if (!this.currentCheck.name) {
+        alert('您没有选择品牌');
+      } else {
+        // 把当前选中brand 带到home页面
+        this.$router.push({
+          path: "/",
+          name: "Home",
+          params: {
+            currentBrand: this.currentCheck.name
+          }
+        });
+      }
     }
   },
   mounted(){
@@ -134,6 +153,12 @@ export default {
 .com-add {
   text-align: right;
   margin-bottom: 20px;
+  span{
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline
+    }
+  }
 }
 .com-brand {
   min-height: 500px;

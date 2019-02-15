@@ -13,7 +13,7 @@ const MockData = {
 		},
 		grid: {
 			top: "8%",
-			left: "5%",
+			left: "6%",
 			right: "4%",
 			bottom: "15%",
 			containLabel: true
@@ -53,7 +53,7 @@ const MockData = {
 			nameLocation: "middle",
 			nameTextStyle: {
 				fontSize: 16,
-				padding: [0, 0, 30, 0]
+				padding: [0, 0, 52, 0]
 				// padding: [20],
 				// shadowOffsetY: 30,
 			},
@@ -136,7 +136,7 @@ const MockData = {
 		},
 		grid: {
 			top: "8%",
-			left: "6%",
+			left: "8%",
 			right: "4%",
 			bottom: "15%",
 			containLabel: true

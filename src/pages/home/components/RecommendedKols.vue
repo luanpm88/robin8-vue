@@ -79,6 +79,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        // console.log('woshi kol brand keyword', this.childKeyList.brand_keywords);
         this.params.brand_keywords = this.childKeyList.brand_keywords
         this.weiboKol(this.params)
       },

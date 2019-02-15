@@ -150,27 +150,40 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        this.cur = this.childKeyList.tabIndex;
         this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
         this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
         this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
         this.competitorParams.cb_names = this.childKeyList.cb_keywords;
         this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
         this.brandKeyWord = this.childKeyList.brand_keywords;
-        // trend 微博
-        this.trendsWeibo(this.trendParams);
+        if (this.cur === 0) {
+          // trend 微博
+          this.trendsWeibo(this.trendParams);
+        } else {
+          // competitor 微博
+          this.competitorWeibo(this.competitorParams);
+        }
       },
       deep: true
     }
   },
   created() {
+    console.log('我是analytic 页面的', this.childKeyList);
+    this.cur = this.childKeyList.tabIndex;
     this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
     this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
     this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
     this.competitorParams.cb_names = this.childKeyList.cb_keywords;
     this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
     this.brandKeyWord = this.childKeyList.brand_keywords;
-    // trend 微博
-    this.trendsWeibo(this.trendParams);
+    if (this.cur === 0) {
+      // trend 微博
+      this.trendsWeibo(this.trendParams);
+    } else {
+      // competitor 微博
+      this.competitorWeibo(this.competitorParams);
+    }
     // this.getNowFormatDate();
     // console.log(this.childKeyList);
   },
@@ -248,8 +261,8 @@ export default {
           if (res.status === 200) {
             _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7);
             _that.trendsList.options.series[0].data = res.data.data.slice(0, 7);
-            _that.trendsList.options.series[0].name = _that.brandKeyWord;
-            _that.trendsList.options.legend.data[0].name = _that.brandKeyWord;
+            _that.trendsList.options.series[0].name = _that.childKeyList.brand_keywords;
+            _that.trendsList.options.legend.data[0].name = _that.childKeyList.brand_keywords;
             _that.$refs.tendsEChart.updateOptions(_that.trendsList.options);
           }
         })
