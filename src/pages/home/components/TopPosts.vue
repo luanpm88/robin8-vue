@@ -86,11 +86,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "微博"
+          name: this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: "微信"
+          name: this.$t('lang.wechat')
         }
       ]
 

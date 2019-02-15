@@ -7,7 +7,8 @@
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
       </h5>
     </div>
-
+      <!-- <p>{{$t(lang.more)}}</p> -->
+    <p>{{$t('lang.weibo')}}</p>
     <div class="panel-body list-content">
       <div class="mt30">
         <div class="analytic-box">
@@ -105,11 +106,11 @@ export default {
       topTab: [
         {
           index: 0,
-          name: "微博"
+          name: this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: "微信"
+          name: this.$t('lang.wechat')
         }
       ],
       tabList: [
@@ -169,7 +170,7 @@ export default {
     }
   },
   created() {
-    console.log('我是analytic 页面的', this.childKeyList);
+    // console.log('我是analytic 页面的', this.childKeyList);
     this.cur = this.childKeyList.tabIndex;
     this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
     this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
@@ -184,8 +185,6 @@ export default {
       // competitor 微博
       this.competitorWeibo(this.competitorParams);
     }
-    // this.getNowFormatDate();
-    // console.log(this.childKeyList);
   },
   computed: {
     ...mapState(["authorization"])

@@ -82,7 +82,7 @@ const MockData = {
 				type: "line",
 				smooth: true,
 				symbolSize: 7,
-				data: [120, 132, 101, 134, 90, 230, 210],
+				data: [],
 				itemStyle: {
 					normal: {
 						color: "rgba(179,127,235,0.5)",

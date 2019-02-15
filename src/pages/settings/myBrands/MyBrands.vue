@@ -1,15 +1,15 @@
 <template>
 <div class="com-brand">
   <div class="com-add">
-    <span><router-link :to="{path: '/settings/my_brands/create'}">新建我的品牌</router-link></span>
+    <span><router-link :to="{path: '/settings/my_brands/create'}">{{$t('lang.myBrandPage.addBtn')}}</router-link></span>
   </div>
   <table class="com-brand-table">
     <tr>
-      <th>Check</th>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Operation</th>
+      <th>{{$t('lang.myBrandPage.table.title.check')}}</th>
+      <th>{{$t('lang.myBrandPage.table.title.id')}}</th>
+      <th>{{$t('lang.myBrandPage.table.title.name')}}</th>
+      <th>{{$t('lang.myBrandPage.table.title.description')}}</th>
+      <th>{{$t('lang.myBrandPage.table.title.operation')}}</th>
     </tr>
     <tr
       v-for="(item, index) in brandsList"
@@ -24,14 +24,14 @@
       <td>{{item.description}}</td>
       <td>
         <p class="campaign-info-detail">
-          <span @click="toDetail(item)">编辑</span>
-          <span @click="toDelete(item)">删除</span>
+          <span @click="toDetail(item)">{{$t('lang.edit')}}</span>
+          <span @click="toDelete(item)">{{$t('lang.delete')}}</span>
         </p>
       </td>
     </tr>
   </table>
   <div class="com-add mt20">
-    <span @click="checkInsight">Selected view</span>
+    <span @click="checkInsight">{{$t('lang.myBrandPage.contrastButton')}}</span>
   </div>
 </div>
 </template>
@@ -71,8 +71,6 @@ export default {
             _brandItem.isCheck = false
           } else {
             _brandItem.isCheck = true
-            // 把当前的值存起来
-            this.currentCheck = item;
           }
           _brandItem.status = item.status
           _brandItem.name = item.name
@@ -125,9 +123,13 @@ export default {
       this.totalJoggle(item, params);
     },
     checkInsight() {
-      console.log(this.currentCheck.name);
+      this.brandsList.forEach(element => {
+        if (element.status === 1) {
+          this.currentCheck = element
+        }
+      });
       if (!this.currentCheck.name) {
-        alert('您没有选择品牌');
+        alert(this.$t('lang.myBrandPage.tip'));
       } else {
         // 把当前选中brand 带到home页面
         this.$router.push({
