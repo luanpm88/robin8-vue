@@ -10,6 +10,88 @@ export const lang = {
   edit: 'edit',
   delete: 'delete',
   detail: 'detail',
+  payment: 'Payment',
+  information: 'Information',
+  submitBtn: 'Submit',
+  campaigns: {
+    campaignInfo: 'Campaign Information',
+    kolParticipate: 'KOL Participate',
+    collaborationCompleted: 'Collaboration Completed',
+    bigVRequirement: 'Big V related requirement',
+    serchBtn: 'Search Big V',
+    name: {
+      title: 'Campaign name',
+      placeholder: 'please fill in the campaign name',
+      errorTips: 'a good name can attract more KOL to participate'
+    },
+    description: {
+      title: 'Campaign description',
+      placeholder: 'please write down the campaign description',
+      errorTips: 'please write down the campaign related information'
+    },
+    brandName: {
+      title: 'Brand name',
+      placeholder: 'please select a brand name',
+      errorTips: 'please select the right brand name'
+    },
+    platform: {
+      title: 'Campaign platform',
+      placeholder: '',
+      errorTips: ''
+    },
+    picture: {
+      title: 'Campaign picture',
+      placeholder: '',
+      errorTips: ''
+    },
+    time: {
+      title: 'Campaign time',
+      startPlaceholder: 'select start time',
+      endPlaceholder: 'select end time',
+      errorTips: 'please select the right campaign time'
+    },
+    kolNumber: {
+      title: 'Number of KOL',
+      placeholder: 'please fill in the number of KOL for the campaign',
+      errorTips: 'please fill in the number of KOL for the campaign'
+    },
+    budget: {
+      title: 'Campaign budget',
+      placeholder: 'please fill in the campaign budget',
+      errorTips: 'please fill in the campaign budget'
+    },
+    precaution: {
+      title: 'Psrecaution',
+      placeholder: 'please fill out the precaution for the campaign, including content that should not be talk about and the important things need to be take care of.',
+      errorTips: 'please fill in the precaution'
+    },
+    tags: {
+      title: 'please select the tags',
+      placeholder: '',
+      errorTips: 'please select the tags'
+    },
+    price: {
+      title: 'Price requirements',
+      lowestPlaceholder: 'lowest',
+      highestPlaceholder: 'highest',
+      errorTips: 'please select a price range for us to recommend accurate KOL'
+    },
+    followerAge: {
+      title: 'Follower age',
+      placeholder: 'please select the expected range for the follower’s age',
+      errorTips: 'please select the expected range for the follower’s age'
+    },
+    followerGender: {
+      title: 'Follower gender',
+      placeholder: 'please select the follower gender',
+      errorTips: 'please select the follower gender'
+    },
+    followerDistrict: {
+      title: 'Follower district',
+      placeholder: 'please fill in the district reauirement',
+      errorTips: 'please fill in the district reauirement'
+    }
+  },
   myBrandPage: {
     table: {
       title: {
