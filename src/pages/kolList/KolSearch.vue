@@ -377,7 +377,11 @@ export default {
       }).then(function(res) {
         if (res.status === 200) {
           if (!res.data.competitors.length == 0) {
-            _that.totalKeywords = res.data.trademarks_list[0].name;
+            res.data.trademarks_list.forEach(element => {
+              if (element.status === 1) {
+                _that.totalKeywords = element.name;
+              }
+            });
           }
         }
       })
