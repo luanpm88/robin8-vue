@@ -38,10 +38,10 @@
 
           <div class="home-show row mt20">
             <div class="col-xs-6">
-              <home-recommended-kols  :childKeyList='keyList'></home-recommended-kols>
+              <home-recommended-kols :childKeyList='keyList'></home-recommended-kols>
             </div>
             <div  class="col-xs-6">
-              <home-top-posts  :childKeyList='keyList'></home-top-posts>
+              <home-top-posts :childKeyList='keyList'></home-top-posts>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default {
                   _that.keyList.brand_keywords = element.name;
                 }
               })
-              
+
               res.data.competitors.forEach(element => {
                 if (element.status === 1) {
                   _that.keyList.cb_keywords.push(element.short_name);

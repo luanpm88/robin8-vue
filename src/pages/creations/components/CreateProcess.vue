@@ -10,7 +10,7 @@
           }"
         >
           <div class="num">1</div>
-          <div class="title">活动基本信息</div>
+          <div class="title">{{$t('lang.campaigns.campaignInfo')}}</div>
         </div>
         <div
           :class="{
@@ -20,7 +20,7 @@
           }"
         >
           <div class="num">2</div>
-          <div class="title">KOL参与</div>
+          <div class="title">{{$t('lang.campaigns.kolParticipate')}}</div>
         </div>
         <div
           :class="{
@@ -30,7 +30,7 @@
           }"
         >
           <div class="num">3</div>
-          <div class="title">支付</div>
+          <div class="title">{{$t('lang.payment')}}</div>
         </div>
         <div
           :class="{
@@ -40,7 +40,7 @@
           }"
         >
           <div class="num">4</div>
-          <div class="title">合作完成</div>
+          <div class="title">{{$t('lang.campaigns.collaborationCompleted')}}</div>
         </div>
       </div>
     </div>
