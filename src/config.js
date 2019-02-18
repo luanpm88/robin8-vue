@@ -109,7 +109,7 @@ const config = {
   kollistWeixinTable: `${searchHost}/weixin/profile/kol_search_profile?${searchHostKey}`,
 
   // 首页接口结束------------------------
-  
+
   // 我的竞争品牌 增加品牌 提交接口
   // brand_api/v2/users/competitor
   submitCreatedCompetitor: `${host}/users/competitor`,
