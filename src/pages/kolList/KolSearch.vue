@@ -166,6 +166,9 @@
               </ul>
             </div>
           </div>
+          <div class="r8-loading" v-if="isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
           <div class="form-group text-center">
             <button type="button" class="btn btn-blue btn-outline" @click="showMore">Show more</button>
           </div>
@@ -179,12 +182,12 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import { Table, Progress } from "ant-design-vue";
+import { Spin, Progress } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
 export default {
   components: {
-    ATable: Table,
+    ASpin: Spin,
     AProgress: Progress,
     DefaultTabs
   },
@@ -192,6 +195,7 @@ export default {
   data() {
     return {
       profileSort: 1,
+      isLoading: true,
       isactive: false,
       keyword: "",
       totalKeywords: '',
@@ -213,11 +217,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "微博"
+          name: this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: "微信"
+          name: this.$t('lang.wechat')
         }
       ],
       tabIndex: 0,
@@ -314,6 +318,7 @@ export default {
     },
     // 处理数据函数
     jogDataInit(data) {
+      this.isLoading = false;
       const _that = this;
       data.forEach((element, index) => {
         if (element.description_raw.length > 60) {
@@ -333,6 +338,7 @@ export default {
       this.advancedSearch = !this.advancedSearch;
     },
     changeTab(tab) {
+      this.isLoading = true;
       this.tabIndex = tab.index;
       this.currentPage = 0;
       this.searchListBox = [];
@@ -340,6 +346,7 @@ export default {
       this.paramsInit(tab.index);
     },
     showMore() {
+      this.isLoading = true;
       // 接口
       this.paramsInit(this.tabIndex);
     },

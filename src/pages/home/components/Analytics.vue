@@ -7,8 +7,6 @@
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
       </h5>
     </div>
-      <!-- <p>{{$t(lang.more)}}</p> -->
-    <!-- <p>{{$t('lang.weibo')}}</p> -->
     <div class="panel-body list-content">
       <div class="mt30">
         <div class="analytic-box">
