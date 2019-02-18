@@ -132,5 +132,10 @@ export const lang = {
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
     }
+  },
+  kolList: {
+    detail: {
+      btn: '返回'
+    }
   }
 }

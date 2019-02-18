@@ -132,5 +132,10 @@ export const lang = {
       addTip: 'Add My Competitive Brand',
       placeholderDec: 'Please fill in the abbreviation of brand'
     }
+  },
+  kolList: {
+    detail: {
+      btn: 'Return'
+    }
   }
 }

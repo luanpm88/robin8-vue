@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="kol-detail-con">
-          <span class="kol-back-btn" @click="goback">返回上一级</span>
+          <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
           <div class="kol-card">
             <p class="kol-cloumn mb10">Activity</p>
             <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>

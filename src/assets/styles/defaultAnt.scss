@@ -46,3 +46,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.r8-loading{
+    text-align: center;
+    margin-top: 20px;
+    .ant-spin-text{
+        color: #333;
+    }
+    .ant-spin-dot i{
+        color: #333;
+    }
+}
