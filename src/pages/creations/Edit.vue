@@ -13,12 +13,12 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">基础信息</h5>
+        <h5 class="title text-center">{{$t('lang.information')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
             <div class="col-sm-10">
               <input
                 type="text"
@@ -26,14 +26,14 @@
                 class="form-control"
                 :class="[errors.has('name') ? 'danger' : '']"
                 v-model="submitData.name"
-                placeholder="请填写活动名称"
+                :placeholder="$t('lang.campaigns.name.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
+              <div class="form-tips">{{$t('lang.campaigns.name.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动介绍：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
             <div class="col-sm-10">
               <input
                 type="text"
@@ -41,14 +41,14 @@
                 class="form-control"
                 :class="[errors.has('desc') ? 'danger' : '']"
                 v-model="submitData.description"
-                placeholder="请填写活动介绍"
+                :placeholder="$t('lang.campaigns.description.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动相关介绍</div>
+              <div class="form-tips">{{$t('lang.campaigns.description.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">品牌名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
             <div class="col-sm-10">
               <select
                 name="brand"
@@ -57,14 +57,14 @@
                 v-model="submitData.trademark_id"
                 v-validate="'required'"
               >
-                <option value="">请选择品牌名称</option>
+                <option value="">{{$t('lang.campaigns.brandName.placeholder')}}</option>
                 <option
                   v-for="item in brandsList"
                   :key="item.id"
                   :value="item.id"
                 >{{item.name}}</option>
               </select>
-              <div class="form-tips">请选择准确的品牌名称</div>
+              <div class="form-tips">{{$t('lang.campaigns.brandName.errorTips')}}</div>
             </div>
           </div>
         </div>
@@ -73,12 +73,12 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">活动信息</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动平台：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
             <div class="col-sm-10">
               <div class="row">
                 <div
@@ -127,7 +127,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动图片：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-10">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
@@ -178,14 +178,14 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动时间：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-10">
               <div class="input-group">
                 <datepicker
                   name="start_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
-                  placeholder="选择开始时间"
+                  :placeholder="$t('lang.campaigns.time.startPlaceholder')"
                   v-model="submitData.start_at"
                   v-validate="'required'"
                 ></datepicker>
@@ -194,7 +194,7 @@
                   name="end_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
-                  placeholder="选择结束时间"
+                  :placeholder="$t('lang.campaigns.time.endPlaceholder')"
                   v-model="submitData.end_at"
                   v-validate="'required'"
                 ></datepicker>
@@ -203,12 +203,12 @@
                 class="form-tips text-right danger"
                 v-show="errors.has('start_at') || errors.has('end_at')"
               >
-                请选择您预期的活动时间
+                {{$t('lang.campaigns.time.errorTips')}}
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">KOL数量：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
             <div class="col-sm-4">
               <input
                 type="number"
@@ -216,12 +216,12 @@
                 class="form-control"
                 :class="[errors.has('kols_count') ? 'danger' : '']"
                 v-model.number="submitData.pre_kols_count"
-                placeholder="请填写活动KOL数量"
+                :placeholder="$t('lang.campaigns.kolNumber.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动KOL数量</div>
+              <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">活动预算：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
             <div class="col-sm-4">
               <input
                 type="number"
@@ -229,21 +229,21 @@
                 class="form-control"
                 :class="[errors.has('pre_amount') ? 'danger' : '']"
                 v-model.number="submitData.pre_amount"
-                placeholder="请填写活动预算"
+                :placeholder="$t('lang.campaigns.budget.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动预算</div>
+              <div class="form-tips">{{$t('lang.campaigns.budget.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">注意事项：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
             <div class="col-sm-10">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
                 class="form-control"
                 rows="6"
-                placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"
+                :placeholder="$t('lang.campaigns.precaution.placeholder')"
               ></textarea>
             </div>
           </div>
@@ -253,7 +253,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">大V 相关要求</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.bigVRequirement')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -273,11 +273,11 @@
               class="form-tips danger"
               v-show="errors.has('tags')"
             >
-              情选择一个标签
+              {{$t('lang.campaigns.tags.errorTips')}}
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">价格要求：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
             <div class="col-sm-10">
               <div class="input-group">
                 <input
@@ -286,7 +286,7 @@
                   class="form-control"
                   :class="[errors.has('price_from') ? 'danger' : '']"
                   v-model.number="submitData.target.price_from"
-                  placeholder="最低价格"
+                  :placeholder="$t('lang.campaigns.price.lowestPlaceholder')"
                   v-validate="'required'"
                 >
                 <span class="input-group-addon">-</span>
@@ -296,42 +296,42 @@
                   class="form-control"
                   :class="[errors.has('price_to') ? 'danger' : '']"
                   v-model.number="submitData.target.price_to"
-                  placeholder="最高价格"
+                  :placeholder="$t('lang.campaigns.price.highestPlaceholder')"
                   v-validate="'required'"
                 >
               </div>
-              <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
+              <div class="form-tips">{{$t('lang.campaigns.price.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝年龄：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
             <div class="col-sm-4">
               <select class="form-control">
-                <option>请选择期望的粉丝年龄</option>
+                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-              <div class="form-tips">请选择期望的粉丝年龄</div>
+              <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">粉丝性别：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
             <div class="col-sm-4">
               <select class="form-control">
-                <option>请选择粉丝性别</option>
+                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-              <div class="form-tips">请选择粉丝性别</div>
+              <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝地域：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请选择/填写粉丝的地域要求">
-              <div class="form-tips">请填写期望的粉丝地域描述</div>
+              <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
+              <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group text-center">
@@ -339,7 +339,7 @@
               type="button"
               class="btn btn-blue btn-outline"
               @click="searchKolsCtrl"
-            >搜索大V</button>
+            >{{$t('lang.campaigns.serchBtn')}}</button>
           </div>
         </div>
       </div>
@@ -359,7 +359,7 @@
         class="btn btn-cyan next-btn"
         @click="doConfirm"
         :disabled="canSubmit ? false : true"
-      >提交</button>
+      >{{$t('lang.submitBtn')}}</button>
     </div>
   </div>
 </template>

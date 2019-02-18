@@ -4,37 +4,68 @@
       <div class="media-left media-middle">
         <div class="kol-intro">
           <div class="avatar">
-            <img src="" alt="" class="avatar-img" />
+            <img :src="profile.avatar_url" alt="" class="avatar-img" />
           </div>
-          <div class="name">不知道酱</div>
-          <div class="desc">小红书知名美妆博主/大V博主</div>
+          <div class="name">{{profile.name}}</div>
+          <div class="desc">{{profile.desc}}</div>
           <div class="opaeration-btns">
             <div class="item iconfont icon-details"></div>
-            <div class="item iconfont icon-msg"></div>
-            <div class="item iconfont icon-star-fill active"></div>
+            <!-- <div class="item iconfont icon-msg"></div>
+            <div class="item iconfont icon-star-fill active"></div> -->
           </div>
         </div>
       </div>
       <div class="media-body media-middle">
         <div class="related-info">
-          <p>合计：<span class="price">¥20000.00</span></p>
-          <p>微信公众号 | 发帖数：10 | 报价：￥10000.00 | 曝光值：30000</p>
-          <p>微博 | 发帖数：10 | 报价：￥10000.00 | 曝光值：20000</p>
-
-          <articles-list></articles-list>
+          <p>合计：<span class="price">¥{{profile.price_total}}</span></p>
+          <p
+            v-for="item in tenders"
+            :key="item.id"
+          >
+            {{item.brand_show_info}}
+          </p>
+          <articles-list
+            v-if="profile.status != 'pending'"
+            :articles="tenders"
+          ></articles-list>
         </div>
       </div>
       <div class="media-right media-middle kol-ctrl">
-        <input type="radio" name="kol" />
-        <button type="button" class="btn btn-sm btn-outline btn-blue btn-circle">满意</button>
-        <button type="button" disabled="true" class="btn btn-sm btn-outline btn-blue btn-circle disabled">已支付</button>
+        <input
+          v-if="profile.status == 'pending'"
+          type="checkbox"
+          name="kol"
+          :checked="checked"
+          @click="selectKol(profile.creation_selected_kol_id, profile.price_total)"
+        />
+        <button
+          v-else-if="profile.status == 'uploaded'"
+          type="button"
+          :disabled="statusText != ''"
+          class="btn btn-sm btn-outline btn-blue btn-circle"
+          @click="updateStatus()"
+        >
+          {{statusText != '' ? statusText : '满意'}}
+        </button>
+        <button
+          v-else
+          type="button"
+          disabled
+          class="btn btn-sm btn-outline btn-blue btn-circle disabled"
+        >
+          {{profile.status_zh}}
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
+import commonJs from '@javascripts/common.js'
 import ArticlesList from './ArticlesList'
+import { mapState } from 'vuex'
 
 export default {
   name: 'KolItem',
@@ -42,6 +73,53 @@ export default {
     ArticlesList
   },
   props: {
+    renderData: Object,
+    checkedIds: Array
+  },
+  data () {
+    return {
+      profile: {},
+      tenders: [],
+      checked: false,
+      statusText: ''
+    }
+  },
+  methods: {
+    selectKol (id, price) {
+      this.$emit('selectKol', {
+        'id': id,
+        'price': price
+      })
+    },
+    updateStatus () {
+      axios.post(apiConfig.updateStatusUrl, {
+        'creation_selected_kol_id': this.profile.creation_selected_kol_id
+      }, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleUpdateStatusSucc)
+    },
+    handleUpdateStatusSucc (res) {
+      let resData = res.data
+      console.log(resData)
+      this.statusText = resData.status_zh
+    }
+  },
+  mounted () {
+    // console.log(this.renderData)
+    console.log(this.checkedIds)
+    this.profile = this.renderData.profile
+    this.tenders = this.renderData.tenders
+
+    this.checkedIds.forEach(item => {
+      if (this.profile.creation_selected_kol_id == item) {
+        this.checked = true
+      }
+    })
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>
@@ -56,6 +134,7 @@ export default {
       position: relative;
       width: 50px;
       height: 50px;
+      margin: 0 auto;
       .avatar-img {
         width: 100%;
         height: 100%;

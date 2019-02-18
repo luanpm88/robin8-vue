@@ -1,147 +1,141 @@
 <template>
   <div class="campaign-detail-container">
-    <campaign-create-process
+    <create-process
       :renderData="processStatus"
       class="mt20"
-    ></campaign-create-process>
+    ></create-process>
 
     <div class="panel default-panel mt20">
       <div class="panel-body">
-        <campaign-status-area></campaign-status-area>
+        <status-area :statusData="detailData.status"></status-area>
 
-        <div class="line-title">基础信息</div>
+        <div class="line-title">{{$t('lang.information')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰唇釉圣诞活动</p>
+              <p class="form-control-static">{{detailData.name}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动介绍：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰唇釉圣诞活动开始招募大V啦！圣诞期间参加活动的大V可以获得丰盛的礼品奖励哦～</p>
+              <p class="form-control-static">{{detailData.description}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">品牌名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">圣罗兰</p>
+              <p class="form-control-static">{{detailData.trademark_name}}</p>
             </div>
           </div>
         </div>
 
-        <div class="line-title">活动信息</div>
+        <div class="line-title">{{$t('lang.campaigns.campaignInfo')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动平台：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
             <div class="col-sm-10">
               <div class="row">
-                <div class="col-sm-1 text-center">
-                  <div class="check-icon checked">
-                    <div class="iconfont icon-wechat-circle"></div>
+                <div
+                  v-for="item in detailData.terraces"
+                  :key="item.terrace_id"
+                  class="col-sm-6"
+                >
+                  <div class="col-sm-2 text-center">
+                    <div class="check-icon checked">
+                      <div :class="'iconfont ' + item.iconClass"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-5">
-                  <p class="form-control-static">微信曝光值：30000</p>
-                </div>
-                <div class="col-sm-1 text-center">
-                  <div class="check-icon">
-                    <div class="iconfont icon-weibo-circle"></div>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{item.name}}曝光值：{{item.exposure_value}}</p>
                   </div>
-                </div>
-                <div class="col-sm-5">
-                  <p class="form-control-static">微博曝光值：30000</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动图片：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-10">
               <div class="upload-imgs-list">
                 <div class="upload-img-item">
-                  <img src="" alt="" class="upload-img" />
+                  <img :src="detailData.img_url" alt="" class="upload-img" />
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动要求：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">微博 / 微信平台转发量4w次以上</p>
+              <p class="form-control-static">{{detailData.time_range}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动时间：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">2018-12-21 ～ 2018-1-20</p>
+              <p class="form-control-static">{{detailData.pre_kols_count}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">KOL数量：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">100</p>
+              <p class="form-control-static">{{detailData.pre_amount}}</p>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">活动预算：</div>
+          <div v-if="detailData.notice" class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">128w</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">注意事项：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">大V粉丝量10k以上 / 微博平台认证大V / 小红书平台粉丝量20k以上</p>
+              <p class="form-control-static">{{detailData.notice}}</p>
             </div>
           </div>
         </div>
 
-        <div class="line-title">大V相关要求</div>
+        <div class="line-title">{{$t('lang.campaigns.bigVRequirement')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">所属标签：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.tags.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">潮流时装博主 / 美妆达人 / 时尚达人</p>
+              <p class="form-control-static">{{detailData.industries}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">价格要求：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
             <div class="col-sm-10">
-              <p class="form-control-static">10k~30k</p>
+              <p class="form-control-static">{{detailData.price_range}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝年龄：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
             <div class="col-sm-10">
               <p class="form-control-static">18～40</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝性别：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
             <div class="col-sm-10">
               <p class="form-control-static">女</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝地域：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
             <div class="col-sm-10">
               <p class="form-control-static">北京 / 上海 / 深圳</p>
             </div>
           </div>
         </div>
 
-        <div class="line-title">已选择的大V</div>
-        <div class="kols-list">
-          <kols-list-item
-            v-for="(item, index) in kolsList"
-            :key="index"
-            :hasLiked="kolHasLiked"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :renderData="item"
-          ></kols-list-item>
+        <div v-if="kolsList.length > 0">
+          <div class="line-title">已选择的大V</div>
+          <div class="kols-list">
+            <kols-list-item
+              v-for="(item, index) in kolsList"
+              :key="index"
+              :hasLiked="kolHasLiked"
+              :hasMsg="kolHasMsg"
+              :hasChecked="kolHasChecked"
+              :renderData="item"
+            ></kols-list-item>
+          </div>
         </div>
       </div>
     </div>
@@ -152,15 +146,16 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import CampaignCreateProcess from './components/CampaignCreateProcess'
-import CampaignStatusArea from './components/CampaignStatusArea'
+import CreateProcess from './components/CreateProcess'
+import StatusArea from './components/StatusArea'
 import KolsListItem from './components/KolsListItem'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignDetail',
   components: {
-    CampaignCreateProcess,
-    CampaignStatusArea,
+    CreateProcess,
+    StatusArea,
     KolsListItem
   },
   data () {
@@ -169,31 +164,11 @@ export default {
         current: 1,
         index: 0
       },
-      kolHasLiked: true,
+      detailData: {},
+      kolHasLiked: false,
       kolHasMsg: false,
-      kolHasChecked: true,
-      kolsList: [
-        {
-          name: "Anna Strong",
-          desc: "Visual Designer,Google Inc Visual Designer,Google Inc Visual Designer,Google Inc"
-        },
-        {
-          name: "Milano Esco",
-          desc: "Well-known car blogger"
-        },
-        {
-          name: "Nick Bold",
-          desc: "Web Developer, Facebook Inc"
-        },
-        {
-          name: "Wiltor Delton",
-          desc: "Project Manager"
-        },
-        {
-          name: "Nick Stone",
-          desc: "Visual Designer, Github Inc"
-        }
-      ]
+      kolHasChecked: false,
+      kolsList: []
     }
   },
   methods: {
@@ -205,17 +180,46 @@ export default {
       }).then(this.handleGetDetailDataSucc)
     },
     handleGetDetailDataSucc (res) {
-      let resData = res.data
       console.log(res)
-      // if (resData.code == 0 && resData.data) {
-      //   const data = resData.data
-      //   console.log(data)
-      //   this.ambassadorData = data
-      // }
-    },
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        console.log(resData)
+        this.detailData = resData
+
+        let _kolsList = this.kolsList
+        let _kolItem
+        resData.selected_kols.forEach(item => {
+          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
+          _kolItem.id = item.plateform_uuid
+          _kolItem.name = item.name
+          _kolItem.desc = item.desc
+          _kolItem.checked = false
+          _kolsList.push(_kolItem)
+        })
+        console.log(_kolsList)
+
+        let _terraces = resData.terraces
+        _terraces.forEach(item => {
+          console.log(item)
+          switch (item.short_name) {
+            case 'public_wechat_account':
+              item.iconClass = 'icon-wechat-circle'
+              break
+            case 'weibo':
+              item.iconClass = 'icon-weibo-circle'
+              break
+            default:
+              item.iconClass = ''
+          }
+        })
+      }
+    }
   },
   mounted () {
     this.getDetailData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>

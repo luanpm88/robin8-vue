@@ -1,20 +1,20 @@
 <template>
   <ul class="articles-list">
-    <li class="item">
-      <span class="iconfont icon-weibo"></span>
+    <li
+      v-for="item in articles"
+      :key="item.id"
+      v-if="!!item.title && item.title != ''"
+      class="item"
+    >
+      <span
+        class="iconfont "
+        :class="[item.from_terrace == '公众号' ? 'icon-wechat' : 'icon-weibo']"
+      ></span>
       <span class="iconfont icon-book"></span>
       <div class="article-title">
-        <router-link to="/">文章标题：这就是KOL准备发出去的文章，测试文章</router-link>
+        <router-link :to="item.link">文章标题：{{item.title}}</router-link>
       </div>
-      <button type="button" class="btn btn-xs btn-outline btn-blue link-btn">查看报告</button>
-    </li>
-    <li class="item">
-      <span class="iconfont icon-wechat"></span>
-      <span class="iconfont icon-book"></span>
-      <div class="article-title">
-        <router-link to="/">文章标题：这就是KOL准备发出去的文章，测试文章</router-link>
-      </div>
-      <button type="button" class="btn btn-xs btn-outline btn-blue link-btn">查看报告</button>
+      <!-- <button type="button" class="btn btn-xs btn-outline btn-blue link-btn">查看报告</button> -->
     </li>
   </ul>
 </template>
@@ -23,6 +23,12 @@
 export default {
   name: 'ArticlesList',
   props: {
+    articles: Array
+  },
+  data () {
+    return {
+      iconClass: ''
+    }
   }
 }
 </script>

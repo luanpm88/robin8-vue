@@ -5,6 +5,7 @@ import Reg from '@/pages/Reg'
 import ForgetPassword from '@/pages/ForgetPassword'
 import ChangePassword from '@/pages/ChangePassword'
 import Home from '@/pages/home/Home'
+import HomeCreate from '@/pages/home/Create'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
 
@@ -15,6 +16,14 @@ import CreationEdit from '@/pages/creations/Edit'
 import CreationDetail from '@/pages/creations/Detail'
 import ChooseKols from '@/pages/creations/Kols'
 import CreationPay from '@/pages/creations/Pay'
+
+import Campaigns from '@/pages/campaigns/Creations'
+import CampaignList from '@/pages/campaigns/list'
+import CampaignCreate from '@/pages/campaigns/Create'
+import CampaignEdit from '@/pages/campaigns/Edit'
+import CampaignDetail from '@/pages/campaigns/Detail'
+import CampaignChooseKols from '@/pages/campaigns/Kols'
+import CampaignPay from '@/pages/campaigns/Pay'
 
 import Settings from '@/pages/settings/Settings'
 import CompanyInfo from '@/pages/settings/CompanyInfo'
@@ -75,6 +84,15 @@ export default new Router({
       component: Home,
       meta: {
         title: 'ROBIN8',
+        auth: true
+      }
+    },
+    {
+      path: '/home/create',
+      name: 'HomeCreate',
+      component: HomeCreate,
+      meta: {
+        title: '创建新活动',
         auth: true
       }
     },
@@ -144,7 +162,7 @@ export default new Router({
       },
       children: [
         {
-          path: 'list',
+          path: '',
           name: 'CreationList',
           component: CreationList,
           meta: {
@@ -152,6 +170,15 @@ export default new Router({
             auth: true
           }
         },
+        // {
+        //   path: 'list',
+        //   name: 'CreationList',
+        //   component: CreationList,
+        //   meta: {
+        //     title: '创作活动列表',
+        //     auth: true
+        //   }
+        // },
         {
           path: 'create',
           name: 'CreationCreate',
@@ -192,6 +219,71 @@ export default new Router({
           path: ':id/pay/:tenderId',
           name: 'CreationPay',
           component: CreationPay,
+          meta: {
+            title: '创建新活动',
+            auth: true
+          }
+        }
+      ]
+    },
+    {
+      path: '/campaigns',
+      name: 'Campaigns',
+      component: Campaigns,
+      meta: {
+        title: '活动',
+        auth: true
+      },
+      children: [
+        {
+          path: '',
+          name: 'CampaignList',
+          component: CampaignList,
+          meta: {
+            title: '创作活动列表',
+            auth: true
+          }
+        },
+        {
+          path: 'create',
+          name: 'CampaignCreate',
+          component: CampaignCreate,
+          meta: {
+            title: '创建新活动',
+            auth: true
+          }
+        },
+        {
+          path: ':id',
+          name: 'CampaignDetail',
+          component: CampaignDetail,
+          meta: {
+            title: '活动详情',
+            auth: true
+          }
+        },
+        {
+          path: ':id/edit',
+          name: 'CampaignEdit',
+          component: CampaignEdit,
+          meta: {
+            title: '活动编辑',
+            auth: true
+          }
+        },
+        {
+          path: ':id/kols',
+          name: 'CampaignChooseKols',
+          component: CampaignChooseKols,
+          meta: {
+            title: '创建新活动',
+            auth: true
+          }
+        },
+        {
+          path: ':id/pay/:tenderId',
+          name: 'CampaignPay',
+          component: CampaignPay,
           meta: {
             title: '创建新活动',
             auth: true

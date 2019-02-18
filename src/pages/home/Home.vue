@@ -7,7 +7,7 @@
 
       <div class="home-container pull-right">
         <home-banner></home-banner>
-        <div class="mt20"></div>
+
         <div class="icon-grid-panel mt20">
           <router-link to="/kol/list" tag="div" class="item">
             <div class="box">
@@ -16,14 +16,14 @@
               <h6 class="sub-title">Search Engine</h6>
             </div>
           </router-link>
-          <router-link to="/creations/create" tag="div" class="item">
+          <router-link to="/home/create" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建新活动</h5>
               <h6 class="sub-title">Create Campaign</h6>
             </div>
           </router-link>
-          <router-link to="/creations/list" tag="div" class="item">
+          <router-link to="/campaigns" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-trophy"></div>
               <h5 class="title">活动列表</h5>
