@@ -10,10 +10,13 @@ let cNow = new Date(cPastOneday.replace(/\-/g, "/"));
 let cPastOneMonth = moment(new Date(cNow.setMonth(cNow.getMonth() - 1))).format("YYYY-MM-DD");
 // 获取当天日子
 let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
-// 获取过去七天
-let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+// 获取过去七天 目前暂时先 获取过去14天 后续可能要再改下
+// let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+let cPastSevenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去14天
 let cPastFourteenDays = moment(new Date(new Date().getTime() - 336 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+// 获取过去21天
+let cPastTwentyOneDays = moment(new Date(new Date().getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 
 // 格式化数字
 function formatNumber (n) {
@@ -160,5 +163,6 @@ module.exports = {
   cPastOneMonth,
   cCurrentDay,
   cPastSevenDays,
-  cPastFourteenDays
+  cPastFourteenDays,
+  cPastTwentyOneDays
 }
