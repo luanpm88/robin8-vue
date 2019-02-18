@@ -22,6 +22,7 @@ import MyBrands from '@/pages/settings/myBrands/MyBrands'
 import MyBrandsCreate from '@/pages/settings/myBrands/Create'
 import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
 import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
+import WechatRanking from '@/pages/ranking/WechatRanking'
 
 Vue.use(Router)
 
@@ -214,6 +215,15 @@ export default new Router({
       component: KolDetail,
       meta: {
         title: 'KolDetail',
+        auth: true
+      }
+    },
+    {
+      path: '/ranking/WechatRanking',
+      name: 'wechatRanking',
+      component: WechatRanking,
+      meta: {
+        title: 'WechatRanking',
         auth: true
       }
     }

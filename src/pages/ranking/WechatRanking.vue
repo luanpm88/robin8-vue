@@ -1,0 +1,210 @@
+<template>
+  <div class="page">
+    <page-header></page-header>
+
+    <div class="container mt50 clearfix">
+      <!-- <main-nav class="pull-left"></main-nav> -->
+      <div class="ranking-container pull-right">
+        <!-- left -->
+        <div class="ranking-left">
+          <h5>Industries</h5>
+          <ul class="ranking-nav">
+            <li
+              v-for="(item, index) in rankSideList"
+              :key="index"
+              @click="listSearch(item, index)"
+              :class="{rankingcur:iscur === index}"
+            >
+              <!-- <i class="iconfont icon" v-html="item.icon">&#xe71a;</i> -->
+              {{item.label}}
+            </li>
+          </ul>
+        </div>
+        <!-- right -->
+        <div class="ranking-right">
+          <!-- top dec -->
+          <div class="r-top clearfix">
+            <p
+              class="r-top-dec col-sm-8"
+            >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{startDate}} to {{endDate}})</p>
+            <p class="r-top-right col-sm-4">
+              <span>7 | 14 | 21</span>
+              <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
+            </p>
+          </div>
+          <!-- top list -->
+          <div class="r-right-topList clearfix">
+            <div class="r8-loading" v-if="isTopLoading">
+              <a-spin tip="Loading..."/>
+            </div>
+            <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
+              <p class="r-right-topList-tit">{{item.fixedTit}}</p>
+              <div class="r-right-topList-box clearfix">
+                <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
+                  <img :src="item.avatar_url" alt>
+                </span>
+                <span class="r-right-topList-txt col-sm-4">
+                  <b>{{item.profile_name}}</b>
+                  <b>{{item.source}}</b>
+                  <b>{{item.value}}</b>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="r8-loading" v-if="isTableLoding">
+              <a-spin tip="Loading..."/>
+            </div>
+            <!-- <a-table v-if="isTable" :columns="columns" :dataSource="TableData" :pagination="false" :scroll="{ y: 240 }"/> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import apiConfig from "@/config";
+import PageHeader from "@components/PageHeader";
+import MainNav from "@components/MainNav";
+import { mapState } from "vuex";
+import totalDataJS from "@components/Chart/GlobalChartOption";
+import commonJs from "@javascripts/common.js";
+import { Spin, Table } from "ant-design-vue";
+let totalParams = {
+  industry: "airline",
+  no_of_days: 21
+};
+export default {
+  name: "Home",
+  components: {
+    ASpin: Spin,
+    PageHeader,
+    MainNav,
+    ATable: Table
+  },
+  computed: {
+    ...mapState(["authorization"])
+  },
+  data() {
+    return {
+      rankSideList: totalDataJS.ranking.rankSideList,
+      iscur: 0,
+      refreshDate: "",
+      endDate: commonJs.cPastTwentyOneDays,
+      startDate: commonJs.cPastOneday,
+      topTittle: "Top 30 KOLs",
+      topTittleIndustry: totalParams.industry,
+      tableTopList: [],
+      tableThirtyList: [],
+      isTopLoading: true,
+      isTableLoding: true,
+      isTable: true,
+      columns: totalDataJS.ranking.thirtyColums,
+      TableData: []
+    };
+  },
+  created() {
+    // 获取最新的report_date
+    this.RankingDate(totalParams);
+  },
+  methods: {
+    // ranking 在调用right 两个列表之前 获取最新的report_date
+    RankingDate(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.RankingDate, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('头部data', res);
+          if ((res.status = 200)) {
+            _that.refreshDate = res.data.available_report_dates[0];
+            totalParams.report_date = _that.refreshDate;
+            // right top list
+            _that.WeChatTopList(totalParams);
+            // 30 list
+            _that.WeChatThirtyList(totalParams);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // top list
+    WeChatTopList(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.WeChatTopList, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('topList', res);
+          if ((res.status = 200)) {
+            _that.isTopLoading = false;
+            _that.tableTopList.push(
+              res.data.most_likes_summary,
+              res.data.most_post_influence_summary,
+              res.data.top_count_summary
+            );
+            _that.tableTopList[0].fixedTit = "Most Active Profile";
+            _that.tableTopList[1].fixedTit = "Most Like Profile";
+            _that.tableTopList[2].fixedTit = "Most Influential Profile";
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // right 30 list
+    WeChatThirtyList(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.WeChatThirtyList, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          console.log('getRankingThirtyList', res)
+          if ((res.status = 200)) {
+            // _that.isTableLoding = false;
+            // this.isTable = true;
+            // // console.log('我是30lit');
+            // this.tableThirtyList = res.data;
+            // console.log(this.tableThirtyList);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    listSearch(currentList, index) {
+      this.iscur = index;
+      totalParams.industry = currentList.value;
+      this.topTittleIndustry = currentList.value;
+      totalParams.report_date = this.refreshDate;
+      this.tableTopList = [];
+      this.tableThirtyList = [];
+      this.isLoding = true;
+      // right top list
+      this.getRankingTopList(totalParams);
+    },
+    // 跳转benchmark页面
+    lookBenchmark() {
+      // this.$router.push({
+      // });
+    }
+  },
+  // 跳转detail
+  openDetails(row) {}
+};
+</script>
+
+<style lang="scss" scoped>
+</style>

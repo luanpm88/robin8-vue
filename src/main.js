@@ -18,6 +18,7 @@ import '@styles/login.scss'
 import '@styles/campaigns.scss'
 import '@styles/brands.scss'
 import '@styles/defaultAnt.scss'
+import '@styles/home.scss'
 
 Vue.use(VueI18n)
 Vue.config.productionTip = false

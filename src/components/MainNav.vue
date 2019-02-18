@@ -84,6 +84,17 @@ export default {
               href: '/settings/my_competition_brands'
             }
           ]
+        },
+        {
+          title: 'ranking',
+          icon: 'icon-setting',
+          href: '/ranking',
+          subNav: [
+            {
+              title: 'WechatRanking',
+              href: '/ranking/WechatRanking'
+            }
+          ]
         }
       ]
     }

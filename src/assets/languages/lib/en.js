@@ -4,6 +4,7 @@ export const lang = {
   myKols: 'KOL List',
   myWallet: 'Wallet',
   settings: 'Settings',
+  ranking: 'Ranking',
   wechat: 'Wechat',
   weibo: 'Weibo',
   more: 'load more',
