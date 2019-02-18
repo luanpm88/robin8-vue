@@ -3,7 +3,7 @@
     <div class="panel-body brand-create-body">
       <div class="form-horizontal brand-create-form">
         <div class="form-group">
-          <div class="col-sm-2 control-label">品牌名称：</div>
+          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.name')}}</div>
           <div class="col-sm-9">
             <input
               type="text"
@@ -11,13 +11,13 @@
               class="form-control"
               :class="[errors.has('name') ? 'danger' : '']"
               v-model="submitData.name"
-              placeholder="请填写品牌名称"
+              :placeholder="$t('lang.myBrandPage.addPage.placeholderName')"
               v-validate="'required'"
             >
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-2 control-label">品牌介绍：</div>
+          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.dec')}}</div>
           <div class="col-sm-9">
             <textarea
               name="description"
@@ -25,7 +25,7 @@
               class="form-control"
               :class="[errors.has('description') ? 'danger' : '']"
               v-model="submitData.description"
-              placeholder="请填写品牌介绍"
+              :placeholder="$t('lang.myBrandPage.addPage.placeholderDec')"
               v-validate="'required'"
             ></textarea>
           </div>

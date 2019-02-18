@@ -1,15 +1,15 @@
 <template>
   <div class="com-brand">
     <div class="com-add">
-      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">新建我的竞争品牌</router-link></span>
+      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">{{$t('lang.myCompetitionBrands.addBtn')}}</router-link></span>
     </div>
     <table class="com-brand-table">
       <tr>
-        <th>Check</th>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Short Name</th>
-        <th>Operation</th>
+        <th>{{$t('lang.myCompetitionBrands.table.title.check')}}</th>
+        <th>{{$t('lang.myCompetitionBrands.table.title.id')}}</th>
+        <th>{{$t('lang.myCompetitionBrands.table.title.name')}}</th>
+        <th>{{$t('lang.myCompetitionBrands.table.title.shortname')}}</th>
+        <th>{{$t('lang.myCompetitionBrands.table.title.operation')}}</th>
       </tr>
       <tr v-for="(key, index) in dataListBox" :key="index">
         <td>
@@ -20,14 +20,14 @@
         <td>{{key.short_name}}</td>
         <td>
         <p class="campaign-info-detail">
-          <span @click="toDetail(key)">编辑</span>
-          <span @click="toDelete(key)">删除</span>
+          <span @click="toDetail(key)">{{$t('lang.edit')}}</span>
+          <span @click="toDelete(key)">{{$t('lang.delete')}}</span>
         </p>
       </td>
       </tr>
     </table>
     <div class="com-add mt20">
-      <span @click="checkInsight">Selected view</span>
+      <span @click="checkInsight">{{$t('lang.myCompetitionBrands.contrastButton')}}</span>
     </div>
   </div>
 </template>

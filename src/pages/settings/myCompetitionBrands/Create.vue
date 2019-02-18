@@ -1,16 +1,16 @@
 <template>
   <div class="panel default-panel mt20">
     <div class="panel-body brand-create-body">
-      <div class="creat-txt">添加您的竞争对手，我们会帮助您更清晰地了解您与竞争品牌的差异哦!</div>
+      <div class="creat-txt">{{$t('lang.myCompetitionBrands.topTit')}}</div>
       <div class="form-horizontal brand-create-form">
         <div class="form-group" v-for="(item, index) in brandList" :key="index">
-          <div class="col-sm-2 control-label">品牌名称：</div>
-          <div class="col-sm-2">
+          <div class="col-sm-2 control-label">{{$t('lang.myCompetitionBrands.addPage.name')}}</div>
+          <div class="col-sm-3">
             <input
               type="text"
               name="name"
               class="form-control"
-              placeholder="请填写品牌名称"
+              :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderName')"
               v-model="item.name"
             >
           </div>
@@ -19,16 +19,16 @@
               type="text"
               name="name"
               class="form-control"
-              placeholder="请填写品牌简称"
+              :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderDec')"
               v-model="item.short_name"
             >
           </div>
-          <div class="col-sm-1">
+          <div class="col-sm-1" v-if="isAdd">
             <span class="iconfont icon-delete" @click="delBrand(index)"></span>
           </div>
         </div>
-        <div class="form-add">
-          <span class="iconfont icon-edit" @click="addBrand">&nbsp;添加我的竞争品牌</span>
+        <div class="form-add" v-if="isAdd">
+          <span class="iconfont icon-edit" @click="addBrand">&nbsp;{{$t('lang.myCompetitionBrands.addPage.addTip')}}</span>
         </div>
       </div>
       <div class="text-center create-btn-area">
@@ -53,6 +53,7 @@ export default {
   data () {
     return {
       chageHomeShow: true,
+      isAdd: true,
       brandList: [
         {
           name: '',
@@ -64,8 +65,11 @@ export default {
   created() {
     // console.log(this.$route.params.itemList);
     if (this.$route.params.itemList) {
+      this.isAdd = false
       this.brandList[0].name = this.$route.params.itemList.name
       this.brandList[0].short_name = this.$route.params.itemList.short_name
+    } else {
+      this.isAdd = true
     }
   },
   methods: {
