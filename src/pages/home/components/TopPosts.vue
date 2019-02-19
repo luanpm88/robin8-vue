@@ -151,15 +151,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false;
           if (!res.data.data.length) {
-            _that.isLoading = true;
+            _that.isShow = true;
           } else {
             if (res.data.data.length === 0) {
               _that.isShow = true;
-              _that.isLoading = false;
             } else {
               _that.isShow = false;
-              _that.isLoading = false;
               _that.postType = 0
               _that.postListBox.push(res.data.data);
               _that.postWeiboCurrentPage ++;
@@ -180,15 +179,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false;
           if (!res.data.data.length) {
-            _that.isLoading = true;
+            _that.isShow = true;
           } else {
             if (res.data.data.length === 0) {
               _that.isShow = true;
-              _that.isLoading = false;
             } else {
               _that.isShow = false;
-              _that.isLoading = false;
               _that.postType = 1
               _that.postListBox.push(res.data.data);
               _that.postWeixinCurrentPage ++;

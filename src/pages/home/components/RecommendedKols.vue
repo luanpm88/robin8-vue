@@ -146,15 +146,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false;
           if (!res.data.length) {
-            _that.isLoading = true;
+            _that.isShow = true;
           } else {
             if (res.data.length === 0) {
               _that.isShow = true;
-              _that.isLoading = false;
             } else {
               _that.isShow = false;
-              _that.isLoading = false;
               res.data.forEach(element => {
                 element.name = element.profile_name
                 element.desc = element.description_raw
@@ -179,15 +178,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false;
           if (!res.data.length) {
             _that.isLoading = true;
           } else {
             if (res.data.length === 0) {
               _that.isShow = true;
-              _that.isLoading = false;
             } else {
               _that.isShow = false;
-              _that.isLoading = false;
               res.data.forEach(element => {
                 element.name = element.profile_name
                 element.desc = element.description_raw
