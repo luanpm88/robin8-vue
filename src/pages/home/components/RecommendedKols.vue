@@ -7,8 +7,15 @@
       </h5>
     </div>
 
-    <div class="panel-body list-content">
+    <div class="panel-body list-content recommendkol">
       <span class="kol-score">Influence Score</span>
+      <div class="nonetip" v-if="isShow">
+        <span>暂无数据...</span>
+      </div>
+      <div class="r8-loading" v-if="isLoading">
+        <a-spin tip="Loading..."/>
+      </div>
+
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
         <div class="list-content-inner">
           <kols-list-item
@@ -40,10 +47,12 @@ import apiConfig from "@/config"
 import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
+import { Spin} from "ant-design-vue";
 import { mapState } from 'vuex'
 export default {
   props: ['childKeyList'],
   components: {
+    ASpin: Spin,
     DefaultTabs,
     KolsListItem
   },
@@ -54,6 +63,8 @@ export default {
       kolHasMsg: true,
       kolHasChecked: false,
       tabIndex: 0,
+      isShow: false,
+      isLoading: true,
       params: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
@@ -79,7 +90,6 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        // console.log('woshi kol brand keyword', this.childKeyList.brand_keywords);
         this.params.brand_keywords = this.childKeyList.brand_keywords
         this.weiboKol(this.params)
       },
@@ -94,6 +104,8 @@ export default {
     changeTab(tab) {
       this.tabIndex = tab.index
       this.currentList = [];
+      this.isShow = false;
+      this.isLoading = true;
       if (tab.index === 0) {
         // 微博接口
         this.weiboKol(this.params)
@@ -104,8 +116,6 @@ export default {
     },
     // 跳转 kol detail
     intoKolDetail(item) {
-      // console.log(item)
-      // this.$router.push("/kol/" + item.profile_id)
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',
@@ -137,13 +147,24 @@ export default {
           }
         })
         .then(function(res) {
-          res.data.forEach(element => {
-            element.name = element.profile_name
-            element.desc = element.description_raw
-            element.avatar = element.avatar_url
-            element.influnce = element.avg_post_influences
-          })
-          _that.currentList = res.data.slice(0, 5)
+          _that.isLoading = false;
+          if (!res.data.length) {
+            // console.log()
+            // _that.isShow = true;
+          } else {
+            if (res.data.length === 0) {
+              _that.isShow = true;
+            } else {
+              _that.isShow = false;
+              res.data.forEach(element => {
+                element.name = element.profile_name
+                element.desc = element.description_raw
+                element.avatar = element.avatar_url
+                element.influnce = element.avg_post_influences
+              })
+              _that.currentList = res.data.slice(0, 5)
+            }
+          }
         })
         .catch(function(error) {
           // console.log(error)
@@ -159,14 +180,23 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log(res);
-          res.data.forEach(element => {
-            element.name = element.profile_name
-            element.desc = element.description_raw
-            element.avatar = element.avatar_url
-            element.influnce = element.avg_post_influences
-          })
-          _that.currentList = res.data.slice(0, 5)
+          _that.isLoading = false;
+          if (!res.data.length) {
+            _that.isLoading = true;
+          } else {
+            if (res.data.length === 0) {
+              _that.isShow = true;
+            } else {
+              _that.isShow = false;
+              res.data.forEach(element => {
+                element.name = element.profile_name
+                element.desc = element.description_raw
+                element.avatar = element.avatar_url
+                element.influnce = element.avg_post_influences
+              })
+              _that.currentList = res.data.slice(0, 5)
+            }
+          }
         })
         .catch(function(error) {
           console.log(error)

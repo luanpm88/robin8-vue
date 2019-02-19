@@ -166,6 +166,9 @@
               </ul>
             </div>
           </div>
+          <div class="nonetip" v-if="isShow">
+            <span>暂无数据...</span>
+          </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
           </div>
@@ -196,6 +199,7 @@ export default {
     return {
       profileSort: 1,
       isLoading: true,
+      isShow: false,
       isactive: false,
       keyword: "",
       totalKeywords: '',
@@ -318,6 +322,9 @@ export default {
     },
     // 处理数据函数
     jogDataInit(data) {
+      if (data.length === 0 || !data.length) {
+        this.isShow = true;
+      }
       this.isLoading = false;
       const _that = this;
       data.forEach((element, index) => {
@@ -346,11 +353,14 @@ export default {
       this.paramsInit(tab.index);
     },
     showMore() {
+      this.isShow = false;
       this.isLoading = true;
       // 接口
       this.paramsInit(this.tabIndex);
     },
     totalSearch() {
+      this.isShow = false;
+      this.isLoading = true;
       this.currentPage = 0;
       this.searchListBox = [];
       // 接口
@@ -478,7 +488,7 @@ span {
     font-weight: normal;
   }
   .oneinput {
-    padding: 0px 10px;
+    padding: 0px 5px;
   }
 }
 .kol-type {

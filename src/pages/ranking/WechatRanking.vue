@@ -55,7 +55,7 @@
             <div class="r8-loading" v-if="isTableLoding">
               <a-spin tip="Loading..."/>
             </div>
-            <!-- <a-table v-if="isTable" :columns="columns" :dataSource="TableData" :pagination="false" :scroll="{ y: 240 }"/> -->
+            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList" :pagination="false" :scroll="{ y: 240 }"/>
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ export default {
             // _that.isTableLoding = false;
             // this.isTable = true;
             // // console.log('我是30lit');
-            // this.tableThirtyList = res.data;
+            this.tableThirtyList = res.data;
             // console.log(this.tableThirtyList);
           }
         })
@@ -193,7 +193,7 @@ export default {
       this.tableThirtyList = [];
       this.isLoding = true;
       // right top list
-      this.getRankingTopList(totalParams);
+      this.WeChatTopList(totalParams);
     },
     // 跳转benchmark页面
     lookBenchmark() {

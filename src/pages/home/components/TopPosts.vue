@@ -43,6 +43,12 @@
               </div>
             </div>
           </div>
+          <div class="nonetip" v-if="isShow">
+            <span>暂无数据...</span>
+          </div>
+          <div class="r8-loading" v-if="isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
         </div>
         <div class="text-center mt20">
           <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="PostShowMore">查看更多</button>
@@ -59,8 +65,10 @@ import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from "@/pages/creations/components/KolsListItem"
 import { mapState } from 'vuex'
+import { Spin} from "ant-design-vue"
 export default {
   components: {
+    ASpin: Spin,
     DefaultTabs,
     KolsListItem
   },
@@ -70,6 +78,8 @@ export default {
       kolHasLiked: true,
       kolHasMsg: true,
       kolHasChecked: false,
+      isShow: false,
+      isLoading: true,
       postWeiboCurrentPage: 0,
       postWeixinCurrentPage: 0,
       tabIndex: 0,
@@ -120,6 +130,8 @@ export default {
     changeTab(tab) {
       this.tabIndex = tab.index
       this.postListBox = [];
+      this.isShow = false;
+      this.isLoading = true;
       // this.currentList = tab.data
       if (tab.index === 0) {
         // 微博
@@ -139,10 +151,19 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微博接口", res)
-          _that.postType = 0
-          _that.postListBox.push(res.data.data);
-          _that.postWeiboCurrentPage ++;
+          _that.isLoading = false;
+          if (!res.data.data.length) {
+            // _that.isShow = true;
+          } else {
+            if (res.data.data.length === 0) {
+              _that.isShow = true;
+            } else {
+              _that.isShow = false;
+              _that.postType = 0
+              _that.postListBox.push(res.data.data);
+              _that.postWeiboCurrentPage ++;
+            }
+          }
         })
         .catch(function(error) {
           console.log(error)
@@ -158,10 +179,19 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微信接口", res)
-          _that.postType = 1
-          _that.postListBox.push(res.data.data);
-          _that.postWeixinCurrentPage ++;
+          _that.isLoading = false;
+          if (!res.data.data.length) {
+            _that.isShow = true;
+          } else {
+            if (res.data.data.length === 0) {
+              _that.isShow = true;
+            } else {
+              _that.isShow = false;
+              _that.postType = 1
+              _that.postListBox.push(res.data.data);
+              _that.postWeixinCurrentPage ++;
+            }
+          }
         })
         .catch(function(error) {
           console.log(error)
@@ -182,6 +212,7 @@ export default {
       });
     },
     PostShowMore() {
+      this.isLoading = true;
       if (this.tabIndex === 0) {
         this.topPostParams.page_no = this.postWeiboCurrentPage;
         // 微博
