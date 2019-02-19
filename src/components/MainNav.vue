@@ -54,7 +54,17 @@ export default {
         {
           title: 'campaignsData',
           icon: 'icon-data',
-          href: '/creations/list'
+          href: '/creations',
+          subNav: [
+            {
+              title: 'Creations',
+              href: '/creations'
+            },
+            {
+              title: 'Campaigns',
+              href: '/campaigns'
+            }
+          ]
         },
         {
           title: 'myKols',

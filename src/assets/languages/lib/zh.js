@@ -67,7 +67,7 @@ export const lang = {
       errorTips: '请填写注意事项'
     },
     tags: {
-      title: '请选择一个标签',
+      title: '标签',
       placeholder: '',
       errorTips: '请选择一个标签'
     },

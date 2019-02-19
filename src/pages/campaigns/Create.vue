@@ -1,18 +1,18 @@
 <template>
   <div class="campaign-create-container">
-    <campaign-create-process
+    <create-process
       :renderData="processStatus"
       class="mt20"
-    ></campaign-create-process>
+    ></create-process>
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">基础信息</h5>
+        <h5 class="title text-center">{{$t('lang.information')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
             <div class="col-sm-10">
               <input
                 type="text"
@@ -20,14 +20,14 @@
                 class="form-control"
                 :class="[errors.has('name') ? 'danger' : '']"
                 v-model="submitData.name"
-                placeholder="请填写活动名称"
+                :placeholder="$t('lang.campaigns.name.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">好的名称可以吸引更多优质KOL参加</div>
+              <div class="form-tips">{{$t('lang.campaigns.name.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动介绍：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
             <div class="col-sm-10">
               <input
                 type="text"
@@ -35,14 +35,14 @@
                 class="form-control"
                 :class="[errors.has('desc') ? 'danger' : '']"
                 v-model="submitData.description"
-                placeholder="请填写活动介绍"
+                :placeholder="$t('lang.campaigns.description.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动相关介绍</div>
+              <div class="form-tips">{{$t('lang.campaigns.description.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">品牌名称：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
             <div class="col-sm-10">
               <select
                 name="brand"
@@ -51,14 +51,14 @@
                 v-model="submitData.trademark_id"
                 v-validate="'required'"
               >
-                <option value="">请选择品牌名称</option>
+                <option value="">{{$t('lang.campaigns.brandName.placeholder')}}</option>
                 <option
                   v-for="item in brandsList"
                   :key="item.id"
                   :value="item.id"
                 >{{item.name}}</option>
               </select>
-              <div class="form-tips">请选择准确的品牌名称</div>
+              <div class="form-tips">{{$t('lang.campaigns.brandName.errorTips')}}</div>
             </div>
           </div>
         </div>
@@ -67,12 +67,12 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">活动信息</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动平台：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
             <div class="col-sm-10">
               <div class="row">
                 <div
@@ -84,7 +84,7 @@
                     <div
                       class="check-icon"
                       :class="[item.checked ? 'checked' : '']"
-                      @click="terraceCtrl(item.id)"
+                      @click="terraceCheck(item.id)"
                     >
                       <div
                         :class="'iconfont ' + item.iconClass"
@@ -97,7 +97,6 @@
                       type="number"
                       class="form-control"
                       v-model="item.val"
-                      @change="exposureCtrl(item.id)"
                       :placeholder="'请填写'+ item.name +'期待曝光值'"
                     >
                   </div>
@@ -122,12 +121,12 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动图片：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-10">
-              <div class="upload-imgs-list">
+              <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
-                  <img src="" alt="" class="upload-img" />
-                  <div class="iconfont icon-close close-btn"></div>
+                  <img :src="submitData.img_url" alt="" class="upload-img" />
+                  <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
               <!-- <vue-core-image-upload
@@ -145,6 +144,7 @@
                 :url="uploadImageUrl">
               </vue-core-image-upload> -->
               <vue-core-image-upload
+                v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 :crop="false"
                 @imageuploaded="imageuploaded"
@@ -157,15 +157,14 @@
                 input-accept="image/*"
                 :url="uploadImageUrl">
               </vue-core-image-upload>
-              <!-- <input
+              <input
                 type="hidden"
                 name="img_url"
                 v-model="submitData.img_url"
                 v-validate="'required'"
-              > -->
-
+              >
               <div
-                class="form-tips text-right danger"
+                class="form-tips danger"
                 v-show="errors.has('img_url')"
               >
                 {{ errors.first('img_url') }}
@@ -173,14 +172,14 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">活动时间：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-10">
               <div class="input-group">
                 <datepicker
                   name="start_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
-                  placeholder="选择开始时间"
+                  :placeholder="$t('lang.campaigns.time.startPlaceholder')"
                   v-model="submitData.start_at"
                   v-validate="'required'"
                 ></datepicker>
@@ -189,7 +188,7 @@
                   name="end_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
-                  placeholder="选择结束时间"
+                  :placeholder="$t('lang.campaigns.time.endPlaceholder')"
                   v-model="submitData.end_at"
                   v-validate="'required'"
                 ></datepicker>
@@ -198,12 +197,12 @@
                 class="form-tips text-right danger"
                 v-show="errors.has('start_at') || errors.has('end_at')"
               >
-                请选择您预期的活动时间
+                {{$t('lang.campaigns.time.errorTips')}}
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">KOL数量：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
             <div class="col-sm-4">
               <input
                 type="number"
@@ -211,12 +210,12 @@
                 class="form-control"
                 :class="[errors.has('kols_count') ? 'danger' : '']"
                 v-model.number="submitData.pre_kols_count"
-                placeholder="请填写活动KOL数量"
+                :placeholder="$t('lang.campaigns.kolNumber.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动KOL数量</div>
+              <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">活动预算：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
             <div class="col-sm-4">
               <input
                 type="number"
@@ -224,21 +223,21 @@
                 class="form-control"
                 :class="[errors.has('pre_amount') ? 'danger' : '']"
                 v-model.number="submitData.pre_amount"
-                placeholder="请填写活动预算"
+                :placeholder="$t('lang.campaigns.budget.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">请填写活动预算</div>
+              <div class="form-tips">{{$t('lang.campaigns.budget.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">注意事项：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
             <div class="col-sm-10">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
                 class="form-control"
                 rows="6"
-                placeholder="请填写活动的注意事项，包括不要涵盖的内容，不可以提及的事项等特殊需要注意的地方"
+                :placeholder="$t('lang.campaigns.precaution.placeholder')"
               ></textarea>
             </div>
           </div>
@@ -248,13 +247,14 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">大V 相关要求</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.bigVRequirement')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
             <tags-list
               :renderData="tagsList"
+              :checkedIds="checkedIds"
               @checkTag="checkTag"
             ></tags-list>
             <input
@@ -267,11 +267,11 @@
               class="form-tips danger"
               v-show="errors.has('tags')"
             >
-              情选择一个标签
+              {{$t('lang.campaigns.tags.errorTips')}}
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">价格要求：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
             <div class="col-sm-10">
               <div class="input-group">
                 <input
@@ -280,7 +280,7 @@
                   class="form-control"
                   :class="[errors.has('price_from') ? 'danger' : '']"
                   v-model.number="submitData.target.price_from"
-                  placeholder="最低价格"
+                  :placeholder="$t('lang.campaigns.price.lowestPlaceholder')"
                   v-validate="'required'"
                 >
                 <span class="input-group-addon">-</span>
@@ -290,54 +290,61 @@
                   class="form-control"
                   :class="[errors.has('price_to') ? 'danger' : '']"
                   v-model.number="submitData.target.price_to"
-                  placeholder="最高价格"
+                  :placeholder="$t('lang.campaigns.price.highestPlaceholder')"
                   v-validate="'required'"
                 >
               </div>
-              <div class="form-tips">请选择您期待的价格区间方便我们更精准的为您推荐KOL</div>
+              <div class="form-tips">{{$t('lang.campaigns.price.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝年龄：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
             <div class="col-sm-4">
               <select class="form-control">
-                <option>请选择期望的粉丝年龄</option>
+                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-              <div class="form-tips">请选择期望的粉丝年龄</div>
+              <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">粉丝性别：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
             <div class="col-sm-4">
               <select class="form-control">
-                <option>请选择粉丝性别</option>
+                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-              <div class="form-tips">请选择粉丝性别</div>
+              <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">粉丝地域：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="" placeholder="请选择/填写粉丝的地域要求">
-              <div class="form-tips">请填写期望的粉丝地域描述</div>
+              <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
+              <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group text-center">
-            <button type="button" class="btn btn-blue btn-outline" @click="">搜索大V</button>
+            <button
+              type="button"
+              class="btn btn-blue btn-outline"
+              @click="searchKolsCtrl"
+            >{{$t('lang.campaigns.serchBtn')}}</button>
           </div>
         </div>
       </div>
     </div>
 
     <kols-list-panel
+      v-if="kolsList.length > 0"
       class="mt20"
       title="为您推荐的大V"
+      :kolsList="kolsList"
+      @checkedKols="checkedKols"
     ></kols-list-panel>
 
     <!-- <div class="row mt20">
@@ -359,7 +366,12 @@
     </div> -->
 
     <div class="text-center create-btn-area">
-      <button type="button" class="btn btn-cyan next-btn" @click="doConfirm">提交</button>
+      <button
+        type="button"
+        class="btn btn-cyan next-btn"
+        @click="doConfirm"
+        :disabled="canSubmit ? false : true"
+      >{{$t('lang.submitBtn')}}</button>
     </div>
   </div>
 </template>
@@ -370,16 +382,17 @@ import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
-import CampaignCreateProcess from './components/CampaignCreateProcess'
+import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignCreate',
   components: {
     Datepicker,
     TagsList,
-    CampaignCreateProcess,
+    CreateProcess,
     KolsListPanel,
     VueCoreImageUpload
   },
@@ -391,9 +404,13 @@ export default {
       },
       brandsList: [],
       tagsList: [],
+      checkedIds: [],
+      checkedTags: [],
       terracesList: [],
+      kolsParams: {},
+      kolsList: [],
+      plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
-      pictures: [],
       loading: false,
       submitData: {
         name: '',
@@ -409,14 +426,16 @@ export default {
           price_from: '',
           price_to: ''
         },
-        terraces: []
+        terraces: [],
+        selected_kols: [],
+        notice: ''
       },
       canSubmit: true
     }
   },
   methods: {
     getBaseData () {
-      axios.get(apiConfig.baseInfosUr, {
+      axios.get(apiConfig.baseInfosUrl, {
         headers: {
           'Authorization': this.authorization
         }
@@ -430,58 +449,134 @@ export default {
         this.tagsList = data.tags_list
 
         let _terracesList = data.terraces_list
-        for (let i = 0; i < _terracesList.length; i++) {
-          let _shortName = _terracesList[i].short_name
+        _terracesList.forEach(item => {
+          let _shortName = item.short_name
           switch (_shortName) {
             case 'public_wechat_account':
-              _terracesList[i].iconClass = 'icon-wechat-circle'
+              item.iconClass = 'icon-wechat-circle'
               break
             case 'weibo':
-              _terracesList[i].iconClass = 'icon-weibo-circle'
+              item.iconClass = 'icon-weibo-circle'
               break
             default:
-              _terracesList[i].iconClass = ''
+              item.iconClass = ''
           }
-          _terracesList[i].checked = false
-          _terracesList[i].val = ''
-        }
+          item.checked = false
+          item.val = ''
+        })
         this.terracesList = _terracesList
       }
     },
+    searchKols (postUrl) {
+      axios.post(postUrl, this.kolsParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleSearchKolsSucc)
+    },
+    handleSearchKolsSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+      this.kolsList = []
+      this.kolsList = resData.data
+      if (resData.data.length > 0) {
+        this.kolsList.forEach(item => {
+          item.checked = false
+        })
+      }
+    },
+    searchKolsCtrl () {
+      let _terraces = this.submitData.terraces
+      console.log(_terraces)
+      this.kolsParams = {
+        start_date: this.submitData.start_at,
+        end_date: this.submitData.start_end,
+        industries: this.checkedTags,
+        page_no: 0,
+        page_size: 12,
+        price_from: this.submitData.target.price_from,
+        price_to: this.submitData.target.price_to
+      }
+
+      this.$validator.validateAll().then((msg) => {
+        console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          if (_terraces.length > 0) {
+            let hasWechat = _terraces.some(item => {
+              if (item.short_name == 'public_wechat_account') {
+                return true
+              } else {
+                return false
+              }
+            })
+            if (hasWechat) {
+              this.searchKols(apiConfig.kolWxSearchUrl)
+              this.plateformName = 'public_wechat_account'
+            } else {
+              this.searchKols(apiConfig.kolWbSearchUrl)
+              this.plateformName = 'weibo'
+            }
+          } else {
+            this.searchKols(apiConfig.kolWxSearchUrl)
+            this.plateformName = 'public_wechat_account'
+          }
+        }
+      })
+    },
+    checkedKols (data) {
+      let _ids = data.ids
+      console.log(_ids)
+      let _kolsList = this.kolsList
+      let _checkedKols = []
+      let _kolItem
+
+      _ids.forEach(item => {
+        _kolsList.forEach(e => {
+          if (e.profile_id == item) {
+            _kolItem = commonJs.buildObjData('plateform_uuid', item)
+            _kolItem.plateform_name = this.plateformName
+            _kolItem.name = e.profile_name
+            _kolItem.avatar_url = e.avatar_url
+            _kolItem.desc = e.description_raw
+            _checkedKols.push(_kolItem)
+          }
+        })
+      })
+      console.log(_checkedKols)
+      this.submitData.selected_kols = _checkedKols
+    },
     checkTag (data) {
-      let _checkedTags = data.checkedTags
-      console.log(_checkedTags.toString())
+      let _ids = data.ids
+      let _tagsList = this.tagsList
+      let _checkedTags = []
+
+      _ids.forEach(item => {
+        _tagsList.forEach(e => {
+          if (e.id == item) {
+            _checkedTags.push(e.name)
+          }
+        })
+      })
+      console.log(_checkedTags)
+      this.checkedTags = _checkedTags
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      if (this.pictures.length >= 1) {
-        alert('最多可上传1张图片')
-        return false
-      }
       console.log(res)
-      if (res.code == 0) {
-        this.pictures.push(res.data.base)
-        this.loading = false
-      } else {
-        alert('上传失败')
-        this.loading = false
-      }
-      this.submitData.img_url = this.pictures
-      console.log(this.pictures)
+      this.submitData.img_url = res
     },
     imageuploading (res) {
       this.loading = true
     },
-    delPhoto (e, url) {
-      console.log(url)
-      let index = this.pictures.indexOf(url)
+    delPhoto () {
       let delConfirm = confirm('确定要删除此图片？')
       if (delConfirm) {
-        this.pictures.splice(index, 1)
+        this.submitData.img_url = ''
       }
-      console.log(this.pictures)
     },
-    terraceCtrl (id) {
+    terraceCheck (id) {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
@@ -491,71 +586,57 @@ export default {
           return true
         }
       })
-      if (!result) {
-        _terraces.push(_terraceItem)
-        for (let i = 0; i < _terracesList.length; i++) {
-          if (_terracesList[i].id == _terraceItem.terrace_id) {
-            _terracesList[i].checked = true
-            for (let j = 0; j < _terracesList.length; j++) {
-              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-                _terraces[j].exposure_value = _terracesList[i].val
-              }
-            }
-          }
-        }
-      } else {
-        for (let i = 0; i < _terraces.length; i++) {
-          if (_terraces[i].terrace_id == _terraceItem.terrace_id) {
-            let _index = _terraces.indexOf(_terraces[i])
+
+      _terracesList.forEach(item => {
+        if (item.id == _terraceItem.terrace_id) {
+          if (!result) {
+            _terraceItem.short_name = item.short_name
+            _terraces.push(_terraceItem)
+            item.checked = true
+          } else {
+            let _index = _terraces.indexOf(item)
             _terraces.splice(_index, 1)
+            item.checked = false
           }
         }
-        for (let i = 0; i < _terracesList.length; i++) {
-          if (_terracesList[i].id == _terraceItem.terrace_id) {
-            _terracesList[i].checked = false
-            for (let j = 0; j < _terracesList.length; j++) {
-              if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-                _terraces[j].exposure_value = _terracesList[i].val
-              }
-            }
-          }
-        }
-      }
+      })
       console.log(this.submitData.terraces)
     },
-    exposureCtrl (id) {
-      console.log(id)
-      let _terraces = this.submitData.terraces
-      let _terracesList = this.terracesList
-      console.log(_terracesList)
-      for (let i = 0; i < _terracesList.length; i++) {
-        if (_terracesList[i].id == id) {
-          for (let j = 0; j < _terracesList.length; j++) {
-            if (!!_terraces[j] && _terraces[j].terrace_id == id) {
-              _terraces[j].exposure_value = _terracesList[i].val
-            }
-          }
-        }
-      }
-      console.log(_terraces)
-    },
     doSubmit () {
+      if (!this.canSubmit) {
+        return false
+      }
       this.canSubmit = false
       axios.post(apiConfig.creationsUrl, {
         'creation': this.submitData
+      }, {
+        headers: {
+          'Authorization': this.authorization
+        }
       }).then(this.handleDoSubmitSucc)
     },
     handleDoSubmitSucc (res) {
+      console.log(res)
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        // this.$router.push('/campaigns/' + resData.id)
+        this.$router.push('/creations/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
       }
       this.canSubmit = true
     },
     doConfirm () {
+      let _terraces = this.submitData.terraces
+      let _terracesList = this.terracesList
+      _terraces.forEach(item => {
+        console.log(item)
+        _terracesList.forEach(originalItem => {
+          if (!!item && item.terrace_id == originalItem.id) {
+            item.exposure_value = originalItem.val
+          }
+        })
+      })
       console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {
@@ -569,6 +650,9 @@ export default {
   },
   mounted () {
     this.getBaseData()
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
 }
 </script>

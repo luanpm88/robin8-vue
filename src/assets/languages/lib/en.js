@@ -67,7 +67,7 @@ export const lang = {
       errorTips: 'please fill in the precaution'
     },
     tags: {
-      title: 'please select the tags',
+      title: 'Campaign tags',
       placeholder: '',
       errorTips: 'please select the tags'
     },
