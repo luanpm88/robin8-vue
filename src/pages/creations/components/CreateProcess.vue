@@ -65,7 +65,7 @@ export default {
   font-size: 0;
   & > .item {
     display: inline-block;
-    padding: 0 50px;
+    padding: 0 40px;
     font-size: 1.1rem;
     font-weight: 600;
     .num {

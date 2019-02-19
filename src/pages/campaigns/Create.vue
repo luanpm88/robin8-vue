@@ -7,10 +7,25 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.information')}}</h5>
+        <h5 class="title text-center">推广简介</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.link.title')}}：</div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                :class="[errors.has('name') ? 'danger' : '']"
+                v-model="submitData.name"
+                :placeholder="$t('lang.campaigns.link.placeholder')"
+                v-validate="'required'"
+              >
+              <div class="form-tips">{{$t('lang.campaigns.link.errorTips')}}</div>
+            </div>
+          </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
             <div class="col-sm-10">
@@ -61,65 +76,7 @@
               <div class="form-tips">{{$t('lang.campaigns.brandName.errorTips')}}</div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.campaignInfo')}}</h5>
-      </div>
-      <div class="panel-body">
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div
-                  v-for="item in terracesList"
-                  :key="item.id"
-                  class="col-sm-6"
-                >
-                  <div class="col-sm-2 text-center">
-                    <div
-                      class="check-icon"
-                      :class="[item.checked ? 'checked' : '']"
-                      @click="terraceCheck(item.id)"
-                    >
-                      <div
-                        :class="'iconfont ' + item.iconClass"
-                      ></div>
-                      <div class="iconfont icon-check"></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <input
-                      type="number"
-                      class="form-control"
-                      v-model="item.val"
-                      :placeholder="'请填写'+ item.name +'期待曝光值'"
-                    >
-                  </div>
-                </div>
-                <input
-                  type="hidden"
-                  name="terrace"
-                  v-model="submitData.terraces"
-                  v-validate="'required'"
-                >
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div
-                    class="form-tips text-right danger"
-                    v-show="errors.has('terrace')"
-                  >
-                    {{ errors.first('terrace') }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="form-group">
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-10">
@@ -129,20 +86,6 @@
                   <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
-              <!-- <vue-core-image-upload
-                :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                crop="local"
-                crop-ratio="4:3"
-                @imageuploaded="imageuploaded"
-                @imageuploading="imageuploading"
-                inputOfFile="image"
-                text=""
-                :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
-                input-accept="image/*"
-                :url="uploadImageUrl">
-              </vue-core-image-upload> -->
               <vue-core-image-upload
                 v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
@@ -171,6 +114,144 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">推广预算</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-2 control-label">总预算：</div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <span class="input-group-addon iconfont icon-subtract"></span>
+                <input type="text" class="form-control" />
+                <span class="input-group-addon iconfont icon-add"></span>
+              </div>
+              <div class="form-tips">最低费用500元</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">推广详情</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-2 control-label">推广平台选择：</div>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>分享到朋友圈</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>分享到微博</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-2 control-label">奖励模式选择：</div>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>按照点击奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>按照转发奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>按照完成任务奖励KOL</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>按照转发奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>按照完成任务奖励KOL</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-2 control-label">示例图片数量：</div>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>需要用户上传1张图片</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>需要用户上传2张图片</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label for="">
+                    <input type="radio" />
+                    <span>需要用户上传3张图片</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-2 control-label">单次预算：</div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <span class="input-group-addon iconfont icon-subtract"></span>
+                <input type="text" class="form-control" />
+                <span class="input-group-addon iconfont icon-add"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">推广时间</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
           <div class="form-group">
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-10">
@@ -201,141 +282,16 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-4">
-              <input
-                type="number"
-                name="kols_count"
-                class="form-control"
-                :class="[errors.has('kols_count') ? 'danger' : '']"
-                v-model.number="submitData.pre_kols_count"
-                :placeholder="$t('lang.campaigns.kolNumber.placeholder')"
-                v-validate="'required'"
-              >
-              <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
-            </div>
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-4">
-              <input
-                type="number"
-                name="pre_amount"
-                class="form-control"
-                :class="[errors.has('pre_amount') ? 'danger' : '']"
-                v-model.number="submitData.pre_amount"
-                :placeholder="$t('lang.campaigns.budget.placeholder')"
-                v-validate="'required'"
-              >
-              <div class="form-tips">{{$t('lang.campaigns.budget.errorTips')}}</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-10">
-              <textarea
-                name="notice"
-                v-model="submitData.notice"
-                class="form-control"
-                rows="6"
-                :placeholder="$t('lang.campaigns.precaution.placeholder')"
-              ></textarea>
-            </div>
-          </div>
         </div>
       </div>
     </div>
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.bigVRequirement')}}</h5>
+        <h5 class="title text-center">KOL选择</h5>
       </div>
       <div class="panel-body">
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <tags-list
-              :renderData="tagsList"
-              :checkedIds="checkedIds"
-              @checkTag="checkTag"
-            ></tags-list>
-            <input
-              type="hidden"
-              name="tags"
-              v-model="submitData.target.industries"
-              v-validate="'required'"
-            >
-            <div
-              class="form-tips danger"
-              v-show="errors.has('tags')"
-            >
-              {{$t('lang.campaigns.tags.errorTips')}}
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-10">
-              <div class="input-group">
-                <input
-                  type="number"
-                  name="price_from"
-                  class="form-control"
-                  :class="[errors.has('price_from') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_from"
-                  :placeholder="$t('lang.campaigns.price.lowestPlaceholder')"
-                  v-validate="'required'"
-                >
-                <span class="input-group-addon">-</span>
-                <input
-                  type="number"
-                  name="price_to"
-                  class="form-control"
-                  :class="[errors.has('price_to') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_to"
-                  :placeholder="$t('lang.campaigns.price.highestPlaceholder')"
-                  v-validate="'required'"
-                >
-              </div>
-              <div class="form-tips">{{$t('lang.campaigns.price.errorTips')}}</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-4">
-              <select class="form-control">
-                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
-            </div>
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-4">
-              <select class="form-control">
-                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
-              <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
-            </div>
-          </div>
-          <div class="form-group text-center">
-            <button
-              type="button"
-              class="btn btn-blue btn-outline"
-              @click="searchKolsCtrl"
-            >{{$t('lang.campaigns.serchBtn')}}</button>
-          </div>
-        </div>
+        <div class="form-horizontal campaign-create-form"></div>
       </div>
     </div>
 
