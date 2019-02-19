@@ -15,6 +15,7 @@
       <div class="r8-loading" v-if="isLoading">
         <a-spin tip="Loading..."/>
       </div>
+      
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
         <div class="list-content-inner">
           <kols-list-item
