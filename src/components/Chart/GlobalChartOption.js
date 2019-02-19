@@ -446,55 +446,55 @@ const MockData = {
     thirtyColums: [{
       title: 'Rank No.',
       dataIndex: 'rank_no',
-      scopedSlots: { customRender: 'rank_no' }
+      // scopedSlots: { customRender: 'rank_no' }
     }, {
       title: 'Profile Name Weixin ID',
       dataIndex: 'profile_name',
-      scopedSlots: { customRender: 'profile_name' }
+      // scopedSlots: { customRender: 'profile_name' }
     }, {
       title: 'Total Post Count',
-      dataIndex: 'total_post_influence',
-      scopedSlots: { customRender: 'total_post_influence' }
+      dataIndex: 'doc_count',
+      // scopedSlots: { customRender: 'doc_count' }
     },{
       title: 'Headlines',
       dataIndex: 'headline_count',
-      scopedSlots: { customRender: 'headline_count' }
+      // scopedSlots: { customRender: 'headline_count' }
     }, {
       title: 'Total Read Count',
       dataIndex: 'total_reads',
-      scopedSlots: { customRender: 'total_reads' }
+      // scopedSlots: { customRender: 'total_reads' }
     }, {
       title: 'Max Read Count',
       dataIndex: 'max_reads',
-      scopedSlots: { customRender: 'max_reads' }
+      // scopedSlots: { customRender: 'max_reads' }
     },{
       title: 'Avg Read Count',
       dataIndex: 'avg_reads',
-      scopedSlots: { customRender: 'avg_reads' }
+      // scopedSlots: { customRender: 'avg_reads' }
     }, {
       title: 'Total Like Count',
       dataIndex: 'total_likes',
-      scopedSlots: { customRender: 'total_likes' }
+      // scopedSlots: { customRender: 'total_likes' }
     }, {
       title: 'Max Like Count',
       dataIndex: 'max_likes',
-      scopedSlots: { customRender: 'max_likes' }
+      // scopedSlots: { customRender: 'max_likes' }
     },{
       title: 'Avg Like Count',
       dataIndex: 'avg_likes',
-      scopedSlots: { customRender: 'avg_likes' }
+      // scopedSlots: { customRender: 'avg_likes' }
     },{
       title: 'Total Influence',
       dataIndex: 'total_post_influence',
-      scopedSlots: { customRender: 'total_post_influence' }
+      // scopedSlots: { customRender: 'total_post_influence' }
     }, {
       title: 'Max Post Influence',
       dataIndex: 'max_post_influence',
-      scopedSlots: { customRender: 'max_post_influence' }
+      // scopedSlots: { customRender: 'max_post_influence' }
     },{
       title: 'Avg Post influence',
       dataIndex: 'avg_post_influence',
-      scopedSlots: { customRender: 'avg_post_influence' }
+      // scopedSlots: { customRender: 'avg_post_influence' }
     }]
   },
 }

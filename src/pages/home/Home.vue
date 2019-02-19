@@ -114,9 +114,10 @@ export default {
           } else {
             _that.isCompetitors = true;
             if (JSON.stringify(_that.$route.params) == "{}") {
-              _that.keyList.brand_keywords = '';
+              // _that.keyList.brand_keywords = '';
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
+                  // console.log(111);
                   _that.keyList.brand_keywords = element.name;
                 }
               })
@@ -128,6 +129,7 @@ export default {
               });
             } else {
               if (_that.$route.params.currentBrand) {
+                // console.log(222);
                 _that.keyList.brand_keywords = _that.$route.params.currentBrand;
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
@@ -138,6 +140,7 @@ export default {
               if (_that.$route.params.curentCompittor) {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
+                    // console.log(3333);
                     _that.keyList.brand_keywords = element.name;
                   }
                 })

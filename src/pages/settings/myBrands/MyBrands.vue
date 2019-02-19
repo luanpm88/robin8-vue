@@ -62,21 +62,23 @@ export default {
     },
     handelGetListDataSucc(res){
       let resData = res.data
+      console.log(res);
       if (res.status == 200 && resData){
         let _brandsList = this.brandsList;
         let _brandItem
         resData.trademarks_list.forEach(item => {
           _brandItem = commonJs.buildObjData('id', item.id)
-          if (item.status === 0) {
-            _brandItem.isCheck = false
-          } else {
+          if (item.status === 1 ) {
             _brandItem.isCheck = true
+          } else {
+            _brandItem.isCheck = false
           }
           _brandItem.status = item.status
           _brandItem.name = item.name
           _brandItem.description = item.description
           this.brandsList.push(_brandItem)
         })
+        console.log(this.brandsList)
       }
     },
     // 编辑和修改的接口
