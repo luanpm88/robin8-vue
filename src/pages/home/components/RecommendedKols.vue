@@ -15,7 +15,7 @@
       <div class="r8-loading" v-if="isLoading">
         <a-spin tip="Loading..."/>
       </div>
-      
+
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
         <div class="list-content-inner">
           <kols-list-item
@@ -149,7 +149,8 @@ export default {
         .then(function(res) {
           _that.isLoading = false;
           if (!res.data.length) {
-            _that.isShow = true;
+            // console.log()
+            // _that.isShow = true;
           } else {
             if (res.data.length === 0) {
               _that.isShow = true;

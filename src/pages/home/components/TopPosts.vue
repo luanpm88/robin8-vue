@@ -153,7 +153,7 @@ export default {
         .then(function(res) {
           _that.isLoading = false;
           if (!res.data.data.length) {
-            _that.isShow = true;
+            // _that.isShow = true;
           } else {
             if (res.data.data.length === 0) {
               _that.isShow = true;
