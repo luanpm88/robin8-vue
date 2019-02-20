@@ -8,7 +8,7 @@
       <div class="campaign-container pull-right">
         <!-- <router-view></router-view> -->
         <!-- kol search 页面 -->
-        <kol-search :keyWord='keyList'></kol-search>
+        <kol-search :keyWord='keyList' ></kol-search>
       </div>
     </div>
   </div>
@@ -28,6 +28,15 @@ export default {
   created() {
     // console.log(this.$route.params.brand_keywords);
     // console.log(this.$route.params.type);
+  },
+  beforeRouteLeave(to, from, next) {
+    // 判断是下一个路由是不是进入到详情页
+    if (to.name === 'KolDetail') {
+      this.$route.meta.keepAlive = true
+    } else {
+      this.$route.meta.keepAlive = false
+    }
+    next();
   },
   data () {
     return {
