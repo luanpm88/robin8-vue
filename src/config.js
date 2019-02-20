@@ -56,6 +56,9 @@ const config = {
   // 创建品牌post 参数name, description
   createBrandUrl: `${host}/users/trademark`,
 
+  // 首页baseinfo更新
+  updateBaseInfo: `${host}/users/update_base_infos`,
+
   // kol微信搜索
   kolWxSearchUrl: `${searchHost}/price/price/kol_search?${searchHostKey}`,
 

@@ -12,8 +12,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-8">
               <input
                 type="text"
                 name="name"
@@ -27,8 +27,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-8">
               <input
                 type="text"
                 name="desc"
@@ -42,8 +42,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
+            <div class="col-sm-8">
               <select
                 name="brand"
                 class="form-control"
@@ -72,8 +72,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-8">
               <div class="row">
                 <div
                   v-for="item in terracesList"
@@ -121,8 +121,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-8">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
@@ -172,8 +172,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-8">
               <div class="input-group">
                 <datepicker
                   name="start_at"
@@ -202,8 +202,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
+            <div class="col-sm-3">
               <input
                 type="number"
                 name="kols_count"
@@ -216,7 +216,7 @@
               <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <input
                 type="number"
                 name="pre_amount"
@@ -230,8 +230,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
+            <div class="col-sm-8">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
@@ -271,8 +271,16 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.price.title')}}：</div>
+            <div class="col-sm-8">
+              <!-- <select class="form-control">
+                <option value="">{{$t('lang.campaigns.price.placeholder')}}</option>
+                <option
+                  v-for="(item, index) in priceList"
+                  :key="index"
+                  :value="item[0]"
+                >{{item[1]}}</option>
+              </select> -->
               <div class="input-group">
                 <input
                   type="number"
@@ -298,32 +306,32 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
+            <div class="col-sm-3">
               <select class="form-control">
-                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="">{{$t('lang.campaigns.followerAge.placeholder')}}</option>
+                <option value="">10-20 岁</option>
+                <option value="">20-30 岁</option>
+                <option value="">30-40 岁</option>
+                <option value="">40-50 岁</option>
+                <option value="">50-60 岁</option>
+                <option value="">60 岁以上</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <select class="form-control">
-                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="">{{$t('lang.campaigns.followerGender.placeholder')}}</option>
+                <option value="">男</option>
+                <option value="">女</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
+            <div class="col-sm-8">
               <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
               <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
             </div>
@@ -409,6 +417,7 @@ export default {
       terracesList: [],
       kolsParams: {},
       kolsList: [],
+      priceList: [],
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -423,6 +432,7 @@ export default {
         img_url: '',
         target: {
           industries: '',
+          price: '',
           price_from: '',
           price_to: ''
         },
@@ -447,6 +457,8 @@ export default {
         const data = res.data
         this.brandsList = data.trademarks_list
         this.tagsList = data.tags_list
+        // this.priceList = data.prices_range
+        // console.log(this.priceList)
 
         let _terracesList = data.terraces_list
         _terracesList.forEach(item => {
@@ -495,6 +507,7 @@ export default {
         industries: this.checkedTags,
         page_no: 0,
         page_size: 12,
+        // price: this.submitData.target.price,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
       }

@@ -18,9 +18,9 @@
 
       <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
 
-      <div v-if="kolsList.length >= 12" class="btn-area">
+      <!-- <div v-if="kolsList.length >= 12" class="btn-area">
         <button type="button" class="btn btn-blue btn-outline btn-sm" @click="">下一页</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

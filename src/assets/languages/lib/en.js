@@ -14,6 +14,57 @@ export const lang = {
   payment: 'Payment',
   information: 'Information',
   submitBtn: 'Submit',
+  updateBaseInfo: {
+    base_info: {
+      title: 'Base Info',
+      name: {
+        title: 'Name',
+        placeholder: 'Please fill in your name',
+        errorTips: 'Please fill in your name'
+      },
+      campany_name: {
+        title: 'Company Name',
+        placeholder: 'Please fill in your company name',
+        errorTips: 'Please fill in your company name'
+      },
+      email: {
+        title: 'Email',
+        placeholder: 'Please fill in your email',
+        errorTips: 'Please fill in a valid email'
+      },
+      mobile_number: {
+        title: 'Mobile Number',
+        placeholder: 'Please fill in your mobile number',
+        errorTips: 'Please fill in a valid mobile number'
+      }
+    },
+    my_brand: {
+      title: 'My Brands',
+      name: {
+        title: 'Brand Name',
+        placeholder: 'Please fill in your brand name',
+        errorTips: 'Please fill in your brand name'
+      },
+      description: {
+        title: 'Brand Description',
+        placeholder: 'Please fill in your brand description',
+        errorTips: 'Please fill in your brand description'
+      }
+    },
+    competitors: {
+      title: 'My Competitive Brands',
+      name: {
+        title: 'Name',
+        placeholder: 'Please fill in the name',
+        errorTips: 'Please fill in the name'
+      },
+      short_name: {
+        title: 'Short Name',
+        placeholder: 'Please fill in a short name',
+        errorTips: 'Please fill in a short name'
+      }
+    }
+  },
   campaigns: {
     campaignInfo: 'Campaign Information',
     kolParticipate: 'KOL Participate',
@@ -75,20 +126,21 @@ export const lang = {
       title: 'Price requirements',
       lowestPlaceholder: 'lowest',
       highestPlaceholder: 'highest',
+      placeholder: 'all',
       errorTips: 'please select a price range for us to recommend accurate KOL'
     },
     followerAge: {
-      title: 'Follower age',
-      placeholder: 'please select the expected range for the follower’s age',
-      errorTips: 'please select the expected range for the follower’s age'
+      title: 'Follower\'s age',
+      placeholder: 'all',
+      errorTips: 'please select the expected range for the follower\'s age'
     },
     followerGender: {
-      title: 'Follower gender',
-      placeholder: 'please select the follower gender',
-      errorTips: 'please select the follower gender'
+      title: 'Follower\'s gender',
+      placeholder: 'all',
+      errorTips: 'please select the follower\'s gender'
     },
     followerDistrict: {
-      title: 'Follower district',
+      title: 'Follower\'s location',
       placeholder: 'please fill in the district reauirement',
       errorTips: 'please fill in the district reauirement'
     }
