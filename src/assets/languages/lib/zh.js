@@ -20,6 +20,11 @@ export const lang = {
     collaborationCompleted: '合作完成',
     bigVRequirement: '大V 相关要求',
     serchBtn: '搜索大V',
+    link: {
+      title: '活动链接',
+      placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
+      errorTips: '请填写活动链接'
+    },
     name: {
       title: '活动名称',
       placeholder: '请填写活动名称',

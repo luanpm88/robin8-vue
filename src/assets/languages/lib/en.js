@@ -62,7 +62,7 @@ export const lang = {
       errorTips: 'please fill in the campaign budget'
     },
     precaution: {
-      title: 'Psrecaution',
+      title: 'Precaution',
       placeholder: 'please fill out the precaution for the campaign, including content that should not be talk about and the important things need to be take care of.',
       errorTips: 'please fill in the precaution'
     },

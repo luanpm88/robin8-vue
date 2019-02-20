@@ -143,16 +143,6 @@ const config = {
 
   // activity
   kolActivityUrl: `${host}/creation_selected_kols`,
-
-  // ranking--------------------------
-  // ranking 在调用right 两个列表之前 获取最新的report_date
-  RankingDate: `${searchHost}/price/kol/ranking_date?${searchHostKey}`,
-
-  // WeChatTopList
-  WeChatTopList: `${searchHost}/price/kol/ranking_summary?${searchHostKey}`,
-
-  // WeChatThirtyList
-  WeChatThirtyList: `${searchHost}/price/kol/ranking?${searchHostKey}`,
 }
 
 module.exports = config
