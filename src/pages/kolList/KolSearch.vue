@@ -1,81 +1,79 @@
 <template>
   <div>
-    <keep-alive>
-      <div class="kol-list-wrap">
-        <h5>Enter a keyword, category or KOL</h5>
-        <div class="kol-search clearfix">
-          <input type="text" placeholder="please input" v-model="keyword">
-          <span class="kol-search-btn" @click="totalSearch">Search</span>
+    <div class="kol-list-wrap">
+      <h5>Enter a keyword, category or KOL</h5>
+      <div class="kol-search clearfix">
+        <input type="text" placeholder="please input" v-model="keyword">
+        <span class="kol-search-btn" @click="totalSearch">Search</span>
+      </div>
+      <div class="kol-advance">
+        <div class="kol-advance-btn">
+          <span @click="showMoreSearch">Advanced Search</span>
         </div>
-        <div class="kol-advance">
-          <div class="kol-advance-btn">
-            <span @click="showMoreSearch">Advanced Search</span>
+        <div class="kol-advance-box clearfix" v-if="advancedSearch">
+          <div class="kol-advance-line col-xs-6">
+            <span class="kol-advance-left col-xs-4">KOL industries:</span>
+            <select class="col-xs-7 oneselect" v-model="industry">
+              <option value=""></option>
+              <option value="airline">Airline</option>
+              <option value="appliances">Appliances</option>
+              <option value="auto">Car</option>
+              <option value="babies">Babies</option>
+              <option value="beauty">Beauty</option>
+              <option value="books">Books</option>
+              <option value="camera">Camera</option>
+              <option value="ce">Electronics</option>
+              <option value="digital">Digital</option>
+              <option value="education">Education</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="fashion">Fashion</option>
+              <option value="finance">Finance</option>
+              <option value="fitness">Fitness</option>
+              <option value="food">Food</option>
+              <option value="furniture">Furniture</option>
+              <option value="games">Games</option>
+              <option value="health">Gealth</option>
+              <option value="hotel">Hotel</option>
+              <option value="internet">Hnternet</option>
+              <option value="mobile">Mobile</option>
+              <option value="music">Music</option>
+              <option value="realestate">Realestate</option>
+              <option value="sports">Sports</option>
+              <option value="travel">Travel</option>
+            </select>
           </div>
-          <div class="kol-advance-box clearfix" v-if="advancedSearch">
-            <div class="kol-advance-line col-xs-6">
-              <span class="kol-advance-left col-xs-4">KOL industries:</span>
-              <select class="col-xs-7 oneselect" v-model="industry">
-                <option value=""></option>
-                <option value="airline">Airline</option>
-                <option value="appliances">Appliances</option>
-                <option value="auto">Car</option>
-                <option value="babies">Babies</option>
-                <option value="beauty">Beauty</option>
-                <option value="books">Books</option>
-                <option value="camera">Camera</option>
-                <option value="ce">Electronics</option>
-                <option value="digital">Digital</option>
-                <option value="education">Education</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="fashion">Fashion</option>
-                <option value="finance">Finance</option>
-                <option value="fitness">Fitness</option>
-                <option value="food">Food</option>
-                <option value="furniture">Furniture</option>
-                <option value="games">Games</option>
-                <option value="health">Gealth</option>
-                <option value="hotel">Hotel</option>
-                <option value="internet">Hnternet</option>
-                <option value="mobile">Mobile</option>
-                <option value="music">Music</option>
-                <option value="realestate">Realestate</option>
-                <option value="sports">Sports</option>
-                <option value="travel">Travel</option>
-              </select>
+          <div class="kol-advance-line col-xs-6">
+            <span class="kol-advance-left col-xs-4">Engagement:</span>
+            <input class="col-xs-3 oneinput" v-model="engagementFrom">
+            <b class="col-xs-1">-</b>
+            <input class="col-xs-3 oneinput" v-model="engagementTo">
+          </div>
+          <div class="kol-advance-line col-xs-6">
+            <span class="kol-advance-left col-xs-4">Followers:</span>
+            <input class="col-xs-3 oneinput" v-model="followerFrom">
+            <b class="col-xs-1">-</b>
+            <input class="col-xs-3 oneinput" v-model="followerTo">
+          </div>
+          <div class="kol-advance-line col-xs-6">
+            <span class="kol-advance-left col-xs-4">Influence:</span>
+            <input class="col-xs-3 oneinput" v-model="influenceFrom">
+            <b class="col-xs-1">-</b>
+            <input class="col-xs-3 oneinput" v-model="influenceTo">
+          </div>
+          <div class="kol-advance-line kol-advance-bottom">
+            <div class="kol-type">
+              <label>
+                <input type="checkbox" v-model="kolOnly">
+                <span>Only display KOLs that have prices at Robin8</span>
+              </label>
             </div>
-            <div class="kol-advance-line col-xs-6">
-              <span class="kol-advance-left col-xs-4">Engagement:</span>
-              <input class="col-xs-3 oneinput" v-model="engagementFrom">
-              <b class="col-xs-1">-</b>
-              <input class="col-xs-3 oneinput" v-model="engagementTo">
-            </div>
-            <div class="kol-advance-line col-xs-6">
-              <span class="kol-advance-left col-xs-4">Followers:</span>
-              <input class="col-xs-3 oneinput" v-model="followerFrom">
-              <b class="col-xs-1">-</b>
-              <input class="col-xs-3 oneinput" v-model="followerTo">
-            </div>
-            <div class="kol-advance-line col-xs-6">
-              <span class="kol-advance-left col-xs-4">Influence:</span>
-              <input class="col-xs-3 oneinput" v-model="influenceFrom">
-              <b class="col-xs-1">-</b>
-              <input class="col-xs-3 oneinput" v-model="influenceTo">
-            </div>
-            <div class="kol-advance-line kol-advance-bottom">
-              <div class="kol-type">
-                <label>
-                  <input type="checkbox" v-model="kolOnly">
-                  <span>Only display KOLs that have prices at Robin8</span>
-                </label>
-              </div>
-            </div>
-            <div class="form-group text-center">
-              <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
-            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
           </div>
         </div>
       </div>
-    </keep-alive>
+    </div>
     <div class="kol-data-wrap mt20">
       <p class="kol-list-topnum">
         <span v-for="(item, index) in topNumList" :key="index
@@ -192,6 +190,7 @@ import { Spin, Progress } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
 export default {
+  name: 'kolsearch',
   components: {
     ASpin: Spin,
     AProgress: Progress,
@@ -376,7 +375,6 @@ export default {
       this.paramsInit();
       // 调用接口
       this.totalJoggle(this.tabIndex);
-      console.log(this.currentPage);
     },
     totalSearch() {
       this.isShow = false;
