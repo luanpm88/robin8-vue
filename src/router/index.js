@@ -298,6 +298,8 @@ export default new Router({
       component: KolList,
       meta: {
         title: 'KolList',
+        isUseCache: false,
+        keepAlive: true,
         auth: true
       }
     },

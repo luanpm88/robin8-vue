@@ -1,78 +1,81 @@
 <template>
   <div>
-    <div class="kol-list-wrap">
-      <h5>Enter a keyword, category or KOL</h5>
-      <div class="kol-search clearfix">
-        <input type="text" placeholder="please input" v-model="keyword">
-        <span class="kol-search-btn" @click="totalSearch">Search</span>
-      </div>
-      <div class="kol-advance">
-        <div class="kol-advance-btn">
-          <span @click="showMoreSearch">Advanced Search</span>
+    <keep-alive>
+      <div class="kol-list-wrap">
+        <h5>Enter a keyword, category or KOL</h5>
+        <div class="kol-search clearfix">
+          <input type="text" placeholder="please input" v-model="keyword">
+          <span class="kol-search-btn" @click="totalSearch">Search</span>
         </div>
-        <div class="kol-advance-box clearfix" v-if="advancedSearch">
-          <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">KOL industries:</span>
-            <select class="col-xs-7 oneselect" v-model="industry">
-              <option value="airline">Airline</option>
-              <option value="appliances">Appliances</option>
-              <option value="auto">Car</option>
-              <option value="babies">Babies</option>
-              <option value="beauty">Beauty</option>
-              <option value="books">Books</option>
-              <option value="camera">Camera</option>
-              <option value="ce">Electronics</option>
-              <option value="digital">Digital</option>
-              <option value="education">Education</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="fashion">Fashion</option>
-              <option value="finance">Finance</option>
-              <option value="fitness">Fitness</option>
-              <option value="food">Food</option>
-              <option value="furniture">Furniture</option>
-              <option value="games">Games</option>
-              <option value="health">Gealth</option>
-              <option value="hotel">Hotel</option>
-              <option value="internet">Hnternet</option>
-              <option value="mobile">Mobile</option>
-              <option value="music">Music</option>
-              <option value="realestate">Realestate</option>
-              <option value="sports">Sports</option>
-              <option value="travel">Travel</option>
-            </select>
+        <div class="kol-advance">
+          <div class="kol-advance-btn">
+            <span @click="showMoreSearch">Advanced Search</span>
           </div>
-          <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Engagement:</span>
-            <input class="col-xs-3 oneinput" v-model="engagementFrom">
-            <b class="col-xs-1">-</b>
-            <input class="col-xs-3 oneinput" v-model="engagementTo">
-          </div>
-          <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Followers:</span>
-            <input class="col-xs-3 oneinput" v-model="followerFrom">
-            <b class="col-xs-1">-</b>
-            <input class="col-xs-3 oneinput" v-model="followerTo">
-          </div>
-          <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Influence:</span>
-            <input class="col-xs-3 oneinput" v-model="influenceFrom">
-            <b class="col-xs-1">-</b>
-            <input class="col-xs-3 oneinput" v-model="influenceTo">
-          </div>
-          <div class="kol-advance-line kol-advance-bottom">
-            <div class="kol-type">
-              <label>
-                <input type="checkbox" v-model="kolOnly">
-                <span>Only display KOLs that have prices at Robin8</span>
-              </label>
+          <div class="kol-advance-box clearfix" v-if="advancedSearch">
+            <div class="kol-advance-line col-xs-6">
+              <span class="kol-advance-left col-xs-4">KOL industries:</span>
+              <select class="col-xs-7 oneselect" v-model="industry">
+                <option value=""></option>
+                <option value="airline">Airline</option>
+                <option value="appliances">Appliances</option>
+                <option value="auto">Car</option>
+                <option value="babies">Babies</option>
+                <option value="beauty">Beauty</option>
+                <option value="books">Books</option>
+                <option value="camera">Camera</option>
+                <option value="ce">Electronics</option>
+                <option value="digital">Digital</option>
+                <option value="education">Education</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="fashion">Fashion</option>
+                <option value="finance">Finance</option>
+                <option value="fitness">Fitness</option>
+                <option value="food">Food</option>
+                <option value="furniture">Furniture</option>
+                <option value="games">Games</option>
+                <option value="health">Gealth</option>
+                <option value="hotel">Hotel</option>
+                <option value="internet">Hnternet</option>
+                <option value="mobile">Mobile</option>
+                <option value="music">Music</option>
+                <option value="realestate">Realestate</option>
+                <option value="sports">Sports</option>
+                <option value="travel">Travel</option>
+              </select>
+            </div>
+            <div class="kol-advance-line col-xs-6">
+              <span class="kol-advance-left col-xs-4">Engagement:</span>
+              <input class="col-xs-3 oneinput" v-model="engagementFrom">
+              <b class="col-xs-1">-</b>
+              <input class="col-xs-3 oneinput" v-model="engagementTo">
+            </div>
+            <div class="kol-advance-line col-xs-6">
+              <span class="kol-advance-left col-xs-4">Followers:</span>
+              <input class="col-xs-3 oneinput" v-model="followerFrom">
+              <b class="col-xs-1">-</b>
+              <input class="col-xs-3 oneinput" v-model="followerTo">
+            </div>
+            <div class="kol-advance-line col-xs-6">
+              <span class="kol-advance-left col-xs-4">Influence:</span>
+              <input class="col-xs-3 oneinput" v-model="influenceFrom">
+              <b class="col-xs-1">-</b>
+              <input class="col-xs-3 oneinput" v-model="influenceTo">
+            </div>
+            <div class="kol-advance-line kol-advance-bottom">
+              <div class="kol-type">
+                <label>
+                  <input type="checkbox" v-model="kolOnly">
+                  <span>Only display KOLs that have prices at Robin8</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
             </div>
           </div>
-          <div class="form-group text-center">
-            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
-          </div>
         </div>
       </div>
-    </div>
+    </keep-alive>
     <div class="kol-data-wrap mt20">
       <p class="kol-list-topnum">
         <span v-for="(item, index) in topNumList" :key="index
@@ -94,16 +97,16 @@
               <li>R8 KOL</li>
               <li>
                 Influence
-                <span class="kol-data-rank" @click="rank">
-                  <i :class="{active: isactive}"></i>
-                  <i :class="{active: !isactive}"></i>
+                <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
+                  <i :class="{one: true, 'is-top-iactive': isFIactive}"></i>
+                  <i :class="{two: true, 'is-bottom-iactive': !isFIactive}"></i>
                 </span>
               </li>
               <li>
                 Relevance
-                <span class="kol-data-rank" @click="rank">
-                  <i :class="{active: isactive}"></i>
-                  <i :class="{active: !isactive}"></i>
+                <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
+                  <i :class="{one: true, 'is-top-iactive': isRIactive}"></i>
+                  <i :class="{two: true, 'is-bottom-iactive': !isRIactive}"></i>
                 </span>
               </li>
             </ul>
@@ -197,10 +200,16 @@ export default {
   props: ["keyWord"],
   data() {
     return {
-      profileSort: 1,
+      listSortType: 1,
+      listSortDir: 'desc',
       isLoading: true,
       isShow: false,
-      isactive: false,
+      isFIactive: false,
+      isFluenceActive: true,
+      isFluenceSort: 'asc',
+      isRIactive: false,
+      isRelevanceActive: false,
+      isRelevanceSort: 'asc',
       keyword: "",
       totalKeywords: '',
       industry: "",
@@ -231,7 +240,8 @@ export default {
       tabIndex: 0,
       searchListBox: [],
       searchList: {},
-      r8List: []
+      r8List: [],
+      totalParams: {}
     };
   },
   created() {
@@ -239,49 +249,54 @@ export default {
     // 获取keywords
     this.getBaseData();
     if (this.keyWord.brand_keywords) {
-      // console.log(1)
+      this.tabIndex = this.keyWord.type;
       this.keyword = this.keyWord.brand_keywords;
-      this.paramsInit(this.keyWord.type);
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
     } else {
-      this.paramsInit(0);
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
     }
   },
   computed: {
     ...mapState(["authorization"])
   },
   methods: {
-    // params chus
-    paramsInit(type) {
-      // type = 0 微博
-      // type = 1 微信
+    // 初始化传参数
+    paramsInit() {
       if (this.kolOnly) {
         this.kolOnlyText = "Y";
       } else {
         this.kolOnlyText = "N";
       }
-      let params = {
-        page_no: this.currentPage,
-        page_size: 10,
-        industry: this.industry,
-        engagement_from: this.engagementFrom,
-        engagement_to: this.engagementTo,
-        influence_from: this.influenceFrom,
-        influence_to: this.influenceTo,
-        keywords: this.keyword,
-        profile_sort_col: 0,
-        profile_sort_dir: "desc",
-        r8_registered_kol_only: this.kolOnlyText
-      };
+      this.totalParams.page_no = this.currentPage;
+      this.totalParams.page_size = 10;
+      this.totalParams.industry = this.industry;
+      this.totalParams.engagement_from = this.engagementFrom;
+      this.totalParams.engagement_to = this.engagementTo;
+      this.totalParams.influence_from = this.influenceFrom;
+      this.totalParams.influence_to = this.influenceTo;
+      this.totalParams.keywords = this.keyword;
+      this.totalParams.profile_sort_col = this.listSortType;
+      this.totalParams.profile_sort_dir = this.listSortDir;
+      this.totalParams.r8_registered_kol_only = this.kolOnlyText;;
+    },
+    // 调用接口
+    totalJoggle(type) {
+      // type = 0 微博
+      // type = 1 微信
       if (type === 0) {
-        params.folllower_from = this.followerFrom;
-        params.follower_to = this.followerTo;
-        params.profile_sort_col = this.profileSort;
+        this.totalParams.folllower_from = this.followerFrom;
+        this.totalParams.follower_to = this.followerTo;
         // 微博的接口
-        this.kollistJoggle(type, params);
+        this.kollistJoggle(type, this.totalParams);
       } else {
         // weixin的接口
-        this.kollistJoggle(type, params);
-        
+        this.kollistJoggle(type, this.totalParams);
       }
     },
     // 微博和微信的接口
@@ -320,7 +335,7 @@ export default {
           });
       }
     },
-    // 处理数据函数
+    // 处理接口数据函数
     jogDataInit(data) {
       if (data.length === 0 || !data.length) {
         this.isShow = true;
@@ -339,7 +354,6 @@ export default {
       });
       _that.searchList = data;
       _that.searchListBox.push(_that.searchList);
-      _that.currentPage = _that.currentPage + 1;
     },
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch;
@@ -349,22 +363,30 @@ export default {
       this.tabIndex = tab.index;
       this.currentPage = 0;
       this.searchListBox = [];
-      // 接口
-      this.paramsInit(tab.index);
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
     },
     showMore() {
       this.isShow = false;
       this.isLoading = true;
-      // 接口
-      this.paramsInit(this.tabIndex);
+      this.currentPage = this.currentPage + 1;
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
+      console.log(this.currentPage);
     },
     totalSearch() {
       this.isShow = false;
       this.isLoading = true;
       this.currentPage = 0;
       this.searchListBox = [];
-      // 接口
-      this.paramsInit(this.tabIndex);
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
     },
     intoKolDetail(item) {
       this.$router.push({
@@ -396,17 +418,39 @@ export default {
         }
       })
     },
-    // rank
-    rank() {
+    // influencerank
+    influencerank(value) {
+      this.isShow = false;
+      this.isLoading = true;
+      this.currentPage = 0;
       this.searchListBox = [];
-      this.isactive = !this.isactive;
-      if (this.isactive) {
-        this.profileSort = 0;
-        this.paramsInit(this.tabIndex);
+      if (value === 1) {
+        this.isFluenceActive = true;
+        this.isRelevanceActive = false;
+        this.isFIactive = !this.isFIactive;
+        this.listSortType = 1;
+        if (this.isFIactive) {
+          this.listSortDir = 'asc';
+        } else {
+          this.listSortDir = 'desc';
+        }
+        // 重置params
+        this.paramsInit();
       } else {
-        this.profileSort = 1;
-        this.paramsInit(this.tabIndex);
+        this.isFluenceActive = false;
+        this.isRelevanceActive = true;
+        this.isRIactive = !this.isRIactive;
+        this.listSortType = 0;
+        if (this.isRIactive) {
+          this.listSortDir = 'asc';
+        } else {
+          this.listSortDir = 'desc';
+        }
+        // 重置params
+        this.paramsInit();
       }
+      // 调用接口的函数
+      this.totalJoggle(this.tabIndex);
     },
     // top头部微信的数字
     r8Kol() {
@@ -658,26 +702,25 @@ span {
     width: 0;
     height: 0;
     border-style: solid;
-    &:nth-child(1) {
-      display: block;
-      border-width: 0 5px 6px;
-      border-color: transparent transparent #a7a5a5;
-    }
-    &:nth-child(2) {
-      display: block;
-      border-width: 6px 5px 0;
-      border-color: #a7a5a5 transparent transparent;
-      margin: 1px auto 0;
-    }
   }
-  .active {
-    &:nth-child(1) {
-      border-color: transparent transparent #b180ef ;
-    }
-    &:nth-child(2) {
-      border-color: #b180ef  transparent transparent; 
-    }
+  .one {
+    display: block;
+    border-width: 0 5px 6px;
+    border-color: transparent transparent #a7a5a5;
   }
-
+  .two {
+    display: block;
+    border-width: 6px 5px 0;
+    border-color: #a7a5a5 transparent transparent;
+    margin: 1px auto 0;
+  }
+}
+.fluenceactive, .relevanceactive {
+  .is-top-iactive {
+    border-color: transparent transparent #b180ef ;
+  }
+  .is-bottom-iactive {
+    border-color: #b180ef  transparent transparent; 
+  }
 }
 </style>
