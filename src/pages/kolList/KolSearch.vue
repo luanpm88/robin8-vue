@@ -151,7 +151,7 @@
                     :width="100"
                     :strokeWidth="9"
                     strokeColor="#b37feb"
-                    :format="() => item.stats.avg_post_influence"
+                    :format="() => item.influence"
                   />
                 </li>
                 <li>
@@ -345,7 +345,7 @@ export default {
         if (element.description_raw.length > 60) {
           element.description_raw = element.description_raw.substr(0, 30) + '...'
         }
-        element.influence = element.stats.avg_post_influence;
+        element.influence = parseInt(element.influence * 100);
         element.correlation = parseInt(element.correlation * 100);
         if (!element.pricing) {
           (element.pricing = {}), (element.pricing.direct_price = "N/A");
