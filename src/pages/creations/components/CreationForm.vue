@@ -191,7 +191,7 @@
                 lang="en"
                 format="YYYY-MM-DD HH:mm:ss"
                 input-class="form-control"
-                :placeholder="$t('lang.campaigns.time.startPlaceholder')"
+                :placeholder="$t('lang.campaigns.time.placeholder')"
                 v-model="campaignTime"
                 v-validate="'required'"
                 :minute-step="10"

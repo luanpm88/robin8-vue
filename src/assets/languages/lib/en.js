@@ -100,6 +100,7 @@ export const lang = {
       title: 'Campaign time',
       startPlaceholder: 'select start time',
       endPlaceholder: 'select end time',
+      placeholder: 'please select the campaign time',
       errorTips: 'please select the right campaign time'
     },
     kolNumber: {

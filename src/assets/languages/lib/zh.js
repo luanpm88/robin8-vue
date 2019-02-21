@@ -105,6 +105,7 @@ export const lang = {
       title: '活动时间',
       startPlaceholder: '选择开始时间',
       endPlaceholder: '选择结束时间',
+      placeholder: '请选择您预期的活动时间',
       errorTips: '请选择您预期的活动时间'
     },
     kolNumber: {
