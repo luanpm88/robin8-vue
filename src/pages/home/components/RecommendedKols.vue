@@ -97,8 +97,8 @@ export default {
     }
   },
   created() {
-    this.params.brand_keywords = this.childKeyList.brand_keywords;
-    this.weiboKol(this.params)
+    // this.params.brand_keywords = this.childKeyList.brand_keywords;
+    // this.weiboKol(this.params)
   },
   methods: {
     changeTab(tab) {
@@ -148,22 +148,17 @@ export default {
         })
         .then(function(res) {
           _that.isLoading = false;
-          if (!res.data.length) {
-            // console.log()
-            // _that.isShow = true;
+          if (res.data.length === 0 || !res.data.length) {
+            _that.isShow = true;
           } else {
-            if (res.data.length === 0) {
-              _that.isShow = true;
-            } else {
-              _that.isShow = false;
-              res.data.forEach(element => {
-                element.name = element.profile_name
-                element.desc = element.description_raw
-                element.avatar = element.avatar_url
-                element.influnce = element.avg_post_influences
-              })
-              _that.currentList = res.data.slice(0, 5)
-            }
+            _that.isShow = false;
+            res.data.forEach(element => {
+              element.name = element.profile_name
+              element.desc = element.description_raw
+              element.avatar = element.avatar_url
+              element.influnce = element.avg_post_influences
+            })
+            _that.currentList = res.data.slice(0, 5)
           }
         })
         .catch(function(error) {
@@ -181,21 +176,17 @@ export default {
         })
         .then(function(res) {
           _that.isLoading = false;
-          if (!res.data.length) {
-            _that.isLoading = true;
+          if (res.data.length === 0 || !res.data.length) {
+            _that.isShow = true;
           } else {
-            if (res.data.length === 0) {
-              _that.isShow = true;
-            } else {
-              _that.isShow = false;
-              res.data.forEach(element => {
-                element.name = element.profile_name
-                element.desc = element.description_raw
-                element.avatar = element.avatar_url
-                element.influnce = element.avg_post_influences
-              })
-              _that.currentList = res.data.slice(0, 5)
-            }
+            _that.isShow = false;
+            res.data.forEach(element => {
+              element.name = element.profile_name
+              element.desc = element.description_raw
+              element.avatar = element.avatar_url
+              element.influnce = element.avg_post_influences
+            })
+            _that.currentList = res.data.slice(0, 5)
           }
         })
         .catch(function(error) {

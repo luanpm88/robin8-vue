@@ -37,17 +37,19 @@
             <div class="r8-loading" v-if="isTopLoading">
               <a-spin tip="Loading..."/>
             </div>
-            <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
-              <p class="r-right-topList-tit">{{item.fixedTit}}</p>
-              <div class="r-right-topList-box clearfix">
-                <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
-                  <img :src="item.avatar_url" alt>
-                </span>
-                <span class="r-right-topList-txt col-sm-4">
-                  <b>{{item.profile_name}}</b>
-                  <b>{{item.source}}</b>
-                  <b>{{item.value}}</b>
-                </span>
+            <div v-if="!isTopLoading">
+              <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
+                <p class="r-right-topList-tit">{{item.fixedTit}}</p>
+                <div class="r-right-topList-box clearfix">
+                  <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
+                    <img :src="item.avatar_url" alt>
+                  </span>
+                  <span class="r-right-topList-txt col-sm-4">
+                    <b>{{item.profile_name}}</b>
+                    <b>{{item.source}}</b>
+                    <b>{{item.value}}</b>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -109,7 +111,7 @@ export default {
       tableThirtyList: [],
       isTopLoading: true,
       isTableLoding: true,
-      isTable: true,
+      isTable: false,
       columns: totalDataJS.ranking.thirtyColums,
       TableData: []
     };
@@ -183,8 +185,9 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log(res);
+          // console.log('30', res);
           if ((res.status === 200)) {
+             _that.isTable = true;
             _that.isTableLoding = false;
             res.data.forEach((element, index) => {
               element.profileDec = {
@@ -211,6 +214,8 @@ export default {
       this.tableTopList = [];
       this.tableThirtyList = [];
       this.isLoding = true;
+      this.isTable = false;
+      this.isTableLoding = true;
       // right top list
       this.WeChatTopList(totalParams);
       // 30 list
