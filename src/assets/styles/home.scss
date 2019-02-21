@@ -4,16 +4,12 @@
   color: #333;
 }
 .ranking-left{
-  width: 20%;
   background: $white;
-  float: left;
+  padding: 0px !important;
 }
 .ranking-right{
-  width: 80%;
   background: $white;
-  float: left;
   height: 910px;
-  // overflow-y: scroll;
   padding:20px 20px 0px;
 }
 .rankingcur {
@@ -120,5 +116,11 @@
     width: 87%;
     position: absolute;
     top: 20%;
+  }
+}
+.r-tableThirtyList-name{
+  img{
+      width: 40px;
+      border-radius: 50%;
   }
 }

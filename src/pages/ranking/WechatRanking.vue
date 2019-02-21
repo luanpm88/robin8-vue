@@ -4,9 +4,9 @@
 
     <div class="container mt50 clearfix">
       <!-- <main-nav class="pull-left"></main-nav> -->
-      <div class="ranking-container pull-right">
+      <div class="ranking-container pull-right clearfix">
         <!-- left -->
-        <div class="ranking-left">
+        <div class="ranking-left col-sm-1">
           <h5>Industries</h5>
           <ul class="ranking-nav">
             <li
@@ -21,7 +21,7 @@
           </ul>
         </div>
         <!-- right -->
-        <div class="ranking-right">
+        <div class="ranking-right col-sm-11">
           <!-- top dec -->
           <div class="r-top clearfix">
             <p
@@ -37,17 +37,19 @@
             <div class="r8-loading" v-if="isTopLoading">
               <a-spin tip="Loading..."/>
             </div>
-            <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
-              <p class="r-right-topList-tit">{{item.fixedTit}}</p>
-              <div class="r-right-topList-box clearfix">
-                <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
-                  <img :src="item.avatar_url" alt>
-                </span>
-                <span class="r-right-topList-txt col-sm-4">
-                  <b>{{item.profile_name}}</b>
-                  <b>{{item.source}}</b>
-                  <b>{{item.value}}</b>
-                </span>
+            <div v-if="!isTopLoading">
+              <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
+                <p class="r-right-topList-tit">{{item.fixedTit}}</p>
+                <div class="r-right-topList-box clearfix">
+                  <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
+                    <img :src="item.avatar_url" alt>
+                  </span>
+                  <span class="r-right-topList-txt col-sm-4">
+                    <b>{{item.profile_name}}</b>
+                    <b>{{item.source}}</b>
+                    <b>{{item.value}}</b>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -55,7 +57,16 @@
             <div class="r8-loading" v-if="isTableLoding">
               <a-spin tip="Loading..."/>
             </div>
-            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList" :pagination="false" :scroll="{ y: 240 }"/>
+            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
+            @change="handleTableChange" :pagination="false" :scroll="{ y: 550 }">
+              <template slot="profileDec" slot-scope="dec">
+                <div class="r-tableThirtyList-name">
+                  <img :src="dec.img" alt="">
+                  <p>{{dec.name}}</p>
+                  <p>{{dec.id}}</p>
+                </div>
+              </template>
+            </a-table>
           </div>
         </div>
       </div>
@@ -100,7 +111,7 @@ export default {
       tableThirtyList: [],
       isTopLoading: true,
       isTableLoding: true,
-      isTable: true,
+      isTable: false,
       columns: totalDataJS.ranking.thirtyColums,
       TableData: []
     };
@@ -110,6 +121,9 @@ export default {
     this.RankingDate(totalParams);
   },
   methods: {
+    handleTableChange() {
+
+    },
     // ranking 在调用right 两个列表之前 获取最新的report_date
     RankingDate(params) {
       const _that = this;
@@ -171,13 +185,21 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('getRankingThirtyList', res)
-          if ((res.status = 200)) {
-            // _that.isTableLoding = false;
-            // this.isTable = true;
-            // // console.log('我是30lit');
-            this.tableThirtyList = res.data;
-            // console.log(this.tableThirtyList);
+          // console.log('30', res);
+          if ((res.status === 200)) {
+             _that.isTable = true;
+            _that.isTableLoding = false;
+            res.data.forEach((element, index) => {
+              element.profileDec = {
+                img: '',
+                name: '',
+                id: '',
+              }
+              element.profileDec.img = element.avatar_url;
+              element.profileDec.name = element.profile_name;
+              element.profileDec.id = element.weixin_id;
+            });
+            _that.tableThirtyList = res.data;
           }
         })
         .catch(function(error) {
@@ -192,8 +214,12 @@ export default {
       this.tableTopList = [];
       this.tableThirtyList = [];
       this.isLoding = true;
+      this.isTable = false;
+      this.isTableLoding = true;
       // right top list
       this.WeChatTopList(totalParams);
+      // 30 list
+      this.WeChatThirtyList(totalParams);
     },
     // 跳转benchmark页面
     lookBenchmark() {

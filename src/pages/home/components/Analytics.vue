@@ -168,21 +168,6 @@ export default {
     }
   },
   created() {
-    // console.log('我是analytic 页面的', this.childKeyList);
-    this.cur = this.childKeyList.tabIndex;
-    this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
-    this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
-    this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
-    this.competitorParams.cb_names = this.childKeyList.cb_keywords;
-    this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
-    this.brandKeyWord = this.childKeyList.brand_keywords;
-    if (this.cur === 0) {
-      // trend 微博
-      this.trendsWeibo(this.trendParams);
-    } else {
-      // competitor 微博
-      this.competitorWeibo(this.competitorParams);
-    }
   },
   computed: {
     ...mapState(["authorization"])

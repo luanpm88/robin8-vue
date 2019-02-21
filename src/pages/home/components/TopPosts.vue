@@ -121,10 +121,10 @@ export default {
     }
   },
   created() {
-    this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
-    this.topPostParams.page_no = this.postWeiboCurrentPage;
-    // 微博
-    this.topPostWeibo(this.topPostParams)
+    // this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
+    // this.topPostParams.page_no = this.postWeiboCurrentPage;
+    // // 微博
+    // this.topPostWeibo(this.topPostParams)
   },
   methods: {
     changeTab(tab) {
@@ -152,17 +152,13 @@ export default {
         })
         .then(function(res) {
           _that.isLoading = false;
-          if (!res.data.data.length) {
-            // _that.isShow = true;
+          if (res.data.data.length === 0 || !res.data.data.length) {
+            _that.isShow = true;
           } else {
-            if (res.data.data.length === 0) {
-              _that.isShow = true;
-            } else {
-              _that.isShow = false;
-              _that.postType = 0
-              _that.postListBox.push(res.data.data);
-              _that.postWeiboCurrentPage ++;
-            }
+            _that.isShow = false;
+            _that.postType = 0
+            _that.postListBox.push(res.data.data);
+            _that.postWeiboCurrentPage ++;
           }
         })
         .catch(function(error) {
@@ -180,17 +176,13 @@ export default {
         })
         .then(function(res) {
           _that.isLoading = false;
-          if (!res.data.data.length) {
+          if (res.data.data.length === 0 || !res.data.data.length) {
             _that.isShow = true;
           } else {
-            if (res.data.data.length === 0) {
-              _that.isShow = true;
-            } else {
-              _that.isShow = false;
-              _that.postType = 1
-              _that.postListBox.push(res.data.data);
-              _that.postWeixinCurrentPage ++;
-            }
+            _that.isShow = false;
+            _that.postType = 1
+            _that.postListBox.push(res.data.data);
+            _that.postWeixinCurrentPage ++;
           }
         })
         .catch(function(error) {
