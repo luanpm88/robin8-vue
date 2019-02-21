@@ -93,13 +93,13 @@ export const lang = {
     },
     platform: {
       title: '活动平台',
-      placeholder: '请填写活动介绍',
-      errorTips: '请填写活动相关介绍'
+      placeholder: '请填写曝光值',
+      errorTips: '请选择活动平台'
     },
     picture: {
       title: '活动图片',
-      placeholder: '请填写活动介绍',
-      errorTips: '请填写活动相关介绍'
+      placeholder: '',
+      errorTips: '请上传活动图片'
     },
     time: {
       title: '活动时间',

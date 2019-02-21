@@ -7,8 +7,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-8">
               <input
                 type="text"
                 name="name"
@@ -18,12 +18,17 @@
                 :placeholder="$t('lang.campaigns.name.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.name.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('name')"
+              >
+                {{$t('lang.campaigns.name.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-8">
               <input
                 type="text"
                 name="desc"
@@ -33,12 +38,17 @@
                 :placeholder="$t('lang.campaigns.description.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.description.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('desc')"
+              >
+                {{$t('lang.campaigns.description.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
+            <div class="col-sm-8">
               <select
                 name="brand"
                 class="form-control"
@@ -53,7 +63,12 @@
                   :value="item.id"
                 >{{item.name}}</option>
               </select>
-              <div class="form-tips">{{$t('lang.campaigns.brandName.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('brand')"
+              >
+                {{$t('lang.campaigns.brandName.errorTips')}}
+              </div>
             </div>
           </div>
         </div>
@@ -67,11 +82,11 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-8">
               <div class="row">
                 <div
-                  v-for="item in terracesList"
+                  v-for="(item, index) in terracesList"
                   :key="item.id"
                   class="col-sm-6"
                 >
@@ -87,12 +102,12 @@
                       <div class="iconfont icon-check"></div>
                     </div>
                   </div>
-                  <div class="col-sm-10">
+                  <div class="col-sm-10 pr0">
                     <input
                       type="number"
                       class="form-control"
                       v-model="item.val"
-                      :placeholder="'请填写'+ item.name +'期待曝光值'"
+                      :placeholder="$t('lang.campaigns.platform.placeholder')"
                     >
                   </div>
                 </div>
@@ -109,15 +124,15 @@
                     class="form-tips text-right danger"
                     v-show="errors.has('terrace')"
                   >
-                    {{ errors.first('terrace') }}
+                    {{$t('lang.campaigns.platform.errorTips')}}
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-8">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
@@ -162,19 +177,20 @@
                 class="form-tips danger"
                 v-show="errors.has('img_url')"
               >
-                {{ errors.first('img_url') }}
+                {{$t('lang.campaigns.picture.errorTips')}}
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-8">
               <div class="input-group">
                 <datepicker
                   name="start_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
                   :placeholder="$t('lang.campaigns.time.startPlaceholder')"
+                  :open-date="new Date()"
                   v-model="submitData.start_at"
                   v-validate="'required'"
                 ></datepicker>
@@ -197,8 +213,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
+            <div class="col-sm-3">
               <input
                 type="number"
                 name="kols_count"
@@ -208,10 +224,15 @@
                 :placeholder="$t('lang.campaigns.kolNumber.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('kols_count')"
+              >
+                {{$t('lang.campaigns.kolNumber.errorTips')}}
+              </div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <input
                 type="number"
                 name="pre_amount"
@@ -221,12 +242,17 @@
                 :placeholder="$t('lang.campaigns.budget.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.budget.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('pre_amount')"
+              >
+                {{$t('lang.campaigns.budget.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
+            <div class="col-sm-8">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
@@ -266,8 +292,16 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.price.title')}}：</div>
+            <div class="col-sm-8">
+              <!-- <select class="form-control">
+                <option value="">{{$t('lang.campaigns.price.placeholder')}}</option>
+                <option
+                  v-for="(item, index) in priceList"
+                  :key="index"
+                  :value="item[0]"
+                >{{item[1]}}</option>
+              </select> -->
               <div class="input-group">
                 <input
                   type="number"
@@ -289,37 +323,46 @@
                   v-validate="'required'"
                 >
               </div>
-              <div class="form-tips">{{$t('lang.campaigns.price.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('price_from') || errors.has('price_to')"
+              >
+                {{$t('lang.campaigns.price.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
+            <div class="col-sm-3">
               <select class="form-control">
-                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="">{{$t('lang.campaigns.followerAge.placeholder')}}</option>
+                <option value="1">10-20 岁</option>
+                <option value="2">20-30 岁</option>
+                <option value="3">30-40 岁</option>
+                <option value="4">40-50 岁</option>
+                <option value="5">50-60 岁</option>
+                <option value="6">60 岁以上</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <select class="form-control">
-                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="">{{$t('lang.campaigns.followerGender.placeholder')}}</option>
+                <option value="1">男</option>
+                <option value="0">女</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                :placeholder="$t('lang.campaigns.followerDistrict.placeholder')"
+              >
               <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
             </div>
           </div>
@@ -377,14 +420,14 @@ import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
-import KolsListPanel from './components/KolsListPanel'
+import KolsListPanel from './KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CreationForm',
   props: {
-    articles: Array
+    formType: String
   },
   components: {
     Datepicker,
@@ -394,6 +437,7 @@ export default {
   },
   data () {
     return {
+      detailData: {},
       brandsList: [],
       tagsList: [],
       checkedIds: [],
@@ -401,6 +445,7 @@ export default {
       terracesList: [],
       kolsParams: {},
       kolsList: [],
+      priceList: [],
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -415,6 +460,7 @@ export default {
         img_url: '',
         target: {
           industries: '',
+          price: '',
           price_from: '',
           price_to: ''
         },
@@ -439,6 +485,8 @@ export default {
         const data = res.data
         this.brandsList = data.trademarks_list
         this.tagsList = data.tags_list
+        // this.priceList = data.prices_range
+        // console.log(this.priceList)
 
         let _terracesList = data.terraces_list
         _terracesList.forEach(item => {
@@ -459,6 +507,68 @@ export default {
         this.terracesList = _terracesList
       }
     },
+    getDetailData () {
+      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetDetailDataSucc)
+    },
+    handleGetDetailDataSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        // console.log(resData)
+        this.detailData = resData
+        this.submitData.name = resData.name
+        this.submitData.description = resData.description
+        this.submitData.trademark_id = resData.trademark_id
+        this.submitData.start_at = resData.start_at
+        this.submitData.end_at = resData.end_at
+        this.submitData.pre_kols_count = resData.pre_kols_count
+        this.submitData.pre_amount = resData.pre_amount
+        this.submitData.img_url = resData.img_url
+        this.submitData.target.industries = resData.targets_hash.industries
+        this.submitData.target.price_from = resData.targets_hash.price_from
+        this.submitData.target.price_to = resData.targets_hash.price_to
+        this.submitData.terraces = resData.terraces
+        this.submitData.selected_kols = resData.selected_kols
+        this.submitData.notice = resData.notice
+
+        let _terracesList = this.terracesList
+        _terracesList.forEach(item => {
+          resData.terraces.forEach(e => {
+            if (item.id == e.terrace_id) {
+              item.checked = true
+              item.val = e.exposure_value
+            }
+          })
+        })
+        // console.log(_terracesList)
+
+        let _tagsList = this.tagsList
+        let _checkedData = resData.targets_hash.industries
+        let _checkedArr = _checkedData.split(',')
+        let _checkedIds = []
+        let _checkedTags = []
+        _tagsList.forEach(item => {
+          _checkedArr.forEach(e => {
+            if (item.name == e) {
+              _checkedIds.push(item.id)
+              _checkedTags.push(item.name)
+            }
+          })
+        })
+
+        this.checkedTags = _checkedTags
+        // console.log(this.checkedTags)
+        this.checkedIds = _checkedIds
+        // console.log(this.checkedIds)
+
+        this.searchKolsCtrl()
+        // console.log(this.kolsList)
+      }
+    },
     searchKols (postUrl) {
       axios.post(postUrl, this.kolsParams, {
         headers: {
@@ -472,9 +582,22 @@ export default {
       console.log(resData)
       this.kolsList = []
       this.kolsList = resData.data
-      if (resData.data.length > 0) {
-        this.kolsList.forEach(item => {
-          item.checked = false
+
+      if (this.formType == 'create') {
+        if (resData.data.length > 0) {
+          this.kolsList.forEach(item => {
+            item.checked = false
+          })
+        }
+      }
+      if (this.formType == 'edit') {
+        let _selectedKols = this.submitData.selected_kols
+        _selectedKols.forEach(item => {
+          this.kolsList.forEach(e => {
+            if (item.plateform_uuid == e.profile_id) {
+              e.checked = true
+            }
+          })
         })
       }
     },
@@ -487,6 +610,7 @@ export default {
         industries: this.checkedTags,
         page_no: 0,
         page_size: 12,
+        // price: this.submitData.target.price,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
       }
@@ -599,9 +723,19 @@ export default {
         return false
       }
       this.canSubmit = false
-      axios.post(apiConfig.creationsUrl, {
-        'creation': this.submitData
-      }, {
+      let submitParams = {}
+      if (this.formType == 'create') {
+        submitParams = {
+          'creation': this.submitData
+        }
+      }
+      if (this.formType == 'edit') {
+        submitParams = {
+          'id': this.$route.params.id,
+          'creation': this.submitData
+        }
+      }
+      axios.post(apiConfig.creationsUrl, submitParams, {
         headers: {
           'Authorization': this.authorization
         }
@@ -642,6 +776,9 @@ export default {
   },
   mounted () {
     this.getBaseData()
+    if (this.formType == 'edit') {
+      this.getDetailData()
+    }
   },
   computed: {
     ...mapState(['authorization'])
@@ -662,7 +799,7 @@ export default {
     width: 150px;
   }
 }
-.campaign-create-container /deep/ .kols-list {
+.creation-form /deep/ .kols-list {
   padding: 24px 60px;
   font-size: 0;
   & > .kols-list-item {
@@ -670,5 +807,8 @@ export default {
     width: 33.33333%;
     padding: 0 10px;
   }
+}
+.pr0 {
+  padding-right: 0;
 }
 </style>
