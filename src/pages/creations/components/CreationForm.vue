@@ -1,16 +1,5 @@
 <template>
-  <div class="campaign-detail-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
-
-    <!-- <div class="panel default-panel mt20">
-      <div class="panel-body">
-        <status-area :statusData="detailData.status"></status-area>
-      </div>
-    </div> -->
-
+  <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
         <h5 class="title text-center">{{$t('lang.information')}}</h5>
@@ -18,8 +7,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-10">
               <input
                 type="text"
                 name="name"
@@ -33,8 +22,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-10">
               <input
                 type="text"
                 name="desc"
@@ -48,8 +37,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
+            <div class="col-sm-10">
               <select
                 name="brand"
                 class="form-control"
@@ -78,8 +67,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-10">
               <div class="row">
                 <div
                   v-for="item in terracesList"
@@ -127,8 +116,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-10">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
@@ -178,8 +167,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-10">
               <div class="input-group">
                 <datepicker
                   name="start_at"
@@ -208,8 +197,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-3">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
+            <div class="col-sm-4">
               <input
                 type="number"
                 name="kols_count"
@@ -222,7 +211,7 @@
               <div class="form-tips">{{$t('lang.campaigns.kolNumber.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <input
                 type="number"
                 name="pre_amount"
@@ -236,8 +225,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
+            <div class="col-sm-10">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
@@ -277,16 +266,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-8">
-              <!-- <select class="form-control">
-                <option value="">{{$t('lang.campaigns.price.placeholder')}}</option>
-                <option
-                  v-for="(item, index) in priceList"
-                  :key="index"
-                  :value="item[0]"
-                >{{item[1]}}</option>
-              </select> -->
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
+            <div class="col-sm-10">
               <div class="input-group">
                 <input
                   type="number"
@@ -312,32 +293,32 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-3">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
+            <div class="col-sm-4">
               <select class="form-control">
-                <option value="">{{$t('lang.campaigns.followerAge.placeholder')}}</option>
-                <option value="">10-20 岁</option>
-                <option value="">20-30 岁</option>
-                <option value="">30-40 岁</option>
-                <option value="">40-50 岁</option>
-                <option value="">50-60 岁</option>
-                <option value="">60 岁以上</option>
+                <option>{{$t('lang.campaigns.followerAge.placeholder')}}</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerAge.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <select class="form-control">
-                <option value="">{{$t('lang.campaigns.followerGender.placeholder')}}</option>
-                <option value="">男</option>
-                <option value="">女</option>
+                <option>{{$t('lang.campaigns.followerGender.placeholder')}}</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.followerGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-8">
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
+            <div class="col-sm-10">
               <input type="text" class="form-control" id="" :placeholder="$t('lang.campaigns.followerDistrict.placeholder')">
               <div class="form-tips">{{$t('lang.campaigns.followerDistrict.errorTips')}}</div>
             </div>
@@ -361,6 +342,24 @@
       @checkedKols="checkedKols"
     ></kols-list-panel>
 
+    <!-- <div class="row mt20">
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="为您推荐的大V"
+        ></kols-list-panel>
+      </div>
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="您可能感兴趣的大V"
+        ></kols-list-panel>
+      </div>
+      <div class="col-sm-4">
+        <kols-list-panel
+          title="您收藏的大V"
+        ></kols-list-panel>
+      </div>
+    </div> -->
+
     <div class="text-center create-btn-area">
       <button
         type="button"
@@ -378,29 +377,23 @@ import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
-import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
-// import StatusArea from './components/StatusArea'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'CreationEdit',
+  name: 'CreationForm',
+  props: {
+    articles: Array
+  },
   components: {
     Datepicker,
     TagsList,
-    CreateProcess,
     KolsListPanel,
-    // StatusArea,
     VueCoreImageUpload
   },
   data () {
     return {
-      processStatus: {
-        current: 1,
-        index: 0
-      },
-      detailData: {},
       brandsList: [],
       tagsList: [],
       checkedIds: [],
@@ -441,7 +434,7 @@ export default {
       }).then(this.handleGetBaseDataSucc)
     },
     handleGetBaseDataSucc (res) {
-      // console.log(res)
+      console.log(res)
       if (res.status == 200 && res.data) {
         const data = res.data
         this.brandsList = data.trademarks_list
@@ -466,68 +459,6 @@ export default {
         this.terracesList = _terracesList
       }
     },
-    getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
-        headers: {
-          'Authorization': this.authorization
-        }
-      }).then(this.handleGetDetailDataSucc)
-    },
-    handleGetDetailDataSucc (res) {
-      // console.log(res)
-      let resData = res.data
-      if (res.status == 200 && resData) {
-        // console.log(resData)
-        this.detailData = resData
-        this.submitData.name = resData.name
-        this.submitData.description = resData.description
-        this.submitData.trademark_id = resData.trademark_id
-        this.submitData.start_at = resData.start_at
-        this.submitData.end_at = resData.end_at
-        this.submitData.pre_kols_count = resData.pre_kols_count
-        this.submitData.pre_amount = resData.pre_amount
-        this.submitData.img_url = resData.img_url
-        this.submitData.target.industries = resData.targets_hash.industries
-        this.submitData.target.price_from = resData.targets_hash.price_from
-        this.submitData.target.price_to = resData.targets_hash.price_to
-        this.submitData.terraces = resData.terraces
-        this.submitData.selected_kols = resData.selected_kols
-        this.submitData.notice = resData.notice
-
-        let _terracesList = this.terracesList
-        _terracesList.forEach(item => {
-          resData.terraces.forEach(e => {
-            if (item.id == e.terrace_id) {
-              item.checked = true
-              item.val = e.exposure_value
-            }
-          })
-        })
-        // console.log(_terracesList)
-
-        let _tagsList = this.tagsList
-        let _checkedData = resData.targets_hash.industries
-        let _checkedArr = _checkedData.split(',')
-        let _checkedIds = []
-        let _checkedTags = []
-        _tagsList.forEach(item => {
-          _checkedArr.forEach(e => {
-            if (item.name == e) {
-              _checkedIds.push(item.id)
-              _checkedTags.push(item.name)
-            }
-          })
-        })
-
-        this.checkedTags = _checkedTags
-        // console.log(this.checkedTags)
-        this.checkedIds = _checkedIds
-        // console.log(this.checkedIds)
-
-        this.searchKolsCtrl()
-        // console.log(this.kolsList)
-      }
-    },
     searchKols (postUrl) {
       axios.post(postUrl, this.kolsParams, {
         headers: {
@@ -536,42 +467,20 @@ export default {
       }).then(this.handleSearchKolsSucc)
     },
     handleSearchKolsSucc (res) {
-      // console.log(res)
+      console.log(res)
       let resData = res.data
-      // console.log(resData)
+      console.log(resData)
       this.kolsList = []
       this.kolsList = resData.data
-
-      let _selectedKols = this.submitData.selected_kols
-      // if (_selectedKols.length > 0) {
-      //   _selectedKols.forEach(item => {
-      //     this.kolsList.forEach(e => {
-      //       if (item.plateform_uuid == e.profile_id) {
-      //         e.checked = true
-      //       }
-      //     })
-      //   })
-      // } else {
-      //   if (resData.data.length > 0) {
-      //     this.kolsList.forEach(item => {
-      //       item.checked = false
-      //     })
-      //   }
-      // }
-      // console.log(_selectedKols)
-      _selectedKols.forEach(item => {
-        this.kolsList.forEach(e => {
-          if (item.plateform_uuid == e.profile_id) {
-            e.checked = true
-          }
+      if (resData.data.length > 0) {
+        this.kolsList.forEach(item => {
+          item.checked = false
         })
-      })
-      console.log(this.kolsList)
+      }
     },
     searchKolsCtrl () {
       let _terraces = this.submitData.terraces
-      // console.log(_terraces)
-      // console.log(this.checkedTags)
+      console.log(_terraces)
       this.kolsParams = {
         start_date: this.submitData.start_at,
         end_date: this.submitData.start_end,
@@ -583,9 +492,9 @@ export default {
       }
 
       this.$validator.validateAll().then((msg) => {
-        // console.log(msg)
+        console.log(msg)
         if (msg) {
-          // console.log('验证通过')
+          console.log('验证通过')
           if (_terraces.length > 0) {
             let hasWechat = _terraces.some(item => {
               if (item.short_name == 'public_wechat_account') {
@@ -610,10 +519,11 @@ export default {
     },
     checkedKols (data) {
       let _ids = data.ids
-      // console.log(_ids)
+      console.log(_ids)
       let _kolsList = this.kolsList
       let _checkedKols = []
       let _kolItem
+
       _ids.forEach(item => {
         _kolsList.forEach(e => {
           if (e.profile_id == item) {
@@ -626,7 +536,7 @@ export default {
           }
         })
       })
-      // console.log(_checkedKols)
+      console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
@@ -646,7 +556,7 @@ export default {
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      // console.log(res)
+      console.log(res)
       this.submitData.img_url = res
     },
     imageuploading (res) {
@@ -662,7 +572,7 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      // console.log(_terraceItem)
+      console.log(_terraceItem)
       let result = _terraces.some(item => {
         if (item.terrace_id == id) {
           return true
@@ -682,7 +592,7 @@ export default {
           }
         }
       })
-      // console.log(this.submitData.terraces)
+      console.log(this.submitData.terraces)
     },
     doSubmit () {
       if (!this.canSubmit) {
@@ -690,7 +600,6 @@ export default {
       }
       this.canSubmit = false
       axios.post(apiConfig.creationsUrl, {
-        'id': this.$route.params.id,
         'creation': this.submitData
       }, {
         headers: {
@@ -699,10 +608,10 @@ export default {
       }).then(this.handleDoSubmitSucc)
     },
     handleDoSubmitSucc (res) {
-      // console.log(res)
+      console.log(res)
       if (res.status == 201) {
         let resData = res.data
-        // console.log(resData)
+        console.log(resData)
         this.$router.push('/creations/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
@@ -713,19 +622,19 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       _terraces.forEach(item => {
-        // console.log(item)
+        console.log(item)
         _terracesList.forEach(originalItem => {
           if (!!item && item.terrace_id == originalItem.id) {
             item.exposure_value = originalItem.val
           }
         })
       })
-      // console.log(this.submitData)
+      console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {
-        // console.log(msg)
+        console.log(msg)
         if (msg) {
-          // console.log('验证通过')
+          console.log('验证通过')
           this.doSubmit()
         }
       })
@@ -733,7 +642,6 @@ export default {
   },
   mounted () {
     this.getBaseData()
-    this.getDetailData()
   },
   computed: {
     ...mapState(['authorization'])
@@ -754,7 +662,7 @@ export default {
     width: 150px;
   }
 }
-.campaign-detail-container /deep/ .kols-list {
+.campaign-create-container /deep/ .kols-list {
   padding: 24px 60px;
   font-size: 0;
   & > .kols-list-item {

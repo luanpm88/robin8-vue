@@ -47,7 +47,8 @@
         </div>
         <!-- 没有品牌渲染提交接口 -->
         <div v-else>
-          <brand-submit :status='isHomeStatus' @childStatus='changeHomStatus'></brand-submit>
+          <!-- <brand-submit :status='isHomeStatus' @childStatus='changeHomStatus'></brand-submit> -->
+          <update-base-info @updateStatus="changeHomStatus"></update-base-info>
         </div>
       </div>
     </div>
@@ -63,7 +64,8 @@ import HomeBanner from './components/HomeBanner'
 import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
-import brandSubmit from '@/pages/settings/myCompetitionBrands/Create'
+import UpdateBaseInfo from './components/UpdateBaseInfo'
+// import brandSubmit from '@/pages/settings/myCompetitionBrands/Create'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
@@ -74,7 +76,8 @@ export default {
     HomeAnalytic,
     HomeRecommendedKols,
     HomeTopPosts,
-    brandSubmit
+    // brandSubmit,
+    UpdateBaseInfo
   },
   computed: {
      ...mapState(['authorization'])
@@ -109,7 +112,7 @@ export default {
         }
       }).then(function(res) {
         if (res.status === 200) {
-          if (res.data.competitors.length == 0) {
+          if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;

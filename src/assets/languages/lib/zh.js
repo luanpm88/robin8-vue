@@ -14,6 +14,57 @@ export const lang = {
   payment: '支付',
   information: '基本信息',
   submitBtn: '提交',
+  updateBaseInfo: {
+    base_info: {
+      title: '基本信息',
+      name: {
+        title: '名称',
+        placeholder: '请输入名称',
+        errorTips: '请输入名称'
+      },
+      campany_name: {
+        title: '公司名称',
+        placeholder: '请输入公司名称',
+        errorTips: '请输入公司名称'
+      },
+      email: {
+        title: '电子邮箱',
+        placeholder: '请输入电子邮箱',
+        errorTips: '请输入正确的电子邮箱'
+      },
+      mobile_number: {
+        title: '手机号码',
+        placeholder: '请输入手机号码',
+        errorTips: '请输入正确的手机号码'
+      }
+    },
+    my_brand: {
+      title: '我的品牌',
+      name: {
+        title: '品牌名称',
+        placeholder: '请输入品牌名称',
+        errorTips: '请输入品牌名称'
+      },
+      description: {
+        title: '品牌描述',
+        placeholder: '请输入品牌描述',
+        errorTips: '请输入品牌描述'
+      }
+    },
+    competitors: {
+      title: '竞争对手',
+      name: {
+        title: '竞争对手名称',
+        placeholder: '请输入竞争对手名称',
+        errorTips: '请输入竞争对手名称'
+      },
+      short_name: {
+        title: '竞争对手简称',
+        placeholder: '请输入竞争对手简称',
+        errorTips: '请输入竞争对手简称'
+      }
+    }
+  },
   campaigns: {
     campaignInfo: '活动基本信息',
     kolParticipate: 'KOL参与',
@@ -80,16 +131,17 @@ export const lang = {
       title: '价格要求',
       lowestPlaceholder: '最低价格',
       highestPlaceholder: '最高价格',
+      placeholder: '全部',
       errorTips: '请选择您期待的价格区间方便我们更精准的为您推荐KOL'
     },
     followerAge: {
       title: '粉丝年龄',
-      placeholder: '请选择期望的粉丝年龄',
+      placeholder: '全部',
       errorTips: '请选择期望的粉丝年龄'
     },
     followerGender: {
       title: '粉丝性别',
-      placeholder: '请选择粉丝性别',
+      placeholder: '全部',
       errorTips: '请选择粉丝性别'
     },
     followerDistrict: {

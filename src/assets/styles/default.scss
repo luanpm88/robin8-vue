@@ -88,6 +88,9 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
   &.align-baseline { align-items: baseline; }
   &.with-arr { padding-right: 30px;
     &:after { @include tail-arr; }
+    &.open:after {
+      @include transform(translateY(-50%) rotate(90deg));
+    }
   }
 }
 

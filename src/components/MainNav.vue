@@ -19,12 +19,20 @@
         <div
           v-else
           class="title-bar"
-          :class="[!!item.subNav && item.subNav.length > 0 ? 'with-arr' : '']"
+          :class="[
+            !!item.subNav && item.subNav.length > 0 ? 'with-arr' : '',
+            active && activeIndex == index ? 'open' : ''
+          ]"
+          @click="toggleActive(index)"
         >
           <div :class="'iconfont ' + item.icon"></div>
           <div class="title">{{$t('lang.' + item.title)}}</div>
         </div>
-        <div v-if="!!item.subNav && item.subNav.length > 0" class="sub-nav">
+        <div
+          v-if="!!item.subNav && item.subNav.length > 0"
+          class="sub-nav"
+          :class="[active && activeIndex == index ? 'active' : '']"
+        >
           <router-link
             v-for="(subItem, index) in item.subNav"
             :key="index"
@@ -106,7 +114,33 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      active: false,
+      activeIndex: ''
+    }
+  },
+  methods: {
+    getBreadcrumb () {
+      // this.brumblist = this.$route.matched
+      console.log(this.$route.path)
+      // this.$route.matched.forEach((item, index) => {
+      //   // 判断父级路由是否为空字符串或者meta是否为首页,直接复写路径到根目录
+      //   // 后面的就是判断路由和当前遍历的项目是否一致,是的话把标题的值给上
+      //   item.meta.breadcrumbName === '首页' ? item.path = '/' : this.$route.path === item.path ? this.title = item.meta.breadcrumbName : ''
+      // })
+    },
+    toggleActive (index) {
+      console.log(index)
+      this.activeIndex = index
+      this.active = !this.active
+    }
+  },
+  created () {
+    this.getBreadcrumb()
+  },
+  watch: {
+    $route () {
+      this.getBreadcrumb()
     }
   }
 }
@@ -135,6 +169,7 @@ export default {
         }
         &.with-arr:after {
           right: 20px;
+          @include transition(.4s);
         }
         &.active, &.router-link-active {
           .title {
@@ -144,6 +179,10 @@ export default {
         }
       }
       .sub-nav {
+        display: none;
+        &.active {
+          display: block;
+        }
         & > .item {
           display: block;
           height: $item-height;

@@ -12,20 +12,20 @@
         <div class="line-title">{{$t('lang.information')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.name}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.description}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.trademark_name}}</p>
             </div>
           </div>
@@ -34,20 +34,20 @@
         <div class="line-title">{{$t('lang.campaigns.campaignInfo')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-8">
               <div class="row">
                 <div
                   v-for="item in detailData.terraces"
                   :key="item.terrace_id"
                   class="col-sm-6"
                 >
-                  <div class="col-sm-2 text-center">
+                  <div class="col-sm-3 text-center">
                     <div class="check-icon checked">
                       <div :class="'iconfont ' + item.iconClass"></div>
                     </div>
                   </div>
-                  <div class="col-sm-10">
+                  <div class="col-sm-8">
                     <p class="form-control-static">{{item.name}}曝光值：{{item.exposure_value}}</p>
                   </div>
                 </div>
@@ -55,8 +55,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-8">
               <div class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="detailData.img_url" alt="" class="upload-img" />
@@ -65,26 +65,26 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.time_range}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.pre_kols_count}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.pre_amount}}</p>
             </div>
           </div>
           <div v-if="detailData.notice" class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.notice}}</p>
             </div>
           </div>
@@ -93,32 +93,32 @@
         <div class="line-title">{{$t('lang.campaigns.bigVRequirement')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.tags.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.tags.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.industries}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.price.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.price_range}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">18～40</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">女</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">北京 / 上海 / 深圳</p>
             </div>
           </div>
