@@ -147,7 +147,7 @@
                 <li>
                   <a-progress
                     type="circle"
-                    :percent="item.influence"
+                    :percent="item.influence / 10"
                     :width="100"
                     :strokeWidth="9"
                     strokeColor="#b37feb"
@@ -345,7 +345,7 @@ export default {
         if (element.description_raw.length > 60) {
           element.description_raw = element.description_raw.substr(0, 30) + '...'
         }
-        element.influence = parseInt(element.influence * 100);
+        element.influence = parseInt(element.influence * 1000);
         element.correlation = parseInt(element.correlation * 100);
         if (!element.pricing) {
           (element.pricing = {}), (element.pricing.direct_price = "N/A");

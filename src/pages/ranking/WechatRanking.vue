@@ -4,9 +4,9 @@
 
     <div class="container mt50 clearfix">
       <!-- <main-nav class="pull-left"></main-nav> -->
-      <div class="ranking-container pull-right">
+      <div class="ranking-container pull-right clearfix">
         <!-- left -->
-        <div class="ranking-left">
+        <div class="ranking-left col-sm-1">
           <h5>Industries</h5>
           <ul class="ranking-nav">
             <li
@@ -21,7 +21,7 @@
           </ul>
         </div>
         <!-- right -->
-        <div class="ranking-right">
+        <div class="ranking-right col-sm-11">
           <!-- top dec -->
           <div class="r-top clearfix">
             <p
@@ -55,7 +55,16 @@
             <div class="r8-loading" v-if="isTableLoding">
               <a-spin tip="Loading..."/>
             </div>
-            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList" :pagination="false" :scroll="{ y: 240 }"/>
+            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
+            @change="handleTableChange" :pagination="false" :scroll="{ y: 550 }">
+              <template slot="profileDec" slot-scope="dec">
+                <div class="r-tableThirtyList-name">
+                  <img :src="dec.img" alt="">
+                  <p>{{dec.name}}</p>
+                  <p>{{dec.id}}</p>
+                </div>
+              </template>
+            </a-table>
           </div>
         </div>
       </div>
@@ -110,6 +119,9 @@ export default {
     this.RankingDate(totalParams);
   },
   methods: {
+    handleTableChange() {
+
+    },
     // ranking 在调用right 两个列表之前 获取最新的report_date
     RankingDate(params) {
       const _that = this;
@@ -171,13 +183,20 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('getRankingThirtyList', res)
-          if ((res.status = 200)) {
-            // _that.isTableLoding = false;
-            // this.isTable = true;
-            // // console.log('我是30lit');
-            this.tableThirtyList = res.data;
-            // console.log(this.tableThirtyList);
+          // console.log(res);
+          if ((res.status === 200)) {
+            _that.isTableLoding = false;
+            res.data.forEach((element, index) => {
+              element.profileDec = {
+                img: '',
+                name: '',
+                id: '',
+              }
+              element.profileDec.img = element.avatar_url;
+              element.profileDec.name = element.profile_name;
+              element.profileDec.id = element.weixin_id;
+            });
+            _that.tableThirtyList = res.data;
           }
         })
         .catch(function(error) {
@@ -194,6 +213,8 @@ export default {
       this.isLoding = true;
       // right top list
       this.WeChatTopList(totalParams);
+      // 30 list
+      this.WeChatThirtyList(totalParams);
     },
     // 跳转benchmark页面
     lookBenchmark() {
