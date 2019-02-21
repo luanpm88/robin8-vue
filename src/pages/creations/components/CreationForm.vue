@@ -184,29 +184,22 @@
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-8">
-              <div class="input-group">
-                <datepicker
-                  name="start_at"
-                  input-class="form-control"
-                  format="yyyy-MM-dd"
-                  :placeholder="$t('lang.campaigns.time.startPlaceholder')"
-                  :open-date="new Date()"
-                  v-model="submitData.start_at"
-                  v-validate="'required'"
-                ></datepicker>
-                <span class="input-group-addon">-</span>
-                <datepicker
-                  name="end_at"
-                  input-class="form-control"
-                  format="yyyy-MM-dd"
-                  :placeholder="$t('lang.campaigns.time.endPlaceholder')"
-                  v-model="submitData.end_at"
-                  v-validate="'required'"
-                ></datepicker>
-              </div>
+              <datepicker
+                name="campaignTime"
+                range
+                type="datetime"
+                lang="en"
+                format="YYYY-MM-DD HH:mm:ss"
+                input-class="form-control"
+                :placeholder="$t('lang.campaigns.time.startPlaceholder')"
+                v-model="campaignTime"
+                v-validate="'required'"
+                :minute-step="10"
+                confirm
+              ></datepicker>
               <div
                 class="form-tips text-right danger"
-                v-show="errors.has('start_at') || errors.has('end_at')"
+                v-show="errors.has('campaignTime')"
               >
                 {{$t('lang.campaigns.time.errorTips')}}
               </div>
@@ -418,7 +411,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import Datepicker from 'vuejs-datepicker'
+import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
 import KolsListPanel from './KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
@@ -449,6 +442,7 @@ export default {
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
+      campaignTime: '',
       submitData: {
         name: '',
         description: '',
@@ -518,7 +512,7 @@ export default {
       // console.log(res)
       let resData = res.data
       if (res.status == 200 && resData) {
-        // console.log(resData)
+        console.log(resData)
         this.detailData = resData
         this.submitData.name = resData.name
         this.submitData.description = resData.description
@@ -534,6 +528,9 @@ export default {
         this.submitData.terraces = resData.terraces
         this.submitData.selected_kols = resData.selected_kols
         this.submitData.notice = resData.notice
+        this.campaignTime = []
+        this.campaignTime[0] = resData.start_at
+        this.campaignTime[1] = resData.end_at
 
         let _terracesList = this.terracesList
         _terracesList.forEach(item => {
@@ -605,8 +602,10 @@ export default {
       let _terraces = this.submitData.terraces
       console.log(_terraces)
       this.kolsParams = {
-        start_date: this.submitData.start_at,
-        end_date: this.submitData.start_end,
+        // start_date: this.submitData.start_at,
+        // end_date: this.submitData.start_end,
+        start_date: this.campaignTime[0],
+        end_date: this.campaignTime[1],
         industries: this.checkedTags,
         page_no: 0,
         page_size: 12,
@@ -763,6 +762,10 @@ export default {
           }
         })
       })
+
+      this.submitData.start_at = this.campaignTime[0]
+      this.submitData.end_at = this.campaignTime[1]
+
       console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {

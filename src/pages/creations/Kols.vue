@@ -141,7 +141,7 @@ export default {
     },
     selectKol (data) {
       console.log(data)
-      let _price = parseInt(data.price)
+      let _price = parseFloat(data.price)
       let _id = parseInt(data.id)
       let _kolsCheckedIds = this.kolsCheckedIds
       let _index = _kolsCheckedIds.indexOf(_id)

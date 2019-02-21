@@ -132,6 +132,10 @@ input[type=radio]:checked:before { content: $icon-radioed; }
   &.radius-panel { border-radius: 10px; overflow: hidden; }
 }
 
+/*datetime styles*/
+.mx-calendar-icon { height: auto; }
+.mx-datepicker { width: 100%; }
+
 /*page styles begin && class reset begin*/
 .pull-right { float: right !important; }
 .pull-left { float: left !important; }
