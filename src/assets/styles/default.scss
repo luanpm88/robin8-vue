@@ -133,9 +133,9 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 }
 
 /*datetime styles*/
-.mx-calendar-icon { height: auto; }
-.mx-datepicker { width: 100%; }
-.mx-datepicker-range { width: 100%; }
+.mx-calendar-icon { height: auto !important; }
+.mx-datepicker { width: 100% !important; }
+.mx-datepicker-range { width: 100% !important; }
 
 /*page styles begin && class reset begin*/
 .pull-right { float: right !important; }
