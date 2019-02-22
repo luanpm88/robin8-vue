@@ -261,16 +261,16 @@ export default {
     },
     // 跳转benchmark页面
     lookBenchmark() {
-      this.$router.push({
-        path: '/ranking/BenchMark',
-        name: 'benchMark',
-        params: {
-          industry: totalParams.industry,
-          no_of_days: totalParams.no_of_days,
-          // report_date: this.refreshDate
-          report_date: totalParams.report_date
-        },
-      });
+      // this.$router.push({
+      //   path: '/ranking/BenchMark',
+      //   name: 'benchMark',
+      //   params: {
+      //     industry: totalParams.industry,
+      //     no_of_days: totalParams.no_of_days,
+      //     // report_date: this.refreshDate
+      //     report_date: totalParams.report_date
+      //   },
+      // });
     },
     // 跳转detail
     openDetails(item) {
