@@ -53,9 +53,9 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
+import KolItem from '@components/KolItem'
 import CreateProcess from './components/CreateProcess'
 import StatusArea from './components/StatusArea'
-import KolItem from './components/KolItem'
 import { mapState } from 'vuex'
 
 export default {

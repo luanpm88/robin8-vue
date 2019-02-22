@@ -9,7 +9,7 @@
 import Breadcrumb from '@components/Breadcrumb'
 
 export default {
-  name: 'ContainerHeader',
+  name: 'CampaignContainerHeader',
   components: {
     Breadcrumb
   },

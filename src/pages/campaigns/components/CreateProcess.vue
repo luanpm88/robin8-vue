@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'CreationCreateProcess',
+  name: 'CampaignCreateProcess',
   props: {
     renderData: Object
   }

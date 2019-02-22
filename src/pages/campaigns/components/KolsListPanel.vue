@@ -27,10 +27,10 @@
 
 <script>
 import commonJs from '@javascripts/common.js'
-import KolsListItem from './KolsListItem'
+import KolsListItem from '@components/KolsListItem'
 
 export default {
-  name: 'KolsListPanel',
+  name: 'CampaignKolsListPanel',
   components: {
     KolsListItem
   },

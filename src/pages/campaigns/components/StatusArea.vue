@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'CreationStatusArea',
+  name: 'CampaignStatusArea',
   props: {
     statusData: String
   },

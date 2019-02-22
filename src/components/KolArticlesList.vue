@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'ArticlesList',
+  name: 'KolArticlesList',
   props: {
     articles: Array
   },

@@ -63,7 +63,7 @@ import axios from "axios"
 import apiConfig from "@/config"
 import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
-import KolsListItem from "@/pages/creations/components/KolsListItem"
+import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
 import { Spin} from "ant-design-vue"
 export default {
