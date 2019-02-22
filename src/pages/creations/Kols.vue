@@ -20,21 +20,21 @@
           @changeTab="changeTab"
         >
           <div class="kols-list-container">
-            <kol-item
-              v-if="currentList.length > 0"
-              v-for="item in currentList"
-              :key="item.profile.creation_selected_kol_id"
-              :renderData="item"
-              :checkedIds="kolsCheckedIds"
-              @selectKol="selectKol"
-            ></kol-item>
-
+            <div v-if="currentList.length > 0">
+              <kol-item
+                v-for="item in currentList"
+                :key="item.profile.creation_selected_kol_id"
+                :renderData="item"
+                :checkedIds="kolsCheckedIds"
+                @selectKol="selectKol"
+              ></kol-item>
+            </div>
             <div v-else class="empty-area text-center">暂无内容</div>
           </div>
         </default-tabs>
       </div>
 
-      <div class="panel-foot clearfix">
+      <div v-if="currentList.length > 0 && tabIndex == 0" class="panel-foot clearfix">
         <div class="select-statistics pull-left">微博总曝光值：<span class="num">0</span> | 微信总曝光值：<span class="num">0</span> | 总报价：<span class="num">{{totalPrice}}</span></div>
         <button
           type="button"
