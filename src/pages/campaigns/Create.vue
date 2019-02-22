@@ -256,7 +256,7 @@
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-10">
               <div class="input-group">
-                <datepicker
+                <!-- <datepicker
                   name="start_at"
                   input-class="form-control"
                   format="yyyy-MM-dd"
@@ -272,7 +272,7 @@
                   :placeholder="$t('lang.campaigns.time.endPlaceholder')"
                   v-model="submitData.end_at"
                   v-validate="'required'"
-                ></datepicker>
+                ></datepicker> -->
               </div>
               <div
                 class="form-tips text-right danger"
@@ -336,7 +336,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import Datepicker from 'vuejs-datepicker'
+// import Datepicker from 'vuejs-datepicker'
 import TagsList from '@components/TagsList'
 import CreateProcess from './components/CreateProcess'
 import KolsListPanel from './components/KolsListPanel'
@@ -346,7 +346,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'CampaignCreate',
   components: {
-    Datepicker,
+    // Datepicker,
     TagsList,
     CreateProcess,
     KolsListPanel,

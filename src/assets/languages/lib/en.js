@@ -88,18 +88,19 @@ export const lang = {
     },
     platform: {
       title: 'Campaign platform',
-      placeholder: '',
-      errorTips: ''
+      placeholder: 'please fill in the exposure value',
+      errorTips: 'please select the platform'
     },
     picture: {
       title: 'Campaign picture',
       placeholder: '',
-      errorTips: ''
+      errorTips: 'please upload an image'
     },
     time: {
       title: 'Campaign time',
       startPlaceholder: 'select start time',
       endPlaceholder: 'select end time',
+      placeholder: 'please select the campaign time',
       errorTips: 'please select the right campaign time'
     },
     kolNumber: {
