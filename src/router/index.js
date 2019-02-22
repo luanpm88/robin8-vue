@@ -32,6 +32,7 @@ import MyBrandsCreate from '@/pages/settings/myBrands/Create'
 import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
 import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
 import WechatRanking from '@/pages/ranking/WechatRanking'
+import BenchMark from '@/pages/ranking/BenchMark'
 
 Vue.use(Router)
 
@@ -318,6 +319,15 @@ export default new Router({
       component: WechatRanking,
       meta: {
         title: 'WechatRanking',
+        auth: true
+      }
+    },
+    {
+      path: '/ranking/BenchMark',
+      name: 'benchMark',
+      component: BenchMark,
+      meta: {
+        title: 'benchMark',
         auth: true
       }
     }

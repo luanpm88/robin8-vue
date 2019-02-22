@@ -1,3 +1,8 @@
+import echarts from 'echarts'
+let dataList = [
+  [[26424, 75.7, 57110117, 'United Kingdom', 1990], [37062, 75.4, 252847810, 'United States', 1990]],
+  [[19360, 76.5, 78665830, 'Turkey', 2015], [38225, 81.4, 64715810, 'United Kingdom', 2015], [53354, 79.1, 321773631, 'United States', 2015]]
+];
 const MockData = {
   trendOptions: {
     tooltip: {
@@ -456,7 +461,7 @@ const MockData = {
       title: 'Total Post Count',
       dataIndex: 'doc_count',
       width: '10%'
-    },{
+    }, {
       title: 'Headlines',
       dataIndex: 'headline_count'
     }, {
@@ -465,7 +470,7 @@ const MockData = {
     }, {
       title: 'Max Read Count',
       dataIndex: 'max_reads'
-    },{
+    }, {
       title: 'Avg Read Count',
       dataIndex: 'avg_reads'
     }, {
@@ -474,19 +479,132 @@ const MockData = {
     }, {
       title: 'Max Like Count',
       dataIndex: 'max_likes'
-    },{
+    }, {
       title: 'Avg Like Count',
       dataIndex: 'avg_likes'
-    },{
+    }, {
       title: 'Total Influence',
       dataIndex: 'total_post_influence'
     }, {
       title: 'Max Post Influence',
       dataIndex: 'max_post_influence'
-    },{
+    }, {
       title: 'Avg Post influence',
       dataIndex: 'avg_post_influence'
     }]
   },
+  // weixin benchMark
+  benchOneOptions: {
+    title: {
+      text: ''
+    },
+    legend: {
+      x: 'center',
+      y: 'bottom',
+      icon: "rect"
+    },
+    tooltip : {
+      trigger: 'Axis',
+      formatter: '{a}: <br> Reads:' + '{b}<br>' + 'Likes: {c1}'
+    },
+    grid: {
+      top: "10%",
+      left: "10%",
+      right: "10%",
+      bottom: "25%",
+      containLabel: true
+    },
+    xAxis: {
+      name: "Reads",
+      nameLocation: "middle",
+      nameTextStyle: {
+        fontSize: 16,
+        padding: [20, 0, 0, 0]
+      },
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    yAxis: {
+      name: "Likes",
+      nameLocation: "middle",
+      nameTextStyle: {
+        fontSize: 16,
+        padding: [0, 0, 45, 0]
+      },
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      scale: true
+    },
+    series: [],
+  },
+  benchmarkColor: {
+    blue_top_20_colors: [
+      "#d0dafe",
+      "#b0c0fd",
+      "#92a9fc",
+      "#8da0fc",
+      "#7592fb",
+      "#587bf8",
+      "#5077fb",
+      "#5572fa",
+      "#4f6efb",
+      "#5070ec",
+      "#4762db",
+      "#3d54cb",
+      "#2c3bae",
+      "#7a88c9",
+      "#5d6dbe",
+      "#4054b2",
+      "#3a4ca8",
+      "#31429d",
+      "#293891",
+      "#1b277c",
+      "#ff9e94",
+      "#557755",
+      "#D8BFD8",
+      "#DDA0DD",
+      "#EE82EE",
+      "#DA70D6",
+      "#FF00FF",
+      "#FF00FF",
+      "#BA55D3",
+      "#9370DB",
+      "#8A2BE2",
+      "#9400D3"
+    ],
+  }
 }
 export default MockData;

@@ -26,7 +26,7 @@
           <div class="r-top clearfix">
             <p
               class="r-top-dec col-sm-8"
-            >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{startDate}} to {{endDate}})</p>
+            >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{startDate}})</p>
             <p class="r-top-right col-sm-4">
               <span>7 | 14 | 21</span>
               <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
@@ -57,10 +57,13 @@
             <div class="r8-loading" v-if="isTableLoding">
               <a-spin tip="Loading..."/>
             </div>
-            <a-table v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
-            @change="handleTableChange" :pagination="false" :scroll="{ y: 550 }">
+            <a-table
+            v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
+            @change="handleTableChange"
+            :pagination="false" :scroll="{ y: 550 }">
               <template slot="profileDec" slot-scope="dec">
-                <div class="r-tableThirtyList-name">
+                <div class="r-tableThirtyList-name" 
+                @click="rowClick(dec)">
                   <img :src="dec.img" alt="">
                   <p>{{dec.name}}</p>
                   <p>{{dec.id}}</p>
@@ -106,23 +109,58 @@ export default {
       endDate: commonJs.cPastTwentyOneDays,
       startDate: commonJs.cPastOneday,
       topTittle: "Top 30 KOLs",
-      topTittleIndustry: totalParams.industry,
+      topTittleIndustry: '',
       tableTopList: [],
       tableThirtyList: [],
       isTopLoading: true,
       isTableLoding: true,
       isTable: false,
       columns: totalDataJS.ranking.thirtyColums,
-      TableData: []
+      TableData: [],
+      totalKeywords: ''
     };
   },
   created() {
+    this.topTittleIndustry = totalParams.industry;
+    this.rankSideList.forEach((item, index) => {
+      if (item.value === this.topTittleIndustry) {
+        this.iscur = index;
+      }
+    })
     // 获取最新的report_date
     this.RankingDate(totalParams);
   },
   methods: {
     handleTableChange() {
 
+    },
+    // 获取keyword
+    getBaseData () {
+      const _that = this
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': _that.authorization
+        }
+      }).then(function(res) {
+        if (res.status === 200) {
+          if (!res.data.competitors.length == 0) {
+            res.data.trademarks_list.forEach(element => {
+              if (element.status === 1) {
+                _that.totalKeywords = element.name;
+              }
+            });
+          }
+        }
+      })
+    },
+    beforeRouteLeave(to, from, next) {
+      // 判断是下一个路由是不是进入到详情页
+      if (to.name === 'KolDetail') {
+        this.$route.meta.keepAlive = true
+      } else {
+        this.$route.meta.keepAlive = false
+      }
+      next();
     },
     // ranking 在调用right 两个列表之前 获取最新的report_date
     RankingDate(params) {
@@ -159,6 +197,7 @@ export default {
         })
         .then(function(res) {
           // console.log('topList', res);
+          _that.tableTopList = [];
           if ((res.status = 200)) {
             _that.isTopLoading = false;
             _that.tableTopList.push(
@@ -194,10 +233,12 @@ export default {
                 img: '',
                 name: '',
                 id: '',
+                profile_id: ''
               }
               element.profileDec.img = element.avatar_url;
               element.profileDec.name = element.profile_name;
               element.profileDec.id = element.weixin_id;
+              element.profileDec.profile_id = element.profile_id;
             });
             _that.tableThirtyList = res.data;
           }
@@ -210,25 +251,52 @@ export default {
       this.iscur = index;
       totalParams.industry = currentList.value;
       this.topTittleIndustry = currentList.value;
-      totalParams.report_date = this.refreshDate;
       this.tableTopList = [];
       this.tableThirtyList = [];
       this.isLoding = true;
       this.isTable = false;
       this.isTableLoding = true;
-      // right top list
-      this.WeChatTopList(totalParams);
-      // 30 list
-      this.WeChatThirtyList(totalParams);
+      // 获取最新的report_date
+      this.RankingDate(totalParams);
     },
     // 跳转benchmark页面
     lookBenchmark() {
-      // this.$router.push({
-      // });
-    }
-  },
-  // 跳转detail
-  openDetails(row) {}
+      this.$router.push({
+        path: '/ranking/BenchMark',
+        name: 'benchMark',
+        params: {
+          industry: totalParams.industry,
+          no_of_days: totalParams.no_of_days,
+          // report_date: this.refreshDate
+          report_date: totalParams.report_date
+        },
+      });
+    },
+    // 跳转detail
+    openDetails(item) {
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+          type: 1,
+          brand_keywords: this.totalKeywords
+        }
+      });
+    },
+    // 行点击跳转detail
+    rowClick(dec) {
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: dec.profile_id,
+          type: 1,
+          brand_keywords: this.totalKeywords
+        }
+      });
+    },
+  }
 };
 </script>
 

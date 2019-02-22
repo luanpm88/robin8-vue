@@ -157,6 +157,12 @@ const config = {
 
   // WeChatThirtyList
   WeChatThirtyList: `${searchHost}/price/kol/ranking?${searchHostKey}`,
+
+  // benchMark
+  // weixin benchMark
+  weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
+
+  weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
 }
 
 module.exports = config
