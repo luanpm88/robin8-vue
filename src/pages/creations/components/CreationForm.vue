@@ -375,7 +375,11 @@
       class="mt20"
       title="为您推荐的大V"
       :kolsList="kolsList"
+      :kolsPage="kolsPage"
+      :kolsPerPage="kolsPerPage"
+      :kolsTotal="kolsTotal"
       @checkedKols="checkedKols"
+      @changeKolsPage="changeKolsPage"
     ></kols-list-panel>
 
     <!-- <div class="row mt20">
@@ -462,6 +466,9 @@ export default {
         selected_kols: [],
         notice: ''
       },
+      kolsPage: 0,
+      kolsPerPage: 12,
+      kolsTotal: 0,
       canSubmit: true
     }
   },
@@ -579,6 +586,7 @@ export default {
       console.log(resData)
       this.kolsList = []
       this.kolsList = resData.data
+      this.kolsTotal = resData.total_record_count
 
       if (this.formType == 'create') {
         if (resData.data.length > 0) {
@@ -607,13 +615,14 @@ export default {
         start_date: this.campaignTime[0],
         end_date: this.campaignTime[1],
         industries: this.checkedTags,
-        page_no: 0,
-        page_size: 12,
+        page_no: this.kolsPage,
+        page_size: this.kolsPerPage,
         // price: this.submitData.target.price,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
       }
 
+      this.kolsList = []
       this.$validator.validateAll().then((msg) => {
         console.log(msg)
         if (msg) {
@@ -639,6 +648,11 @@ export default {
           }
         }
       })
+    },
+    changeKolsPage (data) {
+      console.log(data.page)
+      this.kolsPage = data.page - 1
+      this.searchKolsCtrl()
     },
     checkedKols (data) {
       let _ids = data.ids

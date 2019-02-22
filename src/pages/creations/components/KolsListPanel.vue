@@ -18,9 +18,14 @@
 
       <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
 
-      <!-- <div v-if="kolsList.length >= 12" class="btn-area">
-        <button type="button" class="btn btn-blue btn-outline btn-sm" @click="">下一页</button>
-      </div> -->
+      <div class="btn-area">
+        <a-pagination
+          :defaultCurrent="currentPage"
+          :defaultPageSize="kolsPerPage"
+          :total="kolsTotal"
+          @change="onPageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -36,7 +41,10 @@ export default {
   },
   props: {
     title: String,
-    kolsList: Array
+    kolsList: Array,
+    kolsPage: Number,
+    kolsPerPage: Number,
+    kolsTotal: Number
   },
   data () {
     return {
@@ -44,7 +52,8 @@ export default {
       kolHasMsg: false,
       kolHasChecked: true,
       kols: [],
-      checkedIds: []
+      checkedIds: [],
+      currentPage: 0
     }
   },
   methods: {
@@ -81,10 +90,17 @@ export default {
       })
       console.log(this.kols)
       console.log(this.checkedIds)
+    },
+    onPageChange (page) {
+      this.$emit('changeKolsPage', {
+        'page': page
+      })
     }
   },
   created () {
     this.renderData(this.kolsList)
+    this.currentPage = this.kolsPage + 1
+    console.log(this.kolsTotal)
   },
   watch: {
     kolsList (newVal, oldVal) {

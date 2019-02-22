@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import { Pagination } from 'ant-design-vue'
 import store from './store'
 import "ant-design-vue/lib/table/style/css";
 import '@javascripts/validate.js'
@@ -21,6 +22,7 @@ import '@styles/defaultAnt.scss'
 import '@styles/home.scss'
 
 Vue.use(VueI18n)
+Vue.use(Pagination)
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
