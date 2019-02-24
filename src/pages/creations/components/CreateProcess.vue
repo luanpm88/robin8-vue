@@ -10,7 +10,7 @@
           }"
         >
           <div class="num">1</div>
-          <div class="title">{{$t('lang.campaigns.campaignInfo')}}</div>
+          <div class="title">{{$t('lang.creations.campaignInfo')}}</div>
         </div>
         <div
           :class="{
@@ -20,7 +20,7 @@
           }"
         >
           <div class="num">2</div>
-          <div class="title">{{$t('lang.campaigns.kolParticipate')}}</div>
+          <div class="title">{{$t('lang.creations.kolParticipate')}}</div>
         </div>
         <div
           :class="{
@@ -40,7 +40,7 @@
           }"
         >
           <div class="num">4</div>
-          <div class="title">{{$t('lang.campaigns.collaborationCompleted')}}</div>
+          <div class="title">{{$t('lang.creations.collaborationCompleted')}}</div>
         </div>
       </div>
     </div>

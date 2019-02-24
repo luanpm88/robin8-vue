@@ -2,7 +2,7 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">推广简介</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionDesc')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -11,14 +11,19 @@
             <div class="col-sm-8">
               <input
                 type="text"
-                name="name"
+                name="link"
                 class="form-control"
-                :class="[errors.has('name') ? 'danger' : '']"
+                :class="[errors.has('link') ? 'danger' : '']"
                 v-model="submitData.name"
                 :placeholder="$t('lang.campaigns.link.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.link.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('link')"
+              >
+                {{$t('lang.campaigns.link.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -33,7 +38,12 @@
                 :placeholder="$t('lang.campaigns.name.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.name.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('name')"
+              >
+                {{$t('lang.campaigns.name.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -48,27 +58,12 @@
                 :placeholder="$t('lang.campaigns.description.placeholder')"
                 v-validate="'required'"
               >
-              <div class="form-tips">{{$t('lang.campaigns.description.errorTips')}}</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-8">
-              <select
-                name="brand"
-                class="form-control"
-                :class="[errors.has('brand') ? 'danger' : '']"
-                v-model="submitData.trademark_id"
-                v-validate="'required'"
+              <div
+                class="form-tips danger"
+                v-show="errors.has('desc')"
               >
-                <option value="">{{$t('lang.campaigns.brandName.placeholder')}}</option>
-                <option
-                  v-for="item in brandsList"
-                  :key="item.id"
-                  :value="item.id"
-                >{{item.name}}</option>
-              </select>
-              <div class="form-tips">{{$t('lang.campaigns.brandName.errorTips')}}</div>
+                {{$t('lang.campaigns.description.errorTips')}}
+              </div>
             </div>
           </div>
 
@@ -81,6 +76,20 @@
                   <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
+              <!-- <vue-core-image-upload
+                :class="['upload-img-btn', 'iconfont', 'icon-image']"
+                crop="local"
+                crop-ratio="4:3"
+                @imageuploaded="imageuploaded"
+                @imageuploading="imageuploading"
+                inputOfFile="image"
+                text=""
+                :max-file-size="5242880"
+                :compress="30"
+                :max-width="200"
+                input-accept="image/*"
+                :url="uploadImageUrl">
+              </vue-core-image-upload> -->
               <vue-core-image-upload
                 v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
@@ -105,7 +114,7 @@
                 class="form-tips danger"
                 v-show="errors.has('img_url')"
               >
-                {{ errors.first('img_url') }}
+                {{$t('lang.campaigns.picture.errorTips')}}
               </div>
             </div>
           </div>
@@ -115,19 +124,30 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">推广预算</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionBudget')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">总预算：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}：</div>
             <div class="col-sm-3">
               <div class="input-group">
                 <span class="input-group-addon iconfont icon-subtract"></span>
-                <input type="text" class="form-control" />
+                <input
+                  name="allBudget"
+                  type="number"
+                  class="form-control text-center"
+                  min="500"
+                  v-validate="'required'"
+                />
                 <span class="input-group-addon iconfont icon-add"></span>
               </div>
-              <div class="form-tips">最低费用500元</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('allBudget')"
+              >
+                最低费用500元
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +156,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">推广详情</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionDetail')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -145,13 +165,13 @@
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>分享到朋友圈</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>分享到微博</span>
                   </label>
@@ -165,19 +185,19 @@
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>按照点击奖励KOL</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>按照转发奖励KOL</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>按照完成任务奖励KOL</span>
                   </label>
@@ -186,13 +206,13 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>按照转发奖励KOL</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>按照完成任务奖励KOL</span>
                   </label>
@@ -206,19 +226,19 @@
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>需要用户上传1张图片</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>需要用户上传2张图片</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
-                  <label for="">
+                  <label class="ctrl-label">
                     <input type="radio" />
                     <span>需要用户上传3张图片</span>
                   </label>
@@ -243,7 +263,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">推广时间</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionTime')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -277,10 +297,93 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">KOL选择</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.selectKols')}}</h5>
       </div>
       <div class="panel-body">
-        <div class="form-horizontal campaign-create-form"></div>
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <tags-list
+              :renderData="tagsList"
+              :checkedIds="checkedIds"
+              @checkTag="checkTag"
+            ></tags-list>
+            <input
+              type="hidden"
+              name="tags"
+              v-model="submitData.target.industries"
+              v-validate="'required'"
+            >
+            <div
+              class="form-tips danger"
+              v-show="errors.has('tags')"
+            >
+              {{$t('lang.campaigns.tags.errorTips')}}
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-4">
+              <select
+                name=""
+                class="form-control"
+              >
+                <option value=""></option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
+            </div>
+            <div class="col-sm-4">
+              <select
+                name=""
+                class="form-control"
+              >
+                <option value=""></option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}：</div>
+            <div class="col-sm-3">
+              <select class="form-control">
+                <option value="">{{$t('lang.campaigns.kolAge.placeholder')}}</option>
+                <option value="1">10-20 岁</option>
+                <option value="2">20-30 岁</option>
+                <option value="3">30-40 岁</option>
+                <option value="4">40-50 岁</option>
+                <option value="5">50-60 岁</option>
+                <option value="6">60 岁以上</option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolAge.errorTips')}}</div>
+            </div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}：</div>
+            <div class="col-sm-3">
+              <select class="form-control">
+                <option value="">{{$t('lang.campaigns.kolGender.placeholder')}}</option>
+                <option value="1">男</option>
+                <option value="0">女</option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolGender.errorTips')}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}：</div>
+            <div class="col-sm-3">
+              <select
+                name="push"
+                class="form-control"
+              >
+                <option value="">允许补推</option>
+                <option value="">禁止补推</option>
+              </select>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('push')"
+              >
+                {{$t('lang.campaigns.kolPush.errorTips')}}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

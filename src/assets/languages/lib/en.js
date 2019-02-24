@@ -69,6 +69,94 @@ export const lang = {
     campaignInfo: 'Campaign Information',
     kolParticipate: 'KOL Participate',
     collaborationCompleted: 'Collaboration Completed',
+    promotionDesc: '推广简介',
+    promotionBudget: '推广预算',
+    promotionDetail: '推广详情',
+    promotionTime: '推广时间',
+    selectKols: 'KOL选择',
+    serchBtn: '搜索大V',
+    link: {
+      title: '活动链接',
+      placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
+      errorTips: '请填写活动链接'
+    },
+    name: {
+      title: '活动标题',
+      placeholder: '请概括您的推广，让您的内容一目了然',
+      errorTips: '请填写活动标题'
+    },
+    description: {
+      title: '活动简介',
+      placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
+      errorTips: '请填写活动相关介绍'
+    },
+    picture: {
+      title: '活动图片',
+      placeholder: '',
+      errorTips: '请上传活动图片'
+    },
+    allBudget: {
+      title: '总预算',
+      placeholder: '请填写活动预算',
+      errorTips: '请填写活动预算'
+    },
+    platform: {
+      title: '推广平台选择',
+      placeholder: '请选择推广平台',
+      errorTips: '请选择推广平台'
+    },
+    mode: {
+      title: '奖励模式选择',
+      placeholder: '请选择奖励模式',
+      errorTips: '请选择奖励模式'
+    },
+    pictureNumber: {
+      title: '示例图片数量',
+      placeholder: '请选择示例图片数量',
+      errorTips: '请选择示例图片数量'
+    },
+    budget: {
+      title: '单次预算',
+      placeholder: '请填写单次预算',
+      errorTips: '请填写单次预算'
+    },
+    time: {
+      title: '推广时间',
+      startPlaceholder: '选择开始时间',
+      endPlaceholder: '选择结束时间',
+      placeholder: '请选择您预期的推广时间',
+      errorTips: '请选择您预期的推广时间'
+    },
+    tags: {
+      title: '分类',
+      placeholder: '',
+      errorTips: '请选择一个分类'
+    },
+    kolDistrict: {
+      title: '地域',
+      placeholder: '请选择地域',
+      errorTips: '请选择地域'
+    },
+    kolAge: {
+      title: '年龄',
+      placeholder: '全部',
+      errorTips: '请选择年龄'
+    },
+    kolGender: {
+      title: '性别',
+      placeholder: '全部',
+      errorTips: '请选择性别'
+    },
+    kolPush: {
+      title: '补推',
+      placeholder: '',
+      errorTips: '请选择补推形式'
+    }
+  },
+  creations: {
+    campaignInfo: 'Campaign Information',
+    kolParticipate: 'KOL Participate',
+    collaborationCompleted: 'Collaboration Completed',
     bigVRequirement: 'Big V related requirement',
     serchBtn: 'Search Big V',
     name: {
