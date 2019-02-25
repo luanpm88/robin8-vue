@@ -252,7 +252,13 @@
             <div class="col-sm-3">
               <div class="input-group">
                 <span class="input-group-addon iconfont icon-subtract"></span>
-                <input type="text" class="form-control" />
+                <input
+                  name="budget"
+                  type="number"
+                  class="form-control text-center"
+                  min="500"
+                  v-validate="'required'"
+                />
                 <span class="input-group-addon iconfont icon-add"></span>
               </div>
             </div>
