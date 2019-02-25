@@ -133,6 +133,10 @@ textarea.form-control {
     }
   }
 
+  input.form-control {
+    border-color: #ccc;
+  }
+
   &[class*="col-"] {
     float: none;
     padding-right: 0;
@@ -216,4 +220,10 @@ textarea.form-control {
 
 .input-group-addon:last-child {
   border-left: 0;
+}
+
+.ctrl-label {
+  display: block;
+  margin-top: 8px;
+  cursor: pointer;
 }

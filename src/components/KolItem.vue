@@ -24,10 +24,10 @@
           >
             {{item.brand_show_info}}
           </p>
-          <articles-list
+          <kol-articles-list
             v-if="profile.status != 'pending'"
             :articles="tenders"
-          ></articles-list>
+          ></kol-articles-list>
         </div>
       </div>
       <div class="media-right media-middle kol-ctrl">
@@ -64,13 +64,13 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import ArticlesList from './ArticlesList'
+import KolArticlesList from './KolArticlesList'
 import { mapState } from 'vuex'
 
 export default {
   name: 'KolItem',
   components: {
-    ArticlesList
+    KolArticlesList
   },
   props: {
     renderData: Object,

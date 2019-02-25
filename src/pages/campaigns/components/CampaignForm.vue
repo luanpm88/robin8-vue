@@ -2,12 +2,32 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.information')}}</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionDesc')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.link.title')}}：</div>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                name="link"
+                class="form-control"
+                :class="[errors.has('link') ? 'danger' : '']"
+                v-model="submitData.name"
+                :placeholder="$t('lang.campaigns.link.placeholder')"
+                v-validate="'required'"
+              >
+              <div
+                class="form-tips danger"
+                v-show="errors.has('link')"
+              >
+                {{$t('lang.campaigns.link.errorTips')}}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -15,19 +35,19 @@
                 class="form-control"
                 :class="[errors.has('name') ? 'danger' : '']"
                 v-model="submitData.name"
-                :placeholder="$t('lang.creations.name.placeholder')"
+                :placeholder="$t('lang.campaigns.name.placeholder')"
                 v-validate="'required'"
               >
               <div
                 class="form-tips danger"
                 v-show="errors.has('name')"
               >
-                {{$t('lang.creations.name.errorTips')}}
+                {{$t('lang.campaigns.name.errorTips')}}
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -35,103 +55,20 @@
                 class="form-control"
                 :class="[errors.has('desc') ? 'danger' : '']"
                 v-model="submitData.description"
-                :placeholder="$t('lang.creations.description.placeholder')"
+                :placeholder="$t('lang.campaigns.description.placeholder')"
                 v-validate="'required'"
               >
               <div
                 class="form-tips danger"
                 v-show="errors.has('desc')"
               >
-                {{$t('lang.creations.description.errorTips')}}
+                {{$t('lang.campaigns.description.errorTips')}}
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}：</div>
-            <div class="col-sm-8">
-              <select
-                name="brand"
-                class="form-control"
-                :class="[errors.has('brand') ? 'danger' : '']"
-                v-model="submitData.trademark_id"
-                v-validate="'required'"
-              >
-                <option value="">{{$t('lang.creations.brandName.placeholder')}}</option>
-                <option
-                  v-for="item in brandsList"
-                  :key="item.id"
-                  :value="item.id"
-                >{{item.name}}</option>
-              </select>
-              <div
-                class="form-tips danger"
-                v-show="errors.has('brand')"
-              >
-                {{$t('lang.creations.brandName.errorTips')}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
-      </div>
-      <div class="panel-body">
-        <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}：</div>
-            <div class="col-sm-8">
-              <div class="row">
-                <div
-                  v-for="(item, index) in terracesList"
-                  :key="item.id"
-                  class="col-sm-6"
-                >
-                  <div class="col-sm-2 text-center">
-                    <div
-                      class="check-icon"
-                      :class="[item.checked ? 'checked' : '']"
-                      @click="terraceCheck(item.id)"
-                    >
-                      <div
-                        :class="'iconfont ' + item.iconClass"
-                      ></div>
-                      <div class="iconfont icon-check"></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-10 pr0">
-                    <input
-                      type="number"
-                      class="form-control"
-                      v-model="item.val"
-                      :placeholder="$t('lang.creations.platform.placeholder')"
-                    >
-                  </div>
-                </div>
-                <input
-                  type="hidden"
-                  name="terrace"
-                  v-model="submitData.terraces"
-                  v-validate="'required'"
-                >
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div
-                    class="form-tips text-right danger"
-                    v-show="errors.has('terrace')"
-                  >
-                    {{$t('lang.creations.platform.errorTips')}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-8">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
@@ -177,12 +114,161 @@
                 class="form-tips danger"
                 v-show="errors.has('img_url')"
               >
-                {{$t('lang.creations.picture.errorTips')}}
+                {{$t('lang.campaigns.picture.errorTips')}}
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionBudget')}}</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}：</div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <span class="input-group-addon iconfont icon-subtract"></span>
+                <input
+                  name="allBudget"
+                  type="number"
+                  class="form-control text-center"
+                  min="500"
+                  v-validate="'required'"
+                />
+                <span class="input-group-addon iconfont icon-add"></span>
+              </div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('allBudget')"
+              >
+                最低费用500元
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionDetail')}}</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">推广平台选择：</div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>分享到朋友圈</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>分享到微博</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-3 control-label">奖励模式选择：</div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>按照点击奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>按照转发奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>按照完成任务奖励KOL</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>按照转发奖励KOL</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>按照完成任务奖励KOL</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-3 control-label">示例图片数量：</div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>需要用户上传1张图片</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>需要用户上传2张图片</span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label class="ctrl-label">
+                    <input type="radio" />
+                    <span>需要用户上传3张图片</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-3 control-label">单次预算：</div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <span class="input-group-addon iconfont icon-subtract"></span>
+                <input type="text" class="form-control" />
+                <span class="input-group-addon iconfont icon-add"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.campaigns.promotionTime')}}</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
             <div class="col-sm-8">
               <datepicker
                 name="campaignTime"
@@ -191,7 +277,7 @@
                 lang="en"
                 format="YYYY-MM-DD HH:mm:ss"
                 input-class="form-control"
-                :placeholder="$t('lang.creations.time.placeholder')"
+                :placeholder="$t('lang.campaigns.time.placeholder')"
                 v-model="campaignTime"
                 v-validate="'required'"
                 :minute-step="10"
@@ -201,58 +287,8 @@
                 class="form-tips text-right danger"
                 v-show="errors.has('campaignTime')"
               >
-                {{$t('lang.creations.time.errorTips')}}
+                {{$t('lang.campaigns.time.errorTips')}}
               </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}：</div>
-            <div class="col-sm-3">
-              <input
-                type="number"
-                name="kols_count"
-                class="form-control"
-                :class="[errors.has('kols_count') ? 'danger' : '']"
-                v-model.number="submitData.pre_kols_count"
-                :placeholder="$t('lang.creations.kolNumber.placeholder')"
-                v-validate="'required'"
-              >
-              <div
-                class="form-tips danger"
-                v-show="errors.has('kols_count')"
-              >
-                {{$t('lang.creations.kolNumber.errorTips')}}
-              </div>
-            </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.budget.title')}}：</div>
-            <div class="col-sm-3">
-              <input
-                type="number"
-                name="pre_amount"
-                class="form-control"
-                :class="[errors.has('pre_amount') ? 'danger' : '']"
-                v-model.number="submitData.pre_amount"
-                :placeholder="$t('lang.creations.budget.placeholder')"
-                v-validate="'required'"
-              >
-              <div
-                class="form-tips danger"
-                v-show="errors.has('pre_amount')"
-              >
-                {{$t('lang.creations.budget.errorTips')}}
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}：</div>
-            <div class="col-sm-8">
-              <textarea
-                name="notice"
-                v-model="submitData.notice"
-                class="form-control"
-                rows="6"
-                :placeholder="$t('lang.creations.precaution.placeholder')"
-              ></textarea>
             </div>
           </div>
         </div>
@@ -261,7 +297,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.bigVRequirement')}}</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.selectKols')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -281,54 +317,35 @@
               class="form-tips danger"
               v-show="errors.has('tags')"
             >
-              {{$t('lang.creations.tags.errorTips')}}
+              {{$t('lang.campaigns.tags.errorTips')}}
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}：</div>
-            <div class="col-sm-8">
-              <!-- <select class="form-control">
-                <option value="">{{$t('lang.creations.price.placeholder')}}</option>
-                <option
-                  v-for="(item, index) in priceList"
-                  :key="index"
-                  :value="item[0]"
-                >{{item[1]}}</option>
-              </select> -->
-              <div class="input-group">
-                <input
-                  type="number"
-                  name="price_from"
-                  class="form-control"
-                  :class="[errors.has('price_from') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_from"
-                  :placeholder="$t('lang.creations.price.lowestPlaceholder')"
-                  v-validate="'required'"
-                >
-                <span class="input-group-addon">-</span>
-                <input
-                  type="number"
-                  name="price_to"
-                  class="form-control"
-                  :class="[errors.has('price_to') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_to"
-                  :placeholder="$t('lang.creations.price.highestPlaceholder')"
-                  v-validate="'required'"
-                >
-              </div>
-              <div
-                class="form-tips danger"
-                v-show="errors.has('price_from') || errors.has('price_to')"
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-4">
+              <select
+                name=""
+                class="form-control"
               >
-                {{$t('lang.creations.price.errorTips')}}
-              </div>
+                <option value=""></option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
+            </div>
+            <div class="col-sm-4">
+              <select
+                name=""
+                class="form-control"
+              >
+                <option value=""></option>
+              </select>
+              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}：</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerAge.placeholder')}}</option>
+                <option value="">{{$t('lang.campaigns.kolAge.placeholder')}}</option>
                 <option value="1">10-20 岁</option>
                 <option value="2">20-30 岁</option>
                 <option value="3">30-40 岁</option>
@@ -336,35 +353,35 @@
                 <option value="5">50-60 岁</option>
                 <option value="6">60 岁以上</option>
               </select>
-              <div class="form-tips">{{$t('lang.creations.followerAge.errorTips')}}</div>
+              <div class="form-tips">{{$t('lang.campaigns.kolAge.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}：</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerGender.placeholder')}}</option>
+                <option value="">{{$t('lang.campaigns.kolGender.placeholder')}}</option>
                 <option value="1">男</option>
                 <option value="0">女</option>
               </select>
-              <div class="form-tips">{{$t('lang.creations.followerGender.errorTips')}}</div>
+              <div class="form-tips">{{$t('lang.campaigns.kolGender.errorTips')}}</div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
-            <div class="col-sm-8">
-              <input
-                type="text"
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}：</div>
+            <div class="col-sm-3">
+              <select
+                name="push"
                 class="form-control"
-                :placeholder="$t('lang.creations.followerDistrict.placeholder')"
               >
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+                <option value="">允许补推</option>
+                <option value="">禁止补推</option>
+              </select>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('push')"
+              >
+                {{$t('lang.campaigns.kolPush.errorTips')}}
+              </div>
             </div>
-          </div>
-          <div class="form-group text-center">
-            <button
-              type="button"
-              class="btn btn-blue btn-outline"
-              @click="searchKolsCtrl"
-            >{{$t('lang.creations.serchBtn')}}</button>
           </div>
         </div>
       </div>
@@ -375,11 +392,7 @@
       class="mt20"
       title="为您推荐的大V"
       :kolsList="kolsList"
-      :kolsPage="kolsPage"
-      :kolsPerPage="kolsPerPage"
-      :kolsTotal="kolsTotal"
       @checkedKols="checkedKols"
-      @changeKolsPage="changeKolsPage"
     ></kols-list-panel>
 
     <!-- <div class="row mt20">
@@ -422,7 +435,7 @@ import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'CreationForm',
+  name: 'CampaignForm',
   props: {
     formType: String
   },
