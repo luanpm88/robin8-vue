@@ -291,7 +291,6 @@
                 name="price"
                 class="form-control"
                 :class="[errors.has('price') ? 'danger' : '']"
-                @change="changePrice"
                 v-model="price"
               >
                 <option value="0,1000000">{{$t('lang.creations.price.placeholder')}}</option>
@@ -306,35 +305,6 @@
                 {{$t('lang.creations.price.errorTips')}}
               </div>
             </div>
-            <!-- <div class="col-sm-8">
-              <div class="input-group">
-                <input
-                  type="number"
-                  name="price_from"
-                  class="form-control"
-                  :class="[errors.has('price_from') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_from"
-                  :placeholder="$t('lang.creations.price.lowestPlaceholder')"
-                  v-validate="'required'"
-                >
-                <span class="input-group-addon">-</span>
-                <input
-                  type="number"
-                  name="price_to"
-                  class="form-control"
-                  :class="[errors.has('price_to') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_to"
-                  :placeholder="$t('lang.creations.price.highestPlaceholder')"
-                  v-validate="'required'"
-                >
-              </div>
-              <div
-                class="form-tips danger"
-                v-show="errors.has('price_from') || errors.has('price_to')"
-              >
-                {{$t('lang.creations.price.errorTips')}}
-              </div>
-            </div> -->
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}：</div>
@@ -492,7 +462,7 @@ export default {
       province: '',
       cityData: [],
       city: '',
-      price: '',
+      price: '0,1000000',
       submitData: {
         name: '',
         description: '',
@@ -663,7 +633,6 @@ export default {
         industries: this.checkedTags,
         page_no: this.kolsPage,
         page_size: this.kolsPerPage,
-        // price: this.submitData.target.price,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
       }
@@ -855,6 +824,11 @@ export default {
 
       this.submitData.start_at = this.campaignTime[0]
       this.submitData.end_at = this.campaignTime[1]
+
+      let _price = this.price
+      _price = _price.split(',')
+      this.submitData.target.price_from = _price[0]
+      this.submitData.target.price_to = _price[1]
 
       console.log(this.submitData)
 
