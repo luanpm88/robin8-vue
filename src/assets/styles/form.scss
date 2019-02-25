@@ -135,6 +135,10 @@ textarea.form-control {
 
   input.form-control {
     border-color: #ccc;
+
+    &.danger {
+      border-color: #a94442;
+    }
   }
 
   &[class*="col-"] {

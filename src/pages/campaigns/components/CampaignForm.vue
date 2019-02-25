@@ -14,7 +14,7 @@
                 name="link"
                 class="form-control"
                 :class="[errors.has('link') ? 'danger' : '']"
-                v-model="submitData.name"
+                v-model="submitData.url"
                 :placeholder="$t('lang.campaigns.link.placeholder')"
                 v-validate="'required'"
               >
@@ -66,7 +66,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
             <div class="col-sm-8">
@@ -137,7 +136,9 @@
                   name="allBudget"
                   type="number"
                   class="form-control text-center"
+                  :class="[errors.has('allBudget') ? 'danger' : '']"
                   min="500"
+                  v-model.number="submitData.budget"
                   v-validate="'required'"
                 />
                 <span class="input-group-addon iconfont icon-add"></span>
@@ -166,16 +167,35 @@
               <div class="row">
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="platform"
+                      type="radio"
+                      value="wechat"
+                      v-model="submitData.sub_type"
+                      v-validate="'required'"
+                    />
                     <span>分享到朋友圈</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="platform"
+                      type="radio"
+                      value="weibo"
+                      v-model="submitData.sub_type"
+                      v-validate="'required'"
+                    />
                     <span>分享到微博</span>
                   </label>
                 </div>
+              </div>
+
+              <div
+                class="form-tips danger"
+                v-show="errors.has('platform')"
+              >
+                {{$t('lang.campaigns.platform.errorTips')}}
               </div>
             </div>
           </div>
@@ -184,65 +204,99 @@
             <div class="col-sm-3 control-label">奖励模式选择：</div>
             <div class="col-sm-8">
               <div class="row">
-                <div class="col-sm-4">
+                <div v-if="submitData.sub_type == 'wechat'" class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="mode"
+                      type="radio"
+                      value="click"
+                      v-model="submitData.per_budget_type"
+                      v-validate="'required'"
+                    />
                     <span>按照点击奖励KOL</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="mode"
+                      type="radio"
+                      value="post"
+                      v-model="submitData.per_budget_type"
+                      v-validate="'required'"
+                    />
                     <span>按照转发奖励KOL</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="mode"
+                      type="radio"
+                      value="cpt"
+                      v-model="submitData.per_budget_type"
+                      v-validate="'required'"
+                    />
                     <span>按照完成任务奖励KOL</span>
                   </label>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-sm-4">
-                  <label class="ctrl-label">
-                    <input type="radio" />
-                    <span>按照转发奖励KOL</span>
-                  </label>
-                </div>
-                <div class="col-sm-4">
-                  <label class="ctrl-label">
-                    <input type="radio" />
-                    <span>按照完成任务奖励KOL</span>
-                  </label>
-                </div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('mode')"
+              >
+                {{$t('lang.campaigns.mode.errorTips')}}
               </div>
             </div>
           </div>
 
-          <div class="form-group">
+          <div v-if="submitData.per_budget_type == 'cpt'" class="form-group">
             <div class="col-sm-3 control-label">示例图片数量：</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="imgCount"
+                      type="radio"
+                      value="1"
+                      v-model="submitData.example_screenshot_count"
+                      v-validate="'required'"
+                    />
                     <span>需要用户上传1张图片</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="imgCount"
+                      type="radio"
+                      value="2"
+                      v-model="submitData.example_screenshot_count"
+                      v-validate="'required'"
+                    />
                     <span>需要用户上传2张图片</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
                   <label class="ctrl-label">
-                    <input type="radio" />
+                    <input
+                      name="imgCount"
+                      type="radio"
+                      value="3"
+                      v-model="submitData.example_screenshot_count"
+                      v-validate="'required'"
+                    />
                     <span>需要用户上传3张图片</span>
                   </label>
                 </div>
+              </div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('imgCount')"
+              >
+                {{$t('lang.campaigns.pictureNumber.errorTips')}}
               </div>
             </div>
           </div>
@@ -256,10 +310,18 @@
                   name="budget"
                   type="number"
                   class="form-control text-center"
-                  min="500"
+                  :class="[errors.has('budget') ? 'danger' : '']"
+                  min="0.3"
+                  v-model.number="submitData.per_action_budget"
                   v-validate="'required'"
                 />
                 <span class="input-group-addon iconfont icon-add"></span>
+              </div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('budget')"
+              >
+                {{$t('lang.campaigns.budget.errorTips')}}
               </div>
             </div>
           </div>
@@ -316,7 +378,7 @@
             <input
               type="hidden"
               name="tags"
-              v-model="submitData.target.industries"
+              v-model="submitData.target.tags"
               v-validate="'required'"
             >
             <div
@@ -329,41 +391,57 @@
 
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
-            <div class="col-sm-4">
-              <select
-                name="province"
-                class="form-control"
-                v-model="province"
-                @change="changeProvince"
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <select
+                    name="province"
+                    class="form-control"
+                    :class="[errors.has('region') ? 'danger' : '']"
+                    v-model="province"
+                    @change="changeProvince"
+                  >
+                    <option value="">{{$t('lang.campaigns.kolDistrict.provincePlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of provinceData"
+                      :key="index"
+                      :value="item.provinceName"
+                    >
+                      {{item.provinceName}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <select
+                    name="city"
+                    class="form-control"
+                    :class="[errors.has('region') ? 'danger' : '']"
+                    v-model="city"
+                    @change="changeCity"
+                  >
+                    <option value="">{{$t('lang.campaigns.kolDistrict.cityPlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of cityData"
+                      :key="index"
+                      :value="item.citysName"
+                    >
+                      {{item.citysName}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <input
+                type="hidden"
+                name="region"
+                v-model="submitData.target.region"
+                v-validate="'required'"
               >
-                <option value="">{{$t('lang.campaigns.kolDistrict.provincePlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of provinceData"
-                  :key="index"
-                  :value="item.provinceName"
-                >
-                  {{item.provinceName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
-            </div>
-            <div class="col-sm-4">
-              <select
-                name="city"
-                class="form-control"
-                v-model="city"
-                @change="changeCity"
+              <div
+                class="form-tips danger"
+                v-show="errors.has('region')"
               >
-                <option value="">{{$t('lang.campaigns.kolDistrict.cityPlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of cityData"
-                  :key="index"
-                  :value="item.citysName"
-                >
-                  {{item.citysName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
+                {{$t('lang.campaigns.kolDistrict.errorTips')}}
+              </div>
             </div>
           </div>
           <div v-if="checkedCitys.length > 0" class="form-group">
@@ -387,25 +465,47 @@
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}：</div>
             <div class="col-sm-3">
-              <select class="form-control">
-                <option value="">{{$t('lang.campaigns.kolAge.placeholder')}}</option>
-                <option value="1">10-20 岁</option>
-                <option value="2">20-30 岁</option>
-                <option value="3">30-40 岁</option>
-                <option value="4">40-50 岁</option>
-                <option value="5">50-60 岁</option>
-                <option value="6">60 岁以上</option>
+              <select
+                name="age"
+                class="form-control"
+                :class="[errors.has('age') ? 'danger' : '']"
+                v-model="submitData.target.age"
+                v-validate="'required'"
+              >
+                <option value="全部">{{$t('lang.campaigns.kolAge.placeholder')}}</option>
+                <option value="10,20">10-20 岁</option>
+                <option value="20,30">20-30 岁</option>
+                <option value="30,40">30-40 岁</option>
+                <option value="40,50">40-50 岁</option>
+                <option value="50,60">50-60 岁</option>
+                <option value="60,100">60 岁以上</option>
               </select>
-              <div class="form-tips">{{$t('lang.campaigns.kolAge.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('age')"
+              >
+                {{$t('lang.campaigns.kolAge.errorTips')}}
+              </div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}：</div>
             <div class="col-sm-3">
-              <select class="form-control">
-                <option value="">{{$t('lang.campaigns.kolGender.placeholder')}}</option>
+              <select
+                name="gender"
+                class="form-control"
+                :class="[errors.has('gender') ? 'danger' : '']"
+                v-model="submitData.target.gender"
+                v-validate="'required'"
+              >
+                <option value="全部">{{$t('lang.campaigns.kolGender.placeholder')}}</option>
                 <option value="1">男</option>
-                <option value="0">女</option>
+                <option value="2">女</option>
               </select>
-              <div class="form-tips">{{$t('lang.campaigns.kolGender.errorTips')}}</div>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('gender')"
+              >
+                {{$t('lang.campaigns.kolGender.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -414,9 +514,12 @@
               <select
                 name="push"
                 class="form-control"
+                :class="[errors.has('push') ? 'danger' : '']"
+                v-model="submitData.enable_append_push"
+                v-validate="'required'"
               >
-                <option value="">允许补推</option>
-                <option value="">禁止补推</option>
+                <option value="true">允许补推</option>
+                <option value="false">禁止补推</option>
               </select>
               <div
                 class="form-tips danger"
@@ -429,32 +532,6 @@
         </div>
       </div>
     </div>
-
-    <kols-list-panel
-      v-if="kolsList.length > 0"
-      class="mt20"
-      title="为您推荐的大V"
-      :kolsList="kolsList"
-      @checkedKols="checkedKols"
-    ></kols-list-panel>
-
-    <!-- <div class="row mt20">
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="为您推荐的大V"
-        ></kols-list-panel>
-      </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您可能感兴趣的大V"
-        ></kols-list-panel>
-      </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您收藏的大V"
-        ></kols-list-panel>
-      </div>
-    </div> -->
 
     <div class="text-center create-btn-area">
       <button
@@ -474,7 +551,6 @@ import commonJs from '@javascripts/common.js'
 import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
-import KolsListPanel from './KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
@@ -486,21 +562,14 @@ export default {
   components: {
     Datepicker,
     TagsList,
-    KolsListPanel,
     VueCoreImageUpload
   },
   data () {
     return {
       detailData: {},
-      brandsList: [],
       tagsList: [],
       checkedIds: [],
       checkedTags: [],
-      terracesList: [],
-      kolsParams: {},
-      kolsList: [],
-      priceList: [],
-      plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
       campaignTime: '',
@@ -510,27 +579,25 @@ export default {
       cityData: [],
       city: '',
       submitData: {
+        url: '',
         name: '',
         description: '',
-        trademark_id: '',
-        start_at: '',
-        end_at: '',
-        pre_kols_count: '',
-        pre_amount: '',
         img_url: '',
+        budget: 500,
+        sub_type: '',
+        per_budget_type: '',
+        example_screenshot_count: '',
+        per_action_budget: 0.3,
+        start_time: '',
+        deadline: '',
         target: {
-          industries: '',
-          price: '',
-          price_from: '',
-          price_to: ''
+          tags: '',
+          region: '',
+          age: '全部',
+          gender: '全部',
         },
-        terraces: [],
-        selected_kols: [],
-        notice: ''
+        enable_append_push: 'true'
       },
-      kolsPage: 0,
-      kolsPerPage: 12,
-      kolsTotal: 0,
       canSubmit: true
     }
   },
@@ -546,28 +613,7 @@ export default {
       console.log(res)
       if (res.status == 200 && res.data) {
         const data = res.data
-        this.brandsList = data.trademarks_list
         this.tagsList = data.tags_list
-        // this.priceList = data.prices_range
-        // console.log(this.priceList)
-
-        let _terracesList = data.terraces_list
-        _terracesList.forEach(item => {
-          let _shortName = item.short_name
-          switch (_shortName) {
-            case 'public_wechat_account':
-              item.iconClass = 'icon-wechat-circle'
-              break
-            case 'weibo':
-              item.iconClass = 'icon-weibo-circle'
-              break
-            default:
-              item.iconClass = ''
-          }
-          item.checked = false
-          item.val = ''
-        })
-        this.terracesList = _terracesList
       }
     },
     getDetailData () {
@@ -583,34 +629,26 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
+        this.submitData.url = resData.url
         this.submitData.name = resData.name
         this.submitData.description = resData.description
-        this.submitData.trademark_id = resData.trademark_id
-        this.submitData.start_at = resData.start_at
-        this.submitData.end_at = resData.end_at
-        this.submitData.pre_kols_count = resData.pre_kols_count
-        this.submitData.pre_amount = resData.pre_amount
         this.submitData.img_url = resData.img_url
-        this.submitData.target.industries = resData.targets_hash.industries
-        this.submitData.target.price_from = resData.targets_hash.price_from
-        this.submitData.target.price_to = resData.targets_hash.price_to
-        this.submitData.terraces = resData.terraces
-        this.submitData.selected_kols = resData.selected_kols
-        this.submitData.notice = resData.notice
-        this.campaignTime = []
-        this.campaignTime[0] = resData.start_at
-        this.campaignTime[1] = resData.end_at
 
-        let _terracesList = this.terracesList
-        _terracesList.forEach(item => {
-          resData.terraces.forEach(e => {
-            if (item.id == e.terrace_id) {
-              item.checked = true
-              item.val = e.exposure_value
-            }
-          })
-        })
-        // console.log(_terracesList)
+        this.submitData.budget = resData.budget
+        this.submitData.sub_type = resData.sub_type
+        this.submitData.per_budget_type = resData.per_budget_type
+        this.submitData.example_screenshot_count = resData.example_screenshot_count
+        this.submitData.per_action_budget = resData.per_action_budget
+        this.submitData.start_time = resData.start_time
+        this.submitData.deadline = resData.deadline
+        this.campaignTime = []
+        this.campaignTime[0] = resData.start_time
+        this.campaignTime[1] = resData.deadline
+        this.submitData.target.tags = resData.targets_hash.tags
+        this.submitData.target.region = resData.targets_hash.region
+        this.submitData.target.age = resData.targets_hash.age
+        this.submitData.target.gender = resData.targets_hash.gender
+        this.submitData.enable_append_push = resData.enable_append_push
 
         let _tagsList = this.tagsList
         let _checkedData = resData.targets_hash.industries
@@ -631,112 +669,13 @@ export default {
         this.checkedIds = _checkedIds
         // console.log(this.checkedIds)
 
-        this.searchKolsCtrl()
-        // console.log(this.kolsList)
-      }
-    },
-    searchKols (postUrl) {
-      axios.post(postUrl, this.kolsParams, {
-        headers: {
-          'Authorization': this.authorization
-        }
-      }).then(this.handleSearchKolsSucc)
-    },
-    handleSearchKolsSucc (res) {
-      console.log(res)
-      let resData = res.data
-      console.log(resData)
-      this.kolsList = []
-      this.kolsList = resData.data
-      this.kolsTotal = resData.total_record_count
-
-      if (this.formType == 'create') {
-        if (resData.data.length > 0) {
-          this.kolsList.forEach(item => {
-            item.checked = false
-          })
-        }
-      }
-      if (this.formType == 'edit') {
-        let _selectedKols = this.submitData.selected_kols
-        _selectedKols.forEach(item => {
-          this.kolsList.forEach(e => {
-            if (item.plateform_uuid == e.profile_id) {
-              e.checked = true
-            }
-          })
+        let _citys = resData.targets_hash.region
+        _citys = _citys.split(',')
+        _citys.forEach(item => {
+          this.checkedCitys.push(item)
         })
+        console.log(this.checkedCitys)
       }
-    },
-    searchKolsCtrl () {
-      let _terraces = this.submitData.terraces
-      console.log(_terraces)
-      this.kolsParams = {
-        // start_date: this.submitData.start_at,
-        // end_date: this.submitData.start_end,
-        start_date: this.campaignTime[0],
-        end_date: this.campaignTime[1],
-        industries: this.checkedTags,
-        page_no: this.kolsPage,
-        page_size: this.kolsPerPage,
-        // price: this.submitData.target.price,
-        price_from: this.submitData.target.price_from,
-        price_to: this.submitData.target.price_to
-      }
-
-      this.kolsList = []
-      this.$validator.validateAll().then((msg) => {
-        console.log(msg)
-        if (msg) {
-          console.log('验证通过')
-          if (_terraces.length > 0) {
-            let hasWechat = _terraces.some(item => {
-              if (item.short_name == 'public_wechat_account') {
-                return true
-              } else {
-                return false
-              }
-            })
-            if (hasWechat) {
-              this.searchKols(apiConfig.kolWxSearchUrl)
-              this.plateformName = 'public_wechat_account'
-            } else {
-              this.searchKols(apiConfig.kolWbSearchUrl)
-              this.plateformName = 'weibo'
-            }
-          } else {
-            this.searchKols(apiConfig.kolWxSearchUrl)
-            this.plateformName = 'public_wechat_account'
-          }
-        }
-      })
-    },
-    changeKolsPage (data) {
-      console.log(data.page)
-      this.kolsPage = data.page - 1
-      this.searchKolsCtrl()
-    },
-    checkedKols (data) {
-      let _ids = data.ids
-      console.log(_ids)
-      let _kolsList = this.kolsList
-      let _checkedKols = []
-      let _kolItem
-
-      _ids.forEach(item => {
-        _kolsList.forEach(e => {
-          if (e.profile_id == item) {
-            _kolItem = commonJs.buildObjData('plateform_uuid', item)
-            _kolItem.plateform_name = this.plateformName
-            _kolItem.name = e.profile_name
-            _kolItem.avatar_url = e.avatar_url
-            _kolItem.desc = e.description_raw
-            _checkedKols.push(_kolItem)
-          }
-        })
-      })
-      console.log(_checkedKols)
-      this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
       let _ids = data.ids
@@ -766,32 +705,6 @@ export default {
       if (delConfirm) {
         this.submitData.img_url = ''
       }
-    },
-    terraceCheck (id) {
-      let _terraces = this.submitData.terraces
-      let _terracesList = this.terracesList
-      let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      console.log(_terraceItem)
-      let result = _terraces.some(item => {
-        if (item.terrace_id == id) {
-          return true
-        }
-      })
-
-      _terracesList.forEach(item => {
-        if (item.id == _terraceItem.terrace_id) {
-          if (!result) {
-            _terraceItem.short_name = item.short_name
-            _terraces.push(_terraceItem)
-            item.checked = true
-          } else {
-            let _index = _terraces.indexOf(item)
-            _terraces.splice(_index, 1)
-            item.checked = false
-          }
-        }
-      })
-      console.log(this.submitData.terraces)
     },
     changeProvince (e) {
       const _self = this
@@ -866,19 +779,8 @@ export default {
       this.canSubmit = true
     },
     doConfirm () {
-      let _terraces = this.submitData.terraces
-      let _terracesList = this.terracesList
-      _terraces.forEach(item => {
-        console.log(item)
-        _terracesList.forEach(originalItem => {
-          if (!!item && item.terrace_id == originalItem.id) {
-            item.exposure_value = originalItem.val
-          }
-        })
-      })
-
-      this.submitData.start_at = this.campaignTime[0]
-      this.submitData.end_at = this.campaignTime[1]
+      this.submitData.start_time = this.campaignTime[0]
+      this.submitData.deadline = this.campaignTime[1]
 
       console.log(this.submitData)
 
