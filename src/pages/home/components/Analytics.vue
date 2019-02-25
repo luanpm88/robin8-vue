@@ -12,7 +12,7 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trend over past 7 days for  <{{trendTitle}} brand ></p>
+              <p class="analytic-chart-title">Trend over past 7 days for  <{{trendTitle}} | brand ></p>
               <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">
@@ -24,7 +24,7 @@
               <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
             </div>
             <div v-if="cur === 3">
-              <p class="analytic-chart-title">Sentiment</p>
+              <p class="analytic-chart-title">Sentiment for <{{trendTitle}} | brand></p>
             </div>
             <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
           </div>
@@ -143,6 +143,7 @@ export default {
         labels: []
       },
       parentTags: [],
+      labelList: [],
       // parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
       tagColor: "purple"
     };
@@ -170,6 +171,7 @@ export default {
     }
   },
   created() {
+    this.labelList = [];
   },
   computed: {
     ...mapState(["authorization"])
@@ -193,7 +195,6 @@ export default {
         // concept 微信
         this.conceptWeixin(this.conceptParams);
       }
-      this.topTabCur = topTab.index;
       if (this.cur === 2 && topTab.index === 0) {
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
@@ -223,7 +224,7 @@ export default {
         this.conceptWeibo(this.conceptParams);
       }
       if (tab.index === 2) {
-        // competitor 微博
+        // competitor 微博d
         this.competitorWeibo(this.competitorParams);
       }
       if (tab.index === 3) {
@@ -312,6 +313,8 @@ export default {
     // competitor 微博
     competitorWeibo(params) {
       const _that = this;
+      // this.labelList = [];
+      console.log(this.labelList);
       axios
         .post(apiConfig.competitorWeibo, params, {
           headers: {
@@ -333,6 +336,7 @@ export default {
     // competitor 微信
     competitorWeixin(params) {
       const _that = this;
+      this.labelList = [];
       axios
         .post(apiConfig.competitorWeixin, params, {
           headers: {
@@ -403,7 +407,14 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-    }
+    },
+    compare (property){
+      return function(a,b){
+          var value1 = a[property];
+          var value2 = b[property];
+          return value1 - value2;
+      }
+    },
   }
 };
 </script>

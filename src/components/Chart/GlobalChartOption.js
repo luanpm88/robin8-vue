@@ -19,7 +19,7 @@ const MockData = {
     },
     grid: {
       top: "8%",
-      left: "6%",
+      left: "10%",
       right: "4%",
       bottom: "15%",
       containLabel: true
@@ -55,11 +55,11 @@ const MockData = {
       data: []
     },
     yAxis: {
-      name: "No. of Mention(s)",
+      name: "Number of mentions",
       nameLocation: "middle",
       nameTextStyle: {
         fontSize: 16,
-        padding: [0, 0, 15, 0]
+        padding: [0, 0, 30, 0]
         // padding: [20],
         // shadowOffsetY: 30,
       },
@@ -133,6 +133,7 @@ const MockData = {
       }
     },
     legend: {
+      show: false,
       data: [
         {
           name: "competitors",
@@ -150,7 +151,7 @@ const MockData = {
     xAxis: {
       type: 'value',
       boundaryGap: [0, 0.01],
-      name: "No. of Mention(s)",
+      name: "Number of mentions",
       nameLocation: "middle",
       nameTextStyle: {
         fontSize: 16,
@@ -225,6 +226,7 @@ const MockData = {
   },
   SentimentOptions: {
     legend: {
+      show: false,
       x: 'center',
       y: 'top',
     },
@@ -245,15 +247,16 @@ const MockData = {
         type: 'pie',
         label: {
           normal: {
-            show: false
+            formatter: '{b}: ({d}%)',
+            show: true
           },
           emphasis: {
-            show: false
+            show: true
           }
         },
         lableLine: {
           normal: {
-            show: false
+            show: true
           },
           emphasis: {
             show: true
