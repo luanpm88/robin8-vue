@@ -286,40 +286,22 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}：</div>
-            <div class="col-sm-8">
-              <!-- <select class="form-control">
-                <option value="">{{$t('lang.creations.price.placeholder')}}</option>
-                <option
-                  v-for="(item, index) in priceList"
-                  :key="index"
-                  :value="item[0]"
-                >{{item[1]}}</option>
-              </select> -->
-              <div class="input-group">
-                <input
-                  type="number"
-                  name="price_from"
-                  class="form-control"
-                  :class="[errors.has('price_from') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_from"
-                  :placeholder="$t('lang.creations.price.lowestPlaceholder')"
-                  v-validate="'required'"
-                >
-                <span class="input-group-addon">-</span>
-                <input
-                  type="number"
-                  name="price_to"
-                  class="form-control"
-                  :class="[errors.has('price_to') ? 'danger' : '']"
-                  v-model.number="submitData.target.price_to"
-                  :placeholder="$t('lang.creations.price.highestPlaceholder')"
-                  v-validate="'required'"
-                >
-              </div>
-              <div
-                class="form-tips danger"
-                v-show="errors.has('price_from') || errors.has('price_to')"
+            <div class="col-sm-3">
+              <select
+                name="price"
+                class="form-control"
+                :class="[errors.has('price') ? 'danger' : '']"
+                v-model="price"
               >
+                <option value="0,1000000">{{$t('lang.creations.price.placeholder')}}</option>
+                <option value="0,5000">0 - 5,000</option>
+                <option value="5000,10000">5,000 - 10,000</option>
+                <option value="10000,50000">10,000 - 50,000</option>
+                <option value="50000,100000">50,000 - 100,000</option>
+                <option value="100000,200000">100,000 - 200,000</option>
+                <option value="200000,1000000">200,000 +</option>
+              </select>
+              <div class="form-tips">
                 {{$t('lang.creations.price.errorTips')}}
               </div>
             </div>
@@ -348,15 +330,62 @@
               <div class="form-tips">{{$t('lang.creations.followerGender.errorTips')}}</div>
             </div>
           </div>
+
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
-            <div class="col-sm-8">
-              <input
-                type="text"
+            <div class="col-sm-4">
+              <select
+                name="province"
                 class="form-control"
-                :placeholder="$t('lang.creations.followerDistrict.placeholder')"
+                v-model="province"
+                @change="changeProvince"
               >
+                <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of provinceData"
+                  :key="index"
+                  :value="item.provinceName"
+                >
+                  {{item.provinceName}}
+                </option>
+              </select>
               <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+            </div>
+            <div class="col-sm-4">
+              <select
+                name="city"
+                class="form-control"
+                v-model="city"
+                @change="changeCity"
+              >
+                <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of cityData"
+                  :key="index"
+                  :value="item.citysName"
+                >
+                  {{item.citysName}}
+                </option>
+              </select>
+              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+            </div>
+          </div>
+          <div v-if="checkedCitys.length > 0" class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
+            <div class="col-sm-8">
+              <ul class="city-list">
+                <li
+                  v-for="(item, index) in checkedCitys"
+                  :key="index"
+                  class="item"
+                >
+                  <span
+                    class="iconfont icon-close"
+                    @click="delCity(item)"
+                  ></span>
+                  {{item}}
+                </li>
+              </ul>
             </div>
           </div>
           <div class="form-group text-center">
@@ -415,6 +444,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
 import KolsListPanel from './KolsListPanel'
@@ -447,6 +477,12 @@ export default {
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
       campaignTime: '',
+      checkedCitys: [],
+      provinceData: [],
+      province: '',
+      cityData: [],
+      city: '',
+      price: '0,1000000',
       submitData: {
         name: '',
         description: '',
@@ -458,7 +494,6 @@ export default {
         img_url: '',
         target: {
           industries: '',
-          price: '',
           price_from: '',
           price_to: ''
         },
@@ -538,6 +573,7 @@ export default {
         this.campaignTime = []
         this.campaignTime[0] = resData.start_at
         this.campaignTime[1] = resData.end_at
+        this.price = resData.targets_hash.price_from + ',' + resData.targets_hash.price_to
 
         let _terracesList = this.terracesList
         _terracesList.forEach(item => {
@@ -617,7 +653,6 @@ export default {
         industries: this.checkedTags,
         page_no: this.kolsPage,
         page_size: this.kolsPerPage,
-        // price: this.submitData.target.price,
         price_from: this.submitData.target.price_from,
         price_to: this.submitData.target.price_to
       }
@@ -731,6 +766,44 @@ export default {
       })
       console.log(this.submitData.terraces)
     },
+    changeProvince (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      console.log(selectedVal)
+      if (selectedVal == '') {
+        _self.cityData = []
+        _self.city = ''
+      }
+      this.provinceData.forEach(function (item, index) {
+        if (item.provinceName == selectedVal) {
+          _self.cityData = item.citys
+          console.log(_self.cityData)
+          _self.city = ''
+        }
+      })
+    },
+    changeCity (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      let citys = _self.checkedCitys
+      console.log(selectedVal)
+      if (selectedVal != '') {
+        let _index = citys.indexOf(selectedVal)
+        if (_index == -1) {
+          citys.push(selectedVal)
+          _self.city = ''
+        }
+      }
+      console.log(_self.checkedCitys)
+    },
+    delCity (city) {
+      let citys = this.checkedCitys
+      let _index = citys.indexOf(city)
+      if (_index != -1) {
+        citys.splice(_index, 1)
+      }
+      console.log(this.checkedCitys)
+    },
     doSubmit () {
       if (!this.canSubmit) {
         return false
@@ -780,6 +853,11 @@ export default {
       this.submitData.start_at = this.campaignTime[0]
       this.submitData.end_at = this.campaignTime[1]
 
+      let _price = this.price
+      _price = _price.split(',')
+      this.submitData.target.price_from = _price[0]
+      this.submitData.target.price_to = _price[1]
+
       console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {
@@ -796,6 +874,8 @@ export default {
     if (this.formType == 'edit') {
       this.getDetailData()
     }
+
+    this.provinceData = cityJs.citiesData.provinces
   },
   computed: {
     ...mapState(['authorization'])

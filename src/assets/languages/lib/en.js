@@ -136,6 +136,8 @@ export const lang = {
     kolDistrict: {
       title: '地域',
       placeholder: '请选择地域',
+      provincePlaceholder: 'please select province',
+      cityPlaceholder: 'please select city',
       errorTips: '请选择地域'
     },
     kolAge: {
@@ -232,6 +234,8 @@ export const lang = {
     followerDistrict: {
       title: 'Follower\'s location',
       placeholder: 'please fill in the district reauirement',
+      provincePlaceholder: 'please select province',
+      cityPlaceholder: 'please select city',
       errorTips: 'please fill in the district reauirement'
     }
   },

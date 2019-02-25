@@ -252,7 +252,13 @@
             <div class="col-sm-3">
               <div class="input-group">
                 <span class="input-group-addon iconfont icon-subtract"></span>
-                <input type="text" class="form-control" />
+                <input
+                  name="budget"
+                  type="number"
+                  class="form-control text-center"
+                  min="500"
+                  v-validate="'required'"
+                />
                 <span class="input-group-addon iconfont icon-add"></span>
               </div>
             </div>
@@ -320,25 +326,62 @@
               {{$t('lang.campaigns.tags.errorTips')}}
             </div>
           </div>
+
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
             <div class="col-sm-4">
               <select
-                name=""
+                name="province"
                 class="form-control"
+                v-model="province"
+                @change="changeProvince"
               >
-                <option value=""></option>
+                <option value="">{{$t('lang.campaigns.kolDistrict.provincePlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of provinceData"
+                  :key="index"
+                  :value="item.provinceName"
+                >
+                  {{item.provinceName}}
+                </option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
             </div>
             <div class="col-sm-4">
               <select
-                name=""
+                name="city"
                 class="form-control"
+                v-model="city"
+                @change="changeCity"
               >
-                <option value=""></option>
+                <option value="">{{$t('lang.campaigns.kolDistrict.cityPlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of cityData"
+                  :key="index"
+                  :value="item.citysName"
+                >
+                  {{item.citysName}}
+                </option>
               </select>
               <div class="form-tips">{{$t('lang.campaigns.kolDistrict.errorTips')}}</div>
+            </div>
+          </div>
+          <div v-if="checkedCitys.length > 0" class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-8">
+              <ul class="city-list">
+                <li
+                  v-for="(item, index) in checkedCitys"
+                  :key="index"
+                  class="item"
+                >
+                  <span
+                    class="iconfont icon-close"
+                    @click="delCity(item)"
+                  ></span>
+                  {{item}}
+                </li>
+              </ul>
             </div>
           </div>
           <div class="form-group">
@@ -428,6 +471,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
 import KolsListPanel from './KolsListPanel'
@@ -460,6 +504,11 @@ export default {
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
       campaignTime: '',
+      checkedCitys: [],
+      provinceData: [],
+      province: '',
+      cityData: [],
+      city: '',
       submitData: {
         name: '',
         description: '',
@@ -744,6 +793,44 @@ export default {
       })
       console.log(this.submitData.terraces)
     },
+    changeProvince (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      console.log(selectedVal)
+      if (selectedVal == '') {
+        _self.cityData = []
+        _self.city = ''
+      }
+      this.provinceData.forEach(function (item, index) {
+        if (item.provinceName == selectedVal) {
+          _self.cityData = item.citys
+          console.log(_self.cityData)
+          _self.city = ''
+        }
+      })
+    },
+    changeCity (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      let citys = _self.checkedCitys
+      console.log(selectedVal)
+      if (selectedVal != '') {
+        let _index = citys.indexOf(selectedVal)
+        if (_index == -1) {
+          citys.push(selectedVal)
+          _self.city = ''
+        }
+      }
+      console.log(_self.checkedCitys)
+    },
+    delCity (city) {
+      let citys = this.checkedCitys
+      let _index = citys.indexOf(city)
+      if (_index != -1) {
+        citys.splice(_index, 1)
+      }
+      console.log(this.checkedCitys)
+    },
     doSubmit () {
       if (!this.canSubmit) {
         return false
@@ -809,6 +896,8 @@ export default {
     if (this.formType == 'edit') {
       this.getDetailData()
     }
+
+    this.provinceData = cityJs.citiesData.provinces
   },
   computed: {
     ...mapState(['authorization'])
