@@ -49,14 +49,12 @@ import MainNav from "@components/MainNav";
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import { mapState } from "vuex";
-import { Spin} from "ant-design-vue";
 export default {
   name: "benchMark",
   components: {
     PageHeader,
     MainNav,
     Echarts,
-    ASpin: Spin
   },
   computed: {
     ...mapState(["authorization"])

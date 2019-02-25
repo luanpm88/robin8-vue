@@ -186,13 +186,12 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import { Spin, Progress } from "ant-design-vue";
+import { Progress } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
 export default {
   name: 'kolsearch',
   components: {
-    ASpin: Spin,
     AProgress: Progress,
     DefaultTabs
   },
@@ -469,15 +468,6 @@ export default {
 <style lang="scss" scoped>
 span {
   display: inline-block;
-}
-.oneinput,
-.oneselect {
-  height: 34px;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ebedf2;
-  border-radius: 4px;
 }
 .kol-list-wrap {
   background: $white;
