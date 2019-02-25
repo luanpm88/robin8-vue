@@ -9,6 +9,7 @@ const MockData = {
       trigger: "axis"
     },
     legend: {
+      show: false,
       data: [
         {
           name: "",
@@ -503,7 +504,7 @@ const MockData = {
       y: 'bottom',
       icon: "rect"
     },
-    tooltip : {
+    tooltip: {
       trigger: 'Axis',
       formatter: '{a}: <br> Reads:' + '{b}<br>' + 'Likes: {c1}'
     },
@@ -569,6 +570,140 @@ const MockData = {
       scale: true
     },
     series: [],
+  },
+  benchTwoOptions: {
+    title: {
+      text: ''
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+      }
+    },
+    legend: {
+      x: 'center',
+      y: 'bottom',
+      icon: "rect"
+    },
+    grid: {
+      top: "10%",
+      left: "10%",
+      right: "10%",
+      bottom: "25%",
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      data: [],
+      type: "category",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      scale: true
+    },
+    series: []
+  },
+  benchThreeOptions: {
+    title: {
+      text: ''
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+      }
+    },
+    legend: {
+      x: 'center',
+      y: 'bottom',
+      icon: "rect"
+    },
+    grid: {
+      top: "10%",
+      left: "10%",
+      right: "10%",
+      bottom: "25%",
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      data: [],
+      type: "category",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      scale: true
+    },
+    series: []
   },
   benchmarkColor: {
     blue_top_20_colors: [

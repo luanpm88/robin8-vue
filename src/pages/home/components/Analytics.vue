@@ -12,7 +12,7 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trends over past 7 days</p>
+              <p class="analytic-chart-title">Trend over past 7 days for  <{{trendTitle}} brand ></p>
               <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">
@@ -60,6 +60,7 @@ export default {
       topTabCur: 0,
       brandKeyWord: "",
       cur: 0,
+      trendTitle: '',
       trendsList: {
         options: ChartOption.trendOptions,
         chartsStyle: {
@@ -149,6 +150,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        this.trendTitle = this.trendParams.brand_keywords;
         this.cur = this.childKeyList.tabIndex;
         this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
         this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
