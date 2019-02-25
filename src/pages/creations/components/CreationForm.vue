@@ -286,15 +286,27 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}：</div>
-            <div class="col-sm-8">
-              <!-- <select class="form-control">
-                <option value="">{{$t('lang.creations.price.placeholder')}}</option>
-                <option
-                  v-for="(item, index) in priceList"
-                  :key="index"
-                  :value="item[0]"
-                >{{item[1]}}</option>
-              </select> -->
+            <div class="col-sm-3">
+              <select
+                name="price"
+                class="form-control"
+                :class="[errors.has('price') ? 'danger' : '']"
+                @change="changePrice"
+                v-model="price"
+              >
+                <option value="0,1000000">{{$t('lang.creations.price.placeholder')}}</option>
+                <option value="0,5000">0 - 5,000</option>
+                <option value="5000,10000">5,000 - 10,000</option>
+                <option value="10000,50000">10,000 - 50,000</option>
+                <option value="50000,100000">50,000 - 100,000</option>
+                <option value="100000,200000">100,000 - 200,000</option>
+                <option value="200000,1000000">200,000 +</option>
+              </select>
+              <div class="form-tips">
+                {{$t('lang.creations.price.errorTips')}}
+              </div>
+            </div>
+            <!-- <div class="col-sm-8">
               <div class="input-group">
                 <input
                   type="number"
@@ -322,7 +334,7 @@
               >
                 {{$t('lang.creations.price.errorTips')}}
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}：</div>
@@ -348,14 +360,42 @@
               <div class="form-tips">{{$t('lang.creations.followerGender.errorTips')}}</div>
             </div>
           </div>
+
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
-            <div class="col-sm-8">
-              <input
-                type="text"
+            <div class="col-sm-4">
+              <select
+                name="province"
                 class="form-control"
-                :placeholder="$t('lang.creations.followerDistrict.placeholder')"
+                v-model="province"
+                @change="changeProvince"
               >
+                <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of provinceData"
+                  :key="index"
+                  :value="item.provinceName"
+                >
+                  {{item.provinceName}}
+                </option>
+              </select>
+              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+            </div>
+            <div class="col-sm-4">
+              <select
+                name="city"
+                class="form-control"
+                v-model="city"
+              >
+                <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
+                <option
+                  v-for="(item, index) of cityData"
+                  :key="index"
+                  :value="item.citysName"
+                >
+                  {{item.citysName}}
+                </option>
+              </select>
               <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
             </div>
           </div>
@@ -415,6 +455,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
 import KolsListPanel from './KolsListPanel'
@@ -447,6 +488,11 @@ export default {
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
       campaignTime: '',
+      provinceData: [],
+      province: '',
+      cityData: [],
+      city: '',
+      price: '',
       submitData: {
         name: '',
         description: '',
@@ -458,7 +504,6 @@ export default {
         img_url: '',
         target: {
           industries: '',
-          price: '',
           price_from: '',
           price_to: ''
         },
@@ -538,6 +583,7 @@ export default {
         this.campaignTime = []
         this.campaignTime[0] = resData.start_at
         this.campaignTime[1] = resData.end_at
+        this.price = resData.targets_hash.price_from + ',' + resData.targets_hash.price_to
 
         let _terracesList = this.terracesList
         _terracesList.forEach(item => {
@@ -731,6 +777,36 @@ export default {
       })
       console.log(this.submitData.terraces)
     },
+    changePrice (e) {
+      const _self = this
+      let selectedVal = e.target.value
+
+      if (selectedVal == '') {
+        _self.submitData.target.price_from = ''
+        _self.submitData.target.price_to = ''
+      } else {
+        selectedVal = selectedVal.split(',')
+        console.log(selectedVal)
+        _self.submitData.target.price_from = selectedVal[0]
+        _self.submitData.target.price_to = selectedVal[1]
+      }
+    },
+    changeProvince (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      console.log(selectedVal)
+      if (selectedVal == '') {
+        _self.cityData = []
+        _self.city = ''
+      }
+      this.provinceData.forEach(function (item, index) {
+        if (item.provinceName == selectedVal) {
+          _self.cityData = item.citys
+          console.log(_self.cityData)
+          _self.city = ''
+        }
+      })
+    },
     doSubmit () {
       if (!this.canSubmit) {
         return false
@@ -796,6 +872,8 @@ export default {
     if (this.formType == 'edit') {
       this.getDetailData()
     }
+
+    this.provinceData = cityJs.citiesData.provinces
   },
   computed: {
     ...mapState(['authorization'])
