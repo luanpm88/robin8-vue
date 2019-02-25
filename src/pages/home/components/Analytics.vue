@@ -171,7 +171,6 @@ export default {
     }
   },
   created() {
-    this.labelList = [];
   },
   computed: {
     ...mapState(["authorization"])
@@ -200,6 +199,8 @@ export default {
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
+        console.log(999999);
+        this.labelList = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -224,7 +225,8 @@ export default {
         this.conceptWeibo(this.conceptParams);
       }
       if (tab.index === 2) {
-        // competitor 微博d
+        // console.log(this.labelList);
+        // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (tab.index === 3) {
@@ -313,8 +315,7 @@ export default {
     // competitor 微博
     competitorWeibo(params) {
       const _that = this;
-      // this.labelList = [];
-      console.log(this.labelList);
+      this.labelList = [];
       axios
         .post(apiConfig.competitorWeibo, params, {
           headers: {
@@ -324,8 +325,21 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = [];
+            _that.competitorList.options.series[0].data = [];
+            res.data.data.forEach((element, index) => {
+              let json = {
+                label: '',
+                data: ''
+              }
+              json.data = element;
+              json.label = res.data.labels[index];
+              _that.labelList.push(json);
+            });
+            _that.labelList.sort(_that.compare('data')).forEach(element => {
+              _that.competitorList.options.yAxis.data.push(element.label);
+              _that.competitorList.options.series[0].data.push(element.data);
+            });
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
@@ -346,8 +360,22 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = [];
+            _that.competitorList.options.series[0].data = [];
+            res.data.data.forEach((element, index) => {
+              let json = {
+                label: '',
+                data: ''
+              }
+              json.data = element;
+              json.label = res.data.labels[index];
+              _that.labelList.push(json);
+            });
+            // console.log();
+            _that.labelList.sort(_that.compare('data')).forEach(element => {
+              _that.competitorList.options.yAxis.data.push(element.label);
+              _that.competitorList.options.series[0].data.push(element.data);
+            });
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
@@ -408,6 +436,7 @@ export default {
           console.log(error);
         });
     },
+    // competitor 排序函数
     compare (property){
       return function(a,b){
           var value1 = a[property];

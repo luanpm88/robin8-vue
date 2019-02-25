@@ -2,10 +2,7 @@
 // const host = 'http://192.168.50.237:3000/brand_api/v2'
 // 张春明
 // const host = 'http://192.168.50.197:3001/brand_api/v2'
-// qa
 const host = 'https://qa.robin8.net/brand_api/v2'
-// 正式
-// const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
 const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
@@ -163,11 +160,12 @@ const config = {
 
   // benchMark
   // weixin benchMark
-  weixinBeachOne: `${searchHost}/weixin/kol/benchmark/benchmarking?${searchHostKey}`,
+  // weixin benchMark
+  weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
 
-  weixinBeachTwo: `${searchHost}/weixin/kol/benchmark/benchmarking2?${searchHostKey}`,
+  weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
 
-  weixinBeachThree: `${searchHost}/weixin/kol/benchmark/benchmarking3?${searchHostKey}`,
+  weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
 }
 
 module.exports = config

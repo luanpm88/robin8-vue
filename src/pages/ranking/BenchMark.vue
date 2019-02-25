@@ -7,21 +7,30 @@
 
       <div class="benchmark-container pull-right">
         <div class="bench-card">
-          <Echarts
+          <div class="r8-loading" v-if="oneLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else 
             :options="benchOne.options"
             :chartsStyle="benchOne.chartsStyle"
             ref="benchOneChart"
           ></Echarts>
         </div>
         <div class="bench-card mt20">
-          <Echarts
+          <div class="r8-loading" v-if="twoLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else
             :options="benchTwo.options"
             :chartsStyle="benchTwo.chartsStyle"
             ref="benchTwoChart"
           ></Echarts>
         </div>
         <div class="bench-card mt20">
-          <Echarts
+          <div class="r8-loading" v-if="threeLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else
             :options="benchThree.options"
             :chartsStyle="benchThree.chartsStyle"
             ref="benchThreeChart"
@@ -40,12 +49,14 @@ import MainNav from "@components/MainNav";
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import { mapState } from "vuex";
+import { Spin} from "ant-design-vue";
 export default {
   name: "benchMark",
   components: {
     PageHeader,
     MainNav,
-    Echarts
+    Echarts,
+    ASpin: Spin
   },
   computed: {
     ...mapState(["authorization"])
@@ -61,6 +72,9 @@ export default {
   },
   data() {
     return {
+      oneLoading: true,
+      twoLoading: true,
+      threeLoading: true,
       totalParams: {
         industry: "",
         no_of_days: "",
@@ -104,6 +118,7 @@ export default {
           _that.benchOne.options.series = [];
            _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
           if (res.status === 200) {
+            _that.oneLoading = false;
             res.data.forEach((element, index) => {
               let json = {
                 name: "",
@@ -173,6 +188,7 @@ export default {
           _that.benchTwo.options.series = [];
            _that.benchTwo.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
           if (res.status === 200) {
+            _that.twoLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
                 name: '',
@@ -211,8 +227,9 @@ export default {
         })
         .then(function(res) {
           _that.benchThree.options.series = [];
-           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
+           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on '+ _that.totalParams.industry +' when comparing to overall market voice';
           if (res.status === 200) {
+            _that.threeLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
                 name: '',
