@@ -65,10 +65,8 @@ import commonJs from '@javascripts/common.js'
 import DefaultTabs from "@components/DefaultTabs"
 import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
-import { Spin} from "ant-design-vue"
 export default {
   components: {
-    ASpin: Spin,
     DefaultTabs,
     KolsListItem
   },
@@ -230,35 +228,6 @@ export default {
   height: 460px;
   overflow: hidden;
 }
-.home-post {
-  padding: 10px 0px 2px;
-  border-bottom: 1px solid #ddd;
-}
-.home-post-detail {
-  cursor: pointer;
-  padding: 12px 0px;
-  img {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  div {
-    display: inline-block;
-    vertical-align: middle;
-    strong {
-      font-weight: normal;
-      font-size: $font-nm-s;
-      color: #575962FF;
-    }
-    p {
-      font-size: 0.8rem;
-    }
-  }
-}
 .home-post-title {
   color: nth($purple, 1);
   @include limit-line(1);
@@ -268,34 +237,5 @@ export default {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
-}
-
-.home-post-form {
-  padding: 10px 0px 0px;
-  span {
-    display: inline-block;
-    width: 32%;
-    text-align: center;
-    &:nth-child(1) {
-      text-align: center;
-    }
-  }
-  i {
-    vertical-align: middle;
-    margin-right: 5px;
-    color: #999;
-  }
-  .icon-pinglun{
-    font-weight: 600;
-  }
-  b {
-    font-weight: normal;
-    vertical-align: middle;
-    color: #b9b7b7;
-  }
-}
-.list-content-inner {
-  height: 380px;
-  overflow-y: auto;
 }
 </style>

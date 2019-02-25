@@ -173,8 +173,13 @@
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
           </div>
-          <div class="form-group text-center">
-            <button type="button" class="btn btn-blue btn-outline" @click="showMore">Show more</button>
+          <div class="btn-area">
+            <a-pagination
+              :defaultCurrent="currentPage"
+              :defaultPageSize="kolsPerPage"
+              :total="kolsTotal"
+              @change="onPageChange"
+            />
           </div>
         </default-tabs>
       </div>
@@ -186,13 +191,12 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import { Spin, Progress } from "ant-design-vue";
+import { Progress } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
 export default {
   name: 'kolsearch',
   components: {
-    ASpin: Spin,
     AProgress: Progress,
     DefaultTabs
   },
@@ -221,6 +225,9 @@ export default {
       kolOnly: false,
       kolOnlyText: "N",
       currentPage: 0,
+      selectPage: 0,
+      kolsPerPage: 10,
+      kolsTotal: 0,
       advancedSearch: false,
       topNumList: [
         "weixin - big data profile - 5,564,575",
@@ -311,6 +318,8 @@ export default {
           })
           .then(function(res) {
             if (res.status === 200) {
+              // console.log("我是weibo接口", res);
+              _that.kolsTotal = res.data.total_page_count;
               _that.jogDataInit(res.data.data);
             }
           })
@@ -327,6 +336,7 @@ export default {
           })
           .then(function(res) {
             // console.log("我是weixin接口", res);
+            _that.kolsTotal = res.data.total_page_count;
             _that.jogDataInit(res.data.data);
           })
           .catch(function(error) {
@@ -362,15 +372,6 @@ export default {
       this.tabIndex = tab.index;
       this.currentPage = 0;
       this.searchListBox = [];
-      // 初始化参数
-      this.paramsInit();
-      // 调用接口
-      this.totalJoggle(this.tabIndex);
-    },
-    showMore() {
-      this.isShow = false;
-      this.isLoading = true;
-      this.currentPage = this.currentPage + 1;
       // 初始化参数
       this.paramsInit();
       // 调用接口
@@ -420,7 +421,7 @@ export default {
     influencerank(value) {
       this.isShow = false;
       this.isLoading = true;
-      this.currentPage = 0;
+      this.currentPage = this.currentPage;
       this.searchListBox = [];
       if (value === 1) {
         this.isFluenceActive = true;
@@ -462,6 +463,15 @@ export default {
         _that.r8List.wechat_kols_count = commonJs.threeFormatter(_that.r8List.wechat_kols_count, 2);
         _that.r8List.weibo_kols_count = commonJs.threeFormatter(_that.r8List.weibo_kols_count, 2);
       })
+    },
+    onPageChange (page) {
+      this.isLoading = true;
+      this.currentPage = page - 1;
+      this.searchListBox = [];
+      // 初始化参数
+      this.paramsInit();
+      // 调用接口
+      this.totalJoggle(this.tabIndex);
     }
   }
 };
@@ -469,15 +479,6 @@ export default {
 <style lang="scss" scoped>
 span {
   display: inline-block;
-}
-.oneinput,
-.oneselect {
-  height: 34px;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ebedf2;
-  border-radius: 4px;
 }
 .kol-list-wrap {
   background: $white;
@@ -720,5 +721,9 @@ span {
   .is-bottom-iactive {
     border-color: #b180ef  transparent transparent; 
   }
+}
+.btn-area{
+  text-align: right;
+  margin-top: 20px;
 }
 </style>

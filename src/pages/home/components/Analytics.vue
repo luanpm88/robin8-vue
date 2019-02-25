@@ -12,7 +12,7 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trend over past 7 days for  <{{trendTitle}} | brand ></p>
+              <p class="analytic-chart-title">Trend over past 7 days for  {{trendTitle}}</p>
               <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">
@@ -24,7 +24,7 @@
               <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
             </div>
             <div v-if="cur === 3">
-              <p class="analytic-chart-title">Sentiment for <{{trendTitle}} | brand></p>
+              <p class="analytic-chart-title">Sentiment for {{trendTitle}}</p>
             </div>
             <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
           </div>
@@ -47,6 +47,7 @@ import { mapState } from "vuex";
 let key = "&application_id=local-001&application_key=vue-001";
 import commonJs from "@javascripts/common.js";
 let colorList = ['rgba(179,127,235,0.5)', 'rgba(179,127,235,0.4)', 'rgba(179,127,235,0.3)', 'rgba(179,127,235,0.2)', 'rgba(179,127,235,0.1)']
+let colorTwoList = [ '#7DCEA0', '#F5B7B1']
 export default {
   props: ["childKeyList"],
   components: {
@@ -398,7 +399,7 @@ export default {
               let json = {};
               json.name = item;
               json.value = res.data.data[index];
-              json.itemStyle = {color: colorList[index]}
+              json.itemStyle = {color: colorTwoList[index]}
               return json;
             });
             _that.SentimentList.options.series[0].data = newArr;
@@ -425,7 +426,7 @@ export default {
               let json = {};
               json.name = item;
               json.value = res.data.data[index];
-              json.itemStyle = {color: colorList[index + 1]}
+              json.itemStyle = {color: colorTwoList[index]}
               return json;
             });
             _that.SentimentList.options.series[0].data = newArr;

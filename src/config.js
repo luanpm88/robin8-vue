@@ -163,12 +163,16 @@ const config = {
 
   // benchMark
   // weixin benchMark
-  // weixin benchMark
   weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
 
   weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
 
   weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
+
+  // social listening 接口
+  socialWeibo: `${searchHost}/weibo/post/query?${searchHostKey}`,
+
+  socialWeixin: `${searchHost}/weixin/post/query?${searchHostKey}`,
 }
 
 module.exports = config
