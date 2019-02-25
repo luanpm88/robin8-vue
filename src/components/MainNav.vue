@@ -113,6 +113,11 @@ export default {
               href: '/ranking/WechatRanking'
             }
           ]
+        },
+        {
+          title: 'socialListening',
+          icon: 'icon-setting',
+          href: '/social/SocialListening'
         }
       ],
       active: false,

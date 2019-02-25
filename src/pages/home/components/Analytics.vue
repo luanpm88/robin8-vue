@@ -12,7 +12,7 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trends over past 7 days</p>
+              <p class="analytic-chart-title">Trend over past 7 days for  <{{trendTitle}} | brand ></p>
               <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">
@@ -24,7 +24,7 @@
               <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
             </div>
             <div v-if="cur === 3">
-              <p class="analytic-chart-title">Sentiment</p>
+              <p class="analytic-chart-title">Sentiment for <{{trendTitle}} | brand></p>
             </div>
             <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
           </div>
@@ -60,6 +60,7 @@ export default {
       topTabCur: 0,
       brandKeyWord: "",
       cur: 0,
+      trendTitle: '',
       trendsList: {
         options: ChartOption.trendOptions,
         chartsStyle: {
@@ -142,6 +143,7 @@ export default {
         labels: []
       },
       parentTags: [],
+      labelList: [],
       // parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
       tagColor: "purple"
     };
@@ -149,6 +151,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        this.trendTitle = this.trendParams.brand_keywords;
         this.cur = this.childKeyList.tabIndex;
         this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
         this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
@@ -191,12 +194,13 @@ export default {
         // concept 微信
         this.conceptWeixin(this.conceptParams);
       }
-      this.topTabCur = topTab.index;
       if (this.cur === 2 && topTab.index === 0) {
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
+        console.log(999999);
+        this.labelList = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -221,6 +225,7 @@ export default {
         this.conceptWeibo(this.conceptParams);
       }
       if (tab.index === 2) {
+        // console.log(this.labelList);
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
@@ -310,6 +315,7 @@ export default {
     // competitor 微博
     competitorWeibo(params) {
       const _that = this;
+      this.labelList = [];
       axios
         .post(apiConfig.competitorWeibo, params, {
           headers: {
@@ -319,8 +325,21 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = [];
+            _that.competitorList.options.series[0].data = [];
+            res.data.data.forEach((element, index) => {
+              let json = {
+                label: '',
+                data: ''
+              }
+              json.data = element;
+              json.label = res.data.labels[index];
+              _that.labelList.push(json);
+            });
+            _that.labelList.sort(_that.compare('data')).forEach(element => {
+              _that.competitorList.options.yAxis.data.push(element.label);
+              _that.competitorList.options.series[0].data.push(element.data);
+            });
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
@@ -331,6 +350,7 @@ export default {
     // competitor 微信
     competitorWeixin(params) {
       const _that = this;
+      this.labelList = [];
       axios
         .post(apiConfig.competitorWeixin, params, {
           headers: {
@@ -340,8 +360,22 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = [];
+            _that.competitorList.options.series[0].data = [];
+            res.data.data.forEach((element, index) => {
+              let json = {
+                label: '',
+                data: ''
+              }
+              json.data = element;
+              json.label = res.data.labels[index];
+              _that.labelList.push(json);
+            });
+            // console.log();
+            _that.labelList.sort(_that.compare('data')).forEach(element => {
+              _that.competitorList.options.yAxis.data.push(element.label);
+              _that.competitorList.options.series[0].data.push(element.data);
+            });
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
@@ -401,7 +435,15 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-    }
+    },
+    // competitor 排序函数
+    compare (property){
+      return function(a,b){
+          var value1 = a[property];
+          var value2 = b[property];
+          return value1 - value2;
+      }
+    },
   }
 };
 </script>

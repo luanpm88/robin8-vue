@@ -7,26 +7,35 @@
 
       <div class="benchmark-container pull-right">
         <div class="bench-card">
-          <Echarts
+          <div class="r8-loading" v-if="oneLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else 
             :options="benchOne.options"
             :chartsStyle="benchOne.chartsStyle"
             ref="benchOneChart"
           ></Echarts>
         </div>
-        <!-- <div class="bench-card mt20">
-          <Echarts
-            :options="benchOne.options"
-            :chartsStyle="benchOne.chartsStyle"
-            ref="benchOneChart"
+        <div class="bench-card mt20">
+          <div class="r8-loading" v-if="twoLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else
+            :options="benchTwo.options"
+            :chartsStyle="benchTwo.chartsStyle"
+            ref="benchTwoChart"
           ></Echarts>
-        </div> -->
-        <!-- <div class="bench-card mt20">
-          <Echarts
-            :options="benchOne.options"
-            :chartsStyle="benchOne.chartsStyle"
-            ref="benchOneChart"
+        </div>
+        <div class="bench-card mt20">
+          <div class="r8-loading" v-if="threeLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <Echarts v-else
+            :options="benchThree.options"
+            :chartsStyle="benchThree.chartsStyle"
+            ref="benchThreeChart"
           ></Echarts>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -40,25 +49,32 @@ import MainNav from "@components/MainNav";
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import { mapState } from "vuex";
+import { Spin} from "ant-design-vue";
 export default {
   name: "benchMark",
   components: {
     PageHeader,
     MainNav,
-    Echarts
+    Echarts,
+    ASpin: Spin
   },
   computed: {
     ...mapState(["authorization"])
   },
   created() {
-    console.log(this.$route.params)
+    // console.log(this.$route.params)
     this.totalParams.industry = this.$route.params.industry;
     this.totalParams.report_date = this.$route.params.report_date;
     this.totalParams.no_of_days = this.$route.params.no_of_days;
     this.weixinBeachOne(this.totalParams);
+    this.weixinBeachTwo(this.totalParams);
+    this.weixinBeachThree(this.totalParams);
   },
   data() {
     return {
+      oneLoading: true,
+      twoLoading: true,
+      threeLoading: true,
       totalParams: {
         industry: "",
         no_of_days: "",
@@ -66,8 +82,21 @@ export default {
         raw: 1
       },
       benchOneColorList: ChartOption.benchmarkColor.blue_top_20_colors,
+      benchTwoColorList: ChartOption.benchmarkColor.blue_top_20_colors,
       benchOne: {
         options: ChartOption.benchOneOptions,
+        chartsStyle: {
+          height: "600px"
+        }
+      },
+      benchTwo: {
+        options: ChartOption.benchTwoOptions,
+        chartsStyle: {
+          height: "600px"
+        }
+      },
+      benchThree: {
+        options: ChartOption.benchThreeOptions,
         chartsStyle: {
           height: "600px"
         }
@@ -89,6 +118,7 @@ export default {
           _that.benchOne.options.series = [];
            _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
           if (res.status === 200) {
+            _that.oneLoading = false;
             res.data.forEach((element, index) => {
               let json = {
                 name: "",
@@ -155,11 +185,73 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微xin", res);
-          _that.benchOne.options.series = [];
-           _that.benchOne.options.title.text = 'Top 39 KOLs on Beauty benchmarking (average Likes vs average Reads)';
+          _that.benchTwo.options.series = [];
+           _that.benchTwo.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
           if (res.status === 200) {
-            _that.$refs.benchOneChart.updateOptions(_that.benchOne.options);
+            _that.twoLoading = false;
+            res.data.data.forEach((element, index) => {
+              let json = {
+                name: '',
+                type: 'bar',
+                stack: '总量',
+                color: '',
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'insideRight'
+                  }
+                },
+                data: []
+              }
+              json.name = res.data.profile_names[index];
+              json.data = element;
+              json.color = _that.benchOneColorList[index];
+              _that.benchTwo.options.series.push(json)
+
+            })
+            _that.benchTwo.options.xAxis.data = res.data.date_labels;
+            _that.$refs.benchTwoChart.updateOptions(_that.benchTwo.options);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    weixinBeachThree(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.weixinBeachThree, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.benchThree.options.series = [];
+           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on '+ _that.totalParams.industry +' when comparing to overall market voice';
+          if (res.status === 200) {
+            _that.threeLoading = false;
+            res.data.data.forEach((element, index) => {
+              let json = {
+                name: '',
+                type: 'bar',
+                stack: '总量',
+                color: '',
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'insideRight'
+                  }
+                },
+                data: []
+              }
+              json.name = res.data.profile_names[index];
+              json.data = element;
+              json.color = _that.benchOneColorList[index];
+              _that.benchThree.options.series.push(json)
+
+            })
+            _that.benchThree.options.xAxis.data = res.data.date_labels;
+            _that.$refs.benchThreeChart.updateOptions(_that.benchThree.options);
           }
         })
         .catch(function(error) {

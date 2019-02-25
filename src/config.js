@@ -163,9 +163,12 @@ const config = {
 
   // benchMark
   // weixin benchMark
+  // weixin benchMark
   weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
 
   weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
+
+  weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
 }
 
 module.exports = config
