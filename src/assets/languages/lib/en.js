@@ -5,6 +5,7 @@ export const lang = {
   myWallet: 'Wallet',
   settings: 'Settings',
   ranking: 'Social Media',
+  socialListening: 'Social Listening',
   wechat: 'Wechat',
   weibo: 'Weibo',
   more: 'load more',

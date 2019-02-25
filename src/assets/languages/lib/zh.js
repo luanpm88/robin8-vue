@@ -5,6 +5,7 @@ export const lang = {
   myWallet: '我的钱包',
   settings: '企业设置',
   ranking: '排名',
+  socialListening: '社交倾听',
   wechat: '微信',
   weibo: '微博',
   more: '查看更多',

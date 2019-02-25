@@ -33,7 +33,8 @@ import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetit
 import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
 import WechatRanking from '@/pages/ranking/WechatRanking'
 import BenchMark from '@/pages/ranking/BenchMark'
-
+import SocialListening from '@/pages//social/SocialListening'
+ 
 Vue.use(Router)
 
 export default new Router({
@@ -330,6 +331,15 @@ export default new Router({
         title: 'benchMark',
         auth: true
       }
-    }
+    },
+    {
+      path: '/social/SocialListening',
+      name: 'socialListening',
+      component: SocialListening,
+      meta: {
+        title: 'socialListening',
+        auth: true
+      }
+    },
   ]
 })
