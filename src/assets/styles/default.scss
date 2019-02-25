@@ -88,9 +88,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
   &.align-baseline { align-items: baseline; }
   &.with-arr { padding-right: 30px;
     &:after { @include tail-arr; }
-    &.open:after {
-      @include transform(translateY(-50%) rotate(90deg));
-    }
+    &.open:after { @include transform(translateY(-50%) rotate(90deg)); }
   }
 }
 
@@ -139,6 +137,12 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 
 /*empty area styles*/
 .empty-area { padding: 60px 0; }
+
+/*city list styles*/
+.city-list { & > .item { display: inline-block; height: 28px; line-height: 26px; padding: 0 8px; margin: 5px; border-radius: 4px; border: 1px solid #6168e6; font-size: 1.2rem; font-weight: 500; color: #6168e6;
+    .iconfont { display: inline-block; margin: -2px 4px 0 0; vertical-align: middle; cursor: pointer; }
+  }
+}
 
 /*page styles begin && class reset begin*/
 .pull-right { float: right !important; }

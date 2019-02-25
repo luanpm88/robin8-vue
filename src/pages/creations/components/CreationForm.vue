@@ -356,6 +356,7 @@
                 name="city"
                 class="form-control"
                 v-model="city"
+                @change="changeCity"
               >
                 <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
                 <option
@@ -367,6 +368,24 @@
                 </option>
               </select>
               <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+            </div>
+          </div>
+          <div v-if="checkedCitys.length > 0" class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
+            <div class="col-sm-8">
+              <ul class="city-list">
+                <li
+                  v-for="(item, index) in checkedCitys"
+                  :key="index"
+                  class="item"
+                >
+                  <span
+                    class="iconfont icon-close"
+                    @click="delCity(item)"
+                  ></span>
+                  {{item}}
+                </li>
+              </ul>
             </div>
           </div>
           <div class="form-group text-center">
@@ -458,6 +477,7 @@ export default {
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
       campaignTime: '',
+      checkedCitys: [],
       provinceData: [],
       province: '',
       cityData: [],
@@ -746,20 +766,6 @@ export default {
       })
       console.log(this.submitData.terraces)
     },
-    changePrice (e) {
-      const _self = this
-      let selectedVal = e.target.value
-
-      if (selectedVal == '') {
-        _self.submitData.target.price_from = ''
-        _self.submitData.target.price_to = ''
-      } else {
-        selectedVal = selectedVal.split(',')
-        console.log(selectedVal)
-        _self.submitData.target.price_from = selectedVal[0]
-        _self.submitData.target.price_to = selectedVal[1]
-      }
-    },
     changeProvince (e) {
       const _self = this
       let selectedVal = e.target.value
@@ -775,6 +781,28 @@ export default {
           _self.city = ''
         }
       })
+    },
+    changeCity (e) {
+      const _self = this
+      let selectedVal = e.target.value
+      let citys = _self.checkedCitys
+      console.log(selectedVal)
+      if (selectedVal != '') {
+        let _index = citys.indexOf(selectedVal)
+        if (_index == -1) {
+          citys.push(selectedVal)
+          _self.city = ''
+        }
+      }
+      console.log(_self.checkedCitys)
+    },
+    delCity (city) {
+      let citys = this.checkedCitys
+      let _index = citys.indexOf(city)
+      if (_index != -1) {
+        citys.splice(_index, 1)
+      }
+      console.log(this.checkedCitys)
     },
     doSubmit () {
       if (!this.canSubmit) {
