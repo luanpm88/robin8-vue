@@ -24,15 +24,15 @@
         </div>
         <div class="social-content clearfix mt20">
           <div class="nonetip" v-if="isShow">
-            <span>暂无数据...</span>
+            <span>{{$t('lang.totalNoDataTip')}}</span>
           </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
           </div>
           <div v-if="isContent">
             <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-              <p v-if="source === 1" class="home-post-title">{{item.title}}</p>
-              <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
+              <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
+              <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
               <div class="home-post-detail"  @click="intoKolDetail(item)">
                 <img :src="item.imgUrl" alt class>
                 <div>
@@ -240,6 +240,9 @@ export default {
   color: nth($purple, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
+}
+.home-post-detail{
+  display: inline-block;
 }
 .home-post-content {
   @include limit-line(3);

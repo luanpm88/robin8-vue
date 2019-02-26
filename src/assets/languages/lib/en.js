@@ -15,6 +15,7 @@ export const lang = {
   payment: 'Payment',
   information: 'Information',
   submitBtn: 'Submit',
+  totalNoDataTip: 'No data...',
   updateBaseInfo: {
     base_info: {
       title: 'Base Info',

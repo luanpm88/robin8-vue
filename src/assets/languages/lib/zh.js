@@ -15,6 +15,7 @@ export const lang = {
   payment: '支付',
   information: '基本信息',
   submitBtn: '提交',
+  totalNoDataTip: '暂无数据...',
   updateBaseInfo: {
     base_info: {
       title: '基本信息',

@@ -42,7 +42,7 @@
           <div class="kol-card">
             <p class="kol-cloumn">Keywords</p>
             <div class="nonetip" v-if="isShow">
-              <span>暂无数据...</span>
+              <span>{{$t('lang.totalNoDataTip')}}</span>
             </div>
             <div class="r8-loading" v-if="isLoading">
               <a-spin tip="Loading..."/>
