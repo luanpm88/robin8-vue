@@ -18,25 +18,25 @@
             <div class="campaign-info">
               <img :src="item.img_url" alt="" class="campaign-info-left">
               <div class="campaign-info-right">
-                <p>预算：{{item.pre_amount}}</p>
-                <p>预招人数：{{item.pre_kols_count}}</p>
-                <p>价格：{{item.pre_amount}}</p>
+                <p>Budget：{{item.pre_amount}}</p>
+                <p>estimated number of kols：{{item.pre_kols_count}}</p>
+                <p>price：{{item.price_range}}</p>
               </div>
             </div>
           </td>
           <td>
-            <p>活动时间：{{item.time_range}}</p>
-            <p>状态：{{item.status_zh}}</p>
+            <p>timeline：{{item.time_range}}</p>
+            <p>status：{{item.status_zh}}</p>
           </td>
           <td>
-            <p>已消耗：{{item.quote_count}}</p>
-            <p>已招募：{{item.actual_amount}}</p>
+            <p>take budget：{{item.actual_amount}}</p>
+            <p>real nmber of kols：{{item.quote_count}}</p>
           </td>
           <td>
             <p class="campaign-info-detail">
-              <span @click="detail(item.id)">详情</span>
-              <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">编辑</span>
-              <span v-else @click="kols(item.id)" >查看报价</span>
+              <span @click="detail(item.id)">detail</span>
+              <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">edit</span>
+              <span v-else @click="kols(item.id)" >quotations</span>
             </p>
           </td>
         </tr>
