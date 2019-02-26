@@ -4,7 +4,7 @@ export const lang = {
   myKols: 'KOL List',
   myWallet: 'Wallet',
   settings: 'Settings',
-  ranking: 'Social Media',
+  ranking: 'Ranking',
   socialListening: 'Social Listening',
   wechat: 'Wechat',
   weibo: 'Weibo',
@@ -15,6 +15,7 @@ export const lang = {
   payment: 'Payment',
   information: 'Information',
   submitBtn: 'Submit',
+  totalNoDataTip: 'No data...',
   updateBaseInfo: {
     base_info: {
       title: 'Base Info',

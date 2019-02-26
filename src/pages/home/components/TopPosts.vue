@@ -18,7 +18,7 @@
           <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
             <div class="home-post" v-for="(item, index) in key" :key="index">
               <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
-              <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
+              <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
               <div class="home-post-detail" @click="intoKolDetail(item)">
                 <img :src="item.avatar_url" alt class>
                 <div>
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="nonetip" v-if="isShow">
-            <span>暂无数据...</span>
+            <span>{{$t('lang.totalNoDataTip')}}</span>
           </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
@@ -119,10 +119,6 @@ export default {
     }
   },
   created() {
-    // this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
-    // this.topPostParams.page_no = this.postWeiboCurrentPage;
-    // // 微博
-    // this.topPostWeibo(this.topPostParams)
   },
   methods: {
     changeTab(tab) {
@@ -130,7 +126,6 @@ export default {
       this.postListBox = [];
       this.isShow = false;
       this.isLoading = true;
-      // this.currentList = tab.data
       if (tab.index === 0) {
         // 微博
         this.topPostWeibo(this.topPostParams)
@@ -160,7 +155,8 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
+          alert(error);
         })
     },
     // 微信的接口
@@ -184,7 +180,8 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
+          alert(error);
         })
     },
      // 跳转 kol detail

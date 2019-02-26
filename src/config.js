@@ -168,9 +168,9 @@ const config = {
   // weixin benchMark
   weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
 
-  weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
+  weixinBeachTwo: `${searchHost}/price/weibo/kol/benchmark/benchmarking2?${searchHostKey}`,
 
-  weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
+  weixinBeachThree: `${searchHost}/price/weibo/kol/benchmark/benchmarking3?${searchHostKey}`,
 
   // social listening 接口
   socialWeibo: `${searchHost}/weibo/post/query?${searchHostKey}`,
