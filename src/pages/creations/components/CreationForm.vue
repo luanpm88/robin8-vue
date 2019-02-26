@@ -215,7 +215,7 @@
                 :class="[errors.has('kols_count') ? 'danger' : '']"
                 v-model.number="submitData.pre_kols_count"
                 :placeholder="$t('lang.creations.kolNumber.placeholder')"
-                v-validate="'required'"
+                v-validate="'required|number'"
               >
               <div
                 class="form-tips danger"
@@ -233,7 +233,7 @@
                 :class="[errors.has('pre_amount') ? 'danger' : '']"
                 v-model.number="submitData.pre_amount"
                 :placeholder="$t('lang.creations.budget.placeholder')"
-                v-validate="'required'"
+                v-validate="'required|number'"
               >
               <div
                 class="form-tips danger"
@@ -472,7 +472,6 @@ export default {
       terracesList: [],
       kolsParams: {},
       kolsList: [],
-      priceList: [],
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -521,8 +520,6 @@ export default {
         const data = res.data
         this.brandsList = data.trademarks_list
         this.tagsList = data.tags_list
-        // this.priceList = data.prices_range
-        // console.log(this.priceList)
 
         let _terracesList = data.terraces_list
         _terracesList.forEach(item => {
