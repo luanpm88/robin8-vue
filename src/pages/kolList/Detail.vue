@@ -41,7 +41,13 @@
           </div>
           <div class="kol-card">
             <p class="kol-cloumn">Keywords</p>
-            <tag-charts :width="240" :height="180" :taglist="parentTags"></tag-charts>
+            <div class="nonetip" v-if="isShow">
+              <span>暂无数据...</span>
+            </div>
+            <div class="r8-loading" v-if="isLoading">
+              <a-spin tip="Loading..."/>
+            </div>
+            <tag-charts v-if="isTag" :width="240" :height="180" :taglist="parentTags"></tag-charts>
           </div>
         </div>
         <div class="kol-detail-con">
@@ -144,6 +150,9 @@ export default {
   },
   data() {
     return {
+      isShow: false,
+      isLoading: true,
+      isTag: false,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,
@@ -215,7 +224,7 @@ export default {
       this.kolWeiXinKeyword(totalParams);
       this.kolWeixinSocial(totalParams);
       // 计算sentiment
-      this.sentimentWeibo(this.sentimentParams);
+      this.sentimentWeixin(this.sentimentParams);
       // 计算Mentions
       this.trendsWeixin(this.trendParams);
     }
@@ -286,9 +295,20 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
-            _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
+            // console.log('我是微博', res)
+            
+            if (res.data.data.length > 0) {
+               _that.isTag = true;
+              _that.competitorList.options.yAxis.data = res.data.labels;
+              _that.competitorList.options.series[0].data = res.data.data;
+              _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
+              _that.isLoading = false;
+            } else {
+              _that.isTag = false;
+              _that.isShow = true;
+              _that.isLoading = false;
+            }
+           
           }
         })
         .catch(function(error) {

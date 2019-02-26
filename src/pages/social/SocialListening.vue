@@ -14,8 +14,8 @@
           <div class="social-line clearfix col-xs-6">
             <span class="social-line-left col-xs-2">Source:</span>
             <select class="col-xs-10 oneselect" v-model="source">
-              <option value="1">{{$t('lang.weibo')}}</option>
-              <option value="0">{{$t('lang.wechat')}}</option>
+              <option value="0">{{$t('lang.weibo')}}</option>
+              <option value="1">{{$t('lang.wechat')}}</option>
             </select>
           </div>
           <div class="form-group text-right">
@@ -33,7 +33,7 @@
             <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
               <p v-if="source === 1" class="home-post-title">{{item.title}}</p>
               <a :href="item.url" v-else><p class="home-post-title">{{item.title}}</p></a>
-              <div class="home-post-detail">
+              <div class="home-post-detail"  @click="intoKolDetail(item)">
                 <img :src="item.imgUrl" alt class>
                 <div>
                   <strong>{{item.name}}</strong>
@@ -82,7 +82,7 @@ export default {
   },
   data() {
     return {
-      source: 1,
+      source: 0,
       topic: 'adidas',
       currentPage: 0,
       currentPageAdd: 1,
@@ -183,7 +183,7 @@ export default {
       this.currentPageAdd = this.currentPage + 1;
       this.totalParams.OR_keywords = this.topic;
       this.totalParams.page_no = this.currentPage;
-      if (Number(this.source) === 1) {
+      if (Number(this.source) === 0) {
         // weibo
         this.socialWeibo(this.totalParams);
       } else {
@@ -199,14 +199,26 @@ export default {
       this.currentPage = page - 1;
       this.totalParams.OR_keywords = this.topic;
       this.totalParams.page_no = this.currentPage;
-      if (Number(this.source) === 1) {
+      if (Number(this.source) === 0) {
         // weibo
         this.socialWeibo(this.totalParams);
       } else {
         // weixin
         this.socialWeixin(this.totalParams);
       }
-    }
+    },
+    // 跳转 kol detail
+    intoKolDetail(item) {
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+          type: Number(this.source),
+          brand_keywords: this.topic
+        },
+      });
+    },
   }
 };
 </script>
