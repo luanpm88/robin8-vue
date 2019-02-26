@@ -177,6 +177,7 @@
             <a-pagination
               :defaultCurrent="currentPage"
               :defaultPageSize="kolsPerPage"
+              v-model="currentPageAdd"
               :total="kolsTotal"
               @change="onPageChange"
             />
@@ -225,6 +226,7 @@ export default {
       kolOnly: false,
       kolOnlyText: "N",
       currentPage: 0,
+      currentPageAdd: 1,
       selectPage: 0,
       kolsPerPage: 10,
       kolsTotal: 0,
@@ -371,6 +373,7 @@ export default {
       this.isLoading = true;
       this.tabIndex = tab.index;
       this.currentPage = 0;
+      this.currentPageAdd = this.currentPage + 1;
       this.searchListBox = [];
       // 初始化参数
       this.paramsInit();
@@ -381,6 +384,7 @@ export default {
       this.isShow = false;
       this.isLoading = true;
       this.currentPage = 0;
+      this.currentPageAdd = this.currentPage + 1;
       this.searchListBox = [];
       // 初始化参数
       this.paramsInit();
@@ -422,6 +426,7 @@ export default {
       this.isShow = false;
       this.isLoading = true;
       this.currentPage = this.currentPage;
+      this.currentPageAdd = this.currentPage + 1;
       this.searchListBox = [];
       if (value === 1) {
         this.isFluenceActive = true;
@@ -467,6 +472,7 @@ export default {
     onPageChange (page) {
       this.isLoading = true;
       this.currentPage = page - 1;
+      this.currentPageAdd = page;
       this.searchListBox = [];
       // 初始化参数
       this.paramsInit();
