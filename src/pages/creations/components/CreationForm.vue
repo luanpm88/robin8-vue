@@ -847,8 +847,15 @@ export default {
         })
       })
 
-      this.submitData.start_at = this.campaignTime[0]
-      this.submitData.end_at = this.campaignTime[1]
+      // this.submitData.start_at = this.campaignTime[0]
+      // this.submitData.end_at = this.campaignTime[1]
+
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+      this.submitData.start_at = _startTime
+      this.submitData.end_at = _endTime
 
       let _price = this.price
       _price = _price.split(',')
@@ -867,9 +874,14 @@ export default {
     }
   },
   mounted () {
-    this.getBaseData()
     if (this.formType == 'edit') {
-      this.getDetailData()
+      let _self = this
+      _self.getBaseData()
+      setTimeout(function () {
+        _self.getDetailData()
+      }, 500)
+    } else {
+      this.getBaseData()
     }
 
     this.provinceData = cityJs.citiesData.provinces

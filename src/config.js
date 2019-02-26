@@ -26,8 +26,11 @@ const config = {
   // 获取邮箱验证码
   emailCodeUrl: `${host}/codes/get_email_code`,
 
-  // 活动 创建post，列表get，详情:id get
+  // 大V活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
+
+  // 小V活动 创建post，列表get，详情:id get
+  campaignsUrl: `${host}/campaigns`,
 
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,
