@@ -155,7 +155,8 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
+          alert(error);
         })
     },
     // 微信的接口
@@ -179,7 +180,8 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error);
+          alert(error);
         })
     },
      // 跳转 kol detail
