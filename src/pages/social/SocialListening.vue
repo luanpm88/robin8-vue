@@ -42,14 +42,15 @@
               </div>
               <p class="home-post-content">'{{item.content}}'</p>
             </div>
-          </div>
-          <div class="btn-area">
-            <a-pagination
-              :defaultCurrent="currentPage"
-              :defaultPageSize="kolsPerPage"
-              :total="kolsTotal"
-              @change="onPageChange"
-            />
+            <div class="btn-area">
+              <a-pagination
+                :defaultCurrent="currentPage"
+                v-model="currentPageAdd"
+                :defaultPageSize="kolsPerPage"
+                :total="kolsTotal"
+                @change="onPageChange"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -84,6 +85,7 @@ export default {
       source: 1,
       topic: 'adidas',
       currentPage: 0,
+      currentPageAdd: 1,
       kolsPerPage: 10,
       kolsTotal: 0,
       isShow: false,
@@ -112,7 +114,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('我是微博', res);
+            // console.log('我是微博', res);
             _that.isLoading = false;
             _that.kolsTotal = res.data.total_page_count;
             if (res.data.data.length > 0) {
@@ -174,13 +176,14 @@ export default {
         });
     },
     totalSearch() {
-      this.isShow = true;
+      this.isLoading = true;
       this.isContent = false;
       this.isShow = false;
       this.currentPage = 0;
+      this.currentPageAdd = this.currentPage + 1;
       this.totalParams.OR_keywords = this.topic;
       this.totalParams.page_no = this.currentPage;
-      if (this.source === 1) {
+      if (Number(this.source) === 1) {
         // weibo
         this.socialWeibo(this.totalParams);
       } else {
@@ -189,13 +192,14 @@ export default {
       }
     },
     onPageChange (page) {
-      this.isShow = true;
+      this.isLoading = true;
       this.isContent = false;
       this.isShow = false;
+      this.currentPageAdd = page;
       this.currentPage = page - 1;
       this.totalParams.OR_keywords = this.topic;
       this.totalParams.page_no = this.currentPage;
-      if (this.source === 1) {
+      if (Number(this.source) === 1) {
         // weibo
         this.socialWeibo(this.totalParams);
       } else {
