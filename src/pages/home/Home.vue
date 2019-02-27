@@ -88,6 +88,7 @@ export default {
       isHomeStatus: 'Yes',
       parentSentiment: '',
       keyList: {
+        name: '',
         brand_keywords: '',
         cb_keywords: [],
         tabIndex: 0
@@ -112,6 +113,7 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
+        console.log(res);
         if (res.status === 200) {
           // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
@@ -122,7 +124,12 @@ export default {
             if (JSON.stringify(_that.$route.params) == "{}") {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
-                  _that.keyList.brand_keywords = element.name;
+                  _that.keyList.name = element.name;
+                  let newKey = '';
+                  element.keywords.split(",").forEach(item => {
+                    newKey += '"' + item + '"'
+                  })
+                  _that.keyList.brand_keywords = newKey;
                 }
               })
 
@@ -148,7 +155,12 @@ export default {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
                     // console.log(3333);
-                    _that.keyList.brand_keywords = element.name;
+                    _that.keyList.name = element.name;
+                    let newKey = '';
+                    element.keywords.split(",").forEach(item => {
+                      newKey += '"' + item + '"'
+                    })
+                    _that.keyList.brand_keywords = newKey;
                   }
                 })
                 // 赋值对比competitor
