@@ -254,7 +254,7 @@ export default {
     this.r8Kol();
     // 获取keywords
     this.getBaseData();
-    console.log(this.keyWord.brand_keywords);
+    // console.log(this.keyWord.brand_keywords);
     if (this.keyWord.brand_keywords) {
       this.tabIndex = this.keyWord.type;
       this.keyword = this.keyWord.brand_keywords;
