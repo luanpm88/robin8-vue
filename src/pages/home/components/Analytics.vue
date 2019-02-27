@@ -87,18 +87,18 @@ export default {
         type: "doc"
       },
       competitorParams: {
-        start_date: commonJs.cPastFourteenDays,
+        start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
         cb_names: ["C1 BMW", "C2 Audi", "C3 Honda"],
         cb_keywords: ["BMW", "Audi", "Honda"]
       },
       sentimentParams: {
-        start_date: commonJs.cPastFourteenDays,
+        start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
         brand_keywords: "BMW"
       },
       conceptParams: {
-        start_date: commonJs.cPastFourteenDays,
+        start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
         brand_keywords: "BMW",
         language: "en"
@@ -145,7 +145,6 @@ export default {
       },
       parentTags: [],
       labelList: [],
-      // parentTags: ["Books", "Music", "Fitness", "Beauty", "Babies", "Food"],
       tagColor: "purple"
     };
   },
@@ -200,8 +199,6 @@ export default {
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
-        console.log(999999);
-        this.labelList = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -226,7 +223,6 @@ export default {
         this.conceptWeibo(this.conceptParams);
       }
       if (tab.index === 2) {
-        // console.log(this.labelList);
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }

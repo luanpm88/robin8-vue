@@ -64,9 +64,14 @@ export default {
     this.totalParams.industry = this.$route.params.industry;
     this.totalParams.report_date = this.$route.params.report_date;
     this.totalParams.no_of_days = this.$route.params.no_of_days;
+    
     this.weixinBeachOne(this.totalParams);
-    this.weixinBeachTwo(this.totalParams);
-    this.weixinBeachThree(this.totalParams);
+    
+     this.totalTwoParams.industry = this.$route.params.industry;
+    this.totalTwoParams.report_date = this.$route.params.report_date;
+    this.totalTwoParams.no_of_days = this.$route.params.no_of_days;
+    this.weixinBeachTwo(this.totalTwoParams);
+    this.weixinBeachThree(this.totalTwoParams);
   },
   data() {
     return {
@@ -78,6 +83,11 @@ export default {
         no_of_days: "",
         report_date: "",
         raw: 1
+      },
+      totalTwoParams: {
+        industry: "",
+        no_of_days: "",
+        report_date: ""
       },
       benchOneColorList: ChartOption.benchmarkColor.blue_top_20_colors,
       benchTwoColorList: ChartOption.benchmarkColor.blue_top_20_colors,

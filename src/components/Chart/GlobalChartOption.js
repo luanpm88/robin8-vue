@@ -59,7 +59,7 @@ const MockData = {
       nameLocation: "middle",
       nameTextStyle: {
         fontSize: 16,
-        padding: [0, 0, 30, 0]
+        padding: [0, 0, 45, 0]
         // padding: [20],
         // shadowOffsetY: 30,
       },
@@ -455,7 +455,9 @@ const MockData = {
     thirtyColums: [{
       title: 'Rank No.',
       dataIndex: 'rank_no',
-      width: '7%'
+      width: '5%',
+      sorter: true,
+      scopedSlots: { customRender: 'rank_no' },
     }, {
       title: 'Profile Name Weixin ID',
       dataIndex: 'profileDec',
@@ -464,37 +466,58 @@ const MockData = {
     }, {
       title: 'Total Post Count',
       dataIndex: 'doc_count',
-      width: '10%'
+      sorter: true,
+      scopedSlots: { customRender: 'doc_count' },
     }, {
-      title: 'Headlines',
-      dataIndex: 'headline_count'
+      title: 'Head Lines',
+      dataIndex: 'headline_count',
+      sorter: true,
+      scopedSlots: { customRender: 'headline_count' },
     }, {
       title: 'Total Read Count',
-      dataIndex: 'total_reads'
+      dataIndex: 'total_reads',
+      sorter: true,
+      scopedSlots: { customRender: 'total_reads' },
     }, {
       title: 'Max Read Count',
-      dataIndex: 'max_reads'
+      dataIndex: 'max_reads',
+      sorter: true,
+      scopedSlots: { customRender: 'max_reads' },
     }, {
       title: 'Avg Read Count',
-      dataIndex: 'avg_reads'
+      dataIndex: 'avg_reads',
+      sorter: true,
+      scopedSlots: { customRender: 'avg_reads' },
     }, {
       title: 'Total Like Count',
-      dataIndex: 'total_likes'
+      dataIndex: 'total_likes',
+      sorter: true,
+      scopedSlots: { customRender: 'total_likes' },
     }, {
       title: 'Max Like Count',
-      dataIndex: 'max_likes'
+      dataIndex: 'max_likes',
+      sorter: true,
+      scopedSlots: { customRender: 'max_likes' },
     }, {
       title: 'Avg Like Count',
-      dataIndex: 'avg_likes'
+      dataIndex: 'avg_likes',
+      sorter: true,
+      scopedSlots: { customRender: 'avg_likes' },
     }, {
       title: 'Total Influence',
-      dataIndex: 'total_post_influence'
+      dataIndex: 'total_post_influence',
+      sorter: true,
+      scopedSlots: { customRender: 'total_post_influence' },
     }, {
       title: 'Max Post Influence',
-      dataIndex: 'max_post_influence'
+      dataIndex: 'max_post_influence',
+      sorter: true,
+      scopedSlots: { customRender: 'max_post_influence' },
     }, {
       title: 'Avg Post influence',
-      dataIndex: 'avg_post_influence'
+      dataIndex: 'avg_post_influence',
+      sorter: true,
+      scopedSlots: { customRender: 'avg_post_influence' },
     }]
   },
   // weixin benchMark

@@ -166,11 +166,18 @@ const config = {
 
   // benchMark
   // weixin benchMark
-  weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
+  weixinBeachOne: `${searchHost}/weixin/kol/benchmark/benchmarking?${searchHostKey}`,
 
-  weixinBeachTwo: `${searchHost}/price/weibo/kol/benchmark/benchmarking2?${searchHostKey}`,
+  weixinBeachTwo: `${searchHost}/weixin/kol/benchmark/benchmarking2?${searchHostKey}`,
 
-  weixinBeachThree: `${searchHost}/price/weibo/kol/benchmark/benchmarking3?${searchHostKey}`,
+  weixinBeachThree: `${searchHost}/weixin/kol/benchmark/benchmarking3?${searchHostKey}`,
+
+  // weixin benchMark
+  // weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
+
+  // weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
+
+  // weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
 
   // social listening 接口
   socialWeibo: `${searchHost}/weibo/post/query?${searchHostKey}`,

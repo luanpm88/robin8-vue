@@ -1,7 +1,7 @@
 export const lang = {
   home: '首页',
   campaignsData: '营销数据',
-  myKols: '我收藏的大V',
+  myKols: 'KOL搜索',
   myWallet: '我的钱包',
   settings: '企业设置',
   ranking: '排名',
@@ -246,6 +246,7 @@ export const lang = {
         check: '勾选',
         id: 'Id',
         name: '名字',
+        keywords: '关键字',
         description: '描述',
         operation: '操作',
       }
@@ -256,6 +257,8 @@ export const lang = {
     addPage: {
       name: '品牌名称：',
       placeholderName: '请填写品牌名称',
+      keywords: '品牌关键字：',
+      placeholderKeywords: '请填写品牌关键字',
       dec: '品牌介绍：',
       placeholderDec: '请填写品牌介绍'
     }
@@ -284,6 +287,10 @@ export const lang = {
   kolList: {
     detail: {
       btn: '返回'
+    },
+    search: {
+      likeTip: '喜欢人数',
+      sumTip: '总投入'
     }
   }
 }

@@ -8,6 +8,7 @@
       <th>{{$t('lang.myBrandPage.table.title.check')}}</th>
       <th>{{$t('lang.myBrandPage.table.title.id')}}</th>
       <th>{{$t('lang.myBrandPage.table.title.name')}}</th>
+      <th>{{$t('lang.myBrandPage.table.title.keywords')}}</th>
       <th>{{$t('lang.myBrandPage.table.title.description')}}</th>
       <th>{{$t('lang.myBrandPage.table.title.operation')}}</th>
     </tr>
@@ -21,6 +22,7 @@
       </td>
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
+      <td>{{item.keywords}}</td>
       <td>{{item.description}}</td>
       <td>
         <p class="campaign-info-detail">
@@ -75,6 +77,7 @@ export default {
           }
           _brandItem.status = item.status
           _brandItem.name = item.name
+          _brandItem.keywords = item.keywords
           _brandItem.description = item.description
           this.brandsList.push(_brandItem)
         })

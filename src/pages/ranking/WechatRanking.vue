@@ -60,7 +60,7 @@
             <a-table
             v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
             @change="handleTableChange"
-            :pagination="false" :scroll="{ y: 550 }">
+            :pagination="false" :scroll="{ y: 500 }">
               <template slot="profileDec" slot-scope="dec">
                 <div class="r-tableThirtyList-name" 
                 @click="rowClick(dec)">
@@ -131,8 +131,29 @@ export default {
     this.RankingDate(totalParams);
   },
   methods: {
-    handleTableChange() {
-
+    // ranking 升降序函数
+    handleTableChange(pagination, filters, sorter) {
+      if (sorter.order === 'ascend') {
+        this.tableThirtyList.sort(this.ascendCompare(sorter.columnKey));
+      } else {
+        this.tableThirtyList.sort(this.descendCompare(sorter.columnKey));
+      }
+    },
+    // ranking 升序排列
+    ascendCompare (property){
+      return function(a,b){
+          var value1 = a[property];
+          var value2 = b[property];
+          return value1 - value2;
+      }
+    },
+    // ranking 降序排列
+    descendCompare (property){
+      return function(a,b){
+          var value1 = a[property];
+          var value2 = b[property];
+          return value2 - value1;
+      }
     },
     // 获取keyword
     getBaseData () {

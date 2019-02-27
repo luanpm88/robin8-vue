@@ -104,6 +104,7 @@ export default {
     }
   },
   methods: {
+    // 获取my brand 页面
     getBaseData () {
       const _that = this
       axios.get(apiConfig.baseInfosUrl, {
@@ -112,15 +113,15 @@ export default {
         }
       }).then(function(res) {
         if (res.status === 200) {
+          // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
             _that.isCompetitors = false;
           } else {
             _that.isCompetitors = true;
+            // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.params) == "{}") {
-              // _that.keyList.brand_keywords = '';
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
-                  // console.log(111);
                   _that.keyList.brand_keywords = element.name;
                 }
               })
@@ -131,6 +132,9 @@ export default {
                 }
               });
             } else {
+              // 假如_that.$route.params 不为空，代表路由是从my brands 的 View selected 或者 my comtitive brands 的 View selected 按钮进到首页的
+              // _that.$route.params.currentBrand 不为空 表示从my brands 的 View selected按钮进到首页
+              // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
               if (_that.$route.params.currentBrand) {
                 // console.log(222);
                 _that.keyList.brand_keywords = _that.$route.params.currentBrand;
@@ -147,7 +151,7 @@ export default {
                     _that.keyList.brand_keywords = element.name;
                   }
                 })
-                // 对比competitor
+                // 赋值对比competitor
                 _that.keyList.cb_keywords = _that.$route.params.curentCompittor
               }
             }
