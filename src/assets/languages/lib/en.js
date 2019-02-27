@@ -1,7 +1,7 @@
 export const lang = {
   home: 'Home',
   campaignsData: 'Campaigns',
-  myKols: 'KOL List',
+  myKols: 'KOL Search',
   myWallet: 'Wallet',
   settings: 'Settings',
   ranking: 'Ranking',
@@ -284,6 +284,10 @@ export const lang = {
   kolList: {
     detail: {
       btn: 'Return'
+    },
+    search: {
+      likeTip: 'Favorite',
+      sumTip: 'Engagement'
     }
   }
 }
