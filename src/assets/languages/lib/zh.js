@@ -14,6 +14,7 @@ export const lang = {
   detail: '详情',
   payment: '支付',
   information: '基本信息',
+  backBtn: '返回',
   submitBtn: '提交',
   totalNoDataTip: '暂无数据...',
   updateBaseInfo: {

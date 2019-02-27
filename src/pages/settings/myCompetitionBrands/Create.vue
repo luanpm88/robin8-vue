@@ -34,8 +34,8 @@
       <div class="text-center create-btn-area">
         <button
           type="button"
-          class="btn btn-cyan submit-btn mr10" @click="backList">返回</button>
-        <button type="button" class="btn btn-cyan submit-btn" @click="submit">提交</button>
+          class="btn btn-cyan submit-btn mr10" @click="backList">{{$t('lang.backBtn')}}</button>
+        <button type="button" class="btn btn-cyan submit-btn" @click="submit">{{$t('lang.submitBtn')}}</button>
       </div>
     </div>
   </div>

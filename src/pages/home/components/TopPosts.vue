@@ -110,8 +110,12 @@ export default {
   watch: {
     childKeyList: {
       handler() {
+        let newKey = '';
+        this.childKeyList.brand_keywords.split(",").forEach(item => {
+          newKey += '"' + item + '"'
+        });
         this.topPostParams.page_no = this.postWeiboCurrentPage;
-        this.topPostParams.brand_keywords = this.childKeyList.brand_keywords;
+        this.topPostParams.brand_keywords = newKey;
         // 微博
         this.topPostWeibo(this.topPostParams)
       },

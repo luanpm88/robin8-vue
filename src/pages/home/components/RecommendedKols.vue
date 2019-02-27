@@ -88,7 +88,11 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        this.params.brand_keywords = this.childKeyList.brand_keywords
+        let newKey = '';
+        this.childKeyList.brand_keywords.split(",").forEach(item => {
+          newKey += '"' + item + '"'
+        });
+        this.params.brand_keywords = newKey
         this.weiboKol(this.params)
       },
       deep: true

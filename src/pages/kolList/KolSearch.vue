@@ -254,6 +254,7 @@ export default {
     this.r8Kol();
     // 获取keywords
     this.getBaseData();
+    console.log(this.keyWord.brand_keywords);
     if (this.keyWord.brand_keywords) {
       this.tabIndex = this.keyWord.type;
       this.keyword = this.keyWord.brand_keywords;
@@ -286,7 +287,15 @@ export default {
       this.totalParams.engagement_to = this.engagementTo;
       this.totalParams.influence_from = this.influenceFrom;
       this.totalParams.influence_to = this.influenceTo;
-      this.totalParams.keywords = this.keyword;
+      if (this.keyword === '') {
+        this.totalParams.keywords = '';
+      } else {
+        let newKey = '';
+        this.keyword.split(",").forEach(item => {
+          newKey += '"' + item + '"'
+        });
+        this.totalParams.keywords = newKey;
+      }
       this.totalParams.profile_sort_col = this.listSortType;
       this.totalParams.profile_sort_dir = this.listSortDir;
       this.totalParams.r8_registered_kol_only = this.kolOnlyText;;
@@ -396,7 +405,7 @@ export default {
         params: {
           id: item.profile_id,
           type: this.tabIndex,
-          brand_keywords: this.totalKeywords
+          brand_keywords: this.keyword
         }
       });
     },
@@ -412,11 +421,11 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                let newKey = '';
-                element.keywords.split(",").forEach(item => {
-                  newKey += '"' + item + '"'
-                })
-                _that.totalKeywords = newKey;
+                // let newKey = '';
+                // element.keywords.split(",").forEach(item => {
+                //   newKey += '"' + item + '"'
+                // })
+                _that.totalKeywords = element.keywords;
               }
             });
           }
