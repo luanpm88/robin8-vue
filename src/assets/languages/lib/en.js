@@ -1,7 +1,11 @@
 export const lang = {
   home: 'Home',
   campaignsData: 'Campaigns',
+<<<<<<< HEAD
   myKols: 'KOL Search',
+=======
+  myKols: 'KOL Search Engine',
+>>>>>>> 419cee456b1b60e7a04c8ab7250fb4d854a61675
   myWallet: 'Wallet',
   settings: 'Settings',
   ranking: 'Ranking',
@@ -246,6 +250,7 @@ export const lang = {
         check: 'Check',
         id: 'Id',
         name: 'Name',
+        keywords: 'Keywords',
         description: 'Description',
         operation: 'Operation',
       }
@@ -256,6 +261,8 @@ export const lang = {
     addPage: {
       name: 'Brand Name:',
       placeholderName: 'Please fill in the brandname',
+      keywords: 'Brand Keywords:',
+      placeholderKeywords: 'Please fill in the brand keywords',
       dec: 'Brand introduction:',
       placeholderDec: 'Please fill in the brand introduction'
     }

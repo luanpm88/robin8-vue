@@ -1,58 +1,100 @@
 .activity-table {
-    .ant-table{
-        font-size: $font-sm;
-    }
-    .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-        padding: 5px 16px;
-    }
+  .ant-table {
+    font-size: $font-sm;
+  }
+
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    padding: 5px 16px;
+  }
+
 }
-.analytic-table{
-    .ant-table-tbody > tr > td{
-        border-bottom: 1px solid transparent;
-    }
-    .ant-table-thead > tr > th{
-        background: transparent;
-        border-bottom: 1px solid transparent;
-    }
+
+.analytic-table {
+  .ant-table-tbody > tr > td {
+    border-bottom: 1px solid transparent;
+  }
+
+  .ant-table-thead > tr > th {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+  }
+
 }
-.kol-data-table{
-    .ant-table{
-        font-size: $font-sm;
-    }
-    .ant-table-thead > tr > th{
-        padding: 5px 0px;
-        background: $white;
-    }
-    .ant-table-tbody > tr > td {
-        padding: 16px 5px;
-    }
+
+.kol-data-table {
+  .ant-table {
+    font-size: $font-sm;
+  }
+
+  .ant-table-thead > tr > th {
+    padding: 5px 0px;
+    background: $white;
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 16px 5px;
+  }
+
 }
-.page{
-    .ant-input{
-        height: 34px;
-        font-size: 13px;
+
+.page {
+  .ant-input {
+    height: 34px;
+    font-size: 13px;
+  }
+
+}
+
+.ant-progress-inner {
+  margin: 0px auto;
+}
+
+.ant-progress-inner {
+  position: relative;
+}
+
+.ant-progress-text {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.r8-loading {
+  text-align: center;
+  margin-top: 20px;
+
+  .ant-spin-text {
+    color: #333;
+  }
+
+  .ant-spin-dot i {
+    color: #333;
+  }
+
+}
+
+.ant-input-number.form-control {
+  padding: 0;
+
+  .ant-input-number-handler-wrap {
+    z-index: 1;
+  }
+
+  .ant-input-number-input-wrap {
+    height: 100%;
+  }
+
+  .ant-input-number-input {
+    height: 100%;
+  }
+
+  &.text-center {
+    .ant-input-number-input {
+      text-align: center;
     }
-}
-.ant-progress-inner{
-    margin: 0px auto;
-}
-.ant-progress-inner{
-    position: relative;
-}
-.ant-progress-text{
-    width: 100%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-.r8-loading{
-    text-align: center;
-    margin-top: 20px;
-    .ant-spin-text{
-        color: #333;
-    }
-    .ant-spin-dot i{
-        color: #333;
-    }
+
+  }
+
 }

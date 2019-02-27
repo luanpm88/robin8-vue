@@ -1,6 +1,5 @@
 <template>
   <div class="panel default-panel mt20">
-    <!-- <page></page> -->
     <div class="panel-body">
       <table class="com-brand-table">
         <tr>
@@ -9,7 +8,7 @@
           <th>Price List</th>
           <th>Operation</th>
         </tr>
-        <tr
+        <!-- <tr
           v-for="(item, index) in CreationsList"
           :key="index"
           class="item"
@@ -39,7 +38,7 @@
               <span v-else @click="kols(item.id)" >查看报价</span>
             </p>
           </td>
-        </tr>
+        </tr> -->
       </table>
     </div>
   </div>
@@ -49,14 +48,10 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import Page from '@components/Page'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignsList',
-  components: {
-    Page
-  },
   data () {
     return {
       CreationsList: []
@@ -64,7 +59,7 @@ export default {
   },
   methods: {
     getListData () {
-      axios.get(apiConfig.creationsUrl, {
+      axios.get(apiConfig.campaignsUrl, {
         headers: {
           'Authorization': this.authorization
         }
@@ -72,35 +67,37 @@ export default {
     },
     handleGetListDataSucc (res) {
       let resData = res.data
+      console.log(resData)
       if (res.status == 200 && resData) {
-        let _creationsList = this.CreationsList
-        let _creationItem
+        console.log(resData)
+        // let _creationsList = this.CreationsList
+        // let _creationItem
         // console.log(resData)
-        resData.items.forEach(item => {
-          _creationItem = commonJs.buildObjData('id', item.id)
-          _creationItem.name = item.name
-          _creationItem.img_url = item.img_url
-          _creationItem.pre_amount = item.pre_amount
-          _creationItem.pre_kols_count = item.pre_kols_count
-          _creationItem.price_range = item.price_range
-          _creationItem.time_range = item.time_range
-          _creationItem.status = item.status
-          _creationItem.status_zh = item.status_zh
-          _creationItem.quote_count = item.quote_count
-          _creationItem.actual_amount = item.actual_amount
+        // resData.items.forEach(item => {
+        //   _creationItem = commonJs.buildObjData('id', item.id)
+        //   _creationItem.name = item.name
+        //   _creationItem.img_url = item.img_url
+        //   _creationItem.pre_amount = item.pre_amount
+        //   _creationItem.pre_kols_count = item.pre_kols_count
+        //   _creationItem.price_range = item.price_range
+        //   _creationItem.time_range = item.time_range
+        //   _creationItem.status = item.status
+        //   _creationItem.status_zh = item.status_zh
+        //   _creationItem.quote_count = item.quote_count
+        //   _creationItem.actual_amount = item.actual_amount
 
-          _creationsList.push(_creationItem)
-        })
+        //   _creationsList.push(_creationItem)
+        // })
       }
     },
-    detail(id) {
-      this.$router.push('/creations/' + id);
+    detail (id) {
+      this.$router.push('/campaigns/' + id);
     },
-    edit(id) {
-      this.$router.push('/creations/' + id + '/edit');
+    edit (id) {
+      this.$router.push('/campaigns/' + id + '/edit');
     },
-    kols(id) {
-      this.$router.push('/creations/' + id + '/kols');
+    kols (id) {
+      this.$router.push('/campaigns/' + id + '/kols');
     }
   },
   mounted () {

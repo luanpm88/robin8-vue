@@ -130,24 +130,20 @@
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}：</div>
             <div class="col-sm-3">
-              <div class="input-group">
-                <span class="input-group-addon iconfont icon-subtract"></span>
-                <input
-                  name="allBudget"
-                  type="number"
-                  class="form-control text-center"
-                  :class="[errors.has('allBudget') ? 'danger' : '']"
-                  min="500"
-                  v-model.number="submitData.budget"
-                  v-validate="'required'"
-                />
-                <span class="input-group-addon iconfont icon-add"></span>
-              </div>
+              <a-input-number
+                name="allBudget"
+                class="form-control text-center"
+                :class="[errors.has('allBudget') || submitData.budget < budgetMin ? 'danger' : '']"
+                :min="budgetMin"
+                :step="1"
+                v-model.number="submitData.budget"
+                v-validate="'required'"
+              />
               <div
                 class="form-tips danger"
-                v-show="errors.has('allBudget')"
+                v-show="errors.has('allBudget') || submitData.budget < budgetMin"
               >
-                最低费用500元
+                最低费用{{budgetMin}}元
               </div>
             </div>
           </div>
@@ -162,7 +158,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">推广平台选择：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
@@ -173,6 +169,7 @@
                       value="wechat"
                       v-model="submitData.sub_type"
                       v-validate="'required'"
+                      @change="subTypeChange"
                     />
                     <span>分享到朋友圈</span>
                   </label>
@@ -185,6 +182,7 @@
                       value="weibo"
                       v-model="submitData.sub_type"
                       v-validate="'required'"
+                      @change="subTypeChange"
                     />
                     <span>分享到微博</span>
                   </label>
@@ -201,7 +199,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">奖励模式选择：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.mode.title')}}：</div>
             <div class="col-sm-8">
               <div class="row">
                 <div v-if="submitData.sub_type == 'wechat'" class="col-sm-4">
@@ -212,6 +210,7 @@
                       value="click"
                       v-model="submitData.per_budget_type"
                       v-validate="'required'"
+                      @change="perBudgetChange"
                     />
                     <span>按照点击奖励KOL</span>
                   </label>
@@ -224,6 +223,7 @@
                       value="post"
                       v-model="submitData.per_budget_type"
                       v-validate="'required'"
+                      @change="perBudgetChange"
                     />
                     <span>按照转发奖励KOL</span>
                   </label>
@@ -236,6 +236,7 @@
                       value="cpt"
                       v-model="submitData.per_budget_type"
                       v-validate="'required'"
+                      @change="perBudgetChange"
                     />
                     <span>按照完成任务奖励KOL</span>
                   </label>
@@ -252,7 +253,7 @@
           </div>
 
           <div v-if="submitData.per_budget_type == 'cpt'" class="form-group">
-            <div class="col-sm-3 control-label">示例图片数量：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.pictureNumber.title')}}：</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
@@ -263,6 +264,7 @@
                       value="1"
                       v-model="submitData.example_screenshot_count"
                       v-validate="'required'"
+                      @change="imgCountChange"
                     />
                     <span>需要用户上传1张图片</span>
                   </label>
@@ -275,6 +277,7 @@
                       value="2"
                       v-model="submitData.example_screenshot_count"
                       v-validate="'required'"
+                      @change="imgCountChange"
                     />
                     <span>需要用户上传2张图片</span>
                   </label>
@@ -287,6 +290,7 @@
                       value="3"
                       v-model="submitData.example_screenshot_count"
                       v-validate="'required'"
+                      @change="imgCountChange"
                     />
                     <span>需要用户上传3张图片</span>
                   </label>
@@ -302,21 +306,17 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">单次预算：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
             <div class="col-sm-3">
-              <div class="input-group">
-                <span class="input-group-addon iconfont icon-subtract"></span>
-                <input
-                  name="budget"
-                  type="number"
-                  class="form-control text-center"
-                  :class="[errors.has('budget') ? 'danger' : '']"
-                  min="0.3"
-                  v-model.number="submitData.per_action_budget"
-                  v-validate="'required'"
-                />
-                <span class="input-group-addon iconfont icon-add"></span>
-              </div>
+              <a-input-number
+                name="budget"
+                class="form-control text-center"
+                :class="[errors.has('budget') ? 'danger' : '']"
+                :min="perBudgetMin"
+                :step="0.1"
+                v-model.number="submitData.per_action_budget"
+                v-validate="'required'"
+              />
               <div
                 class="form-tips danger"
                 v-show="errors.has('budget')"
@@ -433,7 +433,7 @@
               <input
                 type="hidden"
                 name="region"
-                v-model="submitData.target.region"
+                v-model="checkedCitys"
                 v-validate="'required'"
               >
               <div
@@ -578,6 +578,8 @@ export default {
       province: '',
       cityData: [],
       city: '',
+      budgetMin: 500,
+      perBudgetMin: 0.3,
       submitData: {
         url: '',
         name: '',
@@ -586,7 +588,7 @@ export default {
         budget: 500,
         sub_type: '',
         per_budget_type: '',
-        example_screenshot_count: '',
+        example_screenshot_count: 1,
         per_action_budget: 0.3,
         start_time: '',
         deadline: '',
@@ -613,11 +615,13 @@ export default {
       console.log(res)
       if (res.status == 200 && res.data) {
         const data = res.data
+        console.log(data)
         this.tagsList = data.tags_list
+        console.log(this.tagsList)
       }
     },
     getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+      axios.get(apiConfig.campaignsUrl + '/' + this.$route.params.id, {
         headers: {
           'Authorization': this.authorization
         }
@@ -644,19 +648,18 @@ export default {
         this.campaignTime = []
         this.campaignTime[0] = resData.start_time
         this.campaignTime[1] = resData.deadline
-        this.submitData.target.tags = resData.targets_hash.tags
-        this.submitData.target.region = resData.targets_hash.region
-        this.submitData.target.age = resData.targets_hash.age
-        this.submitData.target.gender = resData.targets_hash.gender
+        this.submitData.target.tags = resData.tags.toString()
+        this.submitData.target.region = resData.region
+        this.submitData.target.age = resData.age
+        this.submitData.target.gender = resData.gender
         this.submitData.enable_append_push = resData.enable_append_push
 
         let _tagsList = this.tagsList
-        let _checkedData = resData.targets_hash.industries
-        let _checkedArr = _checkedData.split(',')
+        let _checkedData = resData.tags
         let _checkedIds = []
         let _checkedTags = []
         _tagsList.forEach(item => {
-          _checkedArr.forEach(e => {
+          _checkedData.forEach(e => {
             if (item.name == e) {
               _checkedIds.push(item.id)
               _checkedTags.push(item.name)
@@ -669,8 +672,8 @@ export default {
         this.checkedIds = _checkedIds
         // console.log(this.checkedIds)
 
-        let _citys = resData.targets_hash.region
-        _citys = _citys.split(',')
+        let _citys = resData.region
+        _citys = _citys.split('/')
         _citys.forEach(item => {
           this.checkedCitys.push(item)
         })
@@ -691,7 +694,7 @@ export default {
       })
       console.log(_checkedTags)
       this.checkedTags = _checkedTags
-      this.submitData.target.industries = _checkedTags.toString()
+      this.submitData.target.tags = _checkedTags.toString()
     },
     imageuploaded (res) {
       console.log(res)
@@ -744,6 +747,51 @@ export default {
       }
       console.log(this.checkedCitys)
     },
+    subTypeChange () {
+      console.log(this.submitData.sub_type)
+      this.submitData.per_budget_type = ''
+    },
+    perBudgetChange () {
+      let _perBudgetType = this.submitData.per_budget_type
+      this.submitData.example_screenshot_count = 1
+      switch (_perBudgetType) {
+        case 'click':
+          this.perBudgetMin = 0.3
+          this.submitData.per_action_budget = 0.3
+          break
+        case 'post':
+          this.perBudgetMin = 3
+          this.submitData.per_action_budget = 3
+          break
+        case 'cpt':
+          this.perBudgetMin = 3
+          this.submitData.per_action_budget = 3
+          break
+        default:
+          this.perBudgetMin = 0.3
+          this.submitData.per_action_budget = 0.3
+      }
+    },
+    imgCountChange () {
+      let _imgCount = this.submitData.example_screenshot_count
+      switch (_imgCount) {
+        case '1':
+          this.perBudgetMin = 3
+          this.submitData.per_action_budget = 3
+          break
+        case '2':
+          this.perBudgetMin = 5
+          this.submitData.per_action_budget = 5
+          break
+        case '3':
+          this.perBudgetMin = 8
+          this.submitData.per_action_budget = 8
+          break
+        default:
+          this.perBudgetMin = 0.3
+          this.submitData.per_action_budget = 0.3
+      }
+    },
     doSubmit () {
       if (!this.canSubmit) {
         return false
@@ -751,17 +799,15 @@ export default {
       this.canSubmit = false
       let submitParams = {}
       if (this.formType == 'create') {
-        submitParams = {
-          'creation': this.submitData
-        }
+        submitParams = this.submitData
       }
       if (this.formType == 'edit') {
-        submitParams = {
-          'id': this.$route.params.id,
-          'creation': this.submitData
-        }
+        this.submitData.id = this.$route.params.id
+        submitParams = this.submitData
       }
-      axios.post(apiConfig.creationsUrl, submitParams, {
+
+      console.log(submitParams)
+      axios.post(apiConfig.campaignsUrl, submitParams, {
         headers: {
           'Authorization': this.authorization
         }
@@ -772,15 +818,20 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        this.$router.push('/creations/' + resData.id)
+        this.$router.push('/campaigns/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
       }
       this.canSubmit = true
     },
     doConfirm () {
-      this.submitData.start_time = this.campaignTime[0]
-      this.submitData.deadline = this.campaignTime[1]
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+      this.submitData.start_time = _startTime
+      this.submitData.deadline = _endTime
+      this.submitData.target.region = this.checkedCitys.toString()
 
       console.log(this.submitData)
 
@@ -794,9 +845,14 @@ export default {
     }
   },
   mounted () {
-    this.getBaseData()
     if (this.formType == 'edit') {
-      this.getDetailData()
+      let _self = this
+      _self.getBaseData()
+      setTimeout(function () {
+        _self.getDetailData()
+      }, 500)
+    } else {
+      this.getBaseData()
     }
 
     this.provinceData = cityJs.citiesData.provinces

@@ -1,62 +1,32 @@
 <template>
   <div class="campaign-detail-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
-
     <div class="panel default-panel mt20">
       <div class="panel-body">
-        <status-area :statusData="detailData.status"></status-area>
-
-        <div class="line-title">{{$t('lang.information')}}</div>
+        <div class="line-title">{{$t('lang.campaigns.promotionDesc')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.name.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.link.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">
+                <a :href="detailData.url" target="_blank">{{detailData.url}}</a>
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.name}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.description.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.description}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.brandName.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.trademark_name}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="line-title">{{$t('lang.campaigns.campaignInfo')}}</div>
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div
-                  v-for="item in detailData.terraces"
-                  :key="item.terrace_id"
-                  class="col-sm-6"
-                >
-                  <div class="col-sm-2 text-center">
-                    <div class="check-icon checked">
-                      <div :class="'iconfont ' + item.iconClass"></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">{{item.name}}曝光值：{{item.exposure_value}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-8">
               <div class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="detailData.img_url" alt="" class="upload-img" />
@@ -64,79 +34,90 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="line-title">{{$t('lang.campaigns.promotionBudget')}}</div>
+        <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.time.title')}}：</div>
-            <div class="col-sm-10">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.budget}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="line-title">{{$t('lang.campaigns.promotionDetail')}}</div>
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.sub_type_zh}}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.mode.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.per_budget_type_show}}</p>
+            </div>
+          </div>
+          <div v-if="detailData.per_budget_type == 'cpt'" class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.pictureNumber.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.example_screenshot_count}}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.per_action_budget}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="line-title">{{$t('lang.campaigns.promotionTime')}}</div>
+        <div class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-8">
               <p class="form-control-static">{{detailData.time_range}}</p>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolNumber.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.pre_kols_count}}</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.pre_amount}}</p>
-            </div>
-          </div>
-          <div v-if="detailData.notice" class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.precaution.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.notice}}</p>
-            </div>
-          </div>
         </div>
 
-        <div class="line-title">{{$t('lang.campaigns.bigVRequirement')}}</div>
+        <div class="line-title">{{$t('lang.campaigns.selectKols')}}</div>
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.tags.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.industries}}</p>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.tags.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.tag_labels}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.price.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">{{detailData.price_range}}</p>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.region}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerAge.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">18～40</p>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.age_zh}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerGender.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">女</p>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolGender.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.gender_zh}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.followerDistrict.title')}}：</div>
-            <div class="col-sm-10">
-              <p class="form-control-static">北京 / 上海 / 深圳</p>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.enable_append_push ? '允许补推' : '禁止补推'}}</p>
             </div>
           </div>
         </div>
 
-        <div v-if="kolsList.length > 0">
-          <div class="line-title">已选择的大V</div>
-          <div class="kols-list">
-            <kols-list-item
-              v-for="(item, index) in kolsList"
-              :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :renderData="item"
-            ></kols-list-item>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -147,23 +128,15 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import KolsListItem from '@components/KolsListItem'
-import CreateProcess from './components/CreateProcess'
-import StatusArea from './components/StatusArea'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignDetail',
   components: {
-    CreateProcess,
-    StatusArea,
     KolsListItem
   },
   data () {
     return {
-      processStatus: {
-        current: 1,
-        index: 0
-      },
       detailData: {},
       kolHasLiked: false,
       kolHasMsg: false,
@@ -173,7 +146,7 @@ export default {
   },
   methods: {
     getDetailData () {
-      axios.get(apiConfig.creationsUrl + '/' + this.$route.params.id, {
+      axios.get(apiConfig.campaignsUrl + '/' + this.$route.params.id, {
         headers: {
           'Authorization': this.authorization
         }
@@ -186,32 +159,17 @@ export default {
         console.log(resData)
         this.detailData = resData
 
-        let _kolsList = this.kolsList
-        let _kolItem
-        resData.selected_kols.forEach(item => {
-          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
-          _kolItem.id = item.plateform_uuid
-          _kolItem.name = item.name
-          _kolItem.desc = item.desc
-          _kolItem.checked = false
-          _kolsList.push(_kolItem)
-        })
-        console.log(_kolsList)
-
-        let _terraces = resData.terraces
-        _terraces.forEach(item => {
-          console.log(item)
-          switch (item.short_name) {
-            case 'public_wechat_account':
-              item.iconClass = 'icon-wechat-circle'
-              break
-            case 'weibo':
-              item.iconClass = 'icon-weibo-circle'
-              break
-            default:
-              item.iconClass = ''
-          }
-        })
+        // let _kolsList = this.kolsList
+        // let _kolItem
+        // resData.selected_kols.forEach(item => {
+        //   _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
+        //   _kolItem.id = item.plateform_uuid
+        //   _kolItem.name = item.name
+        //   _kolItem.desc = item.desc
+        //   _kolItem.checked = false
+        //   _kolsList.push(_kolItem)
+        // })
+        // console.log(_kolsList)
       }
     }
   },

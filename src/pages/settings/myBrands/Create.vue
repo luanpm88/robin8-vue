@@ -16,6 +16,22 @@
             >
           </div>
         </div>
+
+        <div class="form-group">
+          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.keywords')}}</div>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="keywords"
+              class="form-control"
+              :class="[errors.has('keywords') ? 'danger' : '']"
+              v-model="submitData.keywords"
+              :placeholder="$t('lang.myBrandPage.addPage.placeholderKeywords')"
+              v-validate="'required'"
+            >
+          </div>
+        </div>
+
         <div class="form-group">
           <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.dec')}}</div>
           <div class="col-sm-9">
@@ -70,6 +86,7 @@ export default {
   created() {
     if (this.$route.params.itemList) {
       this.submitData.name = this.$route.params.itemList.name
+      this.submitData.keywords = this.$route.params.itemList.keywords
       this.submitData.description = this.$route.params.itemList.description
     }
   },
@@ -89,6 +106,7 @@ export default {
         let params = {
           id: this.$route.params.itemList.id,
           name: this.submitData.name,
+          keywords: this.submitData.keywords,
           description: this.submitData.description
         }
         // 编辑修改接口
