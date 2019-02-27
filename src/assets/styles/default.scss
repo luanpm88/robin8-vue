@@ -130,6 +130,25 @@ input[type=radio]:checked:before { content: $icon-radioed; }
   &.radius-panel { border-radius: 10px; overflow: hidden; }
 }
 
+/*corner mark styles*/
+.corner-mark { position: absolute; width: 60px; height: 60px;
+  .icon, .text { position: relative; z-index: 1; }
+  .icon { font-size: $font-lg-s; }
+  .text { width: 60px; height: 60px; line-height: 30px; text-align: center; font-size: $font-xs; color: #fff; }
+  &.tr { top: 0; right: 0; background-image: linear-gradient(to top right, transparent 50%, nth($cyan, 1) 51%, nth($cyan, 1) 52%, nth($cyan, 1) 100%);
+    .text { @include rotate(45); }
+  }
+  &.br { right: 0; bottom: 0; background-image: linear-gradient(to bottom right, transparent 50%, nth($cyan, 1) 51%, nth($cyan, 1) 52%, nth($cyan, 1) 100%);
+    .text { margin: 20px 0 0 20px; @include rotate(-45); }
+  }
+  &.bl { bottom: 0; left: 0; background-image: linear-gradient(to bottom left, transparent 50%, nth($cyan, 1) 51%, nth($cyan, 1) 52%, nth($cyan, 1) 100%);
+    .text { margin: 20px 0 0 -20px; @include rotate(45); }
+  }
+  &.tl { top: 0; left: 0; background-image: linear-gradient(to top left, transparent 50%, nth($cyan, 1) 51%, nth($cyan, 1) 52%, nth($cyan, 1) 100%);
+    .text { @include rotate(-45); }
+  }
+}
+
 /*datetime styles*/
 .mx-calendar-icon { height: auto !important; }
 .mx-datepicker { width: 100% !important; }
@@ -150,6 +169,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .hide { display: none !important; }
 .show { display: block !important; }
 .p10 { padding: 10px; }
+.p30 { padding: 30px; }
 .mt1 { margin-top: 1px; }
 .mt10 { margin-top: 10px; }
 .mt20 { margin-top: 20px; }
