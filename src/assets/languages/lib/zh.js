@@ -47,6 +47,11 @@ export const lang = {
         placeholder: '请输入品牌名称',
         errorTips: '请输入品牌名称'
       },
+      keywords: {
+        title: '品牌关键字',
+        placeholder: '请输入品牌键字',
+        errorTips: '请输入品牌键字'
+      },
       description: {
         title: '品牌描述',
         placeholder: '请输入品牌描述',
@@ -259,6 +264,7 @@ export const lang = {
       placeholderName: '请填写品牌名称',
       keywords: '品牌关键字：',
       placeholderKeywords: '请填写品牌关键字',
+      keywordsTips: '多个关键词请用逗号隔开，使其更具准确性',
       dec: '品牌介绍：',
       placeholderDec: '请填写品牌介绍'
     }

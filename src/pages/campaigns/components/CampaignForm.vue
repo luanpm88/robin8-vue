@@ -101,6 +101,7 @@
                 :compress="30"
                 :max-width="200"
                 input-accept="image/*"
+                :headers="{'Authorization': authorization}"
                 :url="uploadImageUrl">
               </vue-core-image-upload>
               <input

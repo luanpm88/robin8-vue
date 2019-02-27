@@ -1,46 +1,56 @@
 <template>
-  <div class="panel default-panel mt20">
-    <!-- <page></page> -->
-    <div class="panel-body">
-      <table class="com-brand-table">
-        <tr>
-          <th>Profile</th>
-          <th>Active</th>
-          <th>Price List</th>
-          <th>Operation</th>
-        </tr>
-        <tr
-          v-for="(item, index) in CreationsList"
-          :key="index"
-          class="item"
-        >
-          <td>
-            <div class="campaign-info">
-              <img :src="item.img_url" alt="" class="campaign-info-left">
-              <div class="campaign-info-right">
-                <p>Budget：{{item.pre_amount}}</p>
-                <p>estimated number of kols：{{item.pre_kols_count}}</p>
-                <p>price：{{item.price_range}}</p>
+  <div class="campaigns-list-container">
+    <div class="panel default-panel mt20">
+      <div class="panel-body">
+        <table class="com-brand-table">
+          <tr>
+            <th>Profile</th>
+            <th>Active</th>
+            <th>Price List</th>
+            <th>Operation</th>
+          </tr>
+          <tr
+            v-for="(item, index) in creationsList"
+            :key="index"
+            class="item"
+          >
+            <td>
+              <div class="campaign-info">
+                <img :src="item.img_url" alt="" class="campaign-info-left">
+                <div class="campaign-info-right">
+                  <p>Budget：{{item.pre_amount}}</p>
+                  <p>estimated number of kols：{{item.pre_kols_count}}</p>
+                  <p>price：{{item.price_range}}</p>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <p>timeline：{{item.time_range}}</p>
-            <p>status：{{item.status_zh}}</p>
-          </td>
-          <td>
-            <p>take budget：{{item.actual_amount}}</p>
-            <p>real nmber of kols：{{item.quote_count}}</p>
-          </td>
-          <td>
-            <p class="campaign-info-detail">
-              <span @click="detail(item.id)">detail</span>
-              <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">edit</span>
-              <span v-else @click="kols(item.id)" >quotations</span>
-            </p>
-          </td>
-        </tr>
-      </table>
+            </td>
+            <td>
+              <p>timeline：{{item.time_range}}</p>
+              <p>status：{{item.status_zh}}</p>
+            </td>
+            <td>
+              <p>take budget：{{item.actual_amount}}</p>
+              <p>real nmber of kols：{{item.quote_count}}</p>
+            </td>
+            <td>
+              <p class="campaign-info-detail">
+                <span @click="detail(item.id)">detail</span>
+                <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">edit</span>
+                <span v-else @click="kols(item.id)" >quotations</span>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="p30 text-center">
+      <a-pagination
+        :defaultCurrent="page"
+        :defaultPageSize="perPage"
+        :total="total"
+        @change="onPageChange"
+      />
     </div>
   </div>
 </template>
@@ -49,22 +59,23 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import Page from '@components/Page'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CreationsList',
-  components: {
-    Page
-  },
   data () {
     return {
-      CreationsList: []
+      params: {},
+      creationsList: [],
+      page: 1,
+      perPage: 10,
+      total: 0
     }
   },
   methods: {
     getListData () {
       axios.get(apiConfig.creationsUrl, {
+        params: this.params,
         headers: {
           'Authorization': this.authorization
         }
@@ -72,10 +83,10 @@ export default {
     },
     handleGetListDataSucc (res) {
       let resData = res.data
+      console.log(res)
       if (res.status == 200 && resData) {
-        let _creationsList = this.CreationsList
+        let _creationsList = this.creationsList
         let _creationItem
-        // console.log(resData)
         resData.items.forEach(item => {
           _creationItem = commonJs.buildObjData('id', item.id)
           _creationItem.name = item.name
@@ -91,6 +102,8 @@ export default {
 
           _creationsList.push(_creationItem)
         })
+
+        this.total = parseInt(resData.paginate['X-Total'])
       }
     },
     detail(id) {
@@ -101,9 +114,16 @@ export default {
     },
     kols(id) {
       this.$router.push('/creations/' + id + '/kols');
+    },
+    onPageChange (page) {
+      this.params.page = page
+      console.log(this.params)
+      this.getListData()
     }
   },
   mounted () {
+    this.params.page = this.page
+    this.params.per_page = this.perPage
     this.getListData()
   },
   computed: {

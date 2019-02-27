@@ -1,45 +1,87 @@
 <template>
-  <div class="panel default-panel mt20">
-    <div class="panel-body">
-      <table class="com-brand-table">
-        <tr>
-          <th>Profile</th>
-          <th>Active</th>
-          <th>Price List</th>
-          <th>Operation</th>
-        </tr>
-        <!-- <tr
-          v-for="(item, index) in CreationsList"
-          :key="index"
-          class="item"
-        >
-          <td>
-            <div class="campaign-info">
-              <img :src="item.img_url" alt="" class="campaign-info-left">
-              <div class="campaign-info-right">
-                <p>预算：{{item.pre_amount}}</p>
-                <p>预招人数：{{item.pre_kols_count}}</p>
-                <p>价格：{{item.pre_amount}}</p>
+  <div class="campaigns-list-container">
+    <div class="panel default-panel mt20">
+      <div class="panel-body">
+        <div class="campaigns-list">
+          <div
+            v-for="item in campaignsList"
+            class="list-item"
+          >
+            <div class="media">
+              <div class="media-left">
+                <div class="cover">
+                  <img :src="item.img_url" alt="" class="cover-img" />
+                  <div class="corner-mark tl">
+                    <div class="text">{{item.status_zh}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="media-body content">
+                <div class="campaign-info">
+                  <h5 class="title">
+                    <router-link
+                      :to="'/campaigns/' + item.id"
+                    >{{item.name}}</router-link>
+                  </h5>
+                  <div class="date">{{item.time_range}} 按照<span class="per-budget-type">{{item.per_budget_type_show}}</span>奖励</div>
+                  <div class="desc">{{item.description}}</div>
+                </div>
+                <div class="campaign-status">
+                  <div class="item">
+                    <div class="title">已花费</div>
+                    <div class="text">
+                      ￥<span class="num">{{item.take_budget}}</span>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="title">参与人数</div>
+                    <div class="text">
+                      <span class="num">{{item.total_invite_kols_count}}</span>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="title">点击数</div>
+                    <div class="text">
+                      <span class="num">{{item.total_click}}</span>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="title">计费点击</div>
+                    <div class="text">
+                      <span class="num">{{item.avail_click}}</span>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="title">总曝光数</div>
+                    <div class="text">
+                      <span class="num">{{item.exposures_count}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="media-right media-middle content">
+                <router-link
+                  :to="'/campaigns/'+ item.id +'/edit'"
+                  class="btn btn-sm btn-cyan btn-outline mr10"
+                >编辑</router-link>
+                <router-link
+                  to="/"
+                  class="btn btn-sm btn-cyan btn-outline"
+                >支付</router-link>
               </div>
             </div>
-          </td>
-          <td>
-            <p>活动时间：{{item.time_range}}</p>
-            <p>状态：{{item.status_zh}}</p>
-          </td>
-          <td>
-            <p>已消耗：{{item.quote_count}}</p>
-            <p>已招募：{{item.actual_amount}}</p>
-          </td>
-          <td>
-            <p class="campaign-info-detail">
-              <span @click="detail(item.id)">详情</span>
-              <span v-if="item.status === 'pending' || item.status === 'unpassed'" @click="edit(item.id)">编辑</span>
-              <span v-else @click="kols(item.id)" >查看报价</span>
-            </p>
-          </td>
-        </tr> -->
-      </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p30 text-center">
+      <a-pagination
+        :defaultCurrent="page"
+        :defaultPageSize="perPage"
+        :total="total"
+        @change="onPageChange"
+      />
     </div>
   </div>
 </template>
@@ -54,12 +96,17 @@ export default {
   name: 'CampaignsList',
   data () {
     return {
-      CreationsList: []
+      params: {},
+      campaignsList: [],
+      page: 1,
+      perPage: 4,
+      total: 0
     }
   },
   methods: {
     getListData () {
       axios.get(apiConfig.campaignsUrl, {
+        params: this.params,
         headers: {
           'Authorization': this.authorization
         }
@@ -70,37 +117,19 @@ export default {
       console.log(resData)
       if (res.status == 200 && resData) {
         console.log(resData)
-        // let _creationsList = this.CreationsList
-        // let _creationItem
-        // console.log(resData)
-        // resData.items.forEach(item => {
-        //   _creationItem = commonJs.buildObjData('id', item.id)
-        //   _creationItem.name = item.name
-        //   _creationItem.img_url = item.img_url
-        //   _creationItem.pre_amount = item.pre_amount
-        //   _creationItem.pre_kols_count = item.pre_kols_count
-        //   _creationItem.price_range = item.price_range
-        //   _creationItem.time_range = item.time_range
-        //   _creationItem.status = item.status
-        //   _creationItem.status_zh = item.status_zh
-        //   _creationItem.quote_count = item.quote_count
-        //   _creationItem.actual_amount = item.actual_amount
-
-        //   _creationsList.push(_creationItem)
-        // })
+        this.campaignsList = resData.items
+        this.total = parseInt(resData.paginate['X-Total'])
       }
     },
-    detail (id) {
-      this.$router.push('/campaigns/' + id);
-    },
-    edit (id) {
-      this.$router.push('/campaigns/' + id + '/edit');
-    },
-    kols (id) {
-      this.$router.push('/campaigns/' + id + '/kols');
+    onPageChange (page) {
+      this.params.page = page
+      console.log(this.params)
+      this.getListData()
     }
   },
   mounted () {
+    this.params.page = this.page
+    this.params.per_page = this.perPage
     this.getListData()
   },
   computed: {
@@ -110,56 +139,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.default-panel {
-  padding: 30px;
-  background: $white;
-}
-.com-brand-table{
-  width: 100%;
-  color: #333;
-  tr{
-    border-bottom: 1px solid #ddd;
-    th{
-      font-size: $font-nm-b;
-      text-align: center;
-      padding: 5px 0px;
-    }
-  }
-  td{
-    text-align: center;
-    padding: 16px 10px;
-    p{
-      line-height: 22px;
-    }
+.campaigns-list-container {
+  .panel-body {
+    padding: 30px;
   }
 }
-.campaign-info{
-  text-align: left;
-  img{
-    display: inline-block;
-    width: 80px;
-    vertical-align: middle;
-    margin-right: 15px;
-  }
-  .campaign-info-right{
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-.campaign-info-detail{
-  span{
-    cursor: pointer;
-    color: nth($purple, 1);
-    &:hover{
-      border-bottom: 1px solid nth($purple, 1);
+.campaigns-list {
+  & > .list-item {
+    margin-bottom: 20px;
+    box-shadow: 0px 1px 15px 0px rgba(#000, .08);
+    .content {
+      padding: 20px;
     }
-    &:nth-child(2) {
-      margin-left: 8px;
-      color: #6168e6;
-      &:hover{
-        border-bottom: 1px solid #6168e6;
-
+    .cover {
+      position: relative;
+      width: 300px;
+      padding-bottom: 75%;
+      overflow: hidden;
+      .cover-img {
+        position: absolute;
+        top: 0;
+        @include center(x);
+        height: 100%;
       }
+    }
+    .campaign-info {
+      .title {
+        margin-bottom: 10px;
+        font-size: $font-lg-s;
+        font-weight: normal;
+      }
+      .per-budget-type {
+        color: nth($cyan, 1);
+      }
+      .desc {
+        @include limit-line(3);
+      }
+    }
+    .campaign-status {
+      @include display-flex;
+      & > .item {
+        @include flex(1);
+        text-align: center;
+        .num {
+          font-size: $font-nm-l;
+        }
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }

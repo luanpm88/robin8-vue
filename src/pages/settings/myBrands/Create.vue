@@ -29,6 +29,7 @@
               :placeholder="$t('lang.myBrandPage.addPage.placeholderKeywords')"
               v-validate="'required'"
             >
+            <p>{{$t('lang.myBrandPage.addPage.keywordsTips')}}</p>
           </div>
         </div>
 
