@@ -5,6 +5,7 @@
         <div class="campaigns-list">
           <div
             v-for="item in campaignsList"
+            :key="item.id"
             class="list-item"
           >
             <div class="media">
