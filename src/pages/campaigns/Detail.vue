@@ -417,6 +417,7 @@ export default {
     }
   }
   .screenshot {
+    display: inline-block;
     width: 100px;
     .screenshot-img {
       width: 100%;
