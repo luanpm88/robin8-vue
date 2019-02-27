@@ -47,6 +47,11 @@ export const lang = {
         placeholder: 'Please fill in your brand name',
         errorTips: 'Please fill in your brand name'
       },
+      keywords: {
+        title: 'Brand Keywords',
+        placeholder: 'Please fill in your brand keywords',
+        errorTips: 'Please fill in your brand keywords'
+      },
       description: {
         title: 'Brand Description',
         placeholder: 'Please fill in your brand description',
@@ -259,6 +264,7 @@ export const lang = {
       placeholderName: 'Please fill in the brandname',
       keywords: 'Brand Keywords:',
       placeholderKeywords: 'Please fill in the brand keywords',
+      keywordsTips: 'Multiple keywords should be separated by commas to make them more accurate.',
       dec: 'Brand introduction:',
       placeholderDec: 'Please fill in the brand introduction'
     }

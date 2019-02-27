@@ -106,6 +106,28 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.keywords.title')}}：</div>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                name="brand_keywords"
+                class="form-control"
+                :class="[errors.has('brand_keywords') ? 'danger' : '']"
+                v-model="submitData.my_brand.keywords"
+                :placeholder="$t('lang.updateBaseInfo.my_brand.keywords.placeholder')"
+                v-validate="'required'"
+              >
+              <div
+                class="form-tips danger"
+                v-show="errors.has('brand_keywords')"
+              >
+                {{$t('lang.updateBaseInfo.my_brand.keywords.errorTips')}}
+              </div>
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.description.title')}}：</div>
             <div class="col-sm-7">
