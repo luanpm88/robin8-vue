@@ -1,11 +1,7 @@
 export const lang = {
   home: 'Home',
   campaignsData: 'Campaigns',
-<<<<<<< HEAD
-  myKols: 'KOL Search',
-=======
   myKols: 'KOL Search Engine',
->>>>>>> 419cee456b1b60e7a04c8ab7250fb4d854a61675
   myWallet: 'Wallet',
   settings: 'Settings',
   ranking: 'Ranking',
