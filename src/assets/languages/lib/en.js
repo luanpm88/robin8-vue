@@ -293,6 +293,10 @@ export const lang = {
   kolList: {
     detail: {
       btn: 'Return'
+    },
+    search: {
+      likeTip: 'Favorite',
+      sumTip: 'Engagement'
     }
   }
 }

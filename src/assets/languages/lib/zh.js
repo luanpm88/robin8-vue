@@ -293,6 +293,10 @@ export const lang = {
   kolList: {
     detail: {
       btn: '返回'
+    },
+    search: {
+      likeTip: '喜欢人数',
+      sumTip: '总投入'
     }
   }
 }

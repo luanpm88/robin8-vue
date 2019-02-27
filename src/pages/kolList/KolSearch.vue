@@ -76,10 +76,10 @@
     </div>
     <div class="kol-data-wrap mt20">
       <p class="kol-list-topnum">
-        <span v-for="(item, index) in topNumList" :key="index
-        ">{{item}}</span>
-        <span>weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
-        <span>weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
+        <span v-if="tabIndex === 1">weixin - big data profile - 5,564,575</span>
+        <span v-if="tabIndex === 0">weibo - big data profile - 65,860,968</span>
+        <span v-if="tabIndex === 1">weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
+        <span v-if="tabIndex === 0">weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
       </p>
       <div class>
         <default-tabs
@@ -128,10 +128,12 @@
                         <span>
                           <i class="iconfont icon-icon-test1"></i>
                           {{item.stats.avg_likes}}
+                          <b>{{$t('lang.kolList.search.likeTip')}}</b>
                         </span>
                         <span>
                           <i class="iconfont icon-app"></i>
                           {{item.stats.total_sum_engagement}}
+                          <b>{{$t('lang.kolList.search.sumTip')}}</b>
                         </span>
                       </div>
                     </div>
@@ -231,10 +233,6 @@ export default {
       kolsPerPage: 10,
       kolsTotal: 0,
       advancedSearch: false,
-      topNumList: [
-        "weixin - big data profile - 5,564,575",
-        "weibo - big data profile - 65,860,968"
-      ],
       tabList: [
         {
           index: 0,
@@ -675,12 +673,31 @@ span {
   }
   div {
     span {
+      position: relative;
       padding-right: 11px;
       display: inline-block;
       margin: 10px 0px 0px;
       i {
         vertical-align: -1px;
         font-size: 16px;
+      }
+      b{
+        display: none;
+        color: $white;
+        line-height: 25px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 0px 10px;
+        font-weight: normal;
+        font-size: 12px;
+        border-radius: 4px;
+        position: absolute;
+        left: 0px;
+        top: -28px;
+      }
+      &:hover{
+        b{
+          display: inline-block;
+        }
       }
     }
   }
@@ -731,5 +748,8 @@ span {
 .btn-area{
   text-align: right;
   margin-top: 20px;
+}
+.kol-profile{
+  cursor: pointer;
 }
 </style>
