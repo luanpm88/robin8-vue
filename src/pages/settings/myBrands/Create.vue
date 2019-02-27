@@ -29,6 +29,7 @@
               :placeholder="$t('lang.myBrandPage.addPage.placeholderKeywords')"
               v-validate="'required'"
             >
+            <p class="creat-text-tip">{{$t('lang.myBrandPage.addPage.keywordsTips')}}</p>
           </div>
         </div>
 
@@ -51,13 +52,13 @@
       <div class="text-center create-btn-area">
         <button
           type="button"
-          class="btn btn-cyan submit-btn mr10" @click="backList">返回</button>
+          class="btn btn-cyan submit-btn mr10" @click="backList">{{$t('lang.backBtn')}}</button>
         <button
           type="button"
           class="btn btn-cyan submit-btn"
           @click="doConfirm"
           :disabled="canSubmit ? false : true"
-        >提交</button>
+        >{{$t('lang.submitBtn')}}</button>
       </div>
 
     </div>
@@ -158,5 +159,9 @@ export default {
   .submit-btn {
     width: 160px;
   }
+}
+.creat-text-tip{
+    color: #64e0d7;
+    margin-top: 5px;
 }
 </style>

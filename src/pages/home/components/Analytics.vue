@@ -151,7 +151,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        this.trendTitle = this.childKeyList.brand_keywords;
+        this.trendTitle = this.childKeyList.name;
         this.cur = this.childKeyList.tabIndex;
         this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
         this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;

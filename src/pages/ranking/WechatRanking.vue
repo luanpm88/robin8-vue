@@ -167,7 +167,11 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                _that.totalKeywords = element.name;
+                let newKey = '';
+                element.keywords.split(",").forEach(item => {
+                  newKey += '"' + item + '"'
+                })
+                _that.totalKeywords = newKey;
               }
             });
           }

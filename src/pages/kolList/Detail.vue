@@ -201,9 +201,12 @@ export default {
     };
   },
   created() {
-    // console.log(this.$route.params.id);
-    this.trendParams.brand_keywords = this.$route.params.brand_keywords;
-    this.sentimentParams.brand_keywords = this.$route.params.brand_keywords;
+    let newKey = '';
+    this.$route.params.brand_keywords.split(",").forEach(item => {
+      newKey += '"' + item + '"'
+    });
+    this.trendParams.brand_keywords = newKey;
+    this.sentimentParams.brand_keywords = newKey;
     let totalParams = {};
     if (Number(this.$route.params.type) === 0) {
       // 微博相关接口
@@ -296,19 +299,9 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('我是微博', res)
-            
-            if (res.data.data.length > 0) {
-               _that.isTag = true;
-              _that.competitorList.options.yAxis.data = res.data.labels;
-              _that.competitorList.options.series[0].data = res.data.data;
-              _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
-              _that.isLoading = false;
-            } else {
-              _that.isTag = false;
-              _that.isShow = true;
-              _that.isLoading = false;
-            }
-           
+            _that.competitorList.options.yAxis.data = res.data.labels;
+            _that.competitorList.options.series[0].data = res.data.data;
+            _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
         .catch(function(error) {
@@ -345,8 +338,16 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.parentTags = [];
-            _that.parentTags = res.data.slice(0, 25);
+            _that.isLoading = false;
+            if (res.data.length > 0) {
+              _that.isTag = true;
+              _that.isShow = false;
+              _that.parentTags = [];
+              _that.parentTags = res.data.slice(0, 25);
+            } else {
+              _that.isTag = false;
+              _that.isShow = true;
+            }
           }
         })
         .catch(function(error) {
@@ -362,10 +363,17 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('weixin ', res);
           if (res.status === 200) {
-            _that.parentTags = [];
-            _that.parentTags = res.data.slice(0, 25);
+            _that.isLoading = false;
+            if (res.data.length > 0) {
+              _that.isTag = true;
+              _that.isShow = false;
+              _that.parentTags = [];
+              _that.parentTags = res.data.slice(0, 25);
+            } else {
+              _that.isTag = false;
+              _that.isShow = true;
+            }
           }
         })
         .catch(function(error) {
