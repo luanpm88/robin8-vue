@@ -44,7 +44,7 @@
                   <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
                     <img :src="item.avatar_url" alt>
                   </span>
-                  <span class="r-right-topList-txt col-sm-4">
+                  <span class="r-right-topList-txt col-sm-6">
                     <b>{{item.profile_name}}</b>
                     <b>{{item.source}}</b>
                     <b>{{item.value}}</b>
