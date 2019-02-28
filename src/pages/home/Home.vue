@@ -145,6 +145,7 @@ export default {
               // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
               if (_that.$route.params.currentBrand) {
                 // console.log(222);
+                _that.keyList.name = _that.$route.params.currentBrandName;
                 _that.keyList.brand_keywords = _that.$route.params.currentBrand;
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
