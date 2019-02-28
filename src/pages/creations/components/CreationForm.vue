@@ -827,7 +827,13 @@ export default {
         headers: {
           'Authorization': this.authorization
         }
-      }).then(this.handleDoSubmitSucc)
+      })
+      .then(this.handleDoSubmitSucc)
+      .catch(function(error) {
+        console.log(error)
+        alert('提交失败，请重新提交')
+        this.canSubmit = true
+      })
     },
     handleDoSubmitSucc (res) {
       console.log(res)
