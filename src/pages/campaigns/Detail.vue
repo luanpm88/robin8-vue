@@ -163,7 +163,38 @@
             </div>
             <div v-else class="empty-area text-center">暂时还没有KOL转发活动!</div>
           </div>
-          <div v-show="tabIndex == 1"></div>
+          <div v-if="tabIndex == 1">
+            <div class="chart-list clearfix">
+              <div class="chart-item">
+                <Echarts
+                  :options="ageOption"
+                  :chartsStyle="chartsStyle"
+                  ref="ageChart"
+                ></Echarts>
+              </div>
+              <div class="chart-item">
+                <Echarts
+                  :options="genderOption"
+                  :chartsStyle="chartsStyle"
+                  ref="genderChart"
+                ></Echarts>
+              </div>
+              <div class="chart-item">
+                <Echarts
+                  :options="tagOption"
+                  :chartsStyle="chartsStyle"
+                  ref="tagChart"
+                ></Echarts>
+              </div>
+              <div class="chart-item">
+                <Echarts
+                  :options="regionOption"
+                  :chartsStyle="chartsStyle"
+                  ref="regionChart"
+                ></Echarts>
+              </div>
+            </div>
+          </div>
         </default-tabs>
       </div>
     </div>
@@ -185,6 +216,81 @@
       </div>
     </div>
 
+    <div class="panel default-panel mt20">
+      <div class="panel-head">
+        <div class="title-bar">
+          <h5 class="title">评价详情</h5>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div v-if="evaluationStatus == 'evaluating'" class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
+            <div class="col-sm-8">
+              <a-rate v-model="commentSubmit.effect_score" />
+              <input
+                type="hidden"
+                name="points"
+                :value="commentSubmit.effect_score"
+              />
+              {{commentSubmit.effect_score}} 分
+              <div
+                class="form-tips danger"
+                v-show="errors.has('points') || commentSubmit.effect_score == '0'"
+              >
+                {{$t('lang.campaigns.evaluatePoint.errorTips')}}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}：</div>
+            <div class="col-sm-8">
+              <textarea
+                name="comment"
+                class="form-control"
+                :class="[errors.has('comment') ? 'danger' : '']"
+                :placeholder="$t('lang.campaigns.evaluateComment.placeholder')"
+                rows="4"
+                v-model="commentSubmit.review_content"
+                v-validate="'required'"
+              ></textarea>
+              <div
+                class="form-tips danger"
+                v-show="errors.has('comment')"
+              >
+                {{$t('lang.campaigns.evaluateComment.errorTips')}}
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center comment-submit-area">
+            <button
+              type="button"
+              class="btn btn-cyan submit-btn"
+              @click="doCommentSubmit"
+              :disabled="commentCanSubmit ? false : true"
+            >{{$t('lang.submitBtn')}}</button>
+          </div>
+        </div>
+
+        <div v-else class="form-horizontal campaign-create-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
+            <div class="col-sm-8">
+              <a-rate :defaultValue="detailData.effect_score" disabled />
+              {{detailData.effect_score}} 分
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{detailData.review_content}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -192,13 +298,17 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import { Rate } from 'ant-design-vue'
+import 'ant-design-vue/lib/rate/style/css'
 import Echarts from '@components/Chart/GlobalEcharts'
+import 'echarts/map/js/china.js'
 import DefaultTabs from "@components/DefaultTabs"
 import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignDetail',
   components: {
+    ARate: Rate,
     Echarts,
     DefaultTabs
   },
@@ -223,6 +333,12 @@ export default {
           name: 'KOL分析'
         }
       ],
+      evaluationStatus: '',
+      commentSubmit: {
+        effect_score: 0,
+        review_content: ''
+      },
+      commentCanSubmit: true,
       chartsStyle: {
         height: '400px'
       },
@@ -272,6 +388,55 @@ export default {
           areaStyle: {},
           data: []
         }]
+      },
+      genderOption: {},
+      ageOption: {},
+      tagOption: {},
+      regionOption: {
+        title: {
+          text: 'KOL地域分析',
+          left: 'left'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        visualMap: {
+          min: 0,
+          max: 10,
+          left: 'left',
+          top: 'bottom',
+          calculable: true
+        },
+        series: [{
+          name: 'KOL地域分析',
+          type: 'map',
+          mapType: 'china',
+          roam: false,
+          label: {
+            normal: {
+              show: false
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          data: [{
+            name: '北京',
+            value: 1
+          },
+          {
+            name: '天津',
+            value: 1
+          },
+          {
+            name: '上海',
+            value: 1
+          },
+          {
+            name: '重庆',
+            value: 1
+          }]
+        }]
       }
     }
   },
@@ -288,6 +453,54 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
+        this.evaluationStatus = resData.evaluation_status
+
+        let _ageData = resData.age_analysis
+        let _ageArr = []
+        let _ageTitles = []
+        let _ageItem
+        _ageData.forEach(item => {
+          _ageItem = commonJs.buildObjData('name', item.name)
+          _ageItem.value = item.count
+          _ageTitles.push(item.name)
+          _ageArr.push(_ageItem)
+        })
+        this.ageOption = this.setPieOptions('KOL年龄分析', _ageTitles, _ageArr)
+
+        let _genderData = resData.gender_analysis
+        let _genderArr = []
+        let _genderTitles = []
+        let _genderItem
+        _genderData.forEach(item => {
+          _genderItem = commonJs.buildObjData('name', item.name)
+          _genderItem.value = item.ratio * 100
+          _genderTitles.push(item.name)
+          _genderArr.push(_genderItem)
+        })
+        this.genderOption = this.setPieOptions('KOL性别分析', _genderTitles, _genderArr)
+
+        let _tagData = resData.tag_analysis
+        let _tagArr = []
+        let _tagTitles = []
+        let _tagItem
+        _tagData.forEach(item => {
+          _tagItem = commonJs.buildObjData('name', item.name)
+          _tagItem.value = item.count
+          _tagTitles.push(item.name)
+          _tagArr.push(_tagItem)
+        })
+        this.tagOption = this.setPieOptions('KOL个性分析', _tagTitles, _tagArr)
+
+        let _regionData = resData.region_analysis
+        let _regionArr = []
+        let _regionItem
+        _regionData.forEach(item => {
+          _regionItem = commonJs.buildObjData('name', item.name)
+          _regionItem.value = item.count
+          _regionArr.push(_regionItem)
+        })
+
+        console.log(_regionArr)
       }
     },
     getKolsData () {
@@ -334,6 +547,77 @@ export default {
       this.kolsParams.page = page
       console.log(this.params)
       this.getKolsData()
+    },
+    setPieOptions (title, chartTitles, chartData) {
+      let options = {
+        title: {
+          text: title,
+          x: 'left'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: 'vertical',
+          top: 'middle',
+          right: 'right',
+          data: chartTitles
+        },
+        series: [{
+          name: title,
+          type: 'pie',
+          radius: '50%',
+          data: chartData,
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }]
+      }
+      return options
+    },
+    doCommentSubmitFn () {
+      if (!this.commentCanSubmit) {
+        return false
+      }
+      this.commentCanSubmit = false
+      let commentParams = this.commentSubmit
+      commentParams.campaign_id = this.$route.params.id
+
+      axios.post(apiConfig.campaignEvaluateUrl, commentParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      })
+      .then(this.handleDoCommentSubmitFnSucc)
+      .catch(function(error) {
+        console.log(error)
+        alert('提交失败，请重新提交')
+        this.commentCanSubmit = true
+      })
+    },
+    handleDoCommentSubmitFnSucc (res) {
+      console.log(res)
+      if (res.status == 201) {
+        let resData = res.data
+        console.log(resData)
+      } else {
+        alert('提交失败，请重新提交')
+      }
+      this.commentCanSubmit = true
+    },
+    doCommentSubmit () {
+      this.$validator.validateAll().then((msg) => {
+        console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          this.doCommentSubmitFn()
+        }
+      })
     }
   },
   mounted () {
@@ -424,6 +708,18 @@ export default {
     }
   }
 }
+.chart-list {
+  .chart-item {
+    float: left;
+    width: 50%;
+    &:nth-child(odd) {
+      padding-right: 20px;
+    }
+    &:nth-child(even) {
+      padding-left: 20px;
+    }
+  }
+}
 .statistics-panel {
   @include display-flex;
   padding: 20px;
@@ -437,6 +733,12 @@ export default {
     .num {
       font-size: $font-nm-l;
     }
+  }
+}
+.comment-submit-area {
+  padding: 20px;
+  .submit-btn {
+    width: 150px;
   }
 }
 </style>

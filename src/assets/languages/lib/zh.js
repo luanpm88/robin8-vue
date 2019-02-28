@@ -161,6 +161,16 @@ export const lang = {
       title: '补推',
       placeholder: '',
       errorTips: '请选择补推形式'
+    },
+    evaluatePoint: {
+      title: '效果打分',
+      placeholder: '',
+      errorTips: '请选择分数'
+    },
+    evaluateComment: {
+      title: '效果评价',
+      placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
+      errorTips: '请输入效果评价'
     }
   },
   creations: {

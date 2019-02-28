@@ -38,6 +38,9 @@ const config = {
   // 活动详情参与情况 get，参数:id
   campaignStatisticsUrl: `${host}/campaigns/statistics_clicks`,
 
+  // 活动详情评论 post，参数:id
+  campaignEvaluateUrl: `${host}/campaigns/evaluate`,
+
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,
 
