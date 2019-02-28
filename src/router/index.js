@@ -31,7 +31,9 @@ import MyBrands from '@/pages/settings/myBrands/MyBrands'
 import MyBrandsCreate from '@/pages/settings/myBrands/Create'
 import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
 import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
+import Ranking from '@/pages/ranking/Ranking'
 import WechatRanking from '@/pages/ranking/WechatRanking'
+import WeiboRanking from '@/pages/ranking/WeiboRanking'
 import BenchMark from '@/pages/ranking/BenchMark'
 import SocialListening from '@/pages//social/SocialListening'
  
@@ -315,22 +317,40 @@ export default new Router({
       }
     },
     {
-      path: '/ranking/WechatRanking',
-      name: 'wechatRanking',
-      component: WechatRanking,
+      path: '/ranking',
+      name: 'Ranking',
+      component: Ranking,
       meta: {
-        title: 'WechatRanking',
+        title: '排名',
         auth: true
-      }
-    },
-    {
-      path: '/ranking/BenchMark',
-      name: 'benchMark',
-      component: BenchMark,
-      meta: {
-        title: 'benchMark',
-        auth: true
-      }
+      },
+      children: [
+        {
+          path: '/ranking/WechatRanking',
+          name: 'wechatRanking',
+          component: WechatRanking,
+          meta: {
+            title: 'WechatRanking',
+            auth: true
+          }
+        },{
+          path: '/ranking/WeiboRanking',
+          name: 'weiboRanking',
+          component: WeiboRanking,
+          meta: {
+            title: 'WeiboRanking',
+            auth: true
+          }
+        },
+        {
+        path: '/ranking/BenchMark',
+        name: 'benchMark',
+        component: BenchMark,
+        meta: {
+          title: 'benchMark',
+          auth: true
+        }
+      }]
     },
     {
       path: '/social/SocialListening',

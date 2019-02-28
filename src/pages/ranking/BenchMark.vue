@@ -1,59 +1,47 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
-
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
-
-      <div class="benchmark-container pull-right">
-        <div class="bench-card">
-          <div class="r8-loading" v-if="oneLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <Echarts v-else 
-            :options="benchOne.options"
-            :chartsStyle="benchOne.chartsStyle"
-            ref="benchOneChart"
-          ></Echarts>
-        </div>
-        <div class="bench-card mt20">
-          <div class="r8-loading" v-if="twoLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <Echarts v-else
-            :options="benchTwo.options"
-            :chartsStyle="benchTwo.chartsStyle"
-            ref="benchTwoChart"
-          ></Echarts>
-        </div>
-        <div class="bench-card mt20">
-          <div class="r8-loading" v-if="threeLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <Echarts v-else
-            :options="benchThree.options"
-            :chartsStyle="benchThree.chartsStyle"
-            ref="benchThreeChart"
-          ></Echarts>
-        </div>
-      </div>
+<div class="benchmark-container pull-right">
+  <div class="bench-card">
+    <div class="r8-loading" v-if="oneLoading">
+      <a-spin tip="Loading..."/>
     </div>
+    <Echarts v-else 
+      :options="benchOne.options"
+      :chartsStyle="benchOne.chartsStyle"
+      ref="benchOneChart"
+    ></Echarts>
   </div>
+  <div class="bench-card mt20">
+    <div class="r8-loading" v-if="twoLoading">
+      <a-spin tip="Loading..."/>
+    </div>
+    <Echarts v-else
+      :options="benchTwo.options"
+      :chartsStyle="benchTwo.chartsStyle"
+      ref="benchTwoChart"
+    ></Echarts>
+  </div>
+  <div class="bench-card mt20">
+    <div class="r8-loading" v-if="threeLoading">
+      <a-spin tip="Loading..."/>
+    </div>
+    <Echarts v-else
+      :options="benchThree.options"
+      :chartsStyle="benchThree.chartsStyle"
+      ref="benchThreeChart"
+    ></Echarts>
+  </div>
+</div>
 </template>
 
 <script>
-import PageHeader from "@components/PageHeader";
 import axios from "axios";
 import apiConfig from "@/config";
-import MainNav from "@components/MainNav";
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import { mapState } from "vuex";
 export default {
   name: "benchMark",
   components: {
-    PageHeader,
-    MainNav,
     Echarts,
   },
   computed: {
