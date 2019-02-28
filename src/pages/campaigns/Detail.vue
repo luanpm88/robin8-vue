@@ -118,7 +118,7 @@
           theme="blue"
           @changeTab="changeTab"
         >
-          <div v-if="tabIndex == 0">
+          <div v-show="tabIndex == 0">
             <table class="default-table kol-list">
               <thead>
                 <tr>
@@ -160,7 +160,7 @@
               />
             </div>
           </div>
-          <div v-if="tabIndex == 1"></div>
+          <div v-show="tabIndex == 1"></div>
         </default-tabs>
       </div>
     </div>
@@ -327,6 +327,22 @@ export default {
         this.kolsTotal = parseInt(resData.paginate['X-Total'])
       }
     },
+    getStatisticsData () {
+      axios.get(apiConfig.campaignStatisticsUrl, {
+        params: {
+          'campaign_id': this.$route.params.id
+        },
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetStatisticsDataSucc)
+    },
+    handleGetStatisticsDataSucc (res) {
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        console.log(resData)
+      }
+    },
     changeTab(tab) {
       this.tabIndex = tab.index
       console.log(this.tabIndex)
@@ -342,6 +358,7 @@ export default {
     this.kolsParams.per_page = this.kolsPerPage
     this.getDetailData()
     this.getKolsData()
+    this.getStatisticsData()
   },
   computed: {
     ...mapState(['authorization'])
