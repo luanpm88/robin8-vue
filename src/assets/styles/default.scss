@@ -43,9 +43,9 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .container { width: 1280px; margin: 0 auto; }
 
 /*default table styles*/
-.default-table { width: 100%; max-width: 100%; border: 0; border-spacing: 0; border-collapse: collapse; font-size: $font-sm;
-  th { background-color: #ddddcb; }
-  tbody { tr { &:nth-child(odd) { background-color: #f4f4e3; }
+.default-table { width: 100%; max-width: 100%; border: 0; border-spacing: 0; border-collapse: collapse;
+  th { font-weight: bold; }
+  tbody { tr { &:nth-child(odd) { background-color: rgba(nth($cyan, 1), .2); }
     }
   }
   th, td { line-height: 20px; padding: 8px 4px; text-align: left; word-break: break-all;
@@ -116,6 +116,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 
 /*panel styles*/
 .panel { .panel-head { padding: 20px; background-color: #fff;
+    .title-bar { margin: -10px; }
     .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962;
       .iconfont { display: inline-block; margin: -4px 4px 0 0; vertical-align: middle; font-size: 2rem; }
       &.purple { color: nth($purple, 1); }

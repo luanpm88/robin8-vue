@@ -11,7 +11,7 @@
           </tr>
           <tr
             v-for="(item, index) in creationsList"
-            :key="index"
+            :key="item.id"
             class="item"
           >
             <td>
