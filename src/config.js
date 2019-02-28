@@ -35,6 +35,9 @@ const config = {
   // 小V活动kol列表 get，参数:id
   campaignInvitesUrl: `${host}/campaign_invites`,
 
+  // 活动详情参与情况 get，参数:id
+  campaignStatisticsUrl: `${host}/campaigns/statistics_clicks`,
+
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,
 
