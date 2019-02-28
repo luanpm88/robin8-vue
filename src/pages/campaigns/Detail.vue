@@ -119,46 +119,49 @@
           @changeTab="changeTab"
         >
           <div v-show="tabIndex == 0">
-            <table class="default-table kol-list">
-              <thead>
-                <tr>
-                  <th class="text-center">头像</th>
-                  <th class="text-center">昵称</th>
-                  <th class="text-center">总点击</th>
-                  <th class="text-center">奖励</th>
-                  <th class="text-center">截图</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="item in kolsList"
-                  :key="item.id"
-                >
-                  <td class="text-center">
-                    <div class="avatar">
-                      <img :src="item.kol.avatar_url" alt="" class="avatar-img" />
-                    </div>
-                  </td>
-                  <td class="text-center">{{item.kol.name}}</td>
-                  <td class="text-center">{{item.get_total_click}}</td>
-                  <td class="text-center">{{item.total_rewards}}</td>
-                  <td class="text-center">
-                    <div class="screenshot">
-                      <img :src="item.screenshot" alt="" class="screenshot-img" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div v-if="kolsList.length > 0">
+              <table class="default-table kol-list">
+                <thead>
+                  <tr>
+                    <th class="text-center">头像</th>
+                    <th class="text-center">昵称</th>
+                    <th class="text-center">总点击</th>
+                    <th class="text-center">奖励</th>
+                    <th class="text-center">截图</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="item in kolsList"
+                    :key="item.id"
+                  >
+                    <td class="text-center">
+                      <div class="avatar">
+                        <img :src="item.kol.avatar_url" alt="" class="avatar-img" />
+                      </div>
+                    </td>
+                    <td class="text-center">{{item.kol.name}}</td>
+                    <td class="text-center">{{item.get_total_click}}</td>
+                    <td class="text-center">{{item.total_rewards}}</td>
+                    <td class="text-center">
+                      <div class="screenshot">
+                        <img :src="item.screenshot" alt="" class="screenshot-img" />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <div class="p30 text-center">
-              <a-pagination
-                :defaultCurrent="kolsPage"
-                :defaultPageSize="kolsPerPage"
-                :total="kolsTotal"
-                @change="onKolsPageChange"
-              />
+              <div class="p30 text-center">
+                <a-pagination
+                  :defaultCurrent="kolsPage"
+                  :defaultPageSize="kolsPerPage"
+                  :total="kolsTotal"
+                  @change="onKolsPageChange"
+                />
+              </div>
             </div>
+            <div v-else class="empty-area text-center">暂时还没有KOL转发活动!</div>
           </div>
           <div v-show="tabIndex == 1"></div>
         </default-tabs>
@@ -174,8 +177,9 @@
       <div class="panel-body">
         <div class="p30">
           <Echarts
-            :options="option"
+            :options="participateOptions"
             :chartsStyle="chartsStyle"
+            ref="participateChart"
           ></Echarts>
         </div>
       </div>
@@ -222,7 +226,7 @@ export default {
       chartsStyle: {
         height: '400px'
       },
-      option: {
+      participateOptions: {
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -233,65 +237,40 @@ export default {
           }
         },
         legend: {
-          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+          data: ['计费点击', '总点击']
         },
         toolbox: {
           feature: {
-            saveAsImage: {}
+            magicType: {
+              show: true,
+              type: ['stack', 'tiled']
+            },
+            saveAsImage: {
+              show: true
+            }
           }
         },
-        xAxis: [{
+        xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }],
+          data: []
+        },
         yAxis: [{
           type: 'value'
         }],
         series: [{
-          name: '邮件营销',
+          name: '计费点击',
           type: 'line',
-          stack: '总量',
+          smooth: true,
           areaStyle: {},
-          data: [120, 132, 101, 134, 90, 230, 210]
+          data: []
         },
         {
-          name: '联盟广告',
+          name: '总点击',
           type: 'line',
-          stack: '总量',
+          smooth: true,
           areaStyle: {},
-          data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name: '视频广告',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {},
-          data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name: '直接访问',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {
-            normal: {}
-          },
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: '搜索引擎',
-          type: 'line',
-          stack: '总量',
-          label: {
-            normal: {
-              show: true,
-              position: 'top'
-            }
-          },
-          areaStyle: {
-            normal: {}
-          },
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
+          data: []
         }]
       }
     }
@@ -341,6 +320,10 @@ export default {
       let resData = res.data
       if (res.status == 200 && resData) {
         console.log(resData)
+        this.participateOptions.xAxis.data = resData.labels
+        this.participateOptions.series[0].data = resData.avail_clicks
+        this.participateOptions.series[1].data = resData.total_clicks
+        this.$refs.participateChart.updateOptions(this.participateOptions)
       }
     },
     changeTab(tab) {
