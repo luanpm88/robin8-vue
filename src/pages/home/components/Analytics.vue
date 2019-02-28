@@ -59,7 +59,6 @@ export default {
     return {
       competitorsNum: "",
       topTabCur: 0,
-      brandKeyWord: "",
       cur: 0,
       trendTitle: '',
       trendsList: {
@@ -151,14 +150,7 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        this.trendTitle = this.childKeyList.name;
-        this.cur = this.childKeyList.tabIndex;
-        this.trendParams.brand_keywords = this.childKeyList.brand_keywords;
-        this.sentimentParams.brand_keywords = this.childKeyList.brand_keywords;
-        this.conceptParams.brand_keywords = this.childKeyList.brand_keywords;
-        this.competitorParams.cb_names = this.childKeyList.cb_keywords;
-        this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
-        this.brandKeyWord = this.childKeyList.brand_keywords;
+        this.pramsInit();
         if (this.cur === 0) {
           // trend 微博
           this.trendsWeibo(this.trendParams);
@@ -171,11 +163,26 @@ export default {
     }
   },
   created() {
+    this.trendsList.options.xAxis.data = [];
+    this.trendsList.options.series[0].data = [];
   },
   computed: {
     ...mapState(["authorization"])
   },
   methods: {
+    pramsInit() {
+      this.trendTitle = this.childKeyList.name;
+      this.cur = this.childKeyList.tabIndex;
+      let newKey = '';
+      this.childKeyList.brand_keywords.split(",").forEach(item => {
+        newKey += '"' + item + '"'
+      });
+      this.trendParams.brand_keywords = newKey;
+      this.sentimentParams.brand_keywords = newKey;
+      this.conceptParams.brand_keywords = newKey;
+      this.competitorParams.cb_names = this.childKeyList.cb_keywords;
+      this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
+    },
     topTabClick(topTab) {
       this.topTabCur = topTab.index;
       if (this.cur === 0 && topTab.index === 0) {
@@ -214,6 +221,7 @@ export default {
     tabClick(tab) {
       this.cur = tab.index;
       this.topTabCur = 0;
+      
       if (tab.index === 0) {
         // trend 微博
         this.trendsWeibo(this.trendParams);
@@ -245,8 +253,6 @@ export default {
           if (res.status === 200) {
             _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7);
             _that.trendsList.options.series[0].data = res.data.data.slice(0, 7);
-            _that.trendsList.options.series[0].name = _that.childKeyList.brand_keywords;
-            _that.trendsList.options.legend.data[0].name = _that.childKeyList.brand_keywords;
             _that.$refs.tendsEChart.updateOptions(_that.trendsList.options);
           }
         })
@@ -266,8 +272,6 @@ export default {
         .then(function(res) {
           _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7);
           _that.trendsList.options.series[0].data = res.data.data.slice(0, 7);
-          _that.trendsList.options.series[0].name = _that.brandKeyWord;
-          _that.trendsList.options.legend.data[0].name = _that.brandKeyWord;
           _that.$refs.tendsEChart.updateOptions(_that.trendsList.options);
         })
         .catch(function(error) {

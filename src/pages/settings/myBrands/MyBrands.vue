@@ -141,7 +141,8 @@ export default {
           path: "/",
           name: "Home",
           params: {
-            currentBrand: this.currentCheck.name
+            currentBrand: this.currentCheck.keywords,
+            currentBrandName: this.currentCheck.name
           }
         });
       }
