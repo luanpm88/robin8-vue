@@ -277,7 +277,7 @@
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
             <div class="col-sm-8">
-              <a-rate :defaultValue="detailData.effect_score" disabled />
+              <a-rate :value="detailData.effect_score" disabled />
               {{detailData.effect_score}} 分
             </div>
           </div>
@@ -402,7 +402,7 @@ export default {
         },
         visualMap: {
           min: 0,
-          max: 10,
+          max: 100,
           left: 'left',
           top: 'bottom',
           calculable: true
@@ -420,22 +420,7 @@ export default {
               show: false
             }
           },
-          data: [{
-            name: '北京',
-            value: 1
-          },
-          {
-            name: '天津',
-            value: 1
-          },
-          {
-            name: '上海',
-            value: 1
-          },
-          {
-            name: '重庆',
-            value: 1
-          }]
+          data: []
         }]
       }
     }
@@ -495,12 +480,17 @@ export default {
         let _regionArr = []
         let _regionItem
         _regionData.forEach(item => {
-          _regionItem = commonJs.buildObjData('name', item.name)
-          _regionItem.value = item.count
+          _regionItem = commonJs.buildObjData('name', item.province_short_name)
+          _regionItem.value = item.province_kols_count
           _regionArr.push(_regionItem)
         })
-
+        _regionArr = _regionArr.sort(commonJs.sortByProperty('value'))
         console.log(_regionArr)
+        this.regionOption.visualMap.max = _regionArr[_regionArr.length - 1].value
+        this.regionOption.series[0].data = _regionArr
+        if (!!this.$refs.regionChart) {
+          this.$refs.regionChart.updateOptions(this.regionOption)
+        }
       }
     },
     getKolsData () {

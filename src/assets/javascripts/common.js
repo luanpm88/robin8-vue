@@ -11,7 +11,7 @@ let cPastOneMonth = moment(new Date(cNow.setMonth(cNow.getMonth() - 1))).format(
 // 获取当天日子
 let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
 // let cCurrentDay = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
-// 获取过去七天 
+// 获取过去七天
 let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // let cPastSevenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去14天
@@ -149,6 +149,14 @@ function threeFormatter(num, digits) {
   }
 }
 
+function sortByProperty(property) {
+  return function (obj1, obj2) {
+    var value1 = obj1[property]
+    var value2 = obj2[property]
+    return value1 - value2
+  }
+}
+
 module.exports = {
   setLocalData,
   getLocalData,
@@ -165,5 +173,6 @@ module.exports = {
   cCurrentDay,
   cPastSevenDays,
   cPastFourteenDays,
-  cPastTwentyOneDays
+  cPastTwentyOneDays,
+  sortByProperty
 }
