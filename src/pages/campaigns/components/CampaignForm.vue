@@ -622,8 +622,8 @@ export default {
         console.log(this.tagsList)
       }
     },
-    getDetailData () {
-      axios.get(apiConfig.campaignsUrl + '/' + this.$route.params.id, {
+    getDetailData (id) {
+      axios.get(apiConfig.campaignsUrl + '/' + id, {
         headers: {
           'Authorization': this.authorization
         }
@@ -854,17 +854,25 @@ export default {
     }
   },
   mounted () {
-    if (this.formType == 'edit') {
-      let _self = this
+    console.log(this.$route.query.copy_id)
+    let _self = this
+    if (_self.formType == 'edit') {
       _self.getBaseData()
       setTimeout(function () {
-        _self.getDetailData()
+        _self.getDetailData(_self.$route.params.id)
       }, 500)
     } else {
-      this.getBaseData()
+      if (!!_self.$route.query.copy_id && _self.$route.query.copy_id != '') {
+        _self.getBaseData()
+        setTimeout(function () {
+          _self.getDetailData(_self.$route.query.copy_id)
+        }, 500)
+      } else {
+        _self.getBaseData()
+      }
     }
 
-    this.provinceData = cityJs.citiesData.provinces
+    _self.provinceData = cityJs.citiesData.provinces
   },
   computed: {
     ...mapState(['authorization'])
