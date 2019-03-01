@@ -276,7 +276,7 @@ export default new Router({
           }
         },
         {
-          path: ':id/pay/:tenderId',
+          path: ':id/pay',
           name: 'CampaignPay',
           component: CampaignPay,
           meta: {

@@ -32,17 +32,23 @@ const config = {
   // 小V活动 创建post，列表get，详情:id get
   campaignsUrl: `${host}/campaigns`,
 
-  // 小V活动kol列表 get，参数:id
+  // 小V活动kol列表 get，参数:campaign_id
   campaignInvitesUrl: `${host}/campaign_invites`,
 
-  // 活动详情参与情况 get，参数:id
+  // 小V活动详情参与情况 get，参数:campaign_id
   campaignStatisticsUrl: `${host}/campaigns/statistics_clicks`,
 
-  // 活动详情评论 post，参数:id
+  // 小V活动详情评论 post，参数:campaign_id
   campaignEvaluateUrl: `${host}/campaigns/evaluate`,
 
-  // 活动撤销 post，参数:id
+  // 小V活动撤销 post，参数:campaign_id
   campaignCancelUrl: `${host}/campaigns/revoke_campaign`,
+
+  // 小V活动支付宝支付 post，参数:campaign_id
+  campaignPayByAlipayUrl: `${host}/campaigns/pay_by_alipay`,
+
+  // 小V活动余额支付 post，参数:campaign_id
+  campaignPayByBalanceUrl: `${host}/campaigns/pay_by_balance`,
 
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,

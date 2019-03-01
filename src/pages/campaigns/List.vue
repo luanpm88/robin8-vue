@@ -73,13 +73,14 @@
                 >评价</router-link>
                 <router-link
                   v-show="item.status == 'unpay'"
-                  to="/"
+                  :to="'/campaigns/'+ item.id +'/pay'"
                   class="btn btn-sm btn-cyan btn-outline"
                 >支付</router-link>
-                <div
+                <router-link
                   v-show="item.status == 'agreed'"
+                  :to="'/campaigns/create?copy_id='+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
-                >再次发布</div>
+                >再次发布</router-link>
               </div>
             </div>
           </div>

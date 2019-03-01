@@ -1,46 +1,55 @@
 <template>
   <div class="campaign-pay-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
-
     <div class="panel default-panel mt20">
       <div class="panel-head">
         <h5 class="title text-center">支付订单</h5>
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>邀请KOL人数：{{detailData.kols_count}}人</p>
-          <p>KOL总价：¥{{detailData.price}} | 平台服务费：¥{{detailData.fee}}</p>
-          <p>支付总额：<span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+          <p>标题：{{detailData.name}}</p>
+          <p>活动简介：{{detailData.description}}</p>
+          <p>活动时间：{{detailData.time_range}}</p>
+          <p>支付总额：<span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
           <h5 class="title">支付方式：</h5>
           <ul class="method-list">
-            <li
-              v-for="item in payMethods"
-              :key="item.id"
-              class="item"
-            >
+            <li class="item">
               <label class="media">
                 <div class="media-left media-middle">
                   <input
                     type="radio"
                     name="payMethod"
-                    :value="item.val"
-                    :checked="item.checked"
+                    value="alipay"
+                    v-model="payMethod"
+                    @change="methodChange"
                   />
                 </div>
                 <div class="media-body media-middle">
-                  <div
-                    class="pay-icon iconfont "
-                    :class="item.iconClass"
-                  ></div>
+                  <div class="pay-icon iconfont icon-alipay"></div>
                   <div class="info">
-                    <div class="method">{{item.name}}</div>
-                    <div class="desc">{{item.desc}}</div>
+                    <div class="method">支付宝</div>
+                    <div class="desc">支付宝支付暂不支持开具发票</div>
+                  </div>
+                </div>
+              </label>
+            </li>
+            <li class="item">
+              <label class="media">
+                <div class="media-left media-middle">
+                  <input
+                    type="radio"
+                    name="payMethod"
+                    value="balance"
+                    v-model="payMethod"
+                    @change="methodChange"
+                  />
+                </div>
+                <div class="media-body media-middle">
+                  <div class="info">
+                    <div class="method">账户余额支付</div>
+                    <div class="desc">使用账户余额支付(余额 ￥{{availAmount}})</div>
                   </div>
                 </div>
               </label>
@@ -65,49 +74,25 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import CreateProcess from './components/CreateProcess'
 import { mapState } from 'vuex'
 
 export default {
   name: 'CampaignPay',
-  components: {
-    CreateProcess
-  },
   data () {
     return {
-      processStatus: {
-        current: 3,
-        index: 2
-      },
-      tenderId: this.$route.params.tenderId,
       detailData: {},
-      payMethods: [
-        {
-          id: '0',
-          val: 'alipay',
-          name: '支付宝',
-          desc: '使用支付宝线上支付安全放心',
-          iconClass: 'icon-alipay',
-          checked: true
-        },
-        // {
-        //   id: '1',
-        //   val: 'wechatpay',
-        //   name: '微信支付',
-        //   desc: '使用微信支付线上支付安全放心',
-        //   iconClass: 'icon-wechat',
-        //   checked: false
-        // }
-      ],
+      availAmount: '',
+      payMethod: 'alipay',
+      payPostUrl: '',
+      paySubmitData: {
+        'campaign_id': this.$route.params.id
+      },
       canSubmit: true
     }
   },
   methods: {
     getDetailData () {
-      axios.get(apiConfig.showTenderUrl, {
-        params: {
-          'id': this.tenderId
-        },
+      axios.get(apiConfig.campaignsUrl + '/' + this.$route.params.id, {
         headers: {
           'Authorization': this.authorization
         }
@@ -117,16 +102,24 @@ export default {
       console.log(res)
       let resData = res.data
       this.detailData = resData
+      this.availAmount = resData.user.avail_amount
+    },
+    methodChange () {
+      console.log(this.payMethod)
     },
     doPay () {
       if (!this.canSubmit) {
         return false
       }
       this.canSubmit = false
-      axios.post(apiConfig.transactionsUrl, {
-        'tender_id': this.tenderId,
-        'pay_type': 'alipay'
-      }, {
+      console.log(this.payMethod)
+      if (this.payMethod == 'alipay') {
+        this.payPostUrl = apiConfig.campaignPayByAlipayUrl
+      } else if (this.payMethod == 'balance') {
+        this.payPostUrl = apiConfig.campaignPayByBalanceUrl
+        this.paySubmitData.pay_way = 'balance'
+      }
+      axios.post(this.payPostUrl, this.paySubmitData, {
         headers: {
           'Authorization': this.authorization
         }
@@ -137,7 +130,16 @@ export default {
       console.log(res)
       this.canSubmit = true
       if (res.status == 201) {
-        window.location.href = resData.alipay_recharge_url
+        if (this.payMethod == 'alipay') {
+          window.location.href = resData.alipay_recharge_url
+        } else if (this.payMethod == 'balance') {
+          if (!!resData.error && resData.error == 1) {
+            alert(resData.detail)
+            return false
+          } else {
+            this.$router.push('/campaigns/' + this.$route.params.id)
+          }
+        }
       }
     }
   },
