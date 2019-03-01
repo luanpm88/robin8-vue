@@ -216,7 +216,7 @@
       </div>
     </div>
 
-    <div class="panel default-panel mt20">
+    <div v-if="detailData.status == 'settled'" class="panel default-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
           <h5 class="title">评价详情</h5>
@@ -264,9 +264,10 @@
           </div>
 
           <div class="text-center comment-submit-area">
+            <p class="tips">活动一旦评价将不能修改</p>
             <button
               type="button"
-              class="btn btn-cyan submit-btn"
+              class="btn btn-cyan submit-btn mt20"
               @click="doCommentSubmit"
               :disabled="commentCanSubmit ? false : true"
             >{{$t('lang.submitBtn')}}</button>
@@ -289,6 +290,18 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div
+       v-if="detailData.status == 'unpay' || detailData.status == 'unexecute' || detailData.status == 'rejected'"
+      class="text-center p30"
+    >
+      <button
+        type="button"
+        class="btn btn-cyan cancel-btn"
+        @click="doCancel"
+        :disabled="canCancel ? false : true"
+      >撤销活动</button>
     </div>
 
   </div>
@@ -422,7 +435,8 @@ export default {
           },
           data: []
         }]
-      }
+      },
+      canCancel: true
     }
   },
   methods: {
@@ -444,52 +458,60 @@ export default {
         let _ageArr = []
         let _ageTitles = []
         let _ageItem
-        _ageData.forEach(item => {
-          _ageItem = commonJs.buildObjData('name', item.name)
-          _ageItem.value = item.count
-          _ageTitles.push(item.name)
-          _ageArr.push(_ageItem)
-        })
-        this.ageOption = this.setPieOptions('KOL年龄分析', _ageTitles, _ageArr)
+        if (!!_ageData && _ageData.length > 0) {
+          _ageData.forEach(item => {
+            _ageItem = commonJs.buildObjData('name', item.name)
+            _ageItem.value = item.count
+            _ageTitles.push(item.name)
+            _ageArr.push(_ageItem)
+          })
+          this.ageOption = this.setPieOptions('KOL年龄分析', _ageTitles, _ageArr)
+        }
 
         let _genderData = resData.gender_analysis
         let _genderArr = []
         let _genderTitles = []
         let _genderItem
-        _genderData.forEach(item => {
-          _genderItem = commonJs.buildObjData('name', item.name)
-          _genderItem.value = item.ratio * 100
-          _genderTitles.push(item.name)
-          _genderArr.push(_genderItem)
-        })
-        this.genderOption = this.setPieOptions('KOL性别分析', _genderTitles, _genderArr)
+        if (!!_genderData && _genderData.length > 0) {
+          _genderData.forEach(item => {
+            _genderItem = commonJs.buildObjData('name', item.name)
+            _genderItem.value = item.ratio * 100
+            _genderTitles.push(item.name)
+            _genderArr.push(_genderItem)
+          })
+          this.genderOption = this.setPieOptions('KOL性别分析', _genderTitles, _genderArr)
+        }
 
         let _tagData = resData.tag_analysis
         let _tagArr = []
         let _tagTitles = []
         let _tagItem
-        _tagData.forEach(item => {
-          _tagItem = commonJs.buildObjData('name', item.name)
-          _tagItem.value = item.count
-          _tagTitles.push(item.name)
-          _tagArr.push(_tagItem)
-        })
-        this.tagOption = this.setPieOptions('KOL个性分析', _tagTitles, _tagArr)
+        if (!!_tagData && _tagData.length > 0) {
+          _tagData.forEach(item => {
+            _tagItem = commonJs.buildObjData('name', item.name)
+            _tagItem.value = item.count
+            _tagTitles.push(item.name)
+            _tagArr.push(_tagItem)
+          })
+          this.tagOption = this.setPieOptions('KOL个性分析', _tagTitles, _tagArr)
+        }
 
         let _regionData = resData.region_analysis
         let _regionArr = []
         let _regionItem
-        _regionData.forEach(item => {
-          _regionItem = commonJs.buildObjData('name', item.province_short_name)
-          _regionItem.value = item.province_kols_count
-          _regionArr.push(_regionItem)
-        })
-        _regionArr = _regionArr.sort(commonJs.sortByProperty('value'))
-        console.log(_regionArr)
-        this.regionOption.visualMap.max = _regionArr[_regionArr.length - 1].value
-        this.regionOption.series[0].data = _regionArr
-        if (!!this.$refs.regionChart) {
-          this.$refs.regionChart.updateOptions(this.regionOption)
+        if (!!_regionData && _regionData.length > 0) {
+          _regionData.forEach(item => {
+            _regionItem = commonJs.buildObjData('name', item.province_short_name)
+            _regionItem.value = item.province_kols_count
+            _regionArr.push(_regionItem)
+          })
+          _regionArr = _regionArr.sort(commonJs.sortByProperty('value'))
+          console.log(_regionArr)
+          this.regionOption.visualMap.max = _regionArr[_regionArr.length - 1].value
+          this.regionOption.series[0].data = _regionArr
+          if (!!this.$refs.regionChart) {
+            this.$refs.regionChart.updateOptions(this.regionOption)
+          }
         }
       }
     },
@@ -531,11 +553,10 @@ export default {
     },
     changeTab(tab) {
       this.tabIndex = tab.index
-      console.log(this.tabIndex)
     },
     onKolsPageChange (page) {
       this.kolsParams.page = page
-      console.log(this.params)
+      // console.log(this.params)
       this.getKolsData()
     },
     setPieOptions (title, chartTitles, chartData) {
@@ -571,23 +592,24 @@ export default {
       return options
     },
     doCommentSubmitFn () {
-      if (!this.commentCanSubmit) {
+      let _self = this
+      if (!_self.commentCanSubmit) {
         return false
       }
-      this.commentCanSubmit = false
-      let commentParams = this.commentSubmit
-      commentParams.campaign_id = this.$route.params.id
+      _self.commentCanSubmit = false
+      let commentParams = _self.commentSubmit
+      commentParams.campaign_id = _self.$route.params.id
 
       axios.post(apiConfig.campaignEvaluateUrl, commentParams, {
         headers: {
-          'Authorization': this.authorization
+          'Authorization': _self.authorization
         }
       })
-      .then(this.handleDoCommentSubmitFnSucc)
+      .then(_self.handleDoCommentSubmitFnSucc)
       .catch(function(error) {
         console.log(error)
         alert('提交失败，请重新提交')
-        this.commentCanSubmit = true
+        _self.commentCanSubmit = true
       })
     },
     handleDoCommentSubmitFnSucc (res) {
@@ -608,6 +630,38 @@ export default {
           this.doCommentSubmitFn()
         }
       })
+    },
+    doCancel () {
+      let _self = this
+      if (!_self.canCancel) {
+        return false
+      }
+      _self.canCancel = false
+      axios.post(apiConfig.campaignCancelUrl, {
+          'campaign_id': _self.$route.params.id
+        }, {
+        headers: {
+          'Authorization': _self.authorization
+        }
+      })
+      .then(_self.handleDoCancelSucc)
+      .catch(function(error) {
+        console.log(error)
+        alert('提交失败，请重新提交')
+        _self.canCancel = true
+      })
+    },
+    handleDoCancelSucc (res) {
+      console.log(res)
+      if (res.status == 201) {
+        let _cancelConfirm = confirm('确定要撤销此活动？')
+        if (_cancelConfirm) {
+          this.$router.push('/campaigns')
+        }
+      } else {
+        alert('提交失败，请重新提交')
+      }
+      this.canCancel = true
     }
   },
   mounted () {
@@ -730,5 +784,8 @@ export default {
   .submit-btn {
     width: 150px;
   }
+}
+.cancel-btn {
+  width: 150px;
 }
 </style>

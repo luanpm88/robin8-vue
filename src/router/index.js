@@ -22,7 +22,6 @@ import CampaignList from '@/pages/campaigns/List'
 import CampaignCreate from '@/pages/campaigns/Create'
 import CampaignEdit from '@/pages/campaigns/Edit'
 import CampaignDetail from '@/pages/campaigns/Detail'
-import CampaignChooseKols from '@/pages/campaigns/Kols'
 import CampaignPay from '@/pages/campaigns/Pay'
 
 import Settings from '@/pages/settings/Settings'
@@ -36,7 +35,7 @@ import WechatRanking from '@/pages/ranking/WechatRanking'
 import WeiboRanking from '@/pages/ranking/WeiboRanking'
 import BenchMark from '@/pages/ranking/BenchMark'
 import SocialListening from '@/pages//social/SocialListening'
- 
+
 Vue.use(Router)
 
 export default new Router({
@@ -273,15 +272,6 @@ export default new Router({
           component: CampaignEdit,
           meta: {
             title: '活动编辑',
-            auth: true
-          }
-        },
-        {
-          path: ':id/kols',
-          name: 'CampaignChooseKols',
-          component: CampaignChooseKols,
-          meta: {
-            title: '创建新活动',
             auth: true
           }
         },

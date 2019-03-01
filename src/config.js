@@ -41,6 +41,9 @@ const config = {
   // 活动详情评论 post，参数:id
   campaignEvaluateUrl: `${host}/campaigns/evaluate`,
 
+  // 活动撤销 post，参数:id
+  campaignCancelUrl: `${host}/campaigns/revoke_campaign`,
+
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,
 
