@@ -5,12 +5,12 @@
         <table class="default-table">
           <thead>
             <tr>
-              <th class="text-center">账单编号</th>
-              <th class="text-center">消费类型</th>
-              <th class="text-center">日期</th>
-              <th class="text-center">金额</th>
-              <th class="text-center">剩余金额</th>
-              <th class="text-center">备注</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.tradeNo')}}</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.direct')}}</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.createdAt')}}</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.credits')}}</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.availAmount')}}</th>
+              <th class="text-center">{{$t('lang.wallet.summaryPage.remark')}}</th>
             </tr>
           </thead>
           <tbody>

@@ -39,7 +39,8 @@ import SocialListening from '@/pages//social/SocialListening'
 import Wallet from '@/pages/wallet/Wallet'
 import WalletRecharge from '@/pages/wallet/Recharge'
 import WalletSummary from '@/pages/wallet/Summary'
-import WalletInvoice from '@/pages/wallet/Invoice'
+import WalletInvoice from '@/pages/wallet/invoice/Invoice'
+import WalletInvoiceForm from '@/pages/wallet/invoice/InvoiceForm'
 
 Vue.use(Router)
 
@@ -170,17 +171,8 @@ export default new Router({
         auth: true
       },
       children: [
-        {
-          path: '',
-          name: 'WalletRecharge',
-          component: WalletRecharge,
-          meta: {
-            title: '账户充值',
-            auth: true
-          }
-        },
         // {
-        //   path: 'recharge',
+        //   path: '',
         //   name: 'WalletRecharge',
         //   component: WalletRecharge,
         //   meta: {
@@ -188,6 +180,15 @@ export default new Router({
         //     auth: true
         //   }
         // },
+        {
+          path: 'recharge',
+          name: 'WalletRecharge',
+          component: WalletRecharge,
+          meta: {
+            title: '账户充值',
+            auth: true
+          }
+        },
         {
           path: 'summary',
           name: 'WalletSummary',
@@ -201,6 +202,15 @@ export default new Router({
           path: 'invoice',
           name: 'WalletInvoice',
           component: WalletInvoice,
+          meta: {
+            title: '申请发票',
+            auth: true
+          }
+        },
+        {
+          path: 'invoice/form',
+          name: 'WalletInvoiceForm',
+          component: WalletInvoiceForm,
           meta: {
             title: '申请发票',
             auth: true
