@@ -32,6 +32,24 @@ const config = {
   // 充值 post 参数credits
   rechargeUrl: `${host}/users/recharge`,
 
+  // 获取发票记录 get / 申请发票 post
+  invoiceHistoriesUrl: `${host}/invoice_histories`,
+
+  // 获取发票信息 get
+  invoiceUrl: `${host}/invoices`,
+
+  // 普通发票信息的修改与创建 post
+  invoiceCommonUrl: `${host}/invoices/common`,
+
+  // 增税发票信息的修改与创建 post / 获取 get
+  invoiceSpecialUrl: `${host}/invoices/special`,
+
+  // 获取发票总额 get
+  invoiceCreditsUrl: `${host}/invoice_histories/appliable_credits`,
+
+  // 获取邮寄地址 get / 创建和修改 post
+  invoiceReceiverUrl: `${host}/invoice_receiver`,
+
   // 大V活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 

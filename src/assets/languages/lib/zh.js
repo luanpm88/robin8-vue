@@ -284,6 +284,69 @@ export const lang = {
           errorTips: '请输入邀请码(选填)'
         }
       }
+    },
+    summaryPage: {
+      tradeNo: '账单编号',
+      direct: '消费类型',
+      createdAt: '日期',
+      credits: '金额',
+      availAmount: '剩余金额',
+      remark: '备注'
+    },
+    invoicePage: {
+      info: {
+        title: '发票信息',
+        edit: '修改发票信息',
+        create: '添加发票信息',
+        invoiceTitle: {
+          title: '发票抬头',
+          placeholder: '请输入发票抬头',
+          errorTips: '请输入发票抬头'
+        },
+        taxpayerId: {
+          title: '纳税人识别号',
+          placeholder: '请输入纳税人识别号',
+          errorTips: '请输入纳税人识别号'
+        },
+        companyAddress: {
+          title: '公司地址',
+          placeholder: '请输入公司地址',
+          errorTips: '请输入公司地址'
+        },
+        companyMobile: {
+          title: '公司电话',
+          placeholder: '请输入公司电话',
+          errorTips: '请输入公司电话'
+        },
+        bankName: {
+          title: '开户行',
+          placeholder: '请输入开户行',
+          errorTips: '请输入开户行'
+        },
+        bankAccount: {
+          title: '开户行帐号',
+          placeholder: '请输入开户行帐号',
+          errorTips: '请输入开户行帐号'
+        }
+      },
+      receiver: {
+        title: '邮寄地址',
+        name: {
+          title: '收件人姓名',
+          placeholder: '请输入收件人姓名',
+          errorTips: '请输入收件人姓名'
+        },
+        phone_number: {
+          title: '收件人电话',
+          placeholder: '请输入收件人电话',
+          errorTips: '请输入收件人电话'
+        },
+        address: {
+          title: '收件人地址',
+          placeholder: '请输入收件人地址',
+          errorTips: '请输入收件人地址'
+        }
+      }
     }
   },
   myBrandPage: {
