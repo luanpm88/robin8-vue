@@ -834,12 +834,12 @@ export default {
       this.canSubmit = true
     },
     doConfirm () {
-      // let _startTime = new Date(this.campaignTime[0])
-      // let _endTime = new Date(this.campaignTime[1])
-      // _startTime.setHours(_startTime.getHours() + 8)
-      // _endTime.setHours(_endTime.getHours() + 8)
-      this.submitData.start_time = this.campaignTime[0]
-      this.submitData.deadline = this.campaignTime[1]
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+      this.submitData.start_time = _startTime
+      this.submitData.deadline = _endTime
       this.submitData.target.region = this.checkedCitys.toString()
 
       console.log(this.submitData)

@@ -644,14 +644,19 @@ export default {
       let _terraces = this.submitData.terraces
       console.log(_terraces)
 
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+
       let _price = this.price
       _price = _price.split(',')
 
       this.kolsParams = {
         // start_date: this.submitData.start_at,
         // end_date: this.submitData.start_end,
-        start_date: this.campaignTime[0],
-        end_date: this.campaignTime[1],
+        start_date: _startTime,
+        end_date: _endTime,
         industries: this.checkedTags,
         page_no: this.kolsPage,
         page_size: this.kolsPerPage,
@@ -859,8 +864,13 @@ export default {
         })
       })
 
-      this.submitData.start_at = this.campaignTime[0]
-      this.submitData.end_at = this.campaignTime[1]
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+
+      this.submitData.start_at = _startTime
+      this.submitData.end_at = _endTime
 
       let _price = this.price
       _price = _price.split(',')

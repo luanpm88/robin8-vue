@@ -26,6 +26,12 @@ const config = {
   // 获取邮箱验证码
   emailCodeUrl: `${host}/codes/get_email_code`,
 
+  // 品牌主信息 get
+  profileUrl: `${host}/users/profile`,
+
+  // 充值 post 参数credits
+  rechargeUrl: `${host}/users/recharge`,
+
   // 大V活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 

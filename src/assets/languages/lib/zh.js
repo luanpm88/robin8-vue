@@ -17,6 +17,11 @@ export const lang = {
   backBtn: '返回',
   submitBtn: '提交',
   totalNoDataTip: '暂无数据...',
+  profile: {
+    name: '品牌名称',
+    companyName: '公司名称（抬头）',
+    availAmount: '账户余额'
+  },
   updateBaseInfo: {
     base_info: {
       title: '基本信息',
@@ -254,6 +259,31 @@ export const lang = {
       provincePlaceholder: '请选择粉丝的省份',
       cityPlaceholder: '请选择粉丝的城市',
       errorTips: '请选择粉丝的地域要求'
+    }
+  },
+  wallet: {
+    rechargePage: {
+      profileTitle: '账户信息',
+      profileChange: '修改信息',
+      recharge: {
+        title: '线上支付',
+        method: {
+          title: '支付方式',
+          placeholder: '请选择支付方式',
+          errorTips: '请选择支付方式',
+          value: '支付宝'
+        },
+        credits: {
+          title: '支付金额',
+          placeholder: '请输入金额',
+          errorTips: '请输入金额'
+        },
+        invite_code: {
+          title: '邀请码(选填)',
+          placeholder: '请输入邀请码(选填)',
+          errorTips: '请输入邀请码(选填)'
+        }
+      }
     }
   },
   myBrandPage: {

@@ -36,6 +36,11 @@ import WeiboRanking from '@/pages/ranking/WeiboRanking'
 import BenchMark from '@/pages/ranking/BenchMark'
 import SocialListening from '@/pages//social/SocialListening'
 
+import Wallet from '@/pages/wallet/Wallet'
+import WalletRecharge from '@/pages/wallet/Recharge'
+import WalletSummary from '@/pages/wallet/Summary'
+import WalletInvoice from '@/pages/wallet/Invoice'
+
 Vue.use(Router)
 
 export default new Router({
@@ -151,6 +156,53 @@ export default new Router({
           component: MyCompetitionBrandsCreate,
           meta: {
             title: '我的竞争品牌增加',
+            auth: true
+          }
+        }
+      ]
+    },
+    {
+      path: '/wallet',
+      name: 'Wallet',
+      component: Wallet,
+      meta: {
+        title: '我的账户',
+        auth: true
+      },
+      children: [
+        {
+          path: '',
+          name: 'WalletRecharge',
+          component: WalletRecharge,
+          meta: {
+            title: '账户充值',
+            auth: true
+          }
+        },
+        // {
+        //   path: 'recharge',
+        //   name: 'WalletRecharge',
+        //   component: WalletRecharge,
+        //   meta: {
+        //     title: '账户充值',
+        //     auth: true
+        //   }
+        // },
+        {
+          path: 'summary',
+          name: 'WalletSummary',
+          component: WalletSummary,
+          meta: {
+            title: '消费记录',
+            auth: true
+          }
+        },
+        {
+          path: 'invoice',
+          name: 'WalletInvoice',
+          component: WalletInvoice,
+          meta: {
+            title: '申请发票',
             auth: true
           }
         }
