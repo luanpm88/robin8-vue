@@ -80,7 +80,7 @@ const config = {
   // 订单页面get 参数id
   showTenderUrl: `${host}/tenders/show`,
 
-  // 支付post 参数tender_id pay_type
+  // 支付post 参数tender_id pay_type / 消费记录 get
   transactionsUrl: `${host}/transactions`,
 
   // 创建品牌post 参数name, description
