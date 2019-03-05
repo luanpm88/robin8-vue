@@ -411,6 +411,8 @@
       :kolsPage="kolsPage"
       :kolsPerPage="kolsPerPage"
       :kolsTotal="kolsTotal"
+      :keyword="brandKeyword"
+      :kolTypeId="kolTypeId"
       @checkedKols="checkedKols"
       @changeKolsPage="changeKolsPage"
     ></kols-list-panel>
@@ -470,12 +472,14 @@ export default {
     return {
       detailData: {},
       brandsList: [],
+      brandKeyword: '',
       tagsList: [],
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
       kolsParams: {},
       kolsList: [],
+      kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -644,6 +648,15 @@ export default {
       }
     },
     searchKolsCtrl () {
+      let _brands_list = this.brandsList
+      let _checked_trademark_id = this.submitData.trademark_id
+      _brands_list.forEach(item => {
+        if (_checked_trademark_id == item.id) {
+          this.brandKeyword = item.keywords
+        }
+      })
+      console.log(this.brandKeyword)
+
       let _terraces = this.submitData.terraces
       console.log(_terraces)
 
@@ -680,19 +693,28 @@ export default {
                 return false
               }
             })
+            console.log(hasWechat)
             if (hasWechat) {
               this.searchKols(apiConfig.kolWxSearchUrl)
               this.plateformName = 'public_wechat_account'
+              this.kolTypeId = '1'
+              console.log('123')
             } else {
               this.searchKols(apiConfig.kolWbSearchUrl)
               this.plateformName = 'weibo'
+              this.kolTypeId = '0'
+              console.log('321')
             }
           } else {
             this.searchKols(apiConfig.kolWxSearchUrl)
             this.plateformName = 'public_wechat_account'
+            this.kolTypeId = '1'
+            console.log('1111')
           }
         }
       })
+
+      console.log(this.kolTypeId)
     },
     changeKolsPage (data) {
       console.log(data.page)
@@ -721,6 +743,27 @@ export default {
       console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
     },
+    // toKolDetail () {
+    //   console.log(11)
+    //   let _brands_list = this.brandsList
+    //   let _checked_trademark_id = this.submitData.trademark_id
+    //   let _keyword = ''
+    //   _brands_list.forEach(item => {
+    //     if (_checked_trademark_id == item.id) {
+    //       _keyword = item.keywords
+    //     }
+    //   })
+    //   console.log(_keyword)
+    //   // this.$router.push({
+    //   //   path: '/kol/',
+    //   //   name: 'KolDetail',
+    //   //   params: {
+    //   //     id: item.profile_id,
+    //   //     type: this.kolTypeId,
+    //   //     brand_keywords: _keyword
+    //   //   }
+    //   // })
+    // },
     checkTag (data) {
       let _ids = data.ids
       let _tagsList = this.tagsList
@@ -754,7 +797,7 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      console.log(_terraceItem)
+      console.log(_terraces)
       let result = _terraces.some(item => {
         if (item.terrace_id == id) {
           return true
@@ -764,16 +807,29 @@ export default {
       _terracesList.forEach(item => {
         if (item.id == _terraceItem.terrace_id) {
           if (!result) {
+            console.log(item.id)
             _terraceItem.short_name = item.short_name
             _terraces.push(_terraceItem)
             item.checked = true
+            console.log(_terraces)
           } else {
-            let _index = _terraces.indexOf(item)
+            console.log(item.id)
+            let _index
+            _terraces.forEach(_item => {
+              if (item.id == _item.terrace_id) {
+                _index = _terraces.indexOf(_item)
+              } else {
+                _index = -1
+              }
+            })
+            console.log(_index)
             _terraces.splice(_index, 1)
             item.checked = false
+            console.log(_terraces)
           }
         }
       })
+      this.submitData.terraces = _terraces
       console.log(this.submitData.terraces)
     },
     changeProvince (e) {
