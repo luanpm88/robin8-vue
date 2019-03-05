@@ -17,6 +17,8 @@ export const lang = {
   backBtn: '返回',
   submitBtn: '提交',
   totalNoDataTip: '暂无数据...',
+  yes: '是',
+  no: '否',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
@@ -258,7 +260,8 @@ export const lang = {
       placeholder: '请选择粉丝的地域要求',
       provincePlaceholder: '请选择粉丝的省份',
       cityPlaceholder: '请选择粉丝的城市',
-      errorTips: '请选择粉丝的地域要求'
+      provinceErrorTips: '请选择粉丝的省份',
+      cityErrorTips: '请选择粉丝的城市'
     }
   },
   wallet: {
@@ -347,6 +350,30 @@ export const lang = {
           title: '收件人地址',
           placeholder: '请输入收件人地址',
           errorTips: '请输入收件人地址'
+        }
+      },
+      invoiceSubmit: {
+        title: '申请发票',
+        quota: {
+          title: '可申请额度',
+          tips: '已申请发票的金额不可以申请退款！'
+        },
+        credits: {
+          title: '申请金额',
+          placeholder: '请输入申请金额',
+          errorTips: '请输入申请金额'
+        },
+        type: {
+          title: '发票类型',
+          placeholder: '请选择发票类型',
+          errorTips: '请选择发票类型',
+          common: '普通发票',
+          special: '增值税发票'
+        },
+        price_sheet: {
+          title: '是否开报价单',
+          placeholder: '请选择是否开报价单',
+          errorTips: '请选择是否开报价单'
         }
       }
     }

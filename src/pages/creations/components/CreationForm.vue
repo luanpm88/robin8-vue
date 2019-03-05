@@ -353,7 +353,7 @@
                   {{item.provinceName}}
                 </option>
               </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+              <div class="form-tips">{{$t('lang.creations.followerDistrict.provinceErrorTips')}}</div>
             </div>
             <div class="col-sm-4">
               <select
@@ -371,7 +371,7 @@
                   {{item.citysName}}
                 </option>
               </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+              <div class="form-tips">{{$t('lang.creations.followerDistrict.cityErrorTips')}}</div>
             </div>
           </div>
           <div v-if="checkedCitys.length > 0" class="form-group">
