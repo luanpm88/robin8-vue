@@ -41,6 +41,7 @@ import WalletRecharge from '@/pages/wallet/Recharge'
 import WalletSummary from '@/pages/wallet/Summary'
 import WalletInvoice from '@/pages/wallet/invoice/Invoice'
 import WalletInvoiceForm from '@/pages/wallet/invoice/InvoiceForm'
+import WalletReceiverForm from '@/pages/wallet/invoice/ReceiverForm'
 
 Vue.use(Router)
 
@@ -212,7 +213,16 @@ export default new Router({
           name: 'WalletInvoiceForm',
           component: WalletInvoiceForm,
           meta: {
-            title: '申请发票',
+            title: '发票信息',
+            auth: true
+          }
+        },
+        {
+          path: 'invoice/receiver_form',
+          name: 'WalletReceiverForm',
+          component: WalletReceiverForm,
+          meta: {
+            title: '邮寄地址信息',
             auth: true
           }
         }

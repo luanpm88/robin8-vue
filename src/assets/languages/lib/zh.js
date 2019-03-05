@@ -331,6 +331,8 @@ export const lang = {
       },
       receiver: {
         title: '邮寄地址',
+        edit: '修改邮寄地址',
+        create: '添加邮寄地址',
         name: {
           title: '收件人姓名',
           placeholder: '请输入收件人姓名',

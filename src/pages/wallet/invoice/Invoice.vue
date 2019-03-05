@@ -57,6 +57,45 @@
       </div>
     </div>
 
+    <div class="panel default-panel invoice-panel mt20">
+      <div class="panel-head">
+        <div class="title-bar">
+          <h5 class="title">{{$t('lang.wallet.invoicePage.receiver.title')}}</h5>
+          <div v-if="!noReceiver" class="tail-area">
+            <router-link to="/wallet/invoice/receiver_form?type=edit">{{$t('lang.wallet.invoicePage.receiver.edit')}}</router-link>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div v-if="!noReceiver" class="form-horizontal invoice-form">
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{invoiceReceiverData.name}}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{invoiceReceiverData.phone_number}}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}：</div>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{invoiceReceiverData.address}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="p30 text-center">
+          <router-link to="/wallet/invoice/receiver_form?type=create" class="btn btn-cyan create-btn">
+            {{$t('lang.wallet.invoicePage.receiver.create')}}
+          </router-link>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -74,7 +113,9 @@ export default {
   data () {
     return {
       noInvoice: false,
-      invoiceSpecialData: {}
+      noReceiver: false,
+      invoiceSpecialData: {},
+      invoiceReceiverData: {}
     }
   },
   methods: {
@@ -95,10 +136,29 @@ export default {
           this.invoiceSpecialData = resData
         }
       }
+    },
+    getAddressData () {
+      axios.get(apiConfig.invoiceReceiverUrl, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetAddressDataSucc)
+    },
+    handleGetAddressDataSucc (res) {
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        console.log(resData)
+        if (!!resData.no_invoice_receiver && resData.no_invoice_receiver) {
+          this.noReceiver = resData.no_invoice_receiver
+        } else {
+          this.invoiceReceiverData = resData
+        }
+      }
     }
   },
   mounted () {
     this.getInvoiceData()
+    this.getAddressData()
   },
   computed: {
     ...mapState(['authorization'])

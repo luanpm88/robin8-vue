@@ -154,6 +154,7 @@ export default {
   name: 'InvoiceForm',
   data () {
     return {
+      noInvoice: false,
       submitData: {
         title: '',
         invoice_type: 'special',
@@ -169,7 +170,7 @@ export default {
   },
   methods: {
     getInvoiceData () {
-      axios.get(apiConfig.invoiceHistoriesUrl, {
+      axios.get(apiConfig.invoiceSpecialUrl, {
         headers: {
           'Authorization': this.authorization
         }
@@ -179,6 +180,18 @@ export default {
       let resData = res.data
       if (res.status == 200 && resData) {
         console.log(resData)
+        if (!!resData.no_invoice && resData.no_invoice) {
+          this.noInvoice = resData.no_invoice
+        } else {
+          this.submitData.title = resData.title
+          this.submitData.invoice_type = resData.invoice_type
+          this.submitData.taxpayer_id = resData.taxpayer_id
+          this.submitData.company_address = resData.company_address
+          this.submitData.company_mobile = resData.company_mobile
+          this.submitData.bank_name = resData.bank_name
+          this.submitData.bank_account = resData.bank_account
+          this.submitData.id = resData.id
+        }
       }
     },
     doSubmit () {
@@ -214,7 +227,6 @@ export default {
     },
     doConfirm () {
       console.log(this.submitData)
-
       this.$validator.validateAll().then((msg) => {
         console.log(msg)
         if (msg) {
@@ -225,7 +237,10 @@ export default {
     }
   },
   mounted () {
-    this.getInvoiceData()
+    let _type = this.$route.query.type
+    if (_type == 'edit') {
+      this.getInvoiceData()
+    }
   },
   computed: {
     ...mapState(['authorization'])
