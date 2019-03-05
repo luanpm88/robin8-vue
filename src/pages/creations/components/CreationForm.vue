@@ -698,18 +698,15 @@ export default {
               this.searchKols(apiConfig.kolWxSearchUrl)
               this.plateformName = 'public_wechat_account'
               this.kolTypeId = '1'
-              console.log('123')
             } else {
               this.searchKols(apiConfig.kolWbSearchUrl)
               this.plateformName = 'weibo'
               this.kolTypeId = '0'
-              console.log('321')
             }
           } else {
             this.searchKols(apiConfig.kolWxSearchUrl)
             this.plateformName = 'public_wechat_account'
             this.kolTypeId = '1'
-            console.log('1111')
           }
         }
       })
@@ -743,27 +740,6 @@ export default {
       console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
     },
-    // toKolDetail () {
-    //   console.log(11)
-    //   let _brands_list = this.brandsList
-    //   let _checked_trademark_id = this.submitData.trademark_id
-    //   let _keyword = ''
-    //   _brands_list.forEach(item => {
-    //     if (_checked_trademark_id == item.id) {
-    //       _keyword = item.keywords
-    //     }
-    //   })
-    //   console.log(_keyword)
-    //   // this.$router.push({
-    //   //   path: '/kol/',
-    //   //   name: 'KolDetail',
-    //   //   params: {
-    //   //     id: item.profile_id,
-    //   //     type: this.kolTypeId,
-    //   //     brand_keywords: _keyword
-    //   //   }
-    //   // })
-    // },
     checkTag (data) {
       let _ids = data.ids
       let _tagsList = this.tagsList
@@ -797,7 +773,6 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      console.log(_terraces)
       let result = _terraces.some(item => {
         if (item.terrace_id == id) {
           return true
@@ -807,25 +782,18 @@ export default {
       _terracesList.forEach(item => {
         if (item.id == _terraceItem.terrace_id) {
           if (!result) {
-            console.log(item.id)
             _terraceItem.short_name = item.short_name
             _terraces.push(_terraceItem)
             item.checked = true
-            console.log(_terraces)
           } else {
-            console.log(item.id)
             let _index
             _terraces.forEach(_item => {
               if (item.id == _item.terrace_id) {
                 _index = _terraces.indexOf(_item)
-              } else {
-                _index = -1
               }
             })
-            console.log(_index)
             _terraces.splice(_index, 1)
             item.checked = false
-            console.log(_terraces)
           }
         }
       })

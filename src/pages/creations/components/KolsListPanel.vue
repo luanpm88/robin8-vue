@@ -95,17 +95,16 @@ export default {
       console.log(this.checkedIds)
     },
     toKolDetail (item) {
-      console.log(this.kolTypeId)
-      console.log(this.keyword)
-      // this.$router.push({
-      //   path: '/kol/',
-      //   name: 'KolDetail',
-      //   params: {
-      //     id: item.profile_id,
-      //     type: this.kolTypeId,
-      //     brand_keywords: this.keyword
-      //   }
-      // })
+      // console.log(item)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.id,
+          type: this.kolTypeId,
+          brand_keywords: this.keyword
+        }
+      })
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {
