@@ -26,17 +26,53 @@ const config = {
   // 获取邮箱验证码
   emailCodeUrl: `${host}/codes/get_email_code`,
 
+  // 品牌主信息 get
+  profileUrl: `${host}/users/profile`,
+
+  // 充值 post 参数credits
+  rechargeUrl: `${host}/users/recharge`,
+
+  // 获取发票记录 get / 申请发票 post
+  invoiceHistoriesUrl: `${host}/invoice_histories`,
+
+  // 获取发票信息 get
+  invoiceUrl: `${host}/invoices`,
+
+  // 普通发票信息的修改与创建 post
+  invoiceCommonUrl: `${host}/invoices/common`,
+
+  // 增税发票信息的修改与创建 post / 获取 get
+  invoiceSpecialUrl: `${host}/invoices/special`,
+
+  // 获取发票总额 get
+  invoiceCreditsUrl: `${host}/invoice_histories/appliable_credits`,
+
+  // 获取邮寄地址 get / 创建和修改 post
+  invoiceReceiverUrl: `${host}/invoice_receiver`,
+
   // 大V活动 创建post，列表get，详情:id get
   creationsUrl: `${host}/creations`,
 
   // 小V活动 创建post，列表get，详情:id get
   campaignsUrl: `${host}/campaigns`,
 
-  // 小V活动kol列表 get，参数:id
+  // 小V活动kol列表 get，参数:campaign_id
   campaignInvitesUrl: `${host}/campaign_invites`,
 
-  // 活动详情参与情况 get，参数:id
+  // 小V活动详情参与情况 get，参数:campaign_id
   campaignStatisticsUrl: `${host}/campaigns/statistics_clicks`,
+
+  // 小V活动详情评论 post，参数:campaign_id
+  campaignEvaluateUrl: `${host}/campaigns/evaluate`,
+
+  // 小V活动撤销 post，参数:campaign_id
+  campaignCancelUrl: `${host}/campaigns/revoke_campaign`,
+
+  // 小V活动支付宝支付 post，参数:campaign_id
+  campaignPayByAlipayUrl: `${host}/campaigns/pay_by_alipay`,
+
+  // 小V活动余额支付 post，参数:campaign_id
+  campaignPayByBalanceUrl: `${host}/campaigns/pay_by_balance`,
 
   // 上传图片post 参数image
   uploadImageUrl: `${host}/creations/upload_image`,
@@ -62,7 +98,7 @@ const config = {
   // 订单页面get 参数id
   showTenderUrl: `${host}/tenders/show`,
 
-  // 支付post 参数tender_id pay_type
+  // 支付post 参数tender_id pay_type / 消费记录 get
   transactionsUrl: `${host}/transactions`,
 
   // 创建品牌post 参数name, description

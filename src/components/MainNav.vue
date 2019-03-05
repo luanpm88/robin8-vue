@@ -82,7 +82,21 @@ export default {
         {
           title: 'myWallet',
           icon: 'icon-wallet',
-          href: '/my_wallet'
+          href: '/wallet/recharge',
+          subNav: [
+            {
+              title: 'Recharge',
+              href: '/wallet/recharge'
+            },
+            {
+              title: 'Summary',
+              href: '/wallet/summary'
+            },
+            {
+              title: 'Invoice',
+              href: '/wallet/invoice'
+            }
+          ]
         },
         {
           title: 'settings',

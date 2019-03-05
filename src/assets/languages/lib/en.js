@@ -17,6 +17,11 @@ export const lang = {
   backBtn: 'Back',
   submitBtn: 'Submit',
   totalNoDataTip: 'No data...',
+  profile: {
+    name: '品牌名称',
+    companyName: '公司名称（抬头）',
+    availAmount: '账户余额'
+  },
   updateBaseInfo: {
     base_info: {
       title: 'Base Info',
@@ -161,6 +166,16 @@ export const lang = {
       title: '补推',
       placeholder: '',
       errorTips: '请选择补推形式'
+    },
+    evaluatePoint: {
+      title: '效果打分',
+      placeholder: '',
+      errorTips: '请选择分数'
+    },
+    evaluateComment: {
+      title: '效果评价',
+      placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
+      errorTips: '请输入效果评价'
     }
   },
   creations: {
@@ -244,6 +259,94 @@ export const lang = {
       provincePlaceholder: 'please select province',
       cityPlaceholder: 'please select city',
       errorTips: 'please fill in the district reauirement'
+    }
+  },
+  wallet: {
+    rechargePage: {
+      profileTitle: '账户信息',
+      profileChange: '修改信息',
+      recharge: {
+        title: '线上支付',
+        method: {
+          title: '支付方式',
+          placeholder: '请选择支付方式',
+          errorTips: '请选择支付方式',
+          value: 'Alipay'
+        },
+        credits: {
+          title: '支付金额',
+          placeholder: '请输入金额',
+          errorTips: '请输入金额'
+        },
+        invite_code: {
+          title: '邀请码(选填)',
+          placeholder: '请输入邀请码(选填)',
+          errorTips: '请输入邀请码(选填)'
+        }
+      }
+    },
+    summaryPage: {
+      tradeNo: '账单编号',
+      direct: '消费类型',
+      createdAt: '日期',
+      credits: '金额',
+      availAmount: '剩余金额',
+      remark: '备注'
+    },
+    invoicePage: {
+      info: {
+        title: '发票信息',
+        edit: '修改发票信息',
+        create: '添加发票信息',
+        invoiceTitle: {
+          title: '发票抬头',
+          placeholder: '请输入发票抬头',
+          errorTips: '请输入发票抬头'
+        },
+        taxpayerId: {
+          title: '纳税人识别号',
+          placeholder: '请输入纳税人识别号',
+          errorTips: '请输入纳税人识别号'
+        },
+        companyAddress: {
+          title: '公司地址',
+          placeholder: '请输入公司地址',
+          errorTips: '请输入公司地址'
+        },
+        companyMobile: {
+          title: '公司电话',
+          placeholder: '请输入公司电话',
+          errorTips: '请输入公司电话'
+        },
+        bankName: {
+          title: '开户行',
+          placeholder: '请输入开户行',
+          errorTips: '请输入开户行'
+        },
+        bankAccount: {
+          title: '开户行帐号',
+          placeholder: '请输入开户行帐号',
+          errorTips: '请输入开户行帐号'
+        }
+      },
+      receiver: {
+        title: '邮寄地址',
+        name: {
+          title: '收件人姓名',
+          placeholder: '请输入收件人姓名',
+          errorTips: '请输入收件人姓名'
+        },
+        phone_number: {
+          title: '收件人电话',
+          placeholder: '请输入收件人电话',
+          errorTips: '请输入收件人电话'
+        },
+        address: {
+          title: '收件人地址',
+          placeholder: '请输入收件人地址',
+          errorTips: '请输入收件人地址'
+        }
+      }
     }
   },
   myBrandPage: {

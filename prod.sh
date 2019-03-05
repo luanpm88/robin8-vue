@@ -6,5 +6,7 @@ path=/home/deployer/apps/robin8_vue/dist
 echo "部署到$path"
 
 # deploy production
-cd dist && scp -r . prod_1:$path
+cd dist
+scp -r . prod_1:$path
+scp -r . prod_2:$path
 

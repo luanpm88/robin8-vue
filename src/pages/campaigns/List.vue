@@ -60,15 +60,27 @@
                   </div>
                 </div>
               </div>
-              <div class="media-right media-middle content">
+              <div class="media-right media-middle campaign-operation">
                 <router-link
+                  v-show="item.status == 'pending' || item.status == 'unpay'"
                   :to="'/campaigns/'+ item.id +'/edit'"
-                  class="btn btn-sm btn-cyan btn-outline mr10"
+                  class="btn btn-sm btn-cyan btn-outline"
                 >编辑</router-link>
                 <router-link
-                  to="/"
+                  v-show="item.status == 'settled'"
+                  :to="'/campaigns/'+ item.id"
+                  class="btn btn-sm btn-cyan btn-outline"
+                >评价</router-link>
+                <router-link
+                  v-show="item.status == 'unpay'"
+                  :to="'/campaigns/'+ item.id +'/pay'"
                   class="btn btn-sm btn-cyan btn-outline"
                 >支付</router-link>
+                <router-link
+                  v-show="item.status == 'agreed'"
+                  :to="'/campaigns/create?copy_id='+ item.id"
+                  class="btn btn-sm btn-cyan btn-outline"
+                >再次发布</router-link>
               </div>
             </div>
           </div>
@@ -185,6 +197,12 @@ export default {
         .num {
           font-size: $font-nm-l;
         }
+      }
+    }
+    .campaign-operation {
+      padding: 20px;
+      & > .btn {
+        margin: 0 5px;
       }
     }
     &:last-child {

@@ -535,9 +535,10 @@
     </div>
 
     <div class="text-center create-btn-area">
+      <p class="tips">活动一旦通过审核将不能更改，我们将在2小时内审核当天18:00前提交的订单，其余时间段提交的订单次日审核</p>
       <button
         type="button"
-        class="btn btn-cyan next-btn"
+        class="btn btn-cyan next-btn mt20"
         @click="doConfirm"
         :disabled="canSubmit ? false : true"
       >{{$t('lang.submitBtn')}}</button>
@@ -621,8 +622,8 @@ export default {
         console.log(this.tagsList)
       }
     },
-    getDetailData () {
-      axios.get(apiConfig.campaignsUrl + '/' + this.$route.params.id, {
+    getDetailData (id) {
+      axios.get(apiConfig.campaignsUrl + '/' + id, {
         headers: {
           'Authorization': this.authorization
         }
@@ -794,30 +795,31 @@ export default {
       }
     },
     doSubmit () {
-      if (!this.canSubmit) {
+      let _self = this
+      if (!_self.canSubmit) {
         return false
       }
-      this.canSubmit = false
+      _self.canSubmit = false
       let submitParams = {}
-      if (this.formType == 'create') {
-        submitParams = this.submitData
+      if (_self.formType == 'create') {
+        submitParams = _self.submitData
       }
-      if (this.formType == 'edit') {
-        this.submitData.id = this.$route.params.id
-        submitParams = this.submitData
+      if (_self.formType == 'edit') {
+        _self.submitData.id = _self.$route.params.id
+        submitParams = _self.submitData
       }
 
       console.log(submitParams)
       axios.post(apiConfig.campaignsUrl, submitParams, {
         headers: {
-          'Authorization': this.authorization
+          'Authorization': _self.authorization
         }
       })
-      .then(this.handleDoSubmitSucc)
+      .then(_self.handleDoSubmitSucc)
       .catch(function(error) {
         console.log(error)
         alert('提交失败，请重新提交')
-        this.canSubmit = true
+        _self.canSubmit = true
       })
     },
     handleDoSubmitSucc (res) {
@@ -832,12 +834,12 @@ export default {
       this.canSubmit = true
     },
     doConfirm () {
-      // let _startTime = new Date(this.campaignTime[0])
-      // let _endTime = new Date(this.campaignTime[1])
-      // _startTime.setHours(_startTime.getHours() + 8)
-      // _endTime.setHours(_endTime.getHours() + 8)
-      this.submitData.start_time = this.campaignTime[0]
-      this.submitData.deadline = this.campaignTime[1]
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+      this.submitData.start_time = _startTime
+      this.submitData.deadline = _endTime
       this.submitData.target.region = this.checkedCitys.toString()
 
       console.log(this.submitData)
@@ -852,17 +854,25 @@ export default {
     }
   },
   mounted () {
-    if (this.formType == 'edit') {
-      let _self = this
+    console.log(this.$route.query.copy_id)
+    let _self = this
+    if (_self.formType == 'edit') {
       _self.getBaseData()
       setTimeout(function () {
-        _self.getDetailData()
+        _self.getDetailData(_self.$route.params.id)
       }, 500)
     } else {
-      this.getBaseData()
+      if (!!_self.$route.query.copy_id && _self.$route.query.copy_id != '') {
+        _self.getBaseData()
+        setTimeout(function () {
+          _self.getDetailData(_self.$route.query.copy_id)
+        }, 500)
+      } else {
+        _self.getBaseData()
+      }
     }
 
-    this.provinceData = cityJs.citiesData.provinces
+    _self.provinceData = cityJs.citiesData.provinces
   },
   computed: {
     ...mapState(['authorization'])

@@ -105,9 +105,12 @@
                   <div class="col-sm-10 pr0">
                     <input
                       type="number"
+                      :name="'platform' + item.id"
                       class="form-control"
+                      :class="[errors.has('platform' + item.id) ? 'danger' : '']"
                       v-model="item.val"
                       :placeholder="$t('lang.creations.platform.placeholder')"
+                      v-validate="item.checked ? 'required' : ''"
                     >
                   </div>
                 </div>
@@ -644,14 +647,19 @@ export default {
       let _terraces = this.submitData.terraces
       console.log(_terraces)
 
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+
       let _price = this.price
       _price = _price.split(',')
 
       this.kolsParams = {
         // start_date: this.submitData.start_at,
         // end_date: this.submitData.start_end,
-        start_date: this.campaignTime[0],
-        end_date: this.campaignTime[1],
+        start_date: _startTime,
+        end_date: _endTime,
         industries: this.checkedTags,
         page_no: this.kolsPage,
         page_size: this.kolsPerPage,
@@ -807,32 +815,33 @@ export default {
       console.log(this.checkedCitys)
     },
     doSubmit () {
-      if (!this.canSubmit) {
+      let _self = this
+      if (!_self.canSubmit) {
         return false
       }
-      this.canSubmit = false
+      _self.canSubmit = false
       let submitParams = {}
-      if (this.formType == 'create') {
+      if (_self.formType == 'create') {
         submitParams = {
-          'creation': this.submitData
+          'creation': _self.submitData
         }
       }
-      if (this.formType == 'edit') {
+      if (_self.formType == 'edit') {
         submitParams = {
-          'id': this.$route.params.id,
-          'creation': this.submitData
+          'id': _self.$route.params.id,
+          'creation': _self.submitData
         }
       }
       axios.post(apiConfig.creationsUrl, submitParams, {
         headers: {
-          'Authorization': this.authorization
+          'Authorization': _self.authorization
         }
       })
-      .then(this.handleDoSubmitSucc)
+      .then(_self.handleDoSubmitSucc)
       .catch(function(error) {
         console.log(error)
         alert('提交失败，请重新提交')
-        this.canSubmit = true
+        _self.canSubmit = true
       })
     },
     handleDoSubmitSucc (res) {
@@ -858,8 +867,13 @@ export default {
         })
       })
 
-      this.submitData.start_at = this.campaignTime[0]
-      this.submitData.end_at = this.campaignTime[1]
+      let _startTime = new Date(this.campaignTime[0])
+      let _endTime = new Date(this.campaignTime[1])
+      _startTime.setHours(_startTime.getHours() + 8)
+      _endTime.setHours(_endTime.getHours() + 8)
+
+      this.submitData.start_at = _startTime
+      this.submitData.end_at = _endTime
 
       let _price = this.price
       _price = _price.split(',')

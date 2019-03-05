@@ -22,7 +22,6 @@ import CampaignList from '@/pages/campaigns/List'
 import CampaignCreate from '@/pages/campaigns/Create'
 import CampaignEdit from '@/pages/campaigns/Edit'
 import CampaignDetail from '@/pages/campaigns/Detail'
-import CampaignChooseKols from '@/pages/campaigns/Kols'
 import CampaignPay from '@/pages/campaigns/Pay'
 
 import Settings from '@/pages/settings/Settings'
@@ -36,7 +35,13 @@ import WechatRanking from '@/pages/ranking/WechatRanking'
 import WeiboRanking from '@/pages/ranking/WeiboRanking'
 import BenchMark from '@/pages/ranking/BenchMark'
 import SocialListening from '@/pages//social/SocialListening'
- 
+
+import Wallet from '@/pages/wallet/Wallet'
+import WalletRecharge from '@/pages/wallet/Recharge'
+import WalletSummary from '@/pages/wallet/Summary'
+import WalletInvoice from '@/pages/wallet/invoice/Invoice'
+import WalletInvoiceForm from '@/pages/wallet/invoice/InvoiceForm'
+
 Vue.use(Router)
 
 export default new Router({
@@ -152,6 +157,62 @@ export default new Router({
           component: MyCompetitionBrandsCreate,
           meta: {
             title: '我的竞争品牌增加',
+            auth: true
+          }
+        }
+      ]
+    },
+    {
+      path: '/wallet',
+      name: 'Wallet',
+      component: Wallet,
+      meta: {
+        title: '我的账户',
+        auth: true
+      },
+      children: [
+        // {
+        //   path: '',
+        //   name: 'WalletRecharge',
+        //   component: WalletRecharge,
+        //   meta: {
+        //     title: '账户充值',
+        //     auth: true
+        //   }
+        // },
+        {
+          path: 'recharge',
+          name: 'WalletRecharge',
+          component: WalletRecharge,
+          meta: {
+            title: '账户充值',
+            auth: true
+          }
+        },
+        {
+          path: 'summary',
+          name: 'WalletSummary',
+          component: WalletSummary,
+          meta: {
+            title: '消费记录',
+            auth: true
+          }
+        },
+        {
+          path: 'invoice',
+          name: 'WalletInvoice',
+          component: WalletInvoice,
+          meta: {
+            title: '申请发票',
+            auth: true
+          }
+        },
+        {
+          path: 'invoice/form',
+          name: 'WalletInvoiceForm',
+          component: WalletInvoiceForm,
+          meta: {
+            title: '申请发票',
             auth: true
           }
         }
@@ -277,16 +338,7 @@ export default new Router({
           }
         },
         {
-          path: ':id/kols',
-          name: 'CampaignChooseKols',
-          component: CampaignChooseKols,
-          meta: {
-            title: '创建新活动',
-            auth: true
-          }
-        },
-        {
-          path: ':id/pay/:tenderId',
+          path: ':id/pay',
           name: 'CampaignPay',
           component: CampaignPay,
           meta: {
