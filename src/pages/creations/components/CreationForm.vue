@@ -105,9 +105,12 @@
                   <div class="col-sm-10 pr0">
                     <input
                       type="number"
+                      :name="'platform' + item.id"
                       class="form-control"
+                      :class="[errors.has('platform' + item.id) ? 'danger' : '']"
                       v-model="item.val"
                       :placeholder="$t('lang.creations.platform.placeholder')"
+                      v-validate="item.checked ? 'required' : ''"
                     >
                   </div>
                 </div>
