@@ -159,6 +159,27 @@ const config = {
   // activity
   kolActivityUrl: `${host}/creation_selected_kols`,
 
+  // Best Performance Posts weibo
+  performanceWeibo: `${searchHost}/weibo/profile/best_performance_post_by_profile_id?${searchHostKey}`,
+
+  // Best Performance Posts weixin
+  performanceWeixin: `${searchHost}/weixin/profile/best_performance_post_by_profile_id?${searchHostKey}`,
+
+  // Industries Distribution weibo
+  detailAnalyOneWeibo: `${searchHost}/weibo/post/industry_distribution?${searchHostKey}`,
+
+  // Industries Distribution weixin
+  detailAnalyOneWeixin: `${searchHost}/weixin/post/industry_distribution?${searchHostKey}`,
+
+  // Media Distribution weixin
+  detailMediaWeixin: `${searchHost}/weixin/post/media_distribution?${searchHostKey}`,
+
+  // postlist weixin
+  detailPostWeixin: `${searchHost}/weixin/post/post_by_profile_id?${searchHostKey}`,
+
+  // postlist weibo
+  detailPostWeibo: `${searchHost}/weibo/post/post_by_profile_id?${searchHostKey}`,
+
   // ranking--------------------------
 
   // ranking 在调用right 两个列表之前 获取最新的report_date
