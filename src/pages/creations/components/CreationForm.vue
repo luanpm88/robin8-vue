@@ -337,47 +337,56 @@
 
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
-            <div class="col-sm-4">
-              <select
-                name="province"
-                class="form-control"
-                v-model="province"
-                @change="changeProvince"
-              >
-                <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of provinceData"
-                  :key="index"
-                  :value="item.provinceName"
-                >
-                  {{item.provinceName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.provinceErrorTips')}}</div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <select
+                    name="province"
+                    class="form-control"
+                    v-model="province"
+                    @change="changeProvince"
+                  >
+                    <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of provinceData"
+                      :key="index"
+                      :value="item.provinceName"
+                    >
+                      {{item.provinceName}}
+                    </option>
+                  </select>
+                  <div class="form-tips">{{$t('lang.creations.followerDistrict.provinceErrorTips')}}</div>
+                </div>
+                <div class="col-sm-6">
+                  <select
+                    name="city"
+                    class="form-control"
+                    v-model="city"
+                    @change="changeCity"
+                  >
+                    <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of cityData"
+                      :key="index"
+                      :value="item.citysName"
+                    >
+                      {{item.citysName}}
+                    </option>
+                  </select>
+                  <div class="form-tips">{{$t('lang.creations.followerDistrict.cityErrorTips')}}</div>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-4">
-              <select
-                name="city"
-                class="form-control"
-                v-model="city"
-                @change="changeCity"
-              >
-                <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of cityData"
-                  :key="index"
-                  :value="item.citysName"
-                >
-                  {{item.citysName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.cityErrorTips')}}</div>
-            </div>
+            <input
+              type="hidden"
+              name="region"
+              v-model="checkedCitys"
+            >
           </div>
-          <div v-if="checkedCitys.length > 0" class="form-group">
+          <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
             <div class="col-sm-8">
-              <ul class="city-list">
+              <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
                   v-for="(item, index) in checkedCitys"
                   :key="index"
@@ -390,6 +399,7 @@
                   {{item}}
                 </li>
               </ul>
+              <p v-else class="form-control-static">全部</p>
             </div>
           </div>
           <div class="form-group text-center">
@@ -609,6 +619,18 @@ export default {
         // console.log(this.checkedTags)
         this.checkedIds = _checkedIds
         // console.log(this.checkedIds)
+
+        // let _citys
+        // if (resData.region == '全部') {
+        //   this.checkedCitys = []
+        // } else {
+        //   _citys = resData.region
+        //   _citys = _citys.split('/')
+        //   _citys.forEach(item => {
+        //     this.checkedCitys.push(item)
+        //   })
+        // }
+        // console.log(this.checkedCitys)
 
         this.searchKolsCtrl()
         // console.log(this.kolsList)

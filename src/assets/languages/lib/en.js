@@ -193,14 +193,14 @@ export const lang = {
       errorTips: '请选择地域'
     },
     kolAge: {
-      title: '年龄',
-      placeholder: '全部',
-      errorTips: '请选择年龄'
+      title: 'Age',
+      placeholder: 'all',
+      errorTips: 'please select the age'
     },
     kolGender: {
-      title: '性别',
-      placeholder: '全部',
-      errorTips: '请选择性别'
+      title: 'Gender',
+      placeholder: 'all',
+      errorTips: 'please select the gender'
     },
     kolPush: {
       title: '补推',

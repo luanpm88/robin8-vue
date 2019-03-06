@@ -299,7 +299,7 @@
         :to="'/campaigns/'+ $route.params.id +'/edit'"
       >编辑活动</router-link>
       <button
-        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
+        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
         class="btn btn-cyan cancel-btn"
         @click="doCancel"

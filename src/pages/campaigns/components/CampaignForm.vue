@@ -435,7 +435,6 @@
                 type="hidden"
                 name="region"
                 v-model="checkedCitys"
-                v-validate="'required'"
               >
               <div
                 class="form-tips danger"
@@ -445,10 +444,10 @@
               </div>
             </div>
           </div>
-          <div v-if="checkedCitys.length > 0" class="form-group">
+          <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
             <div class="col-sm-8">
-              <ul class="city-list">
+              <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
                   v-for="(item, index) in checkedCitys"
                   :key="index"
@@ -461,6 +460,7 @@
                   {{item}}
                 </li>
               </ul>
+              <p v-else class="form-control-static">全部</p>
             </div>
           </div>
           <div class="form-group">
@@ -674,11 +674,16 @@ export default {
         this.checkedIds = _checkedIds
         // console.log(this.checkedIds)
 
-        let _citys = resData.region
-        _citys = _citys.split('/')
-        _citys.forEach(item => {
-          this.checkedCitys.push(item)
-        })
+        let _citys
+        if (resData.region == '全部') {
+          this.checkedCitys = []
+        } else {
+          _citys = resData.region
+          _citys = _citys.split('/')
+          _citys.forEach(item => {
+            this.checkedCitys.push(item)
+          })
+        }
         console.log(this.checkedCitys)
       }
     },
@@ -840,7 +845,7 @@ export default {
       _endTime.setHours(_endTime.getHours() + 8)
       this.submitData.start_time = _startTime
       this.submitData.deadline = _endTime
-      this.submitData.target.region = this.checkedCitys.toString()
+      this.submitData.target.region = this.checkedCitys.length > 0 ? this.checkedCitys.toString() : '全部'
 
       console.log(this.submitData)
 
