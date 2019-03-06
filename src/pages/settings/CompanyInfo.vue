@@ -9,42 +9,40 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-3">
-            <div class="thumbnail">
-              <img src="" alt="" />
-              <div class="caption"></div>
-            </div>
-            <div v-if="submitData.avatar_url != ''" class="upload-imgs-list">
-              <div class="upload-img-item">
-                <img :src="submitData.avatar_url" alt="" class="upload-img" />
-                <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
+            <div class="upload-avatar-area">
+              <div class="avatar">
+                <img
+                  :src="submitData.avatar_url"
+                  alt=""
+                  class="avatar-img"
+                />
               </div>
-            </div>
-            <vue-core-image-upload
-              v-else
-              :class="['upload-img-btn', 'iconfont', 'icon-image']"
-              :crop="false"
-              @imageuploaded="imageuploaded"
-              @imageuploading="imageuploading"
-              inputOfFile="image"
-              text=""
-              :max-file-size="5242880"
-              :compress="30"
-              :max-width="200"
-              input-accept="image/*"
-              :headers="{'Authorization': authorization}"
-              :url="uploadImageUrl">
-            </vue-core-image-upload>
-            <input
-              type="hidden"
-              name="avatar_url"
-              v-model="submitData.avatar_url"
-              v-validate="'required'"
-            >
-            <div
-              class="form-tips danger"
-              v-show="errors.has('avatar_url')"
-            >
-              {{$t('lang.companyInfo.avatar_url.errorTips')}}
+              <vue-core-image-upload
+                :class="['btn', 'btn-cyan']"
+                :crop="false"
+                @imageuploaded="imageuploaded"
+                @imageuploading="imageuploading"
+                inputOfFile="image"
+                :text="$t('lang.companyInfo.avatar_url.title')"
+                :max-file-size="5242880"
+                :compress="30"
+                :max-width="200"
+                input-accept="image/*"
+                :headers="{'Authorization': authorization}"
+                :url="uploadImageUrl">
+              </vue-core-image-upload>
+              <input
+                type="hidden"
+                name="avatar_url"
+                v-model="submitData.avatar_url"
+                v-validate="'required'"
+              >
+              <div
+                class="form-tips danger"
+                v-show="errors.has('avatar_url')"
+              >
+                {{$t('lang.companyInfo.avatar_url.errorTips')}}
+              </div>
             </div>
           </div>
           <div class="col-sm-9">
@@ -119,37 +117,22 @@
                     :class="[errors.has('url') ? 'danger' : '']"
                     v-model="submitData.url"
                     :placeholder="$t('lang.companyInfo.url.placeholder')"
-                    v-validate="'required'"
                   >
-                  <div
-                    class="form-tips danger"
-                    v-show="errors.has('url')"
-                  >
-                    {{$t('lang.companyInfo.url.errorTips')}}
-                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-3 control-label">{{$t('lang.companyInfo.description.title')}}：</div>
                 <div class="col-sm-8">
-                  <input
-                    type="text"
+                  <textarea
                     name="description"
                     class="form-control"
-                    :class="[errors.has('description') ? 'danger' : '']"
+                    rows="6"
                     v-model="submitData.description"
                     :placeholder="$t('lang.companyInfo.description.placeholder')"
-                    v-validate="'required'"
-                  >
-                  <div
-                    class="form-tips danger"
-                    v-show="errors.has('description')"
-                  >
-                    {{$t('lang.companyInfo.description.errorTips')}}
-                  </div>
+                  ></textarea>
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <div class="col-sm-3 control-label">{{$t('lang.companyInfo.keywords.title')}}：</div>
                 <div class="col-sm-8">
                   <input
@@ -168,7 +151,7 @@
                     {{$t('lang.companyInfo.keywords.errorTips')}}
                   </div>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -210,7 +193,7 @@ export default {
         campany_name: '',
         url: '',
         description: '',
-        keywords: '',
+        // keywords: '',
         avatar_url: ''
       },
       canSubmit: true
@@ -229,6 +212,12 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.submitData.name = resData.name
+        this.submitData.real_name = resData.real_name
+        this.submitData.campany_name = resData.campany_name
+        this.submitData.url = resData.url
+        this.submitData.description = resData.description
+        // this.submitData.keywords = resData.keywords
+        this.submitData.avatar_url = resData.avatar_url
       }
     },
     imageuploaded (res) {
@@ -238,12 +227,6 @@ export default {
     imageuploading (res) {
       this.loading = true
     },
-    delPhoto () {
-      let delConfirm = confirm('确定要删除此图片？')
-      if (delConfirm) {
-        this.submitData.avatar_url = ''
-      }
-    },
     doSubmit () {
       let _self = this
       if (!_self.canSubmit) {
@@ -251,7 +234,7 @@ export default {
       }
       _self.canSubmit = false
 
-      axios.post(apiConfig.invoiceReceiverUrl, this.submitData, {
+      axios.post(apiConfig.usersUrl, this.submitData, {
         headers: {
           'Authorization': _self.authorization
         }
@@ -296,10 +279,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profile-panel {
+  .panel-body {
+    padding: 40px;
+  }
+}
 .profile-form {
-  padding: 20px 60px;
   .form-group {
     margin-bottom: 20px;
+  }
+}
+.upload-avatar-area {
+  text-align: center;
+  .avatar {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    margin-bottom: 20px;
+    border: 1px solid $bg-color;
+    border-radius: 50%;
+    overflow: hidden;
+    .avatar-img {
+      position: absolute;
+      top: 0;
+      @include center(x);
+      height: 100%;
+    }
   }
 }
 .submit-btn {
