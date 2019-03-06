@@ -26,6 +26,9 @@ const config = {
   // 获取邮箱验证码
   emailCodeUrl: `${host}/codes/get_email_code`,
 
+  // 品牌主信息编辑 post
+  usersUrl: `${host}/users`,
+
   // 品牌主信息 get
   profileUrl: `${host}/users/profile`,
 

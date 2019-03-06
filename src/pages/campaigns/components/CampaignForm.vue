@@ -736,8 +736,8 @@ export default {
         let _index = citys.indexOf(selectedVal)
         if (_index == -1) {
           citys.push(selectedVal)
-          _self.city = ''
         }
+        _self.city = ''
       }
       console.log(_self.checkedCitys)
     },

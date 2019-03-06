@@ -62,7 +62,7 @@
               </div>
               <div class="media-right media-middle campaign-operation">
                 <router-link
-                  v-show="item.status == 'pending' || item.status == 'unpay'"
+                  v-show="item.status == 'pending' || item.status == 'unpay' || item.status == 'rejected'"
                   :to="'/campaigns/'+ item.id +'/edit'"
                   class="btn btn-sm btn-cyan btn-outline"
                 >编辑</router-link>

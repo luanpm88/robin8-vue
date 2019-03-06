@@ -134,6 +134,7 @@
               :hasMsg="kolHasMsg"
               :hasChecked="kolHasChecked"
               :renderData="item"
+              @detail="toKolDetail(item)"
             ></kols-list-item>
           </div>
         </div>
@@ -168,7 +169,9 @@ export default {
       kolHasLiked: false,
       kolHasMsg: false,
       kolHasChecked: false,
-      kolsList: []
+      kolsList: [],
+      kolTypeId: '',
+      brandKeyword: ''
     }
   },
   methods: {
@@ -185,6 +188,7 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
+        this.brandKeyword = resData.trademark_keywords
 
         let _kolsList = this.kolsList
         let _kolItem
@@ -204,15 +208,30 @@ export default {
           switch (item.short_name) {
             case 'public_wechat_account':
               item.iconClass = 'icon-wechat-circle'
+              this.kolTypeId = '1'
               break
             case 'weibo':
               item.iconClass = 'icon-weibo-circle'
+              this.kolTypeId = '0'
               break
             default:
               item.iconClass = ''
+              this.kolTypeId = '1'
           }
         })
       }
+    },
+    toKolDetail (item) {
+      // console.log(item)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.id,
+          type: this.kolTypeId,
+          brand_keywords: this.brandKeyword
+        }
+      })
     }
   },
   mounted () {
