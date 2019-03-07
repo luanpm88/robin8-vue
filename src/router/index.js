@@ -261,6 +261,7 @@ export default new Router({
           component: CreationCreate,
           meta: {
             title: '创建新活动',
+            keepAlive: true,
             auth: true
           }
         },
@@ -279,6 +280,7 @@ export default new Router({
           component: CreationEdit,
           meta: {
             title: '活动编辑',
+            keepAlive: true,
             auth: true
           }
         },
@@ -316,7 +318,7 @@ export default new Router({
           name: 'CampaignList',
           component: CampaignList,
           meta: {
-            title: '创作活动列表',
+            title: '小V活动列表',
             auth: true
           }
         },
@@ -326,6 +328,7 @@ export default new Router({
           component: CampaignCreate,
           meta: {
             title: '创建新活动',
+            keepAlive: true,
             auth: true
           }
         },
@@ -344,6 +347,7 @@ export default new Router({
           component: CampaignEdit,
           meta: {
             title: '活动编辑',
+            keepAlive: true,
             auth: true
           }
         },
@@ -364,7 +368,6 @@ export default new Router({
       component: KolList,
       meta: {
         title: 'KolList',
-        isUseCache: false,
         keepAlive: true,
         auth: true
       }

@@ -14,7 +14,11 @@
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建大V活动</h5>
-              <h6 class="sub-title">Content Creation</h6>
+              <h6 class="sub-title">Custom Content</h6>
+              <div class="tips">
+                <p>KOLS create custom content</p>
+                <p>(e.g. article, video, live streaming, review, etc.)</p>
+              </div>
             </div>
           </router-link>
           <router-link to="/campaigns/create" tag="div" class="item">
@@ -92,6 +96,9 @@ export default {
       .sub-title {
         font-size: 1.4rem;
         color: $white;
+      }
+      .tips {
+        font-size: $font-sm;
       }
       &:last-child {
         margin-right: 0;
