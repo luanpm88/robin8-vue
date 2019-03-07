@@ -56,18 +56,12 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import PageHeader from '@components/PageHeader'
-import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from '@javascripts/common.js';
-import TagCharts from "@components/Chart/chartTagsTwo";
 import { mapState } from "vuex";
 export default {
   name: "detailAnalytic",
   components: { 
-    TagCharts, 
-    Echarts,
-    PageHeader,
     DefaultTabs 
   },
   data() {

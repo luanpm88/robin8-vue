@@ -13,20 +13,53 @@
         <table class="com-brand-table" v-if="Number(this.$route.params.type) === 0">
           <tr>
             <th>Industry</th>
-            <th>Doc <br> Count</th>
-            <th>Doc <br> Count %	</th>
-            <th>Total <br> Like <br> Count</th>
-            <th>Total <br> Share <br> Count</th>
-            <th>Total <br> Comment <br> Count</th>
-            <th>Avg <br> Like <br> Count</th>
-            <th>Avg <br> Share <br> Count</th>
-            <th>Avg <br> Comment <br> Count</th>
-            <th>Max <br> Like <br> Count</th>
-            <th>Max <br> Share <br> Count</th>
-            <th>Max <br> Comment <br> Count</th>
+            <th>Doc
+              <br>Count
+            </th>
+            <th>Doc
+              <br>Count %
+            </th>
+            <th>Total
+              <br>Like
+              <br>Count
+            </th>
+            <th>Total
+              <br>Share
+              <br>Count
+            </th>
+            <th>Total
+              <br>Comment
+              <br>Count
+            </th>
+            <th>Avg
+              <br>Like
+              <br>Count
+            </th>
+            <th>Avg
+              <br>Share
+              <br>Count
+            </th>
+            <th>Avg
+              <br>Comment
+              <br>Count
+            </th>
+            <th>Max
+              <br>Like
+              <br>Count
+            </th>
+            <th>Max
+              <br>Share
+              <br>Count
+            </th>
+            <th>Max
+              <br>Comment
+              <br>Count
+            </th>
           </tr>
           <tr v-for="(key, index) in analyOne" :key="index">
-            <td><p v-html="key.industry"></p></td>
+            <td>
+              <p v-html="key.industry"></p>
+            </td>
             <td>{{key.doc_count}}</td>
             <td>{{ Number(key.doc_count_width_percentage)}}%</td>
             <td>{{key.total_like_count}}</td>
@@ -44,15 +77,17 @@
           <tr>
             <th>Industry</th>
             <th>Doc Count</th>
-            <th>Doc Count %	</th>
-            <th>Total Reads	</th>
+            <th>Doc Count %</th>
+            <th>Total Reads</th>
             <th>Avg Reads</th>
             <th>Max Reads</th>
             <th>Total Likes</th>
             <th>Likes To Reads %</th>
           </tr>
           <tr v-for="(key, index) in analyOne" :key="index">
-            <td><p v-html="key.industry"></p></td>
+            <td>
+              <p v-html="key.industry"></p>
+            </td>
             <td>{{key.doc_count}}</td>
             <td>{{ Number(key.doc_count_width_percentage)}}%</td>
             <td>{{key.total_reads}}</td>
@@ -64,6 +99,7 @@
         </table>
       </div>
     </div>
+    <!-- 微博没有 Media-->
     <div class="kol-card" v-if="Number(type) === 1">
       <p class="kol-cloumn mb10">Media Distribution</p>
       <div class="nonetip" v-if="isMediaShow">
@@ -77,15 +113,17 @@
           <tr>
             <th>Type</th>
             <th>Doc Count</th>
-            <th>Doc Count %	</th>
-            <th>Total Reads	</th>
+            <th>Doc Count %</th>
+            <th>Total Reads</th>
             <th>Avg Reads</th>
             <th>Max Reads</th>
             <th>Total Likes</th>
             <th>Likes To Reads %</th>
           </tr>
           <tr v-for="(key, index) in media" :key="index">
-            <td><p v-html="key.media_type"></p></td>
+            <td>
+              <p v-html="key.media_type"></p>
+            </td>
             <td>{{key.doc_count}}</td>
             <td>{{ Number(key.doc_count_width_percentage)}}%</td>
             <td>{{key.total_reads}}</td>
@@ -97,6 +135,45 @@
         </table>
       </div>
     </div>
+
+    <!-- 微博图表渲染模版  -->
+    <div v-if="Number(type) === 0">
+      <div class="kol-card" v-for="(item, index) in countWeiboList" :key="index">
+        <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+        <div class="nonetip" v-if="item.isShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="item.isLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div v-if="item.isChart">
+          <Echarts
+            :options="item.options"
+            :chartsStyle="item.chartsStyle"
+            :ref='item.ref'
+          ></Echarts>
+        </div>
+      </div>
+    </div>
+    <!-- 微信图表渲染模版 -->
+    <div v-if="Number(type) === 1">
+      <div class="kol-card" v-for="(item, index) in countWeixinList" :key="index">
+        <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+        <div class="nonetip" v-if="item.isShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="item.isLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div v-if="item.isChart">
+          <Echarts
+            :options="item.options"
+            :chartsStyle="item.chartsStyle"
+            :ref='item.ref'
+          ></Echarts>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,20 +181,16 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import PageHeader from '@components/PageHeader'
-import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
-import commonJs from '@javascripts/common.js';
+import commonJs from "@javascripts/common.js";
+import Echarts from "@components/Chart/GlobalEcharts";
 import { Table } from "ant-design-vue";
-import TagCharts from "@components/Chart/chartTagsTwo";
 import { mapState } from "vuex";
 export default {
   name: "detailAnalytic",
-  components: { 
-    TagCharts, 
+  components: {
     Echarts,
-    PageHeader,
-    DefaultTabs 
+    DefaultTabs
   },
   data() {
     return {
@@ -136,6 +209,262 @@ export default {
       isMedia: false,
       isMediaShow: false,
       isMediaLoading: true,
+      // weixin count
+      countWeixinList: [{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count0Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin0',
+        type: "Doc",
+        mode: "Daily",
+        countParams: {
+          type: "doc",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count1Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin1',
+        type: "Read",
+        mode: "Daily",
+        countParams: {
+          type: "read",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count2Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin2',
+        type: "Like",
+        mode: "Daily",
+        countParams: {
+          type: "like",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count3Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin3',
+        type: "Doc",
+        mode: "Hourly",
+        countParams: {
+          type: "doc",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count4Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin4',
+        type: "Read",
+        mode: "Hourly",
+        countParams: {
+          type: "read",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count5Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weixin5',
+        type: "Like",
+        mode: "Hourly",
+        countParams: {
+          type: "like",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      }],
+      // weibo count
+      countWeiboList: [{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count0Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo0',
+        type: "Doc",
+        mode: "Daily",
+        countParams: {
+          type: "doc",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count1Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo1',
+        type: "Comment",
+        mode: "Daily",
+        countParams: {
+          type: "comment",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count2Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo2',
+        type: "Share",
+        mode: "Daily",
+        countParams: {
+          type: "share",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count3Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo3',
+        type: "Like",
+        mode: "Daily",
+        countParams: {
+          type: "like",
+          mode: "daily",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count4Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo4',
+        type: "Doc",
+        mode: "Hourly",
+        countParams: {
+          type: "doc",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count5Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo5',
+        type: "Comment",
+        mode: "Hourly",
+        countParams: {
+          type: "comment",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count6Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo6',
+        type: "Share",
+        mode: "Hourly",
+        countParams: {
+          type: "share",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      },{
+        isShow: false,
+        isLoading: true,
+        isChart: false,
+        options: ChartOption.count7Options,
+        chartsStyle: {
+          height: "180px"
+        },
+        ref: 'weibo7',
+        type: "Like",
+        mode: "Hourly",
+        countParams: {
+          type: "like",
+          mode: "hourly",
+          start_date: commonJs.cPastTwentyOneDays,
+          end_date: commonJs.cPastOneday,
+          profile_id: "MzAwMDAyMzY3OA=="
+        }
+      }],
     };
   },
   computed: {
@@ -148,12 +477,27 @@ export default {
       // 微博
       // Industries Distribution
       this.detailAnalyOneWeibo(this.analyOneParams);
+      this.countWeiboList.forEach((element, index) => {
+        element.countParams.profile_id = String(this.$route.params.id);
+        element.isLoading = true;
+        element.isShow = false;
+        element.isChart = false;
+        this.detailCountWeibo(element.countParams, index);
+      });
     } else {
       // 微信
       // Industries Distribution
       this.detailAnalyOneWeixin(this.analyOneParams);
       // Media Distribution
       this.detailMediaWeixin(this.analyOneParams);
+      // count weixin
+      this.countWeixinList.forEach((element, index) => {
+        element.countParams.profile_id = String(this.$route.params.id);
+        element.isLoading = true;
+        element.isShow = false;
+        element.isChart = false;
+        this.detailCountWeixin(element.countParams, index);
+      });
     }
   },
   methods: {
@@ -238,8 +582,69 @@ export default {
           // console.log(error);
         });
     },
+    // count 图表微博
+    detailCountWeibo(params, num) {
+      const _that = this;
+      axios
+        .post(apiConfig.detailCountWeibo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            // console.log('woshi cout weibo', num, res);
+            _that.countWeiboList[num].isLoading = false;
+            if (res.data.data.length > 0) {
+              _that.countWeiboList[num].isShow = false;
+              _that.countWeiboList[num].isChart = true;
+              _that.countWeiboList[num].options.xAxis.data = res.data.labels;
+              _that.countWeiboList[num].options.series[0].data = res.data.data;
+              let curRef = 'weibo' + num;
+              _that.$refs.curRef.updateOptions(_that.countWeiboList[num].options);
+            } else {
+              _that.countWeiboList[num].isShow = true;
+              _that.countWeiboList[num].isChart = false;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // count 图表微信
+    detailCountWeixin(params, num) {
+      const _that = this;
+      axios
+        .post(apiConfig.detailCountWeixin, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            // console.log('woshi cout weixin', num, res);
+            _that.countWeixinList[num].isLoading = false;
+            if (res.data.data.length > 0) {
+              _that.countWeixinList[num].isShow = false;
+              _that.countWeixinList[num].isChart = true;
+              _that.countWeixinList[num].options.xAxis.data = res.data.labels;
+              _that.countWeixinList[num].options.series[0].data = res.data.data;
+              let curRef = 'weixin' + num;
+              _that.$refs.curRef.updateOptions(_that.countWeixinList[num].options);
+            } else {
+              _that.countWeixinList[num].isShow = true;
+              _that.countWeixinList[num].isChart = false;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
   }
 };
 </script>
-<style>
+<style lang="scss" scoped>
+
 </style>

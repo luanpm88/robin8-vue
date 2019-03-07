@@ -758,7 +758,7 @@ export default {
   }
 };
 </script>
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .kol-performance{
   .com-brand-table{
     margin-bottom: 20px;

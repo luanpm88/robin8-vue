@@ -210,6 +210,12 @@ const config = {
   // Media Distribution weixin
   detailMediaWeixin: `${searchHost}/weixin/post/media_distribution?${searchHostKey}`,
 
+  // count 六个图表weibo
+  detailCountWeixin: `${searchHost}/weixin/post/post_distribution?${searchHostKey}`,
+
+  // count 六个图表weixin
+  detailCountWeibo: `${searchHost}/weibo/post/post_distribution?${searchHostKey}`,
+
   // postlist weixin
   detailPostWeixin: `${searchHost}/weixin/post/post_by_profile_id?${searchHostKey}`,
 
