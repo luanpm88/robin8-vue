@@ -100,7 +100,7 @@
       </div>
     </div>
     <!-- 微博没有 Media-->
-    <div class="kol-card" v-if="Number(type) === 1">
+    <!-- <div class="kol-card" v-if="Number(type) === 1">
       <p class="kol-cloumn mb10">Media Distribution</p>
       <div class="nonetip" v-if="isMediaShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
@@ -134,10 +134,10 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- 微博图表渲染模版  -->
-    <div v-if="Number(type) === 0">
+    <!-- <div v-if="Number(type) === 0">
       <div class="kol-card" v-for="(item, index) in countWeiboList" :key="index">
         <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
         <div class="nonetip" v-if="item.isShow">
@@ -147,14 +147,16 @@
           <a-spin tip="Loading..."/>
         </div>
         <div v-if="item.isChart">
+          
           <Echarts
             :options="item.options"
             :chartsStyle="item.chartsStyle"
             :ref='item.ref'
           ></Echarts>
+
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 微信图表渲染模版 -->
     <div v-if="Number(type) === 1">
       <div class="kol-card" v-for="(item, index) in countWeixinList" :key="index">
