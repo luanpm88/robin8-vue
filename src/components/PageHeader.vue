@@ -17,7 +17,10 @@
             </div>
           </div>
           <div class="media-body media-middle">
-            <p class="logout-btn" @click="logOut">{{$t('lang.logout')}}</p>
+            <h5 class="title">{{nickname}}</h5>
+            <p class="logout-btn">
+              <span @click="logOut">{{$t('lang.logout')}}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -43,7 +46,7 @@ import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'PageHeader',
   computed: {
-    ...mapState(['avatarImgUrl']),
+    ...mapState(['avatarImgUrl', 'nickname']),
   },
   data () {
     return {
@@ -105,10 +108,16 @@ export default {
         height: 100%;
       }
     }
+    .title {
+      color: #fff;
+    }
     .logout-btn {
-      border-bottom: 1px solid #eaeaea;
-      cursor: pointer;
+      font-size: $font-xs;
       color: #fafafa;
+      span {
+        border-bottom: 1px solid #eaeaea;
+        cursor: pointer;
+      }
     }
   }
 }

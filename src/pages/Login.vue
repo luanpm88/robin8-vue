@@ -85,6 +85,8 @@ export default {
           } else {
             _that.setAuthorization(resData.access_token)
             _that.setAccount(params.login)
+            _that.setNickname(resData.name)
+            _that.setMobile(resData.mobile_number)
             _that.setAvatarImgUrl(resData.avatar_url)
             _that.loginStatus = false
             _that.$router.push('/')
