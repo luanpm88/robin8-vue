@@ -7,9 +7,9 @@
 
       <div class="home-container pull-right">
         <!-- <home-banner></home-banner> -->
-        <profile-panel></profile-panel>
+        <!-- <profile-panel></profile-panel> -->
 
-        <div class="icon-grid-panel mt20">
+        <div class="icon-grid-panel">
           <router-link to="/kol/list" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-search"></div>

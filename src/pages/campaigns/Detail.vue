@@ -274,7 +274,7 @@
           </div>
         </div>
 
-        <div v-else class="form-horizontal campaign-create-form">
+        <div v-else-if="evaluationStatus == 'evaluated'" class="form-horizontal campaign-create-form">
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
             <div class="col-sm-8">
@@ -625,6 +625,11 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
+        if (resData.error == 1) {
+          alert(resData.detail)
+        } else {
+          this.getDetailData()
+        }
       } else {
         alert('提交失败，请重新提交')
       }
