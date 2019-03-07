@@ -337,47 +337,56 @@
 
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
-            <div class="col-sm-4">
-              <select
-                name="province"
-                class="form-control"
-                v-model="province"
-                @change="changeProvince"
-              >
-                <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of provinceData"
-                  :key="index"
-                  :value="item.provinceName"
-                >
-                  {{item.provinceName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <select
+                    name="province"
+                    class="form-control"
+                    v-model="province"
+                    @change="changeProvince"
+                  >
+                    <option value="">{{$t('lang.creations.followerDistrict.provincePlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of provinceData"
+                      :key="index"
+                      :value="item.provinceName"
+                    >
+                      {{item.provinceName}}
+                    </option>
+                  </select>
+                  <div class="form-tips">{{$t('lang.creations.followerDistrict.provinceErrorTips')}}</div>
+                </div>
+                <div class="col-sm-6">
+                  <select
+                    name="city"
+                    class="form-control"
+                    v-model="city"
+                    @change="changeCity"
+                  >
+                    <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
+                    <option
+                      v-for="(item, index) of cityData"
+                      :key="index"
+                      :value="item.citysName"
+                    >
+                      {{item.citysName}}
+                    </option>
+                  </select>
+                  <div class="form-tips">{{$t('lang.creations.followerDistrict.cityErrorTips')}}</div>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-4">
-              <select
-                name="city"
-                class="form-control"
-                v-model="city"
-                @change="changeCity"
-              >
-                <option value="">{{$t('lang.creations.followerDistrict.cityPlaceholder')}}</option>
-                <option
-                  v-for="(item, index) of cityData"
-                  :key="index"
-                  :value="item.citysName"
-                >
-                  {{item.citysName}}
-                </option>
-              </select>
-              <div class="form-tips">{{$t('lang.creations.followerDistrict.errorTips')}}</div>
-            </div>
+            <input
+              type="hidden"
+              name="region"
+              v-model="checkedCitys"
+            >
           </div>
-          <div v-if="checkedCitys.length > 0" class="form-group">
+          <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
             <div class="col-sm-8">
-              <ul class="city-list">
+              <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
                   v-for="(item, index) in checkedCitys"
                   :key="index"
@@ -390,6 +399,7 @@
                   {{item}}
                 </li>
               </ul>
+              <p v-else class="form-control-static">全部</p>
             </div>
           </div>
           <div class="form-group text-center">
@@ -411,6 +421,8 @@
       :kolsPage="kolsPage"
       :kolsPerPage="kolsPerPage"
       :kolsTotal="kolsTotal"
+      :keyword="brandKeyword"
+      :kolTypeId="kolTypeId"
       @checkedKols="checkedKols"
       @changeKolsPage="changeKolsPage"
     ></kols-list-panel>
@@ -470,12 +482,14 @@ export default {
     return {
       detailData: {},
       brandsList: [],
+      brandKeyword: '',
       tagsList: [],
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
       kolsParams: {},
       kolsList: [],
+      kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -606,6 +620,18 @@ export default {
         this.checkedIds = _checkedIds
         // console.log(this.checkedIds)
 
+        // let _citys
+        // if (resData.region == '全部') {
+        //   this.checkedCitys = []
+        // } else {
+        //   _citys = resData.region
+        //   _citys = _citys.split('/')
+        //   _citys.forEach(item => {
+        //     this.checkedCitys.push(item)
+        //   })
+        // }
+        // console.log(this.checkedCitys)
+
         this.searchKolsCtrl()
         // console.log(this.kolsList)
       }
@@ -644,6 +670,15 @@ export default {
       }
     },
     searchKolsCtrl () {
+      let _brands_list = this.brandsList
+      let _checked_trademark_id = this.submitData.trademark_id
+      _brands_list.forEach(item => {
+        if (_checked_trademark_id == item.id) {
+          this.brandKeyword = item.keywords
+        }
+      })
+      console.log(this.brandKeyword)
+
       let _terraces = this.submitData.terraces
       console.log(_terraces)
 
@@ -680,19 +715,25 @@ export default {
                 return false
               }
             })
+            console.log(hasWechat)
             if (hasWechat) {
               this.searchKols(apiConfig.kolWxSearchUrl)
               this.plateformName = 'public_wechat_account'
+              this.kolTypeId = '1'
             } else {
               this.searchKols(apiConfig.kolWbSearchUrl)
               this.plateformName = 'weibo'
+              this.kolTypeId = '0'
             }
           } else {
             this.searchKols(apiConfig.kolWxSearchUrl)
             this.plateformName = 'public_wechat_account'
+            this.kolTypeId = '1'
           }
         }
       })
+
+      console.log(this.kolTypeId)
     },
     changeKolsPage (data) {
       console.log(data.page)
@@ -754,7 +795,6 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      console.log(_terraceItem)
       let result = _terraces.some(item => {
         if (item.terrace_id == id) {
           return true
@@ -768,12 +808,18 @@ export default {
             _terraces.push(_terraceItem)
             item.checked = true
           } else {
-            let _index = _terraces.indexOf(item)
+            let _index
+            _terraces.forEach(_item => {
+              if (item.id == _item.terrace_id) {
+                _index = _terraces.indexOf(_item)
+              }
+            })
             _terraces.splice(_index, 1)
             item.checked = false
           }
         }
       })
+      this.submitData.terraces = _terraces
       console.log(this.submitData.terraces)
     },
     changeProvince (e) {
@@ -801,8 +847,8 @@ export default {
         let _index = citys.indexOf(selectedVal)
         if (_index == -1) {
           citys.push(selectedVal)
-          _self.city = ''
         }
+        _self.city = ''
       }
       console.log(_self.checkedCitys)
     },

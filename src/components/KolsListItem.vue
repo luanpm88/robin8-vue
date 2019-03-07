@@ -20,7 +20,12 @@
         </div>
       </div>
       <div class="media-body media-middle info">
-        <h5 class="name" @click="toDetail(renderData)">{{renderData.name}}</h5>
+        <h5
+          class="name"
+          @click="toDetail(renderData)"
+        >
+          {{renderData.name}}
+        </h5>
         <p class="desc">{{renderData.desc}}</p>
       </div>
       <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
@@ -79,6 +84,7 @@ export default {
     position: relative;
     width: 44px;
     height: 44px;
+    cursor: pointer;
     .avatar-img {
       width: 100%;
       height: 100%;
@@ -99,6 +105,7 @@ export default {
       @include limit-line(1);
       font-size: $font-sm;
       font-weight: 600;
+      cursor: pointer;
     }
     .desc {
       @include limit-line(1);

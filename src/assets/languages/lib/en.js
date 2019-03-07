@@ -17,10 +17,50 @@ export const lang = {
   backBtn: 'Back',
   submitBtn: 'Submit',
   totalNoDataTip: 'No data...',
+  yes: 'yes',
+  no: 'no',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
     availAmount: '账户余额'
+  },
+  companyInfo: {
+    title: '品牌资料',
+    name: {
+      title: '品牌名称',
+      placeholder: '请输入品牌名称',
+      errorTips: '请输入品牌名称'
+    },
+    real_name: {
+      title: '真实姓名',
+      placeholder: '请输入真实姓名',
+      errorTips: '请输入真实姓名'
+    },
+    campany_name: {
+      title: '公司名称',
+      placeholder: '请输入公司名称',
+      errorTips: '请输入公司名称'
+    },
+    url: {
+      title: '官方网站',
+      placeholder: '请输入官方网站',
+      errorTips: '请输入官方网站'
+    },
+    description: {
+      title: '品牌介绍',
+      placeholder: '请输入品牌介绍',
+      errorTips: '请输入品牌介绍'
+    },
+    keywords: {
+      title: '品牌关键词',
+      placeholder: '请添加品牌关键词',
+      errorTips: '请添加品牌关键词'
+    },
+    avatar_url: {
+      title: '品牌logo',
+      placeholder: '请上传品牌logo',
+      errorTips: '请上传品牌logo'
+    }
   },
   updateBaseInfo: {
     base_info: {
@@ -153,14 +193,14 @@ export const lang = {
       errorTips: '请选择地域'
     },
     kolAge: {
-      title: '年龄',
-      placeholder: '全部',
-      errorTips: '请选择年龄'
+      title: 'Age',
+      placeholder: 'all',
+      errorTips: 'please select the age'
     },
     kolGender: {
-      title: '性别',
-      placeholder: '全部',
-      errorTips: '请选择性别'
+      title: 'Gender',
+      placeholder: 'all',
+      errorTips: 'please select the gender'
     },
     kolPush: {
       title: '补推',
@@ -255,10 +295,11 @@ export const lang = {
     },
     followerDistrict: {
       title: 'Follower\'s location',
-      placeholder: 'please fill in the district reauirement',
+      placeholder: 'please fill in the district requirements',
       provincePlaceholder: 'please select province',
       cityPlaceholder: 'please select city',
-      errorTips: 'please fill in the district reauirement'
+      provinceErrorTips: 'please select province requirements',
+      cityErrorTips: 'please select city requirements'
     }
   },
   wallet: {
@@ -331,6 +372,8 @@ export const lang = {
       },
       receiver: {
         title: '邮寄地址',
+        edit: '修改邮寄地址',
+        create: '添加邮寄地址',
         name: {
           title: '收件人姓名',
           placeholder: '请输入收件人姓名',
@@ -345,6 +388,30 @@ export const lang = {
           title: '收件人地址',
           placeholder: '请输入收件人地址',
           errorTips: '请输入收件人地址'
+        }
+      },
+      invoiceSubmit: {
+        title: '申请发票',
+        quota: {
+          title: '可申请额度',
+          tips: '已申请发票的金额不可以申请退款！'
+        },
+        credits: {
+          title: '申请金额',
+          placeholder: '请输入申请金额',
+          errorTips: '请输入申请金额'
+        },
+        type: {
+          title: '发票类型',
+          placeholder: '请选择发票类型',
+          errorTips: '请选择发票类型',
+          common: '普通发票',
+          special: '增值税发票'
+        },
+        price_sheet: {
+          title: '是否开报价单',
+          placeholder: '请选择是否开报价单',
+          errorTips: '请选择是否开报价单'
         }
       }
     }

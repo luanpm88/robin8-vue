@@ -65,11 +65,11 @@ export default {
           href: '/creations',
           subNav: [
             {
-              title: 'Creations',
+              title: 'Content Creations',
               href: '/creations'
             },
             {
-              title: 'Campaigns',
+              title: 'Content Amplifications',
               href: '/campaigns'
             }
           ]

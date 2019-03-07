@@ -1,30 +1,6 @@
 <template>
   <div class="wallet-container">
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <div class="title-bar">
-          <h5 class="title">{{$t('lang.wallet.rechargePage.profileTitle')}}</h5>
-          <div class="tail-area">
-            <router-link to="/settings/company_info">{{$t('lang.wallet.rechargePage.profileChange')}}</router-link>
-          </div>
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="media user-info-panel">
-          <div class="media-left">
-            <div class="cover">
-              <img :src="profileData.avatar_url" alt="" class="cover-img" />
-            </div>
-          </div>
-          <div class="media-body media-middle content">
-            <h5 class="title">{{$t('lang.profile.name')}}：{{profileData.name}}</h5>
-            <p>{{$t('lang.profile.companyName')}}：{{profileData.campany_name}}</p>
-            <p>{{$t('lang.profile.availAmount')}}：{{profileData.avail_amount}} 元</p>
-            <!-- <p>剩余积分：{{profileData.avail_amount}} 积分</p> -->
-          </div>
-        </div>
-      </div>
-    </div>
+    <profile-panel class="mt20"></profile-panel>
 
     <div class="panel default-panel recharge-panel mt20">
       <div class="panel-head">
@@ -92,13 +68,16 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
+import ProfilePanel from '@components/ProfilePanel'
 import { mapState } from 'vuex'
 
 export default {
   name: 'Recharge',
+  components: {
+    ProfilePanel
+  },
   data () {
     return {
-      profileData: {},
       creditsMin: 500,
       rechargeSubmit: {
         credits: 500,
@@ -108,20 +87,6 @@ export default {
     }
   },
   methods: {
-    getProfileData () {
-      axios.get(apiConfig.profileUrl, {
-        headers: {
-          'Authorization': this.authorization
-        }
-      }).then(this.handleGetProfileDataSucc)
-    },
-    handleGetProfileDataSucc (res) {
-      let resData = res.data
-      if (res.status == 200 && resData) {
-        console.log(resData)
-        this.profileData = resData
-      }
-    },
     doSubmit () {
       let _self = this
       if (!_self.canSubmit) {
@@ -164,9 +129,6 @@ export default {
       })
     }
   },
-  mounted () {
-    this.getProfileData()
-  },
   computed: {
     ...mapState(['authorization'])
   }
@@ -174,30 +136,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-info-panel {
-  padding: 30px;
-  .cover {
-    position: relative;
-    width: 120px;
-    padding-bottom: 100%;
-    overflow: hidden;
-    .cover-img {
-      position: absolute;
-      top: 0;
-      @include center(x);
-      height: 100%;
-    }
-  }
-  .content {
-    padding: 20px;
-    font-size: $font-nm;
-    .title {
-      margin-bottom: 10px;
-      font-size: $font-lg-s;
-      font-weight: normal;
-    }
-  }
-}
 .recharge-form {
   padding: 60px;
   .form-group {

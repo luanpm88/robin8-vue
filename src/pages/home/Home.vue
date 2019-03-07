@@ -7,8 +7,9 @@
 
       <div class="home-container pull-right">
         <!-- <home-banner></home-banner> -->
+        <profile-panel></profile-panel>
 
-        <div class="icon-grid-panel">
+        <div class="icon-grid-panel mt20">
           <router-link to="/kol/list" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-search"></div>
@@ -60,6 +61,7 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
+import ProfilePanel from '@components/ProfilePanel'
 import HomeBanner from './components/HomeBanner'
 import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
@@ -72,6 +74,7 @@ export default {
   components: {
     PageHeader,
     MainNav,
+    ProfilePanel,
     HomeBanner,
     HomeAnalytic,
     HomeRecommendedKols,

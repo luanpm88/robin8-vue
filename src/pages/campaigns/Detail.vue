@@ -292,16 +292,24 @@
       </div>
     </div>
 
-    <div
-       v-if="detailData.status == 'unpay' || detailData.status == 'unexecute' || detailData.status == 'rejected'"
-      class="text-center p30"
-    >
+    <div class="text-center p30">
+      <router-link
+        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
+        class="btn btn-cyan btn-outline edit-btn"
+        :to="'/campaigns/'+ $route.params.id +'/edit'"
+      >编辑活动</router-link>
       <button
+        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
         class="btn btn-cyan cancel-btn"
         @click="doCancel"
         :disabled="canCancel ? false : true"
       >撤销活动</button>
+      <router-link
+        v-if="detailData.status == 'unpay'"
+        :to="'/campaigns/'+ $route.params.id +'/pay'"
+        class="btn btn-cyan btn-outline pay-btn"
+      >支付</router-link>
     </div>
 
   </div>
@@ -785,7 +793,7 @@ export default {
     width: 150px;
   }
 }
-.cancel-btn {
+.cancel-btn, .edit-btn, .pay-btn {
   width: 150px;
 }
 </style>

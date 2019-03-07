@@ -13,6 +13,7 @@
           :hasChecked="kolHasChecked"
           :renderData="item"
           @handleCheck="handleCheck"
+          @detail="toKolDetail(item)"
         ></kols-list-item>
       </div>
 
@@ -44,7 +45,9 @@ export default {
     kolsList: Array,
     kolsPage: Number,
     kolsPerPage: Number,
-    kolsTotal: Number
+    kolsTotal: Number,
+    keyword: String,
+    kolTypeId: String
   },
   data () {
     return {
@@ -90,6 +93,18 @@ export default {
       })
       console.log(this.kols)
       console.log(this.checkedIds)
+    },
+    toKolDetail (item) {
+      // console.log(item)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.id,
+          type: this.kolTypeId,
+          brand_keywords: this.keyword
+        }
+      })
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {

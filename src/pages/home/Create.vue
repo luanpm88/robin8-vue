@@ -7,20 +7,21 @@
 
       <div class="home-container pull-right">
         <!-- <home-banner></home-banner> -->
+        <profile-panel></profile-panel>
 
-        <div class="icon-grid-panel">
+        <div class="icon-grid-panel mt20">
           <router-link to="/creations/create" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建大V活动</h5>
-              <h6 class="sub-title">Create Campaign</h6>
+              <h6 class="sub-title">Content Creation</h6>
             </div>
           </router-link>
           <router-link to="/campaigns/create" tag="div" class="item">
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建小V活动</h5>
-              <h6 class="sub-title">Create Campaign</h6>
+              <h6 class="sub-title">Content Amplification</h6>
             </div>
           </router-link>
         </div>
@@ -34,6 +35,7 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
+import ProfilePanel from '@components/ProfilePanel'
 import HomeBanner from './components/HomeBanner'
 import { mapState } from 'vuex'
 
@@ -42,6 +44,7 @@ export default {
   components: {
     PageHeader,
     MainNav,
+    ProfilePanel,
     HomeBanner
   },
   computed: {
