@@ -85,11 +85,11 @@ export default {
           href: '/wallet/recharge',
           subNav: [
             {
-              title: 'Recharge',
+              title: 'Top up',
               href: '/wallet/recharge'
             },
             {
-              title: 'Summary',
+              title: 'Transactions',
               href: '/wallet/summary'
             },
             {

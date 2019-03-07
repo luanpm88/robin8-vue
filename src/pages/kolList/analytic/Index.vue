@@ -137,7 +137,7 @@
     </div>
 
     <!-- 微博图表渲染模版  -->
-    <!-- <div v-if="Number(type) === 0">
+    <div v-if="Number(type) === 0">
       <div class="kol-card" v-for="(item, index) in countWeiboList" :key="index">
         <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
         <div class="nonetip" v-if="item.isShow">
@@ -156,7 +156,7 @@
 
         </div>
       </div>
-    </div> -->
+    </div>
     <!-- 微信图表渲染模版 -->
     <div v-if="Number(type) === 1">
       <div class="kol-card" v-for="(item, index) in countWeixinList" :key="index">
