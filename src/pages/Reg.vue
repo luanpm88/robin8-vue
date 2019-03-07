@@ -81,18 +81,19 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
+import axios from 'axios'
+import apiConfig from '@/config'
 import { mapMutations } from 'vuex'
+
 export default {
-  name: "Reg",
+  name: 'Reg',
   data() {
     return {
       flag: true,
-      typeVal: "",
-      code: "",
-      password: "",
-      btntxt: "Get valid code",
+      typeVal: '',
+      code: '',
+      password: '',
+      btntxt: 'Get valid code',
       isCheck: false,
       disabled: true,
       time: 0,
@@ -112,30 +113,30 @@ export default {
    }
   },
   methods: {
-    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile", 'setAvatarImgUrl']),
+    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl']),
     // 邮箱和手机注册切换
-    checkType() {
+    checkType () {
       if (this.flag === true) {
-        this.typeVal = ""
+        this.typeVal = ''
         this.flag = false
       } else {
-        this.typeVal = ""
+        this.typeVal = ''
         this.flag = true
       }
     },
     timer: function() {
       if (this.time > 0) {
         this.time--
-        this.btntxt = "Get valid code again" + this.time
+        this.btntxt = 'Get valid code again' + this.time
         setTimeout(this.timer, 1000)
       } else {
         this.time = 0
-        this.btntxt = "Get valid code"
+        this.btntxt = 'Get valid code'
         this.disabled = false
       }
     },
     // reg joggle
-    regUrl(params) {
+    regUrl (params) {
       const _that = this
       axios
         .post(apiConfig.regUrl, params)
@@ -150,7 +151,7 @@ export default {
             } else {
               _that.setMobile(params.login)
             }
-            _that.$router.push("/")
+            _that.$router.push('/')
           }
         })
         .catch(function(error) {
@@ -158,14 +159,14 @@ export default {
         })
     },
     // phoneCodeUrl
-    phoneCodeUrl(params) {
+    phoneCodeUrl (params) {
       const _that = this
       axios
         .get(apiConfig.phoneCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
             _that.time = 0
-            _that.btntxt = "Get valid code"
+            _that.btntxt = 'Get valid code'
             _that.disabled = false
             alert(res.data.detail)
           }
@@ -175,14 +176,14 @@ export default {
         })
     },
     // emailCodeUrl
-    emailCodeUrl(params) {
+    emailCodeUrl (params) {
       const _that = this
       axios
         .get(apiConfig.emailCodeUrl, {params})
         .then(function(res) {
           if (res.data.error) {
             _that.time = 0
-            _that.btntxt = "Get valid code"
+            _that.btntxt = 'Get valid code'
             _that.disabled = false
             alert(res.data.detail)
           }
@@ -191,22 +192,22 @@ export default {
           console.log('woshierror', error)
         })
     },
-    reg() {
+    reg () {
       let params = {
         login: this.typeVal,
         code: this.code,
         password: this.password
       }
       if (this.flag) {
-        params.type = "mobile_number"
+        params.type = 'mobile_number'
       } else {
-        params.type = "email"
+        params.type = 'email'
       }
       console.log(params)
       // 调用注册接口
       this.regUrl(params)
     },
-    codeUrl() {
+    codeUrl () {
       this.time = 60
       this.disabled = true
       this.timer()

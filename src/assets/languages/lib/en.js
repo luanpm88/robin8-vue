@@ -1,4 +1,6 @@
 export const lang = {
+  login: 'Log In',
+  logout: 'Log Out',
   home: 'Home',
   campaignsData: 'Campaigns',
   myKols: 'KOL Search Engine',
