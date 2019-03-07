@@ -247,7 +247,7 @@ export default {
       },
       MentionsList: [],
       MentionsNum: 0,
-      tabIndex: 1,
+      tabIndex: 0,
       tabList: [
         {
           index: 0,
