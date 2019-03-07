@@ -47,8 +47,9 @@
             <input class="col-xs-3 oneinput" v-model="engagementFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="engagementTo">
+             <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.engagementTip')}}</div>
           </div>
-          <div class="kol-advance-line col-xs-6">
+          <div class="kol-advance-line col-xs-6" v-if="tabIndex === 0">
             <span class="kol-advance-left col-xs-4">Followers Count:</span>
             <input class="col-xs-3 oneinput" v-model="followerFrom">
             <b class="col-xs-1">-</b>
@@ -59,9 +60,9 @@
             <input class="col-xs-3 oneinput" v-model="influenceFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="influenceTo">
-            <div class="kol-advance-tip col-xs-10">{{$t('lang.kolList.search.influenceTip')}}</div>
+            <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.influenceTip')}}</div>
           </div>
-          <div class="kol-advance-line kol-advance-bottom">
+          <div class="kol-advance-line kol-advance-bottom col-xs-12">
             <div class="kol-type">
               <label>
                 <input type="checkbox" v-model="kolOnly">
@@ -69,7 +70,7 @@
               </label>
             </div>
           </div>
-          <div class="form-group text-center">
+          <div class="form-group text-center col-xs-12">
             <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
           </div>
         </div>
@@ -117,23 +118,17 @@
                     <div class="kol-show">
                       <p>
                         {{item.profile_name}}
-                        <!-- <i
-                        v-if="profile.sex === 0"
-                        class="iconfont icon-nanxing"
-                        style="color:#096dd9;"
-                      ></i>
-                        <i v-else class="iconfont icon-nvxing" style="color:#f36dbb"></i>-->
                       </p>
                       <div class="desc">{{item.description_raw}}</div>
                       <div>
                         <span>
                           <i class="iconfont icon-icon-test1"></i>
-                          {{item.stats.avg_likes}}
+                          {{item.fans_number}}
                           <b>{{$t('lang.kolList.search.likeTip')}}</b>
                         </span>
                         <span>
                           <i class="iconfont icon-app"></i>
-                          {{item.stats.total_sum_engagement}}
+                          {{item.stats.avg_sum_engagement}}
                           <b>{{$t('lang.kolList.search.sumTip')}}</b>
                         </span>
                       </div>
@@ -166,6 +161,24 @@
                     strokeColor="#b37feb"
                     :format="() => item.correlation + '%'"
                   />
+                  <!-- <a-progress
+                    type="circle"
+                    :percent="item.correlation"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#b37feb"
+                    :format="() => item.correlation + '%'"
+                    v-if="item.colorStatus === 1"
+                  /> -->
+                  <!-- <a-progress
+                    type="circle"
+                    :percent="item.correlation"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#ddd"
+                    :format="() => item.correlation"
+                    v-if="item.colorStatus === 0"
+                  /> -->
                 </li>
               </ul>
             </div>
@@ -367,6 +380,13 @@ export default {
         }
         element.influence = parseInt(element.influence * 1000);
         element.correlation = parseInt(element.correlation * 100);
+        // if (this.keyword !== '') {
+        //   element.colorStatus = 1;
+        //   element.correlation = parseInt(element.correlation * 100);
+        // } else {
+        //   element.colorStatus = 0;
+        //   element.correlation = 'N/A';
+        // }
         if (!element.pricing) {
           (element.pricing = {}), (element.pricing.direct_price = "N/A");
         }
@@ -516,7 +536,7 @@ span {
   }
 }
 .kol-advance {
-  width: 700px;
+  // width: 700px;
   margin: 0px auto;
 }
 .kol-advance-line {
@@ -556,6 +576,7 @@ span {
 .kol-type {
   span {
     line-height: 34px;
+    color: #333;
   }
 }
 .kol-advance-bottom {

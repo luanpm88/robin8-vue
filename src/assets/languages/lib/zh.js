@@ -469,9 +469,10 @@ export const lang = {
       analytics: '分析'
     },
     search: {
-      likeTip: '喜欢人数',
-      sumTip: '总投入',
-      influenceTip: '影响力最大分数是1000'
+      likeTip: '粉丝数',
+      sumTip: '平均总参与度',
+      influenceTip: '影响力最大分数是1000',
+      engagementTip: '喜欢，分享，评论的平均总和'
     }
   }
 }

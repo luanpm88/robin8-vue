@@ -469,9 +469,10 @@ export const lang = {
       analytics: 'Analytics'
     },
     search: {
-      likeTip: 'Favorite',
-      sumTip: 'Engagement',
-      influenceTip: 'Maximum impact score is 1000'
+      likeTip: 'Fans Number',
+      sumTip: 'Average Sum Engagement',
+      influenceTip: 'Maximum impact score is 1000',
+      engagementTip: 'The average sum of likes, shares, comments'
     }
   }
 }
