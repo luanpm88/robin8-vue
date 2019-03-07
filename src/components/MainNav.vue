@@ -65,11 +65,11 @@ export default {
           href: '/creations',
           subNav: [
             {
-              title: 'Content Creations',
+              title: 'Custom Content',
               href: '/creations'
             },
             {
-              title: 'Content Amplifications',
+              title: 'Share-Only',
               href: '/campaigns'
             }
           ]
@@ -93,7 +93,7 @@ export default {
               href: '/wallet/summary'
             },
             {
-              title: 'Invoice',
+              title: 'Invoices',
               href: '/wallet/invoice'
             }
           ]
@@ -112,7 +112,7 @@ export default {
               href: '/settings/my_brands'
             },
             {
-              title: 'My Competitive Brands',
+              title: 'My Competitors',
               href: '/settings/my_competition_brands'
             }
           ]

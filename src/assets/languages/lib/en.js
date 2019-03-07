@@ -188,19 +188,19 @@ export const lang = {
     kolDistrict: {
       title: '地域',
       placeholder: '请选择地域',
-      provincePlaceholder: 'please select province',
-      cityPlaceholder: 'please select city',
+      provincePlaceholder: 'Please select province',
+      cityPlaceholder: 'Please select city',
       errorTips: '请选择地域'
     },
     kolAge: {
       title: 'Age',
       placeholder: 'all',
-      errorTips: 'please select the age'
+      errorTips: 'Please select the age'
     },
     kolGender: {
       title: 'Gender',
       placeholder: 'all',
-      errorTips: 'please select the gender'
+      errorTips: 'Please select the gender'
     },
     kolPush: {
       title: '补推',
@@ -226,80 +226,80 @@ export const lang = {
     serchBtn: 'Search Big V',
     name: {
       title: 'Campaign name',
-      placeholder: 'please fill in the campaign name',
+      placeholder: 'Please fill in the campaign name',
       errorTips: 'a good name can attract more KOL to participate'
     },
     description: {
       title: 'Campaign description',
-      placeholder: 'please write down the campaign description',
-      errorTips: 'please write down the campaign related information'
+      placeholder: 'Please describe your campaign',
+      errorTips: 'Please write down the campaign related information'
     },
     brandName: {
       title: 'Brand name',
-      placeholder: 'please select a brand name',
-      errorTips: 'please select the right brand name'
+      placeholder: 'Please select a brand name',
+      errorTips: 'Please select the right brand name'
     },
     platform: {
       title: 'Campaign platform',
-      placeholder: 'please fill in the exposure value',
-      errorTips: 'please select the platform'
+      placeholder: 'Please fill in the exposure value',
+      errorTips: 'Please select the platform'
     },
     picture: {
       title: 'Campaign picture',
       placeholder: '',
-      errorTips: 'please upload an image'
+      errorTips: 'Please upload an image'
     },
     time: {
       title: 'Campaign time',
       startPlaceholder: 'select start time',
       endPlaceholder: 'select end time',
-      placeholder: 'please select the campaign time',
-      errorTips: 'please select the right campaign time'
+      placeholder: 'Please select the campaign time',
+      errorTips: 'Please select the right campaign time'
     },
     kolNumber: {
       title: 'Number of KOL',
-      placeholder: 'please fill in the number of KOL for the campaign',
-      errorTips: 'please fill in the number of KOL for the campaign'
+      placeholder: 'Please fill in the number of KOL for the campaign',
+      errorTips: 'Please fill in the number of KOL for the campaign'
     },
     budget: {
       title: 'Campaign budget',
-      placeholder: 'please fill in the campaign budget',
-      errorTips: 'please fill in the campaign budget'
+      placeholder: 'Please fill in the campaign budget',
+      errorTips: 'Please fill in the campaign budget'
     },
     precaution: {
       title: 'Precaution',
-      placeholder: 'please fill out the precaution for the campaign, including content that should not be talk about and the important things need to be take care of.',
-      errorTips: 'please fill in the precaution'
+      placeholder: 'Please fill out the precaution for the campaign, including content that should not be talk about and the important things need to be take care of.',
+      errorTips: 'Please fill in the precaution'
     },
     tags: {
       title: 'Campaign tags',
       placeholder: '',
-      errorTips: 'please select the tags'
+      errorTips: 'Please select the tags'
     },
     price: {
       title: 'Price requirements',
       lowestPlaceholder: 'lowest',
       highestPlaceholder: 'highest',
       placeholder: 'all',
-      errorTips: 'please select a price range for us to recommend accurate KOL'
+      errorTips: 'Please select a price range for us to recommend accurate KOL'
     },
     followerAge: {
       title: 'Follower\'s age',
       placeholder: 'all',
-      errorTips: 'please select the expected range for the follower\'s age'
+      errorTips: 'Please select the expected range for the follower\'s age'
     },
     followerGender: {
       title: 'Follower\'s gender',
       placeholder: 'all',
-      errorTips: 'please select the follower\'s gender'
+      errorTips: 'Please select the follower\'s gender'
     },
     followerDistrict: {
       title: 'Follower\'s location',
-      placeholder: 'please fill in the district requirements',
-      provincePlaceholder: 'please select province',
-      cityPlaceholder: 'please select city',
-      provinceErrorTips: 'please select province requirements',
-      cityErrorTips: 'please select city requirements'
+      placeholder: 'Please fill in the district requirements',
+      provincePlaceholder: 'Please select province',
+      cityPlaceholder: 'Please select city',
+      provinceErrorTips: 'Please select province requirements',
+      cityErrorTips: 'Please select city requirements'
     }
   },
   wallet: {

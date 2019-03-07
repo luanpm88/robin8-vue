@@ -28,7 +28,7 @@
             <div class="box">
               <div class="iconfont icon-trophy"></div>
               <h5 class="title">活动列表</h5>
-              <h6 class="sub-title">Campaign List</h6>
+              <h6 class="sub-title">My Campaigns</h6>
             </div>
           </router-link>
         </div>
