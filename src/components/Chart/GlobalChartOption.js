@@ -25,7 +25,7 @@ const MockData = {
       containLabel: true
     },
     xAxis: {
-      name: "Day",
+      name: "Date（day/month）",
       nameLocation: "middle",
       nameTextStyle: {
         fontSize: 16,
