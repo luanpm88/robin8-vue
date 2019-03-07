@@ -31,8 +31,8 @@ fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 
 const i18n = new VueI18n({
-  // locale: 'zh-CN', // 设置语言
-  locale: 'en-US', // 设置语言
+  locale: 'zh-CN', // 设置语言
+  // locale: 'en-US', // 设置语言
   fallbackLocale: 'zh-CN',
   messages: {
     'zh-CN': require('./assets/languages/lib/zh'),   // 中文语言包

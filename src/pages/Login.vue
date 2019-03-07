@@ -55,47 +55,46 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
-import commonJs from "@javascripts/common.js"
+import axios from 'axios'
+import apiConfig from '@/config'
+import commonJs from '@javascripts/common.js'
 import { mapMutations } from 'vuex'
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      userName: "",
-      password: "",
+      userName: '',
+      password: '',
       loginStatus: false
     }
   },
   methods: {
-    ...mapMutations(["setAccount", "setAuthorization", "setNickname", "setMobile", 'setAvatarImgUrl']),
+    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl']),
     // login joggle
-    loginUrl(params) {
+    loginUrl (params) {
       const _that = this
       axios
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
           let resData = res.data
-          console.log(res);
           console.log(resData)
-          if (res.data.error) {
-            alert(res.data.detail)
+          if (resData.error) {
+            alert(resData.detail)
             _that.loginStatus = false
           } else {
             _that.setAuthorization(resData.access_token)
             _that.setAccount(params.login)
             _that.setAvatarImgUrl(resData.avatar_url)
             _that.loginStatus = false
-            _that.$router.push("/")
+            _that.$router.push('/')
           }
         })
         .catch(function(error) {
           console.log(error)
         })
     },
-    login() {
+    login () {
       this.loginStatus = true
       let params = {
         login: this.userName,

@@ -1,4 +1,6 @@
 export const lang = {
+  login: '登录',
+  logout: '退出',
   home: '首页',
   campaignsData: '营销数据',
   myKols: 'KOL搜索',

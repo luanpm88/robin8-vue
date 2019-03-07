@@ -6,36 +6,64 @@
           <img src="@images/logo.png" alt="ROBIN8" class="logo-img" />
         </router-link>
       </h1>
-      <div class="pull-right">
-        <div class="avatar">
-          <img :src="avatarImgUrl" alt="" class="avatar-img" />
+      <div class="user-info pull-right">
+        <div class="media">
+          <div class="media-left">
+            <div v-if="!!avatarImgUrl && avatarImgUrl != 'null'" class="avatar">
+              <img :src="avatarImgUrl" alt="" class="avatar-img" />
+            </div>
+            <div v-else class="avatar">
+              <img src="@images/user.png" alt="" class="avatar-img" />
+            </div>
+          </div>
+          <div class="media-body media-middle">
+            <p class="logout-btn" @click="logOut">{{$t('lang.logout')}}</p>
+          </div>
         </div>
-        <span class="avatar-text" @click="sinUp">退出</span>
-        <!-- <p>退出</p> -->
+      </div>
+      <div class="languages-ctrl pull-right">
+        <span
+          class="item"
+          :class="[lang == 'zh-CN' ? 'active' : '']"
+          @click="toggleLang('zh-CN')"
+        >中文</span>
+        <span
+          class="item"
+          :class="[lang == 'en-US' ? 'active' : '']"
+          @click="toggleLang('en-US')"
+        >En</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: 'PageHeader',
   computed: {
-     ...mapState(['avatarImgUrl']),
-  },
-  created() {
-    // console.log(this.avatarImgUrl);
+    ...mapState(['avatarImgUrl']),
   },
   data () {
     return {
-
+      lang: this.$i18n.locale
     }
   },
   methods: {
-    sinUp() {
-      window.localStorage.clear();
-      this.$router.replace("/login");
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl']),
+    logOut () {
+      // window.localStorage.clear()
+      this.removeAuthorization()
+      this.removeNickname()
+      this.removeMobile()
+      this.removeAccount()
+      this.removeAvatarImgUrl()
+      this.$router.replace('/login')
+    },
+    toggleLang (lang) {
+      this.$i18n.locale = lang
+      this.lang = lang
     }
   }
 }
@@ -53,6 +81,19 @@ export default {
         height: 100%;
       }
     }
+    .languages-ctrl {
+      @include display-flex;
+      height: 40px;
+      padding: 0 40px;
+      align-items: center;
+      & > .item {
+        margin: 0 5px;
+        cursor: pointer;
+        &.active {
+          color: #fff;
+        }
+      }
+    }
     .avatar {
       width: 40px;
       height: 40px;
@@ -64,12 +105,10 @@ export default {
         height: 100%;
       }
     }
-    .avatar-text{
-      margin-left: 10px;
+    .logout-btn {
+      border-bottom: 1px solid #eaeaea;
       cursor: pointer;
       color: #fafafa;
-      vertical-align: 7px;
-      border-bottom: 1px solid #eaeaea;
     }
   }
 }
