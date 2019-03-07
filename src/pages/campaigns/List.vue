@@ -77,7 +77,7 @@
                   class="btn btn-sm btn-cyan btn-outline"
                 >支付</router-link>
                 <router-link
-                  v-show="item.status == 'agreed' && item.status != 'pending' && item.status != 'unpay' && item.status != 'rejected'"
+                  v-show="item.status != 'pending' && item.status != 'unpay' && item.status != 'rejected'"
                   :to="'/campaigns/create?copy_id='+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
                 >再次发布</router-link>

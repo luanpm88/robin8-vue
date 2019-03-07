@@ -310,6 +310,11 @@
         :to="'/campaigns/'+ $route.params.id +'/pay'"
         class="btn btn-cyan btn-outline pay-btn"
       >支付</router-link>
+      <router-link
+        v-show="detailData.status != 'pending' && detailData.status != 'unpay' && detailData.status != 'rejected'"
+        :to="'/campaigns/create?copy_id='+ detailData.id"
+        class="btn btn-cyan edit-btn"
+      >再次发布</router-link>
     </div>
 
   </div>
