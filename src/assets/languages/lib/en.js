@@ -427,7 +427,7 @@ export const lang = {
         operation: 'Operation',
       }
     },
-    addBtn: 'New My Brand',
+    addBtn: 'Add New Brand',
     contrastButton: "View selected",
     tip: 'You did not choose the brand',
     addPage: {
@@ -470,7 +470,8 @@ export const lang = {
     },
     search: {
       likeTip: 'Favorite',
-      sumTip: 'Engagement'
+      sumTip: 'Engagement',
+      influenceTip: 'Maximum impact score is 1000'
     }
   }
 }

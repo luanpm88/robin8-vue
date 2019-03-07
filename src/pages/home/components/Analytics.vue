@@ -12,7 +12,7 @@
         <div class="analytic-box">
           <div class="analytic-chart">
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trend over past 7 days for  {{trendTitle}}</p>
+              <p class="analytic-chart-title">Trends over past 7 days for  {{trendTitle}}</p>
               <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
             </div>
             <div v-if="cur === 1">

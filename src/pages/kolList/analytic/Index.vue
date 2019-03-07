@@ -100,7 +100,7 @@
       </div>
     </div>
     <!-- 微博没有 Media-->
-    <!-- <div class="kol-card" v-if="Number(type) === 1">
+    <div class="kol-card" v-if="Number(type) === 1">
       <p class="kol-cloumn mb10">Media Distribution</p>
       <div class="nonetip" v-if="isMediaShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
@@ -134,7 +134,7 @@
           </tr>
         </table>
       </div>
-    </div> -->
+    </div>
 
     <!-- 微博图表渲染模版  -->
     <!-- <div v-if="Number(type) === 0">

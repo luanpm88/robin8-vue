@@ -470,7 +470,8 @@ export const lang = {
     },
     search: {
       likeTip: '喜欢人数',
-      sumTip: '总投入'
+      sumTip: '总投入',
+      influenceTip: '影响力最大分数是1000'
     }
   }
 }

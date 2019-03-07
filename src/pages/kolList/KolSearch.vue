@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="kol-list-wrap">
-      <h5>Enter a keyword, category or KOL</h5>
+      <h5>Enter a keyword, category or KOL name</h5>
       <div class="kol-search clearfix">
-        <input type="text" placeholder="please input" v-model="keyword">
+        <input type="text" placeholder="Please type here..." v-model="keyword">
         <span class="kol-search-btn" @click="totalSearch">Search</span>
       </div>
       <div class="kol-advance">
@@ -12,7 +12,7 @@
         </div>
         <div class="kol-advance-box clearfix" v-if="advancedSearch">
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">KOL industries:</span>
+            <span class="kol-advance-left col-xs-4">KOL Industry:</span>
             <select class="col-xs-7 oneselect" v-model="industry">
               <option value=""></option>
               <option value="airline">Airline</option>
@@ -49,16 +49,17 @@
             <input class="col-xs-3 oneinput" v-model="engagementTo">
           </div>
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Followers:</span>
+            <span class="kol-advance-left col-xs-4">Followers Count:</span>
             <input class="col-xs-3 oneinput" v-model="followerFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="followerTo">
           </div>
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Influence:</span>
+            <span class="kol-advance-left col-xs-4">Influence Score:</span>
             <input class="col-xs-3 oneinput" v-model="influenceFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="influenceTo">
+            <div class="kol-advance-tip col-xs-10">{{$t('lang.kolList.search.influenceTip')}}</div>
           </div>
           <div class="kol-advance-line kol-advance-bottom">
             <div class="kol-type">
@@ -524,6 +525,7 @@ span {
 .kol-advance-left {
   line-height: 34px;
   text-align: right;
+  color: #333;
 }
 .kol-advance-btn {
   text-align: center;
@@ -764,5 +766,9 @@ span {
 }
 .kol-profile{
   cursor: pointer;
+}
+.kol-advance-tip{
+  text-align: center;
+  margin-top: 5px;
 }
 </style>
