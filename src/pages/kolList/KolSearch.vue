@@ -47,7 +47,7 @@
             <input class="col-xs-3 oneinput" v-model="engagementFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="engagementTo">
-             <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.engagementTip')}}</div>
+             <!-- <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.engagementTip')}}</div> -->
           </div>
           <div class="kol-advance-line col-xs-6" v-if="tabIndex === 0">
             <span class="kol-advance-left col-xs-4">Followers Count:</span>
@@ -60,7 +60,7 @@
             <input class="col-xs-3 oneinput" v-model="influenceFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="influenceTo">
-            <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.influenceTip')}}</div>
+            <!-- <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.influenceTip')}}</div> -->
           </div>
           <div class="kol-advance-line kol-advance-bottom col-xs-12">
             <div class="kol-type">
@@ -121,16 +121,14 @@
                       </p>
                       <div class="desc">{{item.description_raw}}</div>
                       <div>
-                        <span>
+                        <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.likeTip')">
                           <i class="iconfont icon-icon-test1"></i>
                           {{item.fans_number}}
-                          <b>{{$t('lang.kolList.search.likeTip')}}</b>
-                        </span>
-                        <span>
+                        </a-tooltip>
+                        <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.sumTip')">
                           <i class="iconfont icon-app"></i>
                           {{item.stats.avg_sum_engagement}}
-                          <b>{{$t('lang.kolList.search.sumTip')}}</b>
-                        </span>
+                        </a-tooltip>
                       </div>
                     </div>
                   </div>
@@ -160,25 +158,16 @@
                     :strokeWidth="9"
                     strokeColor="#b37feb"
                     :format="() => item.correlation + '%'"
-                  />
-                  <!-- <a-progress
-                    type="circle"
-                    :percent="item.correlation"
-                    :width="100"
-                    :strokeWidth="9"
-                    strokeColor="#b37feb"
-                    :format="() => item.correlation + '%'"
                     v-if="item.colorStatus === 1"
-                  /> -->
-                  <!-- <a-progress
+                  />
+                  <a-progress
                     type="circle"
-                    :percent="item.correlation"
                     :width="100"
                     :strokeWidth="9"
                     strokeColor="#ddd"
                     :format="() => item.correlation"
                     v-if="item.colorStatus === 0"
-                  /> -->
+                  />
                 </li>
               </ul>
             </div>
@@ -208,18 +197,22 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import { Progress } from "ant-design-vue";
+import { Progress, Tooltip } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
 export default {
   name: 'kolsearch',
   components: {
     AProgress: Progress,
+    ATooltip: Tooltip,
     DefaultTabs
   },
   props: ["keyWord"],
   data() {
     return {
+      lang: this.$i18n.locale,
+      langTwo: this.$t('lang.kolList.search.likeTip'),
+      // lang: true,
       listSortType: 1,
       listSortDir: 'desc',
       isLoading: true,
@@ -264,6 +257,11 @@ export default {
       totalParams: {}
     };
   },
+  watch: {lang: function (val) {
+      // console.log('info')
+      console.log(val)
+    }
+  },
   created() {
     this.r8Kol();
     // 获取keywords
@@ -285,6 +283,9 @@ export default {
   },
   computed: {
     ...mapState(["authorization"])
+  },
+  updated() {
+    this.langLoad();
   },
   methods: {
     // 初始化传参数
@@ -313,6 +314,9 @@ export default {
       this.totalParams.profile_sort_col = this.listSortType;
       this.totalParams.profile_sort_dir = this.listSortDir;
       this.totalParams.r8_registered_kol_only = this.kolOnlyText;;
+    },
+    langLoad() {
+      console.log('000', this.langTwo);
     },
     // 调用接口
     totalJoggle(type) {
@@ -379,14 +383,14 @@ export default {
           element.description_raw = element.description_raw.substr(0, 30) + '...'
         }
         element.influence = parseInt(element.influence * 1000);
-        element.correlation = parseInt(element.correlation * 100);
-        // if (this.keyword !== '') {
-        //   element.colorStatus = 1;
-        //   element.correlation = parseInt(element.correlation * 100);
-        // } else {
-        //   element.colorStatus = 0;
-        //   element.correlation = 'N/A';
-        // }
+        // element.correlation = parseInt(element.correlation * 100);
+        if (this.keyword !== '') {
+          element.colorStatus = 1;
+          element.correlation = parseInt(element.correlation * 100);
+        } else {
+          element.colorStatus = 0;
+          element.correlation = 'N/A';
+        }
         if (!element.pricing) {
           (element.pricing = {}), (element.pricing.direct_price = "N/A");
         }
@@ -712,29 +716,7 @@ span {
       position: relative;
       padding-right: 11px;
       display: inline-block;
-      margin: 10px 0px 0px;
-      i {
-        vertical-align: -1px;
-        font-size: 16px;
-      }
-      b{
-        display: none;
-        color: $white;
-        line-height: 25px;
-        background: rgba(0, 0, 0, 0.6);
-        padding: 0px 10px;
-        font-weight: normal;
-        font-size: 12px;
-        border-radius: 4px;
-        position: absolute;
-        left: 0px;
-        top: -28px;
-      }
-      &:hover{
-        b{
-          display: inline-block;
-        }
-      }
+      margin: 2px 0px 0px;
     }
   }
 }
