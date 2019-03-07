@@ -91,7 +91,7 @@
           <div class="item">
             <div class="title">参与人数</div>
             <div class="text">
-              <span class="num">{{detailData.total_invite_kols_count}}</span>
+              <span class="num">{{detailData.join_count}}</span>
             </div>
           </div>
           <div class="item">
@@ -100,10 +100,16 @@
               <span class="num">{{detailData.total_click}}</span>
             </div>
           </div>
-          <div class="item">
+          <div v-if="detailData.per_budget_type == 'cpa' || detailData.per_budget_type == 'click'" class="item">
             <div class="title">计费点击</div>
             <div class="text">
               <span class="num">{{detailData.avail_click}}</span>
+            </div>
+          </div>
+          <div v-if="detailData.per_budget_type == 'post'" class="item">
+            <div class="title">转发量</div>
+            <div class="text">
+              <span class="num">{{detailData.post_count}}</span>
             </div>
           </div>
         </div>
@@ -125,6 +131,7 @@
                   <tr>
                     <th class="text-center">头像</th>
                     <th class="text-center">昵称</th>
+                    <th v-if="detailData.per_budget_type != 'post' && detailData.per_budget_type != 'simple_cpi' && detailData.per_budget_type != 'cpt'" class="text-center">计费点击</th>
                     <th class="text-center">总点击</th>
                     <th class="text-center">奖励</th>
                     <th class="text-center">截图</th>
@@ -141,6 +148,7 @@
                       </div>
                     </td>
                     <td class="text-center">{{item.kol.name}}</td>
+                    <td v-if="detailData.per_budget_type != 'post' && detailData.per_budget_type != 'simple_cpi' && detailData.per_budget_type != 'cpt'" class="text-center">{{item.get_avail_click}}</td>
                     <td class="text-center">{{item.get_total_click}}</td>
                     <td class="text-center">{{item.total_rewards}}</td>
                     <td class="text-center">

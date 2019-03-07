@@ -37,7 +37,7 @@
                   <div class="item">
                     <div class="title">参与人数</div>
                     <div class="text">
-                      <span class="num">{{item.total_invite_kols_count}}</span>
+                      <span class="num">{{item.join_count}}</span>
                     </div>
                   </div>
                   <div class="item">
@@ -46,10 +46,16 @@
                       <span class="num">{{item.total_click}}</span>
                     </div>
                   </div>
-                  <div class="item">
+                  <div v-if="item.per_budget_type == 'cpa' || item.per_budget_type == 'click'" class="item">
                     <div class="title">计费点击</div>
                     <div class="text">
                       <span class="num">{{item.avail_click}}</span>
+                    </div>
+                  </div>
+                  <div v-if="item.per_budget_type == 'post'" class="item">
+                    <div class="title">转发量</div>
+                    <div class="text">
+                      <span class="num">{{item.post_count}}</span>
                     </div>
                   </div>
                   <div class="item">

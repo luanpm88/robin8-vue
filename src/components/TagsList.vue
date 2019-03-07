@@ -7,7 +7,7 @@
       :key="item.id"
       :data-val="item.name"
       @click="checkTag(item.id, item.name)"
-    >{{item.label}}</li>
+    >{{$i18n.locale == 'zh-CN' ? item.label : item.name}}</li>
   </ul>
 </template>
 
