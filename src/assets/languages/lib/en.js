@@ -463,7 +463,10 @@ export const lang = {
   },
   kolList: {
     detail: {
-      btn: 'Return'
+      btn: 'Return',
+      post: 'Posts',
+      summary: 'Summary',
+      analytics: 'Analytics'
     },
     search: {
       likeTip: 'Favorite',

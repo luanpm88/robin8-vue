@@ -37,7 +37,11 @@
           </div>
           <div class="kol-card">
             <p class="kol-cloumn">Top Industries</p>
-            <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
+            <Echarts
+              :options="competitorList.options"
+              :chartsStyle="competitorList.chartsStyle"
+              ref="competitorEChart"
+            ></Echarts>
           </div>
           <div class="kol-card">
             <p class="kol-cloumn">Keywords</p>
@@ -47,83 +51,118 @@
             <div class="r8-loading" v-if="isLoading">
               <a-spin tip="Loading..."/>
             </div>
-            <tag-charts v-if="isTag" :width="240" :height="180" :taglist="parentTags"></tag-charts>
+            <tag-charts v-if="isTag" :width="240" :height="180" :taglist="parentTags" class="mt20"></tag-charts>
           </div>
         </div>
         <div class="kol-detail-con">
           <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
-          <div class="kol-card">
-            <p class="kol-cloumn mb10">Activity</p>
-            <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-            <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
-            <div class="activity-table">
-              <table class="com-brand-table">
+          <default-tabs
+            :tabList="tabList"
+            :tabIndex="tabIndex"
+            @changeTab="changeTab"
+            class="panel-tab"
+          ></default-tabs>
+          <div class="mt20" v-if="tabIndex === 0">
+            <div class="kol-card" v-if="isActivity">
+              <p class="kol-cloumn mb10">Activity</p>
+              <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
+              <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
+              <div class="activity-table">
+                <table class="com-brand-table">
+                  <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Performance</th>
+                  </tr>
+                  <tr v-for="(key, index) in activeList.creations_list" :key="index">
+                    <td>{{key.id}}</td>
+                    <td>{{key.title}}</td>
+                    <td>{{key.date}}</td>
+                    <td>{{key.amount}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="kol-card" v-if="isAnalytics">
+              <p class="kol-cloumn">Analytics</p>
+              <div class="activity-contable">
+                <table class="com-brand-table">
+                  <tr>
+                    <th></th>
+                    <th>No. of Campaigns</th>
+                    <th>Performance (CPC)</th>
+                    <th>No. of Clients</th>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td v-for="(item, index) in activeList.total_info" :key="index">
+                      <p class="activity-border">{{item}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Last 30 days</td>
+                    <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
+                      <p class="activity-border">{{item}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="kol-card">
+              <p class="kol-cloumn">Social Data</p>
+              <div class="activity-table">
+                <table class="com-brand-table">
+                  <tr>
+                    <th>Platform</th>
+                    <th>Price</th>
+                    <th>Followers</th>
+                    <th>Likes</th>
+                    <th>Shares</th>
+                    <th>Comments</th>
+                    <th>Post-last 21 days</th>
+                    <th>Influence Score</th>
+                  </tr>
+                  <tr>
+                    <td>{{dataListBox.platform}}</td>
+                    <td>{{dataListBox.pricing.direct_price}}</td>
+                    <td>{{dataListBox.fans_number}}</td>
+                    <td>{{dataListBox.stats.avg_likes}}</td>
+                    <td>{{dataListBox.stats.avg_shares}}</td>
+                    <td>{{dataListBox.stats.avg_comments}}</td>
+                    <td>{{dataListBox.stats.avg_daily_posts}}</td>
+                    <td>{{dataListBox.stats.avg_post_influences}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="kol-card kol-performance">
+              <p class="kol-cloumn mb10">Best Performance Posts</p>
+              <table class="com-brand-table" v-if="isPer">
                 <tr>
-                  <th>Id</th>
                   <th>Title</th>
-                  <th>Date</th>
-                  <th>Performance</th>
+                  <th>Post Time</th>
+                  <th v-if="tabIndex === 1">Read Count</th>
                 </tr>
-                <tr v-for="(key, index) in activeList.creations_list" :key="index">
-                  <td>{{key.id}}</td>
-                  <td>{{key.title}}</td>
-                  <td>{{key.date}}</td>
-                  <td>{{key.amount}}</td>
+                <tr v-for="(key, index) in performanceList" :key="index">
+                  <td><a :href="key.url" target="blank">{{key.title}}</a></td>
+                  <td>{{key.post_time}}</td>
+                  <td v-if="tabIndex === 1">{{key.influence_reads}}+ </td>
                 </tr>
               </table>
+              <div class="nonetip" v-if="isPerShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isPerLoading">
+                <a-spin tip="Loading..."/>
+              </div>
             </div>
           </div>
-          <div class="kol-card">
-            <p class="kol-cloumn">Analytics</p>
-            <div class="activity-contable">
-              <table class="com-brand-table">
-                <tr>
-                  <th></th>
-                  <th>No. of Campaigns</th>
-                  <th>Performance (CPC)</th>
-                  <th>No. of Clients</th>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td v-for="(item, index) in activeList.total_info" :key="index">
-                    <p class="activity-border">{{item}}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Last 30 days</td>
-                  <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
-                    <p class="activity-border">{{item}}</p>
-                  </td>
-                </tr>
-              </table>
-            </div>
+          <div class="mt20" v-if="tabIndex === 1">
+            <analytics></analytics>
           </div>
-          <div class="kol-card">
-            <p class="kol-cloumn">Social Data</p>
-            <div class="activity-table">
-              <table class="com-brand-table">
-                <tr>
-                  <th>Platform</th>
-                  <th>Price</th>
-                  <th>Followers</th>
-                  <th>Likes</th>
-                  <th>Shares</th>
-                  <th>Comments</th>
-                  <th>Post-last 21 days</th>
-                  <th>Influence Score</th>
-                </tr>
-                <tr>
-                  <td>{{dataListBox.platform}}</td>
-                  <td>{{dataListBox.pricing.direct_price}}</td>
-                  <td>{{dataListBox.fans_number}}</td>
-                  <td>{{dataListBox.stats.avg_likes}}</td>
-                  <td>{{dataListBox.stats.avg_shares}}</td>
-                  <td>{{dataListBox.stats.avg_comments}}</td>
-                  <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                  <td>{{dataListBox.stats.avg_post_influences}}</td>
-                </tr>
-              </table>
-            </div>
+          <div class="mt20" v-if="tabIndex === 2">
+            <posts></posts>
           </div>
         </div>
       </div>
@@ -134,6 +173,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import DefaultTabs from "@components/DefaultTabs";
 import PageHeader from '@components/PageHeader'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
@@ -141,18 +181,27 @@ import commonJs from '@javascripts/common.js';
 import { Table } from "ant-design-vue";
 import TagCharts from "@components/Chart/chartTagsTwo";
 import { mapState } from "vuex";
+// analytics
+import Analytics from "../kolList/analytic/Index";
+// posts
+import Posts from "../kolList/posts/Index";
 export default {
   name: "KolDetail",
   components: { 
     TagCharts, 
     Echarts,
-    PageHeader 
+    PageHeader,
+    DefaultTabs,
+    Analytics,
+    Posts
   },
   data() {
     return {
       isShow: false,
       isLoading: true,
       isTag: false,
+      isActivity: true,
+      isAnalytics: true,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,
@@ -197,7 +246,32 @@ export default {
         type: "doc"
       },
       MentionsList: [],
-      MentionsNum: 0
+      MentionsNum: 0,
+      tabIndex: 0,
+      tabList: [
+        {
+          index: 0,
+          name: this.$t('lang.kolList.detail.summary')
+        },
+        {
+          index: 1,
+          name: this.$t('lang.kolList.detail.analytics')
+        },
+        {
+          index: 2,
+          name: this.$t('lang.kolList.detail.post')
+        }
+      ],
+      performanceList: [],
+      performanceParams: {
+        start_date: commonJs.cPastTwentyOneDays,
+        end_date: commonJs.cPastOneday,
+        profile_id: "MzAwMDAyMzY3OA==",
+        order_type: "read"
+      },
+      isPer: false,
+      isPerShow: false,
+      isPerLoading: true,
     };
   },
   created() {
@@ -207,36 +281,51 @@ export default {
     });
     this.trendParams.brand_keywords = newKey;
     this.sentimentParams.brand_keywords = newKey;
-    let totalParams = {};
-    if (Number(this.$route.params.type) === 0) {
-      // 微博相关接口
-      totalParams.profile_id = Number(this.$route.params.id);
-      totalParams.language = "en";
-      this.kolWeiboIndustry(totalParams);
-      this.kolWeiboKeyword(totalParams);
-      this.kolWeiboSocial(totalParams);
-      // 计算sentiment
-      this.sentimentWeibo(this.sentimentParams);
-      // 计算Mentions
-      this.trendsWeibo(this.trendParams);
-    } else {
-      // 微博相关接口
-      totalParams.profile_id = this.$route.params.id;
-      totalParams.language = "en";
-      this.kolWeiXinIndustry(totalParams);
-      this.kolWeiXinKeyword(totalParams);
-      this.kolWeixinSocial(totalParams);
-      // 计算sentiment
-      this.sentimentWeixin(this.sentimentParams);
-      // 计算Mentions
-      this.trendsWeixin(this.trendParams);
-    }
-    this.kolActivityUrl(totalParams);
+    this.type = Number(this.$route.params.type);
+    this.tabIndexOneInit();
   },
   computed: {
     ...mapState(["authorization"])
   },
   methods: {
+    // summary
+    tabIndexOneInit() {
+      let totalParams = {};
+      this.kolActivityUrl(totalParams);
+      if (Number(this.$route.params.type) === 0) {
+        // 微博相关接口
+        totalParams.profile_id = Number(this.$route.params.id);
+        totalParams.language = "en";
+        this.kolWeiboIndustry(totalParams);
+        this.kolWeiboKeyword(totalParams);
+        this.kolWeiboSocial(totalParams);
+        // 计算sentiment
+        this.sentimentWeibo(this.sentimentParams);
+        // 计算Mentions
+        this.trendsWeibo(this.trendParams);
+        // best performance 参数
+        this.performanceParams.profile_id = String(this.$route.params.id);
+        this.performanceParams.order_type = 'sum_engagement'
+        this.performanceWeibo(this.performanceParams);
+      } else {
+        // 微信相关接口
+        totalParams.profile_id = this.$route.params.id;
+        totalParams.language = "en";
+        this.kolWeiXinIndustry(totalParams);
+        this.kolWeiXinKeyword(totalParams);
+        this.kolWeixinSocial(totalParams);
+        // 计算sentiment
+        this.sentimentWeixin(this.sentimentParams);
+        // 计算Mentions
+        this.trendsWeixin(this.trendParams);
+        // best performance 参数
+        this.performanceParams.profile_id = this.$route.params.id;
+        this.performanceWeixin(this.performanceParams);
+      }
+    },
+    changeTab(tab) {
+      this.tabIndex = tab.index;
+    },
     // info 微博的接口
     kolWeiboInfo(params) {
       const _that = this;
@@ -506,6 +595,8 @@ export default {
               _that.activeList.creations_list[0].amount = "N/A";
             }
             if (res.data.data === null) {
+              _that.isActivity = false;
+              _that.isAnalytics = false;
               if (Number(_that.$route.params.type) === 0) {
                 // 调用Fergus 微博info
                 _that.kolWeiboInfo(params);
@@ -514,10 +605,66 @@ export default {
                 _that.kolWeiXinInfo(params);
               }
             } else {
+              _that.isActivity = true;
+              _that.isAnalytics = true;
               _that.infoList.img = res.data.data.avatar_url;
               _that.infoList.name = res.data.data.profile_name;
               _that.infoList.gender = "-";
               _that.dec = res.data.data.industries;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // Best Performance Posts weibo
+    performanceWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.performanceWeibo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            // console.log('wobo 微博', res);
+            _that.isPerLoading = false;
+            if (res.data.data.length > 0) {
+              _that.isPerShow = false;
+              _that.isPer = true;
+              _that.performanceList = res.data.data;
+            } else {
+              _that.isPerShow = true;
+              _that.isPer = false;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // Best Performance Posts weixin
+    performanceWeixin(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.performanceWeixin, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            // console.log('woshi weixin', res)
+            _that.isPerLoading = false;
+            if (res.data.data.length > 0) {
+              _that.isPerShow = false;
+              _that.isPer = true;
+              _that.performanceList = res.data.data;
+            } else {
+              _that.isPerShow = true;
+              _that.isPer = false;
             }
           }
         })
@@ -611,146 +758,15 @@ export default {
   }
 };
 </script>
-<style  lang="scss" scoped>
-.kol-back-btn{
-  cursor: pointer;
-  line-height: 35px;
-  text-decoration: underline;
-  &:hover{
-    color: #a347c9ff;
-  }
-}
-.kol-detail-wrap {
-  width: 900px;
-  margin: 0px auto;
-  color: #333;
-}
-.kol-detail-title {
-  font-weight: 600;
-  font-size: $font-sm;
-  color: #4a4a4aff;
-  margin: 13px 0px;
-}
-.kol-detail-side {
-  width: 280px;
-  float: left;
-}
-.kol-detail-con {
-  width: 980px;
-  float: right;
-}
-.kol-infobox {
-  position: relative;
-  background: $white;
-  img {
-    position: absolute;
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    left: 50%;
-    top: 13px;
-    transform: translate(-50%);
-  }
-  ul {
-    padding: 15px 10px 10px;
-    li {
-      float: left;
-      line-height: 20px;
-      border-radius: 13px;
-      border: 1px solid #716acaff;
-      color: #716acaff;
-      padding: 0px 10px;
-      margin-right: 5px;
-      margin-bottom: 10px;
+<style lang="scss" scoped>
+.kol-performance{
+  .com-brand-table{
+    margin-bottom: 20px;
+    a{
+      display: block;
+      text-align: left;
+      color: nth($purple, 1);
     }
   }
-}
-.kol-info-topbg {
-  height: 36px;
-  background: nth($purple, 1);
-}
-.kol-info {
-  padding-top: 30px;
-  p {
-    text-align: center;
-    color: #575962ff;
-  }
-}
-.kol-card {
-  background: $white;
-  padding: 10px 20px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
-.kol-brand {
-  p {
-    span {
-      float: left;
-      line-height: 25px;
-    }
-    b {
-      float: right;
-      color: #948de1ff;
-      font-weight: normal;
-      line-height: 25px;
-      font-size: $font-nm-s;
-    }
-  }
-}
-.kol-cloumn {
-  border-left: 3px solid nth($purple, 2);
-  padding-left: 10px;
-  font-size: $font-nm;
-}
-.activity-color {
-  line-height: 30px;
-  color: nth($purple, 1);
-}
-.activity-table {
-  margin: 16px 0px 20px;
-}
-.activity-border {
-  border: 1px solid #a347c9ff;
-  color: #a347c9ff;
-  line-height: 32px;
-  font-size: $font-nm-b;
-}
-.icon-nvxing{
-  color: #a347c9ff;
-}
-.icon-nanxing{
-  color: blue;
-}
-.com-brand-table {
-  color: #333;
-  width: 100%;
-  tr {
-    border-bottom: 1px solid #ddd;
-    th {
-      color: #333;
-      font-size: 14px;
-      text-align: center;
-      padding: 5px 0px;
-    }
-  }
-  td {
-    text-align: center;
-    padding: 5px 10px;
-  }
-}
-.activity-contable {
-  table {
-    th {
-      &:nth-child(1) {
-        width: 20%;
-      }
-    }
-    td {
-      padding: 10px;
-    }
-  }
-}
-.kol-bar-chart {
-  margin-top: 20px;
 }
 </style>

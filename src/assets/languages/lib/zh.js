@@ -463,7 +463,10 @@ export const lang = {
   },
   kolList: {
     detail: {
-      btn: '返回'
+      btn: '返回',
+      post: '邮递',
+      summary: '总结',
+      analytics: '分析'
     },
     search: {
       likeTip: '喜欢人数',

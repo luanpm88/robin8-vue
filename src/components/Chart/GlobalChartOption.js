@@ -766,6 +766,847 @@ const MockData = {
       "#8A2BE2",
       "#9400D3"
     ],
-  }
+  },
+  // detail
+  count0Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count1Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count2Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count3Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count4Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count5Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count6Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
+  count7Options: {
+    tooltip: {
+      trigger: "axis"
+    },
+    legend: {
+      show: false,
+      data: [
+        {
+          name: "",
+          icon: "rect"
+        }
+      ]
+    },
+    grid: {
+      top: "4%",
+      left: "4%",
+      right: "4%",
+      bottom: "4%",
+      containLabel: true
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      data: []
+    },
+    yAxis: {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#999"
+        }
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+      //网格线
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#00000014"
+        }
+      },
+    },
+    series: [
+      {
+        name: "",
+        type: "line",
+        smooth: true,
+        symbolSize: 7,
+        data: [],
+        itemStyle: {
+          normal: {
+            color: "rgba(179,127,235,0.5)",
+            lineStyle: {
+              color: "#B37FEBFF",
+              width: 1
+            }
+          }
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+              },
+              {
+                offset: 0.5,
+                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+              }
+            ],
+            global: false // 缺省为 false
+          }
+        }
+      }
+    ]
+  },
 }
 export default MockData;
