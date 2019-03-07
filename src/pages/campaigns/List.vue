@@ -67,7 +67,7 @@
                   class="btn btn-sm btn-cyan btn-outline"
                 >编辑</router-link>
                 <router-link
-                  v-show="item.status == 'settled'"
+                  v-show="item.status == 'settled' && item.evaluation_status == 'evaluating'"
                   :to="'/campaigns/'+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
                 >评价</router-link>
@@ -77,7 +77,7 @@
                   class="btn btn-sm btn-cyan btn-outline"
                 >支付</router-link>
                 <router-link
-                  v-show="item.status == 'agreed'"
+                  v-show="item.status == 'agreed' && item.status != 'pending' && item.status != 'unpay' && item.status != 'rejected'"
                   :to="'/campaigns/create?copy_id='+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
                 >再次发布</router-link>
