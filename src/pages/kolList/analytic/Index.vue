@@ -44,14 +44,14 @@
         </table>
         <table class="com-brand-table" v-if="Number(this.$route.params.type) === 1">
           <tr>
-            <th>Industry</th>
-            <th>Doc Count</th>
-            <th>Doc Count %</th>
-            <th>Total Reads</th>
-            <th>Avg Reads</th>
-            <th>Max Reads</th>
-            <th>Total Likes</th>
-            <th>Likes To Reads %</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.industry')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCount')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCountPercent')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalLike')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.likeRead')}}</th>
           </tr>
           <tr v-for="(key, index) in analyOne" :key="index">
             <td>
@@ -70,7 +70,7 @@
     </div>
     <!-- 微博没有 Media-->
     <div class="kol-card" v-if="Number(type) === 1">
-      <p class="kol-cloumn mb10">Media Distribution</p>
+      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
       <div class="nonetip" v-if="isMediaShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -80,14 +80,14 @@
       <div class="activity-table" v-if="isMedia">
         <table class="com-brand-table">
           <tr>
-            <th>Type</th>
-            <th>Doc Count</th>
-            <th>Doc Count %</th>
-            <th>Total Reads</th>
-            <th>Avg Reads</th>
-            <th>Max Reads</th>
-            <th>Total Likes</th>
-            <th>Likes To Reads %</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.Type')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCount')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCountPercent')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.avgRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.maxRead')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalLike')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weixin.Media.likeRead')}}</th>
           </tr>
           <tr v-for="(key, index) in media" :key="index">
             <td>
@@ -108,7 +108,7 @@
     <!-- 微博图表渲染模版  -->
     <div v-if="Number(type) === 0">
       <div class="kol-card" v-for="(item, index) in countWeiboList" :key="index">
-        <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+        <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}}  {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}}  {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
         <div class="nonetip" v-if="item.isShow">
           <span>{{$t('lang.totalNoDataTip')}}</span>
         </div>
@@ -129,7 +129,7 @@
     <!-- 微信图表渲染模版 -->
     <div v-if="Number(type) === 1">
       <div class="kol-card" v-for="(item, index) in countWeixinList" :key="index">
-        <p class="kol-cloumn mb10">{{item.mode}} Post Distribution - By {{item.type}} Count {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+        <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
         <div class="nonetip" v-if="item.isShow">
           <span>{{$t('lang.totalNoDataTip')}}</span>
         </div>

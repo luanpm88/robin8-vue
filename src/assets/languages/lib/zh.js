@@ -528,6 +528,33 @@ export const lang = {
           maxShare: '最大分享数',
           maxCommet: '最大点赞数'
         }
+      },
+      weixin: {
+        industryTable: {
+          industry: '行业',
+          DocCount: '文章数',
+          DocCountPercent: '文章百分数',
+          totalRead: '总阅读数',
+          avgRead: '平均阅读数',
+          maxRead: '最大阅读数',
+          totalLike: '总喜欢数',
+          likeRead: '喜欢阅读数',
+        },
+        Media: {
+          title: '媒体分发',
+          Type: '媒体类型',
+          DocCount: '文章数',
+          DocCountPercent: '文章百分数',
+          totalRead: '总阅读数',
+          avgRead: '平均阅读数',
+          maxRead: '最大阅读数',
+          totalLike: '总喜欢数',
+          likeRead: '喜欢阅读数',
+        },
+      },
+      chat: {
+        tit: '发布后-由',
+        count: '计数从'
       }
     },
     search: {

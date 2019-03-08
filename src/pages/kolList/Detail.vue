@@ -2,7 +2,6 @@
   <div class="page">
     <page-header></page-header>
     <div class="container mt50 clearfix">
-      <p class="kol-detail-title">{{infoList.name}}</p>
       <div class="kol-detail clearfix">
         <div class="kol-detail-side">
           <!-- info -->
@@ -24,6 +23,7 @@
             <ul class="clearfix">
               <li v-for="(item, index) in dec" :key="index">{{item}}</li>
             </ul>
+            
           </div>
           <div class="kol-card kol-brand">
             <p class="clearfix">

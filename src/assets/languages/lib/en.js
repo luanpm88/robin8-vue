@@ -527,6 +527,33 @@ export const lang = {
           maxShare: 'Max Share Count',
           maxCommet: 'Max Comment Count'
         }
+      },
+      weixin: {
+        industryTable: {
+          industry: 'Industry',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalRead: 'Total Reads',
+          avgRead: 'Avg Reads',
+          maxRead: 'Max Reads',
+          totalLike: 'Total Likes',
+          likeRead: 'Likes To Reads %',
+        },
+        Media: {
+          title: 'Media Distribution',
+          Type: 'Type',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalRead: 'Total Reads',
+          avgRead: 'Avg Reads',
+          maxRead: 'Max Reads',
+          totalLike: 'Total Likes',
+          likeRead: 'Likes To Reads %',
+        },
+      },
+      chat: {
+        tit: 'Post Distribution - By',
+        count: 'Count'
       }
     },
     search: {
