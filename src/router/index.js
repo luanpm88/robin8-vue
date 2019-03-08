@@ -50,6 +50,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/home',
       name: 'Home',
       component: Home,
       meta: {

@@ -21,7 +21,7 @@
           class="title-bar"
           :class="[
             !!item.subNav && item.subNav.length > 0 ? 'with-arr' : '',
-            active && activeIndex == index ? 'open' : ''
+            (active && activeIndex == index) || (item.href == currentPath || (item.href == '/creations' && currentPath == '/campaigns')) ? 'open' : ''
           ]"
           @click="toggleActive(index)"
         >
@@ -31,7 +31,7 @@
         <div
           v-if="!!item.subNav && item.subNav.length > 0"
           class="sub-nav"
-          :class="[active && activeIndex == index ? 'active' : '']"
+          :class="[(active && activeIndex == index) || (item.href == currentPath || (item.href == '/creations' && currentPath == '/campaigns')) ? 'active' : '']"
         >
           <router-link
             v-for="(subItem, index) in item.subNav"
@@ -82,7 +82,7 @@ export default {
         {
           title: 'myWallet',
           icon: 'icon-wallet',
-          href: '/wallet/recharge',
+          href: '/wallet',
           subNav: [
             {
               title: 'Top up',
@@ -135,18 +135,15 @@ export default {
         }
       ],
       active: false,
-      activeIndex: ''
+      activeIndex: '',
+      currentPath: ''
     }
   },
   methods: {
-    getBreadcrumb () {
-      // this.brumblist = this.$route.matched
-      console.log(this.$route.path)
-      // this.$route.matched.forEach((item, index) => {
-      //   // 判断父级路由是否为空字符串或者meta是否为首页,直接复写路径到根目录
-      //   // 后面的就是判断路由和当前遍历的项目是否一致,是的话把标题的值给上
-      //   item.meta.breadcrumbName === '首页' ? item.path = '/' : this.$route.path === item.path ? this.title = item.meta.breadcrumbName : ''
-      // })
+    getPath () {
+      // console.log(this.$route.matched)
+      this.currentPath = this.$route.matched[0].path
+      // console.log(this.currentPath)
     },
     toggleActive (index) {
       console.log(index)
@@ -155,11 +152,11 @@ export default {
     }
   },
   created () {
-    this.getBreadcrumb()
+    this.getPath()
   },
   watch: {
     $route () {
-      this.getBreadcrumb()
+      this.getPath()
     }
   }
 }
@@ -190,7 +187,7 @@ export default {
           right: 20px;
           @include transition(.4s);
         }
-        &.active, &.router-link-active {
+        &.active, &.router-link-active, &.open {
           .title {
             font-weight: 500;
             color: nth($blue, 1);
