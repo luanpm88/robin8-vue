@@ -27,16 +27,24 @@
           </div>
           <div class="kol-card kol-brand">
             <p class="clearfix">
-              <span>Brand Mentions</span>
+              <span>
+                <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.mentionsTip')">
+                  {{$t('lang.kolList.detail.mentions')}}
+                </a-tooltip>
+              </span>
               <b>{{MentionsNum}}</b>
             </p>
             <p class="clearfix">
-              <span>Brand Sentiment</span>
+              <span>
+                <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.sentimentTip')">
+                  {{$t('lang.kolList.detail.sentiment')}}
+                </a-tooltip>
+              </span>
               <b>{{Sentiment}}</b>
             </p>
           </div>
           <div class="kol-card">
-            <p class="kol-cloumn">Top Industries</p>
+            <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
             <Echarts
               :options="competitorList.options"
               :chartsStyle="competitorList.chartsStyle"
@@ -44,7 +52,11 @@
             ></Echarts>
           </div>
           <div class="kol-card">
-            <p class="kol-cloumn">Keywords</p>
+            <p class="kol-cloumn">
+              <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
+                {{$t('lang.kolList.detail.keywords')}}
+              </a-tooltip>
+            </p>
             <div class="nonetip" v-if="isShow">
               <span>{{$t('lang.totalNoDataTip')}}</span>
             </div>
@@ -64,16 +76,16 @@
           ></default-tabs>
           <div class="mt20" v-if="tabIndex === 0">
             <div class="kol-card" v-if="isActivity">
-              <p class="kol-cloumn mb10">Activity</p>
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
               <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-              <p class="activity-color">AI expert has taken the following campaigns for your brands.</p>-->
+              <p class="activity-color">AI expert has taken the following campaigns for your brands.</p> -->
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Performance</th>
+                    <th>{{$t('lang.kolList.detail.activityData.id')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.title')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.date')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.performance')}}</th>
                   </tr>
                   <tr v-for="(key, index) in activeList.creations_list" :key="index">
                     <td>{{key.id}}</td>
@@ -85,23 +97,32 @@
               </div>
             </div>
             <div class="kol-card" v-if="isAnalytics">
-              <p class="kol-cloumn">Analytics</p>
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.analytics')}}</p>
               <div class="activity-contable">
                 <table class="com-brand-table">
                   <tr>
                     <th></th>
-                    <th>No. of Campaigns</th>
-                    <th>Performance (CPC)</th>
-                    <th>No. of Clients</th>
+                    <th>{{$t('lang.kolList.detail.analyticsData.campaigns')}}</th>
+                    <th>
+                      <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.analyticsData.performTip')">
+                        {{$t('lang.kolList.detail.analyticsData.performance')}}
+                      </a-tooltip>
+                    </th>
+                    <th>
+                      
+                      <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.analyticsData.clientTip')">
+                        {{$t('lang.kolList.detail.analyticsData.clients')}}
+                      </a-tooltip>
+                      </th>
                   </tr>
                   <tr>
-                    <td>Total</td>
+                    <td>{{$t('lang.kolList.detail.analyticsTotal')}}</td>
                     <td v-for="(item, index) in activeList.total_info" :key="index">
                       <p class="activity-border">{{item}}</p>
                     </td>
                   </tr>
                   <tr>
-                    <td>Last 30 days</td>
+                    <td>{{$t('lang.kolList.detail.analyticsDay')}}</td>
                     <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
                       <p class="activity-border">{{item}}</p>
                     </td>
@@ -110,18 +131,18 @@
               </div>
             </div>
             <div class="kol-card">
-              <p class="kol-cloumn">Social Data</p>
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData.title')}}</p>
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
-                    <th>Platform</th>
-                    <th>Price</th>
-                    <th>Followers</th>
-                    <th>Likes</th>
-                    <th>Shares</th>
-                    <th>Comments</th>
-                    <th>Post-last 21 days</th>
-                    <th>Influence Score</th>
+                    <th>{{$t('lang.kolList.detail.socialData.platform')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.price')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.followers')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
                   </tr>
                   <tr>
                     <td>{{dataListBox.platform}}</td>
@@ -137,12 +158,12 @@
               </div>
             </div>
             <div class="kol-card kol-performance">
-              <p class="kol-cloumn mb10">Best Performance Posts</p>
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts.title')}}</p>
               <table class="com-brand-table" v-if="isPer">
                 <tr>
-                  <th>Title</th>
-                  <th>Post Time</th>
-                  <th v-if="tabIndex === 1">Read Count</th>
+                  <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
+                  <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
+                  <th v-if="tabIndex === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
                 </tr>
                 <tr v-for="(key, index) in performanceList" :key="index">
                   <td><a :href="key.url" target="blank">{{key.title}}</a></td>
@@ -178,7 +199,7 @@ import PageHeader from '@components/PageHeader'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from '@javascripts/common.js';
-import { Table } from "ant-design-vue";
+import { Table, Tooltip } from "ant-design-vue";
 import TagCharts from "@components/Chart/chartTagsTwo";
 import { mapState } from "vuex";
 // analytics
@@ -193,7 +214,8 @@ export default {
     PageHeader,
     DefaultTabs,
     Analytics,
-    Posts
+    Posts,
+    ATooltip: Tooltip,
   },
   data() {
     return {

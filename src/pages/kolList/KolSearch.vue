@@ -3,60 +3,63 @@
     <div class="kol-list-wrap">
       <h5>Enter a keyword, category or KOL name</h5>
       <div class="kol-search clearfix">
-        <input type="text" placeholder="Please type here..." v-model="keyword">
-        <span class="kol-search-btn" @click="totalSearch">Search</span>
+        <input type="text" :placeholder="$t('lang.kolList.search.keyword')" v-model="keyword">
+        <span class="kol-search-btn" @click="totalSearch">{{$t('lang.kolList.search.search')}}</span>
       </div>
       <div class="kol-advance">
         <div class="kol-advance-btn">
-          <span @click="showMoreSearch">Advanced Search</span>
+          <span @click="showMoreSearch">{{$t('lang.kolList.search.advancedSearch.btn')}}</span>
         </div>
         <div class="kol-advance-box clearfix" v-if="advancedSearch">
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">KOL Industry:</span>
+            <span class="kol-advance-left col-xs-4">{{$t('lang.kolList.search.advancedSearch.industry')}}</span>
             <select class="col-xs-7 oneselect" v-model="industry">
               <option value=""></option>
-              <option value="airline">Airline</option>
-              <option value="appliances">Appliances</option>
-              <option value="auto">Car</option>
-              <option value="babies">Babies</option>
-              <option value="beauty">Beauty</option>
-              <option value="books">Books</option>
-              <option value="camera">Camera</option>
-              <option value="ce">Electronics</option>
-              <option value="digital">Digital</option>
-              <option value="education">Education</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="fashion">Fashion</option>
-              <option value="finance">Finance</option>
-              <option value="fitness">Fitness</option>
-              <option value="food">Food</option>
-              <option value="furniture">Furniture</option>
-              <option value="games">Games</option>
-              <option value="health">Gealth</option>
-              <option value="hotel">Hotel</option>
-              <option value="internet">Hnternet</option>
-              <option value="mobile">Mobile</option>
-              <option value="music">Music</option>
-              <option value="realestate">Realestate</option>
-              <option value="sports">Sports</option>
-              <option value="travel">Travel</option>
+              <option value="airline">{{$t('lang.kolList.search.advancedSearch.industryType.Airline')}}</option>
+              <option value="appliances">{{$t('lang.kolList.search.advancedSearch.industryType.Appliances')}}</option>
+              <option value="auto">{{$t('lang.kolList.search.advancedSearch.industryType.Car')}}</option>
+              <option value="babies">{{$t('lang.kolList.search.advancedSearch.industryType.Babies')}}</option>
+              <option value="beauty">{{$t('lang.kolList.search.advancedSearch.industryType.Beauty')}}</option>
+              <option value="books">{{$t('lang.kolList.search.advancedSearch.industryType.Books')}}</option>
+              <option value="camera">{{$t('lang.kolList.search.advancedSearch.industryType.Camera')}}</option>
+              <option value="ce">{{$t('lang.kolList.search.advancedSearch.industryType.Electronics')}}</option>
+              <option value="digital">{{$t('lang.kolList.search.advancedSearch.industryType.Digital')}}</option>
+              <option value="education">{{$t('lang.kolList.search.advancedSearch.industryType.Education')}}</option>
+              <option value="entertainment">{{$t('lang.kolList.search.advancedSearch.industryType.Entertainment')}}</option>
+              <option value="fashion">{{$t('lang.kolList.search.advancedSearch.industryType.Fashion')}}</option>
+              <option value="finance">{{$t('lang.kolList.search.advancedSearch.industryType.Finance')}}</option>
+              <option value="fitness">{{$t('lang.kolList.search.advancedSearch.industryType.Fitness')}}</option>
+              <option value="food">{{$t('lang.kolList.search.advancedSearch.industryType.Food')}}</option>
+              <option value="furniture">{{$t('lang.kolList.search.advancedSearch.industryType.Furniture')}}</option>
+              <option value="games">{{$t('lang.kolList.search.advancedSearch.industryType.Games')}}</option>
+              <option value="health">{{$t('lang.kolList.search.advancedSearch.industryType.Health')}}</option>
+              <option value="hotel">{{$t('lang.kolList.search.advancedSearch.industryType.Hotel')}}</option>
+              <option value="internet">{{$t('lang.kolList.search.advancedSearch.industryType.Internet')}}</option>
+              <option value="mobile">{{$t('lang.kolList.search.advancedSearch.industryType.Mobile')}}</option>
+              <option value="music">{{$t('lang.kolList.search.advancedSearch.industryType.Music')}}</option>
+              <option value="realestate">{{$t('lang.kolList.search.advancedSearch.industryType.Realestate')}}</option>
+              <option value="sports">{{$t('lang.kolList.search.advancedSearch.industryType.Sports')}}</option>
+              <option value="travel">{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
             </select>
           </div>
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Engagement:</span>
+            <span class="kol-advance-left col-xs-4">{{$t('lang.kolList.search.advancedSearch.engagement')}}</span>
             <input class="col-xs-3 oneinput" v-model="engagementFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="engagementTo">
-             <!-- <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.engagementTip')}}</div> -->
           </div>
           <div class="kol-advance-line col-xs-6" v-if="tabIndex === 0">
-            <span class="kol-advance-left col-xs-4">Followers Count:</span>
+            <span class="kol-advance-left col-xs-4">{{$t('lang.kolList.search.advancedSearch.followers')}}</span>
             <input class="col-xs-3 oneinput" v-model="followerFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="followerTo">
           </div>
           <div class="kol-advance-line col-xs-6">
-            <span class="kol-advance-left col-xs-4">Influence Score:</span>
+            <span class="kol-advance-left col-xs-4">
+              <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.advancedSearch.influenceTip')">
+              {{$t('lang.kolList.search.advancedSearch.influence')}}
+            </a-tooltip>
+            </span>
             <input class="col-xs-3 oneinput" v-model="influenceFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="influenceTo">
@@ -66,12 +69,12 @@
             <div class="kol-type">
               <label>
                 <input type="checkbox" v-model="kolOnly">
-                <span>Only display KOLs that have prices at Robin8</span>
+                <span>{{$t('lang.kolList.search.advancedSearch.checkText')}}</span>
               </label>
             </div>
           </div>
           <div class="form-group text-center col-xs-12">
-            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
+            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">{{$t('lang.kolList.search.search')}}</button>
           </div>
         </div>
       </div>
@@ -210,9 +213,6 @@ export default {
   props: ["keyWord"],
   data() {
     return {
-      lang: this.$i18n.locale,
-      langTwo: this.$t('lang.kolList.search.likeTip'),
-      // lang: true,
       listSortType: 1,
       listSortDir: 'desc',
       isLoading: true,
@@ -257,11 +257,6 @@ export default {
       totalParams: {}
     };
   },
-  watch: {lang: function (val) {
-      // console.log('info')
-      console.log(val)
-    }
-  },
   created() {
     this.r8Kol();
     // 获取keywords
@@ -283,9 +278,6 @@ export default {
   },
   computed: {
     ...mapState(["authorization"])
-  },
-  updated() {
-    this.langLoad();
   },
   methods: {
     // 初始化传参数
@@ -314,9 +306,6 @@ export default {
       this.totalParams.profile_sort_col = this.listSortType;
       this.totalParams.profile_sort_dir = this.listSortDir;
       this.totalParams.r8_registered_kol_only = this.kolOnlyText;;
-    },
-    langLoad() {
-      console.log('000', this.langTwo);
     },
     // 调用接口
     totalJoggle(type) {

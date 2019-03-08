@@ -7,7 +7,7 @@ export const lang = {
   myWallet: '我的钱包',
   settings: '企业设置',
   ranking: '排名',
-  socialListening: '社交倾听',
+  socialListening: '社交聆听',
   wechat: '微信',
   weibo: '微博',
   more: '查看更多',
@@ -466,15 +466,106 @@ export const lang = {
   kolList: {
     detail: {
       btn: '返回',
-      post: '邮递',
+      post: '文章',
       summary: '总结',
-      analytics: '分析'
+      analytics: '分析',
+      analyticsData: {
+        campaigns: '活动数量',
+        performance: '绩效（CPC）',
+        performTip: '性能以CPC（每次点击费用）衡量。',
+        clients: '客户数量',
+        clientTip: '此KOL适用的客户端数量。 大量客户表示跟踪记录证明了KOL的放大潜力。 另一方面，一个尚未为其他品牌工作或仅为少数品牌工作的KOL可能是一个有吸引力和经济的选择，因为他还没有生产商业内容的声誉。'
+      },
+      mentions: '品牌提及：',
+      mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
+      sentiment: '品牌情绪：',
+      sentimentTip: '情绪分数是介于0（非常消极）和100（非常积极）之间的数字。',
+      industries: '顶级产业',
+      keywords: '关键词',
+      keywordsTip: '标签云显示KOL内容中经常出现的关键词（品牌，产品，地域和其他基本概念）。',
+      activity: '活动',
+      activityData: {
+        id: 'Id',
+        title: '标题',
+        date: '日期',
+        performance: '性能'
+      },
+      analyticsTotal: '总计',
+      analyticsDay: '最后30天',
+      socialData: {
+        title: '社会数据',
+        platform: '平台',
+        price: '价格',
+        followers: '粉丝数',
+        likes: '喜欢',
+        shares: '分享',
+        comments: '评论',
+        postLast: '最近21天发布',
+        influence: '影响力分数'
+      },
+      bestPosts: {
+        title: '最佳绩效文章',
+        tableTitle: '标题',
+        date: '发布时间',
+        readCount: '阅读数'
+      }
     },
     search: {
+      keyword: '请在这里键入…',
+      search: '搜索',
+      advancedSearch: {
+        btn: '高级搜索',
+        industry: 'KOL 产业',
+        industryType: {
+          Airline: '航空公司',
+          Appliances: '器具',
+          Car: '汽车',
+          Babies: 'Babies',
+          Beauty: '婴儿',
+          Books: '书籍',
+          Camera: '摄影',
+          Electronics: '数码产品',
+          Digital: '数字',
+          Education: '教育',
+          Entertainment: '游戏娱乐',
+          Fashion: '时尚',
+          Finance: '金融',
+          Fitness: '体育保健用品',
+          Food: '美食',
+          Furniture: '家具',
+          Games: '游戏',
+          Health: '健康',
+          Hotel: '酒店',
+          Internet: '网络',
+          Mobile: '手机',
+          Music: '音乐',
+          Realestate: '不动产',
+          Sports: '运动',
+          Travel: '旅行'
+        },
+        engagement: '参与度',
+        followers: '粉丝数',
+        influence: '影响评分',
+        influenceTip: '影响力分数是0到1000之间的数字，代表KOL在社交平台上的影响力。 较高的影响力分数可确保更有效地扩大活动。',
+        checkText: '仅显示Robin8价格的KOL'
+      },
       likeTip: '粉丝数',
-      sumTip: '平均总参与度',
-      influenceTip: '影响力最大分数是1000',
-      engagementTip: '喜欢，分享，评论的平均总和'
+      sumTip: '平均总参与度'
+    }
+  },
+  homePage: {
+    anlytics: {
+      title: '分析',
+      trend: '趋势',
+      concept: '概念',
+      competitors: '竞争对手',
+      sentiments: '情绪'
+    },
+    recommend: {
+      title: '推荐的KOL'
+    },
+    topPosts: {
+      title: '热门文章'
     }
   }
 }

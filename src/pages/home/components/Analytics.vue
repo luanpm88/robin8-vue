@@ -3,7 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-101"></span>
-        Analytics
+        {{$t('lang.homePage.anlytics.title')}}
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
       </h5>
     </div>
@@ -115,19 +115,19 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "Trends"
+          name: this.$t('lang.homePage.anlytics.trend')
         },
         {
           index: 1,
-          name: "Concept"
+          name: this.$t('lang.homePage.anlytics.concept')
         },
         {
           index: 2,
-          name: "Competitors"
+          name: this.$t('lang.homePage.anlytics.competitors')
         },
         {
           index: 3,
-          name: "Sentiments"
+          name: this.$t('lang.homePage.anlytics.sentiments')
         }
       ],
       trendsWeiboList: {
@@ -202,10 +202,14 @@ export default {
         this.conceptWeixin(this.conceptParams);
       }
       if (this.cur === 2 && topTab.index === 0) {
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -232,6 +236,8 @@ export default {
       }
       if (tab.index === 2) {
         // competitor 微博
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         this.competitorWeibo(this.competitorParams);
       }
       if (tab.index === 3) {
@@ -326,8 +332,6 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = [];
-            _that.competitorList.options.series[0].data = [];
             res.data.data.forEach((element, index) => {
               let json = {
                 label: '',

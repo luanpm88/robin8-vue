@@ -467,13 +467,104 @@ export const lang = {
       btn: 'Return',
       post: 'Posts',
       summary: 'Summary',
-      analytics: 'Analytics'
+      analytics: 'Analytics',
+      analyticsData: {
+        campaigns: 'No. of Campaigns',
+        performance: 'Performance (CPC)',
+        performTip: 'The performance is measured in terms of CPC (cost-per-click). ',
+        clients: 'No. of Clients',
+        clientTip: 'The number of clients that this KOL works for. A high number of clients indicates a track record that proves the amplification potential of a KOL. On the other hand, a KOL who has not worked for other brands yet or worked only for a few brands might be an attractive and economic choice since he does not yet have a reputation of producing commercial content. '
+      },
+      mentions: 'Brand Mentions:',
+      mentionsTip: 'Number of times the brand was mentioned in our social channels in the last 7 days.',
+      sentiment: 'Brand Sentiment:',
+      sentimentTip: 'The sentiment score is a number between 0 (very negative) and 100 (very positive). ',
+      industries: 'Top Industries',
+      keywords: 'Keywords',keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
+      activity: 'Activity',
+      activityData: {
+        id: 'Id',
+        title: 'Title',
+        date: 'Date',
+        performance: 'Performance'
+      },
+      analytics: 'Analytics',
+      analyticsTotal: 'Total',
+      analyticsDay: 'Last 30 days',
+      socialData: {
+        title: 'Social Data',
+        platform: 'Platform',
+        price: 'Price',
+        followers: 'Followers',
+        likes: 'Likes',
+        shares: 'Shares',
+        comments: 'Comments',
+        postLast: 'Post-last 21 days',
+        influence: 'Influence Score'
+      },
+      bestPosts: {
+        title: 'Best Performance Posts',
+        tableTitle: 'Title',
+        date: 'Post Time',
+        readCount: 'Read Count'
+      }
     },
     search: {
-      likeTip: 'Fans Number',
-      sumTip: 'Average Sum Engagement',
-      influenceTip: 'Maximum impact score is 1000',
-      engagementTip: 'The average sum of likes, shares, comments'
+      keyword: 'Please type here...',
+      search: 'Search',
+      advancedSearch: {
+        btn: 'Advanced Search',
+        industry: 'KOL Industry',
+        industryType: {
+          Airline: 'Airline',
+          Appliances: 'Appliances',
+          Car: 'Car',
+          Babies: 'Babies',
+          Beauty: 'Beauty',
+          Books: 'Books',
+          Camera: 'Camera',
+          Electronics: 'Electronics',
+          Digital: 'Digital',
+          Education: 'Education',
+          Entertainment: 'Entertainment',
+          Fashion: 'Fashion',
+          Finance: 'Finance',
+          Fitness: 'Fitness',
+          Food: 'Food',
+          Furniture: 'Furniture',
+          Games: 'Games',
+          Gealth: 'Health',
+          Hotel: 'Hotel',
+          Internet: 'Internet',
+          Mobile: 'Mobile',
+          Music: 'Music',
+          Realestate: 'Realestate',
+          Sports: 'Sports',
+          Travel: 'Travel'
+        },
+        engagement: 'Engagement',
+        followers: 'Followers Count',
+        influence: 'Influence Score',
+        influenceTip: 'The influence score is a number between 0 and 1000 and indicates how influential the KOL is on a social platform. A higher influence score ensures a stronger amplification of a campaign.',
+        checkText: 'Only display KOLs that have prices at Robin8'
+      },
+      likeTip: 'Fans number',
+      sumTip: 'Average sum engagement'
+    }
+  },
+  homePage: {
+    anlytics: {
+      title: 'Analytics',
+      trend: 'Trends',
+      concept: 'Concept',
+      competitors: 'Competitors',
+      sentiments: 'Sentiments'
+    },
+    recommend: {
+      title: 'Recommended KOLs'
+    },
+    topPosts: {
+      title: 'Top Posts'
     }
   }
 }
