@@ -511,7 +511,7 @@ export const lang = {
       },
     },
     analyticVue: {
-      weixin: {
+      weibo: {
         industryTable: {
           Tit: 'Industries Distribution',
           industry: 'Industry',

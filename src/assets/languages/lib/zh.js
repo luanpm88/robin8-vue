@@ -512,7 +512,7 @@ export const lang = {
       },
     },
     analyticVue: {
-      weixin: {
+      weibo: {
         industryTable: {
           Tit: '行业分布',
           industry: '行业',

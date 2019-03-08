@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="kol-card">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.industryTable.Tit')}}</p>
+      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
       <div class="nonetip" v-if="isAnalyOneShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -12,18 +12,18 @@
       <div class="activity-table" v-if="isAnalyOne">
         <table class="com-brand-table" v-if="Number(this.$route.params.type) === 0">
           <tr>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.industry')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCount')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCountPercent')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalCommet')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgCommet')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxCommet')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.industry')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCount')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCountPercent')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalLike')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalShare')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalCommet')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgLike')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgShare')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgCommet')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxLike')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxShare')}}</th>
+            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxCommet')}}</th>
           </tr>
           <tr v-for="(key, index) in analyOne" :key="index">
             <td>
