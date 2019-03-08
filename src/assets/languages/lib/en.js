@@ -328,12 +328,12 @@ export const lang = {
       }
     },
     summaryPage: {
-      tradeNo: '账单编号',
-      direct: '消费类型',
-      createdAt: '日期',
-      credits: '金额',
-      availAmount: '剩余金额',
-      remark: '备注'
+      tradeNo: 'Transaction number',
+      direct: 'Transaction type',
+      createdAt: 'Date',
+      credits: 'Amount',
+      availAmount: 'Balance',
+      remark: 'Detail'
     },
     invoicePage: {
       info: {

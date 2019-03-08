@@ -330,7 +330,7 @@ export const lang = {
     },
     summaryPage: {
       tradeNo: '账单编号',
-      direct: '消费类型',
+      direct: '交易类型',
       createdAt: '日期',
       credits: '金额',
       availAmount: '剩余金额',
