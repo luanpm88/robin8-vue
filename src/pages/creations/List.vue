@@ -18,19 +18,19 @@
               <div class="campaign-info">
                 <img :src="item.img_url" alt="" class="campaign-info-left">
                 <div class="campaign-info-right">
-                  <p>Budget：{{item.pre_amount}}</p>
-                  <p>estimated number of kols：{{item.pre_kols_count}}</p>
-                  <p>price：{{item.price_range}}</p>
+                  <p>Budget: {{item.pre_amount}}</p>
+                  <p>estimated number of kols: {{item.pre_kols_count}}</p>
+                  <p>price: {{item.price_range}}</p>
                 </div>
               </div>
             </td>
             <td>
-              <p>timeline：{{item.time_range}}</p>
-              <p>status：{{item.status_zh}}</p>
+              <p>timeline: {{item.time_range}}</p>
+              <p>status: {{item.status_zh}}</p>
             </td>
             <td>
-              <p>take budget：{{item.actual_amount}}</p>
-              <p>real nmber of kols：{{item.quote_count}}</p>
+              <p>take budget: {{item.actual_amount}}</p>
+              <p>real nmber of kols: {{item.quote_count}}</p>
             </td>
             <td>
               <p class="campaign-info-detail">

@@ -9,7 +9,7 @@
       <div class="panel-body">
         <div class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.invoiceTitle.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.invoiceTitle.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.taxpayerId.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.taxpayerId.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyAddress.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyAddress.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -69,7 +69,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyMobile.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyMobile.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankName.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankName.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -109,7 +109,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankAccount.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankAccount.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"

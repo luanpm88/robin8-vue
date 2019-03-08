@@ -11,13 +11,13 @@
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>邀请KOL人数：{{detailData.kols_count}}人</p>
-          <p>KOL总价：¥{{detailData.price}} | 平台服务费：¥{{detailData.fee}}</p>
-          <p>支付总额：<span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+          <p>邀请KOL人数: {{detailData.kols_count}}人</p>
+          <p>KOL总价: ¥{{detailData.price}} | 平台服务费: ¥{{detailData.fee}}</p>
+          <p>支付总额: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
-          <h5 class="title">支付方式：</h5>
+          <h5 class="title">支付方式:</h5>
           <ul class="method-list">
             <li
               v-for="item in payMethods"

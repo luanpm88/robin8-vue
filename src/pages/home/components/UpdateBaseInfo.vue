@@ -5,7 +5,7 @@
         <div class="line-title">{{$t('lang.updateBaseInfo.base_info.title')}}</div>
         <div class="form-horizontal base-info-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.campany_name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.campany_name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.email.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.email.title')}}:</div>
             <div v-if="!!submitData.base_info.email && submitData.base_info.email != ''" class="col-sm-7">
               <p class="form-control-static">{{submitData.base_info.email}}</p>
             </div>
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.mobile_number.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.mobile_number.title')}}:</div>
             <div v-if="!!submitData.base_info.mobile_number && submitData.base_info.mobile_number != ''" class="col-sm-7">
               <p class="form-control-static">{{submitData.base_info.mobile_number}}</p>
             </div>
@@ -93,7 +93,7 @@
         <div class="line-title">{{$t('lang.updateBaseInfo.my_brand.title')}}</div>
         <div class="form-horizontal base-info-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -114,7 +114,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.keywords.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.keywords.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -135,7 +135,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.description.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.description.title')}}:</div>
             <div class="col-sm-7">
               <textarea
                 name="brand_description"
@@ -155,7 +155,7 @@
             :key="index"
             class="form-group"
           >
-            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.name.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.name.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="text"
@@ -174,7 +174,7 @@
               </div>
             </div>
 
-            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.short_name.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.short_name.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="text"

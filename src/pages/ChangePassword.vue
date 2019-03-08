@@ -8,7 +8,7 @@
         <div class="forget-container">
           <div class="form-horizontal default-form forget-form">
             <div class="form-group">
-              <div class="col-sm-4 control-label">新密码：</div>
+              <div class="col-sm-4 control-label">新密码:</div>
               <div class="col-sm-8">
                 <input
                   type="password"
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-4 control-label">确认新密码：</div>
+              <div class="col-sm-4 control-label">确认新密码:</div>
               <div class="col-sm-8">
                 <input
                   type="password"
