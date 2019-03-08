@@ -82,10 +82,10 @@
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Performance</th>
+                    <th>{{$t('lang.kolList.detail.activityData.id')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.title')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.date')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.performance')}}</th>
                   </tr>
                   <tr v-for="(key, index) in activeList.creations_list" :key="index">
                     <td>{{key.id}}</td>
@@ -116,13 +116,13 @@
                       </th>
                   </tr>
                   <tr>
-                    <td>Total</td>
+                    <td>{{$t('lang.kolList.detail.analyticsTotal')}}</td>
                     <td v-for="(item, index) in activeList.total_info" :key="index">
                       <p class="activity-border">{{item}}</p>
                     </td>
                   </tr>
                   <tr>
-                    <td>Last 30 days</td>
+                    <td>{{$t('lang.kolList.detail.analyticsDay')}}</td>
                     <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
                       <p class="activity-border">{{item}}</p>
                     </td>
@@ -131,18 +131,18 @@
               </div>
             </div>
             <div class="kol-card">
-              <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData')}}</p>
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData.title')}}</p>
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
-                    <th>Platform</th>
-                    <th>Price</th>
-                    <th>Followers</th>
-                    <th>Likes</th>
-                    <th>Shares</th>
-                    <th>Comments</th>
-                    <th>Post-last 21 days</th>
-                    <th>Influence Score</th>
+                    <th>{{$t('lang.kolList.detail.socialData.platform')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.price')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.followers')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
                   </tr>
                   <tr>
                     <td>{{dataListBox.platform}}</td>
@@ -158,12 +158,12 @@
               </div>
             </div>
             <div class="kol-card kol-performance">
-              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts')}}</p>
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts.title')}}</p>
               <table class="com-brand-table" v-if="isPer">
                 <tr>
-                  <th>Title</th>
-                  <th>Post Time</th>
-                  <th v-if="tabIndex === 1">Read Count</th>
+                  <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
+                  <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
+                  <th v-if="tabIndex === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
                 </tr>
                 <tr v-for="(key, index) in performanceList" :key="index">
                   <td><a :href="key.url" target="blank">{{key.title}}</a></td>

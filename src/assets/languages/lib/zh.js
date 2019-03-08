@@ -484,9 +484,31 @@ export const lang = {
       keywords: '关键词',
       keywordsTip: '标签云显示KOL内容中经常出现的关键词（品牌，产品，地域和其他基本概念）。',
       activity: '活动',
-      analytics: '分析学',
-      socialData: '社会数据',
-      bestPosts: '最佳文章'
+      activityData: {
+        id: 'Id',
+        title: '标题',
+        date: '日期',
+        performance: '性能'
+      },
+      analyticsTotal: '总计',
+      analyticsDay: '最后30天',
+      socialData: {
+        title: '社会数据',
+        platform: '平台',
+        price: '价格',
+        followers: '粉丝数',
+        likes: '喜欢',
+        shares: '分享',
+        comments: '评论',
+        postLast: '最近21天发布',
+        influence: '影响力分数'
+      },
+      bestPosts: {
+        title: '最佳绩效文章',
+        tableTitle: '标题',
+        date: '发布时间',
+        readCount: '阅读数'
+      }
     },
     search: {
       keyword: '请在这里键入…',
@@ -529,6 +551,21 @@ export const lang = {
       },
       likeTip: '粉丝数',
       sumTip: '平均总参与度'
+    }
+  },
+  homePage: {
+    anlytics: {
+      title: '分析',
+      trend: '趋势',
+      concept: '概念',
+      competitors: '竞争对手',
+      sentiments: '情绪'
+    },
+    recommend: {
+      title: '推荐的KOL'
+    },
+    topPosts: {
+      title: '热门文章'
     }
   }
 }

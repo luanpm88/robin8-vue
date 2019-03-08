@@ -3,7 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-101"></span>
-        Analytics
+        {{$t('lang.homePage.anlytics.title')}}
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
       </h5>
     </div>
@@ -115,19 +115,19 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "Trends"
+          name: this.$t('lang.homePage.anlytics.trend')
         },
         {
           index: 1,
-          name: "Concept"
+          name: this.$t('lang.homePage.anlytics.concept')
         },
         {
           index: 2,
-          name: "Competitors"
+          name: this.$t('lang.homePage.anlytics.competitors')
         },
         {
           index: 3,
-          name: "Sentiments"
+          name: this.$t('lang.homePage.anlytics.sentiments')
         }
       ],
       trendsWeiboList: {

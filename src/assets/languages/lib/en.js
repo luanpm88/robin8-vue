@@ -483,9 +483,32 @@ export const lang = {
       industries: 'Top Industries',
       keywords: 'Keywords',keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
       activity: 'Activity',
+      activityData: {
+        id: 'Id',
+        title: 'Title',
+        date: 'Date',
+        performance: 'Performance'
+      },
       analytics: 'Analytics',
-      socialData: 'Social Data',
-      bestPosts: 'Best Performance Posts'
+      analyticsTotal: 'Total',
+      analyticsDay: 'Last 30 days',
+      socialData: {
+        title: 'Social Data',
+        platform: 'Platform',
+        price: 'Price',
+        followers: 'Followers',
+        likes: 'Likes',
+        shares: 'Shares',
+        comments: 'Comments',
+        postLast: 'Post-last 21 days',
+        influence: 'Influence Score'
+      },
+      bestPosts: {
+        title: 'Best Performance Posts',
+        tableTitle: 'Title',
+        date: 'Post Time',
+        readCount: 'Read Count'
+      }
     },
     search: {
       keyword: 'Please type here...',
@@ -528,6 +551,21 @@ export const lang = {
       },
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement'
+    }
+  },
+  homePage: {
+    anlytics: {
+      title: 'Analytics',
+      trend: 'Trends',
+      concept: 'Concept',
+      competitors: 'Competitors',
+      sentiments: 'Sentiments'
+    },
+    recommend: {
+      title: 'Recommended KOLs'
+    },
+    topPosts: {
+      title: 'Top Posts'
     }
   }
 }

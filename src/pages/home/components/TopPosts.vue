@@ -3,7 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-calendar"></span>
-        Top Posts
+        {{$t('lang.homePage.topPosts.title')}}
       </h5>
     </div>
 
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="PostShowMore">查看更多</button>
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="PostShowMore">{{$t('lang.more')}}</button>
         </div>
       </default-tabs>
     </div>

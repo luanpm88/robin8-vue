@@ -3,7 +3,7 @@
     <div class="panel-head">
       <h5 class="title purple">
         <span class="iconfont icon-rocket"></span>
-        Recommended KOLs
+        {{$t('lang.homePage.recommend.title')}}
       </h5>
     </div>
 
@@ -34,7 +34,7 @@
             type="button"
             class="btn btn-sm btn-outline btn-circle btn-purple"
             @click="intoKolDetailMore"
-          >查看更多</button>
+          >{{$t('lang.more')}}</button>
         </div>
       </default-tabs>
     </div>
