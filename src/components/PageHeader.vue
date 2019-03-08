@@ -10,14 +10,20 @@
         <div class="media">
           <div class="media-left">
             <div v-if="!!avatarImgUrl && avatarImgUrl != 'null'" class="avatar">
-              <img :src="avatarImgUrl" alt="" class="avatar-img" />
+              <router-link to="/settings/company_info">
+                <img :src="avatarImgUrl" alt="" class="avatar-img" />
+              </router-link>
             </div>
             <div v-else class="avatar">
-              <img src="@images/user.png" alt="" class="avatar-img" />
+              <router-link to="/settings/company_info">
+                <img src="@images/user.png" alt="" class="avatar-img" />
+              </router-link>
             </div>
           </div>
           <div class="media-body media-middle">
-            <h5 class="title">{{nickname}}</h5>
+            <h5 class="name">
+              <router-link to="/settings/company_info">{{nickname}}</router-link>
+            </h5>
             <p class="logout-btn">
               <span @click="logOut">{{$t('lang.logout')}}</span>
             </p>
@@ -54,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl', 'removeCompanyName']),
     logOut () {
       // window.localStorage.clear()
       this.removeAuthorization()
@@ -62,6 +68,7 @@ export default {
       this.removeMobile()
       this.removeAccount()
       this.removeAvatarImgUrl()
+      this.removeCompanyName()
       this.$router.replace('/login')
     },
     toggleLang (lang) {
@@ -108,8 +115,10 @@ export default {
         height: 100%;
       }
     }
-    .title {
-      color: #fff;
+    .name {
+      a {
+        color: #fff;
+      }
     }
     .logout-btn {
       font-size: $font-xs;

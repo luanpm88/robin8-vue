@@ -68,9 +68,9 @@ export const lang = {
     base_info: {
       title: '基本信息',
       name: {
-        title: '名称',
-        placeholder: '请输入名称',
-        errorTips: '请输入名称'
+        title: '姓名',
+        placeholder: '请输入姓名',
+        errorTips: '请输入姓名'
       },
       campany_name: {
         title: '公司名称',

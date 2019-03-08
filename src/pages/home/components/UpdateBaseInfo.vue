@@ -46,7 +46,10 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.email.title')}}：</div>
-            <div class="col-sm-7">
+            <div v-if="!!submitData.base_info.email && submitData.base_info.email != ''" class="col-sm-7">
+              <p class="form-control-static">{{submitData.base_info.email}}</p>
+            </div>
+            <div v-else class="col-sm-7">
               <input
                 type="email"
                 name="email"
@@ -65,7 +68,10 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.mobile_number.title')}}：</div>
-            <div class="col-sm-7">
+            <div v-if="!!submitData.base_info.mobile_number && submitData.base_info.mobile_number != ''" class="col-sm-7">
+              <p class="form-control-static">{{submitData.base_info.mobile_number}}</p>
+            </div>
+            <div v-else class="col-sm-7">
               <input
                 type="tel"
                 name="mobile"
@@ -296,8 +302,14 @@ export default {
       })
     }
   },
+  mounted () {
+    this.submitData.base_info.name = this.nickname
+    this.submitData.base_info.campany_name = this.companyName
+    this.submitData.base_info.email = this.account
+    this.submitData.base_info.mobile_number = this.mobile
+  },
   computed: {
-    ...mapState(['authorization'])
+    ...mapState(['authorization', 'nickname', 'mobile', 'account', 'companyName'])
   }
 }
 </script>

@@ -2,12 +2,12 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.information')}}</h5>
+        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}:</div>
             <div class="col-sm-8">
               <select
                 name="brand"
@@ -82,7 +82,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}:</div>
             <div class="col-sm-8">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
@@ -178,15 +178,15 @@
                 v-validate="'required'"
               >
               <div
-                class="form-tips danger"
-                v-show="errors.has('img_url')"
+                class="form-tips"
+                :class="[errors.has('img_url') ? 'danger' : '']"
               >
                 {{$t('lang.creations.picture.errorTips')}}
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}:</div>
             <div class="col-sm-8">
               <datepicker
                 name="campaignTime"
@@ -210,7 +210,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="number"
@@ -228,7 +228,7 @@
                 {{$t('lang.creations.kolNumber.errorTips')}}
               </div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.budget.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.creations.budget.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="number"
@@ -248,7 +248,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}:</div>
             <div class="col-sm-8">
               <textarea
                 name="notice"
@@ -289,7 +289,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
             <div class="col-sm-3">
               <select
                 name="price"
@@ -311,7 +311,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
                 <option value="">{{$t('lang.creations.followerAge.placeholder')}}</option>
@@ -324,7 +324,7 @@
               </select>
               <div class="form-tips">{{$t('lang.creations.followerAge.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
                 <option value="">{{$t('lang.creations.followerGender.placeholder')}}</option>
@@ -336,7 +336,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-6">
@@ -384,7 +384,7 @@
             >
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
             <div class="col-sm-8">
               <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
