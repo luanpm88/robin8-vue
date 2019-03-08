@@ -480,7 +480,7 @@ export const lang = {
       sentiment: 'Brand Sentiment:',
       sentimentTip: 'The sentiment score is a number between 0 (very negative) and 100 (very positive). ',
       industries: 'Top Industries',
-      keywords: 'Keywords',keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
+      keywords: 'Keywords', keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
       activity: 'Activity',
       activityData: {
         id: 'Id',
@@ -506,8 +506,28 @@ export const lang = {
         title: 'Best Performance Posts',
         tableTitle: 'Title',
         date: 'Post Time',
-        readCount: 'Read Count'
+        readCount: 'Read Count',
+        engagement: 'Sum Engagement'
       },
+    },
+    analyticVue: {
+      weixin: {
+        industryTable: {
+          Tit: 'Industries Distribution',
+          industry: 'Industry',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalLike: 'Total Like Count',
+          totalShare: 'Total Share Count',
+          totalCommet: 'Total Comment Count',
+          avgLike: 'Avg Like Count',
+          avgShare: 'Avg Share Count',
+          avgCommet: 'Avg Comment Count',
+          maxLike: 'Max Like Count',
+          maxShare: 'Max Share Count',
+          maxCommet: 'Max Comment Count'
+        }
+      }
     },
     search: {
       keyword: 'Please type here...',

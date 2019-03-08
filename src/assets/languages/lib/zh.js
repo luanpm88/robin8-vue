@@ -507,7 +507,27 @@ export const lang = {
         title: '最佳绩效文章',
         tableTitle: '标题',
         date: '发布时间',
-        readCount: '阅读数'
+        readCount: '阅读数',
+        engagement: '互动数'
+      },
+    },
+    analyticVue: {
+      weixin: {
+        industryTable: {
+          Tit: '行业分布',
+          industry: '行业',
+          DocCount: '文章数',
+          DocCountPercent: '文章百分数',
+          totalLike: '总喜欢数',
+          totalShare: '总分享数',
+          totalCommet: '总点赞数',
+          avgLike: '平均喜欢数',
+          avgShare: '平均分享数',
+          avgCommet: '平均点赞数',
+          maxLike: '最大喜欢数',
+          maxShare: '最大分享数',
+          maxCommet: '最大点赞数'
+        }
       }
     },
     search: {

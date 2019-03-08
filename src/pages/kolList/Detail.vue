@@ -163,12 +163,14 @@
                 <tr>
                   <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
                   <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
-                  <th v-if="tabIndex === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
+                  <th v-if="type === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
+                  <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
                 </tr>
                 <tr v-for="(key, index) in performanceList" :key="index">
                   <td><a :href="key.url" target="blank">{{key.title}}</a></td>
                   <td>{{key.post_time}}</td>
-                  <td v-if="tabIndex === 1">{{key.influence_reads}}+ </td>
+                  <td v-if="type === 0">{{key.influence_sum_engagement}}+ </td>
+                  <td v-if="type === 1">{{key.influence_reads}}+ </td>
                 </tr>
               </table>
               <div class="nonetip" v-if="isPerShow">
@@ -656,6 +658,9 @@ export default {
             if (res.data.data.length > 0) {
               _that.isPerShow = false;
               _that.isPer = true;
+              res.data.data.forEach(item => {
+                item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2);
+              })
               _that.performanceList = res.data.data;
             } else {
               _that.isPerShow = true;
@@ -683,6 +688,9 @@ export default {
             if (res.data.data.length > 0) {
               _that.isPerShow = false;
               _that.isPer = true;
+              res.data.data.forEach(item => {
+                item.influence_reads = commonJs.threeFormatter(item.influence_reads, 2);
+              })
               _that.performanceList = res.data.data;
             } else {
               _that.isPerShow = true;
