@@ -64,7 +64,6 @@ export default {
     },
     handelGetListDataSucc(res){
       let resData = res.data
-      console.log(res);
       if (res.status == 200 && resData){
         let _brandsList = this.brandsList;
         let _brandItem
@@ -81,7 +80,6 @@ export default {
           _brandItem.description = item.description
           this.brandsList.push(_brandItem)
         })
-        console.log(this.brandsList)
       }
     },
     // 编辑和修改的接口
