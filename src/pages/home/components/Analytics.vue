@@ -202,10 +202,14 @@ export default {
         this.conceptWeixin(this.conceptParams);
       }
       if (this.cur === 2 && topTab.index === 0) {
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -232,6 +236,8 @@ export default {
       }
       if (tab.index === 2) {
         // competitor 微博
+        this.competitorList.options.yAxis.data = [];
+        this.competitorList.options.series[0].data = [];
         this.competitorWeibo(this.competitorParams);
       }
       if (tab.index === 3) {
@@ -326,8 +332,6 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = [];
-            _that.competitorList.options.series[0].data = [];
             res.data.data.forEach((element, index) => {
               let json = {
                 label: '',
