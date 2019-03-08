@@ -508,7 +508,7 @@ export const lang = {
         tableTitle: 'Title',
         date: 'Post Time',
         readCount: 'Read Count'
-      }
+      },
     },
     search: {
       keyword: 'Please type here...',
