@@ -43,6 +43,13 @@ export default {
       commonJs.setLocalData('robin8CompanyName', companyName, 604700)
     } catch (e) {}
   },
+  setLanguage (state, language) {
+    console.log(language)
+    state.language = language
+    try {
+      commonJs.setLocalData('robin8Language', language, 604700)
+    } catch (e) {}
+  },
   removeAuthorization (state) {
     state.authorization = ''
     try {
@@ -77,6 +84,12 @@ export default {
     state.companyName = ''
     try {
       commonJs.removeLocalData('robin8CompanyName')
+    } catch (e) {}
+  },
+  removeLanguage (state) {
+    state.language = ''
+    try {
+      commonJs.removeLocalData('robin8Language')
     } catch (e) {}
   }
 }

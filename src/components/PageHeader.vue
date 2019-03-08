@@ -56,11 +56,11 @@ export default {
   },
   data () {
     return {
-      lang: this.$i18n.locale
+      lang: ''
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl', 'removeCompanyName']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl', 'removeCompanyName', 'setLanguage']),
     logOut () {
       // window.localStorage.clear()
       this.removeAuthorization()
@@ -74,7 +74,11 @@ export default {
     toggleLang (lang) {
       this.$i18n.locale = lang
       this.lang = lang
+      this.setLanguage(lang)
     }
+  },
+  mounted () {
+    this.lang = this.$i18n.locale
   }
 }
 </script>

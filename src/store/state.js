@@ -55,11 +55,21 @@ try {
   }
 } catch (e) {}
 
+let language = ''
+let localLanguage = commonJs.getLocalData('robin8Language')
+console.log('当前language：' + localLanguage)
+try {
+  if (!!localLanguage && localLanguage != '') {
+    language = localLanguage
+  }
+} catch (e) {}
+
 export default {
   authorization,
   nickname,
   mobile,
   account,
   avatarImgUrl,
-  companyName
+  companyName,
+  language
 }
