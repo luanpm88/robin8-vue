@@ -70,7 +70,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl']),
+    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     // login joggle
     loginUrl (params) {
       const _that = this
@@ -88,6 +88,7 @@ export default {
             _that.setNickname(resData.name)
             _that.setMobile(resData.mobile_number)
             _that.setAvatarImgUrl(resData.avatar_url)
+            _that.setCompanyName(resData.campany_name)
             _that.loginStatus = false
             _that.$router.push('/')
           }

@@ -11,13 +11,13 @@
       <div class="panel-body">
         <div class="form-horizontal recharge-form">
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.method.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.method.title')}}:</div>
             <div class="col-sm-4">
               <p class="form-control-static">{{$t('lang.wallet.rechargePage.recharge.method.value')}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.credits.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.credits.title')}}:</div>
             <div class="col-sm-4">
               <a-input-number
                 name="credits"
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.invite_code.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.invite_code.title')}}:</div>
             <div class="col-sm-4">
               <input
                 type="text"

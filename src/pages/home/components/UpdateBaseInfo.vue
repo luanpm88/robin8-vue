@@ -5,7 +5,7 @@
         <div class="line-title">{{$t('lang.updateBaseInfo.base_info.title')}}</div>
         <div class="form-horizontal base-info-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.campany_name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.campany_name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -45,8 +45,11 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.email.title')}}：</div>
-            <div class="col-sm-7">
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.email.title')}}:</div>
+            <div v-if="!!submitData.base_info.email && submitData.base_info.email != ''" class="col-sm-7">
+              <p class="form-control-static">{{submitData.base_info.email}}</p>
+            </div>
+            <div v-else class="col-sm-7">
               <input
                 type="email"
                 name="email"
@@ -64,8 +67,11 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.mobile_number.title')}}：</div>
-            <div class="col-sm-7">
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.base_info.mobile_number.title')}}:</div>
+            <div v-if="!!submitData.base_info.mobile_number && submitData.base_info.mobile_number != ''" class="col-sm-7">
+              <p class="form-control-static">{{submitData.base_info.mobile_number}}</p>
+            </div>
+            <div v-else class="col-sm-7">
               <input
                 type="tel"
                 name="mobile"
@@ -87,7 +93,7 @@
         <div class="line-title">{{$t('lang.updateBaseInfo.my_brand.title')}}</div>
         <div class="form-horizontal base-info-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.name.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -108,7 +114,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.keywords.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.keywords.title')}}:</div>
             <div class="col-sm-7">
               <input
                 type="text"
@@ -129,7 +135,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.description.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.updateBaseInfo.my_brand.description.title')}}:</div>
             <div class="col-sm-7">
               <textarea
                 name="brand_description"
@@ -149,7 +155,7 @@
             :key="index"
             class="form-group"
           >
-            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.name.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.name.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="text"
@@ -168,7 +174,7 @@
               </div>
             </div>
 
-            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.short_name.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.updateBaseInfo.competitors.short_name.title')}}:</div>
             <div class="col-sm-3">
               <input
                 type="text"
@@ -296,8 +302,14 @@ export default {
       })
     }
   },
+  mounted () {
+    this.submitData.base_info.name = this.nickname
+    this.submitData.base_info.campany_name = this.companyName
+    this.submitData.base_info.email = this.account
+    this.submitData.base_info.mobile_number = this.mobile
+  },
   computed: {
-    ...mapState(['authorization'])
+    ...mapState(['authorization', 'nickname', 'mobile', 'account', 'companyName'])
   }
 }
 </script>

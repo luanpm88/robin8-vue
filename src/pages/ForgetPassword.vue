@@ -8,7 +8,7 @@
         <div class="forget-container">
           <div class="form-horizontal default-form forget-form">
             <div class="form-group">
-              <div class="col-sm-3 control-label">登录名：</div>
+              <div class="col-sm-3 control-label">登录名:</div>
               <div class="col-sm-9">
                 <input
                   type="text"
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">验证码：</div>
+              <div class="col-sm-3 control-label">验证码:</div>
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-sm-6">

@@ -233,7 +233,7 @@
       <div class="panel-body">
         <div v-if="evaluationStatus == 'evaluating'" class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}:</div>
             <div class="col-sm-8">
               <a-rate v-model="commentSubmit.effect_score" />
               <input
@@ -251,7 +251,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}:</div>
             <div class="col-sm-8">
               <textarea
                 name="comment"
@@ -284,14 +284,14 @@
 
         <div v-else-if="evaluationStatus == 'evaluated'" class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluatePoint.title')}}:</div>
             <div class="col-sm-8">
               <a-rate :value="detailData.effect_score" disabled />
               {{detailData.effect_score}} 分
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.evaluateComment.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{detailData.review_content}}</p>
             </div>

@@ -68,9 +68,9 @@ export const lang = {
     base_info: {
       title: '基本信息',
       name: {
-        title: '名称',
-        placeholder: '请输入名称',
-        errorTips: '请输入名称'
+        title: '姓名',
+        placeholder: '请输入姓名',
+        errorTips: '请输入姓名'
       },
       campany_name: {
         title: '公司名称',
@@ -433,12 +433,12 @@ export const lang = {
     contrastButton: "查看选中品牌数据",
     tip: '您没有选择品牌',
     addPage: {
-      name: '品牌名称：',
+      name: '品牌名称:',
       placeholderName: '请填写品牌名称',
-      keywords: '品牌关键字：',
+      keywords: '品牌关键字:',
       placeholderKeywords: '请填写品牌关键字',
       keywordsTips: '多个关键词请用逗号隔开，使其更具准确性',
-      dec: '品牌介绍：',
+      dec: '品牌介绍:',
       placeholderDec: '请填写品牌介绍'
     }
   },
@@ -457,7 +457,7 @@ export const lang = {
     contrastButton: "查看选中竞争品牌数据",
     tip: '您没有选择竞争品牌',
     addPage: {
-      name: '品牌名称：',
+      name: '品牌名称:',
       placeholderName: '请填写竞争品牌名称',
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
@@ -476,9 +476,9 @@ export const lang = {
         clients: '客户数量',
         clientTip: '此KOL适用的客户端数量。 大量客户表示跟踪记录证明了KOL的放大潜力。 另一方面，一个尚未为其他品牌工作或仅为少数品牌工作的KOL可能是一个有吸引力和经济的选择，因为他还没有生产商业内容的声誉。'
       },
-      mentions: '品牌提及：',
+      mentions: '品牌提及:',
       mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
-      sentiment: '品牌情绪：',
+      sentiment: '品牌情绪:',
       sentimentTip: '情绪分数是介于0（非常消极）和100（非常积极）之间的数字。',
       industries: '顶级产业',
       keywords: '关键词',
