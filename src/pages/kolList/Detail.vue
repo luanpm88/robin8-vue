@@ -23,6 +23,7 @@
             <ul class="clearfix">
               <li v-for="(item, index) in dec" :key="index">{{item}}</li>
             </ul>
+            
           </div>
           <div class="kol-card kol-brand">
             <p class="clearfix">
