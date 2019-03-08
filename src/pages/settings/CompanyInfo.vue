@@ -48,7 +48,7 @@
           <div class="col-sm-9">
             <div class="form-horizontal profile-form">
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.name.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.name.title')}}:</div>
                 <div class="col-sm-8">
                   <input
                     type="text"
@@ -68,7 +68,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.real_name.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.real_name.title')}}:</div>
                 <div class="col-sm-8">
                   <input
                     type="text"
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.campany_name.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.campany_name.title')}}:</div>
                 <div class="col-sm-8">
                   <input
                     type="text"
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.url.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.url.title')}}:</div>
                 <div class="col-sm-8">
                   <input
                     type="text"
@@ -121,7 +121,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.description.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.description.title')}}:</div>
                 <div class="col-sm-8">
                   <textarea
                     name="description"
@@ -133,7 +133,7 @@
                 </div>
               </div>
               <!-- <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.keywords.title')}}：</div>
+                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.keywords.title')}}:</div>
                 <div class="col-sm-8">
                   <input
                     type="text"
@@ -176,7 +176,7 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import VueCoreImageUpload from 'vue-core-image-upload'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'CompanyInfo',
@@ -200,6 +200,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     getProfileData () {
       axios.get(apiConfig.profileUrl, {
         headers: {
@@ -251,8 +252,12 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        this.$router.push('/')
-
+        this.setAccount(resData.email)
+        this.setNickname(resData.name)
+        this.setMobile(resData.mobile_number)
+        // this.setAvatarImgUrl(resData.avatar_url)
+        this.setCompanyName(resData.campany_name)
+        // this.$router.push('/')
       } else {
         alert('提交失败，请重新提交')
       }

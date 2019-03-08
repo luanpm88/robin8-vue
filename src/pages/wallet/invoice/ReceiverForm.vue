@@ -9,7 +9,7 @@
       <div class="panel-body">
         <div class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"

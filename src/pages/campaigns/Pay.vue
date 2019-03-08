@@ -6,14 +6,14 @@
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>标题：{{detailData.name}}</p>
-          <p>活动简介：{{detailData.description}}</p>
-          <p>活动时间：{{detailData.time_range}}</p>
-          <p>支付总额：<span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
+          <p>标题: {{detailData.name}}</p>
+          <p>活动简介: {{detailData.description}}</p>
+          <p>活动时间: {{detailData.time_range}}</p>
+          <p>支付总额: <span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
-          <h5 class="title">支付方式：</h5>
+          <h5 class="title">支付方式:</h5>
           <ul class="method-list">
             <li class="item">
               <label class="media">

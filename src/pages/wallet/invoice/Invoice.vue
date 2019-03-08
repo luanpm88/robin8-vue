@@ -12,37 +12,37 @@
       <div class="panel-body">
         <div v-if="!noInvoice" class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.invoiceTitle.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.invoiceTitle.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.title}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.taxpayerId.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.taxpayerId.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.taxpayer_id}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyAddress.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyAddress.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.company_address}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyMobile.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.companyMobile.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.company_mobile}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankName.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankName.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.bank_name}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankAccount.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.info.bankAccount.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceSpecialData.bank_account}}</p>
             </div>
@@ -69,19 +69,19 @@
       <div class="panel-body">
         <div v-if="!noReceiver" class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceReceiverData.name}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceReceiverData.phone_number}}</p>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">{{invoiceReceiverData.address}}</p>
             </div>
@@ -134,7 +134,7 @@
         </div>
         <div class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.credits.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.credits.title')}}:</div>
             <div class="col-sm-5">
               <a-input-number
                 name="credits"
@@ -154,7 +154,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.type.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.type.title')}}:</div>
             <div class="col-sm-5">
               <div class="row">
                 <div class="col-sm-4">
@@ -192,7 +192,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.price_sheet.title')}}：</div>
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.price_sheet.title')}}:</div>
             <div class="col-sm-5">
               <div class="row">
                 <div class="col-sm-4">

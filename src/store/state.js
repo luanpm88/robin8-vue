@@ -46,10 +46,20 @@ try {
   }
 } catch (e) {}
 
+let companyName = ''
+let localCompanyName = commonJs.getLocalData('robin8CompanyName')
+console.log('当前companyName：' + localCompanyName)
+try {
+  if (!!localCompanyName && localCompanyName != '') {
+    companyName = localCompanyName
+  }
+} catch (e) {}
+
 export default {
   authorization,
   nickname,
   mobile,
   account,
-  avatarImgUrl
+  avatarImgUrl,
+  companyName
 }

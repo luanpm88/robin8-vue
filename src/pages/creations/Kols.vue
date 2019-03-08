@@ -35,7 +35,7 @@
       </div>
 
       <div v-if="currentList.length > 0 && tabIndex == 0" class="panel-foot clearfix">
-        <div class="select-statistics pull-left">微博总曝光值：<span class="num">0</span> | 微信总曝光值：<span class="num">0</span> | 总报价：<span class="num">{{totalPrice}}</span></div>
+        <div class="select-statistics pull-left">微博总曝光值: <span class="num">0</span> | 微信总曝光值: <span class="num">0</span> | 总报价: <span class="num">{{totalPrice}}</span></div>
         <button
           type="button"
           class="btn btn-cyan pull-right"

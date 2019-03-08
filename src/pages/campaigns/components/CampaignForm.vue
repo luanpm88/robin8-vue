@@ -7,7 +7,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.link.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.link.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}:</div>
             <div class="col-sm-8">
               <input
                 type="text"
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}:</div>
             <div class="col-sm-8">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
@@ -129,7 +129,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}:</div>
             <div class="col-sm-3">
               <a-input-number
                 name="allBudget"
@@ -159,7 +159,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
@@ -200,7 +200,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.mode.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.mode.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div v-if="submitData.sub_type == 'wechat'" class="col-sm-4">
@@ -254,7 +254,7 @@
           </div>
 
           <div v-if="submitData.per_budget_type == 'cpt'" class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.pictureNumber.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.pictureNumber.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-4">
@@ -307,7 +307,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}:</div>
             <div class="col-sm-3">
               <a-input-number
                 name="budget"
@@ -337,7 +337,7 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}:</div>
             <div class="col-sm-8">
               <datepicker
                 name="campaignTime"
@@ -391,7 +391,7 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
             <div class="col-sm-8">
               <div class="row">
                 <div class="col-sm-6">
@@ -445,7 +445,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
             <div class="col-sm-8">
               <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
@@ -464,7 +464,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}:</div>
             <div class="col-sm-3">
               <select
                 name="age"
@@ -488,7 +488,7 @@
                 {{$t('lang.campaigns.kolAge.errorTips')}}
               </div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}：</div>
+            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}:</div>
             <div class="col-sm-3">
               <select
                 name="gender"
@@ -510,7 +510,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}：</div>
+            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}:</div>
             <div class="col-sm-3">
               <select
                 name="push"

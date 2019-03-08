@@ -129,7 +129,6 @@ export const lang = {
     promotionDetail: '推广详情',
     promotionTime: '推广时间',
     selectKols: 'KOL选择',
-    serchBtn: '搜索大V',
     link: {
       title: '活动链接',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
@@ -222,86 +221,86 @@ export const lang = {
   },
   creations: {
     campaignInfo: 'Campaign Information',
-    kolParticipate: 'KOL Participate',
-    collaborationCompleted: 'Collaboration Completed',
+    kolParticipate: 'Participating KOLs',
+    collaborationCompleted: 'Campaign Completed',
     bigVRequirement: 'Big V related requirement',
-    serchBtn: 'Search Big V',
+    serchBtn: 'Search',
     name: {
-      title: 'Campaign name',
-      placeholder: 'Please fill in the campaign name',
-      errorTips: 'a good name can attract more KOL to participate'
+      title: 'Campaign Name',
+      placeholder: 'Please enter your campaign name.',
+      errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
-      title: 'Campaign description',
-      placeholder: 'Please describe your campaign',
-      errorTips: 'Please write down the campaign related information'
+      title: 'Campaign Description ',
+      placeholder: 'Please describe your campaign.',
+      errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     brandName: {
-      title: 'Brand name',
+      title: 'Brand Name',
       placeholder: 'Please select a brand name',
-      errorTips: 'Please select the right brand name'
+      errorTips: 'To add a new brand name in the selection drop down, please go to the settings tab and create a new brand name.'
     },
     platform: {
-      title: 'Campaign platform',
-      placeholder: 'Please fill in the exposure value',
+      title: 'Campaign Name',
+      placeholder: 'Exposure Target',
       errorTips: 'Please select the platform'
     },
     picture: {
-      title: 'Campaign picture',
+      title: 'Campaign Picture',
       placeholder: '',
       errorTips: 'Please upload an image'
     },
     time: {
-      title: 'Campaign time',
+      title: 'Campaign Timeframe',
       startPlaceholder: 'select start time',
       endPlaceholder: 'select end time',
-      placeholder: 'Please select the campaign time',
-      errorTips: 'Please select the right campaign time'
+      placeholder: 'Please specify your campaign timeframe.',
+      errorTips: 'Please specify your campaign timeframe.'
     },
     kolNumber: {
-      title: 'Number of KOL',
-      placeholder: 'Please fill in the number of KOL for the campaign',
-      errorTips: 'Please fill in the number of KOL for the campaign'
+      title: 'Number of KOLs',
+      placeholder: 'Enter # of KOLs',
+      errorTips: 'Enter # of KOLs'
     },
     budget: {
-      title: 'Campaign budget',
-      placeholder: 'Please fill in the campaign budget',
-      errorTips: 'Please fill in the campaign budget'
+      title: 'Campaign Budget',
+      placeholder: 'Your Budget',
+      errorTips: 'Your Budget'
     },
     precaution: {
-      title: 'Precaution',
-      placeholder: 'Please fill out the precaution for the campaign, including content that should not be talk about and the important things need to be take care of.',
-      errorTips: 'Please fill in the precaution'
+      title: 'ALERT! Important Details',
+      placeholder: 'Please specify any and all details pursuant to the campaign - for example:  what not to say, important information that must be included and any must- follow instructions or details.',
+      errorTips: 'ALERT! Important Details'
     },
     tags: {
-      title: 'Campaign tags',
+      title: 'Campaign Tags',
       placeholder: '',
       errorTips: 'Please select the tags'
     },
     price: {
-      title: 'Price requirements',
-      lowestPlaceholder: 'lowest',
-      highestPlaceholder: 'highest',
-      placeholder: 'all',
-      errorTips: 'Please select a price range for us to recommend accurate KOL'
+      title: 'Price Requirements',
+      lowestPlaceholder: 'Lowest',
+      highestPlaceholder: 'Highest',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred price range for us to recommend the best KOLs for your campaign.'
     },
     followerAge: {
-      title: 'Follower\'s age',
-      placeholder: 'all',
-      errorTips: 'Please select the expected range for the follower\'s age'
+      title: 'Audience’s Age',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ audience age range.'
     },
     followerGender: {
-      title: 'Follower\'s gender',
-      placeholder: 'all',
-      errorTips: 'Please select the follower\'s gender'
+      title: 'Audience’s Gender',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ audience gender.'
     },
     followerDistrict: {
-      title: 'Follower\'s location',
-      placeholder: 'Please fill in the district requirements',
-      provincePlaceholder: 'Please select province',
-      cityPlaceholder: 'Please select city',
-      provinceErrorTips: 'Please select province requirements',
-      cityErrorTips: 'Please select city requirements'
+      title: 'Audience’s Location',
+      placeholder: 'Please select audience’s location',
+      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     }
   },
   wallet: {
