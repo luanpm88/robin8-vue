@@ -1,52 +1,54 @@
 
 <template>
-  <div class="kol-card">
-    <div class="nonetip" v-if="isPostShow">
-      <span>{{$t('lang.totalNoDataTip')}}</span>
-    </div>
-    <div class="r8-loading" v-if="isPostLoading">
-      <a-spin tip="Loading..."/>
-    </div>
-    <div v-if="isPostList">
-      <div class="d-postcontent clearfix" v-for="(item, index) in postList" :key="index">
-        <div class="d-post-left">
-          <div class="d-post-link">
-            <p v-if='Number(type) === 0'>{{item.title}}</p>
-            <a v-else target="view_window" :href="item.url">{{item.title}}</a>
-            <span class="d-post-showMore" @click="showTextContent(item, index)">{{$t('lang.seeMore')}}</span>
-          </div>
-          <p class="d-post-digest">{{item.digest}}</p>
-          <p class="d-post-discribe" v-if="item.showContent">{{item.content}}</p>
-          <div class="d-post-show">
-            <span class="d-post-show-icon" v-html="item.top_industry_display + ' |'"></span>
-            <span class="d-post-show-tag">{{item.tags}}</span>
-          </div>
-          <p class="d-post-right-read" v-if='Number(type) === 0'>
-            <span>
-              <i class="iconfont icon-like"></i>{{item.influence_likes}}
-            </span>
-            <span>
-              <i class="iconfont icon-share"></i>{{item.influence_shares}}
-            </span>
-            <span>
-              <i class="iconfont icon-pinglun"></i>{{item.influence_comments}}
-            </span>
-          </p>
-          <p class="d-post-right-read" v-else> 
-            <span  v-html="'Read:' + item.influence_reads"></span> 
-            <span><i class="iconfont icon-like"></i>{{item.influence_likes}}</span>
-          </p>
-          <p class="d-post-show-time">{{item.post_time_display}}</p>
-        </div>
+  <div class="panel default-panel">
+    <div class="panel-body">
+      <div class="nonetip" v-if="isPostShow">
+        <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
-      <div class="btn-area">
-        <a-pagination
-          :defaultCurrent="postPage"
-          :defaultPageSize="postPageSize"
-          v-model="postCurrentPage"
-          :total="postTotalPage"
-          @change="onPageChange"
-        />
+      <div class="r8-loading" v-if="isPostLoading">
+        <a-spin tip="Loading..."/>
+      </div>
+      <div v-if="isPostList">
+        <div class="d-postcontent clearfix" v-for="(item, index) in postList" :key="index">
+          <div class="d-post-left">
+            <div class="d-post-link">
+              <p v-if='Number(type) === 0'>{{item.title}}</p>
+              <a v-else target="view_window" :href="item.url">{{item.title}}</a>
+              <span class="d-post-showMore" @click="showTextContent(item, index)">{{$t('lang.seeMore')}}</span>
+            </div>
+            <p class="d-post-digest">{{item.digest}}</p>
+            <p class="d-post-discribe" v-if="item.showContent">{{item.content}}</p>
+            <div class="d-post-show">
+              <span class="d-post-show-icon" v-html="item.top_industry_display + ' |'"></span>
+              <span class="d-post-show-tag">{{item.tags}}</span>
+            </div>
+            <p class="d-post-right-read" v-if='Number(type) === 0'>
+              <span>
+                <i class="iconfont icon-like"></i>{{item.influence_likes}}
+              </span>
+              <span>
+                <i class="iconfont icon-share"></i>{{item.influence_shares}}
+              </span>
+              <span>
+                <i class="iconfont icon-pinglun"></i>{{item.influence_comments}}
+              </span>
+            </p>
+            <p class="d-post-right-read" v-else> 
+              <span  v-html="'Read:' + item.influence_reads"></span> 
+              <span><i class="iconfont icon-like"></i>{{item.influence_likes}}</span>
+            </p>
+            <p class="d-post-show-time">{{item.post_time_display}}</p>
+          </div>
+        </div>
+        <div class="btn-area">
+          <a-pagination
+            :defaultCurrent="postPage"
+            :defaultPageSize="postPageSize"
+            v-model="postCurrentPage"
+            :total="postTotalPage"
+            @change="onPageChange"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -93,14 +95,14 @@ export default {
     this.isPostShow = false;
     this.isPostList = false;
     this.postList = [];
-    this.type = Number(this.$route.params.type);
+    this.type = Number(this.$route.query.type);
     this.tabIndexThreeInit();
   },
   methods: {
     // post 
     tabIndexThreeInit() {
       this.postParams.profile_id = String(this.$route.params.id);
-      if (Number(this.$route.params.type) === 0) {
+      if (Number(this.$route.query.type) === 0) {
         // 微博post接口
         this.detailPostWeibo(this.postParams);
 
