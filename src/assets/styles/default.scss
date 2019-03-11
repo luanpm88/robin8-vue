@@ -48,7 +48,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
   tbody { tr { &:nth-child(odd) { background-color: rgba(nth($cyan, 1), .2); }
     }
   }
-  th, td { line-height: 20px; padding: 8px 4px; text-align: left; word-break: break-all;
+  th, td { line-height: 20px; padding: 10px; text-align: left; word-break: break-all;
     &.text-center { text-align: center; }
   }
 }

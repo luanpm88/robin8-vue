@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="kol-list-wrap">
+    <!-- <div class="kol-list-wrap">
       <h5>Enter a keyword, category or KOL name</h5>
       <div class="kol-search clearfix">
         <input type="text" :placeholder="$t('lang.kolList.search.keyword')" v-model="keyword">
@@ -63,7 +63,6 @@
             <input class="col-xs-3 oneinput" v-model="influenceFrom">
             <b class="col-xs-1">-</b>
             <input class="col-xs-3 oneinput" v-model="influenceTo">
-            <!-- <div class="kol-advance-tip col-xs-12">{{$t('lang.kolList.search.influenceTip')}}</div> -->
           </div>
           <div class="kol-advance-line kol-advance-bottom col-xs-12">
             <div class="kol-type">
@@ -86,64 +85,340 @@
         <span v-if="tabIndex === 1">weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
         <span v-if="tabIndex === 0">weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
       </p>
-      <div class>
+      <default-tabs
+        :tabList="tabList"
+        :tabIndex="tabIndex"
+        @changeTab="changeTab"
+        class="panel-tab"
+      >
+        <div class="kol-data">
+          <ul class="kol-data-tab clearfix">
+            <li>Profile</li>
+            <li>Price</li>
+            <li>R8 KOL</li>
+            <li>
+              Influence
+              <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
+                <i :class="{one: true, 'is-top-iactive': isFIactive}"></i>
+                <i :class="{two: true, 'is-bottom-iactive': !isFIactive}"></i>
+              </span>
+            </li>
+            <li>
+              Relevance
+              <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
+                <i :class="{one: true, 'is-top-iactive': isRIactive}"></i>
+                <i :class="{two: true, 'is-bottom-iactive': !isRIactive}"></i>
+              </span>
+            </li>
+          </ul>
+          <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
+            <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
+              <li>
+                <div class="kol-profile clearfix" @click="intoKolDetail(item)">
+                  <img :src="item.avatar_url" alt>
+                  <div class="kol-show">
+                    <p>
+                      {{item.profile_name}}
+                    </p>
+                    <div class="desc">{{item.description_raw}}</div>
+                    <div>
+                      <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.likeTip')">
+                        <i class="iconfont icon-icon-test1"></i>
+                        {{item.fans_number}}
+                      </a-tooltip>
+                      <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.sumTip')">
+                        <i class="iconfont icon-app"></i>
+                        {{item.stats.avg_sum_engagement}}
+                      </a-tooltip>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="kol-data-r8">{{item.pricing.direct_price}}</p>
+              </li>
+              <li>
+                <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
+                <p class="kol-data-r8" v-else>No</p>
+              </li>
+              <li>
+                <a-progress
+                  type="circle"
+                  :percent="item.influence / 10"
+                  :width="100"
+                  :strokeWidth="9"
+                  strokeColor="#b37feb"
+                  :format="() => item.influence"
+                />
+              </li>
+              <li>
+                <a-progress
+                  type="circle"
+                  :percent="item.correlation"
+                  :width="100"
+                  :strokeWidth="9"
+                  strokeColor="#b37feb"
+                  :format="() => item.correlation + '%'"
+                  v-if="item.colorStatus === 1"
+                />
+                <a-progress
+                  type="circle"
+                  :width="100"
+                  :strokeWidth="9"
+                  strokeColor="#ddd"
+                  :format="() => item.correlation"
+                  v-if="item.colorStatus === 0"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="nonetip" v-if="isShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="isLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div class="btn-area">
+          <a-pagination
+            :defaultCurrent="currentPage"
+            :defaultPageSize="kolsPerPage"
+            v-model="currentPageAdd"
+            :total="kolsTotal"
+            @change="onPageChange"
+          />
+        </div>
+      </default-tabs>
+    </div> -->
+
+    <div class="panel default-panel kols-list-panel">
+      <div class="panel-head">
+        <h5 class="title text-center">Enter a keyword, category or KOL name</h5>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  :placeholder="$t('lang.kolList.search.keyword')"
+                  v-model="keyword"
+                />
+                <div class="input-group-btn">
+                  <button
+                    type="button"
+                    class="btn btn-purple"
+                    @click="totalSearch"
+                  >{{$t('lang.kolList.search.search')}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="kol-advance-btn">
+            <span
+              class="toggle"
+              @click="showMoreSearch"
+            >
+              {{$t('lang.kolList.search.advancedSearch.btn')}}
+            </span>
+          </div>
+        </div>
+
+        <div v-if="advancedSearch" class="form-horizontal mt30">
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
+            <div class="col-sm-4">
+              <select class="form-control" v-model="industry">
+                <option value=""></option>
+                <option value="airline">{{$t('lang.kolList.search.advancedSearch.industryType.Airline')}}</option>
+                <option value="appliances">{{$t('lang.kolList.search.advancedSearch.industryType.Appliances')}}</option>
+                <option value="auto">{{$t('lang.kolList.search.advancedSearch.industryType.Car')}}</option>
+                <option value="babies">{{$t('lang.kolList.search.advancedSearch.industryType.Babies')}}</option>
+                <option value="beauty">{{$t('lang.kolList.search.advancedSearch.industryType.Beauty')}}</option>
+                <option value="books">{{$t('lang.kolList.search.advancedSearch.industryType.Books')}}</option>
+                <option value="camera">{{$t('lang.kolList.search.advancedSearch.industryType.Camera')}}</option>
+                <option value="ce">{{$t('lang.kolList.search.advancedSearch.industryType.Electronics')}}</option>
+                <option value="digital">{{$t('lang.kolList.search.advancedSearch.industryType.Digital')}}</option>
+                <option value="education">{{$t('lang.kolList.search.advancedSearch.industryType.Education')}}</option>
+                <option value="entertainment">{{$t('lang.kolList.search.advancedSearch.industryType.Entertainment')}}</option>
+                <option value="fashion">{{$t('lang.kolList.search.advancedSearch.industryType.Fashion')}}</option>
+                <option value="finance">{{$t('lang.kolList.search.advancedSearch.industryType.Finance')}}</option>
+                <option value="fitness">{{$t('lang.kolList.search.advancedSearch.industryType.Fitness')}}</option>
+                <option value="food">{{$t('lang.kolList.search.advancedSearch.industryType.Food')}}</option>
+                <option value="furniture">{{$t('lang.kolList.search.advancedSearch.industryType.Furniture')}}</option>
+                <option value="games">{{$t('lang.kolList.search.advancedSearch.industryType.Games')}}</option>
+                <option value="health">{{$t('lang.kolList.search.advancedSearch.industryType.Health')}}</option>
+                <option value="hotel">{{$t('lang.kolList.search.advancedSearch.industryType.Hotel')}}</option>
+                <option value="internet">{{$t('lang.kolList.search.advancedSearch.industryType.Internet')}}</option>
+                <option value="mobile">{{$t('lang.kolList.search.advancedSearch.industryType.Mobile')}}</option>
+                <option value="music">{{$t('lang.kolList.search.advancedSearch.industryType.Music')}}</option>
+                <option value="realestate">{{$t('lang.kolList.search.advancedSearch.industryType.Realestate')}}</option>
+                <option value="sports">{{$t('lang.kolList.search.advancedSearch.industryType.Sports')}}</option>
+                <option value="travel">{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
+              </select>
+            </div>
+            <div class="col-sm-2 control-label">{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="engagementFrom"
+                />
+                <div class="input-group-addon">-</div>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="engagementTo"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="followerFrom"
+                />
+                <div class="input-group-addon">-</div>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="followerTo"
+                />
+              </div>
+            </div>
+            <div class="col-sm-2 control-label">
+              <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.advancedSearch.influenceTip')">
+                {{$t('lang.kolList.search.advancedSearch.influence')}}
+              </a-tooltip>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="influenceFrom"
+                />
+                <div class="input-group-addon">-</div>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="influenceTo"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <label>
+              <input type="checkbox" v-model="kolOnly">
+              {{$t('lang.kolList.search.advancedSearch.checkText')}}
+            </label>
+          </div>
+          <div class="text-center p30">
+            <button
+              type="button"
+              class="btn btn-blue btn-outline"
+              @click="totalSearch"
+            >
+              {{$t('lang.kolList.search.search')}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel default-panel kols-list-panel mt20">
+      <div class="panel-body">
+        <div class="kols-list-statistics">
+          <span v-if="tabIndex === 1" class="item">weixin - big data profile - 5,564,575</span>
+          <span v-if="tabIndex === 0" class="item">weibo - big data profile - 65,860,968</span>
+          <span v-if="tabIndex === 1" class="item">weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
+          <span v-if="tabIndex === 0" class="item">weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
+        </div>
+
         <default-tabs
           :tabList="tabList"
           :tabIndex="tabIndex"
           @changeTab="changeTab"
-          class="panel-tab"
         >
-          <div class="kol-data">
-            <ul class="kol-data-tab clearfix">
-              <li>Profile</li>
-              <li>Price</li>
-              <li>R8 KOL</li>
-              <li>
-                Influence
-                <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
-                  <i :class="{one: true, 'is-top-iactive': isFIactive}"></i>
-                  <i :class="{two: true, 'is-bottom-iactive': !isFIactive}"></i>
-                </span>
-              </li>
-              <li>
-                Relevance
-                <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
-                  <i :class="{one: true, 'is-top-iactive': isRIactive}"></i>
-                  <i :class="{two: true, 'is-bottom-iactive': !isRIactive}"></i>
-                </span>
-              </li>
-            </ul>
-            <div v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
-              <ul class="kol-data-content clearfix" v-for="(item, index) in key" :key="index">
-                <li>
-                  <div class="kol-profile clearfix" @click="intoKolDetail(item)">
-                    <img :src="item.avatar_url" alt>
-                    <div class="kol-show">
-                      <p>
-                        {{item.profile_name}}
-                      </p>
-                      <div class="desc">{{item.description_raw}}</div>
-                      <div>
-                        <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.likeTip')">
+          <table class="default-table mt20">
+            <thead>
+              <tr>
+                <th width="40%">Profile</th>
+                <th width="12%" class="text-center">Price</th>
+                <th width="12%" class="text-center">R8 KOL</th>
+                <th width="18%" class="text-center">
+                  Influence
+                  <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
+                    <i :class="{one: true, 'is-top-iactive': isFIactive}"></i>
+                    <i :class="{two: true, 'is-bottom-iactive': !isFIactive}"></i>
+                  </span>
+                </th>
+                <th width="18%" class="text-center">
+                  Relevance
+                  <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
+                    <i :class="{one: true, 'is-top-iactive': isRIactive}"></i>
+                    <i :class="{two: true, 'is-bottom-iactive': !isRIactive}"></i>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
+              <tr v-for="(item, index) in key" :key="index">
+                <td>
+                  <div class="media kol-profile">
+                    <div class="media-left media-middle">
+                      <div class="avatar">
+                        <router-link
+                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ keyword"
+                        >
+                          <img :src="item.avatar_url" alt="" class="avatar-img" />
+                        </router-link>
+                      </div>
+                    </div>
+                    <div class="media-body media-middle">
+                      <h5 class="title">
+                        <router-link
+                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ keyword"
+                        >
+                          {{item.profile_name}}
+                        </router-link>
+                      </h5>
+                      <p class="desc">{{item.description_raw}}</p>
+                      <div class="status">
+                        <a-tooltip
+                          placement="topLeft"
+                          :title="$t('lang.kolList.search.likeTip')"
+                          class="item"
+                        >
                           <i class="iconfont icon-icon-test1"></i>
                           {{item.fans_number}}
                         </a-tooltip>
-                        <a-tooltip placement="topLeft" :title="$t('lang.kolList.search.sumTip')">
+                        <a-tooltip
+                          placement="topLeft"
+                          :title="$t('lang.kolList.search.sumTip')"
+                          class="item"
+                        >
                           <i class="iconfont icon-app"></i>
                           {{item.stats.avg_sum_engagement}}
                         </a-tooltip>
                       </div>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <p class="kol-data-r8">{{item.pricing.direct_price}}</p>
-                </li>
-                <li>
-                  <p class="kol-data-r8" v-if="item.kol_id">Yes</p>
-                  <p class="kol-data-r8" v-else>No</p>
-                </li>
-                <li>
+                </td>
+                <td class="text-center">{{item.pricing.direct_price}}</td>
+                <td class="text-center">
+                  <p v-if="item.kol_id">Yes</p>
+                  <p v-else>No</p>
+                </td>
+                <td class="text-center">
                   <a-progress
                     type="circle"
                     :percent="item.influence / 10"
@@ -152,8 +427,8 @@
                     strokeColor="#b37feb"
                     :format="() => item.influence"
                   />
-                </li>
-                <li>
+                </td>
+                <td class="text-center">
                   <a-progress
                     type="circle"
                     :percent="item.correlation"
@@ -171,17 +446,17 @@
                     :format="() => item.correlation"
                     v-if="item.colorStatus === 0"
                   />
-                </li>
-              </ul>
-            </div>
-          </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <div class="nonetip" v-if="isShow">
             <span>{{$t('lang.totalNoDataTip')}}</span>
           </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
           </div>
-          <div class="btn-area">
+          <div class="text-center p30">
             <a-pagination
               :defaultCurrent="currentPage"
               :defaultPageSize="kolsPerPage"
@@ -203,6 +478,7 @@ import DefaultTabs from "@components/DefaultTabs";
 import { Progress, Tooltip } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
+
 export default {
   name: 'kolsearch',
   components: {
@@ -368,9 +644,9 @@ export default {
       this.isLoading = false;
       const _that = this;
       data.forEach((element, index) => {
-        if (element.description_raw.length > 60) {
-          element.description_raw = element.description_raw.substr(0, 30) + '...'
-        }
+        // if (element.description_raw.length > 60) {
+        //   element.description_raw = element.description_raw.substr(0, 30) + '...'
+        // }
         element.influence = parseInt(element.influence * 1000);
         // element.correlation = parseInt(element.correlation * 100);
         if (this.keyword !== '') {
@@ -413,6 +689,7 @@ export default {
       this.totalJoggle(this.tabIndex);
     },
     intoKolDetail(item) {
+      console.log(this.keyword)
       this.$router.push({
         path: "/kol/",
         name: "KolDetail",
@@ -507,260 +784,317 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
-span {
-  display: inline-block;
-}
-.kol-list-wrap {
-  background: $white;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-  padding: 40px 0px 30px;
-  h5 {
-    line-height: 20px;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #575962;
-    text-align: center;
-  }
-  .form-group {
-    button {
-      border-radius: 20px;
+.kols-list-panel {
+  .panel-body {
+    padding: 20px;
+    .form-group {
+      margin-bottom: 20px;
     }
   }
-}
-.kol-advance {
-  // width: 700px;
-  margin: 0px auto;
-}
-.kol-advance-line {
-  margin-bottom: 15px;
-}
-.kol-advance-left {
-  line-height: 34px;
-  text-align: right;
-  color: #333;
 }
 .kol-advance-btn {
   text-align: center;
-  padding: 30px 0px 0px;
-  span {
+  .toggle {
     color: nth($purple, 1);
     border-bottom: 1px solid nth($purple, 1);
-    font-size: $font-nm;
     cursor: pointer;
   }
 }
-.kol-advance-box {
-  padding-top: 30px;
-  .col-xs-6,
-  .col-xs-3,
-  .col-xs-1 {
-    padding: 0px;
-  }
-  .col-xs-1 {
-    text-align: center;
-    line-height: 34px;
-    font-weight: normal;
-  }
-  .oneinput {
-    padding: 0px 5px;
-  }
-}
-.kol-type {
-  span {
-    line-height: 34px;
-    color: #333;
-  }
-}
-.kol-advance-bottom {
-  text-align: center;
-  .kol-type {
-    display: inline-block;
-  }
-}
-.kol-search {
-  position: relative;
-  width: 642px;
-  margin: 30px auto 0px;
-  select {
-    float: left;
-    padding-left: 20px;
-  }
-  .oneselect {
-    width: 13%;
-    border-left: 0px;
-    padding-top: 2px;
-  }
-  input {
-    width: 88%;
-    padding-left: 10px;
-    float: left;
-    margin-right: -3px;
-    height: 34px;
-    color: #555;
-    background-color: #fff;
-    border-left: 1px solid #ebedf2;
-    border-top: 1px solid #ebedf2;
-    border-bottom: 1px solid #ebedf2;
-    border-right: 1px solid transparent;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-  }
-}
-.kol-search-btn {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  margin-left: -2px;
-  top: 0px;
-  float: left;
-  width: 12%;
-  background: nth($purple, 1);
-  color: $white;
-  line-height: 34px;
-  text-align: center;
-  cursor: pointer;
-}
-.kol-data-wrap {
-  background: $white;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-  padding: 20px 30px;
-  .form-group {
-    margin-top: 20px;
-    button {
-      border-radius: 20px;
-    }
-  }
-}
-.kol-data-tab,
-.kol-data-content {
-  li {
-    float: left;
-    border-bottom: 1px solid #ddd;
-    &:nth-child(1) {
-      width: 40%;
-    }
-    &:nth-child(2) {
-      width: 11%;
-    }
-    &:nth-child(3) {
-      width: 11%;
-    }
-    &:nth-child(4),
-    &:nth-child(5) {
-      width: 19%;
-    }
-  }
-}
-.kol-data-tab {
-  li {
-    text-align: center;
-    line-height: 42px;
-    color: #333;
-    font-size: 14px;
-  }
-}
-.kol-data-content {
-  li {
-    text-align: center;
-    padding: 16px 0;
-    height: 134px;
-    .kol-data-r8 {
-      line-height: 95px;
-    }
-  }
-}
-
-.kol-profile {
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 20%;
-    margin-right: 2%;
-  }
-}
-.kol-show {
-  text-align: left;
-  display: inline-block;
-  vertical-align: middle;
-  width: 75%;
-  height: 111px;
-  p {
-    line-height: 30px;
-    color: #333;
-    font-size: 16px;
-    i {
-      vertical-align: -1px;
-    }
-  }
-  .desc {
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-  }
-  div {
-    span {
-      position: relative;
-      padding-right: 11px;
-      display: inline-block;
-      margin: 2px 0px 0px;
-    }
-  }
-}
-.kol-list-topnum {
+.kols-list-statistics {
   height: 40px;
   margin-bottom: 10px;
-  clear: both;
-  span {
-    float: left;
-    border: 1px solid #ddd;
+  .item {
+    display: inline-block;
     margin-right: 10px;
+    border: 1px solid #ddd;
     border-radius: 20px;
     padding: 5px 10px;
     color: #333;
   }
 }
-.kol-data-rank {
-  padding: 0px;
-  display: inline-block;
-  line-height: 20px;
-  cursor: pointer;
-  i {
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-  .one {
-    display: block;
-    border-width: 0 5px 6px;
-    border-color: transparent transparent #a7a5a5;
-  }
-  .two {
-    display: block;
-    border-width: 6px 5px 0;
-    border-color: #a7a5a5 transparent transparent;
-    margin: 1px auto 0;
-  }
-}
 .fluenceactive, .relevanceactive {
   .is-top-iactive {
-    border-color: transparent transparent #b180ef ;
+    border-color: transparent transparent #b180ef;
   }
   .is-bottom-iactive {
-    border-color: #b180ef  transparent transparent; 
+    border-color: #b180ef transparent transparent;
   }
 }
-.btn-area{
-  text-align: right;
-  margin-top: 20px;
+.kol-profile {
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .desc {
+    @include limit-line(2);
+  }
+  .status {
+    .item {
+      margin-right: 10px;
+    }
+  }
 }
-.kol-profile{
-  cursor: pointer;
-}
-.kol-advance-tip{
-  text-align: center;
-  margin-top: 5px;
-}
+// span {
+//   display: inline-block;
+// }
+// .kol-list-wrap {
+//   background: $white;
+//   box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+//   padding: 40px 0px 30px;
+//   h5 {
+//     line-height: 20px;
+//     font-size: 1.8rem;
+//     font-weight: 400;
+//     color: #575962;
+//     text-align: center;
+//   }
+//   .form-group {
+//     button {
+//       border-radius: 20px;
+//     }
+//   }
+// }
+// .kol-advance {
+//   // width: 700px;
+//   margin: 0px auto;
+// }
+// .kol-advance-line {
+//   margin-bottom: 15px;
+// }
+// .kol-advance-left {
+//   line-height: 34px;
+//   text-align: right;
+//   color: #333;
+// }
+// .kol-advance-btn {
+//   text-align: center;
+//   padding: 30px 0px 0px;
+//   span {
+//     color: nth($purple, 1);
+//     border-bottom: 1px solid nth($purple, 1);
+//     font-size: $font-nm;
+//     cursor: pointer;
+//   }
+// }
+// .kol-advance-box {
+//   padding-top: 30px;
+//   .col-xs-6,
+//   .col-xs-3,
+//   .col-xs-1 {
+//     padding: 0px;
+//   }
+//   .col-xs-1 {
+//     text-align: center;
+//     line-height: 34px;
+//     font-weight: normal;
+//   }
+//   .oneinput {
+//     padding: 0px 5px;
+//   }
+// }
+// .kol-type {
+//   span {
+//     line-height: 34px;
+//     color: #333;
+//   }
+// }
+// .kol-advance-bottom {
+//   text-align: center;
+//   .kol-type {
+//     display: inline-block;
+//   }
+// }
+// .kol-search {
+//   position: relative;
+//   width: 642px;
+//   margin: 30px auto 0px;
+//   select {
+//     float: left;
+//     padding-left: 20px;
+//   }
+//   .oneselect {
+//     width: 13%;
+//     border-left: 0px;
+//     padding-top: 2px;
+//   }
+//   input {
+//     width: 88%;
+//     padding-left: 10px;
+//     float: left;
+//     margin-right: -3px;
+//     height: 34px;
+//     color: #555;
+//     background-color: #fff;
+//     border-left: 1px solid #ebedf2;
+//     border-top: 1px solid #ebedf2;
+//     border-bottom: 1px solid #ebedf2;
+//     border-right: 1px solid transparent;
+//     border-top-left-radius: 5px;
+//     border-bottom-left-radius: 5px;
+//   }
+// }
+// .kol-search-btn {
+//   border-top-right-radius: 6px;
+//   border-bottom-right-radius: 6px;
+//   margin-left: -2px;
+//   top: 0px;
+//   float: left;
+//   width: 12%;
+//   background: nth($purple, 1);
+//   color: $white;
+//   line-height: 34px;
+//   text-align: center;
+//   cursor: pointer;
+// }
+// .kol-data-wrap {
+//   background: $white;
+//   box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+//   padding: 20px 30px;
+//   .form-group {
+//     margin-top: 20px;
+//     button {
+//       border-radius: 20px;
+//     }
+//   }
+// }
+// .kol-data-tab,
+// .kol-data-content {
+//   li {
+//     float: left;
+//     border-bottom: 1px solid #ddd;
+//     &:nth-child(1) {
+//       width: 40%;
+//     }
+//     &:nth-child(2) {
+//       width: 11%;
+//     }
+//     &:nth-child(3) {
+//       width: 11%;
+//     }
+//     &:nth-child(4),
+//     &:nth-child(5) {
+//       width: 19%;
+//     }
+//   }
+// }
+// .kol-data-tab {
+//   li {
+//     text-align: center;
+//     line-height: 42px;
+//     color: #333;
+//     font-size: 14px;
+//   }
+// }
+// .kol-data-content {
+//   li {
+//     text-align: center;
+//     padding: 16px 0;
+//     height: 134px;
+//     .kol-data-r8 {
+//       line-height: 95px;
+//     }
+//   }
+// }
+
+// .kol-profile {
+//   img {
+//     display: inline-block;
+//     vertical-align: middle;
+//     border-radius: 50%;
+//     width: 20%;
+//     margin-right: 2%;
+//   }
+// }
+// .kol-show {
+//   text-align: left;
+//   display: inline-block;
+//   vertical-align: middle;
+//   width: 75%;
+//   height: 111px;
+//   p {
+//     line-height: 30px;
+//     color: #333;
+//     font-size: 16px;
+//     i {
+//       vertical-align: -1px;
+//     }
+//   }
+//   .desc {
+//     overflow: hidden;
+//     -webkit-line-clamp: 3;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     -webkit-box-orient: vertical;
+//   }
+//   div {
+//     span {
+//       position: relative;
+//       padding-right: 11px;
+//       display: inline-block;
+//       margin: 2px 0px 0px;
+//     }
+//   }
+// }
+// .kol-list-topnum {
+//   height: 40px;
+//   margin-bottom: 10px;
+//   clear: both;
+//   span {
+//     float: left;
+//     border: 1px solid #ddd;
+//     margin-right: 10px;
+//     border-radius: 20px;
+//     padding: 5px 10px;
+//     color: #333;
+//   }
+// }
+// .kol-data-rank {
+//   padding: 0px;
+//   display: inline-block;
+//   line-height: 20px;
+//   cursor: pointer;
+//   i {
+//     width: 0;
+//     height: 0;
+//     border-style: solid;
+//   }
+//   .one {
+//     display: block;
+//     border-width: 0 5px 6px;
+//     border-color: transparent transparent #a7a5a5;
+//   }
+//   .two {
+//     display: block;
+//     border-width: 6px 5px 0;
+//     border-color: #a7a5a5 transparent transparent;
+//     margin: 1px auto 0;
+//   }
+// }
+// .fluenceactive, .relevanceactive {
+//   .is-top-iactive {
+//     border-color: transparent transparent #b180ef;
+//   }
+//   .is-bottom-iactive {
+//     border-color: #b180ef transparent transparent;
+//   }
+// }
+// .btn-area{
+//   text-align: right;
+//   margin-top: 20px;
+// }
+// .kol-profile{
+//   cursor: pointer;
+// }
+// .kol-advance-tip{
+//   text-align: center;
+//   margin-top: 5px;
+// }
 </style>

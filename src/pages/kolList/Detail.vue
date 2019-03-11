@@ -23,7 +23,7 @@
             <ul class="clearfix">
               <li v-for="(item, index) in dec" :key="index">{{item}}</li>
             </ul>
-            
+
           </div>
           <div class="kol-card kol-brand">
             <p class="clearfix">
@@ -109,7 +109,7 @@
                       </a-tooltip>
                     </th>
                     <th>
-                      
+
                       <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.analyticsData.clientTip')">
                         {{$t('lang.kolList.detail.analyticsData.clients')}}
                       </a-tooltip>
@@ -210,8 +210,8 @@ import Analytics from "../kolList/analytic/Index";
 import Posts from "../kolList/posts/Index";
 export default {
   name: "KolDetail",
-  components: { 
-    TagCharts, 
+  components: {
+    TagCharts,
     Echarts,
     PageHeader,
     DefaultTabs,
@@ -299,13 +299,15 @@ export default {
     };
   },
   created() {
+    console.log(this.$route.params)
+    console.log(this.$route.query)
     let newKey = '';
-    this.$route.params.brand_keywords.split(",").forEach(item => {
+    this.$route.query.brand_keywords.split(",").forEach(item => {
       newKey += '"' + item + '"'
     });
     this.trendParams.brand_keywords = newKey;
     this.sentimentParams.brand_keywords = newKey;
-    this.type = Number(this.$route.params.type);
+    this.type = Number(this.$route.query.type);
     this.tabIndexOneInit();
   },
   computed: {
@@ -316,7 +318,7 @@ export default {
     tabIndexOneInit() {
       let totalParams = {};
       this.kolActivityUrl(totalParams);
-      if (Number(this.$route.params.type) === 0) {
+      if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id);
         totalParams.language = "en";
@@ -621,7 +623,7 @@ export default {
             if (res.data.data === null) {
               _that.isActivity = false;
               _that.isAnalytics = false;
-              if (Number(_that.$route.params.type) === 0) {
+              if (Number(_that.$route.query.type) === 0) {
                 // 调用Fergus 微博info
                 _that.kolWeiboInfo(params);
               } else {
