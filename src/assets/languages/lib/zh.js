@@ -21,6 +21,7 @@ export const lang = {
   totalNoDataTip: '暂无数据...',
   yes: '是',
   no: '否',
+  search: '搜索',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',

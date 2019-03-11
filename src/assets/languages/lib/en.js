@@ -19,8 +19,9 @@ export const lang = {
   backBtn: 'Back',
   submitBtn: 'Submit',
   totalNoDataTip: 'No data...',
-  yes: 'yes',
-  no: 'no',
+  yes: 'Yes',
+  no: 'No',
+  search: 'Search',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
