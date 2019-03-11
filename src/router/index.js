@@ -368,7 +368,7 @@ export default new Router({
       name: 'KolList',
       component: KolList,
       meta: {
-        title: 'KolList',
+        title: 'KOL列表',
         keepAlive: true,
         auth: true
       }
@@ -379,7 +379,7 @@ export default new Router({
       name: 'KolDetail',
       component: KolDetail,
       meta: {
-        title: 'KolDetail',
+        title: 'KOL详情',
         auth: true
       }
     },
@@ -397,7 +397,7 @@ export default new Router({
           name: 'wechatRanking',
           component: WechatRanking,
           meta: {
-            title: 'WechatRanking',
+            title: '微信排名',
             auth: true
           }
         },{
@@ -405,7 +405,7 @@ export default new Router({
           name: 'weiboRanking',
           component: WeiboRanking,
           meta: {
-            title: 'WeiboRanking',
+            title: '微博排名',
             auth: true
           }
         },
@@ -424,7 +424,7 @@ export default new Router({
       name: 'socialListening',
       component: SocialListening,
       meta: {
-        title: 'socialListening',
+        title: '社交聆听',
         auth: true
       }
     },

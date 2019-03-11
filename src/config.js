@@ -1,7 +1,7 @@
 // 小燕
-const host = 'http://192.168.50.237:3000/brand_api/v2'
+// const host = 'http://192.168.50.237:3000/brand_api/v2'
 // 张春明
-// const host = 'http://192.168.50.177:3001/brand_api/v2'
+const host = 'http://192.168.50.177:3001/brand_api/v2'
 // qa
 // const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
