@@ -13,7 +13,7 @@
           <div class="d-post-link">
             <p v-if='Number(type) === 0'>{{item.title}}</p>
             <a v-else target="view_window" :href="item.url">{{item.title}}</a>
-            <span class="d-post-showMore" @click="showTextContent(item, index)">{{$t('lang.more')}}</span>
+            <span class="d-post-showMore" @click="showTextContent(item, index)">{{$t('lang.seeMore')}}</span>
           </div>
           <p class="d-post-digest">{{item.digest}}</p>
           <p class="d-post-discribe" v-if="item.showContent">{{item.content}}</p>

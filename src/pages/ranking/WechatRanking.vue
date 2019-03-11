@@ -58,7 +58,7 @@
       :pagination="false" :scroll="{ y: 500 }">
         <template slot="profileDec" slot-scope="dec">
           <div class="r-tableThirtyList-name" 
-          @click="rowClick(dec)">
+          @click="openDetails(dec)">
             <img :src="dec.img" alt="">
             <p>{{dec.name}}</p>
             <p>{{dec.id}}</p>
@@ -293,18 +293,8 @@ export default {
         name: 'KolDetail',
         params: {
           id: item.profile_id,
-          type: 1,
-          brand_keywords: this.totalKeywords
-        }
-      });
-    },
-    // 行点击跳转detail
-    rowClick(dec) {
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: dec.profile_id,
+        },
+        query: {
           type: 1,
           brand_keywords: this.totalKeywords
         }

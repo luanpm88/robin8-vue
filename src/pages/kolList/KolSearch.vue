@@ -377,7 +377,7 @@
                     <div class="media-left media-middle">
                       <div class="avatar">
                         <router-link
-                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ keyword"
+                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
                         >
                           <img :src="item.avatar_url" alt="" class="avatar-img" />
                         </router-link>
@@ -386,7 +386,7 @@
                     <div class="media-body media-middle">
                       <h5 class="title">
                         <router-link
-                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ keyword"
+                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
                         >
                           {{item.profile_name}}
                         </router-link>
@@ -499,7 +499,9 @@ export default {
       isRIactive: false,
       isRelevanceActive: false,
       isRelevanceSort: 'asc',
+      // top 用户输入的key
       keyword: "",
+      // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: '',
       industry: "",
       engagementFrom: "",
@@ -537,7 +539,6 @@ export default {
     this.r8Kol();
     // 获取keywords
     this.getBaseData();
-    // console.log(this.keyWord.brand_keywords);
     if (this.keyWord.brand_keywords) {
       this.tabIndex = this.keyWord.type;
       this.keyword = this.keyWord.brand_keywords;
@@ -688,18 +689,18 @@ export default {
       // 调用接口
       this.totalJoggle(this.tabIndex);
     },
-    intoKolDetail(item) {
-      console.log(this.keyword)
-      this.$router.push({
-        path: "/kol/",
-        name: "KolDetail",
-        params: {
-          id: item.profile_id,
-          type: this.tabIndex,
-          brand_keywords: this.keyword
-        }
-      });
-    },
+    // intoKolDetail(item) {
+    //   // console.log(this.keyword)
+    //   this.$router.push({
+    //     path: "/kol/",
+    //     name: "KolDetail",
+    //     params: {
+    //       id: item.profile_id,
+    //       type: this.tabIndex,
+    //       brand_keywords: this.totalKeywords
+    //     }
+    //   });
+    // },
     // 获取keyword
     getBaseData () {
       const _that = this

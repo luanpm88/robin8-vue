@@ -234,9 +234,11 @@ export default {
         name: 'KolDetail',
         params: {
           id: item.profile_id,
+        },
+        query: {
           type: Number(this.source),
           brand_keywords: this.topic
-        },
+        }
       });
     },
   }

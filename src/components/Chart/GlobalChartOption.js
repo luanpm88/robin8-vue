@@ -1,8 +1,3 @@
-import echarts from 'echarts'
-let dataList = [
-  [[26424, 75.7, 57110117, 'United Kingdom', 1990], [37062, 75.4, 252847810, 'United States', 1990]],
-  [[19360, 76.5, 78665830, 'Turkey', 2015], [38225, 81.4, 64715810, 'United Kingdom', 2015], [53354, 79.1, 321773631, 'United States', 2015]]
-];
 const MockData = {
   trendOptions: {
     tooltip: {
@@ -286,7 +281,8 @@ const MockData = {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow'
-      }
+      },
+      formatter: "{a} <br/>{b}: {c}%"
     },
     legend: {
       show: false,
@@ -342,7 +338,7 @@ const MockData = {
     },
     series: [
       {
-        name: 'competitors',
+        name: 'Industries',
         type: 'bar',
         color: "rgba(179,127,235,0.5)",
         data: []
