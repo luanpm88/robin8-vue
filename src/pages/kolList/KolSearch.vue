@@ -357,15 +357,15 @@
                 <th width="18%" class="text-center">
                   Influence
                   <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
-                    <i :class="{one: true, 'is-top-iactive': isFIactive}"></i>
-                    <i :class="{two: true, 'is-bottom-iactive': !isFIactive}"></i>
+                    <i :class="{up: true, 'is-top-iactive': isFIactive}"></i>
+                    <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
                   </span>
                 </th>
                 <th width="18%" class="text-center">
                   Relevance
                   <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
-                    <i :class="{one: true, 'is-top-iactive': isRIactive}"></i>
-                    <i :class="{two: true, 'is-bottom-iactive': !isRIactive}"></i>
+                    <i :class="{up: true, 'is-top-iactive': isRIactive}"></i>
+                    <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
                   </span>
                 </th>
               </tr>
@@ -812,6 +812,27 @@ export default {
     border-radius: 20px;
     padding: 5px 10px;
     color: #333;
+  }
+}
+.kol-data-rank {
+  display: inline-block;
+  line-height: 20px;
+  cursor: pointer;
+  i {
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .up {
+    display: block;
+    border-width: 0 5px 6px;
+    border-color: transparent transparent #a7a5a5;
+  }
+  .down {
+    display: block;
+    border-width: 6px 5px 0;
+    border-color: #a7a5a5 transparent transparent;
+    margin: 1px auto 0;
   }
 }
 .fluenceactive, .relevanceactive {
