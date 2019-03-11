@@ -95,7 +95,7 @@ export default {
       console.log(this.checkedIds)
     },
     toKolDetail (item) {
-      // console.log(item)
+      // console.log(this.keyword)
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',
@@ -117,7 +117,6 @@ export default {
   created () {
     this.renderData(this.kolsList)
     this.currentPage = this.kolsPage + 1
-    console.log(this.kolsTotal)
   },
   watch: {
     kolsList (newVal, oldVal) {

@@ -227,7 +227,9 @@ export default {
         path: '/kol/',
         name: 'KolDetail',
         params: {
-          id: item.id,
+          id: item.id
+        },
+        query: {
           type: this.kolTypeId,
           brand_keywords: this.brandKeyword
         }

@@ -6,50 +6,70 @@
       <main-nav class="pull-left"></main-nav>
 
       <div class="socail-container pull-right">
-        <div class="social-search clearfix">
-          <div class="social-line clearfix col-xs-6">
-            <span class="social-line-left col-xs-2">Topic:</span>
-            <input class="col-xs-10 oneinput" v-model="topic">
-          </div>
-          <div class="social-line clearfix col-xs-6">
-            <span class="social-line-left col-xs-2">Source:</span>
-            <select class="col-xs-10 oneselect" v-model="source">
-              <option value="0">{{$t('lang.weibo')}}</option>
-              <option value="1">{{$t('lang.wechat')}}</option>
-            </select>
-          </div>
-          <div class="form-group text-right">
-            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
-          </div>
-        </div>
-        <div class="social-content clearfix mt20">
-          <div class="nonetip" v-if="isShow">
-            <span>{{$t('lang.totalNoDataTip')}}</span>
-          </div>
-          <div class="r8-loading" v-if="isLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <div v-if="isContent">
-            <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-              <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
-              <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-              <div class="home-post-detail"  @click="intoKolDetail(item)">
-                <img :src="item.imgUrl" alt class>
-                <div>
-                  <strong>{{item.name}}</strong>
-                  <p>{{item.time}}</p>
+        <div class="panel default-panel social-search">
+          <div class="panel-body">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-2 control-label">Topic</div>
+                <div class="col-sm-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="topic"
+                  />
+                </div>
+                <div class="col-sm-2 control-label">Source</div>
+                <div class="col-sm-4">
+                  <select class="form-control" v-model="source">
+                    <option value="0">{{$t('lang.weibo')}}</option>
+                    <option value="1">{{$t('lang.wechat')}}</option>
+                  </select>
                 </div>
               </div>
-              <p class="home-post-content">'{{item.content}}'</p>
+
+              <div class="text-center mt30">
+                <button
+                  type="button"
+                  class="btn btn-blue btn-outline"
+                  @click="totalSearch"
+                >
+                  {{$t('lang.search')}}
+                </button>
+              </div>
             </div>
-            <div class="btn-area">
-              <a-pagination
-                :defaultCurrent="currentPage"
-                v-model="currentPageAdd"
-                :defaultPageSize="kolsPerPage"
-                :total="kolsTotal"
-                @change="onPageChange"
-              />
+          </div>
+        </div>
+
+        <div class="panel default-panel social-search mt20">
+          <div class="panel-body">
+            <div class="nonetip" v-if="isShow">
+              <span>{{$t('lang.totalNoDataTip')}}</span>
+            </div>
+            <div class="r8-loading" v-if="isLoading">
+              <a-spin tip="Loading..."/>
+            </div>
+            <div v-if="isContent">
+              <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
+                <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
+                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <div class="home-post-detail"  @click="intoKolDetail(item)">
+                  <img :src="item.imgUrl" alt class>
+                  <div>
+                    <strong>{{item.name}}</strong>
+                    <p>{{item.time}}</p>
+                  </div>
+                </div>
+                <p class="home-post-content">'{{item.content}}'</p>
+              </div>
+              <div class="text-center mt20">
+                <a-pagination
+                  :defaultCurrent="currentPage"
+                  v-model="currentPageAdd"
+                  :defaultPageSize="kolsPerPage"
+                  :total="kolsTotal"
+                  @change="onPageChange"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -233,10 +253,10 @@ export default {
     padding-right: 10px;
   }
 }
-.social-search, .social-content{
-  background: $white;
-  padding: 30px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+.social-search, .social-content {
+  .panel-body {
+    padding: 30px;
+  }
 }
 .home-post-title {
   color: nth($purple, 1);
@@ -250,9 +270,5 @@ export default {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
-}
-.btn-area{
-  text-align: right;
-  margin-top: 20px;
 }
 </style>
