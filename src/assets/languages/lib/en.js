@@ -10,7 +10,7 @@ export const lang = {
   socialListening: 'Social Listening',
   wechat: 'Wechat',
   weibo: 'Weibo',
-  seeMoreL: 'Show More',
+  seeMore: 'Show More',
   more: 'load more',
   edit: 'edit',
   delete: 'delete',

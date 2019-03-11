@@ -1,147 +1,155 @@
 
 <template>
   <div>
-    <div class="kol-card">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
-      <div class="nonetip" v-if="isAnalyOneShow">
-        <span>{{$t('lang.totalNoDataTip')}}</span>
-      </div>
-      <div class="r8-loading" v-if="isAnalyOneLoading">
-        <a-spin tip="Loading..."/>
-      </div>
-      <div class="activity-table" v-if="isAnalyOne">
-        <table class="com-brand-table" v-if="Number(this.$route.params.type) === 0">
-          <tr>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.industry')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCount')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCountPercent')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalCommet')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgCommet')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxShare')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxCommet')}}</th>
-          </tr>
-          <tr v-for="(key, index) in analyOne" :key="index">
-            <td>
-              <p v-html="key.industry"></p>
-            </td>
-            <td>{{key.doc_count}}</td>
-            <td>{{ Number(key.doc_count_width_percentage)}}%</td>
-            <td>{{key.total_like_count}}</td>
-            <td>{{key.total_share_count}}</td>
-            <td>{{key.total_comment_count}}</td>
-            <td>{{key.avg_like_count}}</td>
-            <td>{{key.avg_share_count}}</td>
-            <td>{{key.avg_comment_count}}</td>
-            <td>{{key.max_like_count}}</td>
-            <td>{{key.max_share_count}}</td>
-            <td>{{key.max_comment_count}}</td>
-          </tr>
-        </table>
-        <table class="com-brand-table" v-if="Number(this.$route.params.type) === 1">
-          <tr>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.industry')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCount')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCountPercent')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.likeRead')}}</th>
-          </tr>
-          <tr v-for="(key, index) in analyOne" :key="index">
-            <td>
-              <p v-html="key.industry"></p>
-            </td>
-            <td>{{key.doc_count}}</td>
-            <td>{{ Number(key.doc_count_width_percentage)}}%</td>
-            <td>{{key.total_reads}}</td>
-            <td>{{key.avg_reads}}</td>
-            <td>{{key.max_reads}}</td>
-            <td>{{key.total_likes}}</td>
-            <td>{{key.total_likes_percentage}}</td>
-          </tr>
-        </table>
+    <div class="panel default-panel">
+      <div class="panel-body">
+        <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
+        <div class="nonetip" v-if="isAnalyOneShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="isAnalyOneLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div class="activity-table" v-if="isAnalyOne">
+          <table class="com-brand-table" v-if="Number(this.$route.query.type) === 0">
+            <tr>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.industry')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCount')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.DocCountPercent')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalLike')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalShare')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.totalCommet')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgLike')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgShare')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.avgCommet')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxLike')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxShare')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weibo.industryTable.maxCommet')}}</th>
+            </tr>
+            <tr v-for="(key, index) in analyOne" :key="index">
+              <td>
+                <p v-html="key.industry"></p>
+              </td>
+              <td>{{key.doc_count}}</td>
+              <td>{{ Number(key.doc_count_width_percentage)}}%</td>
+              <td>{{key.total_like_count}}</td>
+              <td>{{key.total_share_count}}</td>
+              <td>{{key.total_comment_count}}</td>
+              <td>{{key.avg_like_count}}</td>
+              <td>{{key.avg_share_count}}</td>
+              <td>{{key.avg_comment_count}}</td>
+              <td>{{key.max_like_count}}</td>
+              <td>{{key.max_share_count}}</td>
+              <td>{{key.max_comment_count}}</td>
+            </tr>
+          </table>
+          <table class="com-brand-table" v-if="Number(this.$route.query.type) === 1">
+            <tr>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.industry')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCount')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.DocCountPercent')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.avgRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.maxRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.totalLike')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.industryTable.likeRead')}}</th>
+            </tr>
+            <tr v-for="(key, index) in analyOne" :key="index">
+              <td>
+                <p v-html="key.industry"></p>
+              </td>
+              <td>{{key.doc_count}}</td>
+              <td>{{ Number(key.doc_count_width_percentage)}}%</td>
+              <td>{{key.total_reads}}</td>
+              <td>{{key.avg_reads}}</td>
+              <td>{{key.max_reads}}</td>
+              <td>{{key.total_likes}}</td>
+              <td>{{key.total_likes_percentage}}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <!-- 微博没有 Media-->
-    <div class="kol-card" v-if="Number(type) === 1">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
-      <div class="nonetip" v-if="isMediaShow">
-        <span>{{$t('lang.totalNoDataTip')}}</span>
-      </div>
-      <div class="r8-loading" v-if="isMediaLoading">
-        <a-spin tip="Loading..."/>
-      </div>
-      <div class="activity-table" v-if="isMedia">
-        <table class="com-brand-table">
-          <tr>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.Type')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCount')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCountPercent')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.avgRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.maxRead')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalLike')}}</th>
-            <th>{{$t('lang.kolList.analyticVue.weixin.Media.likeRead')}}</th>
-          </tr>
-          <tr v-for="(key, index) in media" :key="index">
-            <td>
-              <p v-html="key.media_type"></p>
-            </td>
-            <td>{{key.doc_count}}</td>
-            <td>{{ Number(key.doc_count_width_percentage)}}%</td>
-            <td>{{key.total_reads}}</td>
-            <td>{{key.avg_reads}}</td>
-            <td>{{key.max_reads}}</td>
-            <td>{{key.total_likes}}</td>
-            <td>{{key.total_likes_percentage}}</td>
-          </tr>
-        </table>
+    <div class="panel default-panel mt20" v-if="Number(type) === 1">
+      <div class="panel-body">
+        <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
+        <div class="nonetip" v-if="isMediaShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="isMediaLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div class="activity-table" v-if="isMedia">
+          <table class="com-brand-table">
+            <tr>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.Type')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCount')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.DocCountPercent')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.avgRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.maxRead')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.totalLike')}}</th>
+              <th>{{$t('lang.kolList.analyticVue.weixin.Media.likeRead')}}</th>
+            </tr>
+            <tr v-for="(key, index) in media" :key="index">
+              <td>
+                <p v-html="key.media_type"></p>
+              </td>
+              <td>{{key.doc_count}}</td>
+              <td>{{ Number(key.doc_count_width_percentage)}}%</td>
+              <td>{{key.total_reads}}</td>
+              <td>{{key.avg_reads}}</td>
+              <td>{{key.max_reads}}</td>
+              <td>{{key.total_likes}}</td>
+              <td>{{key.total_likes_percentage}}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
     <!-- 微博图表渲染模版  -->
     <div v-if="Number(type) === 0">
-      <div class="kol-card" v-for="(item, index) in countWeiboList" :key="index">
-        <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}}  {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}}  {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
-        <div class="nonetip" v-if="item.isShow">
-          <span>{{$t('lang.totalNoDataTip')}}</span>
-        </div>
-        <div class="r8-loading" v-if="item.isLoading">
-          <a-spin tip="Loading..."/>
-        </div>
-        <div v-if="item.isChart">
-          
-          <Echarts
-            :options="item.options"
-            :chartsStyle="item.chartsStyle"
-            :ref='item.ref'
-          ></Echarts>
+      <div class="panel default-panel mt20" v-for="(item, index) in countWeiboList" :key="index">
+        <div class="panel-body">
+          <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}}  {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}}  {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+          <div class="nonetip" v-if="item.isShow">
+            <span>{{$t('lang.totalNoDataTip')}}</span>
+          </div>
+          <div class="r8-loading" v-if="item.isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <div v-if="item.isChart">
+            
+            <Echarts
+              :options="item.options"
+              :chartsStyle="item.chartsStyle"
+              :ref='item.ref'
+            ></Echarts>
 
+          </div>
         </div>
       </div>
     </div>
     <!-- 微信图表渲染模版 -->
     <div v-if="Number(type) === 1">
-      <div class="kol-card" v-for="(item, index) in countWeixinList" :key="index">
-        <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
-        <div class="nonetip" v-if="item.isShow">
-          <span>{{$t('lang.totalNoDataTip')}}</span>
-        </div>
-        <div class="r8-loading" v-if="item.isLoading">
-          <a-spin tip="Loading..."/>
-        </div>
-        <div v-if="item.isChart">
-          <Echarts
-            :options="item.options"
-            :chartsStyle="item.chartsStyle"
-            :ref='item.ref'
-          ></Echarts>
+      <div class="panel default-panel mt20" v-for="(item, index) in countWeixinList" :key="index">
+        <div class="panel-body">
+          <p class="kol-cloumn mb10">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+          <div class="nonetip" v-if="item.isShow">
+            <span>{{$t('lang.totalNoDataTip')}}</span>
+          </div>
+          <div class="r8-loading" v-if="item.isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <div v-if="item.isChart">
+            <Echarts
+              :options="item.options"
+              :chartsStyle="item.chartsStyle"
+              :ref='item.ref'
+            ></Echarts>
+          </div>
         </div>
       </div>
     </div>
@@ -443,8 +451,8 @@ export default {
   },
   created() {
     this.analyOneParams.profile_id = String(this.$route.params.id);
-    this.type = Number(this.$route.params.type);
-    if (Number(this.$route.params.type) === 0) {
+    this.type = Number(this.$route.query.type);
+    if (Number(this.$route.query.type) === 0) {
       // 微博
       // Industries Distribution
       this.detailAnalyOneWeibo(this.analyOneParams);
