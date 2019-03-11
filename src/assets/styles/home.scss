@@ -226,6 +226,11 @@
 }
 
 // detail
+.kol-detail{
+  .panel-body{
+    padding: 20px;
+  }
+}
 .kol-back-btn{
   cursor: pointer;
   line-height: 35px;
@@ -256,6 +261,9 @@
 .kol-infobox {
   position: relative;
   background: $white;
+  .panel-body{
+    padding: 0px;
+  }
   img {
     position: absolute;
     width: 43px;
@@ -290,13 +298,8 @@
     color: #575962ff;
   }
 }
-.kol-card {
-  background: $white;
-  padding: 10px 20px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
 .kol-brand {
+  padding: 0px 30px 15px;
   p {
     span {
       float: left;
@@ -321,7 +324,7 @@
   color: nth($purple, 1);
 }
 .activity-table {
-  margin: 16px 0px 20px;
+  margin: 16px 0px 0px;
 }
 .activity-border {
   border: 1px solid nth($purple, 1);
@@ -406,7 +409,6 @@
 }
 .btn-area{
   text-align: right;
-  margin: 20px 0px;
 }
 .d-post-right-img{
   max-width: 80px;
