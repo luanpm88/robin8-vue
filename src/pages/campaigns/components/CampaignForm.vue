@@ -595,7 +595,7 @@ export default {
         start_time: '',
         deadline: '',
         target: {
-          tags: '',
+          tags: '全部',
           region: '',
           age: '全部',
           gender: '全部',
