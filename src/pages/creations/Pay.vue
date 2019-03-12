@@ -117,6 +117,10 @@ export default {
       console.log(res)
       let resData = res.data
       this.detailData = resData
+      if (resData.status == 'ended' || resData.status == 'finished' || resData.status == 'closed') {
+        this.processStatus.current = 4
+        this.processStatus.index = 3
+      }
     },
     doPay () {
       if (!this.canSubmit) {

@@ -8,7 +8,6 @@
     </div>
 
     <div class="panel-body list-content recommendkol">
-      <span class="kol-score">Influence Score</span>
       <div class="nonetip" v-if="isShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -56,7 +55,7 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: false,
+      kolHasLiked: true,
       KolHasInflunce: true,
       kolHasMsg: true,
       kolHasChecked: false,

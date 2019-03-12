@@ -29,7 +29,7 @@
               <p class="home-post-content">{{item.content}}</p>
               <div class="home-post-form">
                 <span>
-                  <i class="iconfont icon-like"></i>
+                  <i class="iconfont icon-heart"></i>
                   <b>{{item.post_influence.likes}}</b>
                 </span>
                 <span v-if="postType === 0">
@@ -37,7 +37,7 @@
                   <b>{{item.post_influence.shares}}</b>
                 </span>
                 <span>
-                  <i class="iconfont icon-pinglun"></i>
+                  <i class="iconfont icon-comment"></i>
                   <b>{{item.post_influence.comments}}</b>
                 </span>
               </div>

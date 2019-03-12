@@ -398,7 +398,7 @@
                           :title="$t('lang.kolList.search.likeTip')"
                           class="item"
                         >
-                          <i class="iconfont icon-icon-test1"></i>
+                          <i class="iconfont icon-user-heart"></i>
                           {{item.fans_number}}
                         </a-tooltip>
                         <a-tooltip

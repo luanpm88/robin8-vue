@@ -595,7 +595,7 @@ export default {
         start_time: '',
         deadline: '',
         target: {
-          tags: '',
+          tags: '全部',
           region: '',
           age: '全部',
           gender: '全部',
@@ -650,7 +650,7 @@ export default {
         this.campaignTime = []
         this.campaignTime[0] = resData.start_time
         this.campaignTime[1] = resData.deadline
-        this.submitData.target.tags = resData.tags.toString()
+        this.submitData.target.tags = resData.tags.length > 0 ? resData.tags.toString() : '全部'
         this.submitData.target.region = resData.region
         this.submitData.target.age = resData.age
         this.submitData.target.gender = resData.gender
@@ -701,7 +701,7 @@ export default {
       })
       console.log(_checkedTags)
       this.checkedTags = _checkedTags
-      this.submitData.target.tags = _checkedTags.toString()
+      this.submitData.target.tags = _checkedTags.length > 0 ? _checkedTags.toString() : '全部'
     },
     imageuploaded (res) {
       console.log(res)

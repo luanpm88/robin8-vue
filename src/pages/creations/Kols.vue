@@ -109,6 +109,10 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
+        if (resData.status == 'ended' || resData.status == 'finished' || resData.status == 'closed') {
+          this.processStatus.current = 4
+          this.processStatus.index = 3
+        }
       }
     },
     getTendersData (postUrl) {
