@@ -24,6 +24,7 @@
             :hasInflunce="KolHasInflunce"
             :hasMsg="kolHasMsg"
             :hasChecked="kolHasChecked"
+            :hasCart="kolHasCart"
             :renderData="item"
             @detail="intoKolDetail"
           ></kols-list-item>
@@ -55,10 +56,11 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: true,
+      kolHasLiked: false,
       KolHasInflunce: true,
       kolHasMsg: true,
       kolHasChecked: false,
+      kolHasCart: true,
       tabIndex: 0,
       isShow: false,
       isLoading: true,

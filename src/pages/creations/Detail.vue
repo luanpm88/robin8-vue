@@ -133,6 +133,7 @@
               :hasLiked="kolHasLiked"
               :hasMsg="kolHasMsg"
               :hasChecked="kolHasChecked"
+              :hasCart="kolHasCart"
               :renderData="item"
               @detail="toKolDetail(item)"
             ></kols-list-item>
@@ -169,6 +170,7 @@ export default {
       kolHasLiked: false,
       kolHasMsg: false,
       kolHasChecked: false,
+      kolHasCart: false,
       kolsList: [],
       kolTypeId: '',
       brandKeyword: ''

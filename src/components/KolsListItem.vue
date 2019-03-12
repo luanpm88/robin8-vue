@@ -34,16 +34,20 @@
           <p>{{renderData.influnce}}</p>
         </div>
       </div>
-      <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
+      <div v-if="hasLiked || hasMsg || hasCart" class="media-right media-middle operation-area">
         <span
           v-if="hasLiked"
           class="iconfont icon-star-fill"
-          @click="doFavorite"
         ></span>
         <span
           v-if="hasMsg"
           class="iconfont icon-msg"
           @click="doChat"
+        ></span>
+        <span
+          v-if="hasCart"
+          class="iconfont icon-cart active"
+          @click="doAddCart"
         ></span>
       </div>
     </div>
@@ -63,12 +67,13 @@ export default {
     hasMsg: Boolean,
     hasChecked: Boolean,
     hasInflunce: Boolean,
+    hasCart: Boolean,
     renderData: Object
   },
   data () {
     return {
       checked: '',
-      favoriteParams: {}
+      cartParams: {}
     }
   },
   methods: {
@@ -81,30 +86,37 @@ export default {
         'id': id
       })
     },
-    doFavorite () {
-      console.log(this.favoriteParams)
-      axios.post(apiConfig.kolCollectUrl, this.favoriteParams, {
+    doAddCart () {
+      console.log(this.cartParams)
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
         headers: {
           'Authorization': this.authorization
         }
-      }).then(this.handledoFavoriteSucc)
+      }).then(this.handleDoAddCartSucc)
     },
-    handledoFavoriteSucc (res) {
+    handleDoAddCartSucc (res) {
       console.log(res)
       let resData = res.data
       console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
     },
     doChat () {
       alert('敬请期待')
     }
   },
   mounted () {
-    console.log(this.renderData)
+    // console.log(this.renderData)
     this.checked = this.renderData.checked
-    this.favoriteParams.profile_id = this.renderData.profile_id
-    this.favoriteParams.profile_name = this.renderData.profile_name
-    this.favoriteParams.avatar_url = this.renderData.avatar_url
-    this.favoriteParams.desc = this.renderData.desc
+    this.cartParams.profile_id = this.renderData.profile_id
+    this.cartParams.profile_name = this.renderData.profile_name
+    this.cartParams.avatar_url = this.renderData.avatar_url
+    this.cartParams.desc = this.renderData.desc
   },
   computed: {
     ...mapState(['authorization'])
@@ -164,6 +176,9 @@ export default {
       }
       &.icon-star-fill.active {
         color: nth($yellow, 1);
+      }
+      &.icon-cart.active {
+        color: nth($purple, 1);
       }
     }
   }
