@@ -29,6 +29,9 @@ const config = {
   // 品牌主信息编辑 post
   usersUrl: `${host}/users`,
 
+  // 收藏kol post
+  kolCollectUrl: `${host}/users/collect_kol`,
+
   // 品牌主信息 get
   profileUrl: `${host}/users/profile`,
 

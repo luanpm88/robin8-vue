@@ -28,28 +28,47 @@
         </h5>
         <p class="desc">{{renderData.desc}}</p>
       </div>
+      <div v-if="hasInflunce" class="media-right media-middle influnce-score">
+        <div class="text-center">
+          <h5>Influence Score</h5>
+          <p>{{renderData.influnce}}</p>
+        </div>
+      </div>
       <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
-        <span v-if="hasInflunce" class="media-right-txt">{{renderData.influnce}}</span>
-        <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
-        <span v-if="hasMsg" class="iconfont icon-msg" @click="alertMessage"></span>
+        <span
+          v-if="hasLiked"
+          class="iconfont icon-star-fill"
+          @click="doFavorite"
+        ></span>
+        <span
+          v-if="hasMsg"
+          class="iconfont icon-msg"
+          @click="doChat"
+        ></span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
+import commonJs from '@javascripts/common.js'
+import { mapState } from 'vuex'
+
 export default {
-  name: "KolsListItem",
+  name: 'KolsListItem',
   props: {
     hasLiked: Boolean,
     hasMsg: Boolean,
     hasChecked: Boolean,
-    renderData: Object,
-    hasInflunce: Boolean
+    hasInflunce: Boolean,
+    renderData: Object
   },
   data () {
     return {
-      checked: ''
+      checked: '',
+      favoriteParams: {}
     }
   },
   methods: {
@@ -62,14 +81,35 @@ export default {
         'id': id
       })
     },
-    alertMessage() {
-      alert('敬请期待');
+    doFavorite () {
+      console.log(this.favoriteParams)
+      axios.post(apiConfig.kolCollectUrl, this.favoriteParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handledoFavoriteSucc)
+    },
+    handledoFavoriteSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+    },
+    doChat () {
+      alert('敬请期待')
     }
   },
   mounted () {
+    console.log(this.renderData)
     this.checked = this.renderData.checked
+    this.favoriteParams.profile_id = this.renderData.profile_id
+    this.favoriteParams.profile_name = this.renderData.profile_name
+    this.favoriteParams.avatar_url = this.renderData.avatar_url
+    this.favoriteParams.desc = this.renderData.desc
+  },
+  computed: {
+    ...mapState(['authorization'])
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -112,6 +152,9 @@ export default {
       font-size: 0.8rem;
     }
   }
+  .influnce-score {
+    color: #333;
+  }
   .operation-area {
     .iconfont {
       margin-left: 10px;
@@ -141,8 +184,5 @@ export default {
     background-color: #ebedf2;
     overflow: hidden;
   }
-}
-.media-right-txt{
-  color:#333;
 }
 </style>

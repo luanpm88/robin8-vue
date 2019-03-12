@@ -24,18 +24,18 @@
             </div>
             <p class="d-post-right-read" v-if='Number(type) === 0'>
               <span>
-                <i class="iconfont icon-like"></i>{{item.influence_likes}}
+                <i class="iconfont icon-heart"></i>{{item.influence_likes}}
               </span>
               <span>
                 <i class="iconfont icon-share"></i>{{item.influence_shares}}
               </span>
               <span>
-                <i class="iconfont icon-pinglun"></i>{{item.influence_comments}}
+                <i class="iconfont icon-comment"></i>{{item.influence_comments}}
               </span>
             </p>
-            <p class="d-post-right-read" v-else> 
-              <span  v-html="'Read:' + item.influence_reads"></span> 
-              <span><i class="iconfont icon-like"></i>{{item.influence_likes}}</span>
+            <p class="d-post-right-read" v-else>
+              <span  v-html="'Read:' + item.influence_reads"></span>
+              <span><i class="iconfont icon-heart"></i>{{item.influence_likes}}</span>
             </p>
             <p class="d-post-show-time">{{item.post_time_display}}</p>
           </div>
@@ -63,8 +63,8 @@ import commonJs from '@javascripts/common.js';
 import { mapState } from "vuex";
 export default {
   name: "detailAnalytic",
-  components: { 
-    DefaultTabs 
+  components: {
+    DefaultTabs
   },
   data() {
     return {
@@ -99,7 +99,7 @@ export default {
     this.tabIndexThreeInit();
   },
   methods: {
-    // post 
+    // post
     tabIndexThreeInit() {
       this.postParams.profile_id = String(this.$route.params.id);
       if (Number(this.$route.query.type) === 0) {

@@ -2,7 +2,7 @@
   <div class="panel default-panel">
     <div class="panel-head">
       <h5 class="title purple">
-        <span class="iconfont icon-101"></span>
+        <span class="iconfont icon-target"></span>
         {{$t('lang.homePage.anlytics.title')}}
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
       </h5>
@@ -225,7 +225,7 @@ export default {
     tabClick(tab) {
       this.cur = tab.index;
       this.topTabCur = 0;
-      
+
       if (tab.index === 0) {
         // trend 微博
         this.trendsWeibo(this.trendParams);

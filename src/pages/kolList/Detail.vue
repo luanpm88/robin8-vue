@@ -12,12 +12,12 @@
               <div class="kol-info">
                 <p>
                   {{infoList.name}}
-                  <i class="iconfont icon-nvxing" v-if="infoList.gender == 'm'"></i>
-                  <i class="iconfont icon-nanxing" v-if="infoList.gender == 'f'"></i>
+                  <i class="iconfont icon-female" v-if="infoList.gender == 'm'"></i>
+                  <i class="iconfont icon-male" v-if="infoList.gender == 'f'"></i>
                 </p>
                 <p>{{infoList.age}}</p>
                 <p>
-                  <i class="iconfont icon-weizhi"></i>
+                  <i class="iconfont icon-location"></i>
                   {{infoList.region}}
                 </p>
               </div>
@@ -117,7 +117,7 @@
                         </a-tooltip>
                       </th>
                       <th>
-                        
+
                         <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.analyticsData.clientTip')">
                           {{$t('lang.kolList.detail.analyticsData.clients')}}
                         </a-tooltip>
