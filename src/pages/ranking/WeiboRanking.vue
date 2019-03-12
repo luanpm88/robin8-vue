@@ -24,7 +24,7 @@
       >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{startDate}})</p>
       <p class="r-top-right col-sm-4">
         <span>7 | 14 | 21</span>
-        <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
+        <!-- <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span> -->
       </p>
     </div>
     <!-- top list -->
@@ -58,10 +58,10 @@
       :pagination="false" :scroll="{ y: 500 }">
         <template slot="profileDec" slot-scope="dec">
           <div class="r-tableThirtyList-name" 
-          @click="rowClick(dec)">
+          @click="openDetails(dec)">
             <img :src="dec.img" alt="">
             <p>{{dec.name}}</p>
-            <p>{{dec.id}}</p>
+            <!-- <p>{{dec.id}}</p> -->
           </div>
         </template>
       </a-table>
@@ -82,7 +82,7 @@ let totalParams = {
   no_of_days: 21
 };
 export default {
-  name: "weiboRanking",
+  name: "wechatRanking",
   components: {
     ASpin: Spin,
     ATable: Table
@@ -104,7 +104,7 @@ export default {
       isTopLoading: true,
       isTableLoding: true,
       isTable: false,
-      columns: totalDataJS.ranking.thirtyColums,
+      columns: totalDataJS.ranking.weibothirtyColums,
       TableData: [],
       totalKeywords: ''
     };
@@ -180,20 +180,21 @@ export default {
     RankingDate(params) {
       const _that = this;
       axios
-        .post(apiConfig.RankingDate, params, {
+        .post(apiConfig.WeboRankingDate, params, {
           headers: {
             Authorization: _that.authorization
           }
         })
         .then(function(res) {
-          // console.log('头部data', res);
+          // console.log('最新的data 数据', res);
           if ((res.status = 200)) {
             _that.refreshDate = res.data.available_report_dates[0];
             totalParams.report_date = _that.refreshDate;
             // right top list
-            _that.WeChatTopList(totalParams);
+            _that.WeboTopList(totalParams);
             // 30 list
-            _that.WeChatThirtyList(totalParams);
+            totalParams.sort_col = 'total_sum_engagement';
+            _that.WeboThirtyList(totalParams);
           }
         })
         .catch(function(error) {
@@ -201,26 +202,28 @@ export default {
         });
     },
     // top list
-    WeChatTopList(params) {
+    WeboTopList(params) {
       const _that = this;
       axios
-        .post(apiConfig.WeChatTopList, params, {
+        .post(apiConfig.WeboTopList, params, {
           headers: {
             Authorization: _that.authorization
           }
         })
         .then(function(res) {
-          // console.log('topList', res);
+          // console.log('topList res', res);
           _that.tableTopList = [];
           if ((res.status = 200)) {
             _that.isTopLoading = false;
             _that.tableTopList.push(
+              res.data.top_count_summary,
               res.data.most_likes_summary,
-              res.data.most_post_influence_summary,
-              res.data.top_count_summary
+              res.data.most_post_influence_summary
             );
             _that.tableTopList[0].fixedTit = "Most Active Profile";
+            _that.tableTopList[0].value = _that.tableTopList[0].value + ' Posts';
             _that.tableTopList[1].fixedTit = "Most Like Profile";
+            _that.tableTopList[1].value = _that.tableTopList[1].value + ' Likes'
             _that.tableTopList[2].fixedTit = "Most Influential Profile";
           }
         })
@@ -229,18 +232,18 @@ export default {
         });
     },
     // right 30 list
-    WeChatThirtyList(params) {
+    WeboThirtyList(params) {
       const _that = this;
       axios
-        .post(apiConfig.WeChatThirtyList, params, {
+        .post(apiConfig.WeboThirtyList, params, {
           headers: {
             Authorization: _that.authorization
           }
         })
         .then(function(res) {
-          // console.log('30', res);
+          // console.log('WeboThirtyList', res);
           if ((res.status === 200)) {
-             _that.isTable = true;
+            _that.isTable = true;
             _that.isTableLoding = false;
             res.data.forEach((element, index) => {
               element.profileDec = {
@@ -251,7 +254,7 @@ export default {
               }
               element.profileDec.img = element.avatar_url;
               element.profileDec.name = element.profile_name;
-              element.profileDec.id = element.weixin_id;
+              element.profileDec.id = element.profile_id;
               element.profileDec.profile_id = element.profile_id;
             });
             _that.tableThirtyList = res.data;
@@ -279,6 +282,7 @@ export default {
         path: '/ranking/BenchMark',
         name: 'benchMark',
         params: {
+          type: 0,
           industry: totalParams.industry,
           no_of_days: totalParams.no_of_days,
           // report_date: this.refreshDate
@@ -293,19 +297,9 @@ export default {
         name: 'KolDetail',
         params: {
           id: item.profile_id,
-          type: 1,
-          brand_keywords: this.totalKeywords
-        }
-      });
-    },
-    // 行点击跳转detail
-    rowClick(dec) {
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: dec.profile_id,
-          type: 1,
+        },
+        query: {
+          type: 0,
           brand_keywords: this.totalKeywords
         }
       });

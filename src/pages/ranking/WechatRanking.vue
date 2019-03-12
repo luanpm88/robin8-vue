@@ -104,7 +104,7 @@ export default {
       isTopLoading: true,
       isTableLoding: true,
       isTable: false,
-      columns: totalDataJS.ranking.thirtyColums,
+      columns: totalDataJS.ranking.weixinthirtyColums,
       TableData: [],
       totalKeywords: ''
     };
@@ -180,7 +180,7 @@ export default {
     RankingDate(params) {
       const _that = this;
       axios
-        .post(apiConfig.RankingDate, params, {
+        .post(apiConfig.WeChatRankingDate, params, {
           headers: {
             Authorization: _that.authorization
           }
@@ -215,12 +215,14 @@ export default {
           if ((res.status = 200)) {
             _that.isTopLoading = false;
             _that.tableTopList.push(
+              res.data.top_count_summary,
               res.data.most_likes_summary,
-              res.data.most_post_influence_summary,
-              res.data.top_count_summary
+              res.data.most_post_influence_summary
             );
             _that.tableTopList[0].fixedTit = "Most Active Profile";
+            _that.tableTopList[0].value = _that.tableTopList[0].value + ' Posts';
             _that.tableTopList[1].fixedTit = "Most Like Profile";
+            _that.tableTopList[1].value = _that.tableTopList[1].value + ' Likes'
             _that.tableTopList[2].fixedTit = "Most Influential Profile";
           }
         })
@@ -279,6 +281,7 @@ export default {
         path: '/ranking/BenchMark',
         name: 'benchMark',
         params: {
+          type: 1,
           industry: totalParams.industry,
           no_of_days: totalParams.no_of_days,
           // report_date: this.refreshDate
