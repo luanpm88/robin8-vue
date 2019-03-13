@@ -282,12 +282,13 @@ export default {
         path: '/ranking/BenchMark',
         name: 'benchMark',
         params: {
-          type: 0,
+          type: 0
+        },
+        query: {
           industry: totalParams.industry,
           no_of_days: totalParams.no_of_days,
-          // report_date: this.refreshDate
           report_date: totalParams.report_date
-        },
+        }
       });
     },
     // 跳转detail

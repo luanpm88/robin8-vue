@@ -49,13 +49,13 @@ export default {
   },
   created() {
     // console.log(this.$route.params)
-    this.totalParams.industry = this.$route.params.industry;
-    this.totalParams.report_date = this.$route.params.report_date;
-    this.totalParams.no_of_days = this.$route.params.no_of_days;
+    this.totalParams.industry = this.$route.query.industry;
+    this.totalParams.report_date = this.$route.query.report_date;
+    this.totalParams.no_of_days = this.$route.query.no_of_days;
 
-    this.totalTwoParams.industry = this.$route.params.industry;
-    this.totalTwoParams.report_date = this.$route.params.report_date;
-    this.totalTwoParams.no_of_days = this.$route.params.no_of_days;
+    this.totalTwoParams.industry = this.$route.query.industry;
+    this.totalTwoParams.report_date = this.$route.query.report_date;
+    this.totalTwoParams.no_of_days = this.$route.query.no_of_days;
 
     if (this.$route.params.type === 1) {
       // 微信 图表一
@@ -142,8 +142,9 @@ export default {
                     padding: [8, 8, 8, 8],
                     color: '#fff',
                     align: 'left',
-                    lineHeight: 15,
+                    fontSize: 16,
                     backgroundColor: 'rgba(0,0,0,0.8)',
+                    borderRadius: 5,
                     formatter: function(param) {
                       // return param.data[3] ;
                       param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Reads: ' + param.data[1];
@@ -296,11 +297,12 @@ export default {
                     padding: [8, 8, 8, 8],
                     color: '#fff',
                     align: 'left',
-                    lineHeight: 15,
+                    fontSize: 16,
                     backgroundColor: 'rgba(0,0,0,0.8)',
+                    borderRadius: 5,
                     formatter: function(param) {
                       // return param.data[3] ;
-                      param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Reads: ' + param.data[1];
+                      param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Total Sum Engagement: ' + param.data[1];
                       return param;
                     },
                     position: 'top'
@@ -320,7 +322,7 @@ export default {
               let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
               x = element.total_sum_engagement / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 50 * (document.body.clientWidth);
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }

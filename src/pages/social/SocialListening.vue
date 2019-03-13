@@ -10,7 +10,7 @@
           <div class="panel-body">
             <div class="form-horizontal">
               <div class="form-group">
-                <div class="col-sm-2 control-label">Topic</div>
+                <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
                 <div class="col-sm-4">
                   <input
                     type="text"
@@ -18,14 +18,14 @@
                     v-model="topic"
                   />
                 </div>
-                <div class="col-sm-2 control-label">Source</div>
+                <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
                 <div class="col-sm-4">
                   <select class="form-control" v-model="source">
                     <option value="0">{{$t('lang.weibo')}}</option>
                     <option value="1">{{$t('lang.wechat')}}</option>
                   </select>
                 </div>
-                <div class="col-sm-2 control-label mt20">ProfileId</div>
+                <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
                 <div class="col-sm-4 mt20">
                   <input
                     type="text"

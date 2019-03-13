@@ -410,7 +410,7 @@ export default new Router({
           }
         },
         {
-        path: '/ranking/BenchMark',
+        path: '/ranking/BenchMark/:type',
         name: 'benchMark',
         component: BenchMark,
         meta: {
