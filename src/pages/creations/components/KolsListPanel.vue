@@ -6,8 +6,8 @@
     <div class="panel-body">
       <div v-if="kolsList.length > 0" class="kols-list clearfix">
         <kols-list-item
-          v-for="(item, index) in kols"
-          :key="index"
+          v-for="item in kols"
+          :key="item.id"
           :hasLiked="kolHasLiked"
           :hasMsg="kolHasMsg"
           :hasChecked="kolHasChecked"
@@ -66,17 +66,17 @@ export default {
     handleCheck (data) {
       let _id = data.id
       console.log(_id)
-      let _kols = this.kols
-      let _index = this.checkedIds.indexOf(_id)
-      if (_index == -1) {
-        this.checkedIds.push(_id)
-      } else {
-        this.checkedIds.splice(_index, 1)
-      }
-      let _checkedIds = this.checkedIds
-      console.log(_checkedIds)
+      // let _index = this.checkedIds.indexOf(_id)
+      // if (_index == -1) {
+      //   this.checkedIds.push(_id)
+      // } else {
+      //   this.checkedIds.splice(_index, 1)
+      // }
+      // let _checkedIds = this.checkedIds
+      // console.log(_checkedIds)
       this.$emit('checkedKols', {
-        'ids': _checkedIds
+        // 'ids': _checkedIds,
+        'id': _id
       })
     },
     renderData (kolsList) {
