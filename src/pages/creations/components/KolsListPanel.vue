@@ -22,6 +22,7 @@
 
       <div class="btn-area">
         <a-pagination
+          size="small"
           :defaultCurrent="currentPage"
           :defaultPageSize="kolsPerPage"
           :total="kolsTotal"
