@@ -615,5 +615,10 @@ export const lang = {
     topPosts: {
       title: 'Top Posts'
     }
+  },
+  socialPage: {
+    topic: 'Topic',
+    source: 'Source',
+    kolId: 'KOL Profile ID'
   }
 }

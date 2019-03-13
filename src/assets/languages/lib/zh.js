@@ -616,5 +616,10 @@ export const lang = {
     topPosts: {
       title: '热门文章'
     }
+  },
+  socialPage: {
+    topic: '主题',
+    source: '平台',
+    kolId: 'KOL Id'
   }
 }
