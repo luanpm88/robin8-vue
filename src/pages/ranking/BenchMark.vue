@@ -52,14 +52,26 @@ export default {
     this.totalParams.industry = this.$route.params.industry;
     this.totalParams.report_date = this.$route.params.report_date;
     this.totalParams.no_of_days = this.$route.params.no_of_days;
-    
-    this.weixinBeachOne(this.totalParams);
-    
-     this.totalTwoParams.industry = this.$route.params.industry;
+
+    this.totalTwoParams.industry = this.$route.params.industry;
     this.totalTwoParams.report_date = this.$route.params.report_date;
     this.totalTwoParams.no_of_days = this.$route.params.no_of_days;
-    this.weixinBeachTwo(this.totalTwoParams);
-    this.weixinBeachThree(this.totalTwoParams);
+
+    if (this.$route.params.type === 1) {
+      // 微信 图表一
+      this.weixinBeachOne(this.totalParams);
+      // 微信 图表二
+      this.weixinBeachTwo(this.totalTwoParams);
+      // 微信 图表三
+      this.weixinBeachThree(this.totalTwoParams);
+    } else {
+      // 微博 图表一
+      this.weiboBeachOne(this.totalParams);
+      // 微博 图表二
+      this.weiboBeachTwo(this.totalTwoParams);
+      // 微博 图表三
+      this.weiboBeachThree(this.totalTwoParams);
+    }
   },
   data() {
     return {
@@ -100,7 +112,7 @@ export default {
     };
   },
   methods: {
-    // Benchmark top 21 KOLs
+    // 微信Benchmark top 21 KOLs
     weixinBeachOne(params) {
       const _that = this;
       axios
@@ -110,9 +122,9 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微xin", res);
           _that.benchOne.options.series = [];
            _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
+           _that.benchOne.options.xAxis.name= 'Reads';
           if (res.status === 200) {
             _that.oneLoading = false;
             res.data.forEach((element, index) => {
@@ -154,7 +166,7 @@ export default {
               let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
               x = element.total_reads / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = 12500 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }
@@ -217,6 +229,160 @@ export default {
       const _that = this;
       axios
         .post(apiConfig.weixinBeachThree, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.benchThree.options.series = [];
+           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on '+ _that.totalParams.industry +' when comparing to overall market voice';
+          if (res.status === 200) {
+            _that.threeLoading = false;
+            res.data.data.forEach((element, index) => {
+              let json = {
+                name: '',
+                type: 'bar',
+                stack: '总量',
+                color: '',
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'insideRight'
+                  }
+                },
+                data: []
+              }
+              json.name = res.data.profile_names[index];
+              json.data = element;
+              json.color = _that.benchOneColorList[index];
+              _that.benchThree.options.series.push(json)
+
+            })
+            _that.benchThree.options.xAxis.data = res.data.date_labels;
+            _that.$refs.benchThreeChart.updateOptions(_that.benchThree.options);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    // weiboBenchmark top 21 KOLs
+    weiboBeachOne(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.weiboBeachOne, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.benchOne.options.series = [];
+           _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
+           _that.benchOne.options.xAxis.name= 'Total Sum Engagement';
+          if (res.status === 200) {
+            _that.oneLoading = false;
+            res.data.forEach((element, index) => {
+              let json = {
+                name: "",
+                data: [],
+                type: 'scatter',
+                symbolSize: function(data) {
+                  return Math.sqrt(data[2]) / 150;
+                },
+                label: {
+                  emphasis: {
+                    show: true,
+                    borderWidth: 0,
+                    padding: [8, 8, 8, 8],
+                    color: '#fff',
+                    align: 'left',
+                    lineHeight: 15,
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    formatter: function(param) {
+                      // return param.data[3] ;
+                      param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Reads: ' + param.data[1];
+                      return param;
+                    },
+                    position: 'top'
+                  }
+                },
+                itemStyle: {
+                  normal: {
+                    shadowBlur: 10,
+                    shadowColor: "rgba(0, 0, 0, 0)",
+                    shadowOffsetY: 5,
+                    // borderWidth: 0,
+                    color: "",
+                    opacity: 0.8,
+                  }
+                }
+              };
+              let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
+              x = element.total_sum_engagement / element.doc_count;
+              y = element.total_likes / element.doc_count;
+              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
+              if (maxCount < element.doc_count) {
+                maxCount = element.doc_count;
+              }
+              size = 5 + (element.doc_count * maxBubbleSize);
+              json.name = '#' + element.rank_no + element.profile_name;
+              currentData.push(x, y, size, element.profile_name, element.profile_name, element.doc_count);
+              json.data.push(currentData);
+              json.itemStyle.normal.color = _that.benchOneColorList[index];
+              _that.benchOne.options.series.push(json);
+            });
+            _that.$refs.benchOneChart.updateOptions(_that.benchOne.options);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    weiboBeachTwo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.weiboBeachTwo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          _that.benchTwo.options.series = [];
+           _that.benchTwo.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
+          if (res.status === 200) {
+            _that.twoLoading = false;
+            res.data.data.forEach((element, index) => {
+              let json = {
+                name: '',
+                type: 'bar',
+                stack: '总量',
+                color: '',
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'insideRight'
+                  }
+                },
+                data: []
+              }
+              json.name = res.data.profile_names[index];
+              json.data = element;
+              json.color = _that.benchOneColorList[index];
+              _that.benchTwo.options.series.push(json)
+
+            })
+            _that.benchTwo.options.xAxis.data = res.data.date_labels;
+            _that.$refs.benchTwoChart.updateOptions(_that.benchTwo.options);
+          }
+        })
+        .catch(function(error) {
+          // console.log(error);
+        });
+    },
+    weiboBeachThree(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.weiboBeachThree, params, {
           headers: {
             Authorization: _that.authorization
           }

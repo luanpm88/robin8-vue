@@ -25,6 +25,14 @@
                     <option value="1">{{$t('lang.wechat')}}</option>
                   </select>
                 </div>
+                <div class="col-sm-2 control-label mt20">ProfileId</div>
+                <div class="col-sm-4 mt20">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="profileId"
+                  />
+                </div>
               </div>
 
               <div class="text-center mt30">
@@ -52,9 +60,11 @@
               <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
                 <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
                 <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-                <div class="home-post-detail"  @click="intoKolDetail(item)">
-                  <img :src="item.imgUrl" alt class>
-                  <div>
+                <div class="media social-detail" @click="intoKolDetail(item)">
+                  <div class="media-left media-middle">
+                    <img :src="item.imgUrl" alt class>
+                  </div>
+                  <div class="media-body media-middle">
                     <strong>{{item.name}}</strong>
                     <p>{{item.time}}</p>
                   </div>
@@ -104,6 +114,7 @@ export default {
     return {
       source: 0,
       topic: 'adidas',
+      profileId: '',
       currentPage: 0,
       currentPageAdd: 1,
       kolsPerPage: 10,
@@ -117,6 +128,7 @@ export default {
         start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
         OR_keywords: 'adidas',
+        profile_ids: [],
       },
       itemList: []
     };
@@ -202,6 +214,8 @@ export default {
       this.currentPage = 0;
       this.currentPageAdd = this.currentPage + 1;
       this.totalParams.OR_keywords = this.topic;
+      this.totalParams.profile_ids = this.profileId.split(",");
+      // console.log(this.profileId.split(","))
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -218,6 +232,7 @@ export default {
       this.currentPageAdd = page;
       this.currentPage = page - 1;
       this.totalParams.OR_keywords = this.topic;
+      this.totalParams.profile_ids = this.profileId.split(",");
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -258,10 +273,17 @@ export default {
     padding: 30px;
   }
 }
+.social-detail{
+  cursor: pointer;
+  img{
+    border-radius: 50%;
+  }
+}
 .home-post-title {
   color: nth($purple, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
+  margin:20px 0px 10px;
 }
 .home-post-detail{
   display: inline-block;

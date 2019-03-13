@@ -125,6 +125,10 @@ export default {
             {
               title: 'WechatRanking',
               href: '/ranking/WechatRanking'
+            },
+            {
+              title: 'WeiboRanking',
+              href: '/ranking/WeiboRanking'
             }
           ]
         },

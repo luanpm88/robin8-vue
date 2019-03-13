@@ -233,29 +233,38 @@ const config = {
 
   // ranking--------------------------
 
-  // ranking 在调用right 两个列表之前 获取最新的report_date
-  RankingDate: `${searchHost}/price/kol/ranking_date?${searchHostKey}`,
+  // 微信 ranking 在调用right 两个列表之前 获取最新的report_date
+  WeChatRankingDate: `${searchHost}/price/kol/ranking_date?${searchHostKey}`,
+
+  // 微博ranking 在调用right 两个列表之前 获取最新的report_date
+  WeboRankingDate: `${searchHost}/price/weibo/kol/ranking_date?${searchHostKey}`,
 
   // WeChatTopList
   WeChatTopList: `${searchHost}/price/kol/ranking_summary?${searchHostKey}`,
 
+  // WeboTopList
+  WeboTopList: `${searchHost}/price/weibo/kol/ranking_summary?${searchHostKey}`,
+
   // WeChatThirtyList
   WeChatThirtyList: `${searchHost}/price/kol/ranking?${searchHostKey}`,
 
+  // WeChatThirtyList
+  WeboThirtyList: `${searchHost}/price/weibo/kol/ranking?${searchHostKey}`,
+
   // benchMark
   // weixin benchMark
-  weixinBeachOne: `${searchHost}/weixin/kol/benchmark/benchmarking?${searchHostKey}`,
+  weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
 
-  weixinBeachTwo: `${searchHost}/weixin/kol/benchmark/benchmarking2?${searchHostKey}`,
+  weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
 
-  weixinBeachThree: `${searchHost}/weixin/kol/benchmark/benchmarking3?${searchHostKey}`,
+  weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
 
-  // weixin benchMark
-  // weixinBeachOne: `${searchHost}/price/kol/benchmark/benchmarking?${searchHostKey}`,
+  // weibo benchMark
+  weiboBeachOne: `${searchHost}/price/weibo/kol/benchmark/benchmarking?${searchHostKey}`,
 
-  // weixinBeachTwo: `${searchHost}/price/kol/benchmark/benchmarking2?${searchHostKey}`,
+  weiboBeachTwo: `${searchHost}/price/weibo/kol/benchmark/benchmarking2?${searchHostKey}`,
 
-  // weixinBeachThree: `${searchHost}/price/kol/benchmark/benchmarking3?${searchHostKey}`,
+  weiboBeachThree: `${searchHost}/price/weibo/kol/benchmark/benchmarking2?${searchHostKey}`,
 
   // social listening 接口
   socialWeibo: `${searchHost}/weibo/post/query?${searchHostKey}`,
