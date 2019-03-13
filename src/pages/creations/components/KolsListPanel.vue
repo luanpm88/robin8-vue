@@ -4,8 +4,9 @@
       <h5 class="title text-center">{{title}}</h5>
     </div>
     <div class="panel-body">
-      <div v-if="kolsList.length > 0" class="kols-list clearfix">
+      <div class="kols-list clearfix">
         <kols-list-item
+          v-if="kolsList.length > 0"
           v-for="item in kols"
           :key="item.id"
           :hasLiked="kolHasLiked"
@@ -16,9 +17,9 @@
           @handleCheck="handleCheck"
           @detail="toKolDetail(item)"
         ></kols-list-item>
-      </div>
 
-      <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
+        <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
+      </div>
 
       <div class="btn-area">
         <a-pagination
