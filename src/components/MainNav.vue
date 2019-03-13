@@ -119,7 +119,7 @@ export default {
         },
         {
           title: 'ranking',
-          icon: 'icon-setting',
+          icon: 'icon-rocket',
           href: '/ranking',
           subNav: [
             {
@@ -134,7 +134,7 @@ export default {
         },
         {
           title: 'socialListening',
-          icon: 'icon-setting',
+          icon: 'icon-unit',
           href: '/social/SocialListening'
         }
       ],
