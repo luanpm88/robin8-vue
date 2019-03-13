@@ -122,9 +122,9 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log("我是微xin", res);
           _that.benchOne.options.series = [];
            _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
+           _that.benchOne.options.xAxis.name= 'Reads';
           if (res.status === 200) {
             _that.oneLoading = false;
             res.data.forEach((element, index) => {
@@ -166,7 +166,7 @@ export default {
               let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
               x = element.total_reads / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = 11500 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }
@@ -320,7 +320,7 @@ export default {
               let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
               x = element.total_sum_engagement / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = 1150 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }
