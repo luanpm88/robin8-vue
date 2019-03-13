@@ -413,7 +413,7 @@
       </div>
     </div>
 
-    <kols-list-panel
+    <!-- <kols-list-panel
       v-if="kolsList.length > 0"
       class="mt20"
       title="为您推荐的大V"
@@ -425,25 +425,38 @@
       :kolTypeId="kolTypeId"
       @checkedKols="checkedKols"
       @changeKolsPage="changeKolsPage"
-    ></kols-list-panel>
+    ></kols-list-panel> -->
 
-    <!-- <div class="row mt20">
-      <div class="col-sm-4">
+    <div class="row mt20">
+      <div class="col-sm-6">
         <kols-list-panel
+          v-if="kolsList.length > 0"
           title="为您推荐的大V"
+          :kolsList="kolsList"
+          :kolsPage="kolsPage"
+          :kolsPerPage="kolsPerPage"
+          :kolsTotal="kolsTotal"
+          :keyword="brandKeyword"
+          :kolTypeId="kolTypeId"
+          @checkedKols="checkedKols"
+          @changeKolsPage="changeKolsPage"
         ></kols-list-panel>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <kols-list-panel
-          title="您可能感兴趣的大V"
+          v-if="cartKolsList.length > 0"
+          title="Shopping Cart"
+          :kolsList="cartKolsList"
+          :kolsPage="kolsCartPage"
+          :kolsPerPage="kolsCartPerPage"
+          :kolsTotal="kolsCartTotal"
+          :keyword="brandKeyword"
+          :kolTypeId="kolTypeId"
+          @checkedKols="checkedKols"
+          @changeKolsPage="changeCartKolsPage"
         ></kols-list-panel>
       </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您收藏的大V"
-        ></kols-list-panel>
-      </div>
-    </div> -->
+    </div>
 
     <div class="text-center create-btn-area">
       <button
@@ -489,6 +502,8 @@ export default {
       terracesList: [],
       kolsParams: {},
       kolsList: [],
+      cartKolsParams: {},
+      cartKolsList: [],
       kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
@@ -519,8 +534,11 @@ export default {
         notice: ''
       },
       kolsPage: 0,
-      kolsPerPage: 12,
+      kolsPerPage: 4,
       kolsTotal: 0,
+      kolsCartPage: 0,
+      kolsCartPerPage: 4,
+      kolsCartTotal: 0,
       canSubmit: true
     }
   },
@@ -556,6 +574,22 @@ export default {
           item.val = ''
         })
         this.terracesList = _terracesList
+      }
+    },
+    getCollectedKolsData () {
+      axios.get(apiConfig.kolCollectListUrl, {
+        params: this.cartKolsParams,
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetCollectedKolsDataSucc)
+    },
+    handleGetCollectedKolsDataSucc (res) {
+      console.log(res)
+      if (res.status == 200 && res.data) {
+        const resData = res.data
+        this.cartKolsList = resData.items
+        this.kolsCartTotal = parseInt(resData.paginate['X-Total'])
       }
     },
     getDetailData () {
@@ -739,6 +773,11 @@ export default {
       console.log(data.page)
       this.kolsPage = data.page - 1
       this.searchKolsCtrl()
+    },
+    changeCartKolsPage (data) {
+      console.log(data.page)
+      this.cartKolsParams.page = data.page
+      this.getCollectedKolsData()
     },
     checkedKols (data) {
       let _ids = data.ids
@@ -941,11 +980,20 @@ export default {
     if (this.formType == 'edit') {
       let _self = this
       _self.getBaseData()
+
+      _self.cartKolsParams.page = _self.kolsCartPage + 1
+      _self.cartKolsParams.per_page = _self.kolsCartPerPage
+
+      console.log(_self.cartKolsParams)
+      _self.getCollectedKolsData()
       setTimeout(function () {
         _self.getDetailData()
       }, 500)
     } else {
       this.getBaseData()
+      this.cartKolsParams.page = this.kolsCartPage + 1
+      this.cartKolsParams.per_page = this.kolsCartPerPage
+      this.getCollectedKolsData()
     }
 
     this.provinceData = cityJs.citiesData.provinces
@@ -970,13 +1018,14 @@ export default {
   }
 }
 .creation-form /deep/ .kols-list {
+  height: 352px;
   padding: 24px 60px;
   font-size: 0;
-  & > .kols-list-item {
-    display: inline-block;
-    width: 33.33333%;
-    padding: 0 10px;
-  }
+  // & > .kols-list-item {
+  //   display: inline-block;
+  //   width: 33.33333%;
+  //   padding: 0 10px;
+  // }
 }
 .pr0 {
   padding-right: 0;

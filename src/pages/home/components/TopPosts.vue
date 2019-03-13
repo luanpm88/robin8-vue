@@ -62,13 +62,11 @@
 import axios from "axios"
 import apiConfig from "@/config"
 import commonJs from '@javascripts/common.js'
-import DefaultTabs from "@components/DefaultTabs"
-import KolsListItem from '@components/KolsListItem'
+import DefaultTabs from '@components/DefaultTabs'
 import { mapState } from 'vuex'
 export default {
   components: {
-    DefaultTabs,
-    KolsListItem
+    DefaultTabs
   },
   props: ['childKeyList'],
   data() {

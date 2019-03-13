@@ -11,6 +11,7 @@
           :hasLiked="kolHasLiked"
           :hasMsg="kolHasMsg"
           :hasChecked="kolHasChecked"
+          :hasCart="kolHasCart"
           :renderData="item"
           @handleCheck="handleCheck"
           @detail="toKolDetail(item)"
@@ -54,6 +55,7 @@ export default {
       kolHasLiked: false,
       kolHasMsg: false,
       kolHasChecked: true,
+      kolHasCart: false,
       kols: [],
       checkedIds: [],
       currentPage: 0
