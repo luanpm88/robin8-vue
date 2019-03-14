@@ -130,10 +130,7 @@
             <kols-list-item
               v-for="(item, index) in kolsList"
               :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :hasCart="kolHasCart"
+              :renderStatus="kolRenderStatus"
               :renderData="item"
               @detail="toKolDetail(item)"
             ></kols-list-item>
@@ -167,10 +164,14 @@ export default {
         index: 0
       },
       detailData: {},
-      kolHasLiked: false,
-      kolHasMsg: false,
-      kolHasChecked: false,
-      kolHasCart: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false
+      },
       kolsList: [],
       kolTypeId: '',
       brandKeyword: ''
@@ -200,10 +201,10 @@ export default {
         let _kolsList = this.kolsList
         let _kolItem
         resData.selected_kols.forEach(item => {
-          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
-          _kolItem.id = item.plateform_uuid
-          _kolItem.name = item.name
-          _kolItem.desc = item.desc
+          _kolItem = commonJs.buildObjData('avatar_url', item.avatar_url)
+          _kolItem.profile_id = item.profile_id
+          _kolItem.profile_name = item.profile_name
+          _kolItem.description_raw = item.description_raw
           _kolItem.checked = false
           _kolsList.push(_kolItem)
         })
@@ -234,7 +235,7 @@ export default {
         path: '/kol/',
         name: 'KolDetail',
         params: {
-          id: item.id
+          id: item.profile_id
         },
         query: {
           type: this.kolTypeId,

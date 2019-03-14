@@ -7,15 +7,15 @@
       <div class="media-left">
         <div class="avatar">
           <img
-            :src="renderData.avatar"
+            :src="renderData.avatar_url"
             alt=""
             class="avatar-img"
             @click="toDetail(renderData)"
           />
           <div
-            v-if="hasChecked"
+            v-if="renderStatus.hasChecked"
             class="iconfont icon-round-check-fill check-icon"
-            @click="handleCheck(renderData.id)"
+            @click="handleCheck(renderData.profile_id)"
           ></div>
         </div>
       </div>
@@ -24,30 +24,35 @@
           class="name"
           @click="toDetail(renderData)"
         >
-          {{renderData.name}}
+          {{renderData.profile_name}}
         </h5>
-        <p class="desc">{{renderData.desc}}</p>
+        <p class="desc">{{renderData.description_raw}}</p>
       </div>
-      <div v-if="hasInflunce" class="media-right media-middle influnce-score">
+      <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
           <h5>Influence Score</h5>
-          <p>{{renderData.influnce}}</p>
+          <p>{{renderData.avg_post_influences}}</p>
         </div>
       </div>
-      <div v-if="hasLiked || hasMsg || hasCart" class="media-right media-middle operation-area">
+      <div v-if="renderStatus.hasLiked || renderStatus.hasMsg || renderStatus.hasCart || renderStatus.hasDelete" class="media-right media-middle operation-area">
         <span
-          v-if="hasLiked"
+          v-if="renderStatus.hasLiked"
           class="iconfont icon-star-fill"
         ></span>
         <span
-          v-if="hasMsg"
+          v-if="renderStatus.hasMsg"
           class="iconfont icon-msg"
           @click="doChat"
         ></span>
         <span
-          v-if="hasCart"
+          v-if="renderStatus.hasCart"
           class="iconfont icon-cart active"
           @click="doAddCart"
+        ></span>
+        <span
+          v-if="renderStatus.hasDelete"
+          class="iconfont icon-delete"
+          @click="doDelete(renderData.profile_id)"
         ></span>
       </div>
     </div>
@@ -63,11 +68,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'KolsListItem',
   props: {
-    hasLiked: Boolean,
-    hasMsg: Boolean,
-    hasChecked: Boolean,
-    hasInflunce: Boolean,
-    hasCart: Boolean,
+    renderStatus: Object,
     renderData: Object
   },
   data () {
@@ -79,6 +80,18 @@ export default {
   methods: {
     toDetail (item) {
       this.$emit('detail', item)
+
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: this.renderData.profile_id
+        },
+        query: {
+          type: this.kolTypeId,
+          brand_keywords: this.brandKeyword
+        }
+      })
     },
     handleCheck (id) {
       this.checked = !this.checked
@@ -106,17 +119,22 @@ export default {
         alert('您已成功添加至购物车')
       }
     },
+    doDelete (id) {
+      this.$emit('handleDelete', {
+        'id': id
+      })
+    },
     doChat () {
       alert('敬请期待')
     }
   },
   mounted () {
-    // console.log(this.renderData)
+    console.log(this.renderData)
     this.checked = this.renderData.checked
     this.cartParams.profile_id = this.renderData.profile_id
     this.cartParams.profile_name = this.renderData.profile_name
     this.cartParams.avatar_url = this.renderData.avatar_url
-    this.cartParams.desc = this.renderData.desc
+    this.cartParams.description_raw = this.renderData.description_raw
   },
   computed: {
     ...mapState(['authorization'])

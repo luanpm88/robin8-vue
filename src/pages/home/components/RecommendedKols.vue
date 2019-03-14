@@ -20,20 +20,16 @@
           <kols-list-item
             v-for="(item, index) in currentList"
             :key="index"
-            :hasLiked="kolHasLiked"
-            :hasInflunce="KolHasInflunce"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :hasCart="kolHasCart"
+            :renderStatus="kolRenderStatus"
             :renderData="item"
-            @detail="intoKolDetail"
+            @detail="toKolDetail"
           ></kols-list-item>
         </div>
         <div class="text-center mt20">
           <button
             type="button"
             class="btn btn-sm btn-outline btn-circle btn-purple"
-            @click="intoKolDetailMore"
+            @click="toKolDetailMore"
           >{{$t('lang.more')}}</button>
         </div>
       </default-tabs>
@@ -56,11 +52,20 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: false,
-      KolHasInflunce: true,
-      kolHasMsg: true,
-      kolHasChecked: false,
-      kolHasCart: true,
+      // kolHasLiked: false,
+      // KolHasInflunce: true,
+      // kolHasMsg: true,
+      // kolHasChecked: false,
+      // kolHasCart: true,
+      // kolHasDelete: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: true,
+        hasChecked: false,
+        hasInflunce: true,
+        hasCart: true,
+        hasDelete: false
+      },
       tabIndex: 0,
       isShow: false,
       isLoading: true,
@@ -118,7 +123,7 @@ export default {
       }
     },
     // 跳转 kol detail
-    intoKolDetail(item) {
+    toKolDetail(item) {
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',
@@ -132,7 +137,7 @@ export default {
       });
     },
     // 跳转kol list
-    intoKolDetailMore() {
+    toKolDetailMore() {
       this.$router.push({
         path: '/kol/list',
         name: 'KolList',
@@ -152,17 +157,11 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
-            _that.isShow = true;
+            _that.isShow = true
           } else {
-            _that.isShow = false;
-            res.data.forEach(element => {
-              element.name = element.profile_name
-              element.desc = element.description_raw
-              element.avatar = element.avatar_url
-              element.influnce = element.avg_post_influences
-            })
+            _that.isShow = false
             _that.currentList = res.data.slice(0, 5)
           }
         })
@@ -180,17 +179,11 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
-            _that.isShow = true;
+            _that.isShow = true
           } else {
-            _that.isShow = false;
-            res.data.forEach(element => {
-              element.name = element.profile_name
-              element.desc = element.description_raw
-              element.avatar = element.avatar_url
-              element.influnce = element.avg_post_influences
-            })
+            _that.isShow = false
             _that.currentList = res.data.slice(0, 5)
           }
         })

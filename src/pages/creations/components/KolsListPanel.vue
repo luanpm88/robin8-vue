@@ -9,16 +9,13 @@
           v-if="kolsList.length > 0"
           v-for="item in kols"
           :key="item.id"
-          :hasLiked="kolHasLiked"
-          :hasMsg="kolHasMsg"
-          :hasChecked="kolHasChecked"
-          :hasCart="kolHasCart"
+          :renderStatus="kolRenderStatus"
           :renderData="item"
           @handleCheck="handleCheck"
           @detail="toKolDetail(item)"
         ></kols-list-item>
 
-        <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
+        <div v-else class="empty-area text-center">暂无数据...</div>
       </div>
 
       <div class="btn-area">
@@ -54,10 +51,14 @@ export default {
   },
   data () {
     return {
-      kolHasLiked: false,
-      kolHasMsg: false,
-      kolHasChecked: true,
-      kolHasCart: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: true,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false
+      },
       kols: [],
       checkedIds: [],
       currentPage: 0
@@ -67,16 +68,7 @@ export default {
     handleCheck (data) {
       let _id = data.id
       console.log(_id)
-      // let _index = this.checkedIds.indexOf(_id)
-      // if (_index == -1) {
-      //   this.checkedIds.push(_id)
-      // } else {
-      //   this.checkedIds.splice(_index, 1)
-      // }
-      // let _checkedIds = this.checkedIds
-      // console.log(_checkedIds)
       this.$emit('checkedKols', {
-        // 'ids': _checkedIds,
         'id': _id
       })
     },
@@ -85,10 +77,10 @@ export default {
       let _kolItem
       this.kols = []
       _kolsList.forEach(item => {
-        _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
-        _kolItem.id = item.profile_id
-        _kolItem.name = item.profile_name
-        _kolItem.desc = item.description_raw
+        _kolItem = commonJs.buildObjData('avatar_url', item.avatar_url)
+        _kolItem.profile_id = item.profile_id
+        _kolItem.profile_name = item.profile_name
+        _kolItem.description_raw = item.description_raw
         _kolItem.checked = item.checked
         if (item.checked) {
           this.checkedIds.push(item.profile_id)
@@ -104,7 +96,7 @@ export default {
         path: '/kol/',
         name: 'KolDetail',
         params: {
-          id: item.id
+          id: item.profile_id
         },
         query: {
           type: this.kolTypeId,

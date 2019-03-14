@@ -413,20 +413,6 @@
       </div>
     </div>
 
-    <!-- <kols-list-panel
-      v-if="kolsList.length > 0"
-      class="mt20"
-      title="为您推荐的大V"
-      :kolsList="kolsList"
-      :kolsPage="kolsPage"
-      :kolsPerPage="kolsPerPage"
-      :kolsTotal="kolsTotal"
-      :keyword="brandKeyword"
-      :kolTypeId="kolTypeId"
-      @checkedKols="checkedKols"
-      @changeKolsPage="changeKolsPage"
-    ></kols-list-panel> -->
-
     <div
       v-if="kolsList.length > 0 || cartKolsList.length > 0"
       class="row mt20"
@@ -459,6 +445,23 @@
       </div>
     </div>
 
+    <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">已选择的大V</h5>
+      </div>
+      <div class="panel-body">
+        <div class="checked-kols-list clearfix">
+          <kols-list-item
+            v-for="item in submitData.selected_kols"
+            :key="item.id"
+            :renderStatus="kolRenderStatus"
+            :renderData="item"
+            @detail="toKolDetail(item)"
+          ></kols-list-item>
+        </div>
+      </div>
+    </div>
+
     <div class="text-center create-btn-area">
       <button
         type="button"
@@ -477,6 +480,7 @@ import commonJs from '@javascripts/common.js'
 import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
+import KolsListItem from '@components/KolsListItem'
 import KolsListPanel from './KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
@@ -489,6 +493,7 @@ export default {
   components: {
     Datepicker,
     TagsList,
+    KolsListItem,
     KolsListPanel,
     VueCoreImageUpload
   },
@@ -505,8 +510,6 @@ export default {
       kolsList: [],
       cartKolsParams: {},
       cartKolsList: [],
-      checkedKolsList: [],
-      checkedKolsId: [],
       kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
@@ -542,6 +545,14 @@ export default {
       kolsCartPage: 0,
       kolsCartPerPage: 4,
       kolsCartTotal: 0,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: true
+      },
       canSubmit: true
     }
   },
@@ -603,9 +614,10 @@ export default {
         }
         if (this.formType == 'edit') {
           let _selectedKols = this.submitData.selected_kols
+          console.log(_selectedKols)
           _selectedKols.forEach(item => {
             this.cartKolsList.forEach(e => {
-              if (item.plateform_uuid == e.profile_id) {
+              if (item.profile_id == e.profile_id) {
                 e.checked = true
               }
             })
@@ -717,7 +729,7 @@ export default {
         let _selectedKols = this.submitData.selected_kols
         _selectedKols.forEach(item => {
           this.kolsList.forEach(e => {
-            if (item.plateform_uuid == e.profile_id) {
+            if (item.profile_id == e.profile_id) {
               e.checked = true
             }
           })
@@ -800,57 +812,32 @@ export default {
       this.cartKolsParams.page = data.page
       this.getCollectedKolsData()
     },
-    checkedKols (data) {
-      // let _ids = data.ids
-      // console.log(_ids)
-      // let _kolsList = this.kolsList
-      // let _checkedKols = []
-      // let _kolItem
-
-      // _ids.forEach(item => {
-      //   _kolsList.forEach(e => {
-      //     if (e.profile_id == item) {
-      //       _kolItem = commonJs.buildObjData('plateform_uuid', item)
-      //       _kolItem.plateform_name = this.plateformName
-      //       _kolItem.name = e.profile_name
-      //       _kolItem.avatar_url = e.avatar_url
-      //       _kolItem.desc = e.description_raw
-      //       _checkedKols.push(_kolItem)
-      //     }
-      //   })
-      // })
-      // console.log(_checkedKols)
-      // this.checkedKolsList.concat(_checkedKols)
-      // console.log(this.submitData.selected_kols)
-      // this.submitData.selected_kols = this.submitData.selected_kols.concat(_checkedKols)
-      // console.log(this.submitData.selected_kols)
-
-
-      let _id = data.id
+    checkedKolsCtrl (id, list) {
+      let _id = id
       console.log(_id)
-      let _kolsList = this.kolsList
+      let _list = list
       let _checkedKols = this.submitData.selected_kols
-      let _kolItem = commonJs.buildObjData('plateform_uuid', _id)
+      let _kolItem = commonJs.buildObjData('profile_id', _id)
 
       let result = _checkedKols.some(item => {
-        if (item.plateform_uuid == _id) {
+        if (item.profile_id == _id) {
           return true
         }
       })
 
-      _kolsList.forEach(item => {
+      _list.forEach(item => {
         console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
             _kolItem.plateform_name = this.plateformName
-            _kolItem.name = item.profile_name
+            _kolItem.profile_name = item.profile_name
             _kolItem.avatar_url = item.avatar_url
-            _kolItem.desc = item.description_raw
+            _kolItem.description_raw = item.description_raw
             _checkedKols.push(_kolItem)
           } else {
             let _index
             _checkedKols.forEach(_item => {
-              if (item.profile_id == _item.plateform_uuid) {
+              if (item.profile_id == _item.profile_id) {
                 _index = _checkedKols.indexOf(_item)
               }
             })
@@ -859,119 +846,36 @@ export default {
         }
       })
       console.log(_checkedKols)
-      // this.checkedKolsList = _checkedKols
       this.submitData.selected_kols = _checkedKols
+      console.log(this.submitData.selected_kols)
+    },
+    checkedKols (data) {
+      let _id = data.id
+      console.log(_id)
+      let _kolsList = this.kolsList
+      this.checkedKolsCtrl(_id, _kolsList)
       console.log(this.submitData.selected_kols)
     },
     checkedCartKols (data) {
       let _id = data.id
       console.log(_id)
       let _cartKolsList = this.cartKolsList
-      let _checkedKols = this.submitData.selected_kols
-      let _kolItem = commonJs.buildObjData('plateform_uuid', _id)
-
-      // let _index = this.checkedKolsId.indexOf(_id)
-      // if (_index == -1) {
-      //   this.checkedKolsId.push(_id)
-      //   _cartKolsList.forEach(e => {
-      //     if (e.profile_id == _id) {
-      //       _kolItem = commonJs.buildObjData('plateform_uuid', _id)
-      //       _kolItem.plateform_name = this.plateformName
-      //       _kolItem.name = e.profile_name
-      //       _kolItem.avatar_url = e.avatar_url
-      //       _kolItem.desc = e.description_raw
-      //       _checkedKols.push(_kolItem)
-      //     }
-      //   })
-      // } else {
-      //   this.checkedKolsId.splice(_index, 1)
-      // }
-
-      // let _terraces = this.submitData.terraces
-      // let _terracesList = this.terracesList
-      // let _terraceItem = commonJs.buildObjData('terrace_id', id)
-      // let result = _terraces.some(item => {
-      //   if (item.terrace_id == id) {
-      //     return true
-      //   }
-      // })
-
-      // _terracesList.forEach(item => {
-      //   if (item.id == _terraceItem.terrace_id) {
-      //     if (!result) {
-      //       _terraceItem.short_name = item.short_name
-      //       _terraces.push(_terraceItem)
-      //       item.checked = true
-      //     } else {
-      //       let _index
-      //       _terraces.forEach(_item => {
-      //         if (item.id == _item.terrace_id) {
-      //           _index = _terraces.indexOf(_item)
-      //         }
-      //       })
-      //       _terraces.splice(_index, 1)
-      //       item.checked = false
-      //     }
-      //   }
-      // })
-      // this.submitData.terraces = _terraces
-      // console.log(this.submitData.terraces)
-
-
-      let result = _checkedKols.some(item => {
-        if (item.plateform_uuid == _id) {
-          return true
-        }
-      })
-
-      _cartKolsList.forEach(item => {
-        console.log(item)
-        if (item.profile_id == _id) {
-          if (!result) {
-            _kolItem.plateform_name = this.plateformName
-            _kolItem.name = item.profile_name
-            _kolItem.avatar_url = item.avatar_url
-            _kolItem.desc = item.description_raw
-            _checkedKols.push(_kolItem)
-          } else {
-            let _index
-            _checkedKols.forEach(_item => {
-              if (item.profile_id == _item.plateform_uuid) {
-                _index = _checkedKols.indexOf(_item)
-              }
-            })
-            _checkedKols.splice(_index, 1)
-          }
-        }
-      })
-
-
-
-      // let _index = this.checkedKolsId.indexOf(_id)
-      // if (_index == -1) {
-      //   this.checkedKolsId.push(_id)
-      // } else {
-      //   this.checkedKolsId.splice(_index, 1)
-      // }
-
-      // console.log(this.checkedKolsId)
-
-      // this.checkedKolsId.forEach(item => {
-      //   _cartKolsList.forEach(e => {
-      //     if (e.profile_id == item) {
-      //       _kolItem = commonJs.buildObjData('plateform_uuid', item)
-      //       _kolItem.plateform_name = this.plateformName
-      //       _kolItem.name = e.profile_name
-      //       _kolItem.avatar_url = e.avatar_url
-      //       _kolItem.desc = e.description_raw
-      //       _checkedKols.push(_kolItem)
-      //     }
-      //   })
-      // })
-      console.log(_checkedKols)
-      this.submitData.selected_kols = _checkedKols
+      this.checkedKolsCtrl(_id, _cartKolsList)
       console.log(this.submitData.selected_kols)
-      // this.submitData.selected_kols = _checkedKols
+    },
+    toKolDetail (item) {
+      console.log(this.brandKeyword)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id
+        },
+        query: {
+          type: this.kolTypeId,
+          brand_keywords: this.brandKeyword
+        }
+      })
     },
     checkTag (data) {
       let _ids = data.ids
@@ -1154,14 +1058,12 @@ export default {
     if (this.formType == 'edit') {
       let _self = this
       _self.getBaseData()
-
-      _self.cartKolsParams.page = _self.kolsCartPage + 1
-      _self.cartKolsParams.per_page = _self.kolsCartPerPage
-
-      console.log(_self.cartKolsParams)
-      _self.getCollectedKolsData()
       setTimeout(function () {
         _self.getDetailData()
+        _self.cartKolsParams.page = _self.kolsCartPage + 1
+        _self.cartKolsParams.per_page = _self.kolsCartPerPage
+        console.log(_self.cartKolsParams)
+        _self.getCollectedKolsData()
       }, 500)
     } else {
       this.getBaseData()
