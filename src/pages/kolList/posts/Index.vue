@@ -143,14 +143,19 @@ export default {
         .then(function(res) {
           // console.log('woshipost list', res);
           if (res.status === 200) {
-            _that.postTotalPage = res.data.total_page_count;
-            _that.isPostShow = false;
             _that.isPostLoading = false;
-            _that.isPostList = true;
-            res.data.data.forEach((item, index) => {
-              item.showContent = false;
-            });
-            _that.postList = res.data.data;
+            _that.postTotalPage = res.data.total_page_count;
+            if (res.data.length > 0) {
+              _that.isPostShow = false;
+              _that.isPostList = true;
+              res.data.data.forEach((item, index) => {
+                item.showContent = false;
+              });
+              _that.postList = res.data.data;
+            } else {
+              _that.isPostShow = true;
+              _that.isPostList = false;
+            }
           }
         })
         .catch(function(error) {

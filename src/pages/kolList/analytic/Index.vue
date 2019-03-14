@@ -313,6 +313,8 @@ export default {
         countParams: {
           type: "doc",
           mode: "daily",
+          // start_date: commonJs.cPastTwentyOneDays,
+          // end_date: commonJs.cPastOneday,
           start_date: commonJs.cPastTwentyOneDays,
           end_date: commonJs.cPastOneday,
           profile_id: "MzAwMDAyMzY3OA=="

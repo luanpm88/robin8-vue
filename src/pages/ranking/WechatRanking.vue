@@ -21,7 +21,7 @@
     <div class="r-top clearfix">
       <p
         class="r-top-dec col-sm-8"
-      >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{startDate}})</p>
+      >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
       <p class="r-top-right col-sm-4">
         <span>7 | 14 | 21</span>
         <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
@@ -97,6 +97,7 @@ export default {
       refreshDate: "",
       endDate: commonJs.cPastTwentyOneDays,
       startDate: commonJs.cPastOneday,
+      topStartData: '',
       topTittle: "Top 30 KOLs",
       topTittleIndustry: '',
       tableTopList: [],
@@ -189,6 +190,9 @@ export default {
           // console.log('头部data', res);
           if ((res.status = 200)) {
             _that.refreshDate = res.data.available_report_dates[0];
+            
+            // _that.topStartData = moment(new Date(_that.refreshDate.getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+            // console.log(_that.topStartData);
             totalParams.report_date = _that.refreshDate;
             // right top list
             _that.WeChatTopList(totalParams);
