@@ -455,6 +455,7 @@
             :renderStatus="kolRenderStatus"
             :renderData="item"
             :routerData="kolRouterData"
+            @handleDelete="delCheckedKol"
           ></kols-list-item>
         </div>
       </div>
@@ -622,6 +623,8 @@ export default {
               }
             })
           })
+
+          console.log(this.cartKolsList)
         }
       }
     },
@@ -700,6 +703,9 @@ export default {
         // console.log(this.checkedCitys)
 
         this.searchKolsCtrl()
+        this.cartKolsParams.page = this.kolsCartPage + 1
+        this.cartKolsParams.per_page = this.kolsCartPerPage
+        this.getCollectedKolsData()
         // console.log(this.kolsList)
       }
     },
@@ -859,6 +865,22 @@ export default {
       console.log(_id)
       let _cartKolsList = this.cartKolsList
       this.checkedKolsCtrl(_id, _cartKolsList)
+      console.log(this.submitData.selected_kols)
+    },
+    delCheckedKol (data) {
+      let _id = data.id
+      console.log(_id)
+      let _checkedKols = this.submitData.selected_kols
+      console.log(_checkedKols)
+      let _index
+      _checkedKols.forEach(item => {
+        if (item.profile_id == _id) {
+          _index = _checkedKols.indexOf(item)
+          console.log(_index)
+        }
+      })
+      _checkedKols.splice(_index, 1)
+      this.submitData.selected_kols = _checkedKols
       console.log(this.submitData.selected_kols)
     },
     checkTag (data) {
@@ -1044,10 +1066,6 @@ export default {
       _self.getBaseData()
       setTimeout(function () {
         _self.getDetailData()
-        _self.cartKolsParams.page = _self.kolsCartPage + 1
-        _self.cartKolsParams.per_page = _self.kolsCartPerPage
-        console.log(_self.cartKolsParams)
-        _self.getCollectedKolsData()
       }, 500)
     } else {
       this.getBaseData()
@@ -1086,6 +1104,14 @@ export default {
   //   width: 33.33333%;
   //   padding: 0 10px;
   // }
+}
+.checked-kols-list {
+  padding: 24px 60px;
+  & > .kols-list-item {
+    float: left;
+    width: 33.33333%;
+    padding: 0 10px;
+  }
 }
 .pr0 {
   padding-right: 0;

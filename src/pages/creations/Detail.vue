@@ -126,7 +126,7 @@
 
         <div v-if="kolsList.length > 0">
           <div class="line-title">已选择的大V</div>
-          <div class="kols-list">
+          <div class="kols-list clearfix">
             <kols-list-item
               v-for="(item, index) in kolsList"
               :key="item.profile_id"
@@ -244,9 +244,8 @@ export default {
 <style lang="scss" scoped>
 .kols-list {
   padding: 24px 60px;
-  font-size: 0;
   & > .kols-list-item {
-    display: inline-block;
+    float: left;
     width: 33.33333%;
     padding: 0 10px;
   }

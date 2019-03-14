@@ -6,12 +6,15 @@
     <div class="media inner">
       <div class="media-left">
         <div class="avatar">
-          <img
-            :src="renderData.avatar_url"
-            alt=""
-            class="avatar-img"
-            @click="toDetail(renderData)"
-          />
+          <router-link
+            :to="'/kol/'+ renderData.profile_id +'?type='+ routerData.type +'&brand_keywords='+ routerData.keywords"
+          >
+            <img
+              :src="renderData.avatar_url"
+              alt=""
+              class="avatar-img"
+            />
+          </router-link>
           <div
             v-if="renderStatus.hasChecked"
             class="iconfont icon-round-check-fill check-icon"
@@ -20,11 +23,12 @@
         </div>
       </div>
       <div class="media-body media-middle info">
-        <h5
-          class="name"
-          @click="toDetail(renderData)"
-        >
-          {{renderData.profile_name}}
+        <h5 class="name">
+          <router-link
+            :to="'/kol/'+ renderData.profile_id +'?type='+ routerData.type +'&brand_keywords='+ routerData.keywords"
+          >
+            {{renderData.profile_name}}
+          </router-link>
         </h5>
         <p class="desc">{{renderData.description_raw}}</p>
       </div>
@@ -79,24 +83,6 @@ export default {
     }
   },
   methods: {
-    toDetail (item) {
-      // this.$emit('detail', item)
-      console.log(this.renderData.profile_id)
-      console.log(this.routerData.type)
-      console.log(this.routerData.keywords)
-
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: this.renderData.profile_id
-        },
-        query: {
-          type: this.routerData.type,
-          brand_keywords: this.routerData.keywords
-        }
-      })
-    },
     handleCheck (id) {
       this.checked = !this.checked
       this.$emit('handleCheck', {
@@ -133,7 +119,11 @@ export default {
     }
   },
   mounted () {
-    console.log(this.renderData)
+    // console.log(this.renderData)
+    // console.log(this.renderData.profile_id)
+    // console.log(this.routerData.type)
+    // console.log(this.routerData.keywords)
+
     this.checked = this.renderData.checked
     this.cartParams.profile_id = this.renderData.profile_id
     this.cartParams.profile_name = this.renderData.profile_name
@@ -180,6 +170,9 @@ export default {
       font-size: $font-sm;
       font-weight: 600;
       cursor: pointer;
+      a {
+        color: rgba(#000, .85);
+      }
     }
     .desc {
       @include limit-line(1);
