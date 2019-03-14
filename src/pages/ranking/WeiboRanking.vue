@@ -155,7 +155,7 @@ export default {
         if (res.status === 200) {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
-              if (element.status === 1) {
+              if (Number(element.status) === 1) {
                 let newKey = '';
                 element.keywords.split(",").forEach(item => {
                   newKey += '"' + item + '"'

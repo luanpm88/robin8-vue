@@ -48,7 +48,6 @@ export default {
     ...mapState(["authorization"])
   },
   created() {
-    // console.log(this.$route.params)
     this.totalParams.industry = this.$route.query.industry;
     this.totalParams.report_date = this.$route.query.report_date;
     this.totalParams.no_of_days = this.$route.query.no_of_days;
@@ -56,15 +55,15 @@ export default {
     this.totalTwoParams.industry = this.$route.query.industry;
     this.totalTwoParams.report_date = this.$route.query.report_date;
     this.totalTwoParams.no_of_days = this.$route.query.no_of_days;
-
-    if (this.$route.params.type === 1) {
+    if (Number(this.$route.params.type) === 1) {
       // 微信 图表一
       this.weixinBeachOne(this.totalParams);
       // 微信 图表二
       this.weixinBeachTwo(this.totalTwoParams);
       // 微信 图表三
       this.weixinBeachThree(this.totalTwoParams);
-    } else {
+    } 
+    if(Number(this.$route.params.type) === 0){
       // 微博 图表一
       this.weiboBeachOne(this.totalParams);
       // 微博 图表二
