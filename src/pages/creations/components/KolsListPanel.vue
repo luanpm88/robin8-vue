@@ -18,7 +18,7 @@
           @detail="toKolDetail(item)"
         ></kols-list-item>
 
-        <div v-else class="empty-area text-center">暂无搜索结果，换个条件再试试？</div>
+        <div v-else class="empty-area text-center">暂无数据...</div>
       </div>
 
       <div class="btn-area">
@@ -67,16 +67,7 @@ export default {
     handleCheck (data) {
       let _id = data.id
       console.log(_id)
-      // let _index = this.checkedIds.indexOf(_id)
-      // if (_index == -1) {
-      //   this.checkedIds.push(_id)
-      // } else {
-      //   this.checkedIds.splice(_index, 1)
-      // }
-      // let _checkedIds = this.checkedIds
-      // console.log(_checkedIds)
       this.$emit('checkedKols', {
-        // 'ids': _checkedIds,
         'id': _id
       })
     },
