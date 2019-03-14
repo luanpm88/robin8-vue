@@ -599,6 +599,9 @@ export const lang = {
       },
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement'
+    },
+    postVue: {
+      tip: 'No Recent Post the Last 3 months'
     }
   },
   homePage: {

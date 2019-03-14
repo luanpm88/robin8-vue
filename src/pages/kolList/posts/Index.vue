@@ -3,7 +3,7 @@
   <div class="panel default-panel">
     <div class="panel-body" style="min-height: 700px">
       <div class="nonetip" v-if="isPostShow">
-        <span>{{$t('lang.totalNoDataTip')}}</span>
+        <span>{{$t('lang.kolList.postVue.tip')}}</span>
       </div>
       <div class="r8-loading" v-if="isPostLoading">
         <a-spin tip="Loading..."/>
