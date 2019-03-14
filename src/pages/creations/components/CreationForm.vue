@@ -427,10 +427,12 @@
       @changeKolsPage="changeKolsPage"
     ></kols-list-panel> -->
 
-    <div class="row mt20">
+    <div
+      v-if="kolsList.length > 0 || cartKolsList.length > 0"
+      class="row mt20"
+    >
       <div class="col-sm-6">
         <kols-list-panel
-          v-if="kolsList.length > 0"
           title="为您推荐的大V"
           :kolsList="kolsList"
           :kolsPage="kolsPage"
@@ -444,7 +446,6 @@
       </div>
       <div class="col-sm-6">
         <kols-list-panel
-          v-if="cartKolsList.length > 0"
           title="Shopping Cart"
           :kolsList="cartKolsList"
           :kolsPage="kolsCartPage"
@@ -452,7 +453,7 @@
           :kolsTotal="kolsCartTotal"
           :keyword="brandKeyword"
           :kolTypeId="kolTypeId"
-          @checkedKols="checkedKols"
+          @checkedKols="checkedCartKols"
           @changeKolsPage="changeCartKolsPage"
         ></kols-list-panel>
       </div>
@@ -504,6 +505,8 @@ export default {
       kolsList: [],
       cartKolsParams: {},
       cartKolsList: [],
+      checkedKolsList: [],
+      checkedKolsId: [],
       kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
@@ -590,6 +593,24 @@ export default {
         const resData = res.data
         this.cartKolsList = resData.items
         this.kolsCartTotal = parseInt(resData.paginate['X-Total'])
+
+        if (this.formType == 'create') {
+          if (resData.items.length > 0) {
+            this.cartKolsList.forEach(item => {
+              item.checked = false
+            })
+          }
+        }
+        if (this.formType == 'edit') {
+          let _selectedKols = this.submitData.selected_kols
+          _selectedKols.forEach(item => {
+            this.cartKolsList.forEach(e => {
+              if (item.plateform_uuid == e.profile_id) {
+                e.checked = true
+              }
+            })
+          })
+        }
       }
     },
     getDetailData () {
@@ -780,26 +801,177 @@ export default {
       this.getCollectedKolsData()
     },
     checkedKols (data) {
-      let _ids = data.ids
-      console.log(_ids)
-      let _kolsList = this.kolsList
-      let _checkedKols = []
-      let _kolItem
+      // let _ids = data.ids
+      // console.log(_ids)
+      // let _kolsList = this.kolsList
+      // let _checkedKols = []
+      // let _kolItem
 
-      _ids.forEach(item => {
-        _kolsList.forEach(e => {
-          if (e.profile_id == item) {
-            _kolItem = commonJs.buildObjData('plateform_uuid', item)
+      // _ids.forEach(item => {
+      //   _kolsList.forEach(e => {
+      //     if (e.profile_id == item) {
+      //       _kolItem = commonJs.buildObjData('plateform_uuid', item)
+      //       _kolItem.plateform_name = this.plateformName
+      //       _kolItem.name = e.profile_name
+      //       _kolItem.avatar_url = e.avatar_url
+      //       _kolItem.desc = e.description_raw
+      //       _checkedKols.push(_kolItem)
+      //     }
+      //   })
+      // })
+      // console.log(_checkedKols)
+      // this.checkedKolsList.concat(_checkedKols)
+      // console.log(this.submitData.selected_kols)
+      // this.submitData.selected_kols = this.submitData.selected_kols.concat(_checkedKols)
+      // console.log(this.submitData.selected_kols)
+
+
+      let _id = data.id
+      console.log(_id)
+      let _kolsList = this.kolsList
+      let _checkedKols = this.submitData.selected_kols
+      let _kolItem = commonJs.buildObjData('plateform_uuid', _id)
+
+      let result = _checkedKols.some(item => {
+        if (item.plateform_uuid == _id) {
+          return true
+        }
+      })
+
+      _kolsList.forEach(item => {
+        console.log(item)
+        if (item.profile_id == _id) {
+          if (!result) {
             _kolItem.plateform_name = this.plateformName
-            _kolItem.name = e.profile_name
-            _kolItem.avatar_url = e.avatar_url
-            _kolItem.desc = e.description_raw
+            _kolItem.name = item.profile_name
+            _kolItem.avatar_url = item.avatar_url
+            _kolItem.desc = item.description_raw
             _checkedKols.push(_kolItem)
+          } else {
+            let _index
+            _checkedKols.forEach(_item => {
+              if (item.profile_id == _item.plateform_uuid) {
+                _index = _checkedKols.indexOf(_item)
+              }
+            })
+            _checkedKols.splice(_index, 1)
           }
-        })
+        }
       })
       console.log(_checkedKols)
+      // this.checkedKolsList = _checkedKols
       this.submitData.selected_kols = _checkedKols
+      console.log(this.submitData.selected_kols)
+    },
+    checkedCartKols (data) {
+      let _id = data.id
+      console.log(_id)
+      let _cartKolsList = this.cartKolsList
+      let _checkedKols = this.submitData.selected_kols
+      let _kolItem = commonJs.buildObjData('plateform_uuid', _id)
+
+      // let _index = this.checkedKolsId.indexOf(_id)
+      // if (_index == -1) {
+      //   this.checkedKolsId.push(_id)
+      //   _cartKolsList.forEach(e => {
+      //     if (e.profile_id == _id) {
+      //       _kolItem = commonJs.buildObjData('plateform_uuid', _id)
+      //       _kolItem.plateform_name = this.plateformName
+      //       _kolItem.name = e.profile_name
+      //       _kolItem.avatar_url = e.avatar_url
+      //       _kolItem.desc = e.description_raw
+      //       _checkedKols.push(_kolItem)
+      //     }
+      //   })
+      // } else {
+      //   this.checkedKolsId.splice(_index, 1)
+      // }
+
+      // let _terraces = this.submitData.terraces
+      // let _terracesList = this.terracesList
+      // let _terraceItem = commonJs.buildObjData('terrace_id', id)
+      // let result = _terraces.some(item => {
+      //   if (item.terrace_id == id) {
+      //     return true
+      //   }
+      // })
+
+      // _terracesList.forEach(item => {
+      //   if (item.id == _terraceItem.terrace_id) {
+      //     if (!result) {
+      //       _terraceItem.short_name = item.short_name
+      //       _terraces.push(_terraceItem)
+      //       item.checked = true
+      //     } else {
+      //       let _index
+      //       _terraces.forEach(_item => {
+      //         if (item.id == _item.terrace_id) {
+      //           _index = _terraces.indexOf(_item)
+      //         }
+      //       })
+      //       _terraces.splice(_index, 1)
+      //       item.checked = false
+      //     }
+      //   }
+      // })
+      // this.submitData.terraces = _terraces
+      // console.log(this.submitData.terraces)
+
+
+      let result = _checkedKols.some(item => {
+        if (item.plateform_uuid == _id) {
+          return true
+        }
+      })
+
+      _cartKolsList.forEach(item => {
+        console.log(item)
+        if (item.profile_id == _id) {
+          if (!result) {
+            _kolItem.plateform_name = this.plateformName
+            _kolItem.name = item.profile_name
+            _kolItem.avatar_url = item.avatar_url
+            _kolItem.desc = item.description_raw
+            _checkedKols.push(_kolItem)
+          } else {
+            let _index
+            _checkedKols.forEach(_item => {
+              if (item.profile_id == _item.plateform_uuid) {
+                _index = _checkedKols.indexOf(_item)
+              }
+            })
+            _checkedKols.splice(_index, 1)
+          }
+        }
+      })
+
+
+
+      // let _index = this.checkedKolsId.indexOf(_id)
+      // if (_index == -1) {
+      //   this.checkedKolsId.push(_id)
+      // } else {
+      //   this.checkedKolsId.splice(_index, 1)
+      // }
+
+      // console.log(this.checkedKolsId)
+
+      // this.checkedKolsId.forEach(item => {
+      //   _cartKolsList.forEach(e => {
+      //     if (e.profile_id == item) {
+      //       _kolItem = commonJs.buildObjData('plateform_uuid', item)
+      //       _kolItem.plateform_name = this.plateformName
+      //       _kolItem.name = e.profile_name
+      //       _kolItem.avatar_url = e.avatar_url
+      //       _kolItem.desc = e.description_raw
+      //       _checkedKols.push(_kolItem)
+      //     }
+      //   })
+      // })
+      console.log(_checkedKols)
+      this.submitData.selected_kols = _checkedKols
+      console.log(this.submitData.selected_kols)
+      // this.submitData.selected_kols = _checkedKols
     },
     checkTag (data) {
       let _ids = data.ids
@@ -901,10 +1073,6 @@ export default {
     },
     doSubmit () {
       let _self = this
-      if (!_self.canSubmit) {
-        return false
-      }
-      _self.canSubmit = false
       let submitParams = {}
       if (_self.formType == 'create') {
         submitParams = {
@@ -917,6 +1085,12 @@ export default {
           'creation': _self.submitData
         }
       }
+
+      if (!_self.canSubmit) {
+        return false
+      }
+      _self.canSubmit = false
+      console.log(submitParams)
       axios.post(apiConfig.creationsUrl, submitParams, {
         headers: {
           'Authorization': _self.authorization
