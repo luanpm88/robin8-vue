@@ -21,7 +21,7 @@
     <div class="r-top clearfix">
       <p
         class="r-top-dec col-sm-8"
-      >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
+      >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{topStartData}} to {{refreshDate}})</p>
       <p class="r-top-right col-sm-4">
         <span>7 | 14 | 21</span>
         <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
@@ -77,6 +77,7 @@ import { mapState } from "vuex";
 import totalDataJS from "@components/Chart/GlobalChartOption";
 import commonJs from "@javascripts/common.js";
 import { Spin, Table } from "ant-design-vue";
+const moment = require('moment');
 let totalParams = {
   industry: "airline",
   no_of_days: 21
@@ -190,10 +191,9 @@ export default {
           // console.log('头部data', res);
           if ((res.status = 200)) {
             _that.refreshDate = res.data.available_report_dates[0];
-            
-            // _that.topStartData = moment(new Date(_that.refreshDate.getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
-            // console.log(_that.topStartData);
             totalParams.report_date = _that.refreshDate;
+            _that.topStartData = new Date(_that.refreshDate.replace(/\-/g, "/"))
+            _that.topStartData = moment(new Date(_that.topStartData.getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
             // right top list
             _that.WeChatTopList(totalParams);
             // 30 list

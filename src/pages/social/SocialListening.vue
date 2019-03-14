@@ -277,6 +277,7 @@ export default {
   cursor: pointer;
   img{
     border-radius: 50%;
+    max-width: 50px;
   }
 }
 .home-post-title {
