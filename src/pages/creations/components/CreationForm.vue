@@ -424,8 +424,7 @@
           :kolsPage="kolsPage"
           :kolsPerPage="kolsPerPage"
           :kolsTotal="kolsTotal"
-          :keyword="brandKeyword"
-          :kolTypeId="kolTypeId"
+          :routerData="kolRouterData"
           @checkedKols="checkedKols"
           @changeKolsPage="changeKolsPage"
         ></kols-list-panel>
@@ -437,8 +436,7 @@
           :kolsPage="kolsCartPage"
           :kolsPerPage="kolsCartPerPage"
           :kolsTotal="kolsCartTotal"
-          :keyword="brandKeyword"
-          :kolTypeId="kolTypeId"
+          :routerData="kolRouterData"
           @checkedKols="checkedCartKols"
           @changeKolsPage="changeCartKolsPage"
         ></kols-list-panel>
@@ -453,10 +451,10 @@
         <div class="checked-kols-list clearfix">
           <kols-list-item
             v-for="item in submitData.selected_kols"
-            :key="item.id"
+            :key="item.profile_id"
             :renderStatus="kolRenderStatus"
             :renderData="item"
-            @detail="toKolDetail(item)"
+            :routerData="kolRouterData"
           ></kols-list-item>
         </div>
       </div>
@@ -501,7 +499,6 @@ export default {
     return {
       detailData: {},
       brandsList: [],
-      brandKeyword: '',
       tagsList: [],
       checkedIds: [],
       checkedTags: [],
@@ -510,7 +507,6 @@ export default {
       kolsList: [],
       cartKolsParams: {},
       cartKolsList: [],
-      kolTypeId: '',
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -552,6 +548,10 @@ export default {
         hasInflunce: false,
         hasCart: false,
         hasDelete: true
+      },
+      kolRouterData: {
+        type: '',
+        keywords: ''
       },
       canSubmit: true
     }
@@ -741,10 +741,10 @@ export default {
       let _checked_trademark_id = this.submitData.trademark_id
       _brands_list.forEach(item => {
         if (_checked_trademark_id == item.id) {
-          this.brandKeyword = item.keywords
+          this.kolRouterData.keywords = item.keywords
         }
       })
-      console.log(this.brandKeyword)
+      console.log(this.kolRouterData.keywords)
 
       let _terraces = this.submitData.terraces
       console.log(_terraces)
@@ -786,21 +786,19 @@ export default {
             if (hasWechat) {
               this.searchKols(apiConfig.kolWxSearchUrl)
               this.plateformName = 'public_wechat_account'
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
             } else {
               this.searchKols(apiConfig.kolWbSearchUrl)
               this.plateformName = 'weibo'
-              this.kolTypeId = '0'
+              this.kolRouterData.type = '0'
             }
           } else {
             this.searchKols(apiConfig.kolWxSearchUrl)
             this.plateformName = 'public_wechat_account'
-            this.kolTypeId = '1'
+            this.kolRouterData.type = '1'
           }
         }
       })
-
-      console.log(this.kolTypeId)
     },
     changeKolsPage (data) {
       console.log(data.page)
@@ -862,20 +860,6 @@ export default {
       let _cartKolsList = this.cartKolsList
       this.checkedKolsCtrl(_id, _cartKolsList)
       console.log(this.submitData.selected_kols)
-    },
-    toKolDetail (item) {
-      console.log(this.brandKeyword)
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id
-        },
-        query: {
-          type: this.kolTypeId,
-          brand_keywords: this.brandKeyword
-        }
-      })
     },
     checkTag (data) {
       let _ids = data.ids

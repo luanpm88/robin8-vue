@@ -8,11 +8,11 @@
         <kols-list-item
           v-if="kolsList.length > 0"
           v-for="item in kols"
-          :key="item.id"
+          :key="item.profile_id"
           :renderStatus="kolRenderStatus"
           :renderData="item"
+          :routerData="routerData"
           @handleCheck="handleCheck"
-          @detail="toKolDetail(item)"
         ></kols-list-item>
 
         <div v-else class="empty-area text-center">暂无数据...</div>
@@ -46,8 +46,7 @@ export default {
     kolsPage: Number,
     kolsPerPage: Number,
     kolsTotal: Number,
-    keyword: String,
-    kolTypeId: String
+    routerData: Object
   },
   data () {
     return {
@@ -89,20 +88,6 @@ export default {
       })
       console.log(this.kols)
       console.log(this.checkedIds)
-    },
-    toKolDetail (item) {
-      // console.log(this.keyword)
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id
-        },
-        query: {
-          type: this.kolTypeId,
-          brand_keywords: this.keyword
-        }
-      })
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {

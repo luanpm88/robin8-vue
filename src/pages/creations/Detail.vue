@@ -129,10 +129,10 @@
           <div class="kols-list">
             <kols-list-item
               v-for="(item, index) in kolsList"
-              :key="index"
+              :key="item.profile_id"
               :renderStatus="kolRenderStatus"
               :renderData="item"
-              @detail="toKolDetail(item)"
+              :routerData="kolRouterData"
             ></kols-list-item>
           </div>
         </div>
@@ -173,8 +173,10 @@ export default {
         hasDelete: false
       },
       kolsList: [],
-      kolTypeId: '',
-      brandKeyword: ''
+      kolRouterData: {
+        type: '',
+        keywords: ''
+      }
     }
   },
   methods: {
@@ -196,7 +198,7 @@ export default {
           this.processStatus.index = 3
         }
 
-        this.brandKeyword = resData.trademark_keywords
+        this.kolRouterData.keywords = resData.trademark_keywords
 
         let _kolsList = this.kolsList
         let _kolItem
@@ -216,32 +218,18 @@ export default {
           switch (item.short_name) {
             case 'public_wechat_account':
               item.iconClass = 'icon-wechat-circle'
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
               break
             case 'weibo':
               item.iconClass = 'icon-weibo-circle'
-              this.kolTypeId = '0'
+              this.kolRouterData.type = '0'
               break
             default:
               item.iconClass = ''
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
           }
         })
       }
-    },
-    toKolDetail (item) {
-      // console.log(item)
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id
-        },
-        query: {
-          type: this.kolTypeId,
-          brand_keywords: this.brandKeyword
-        }
-      })
     }
   },
   mounted () {

@@ -19,10 +19,10 @@
         <div class="list-content-inner">
           <kols-list-item
             v-for="(item, index) in currentList"
-            :key="index"
+            :key="item.profile_id"
             :renderStatus="kolRenderStatus"
             :renderData="item"
-            @detail="toKolDetail"
+            :routerData="kolRouterData"
           ></kols-list-item>
         </div>
         <div class="text-center mt20">
@@ -52,12 +52,6 @@ export default {
   },
   data() {
     return {
-      // kolHasLiked: false,
-      // KolHasInflunce: true,
-      // kolHasMsg: true,
-      // kolHasChecked: false,
-      // kolHasCart: true,
-      // kolHasDelete: false,
       kolRenderStatus: {
         hasLiked: false,
         hasMsg: true,
@@ -65,6 +59,10 @@ export default {
         hasInflunce: true,
         hasCart: true,
         hasDelete: false
+      },
+      kolRouterData: {
+        type: '',
+        keywords: ''
       },
       tabIndex: 0,
       isShow: false,
@@ -100,13 +98,10 @@ export default {
         });
         this.params.brand_keywords = newKey
         this.weiboKol(this.params)
+        this.kolRouterData.keywords = newKey
       },
       deep: true
     }
-  },
-  created() {
-    // this.params.brand_keywords = this.childKeyList.brand_keywords;
-    // this.weiboKol(this.params)
   },
   methods: {
     changeTab(tab) {
@@ -121,20 +116,7 @@ export default {
         // 微信接口
         this.weixinKol(this.params)
       }
-    },
-    // 跳转 kol detail
-    toKolDetail(item) {
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id,
-        },
-        query: {
-          type: this.tabIndex,
-          brand_keywords: this.childKeyList.brand_keywords
-        }
-      });
+      this.kolRouterData.type = tab.index
     },
     // 跳转kol list
     toKolDetailMore() {
@@ -191,6 +173,9 @@ export default {
           console.log(error)
         })
     }
+  },
+  mounted () {
+    this.kolRouterData.type = this.tabIndex
   }
 }
 </script>

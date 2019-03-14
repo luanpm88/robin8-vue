@@ -69,7 +69,8 @@ export default {
   name: 'KolsListItem',
   props: {
     renderStatus: Object,
-    renderData: Object
+    renderData: Object,
+    routerData: Object
   },
   data () {
     return {
@@ -79,7 +80,10 @@ export default {
   },
   methods: {
     toDetail (item) {
-      this.$emit('detail', item)
+      // this.$emit('detail', item)
+      console.log(this.renderData.profile_id)
+      console.log(this.routerData.type)
+      console.log(this.routerData.keywords)
 
       this.$router.push({
         path: '/kol/',
@@ -88,8 +92,8 @@ export default {
           id: this.renderData.profile_id
         },
         query: {
-          type: this.kolTypeId,
-          brand_keywords: this.brandKeyword
+          type: this.routerData.type,
+          brand_keywords: this.routerData.keywords
         }
       })
     },
