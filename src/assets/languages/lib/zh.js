@@ -600,6 +600,9 @@ export const lang = {
       },
       likeTip: '粉丝数',
       sumTip: '平均总参与度'
+    },
+    postVue: {
+      tip: '最近三个月没有文章'
     }
   },
   homePage: {
