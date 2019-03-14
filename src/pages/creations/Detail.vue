@@ -134,6 +134,7 @@
               :hasMsg="kolHasMsg"
               :hasChecked="kolHasChecked"
               :hasCart="kolHasCart"
+              :hasDelete="kolHasDelete"
               :renderData="item"
               @detail="toKolDetail(item)"
             ></kols-list-item>
@@ -171,6 +172,7 @@ export default {
       kolHasMsg: false,
       kolHasChecked: false,
       kolHasCart: false,
+      kolHasDelete: false,
       kolsList: [],
       kolTypeId: '',
       brandKeyword: ''
@@ -200,10 +202,10 @@ export default {
         let _kolsList = this.kolsList
         let _kolItem
         resData.selected_kols.forEach(item => {
-          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
-          _kolItem.id = item.plateform_uuid
-          _kolItem.name = item.name
-          _kolItem.desc = item.desc
+          _kolItem = commonJs.buildObjData('avatar_url', item.avatar_url)
+          _kolItem.profile_id = item.profile_id
+          _kolItem.profile_name = item.profile_name
+          _kolItem.description_raw = item.description_raw
           _kolItem.checked = false
           _kolsList.push(_kolItem)
         })
