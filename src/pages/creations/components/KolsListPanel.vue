@@ -9,11 +9,7 @@
           v-if="kolsList.length > 0"
           v-for="item in kols"
           :key="item.id"
-          :hasLiked="kolHasLiked"
-          :hasMsg="kolHasMsg"
-          :hasChecked="kolHasChecked"
-          :hasCart="kolHasCart"
-          :hasDelete="kolHasDelete"
+          :renderStatus="kolRenderStatus"
           :renderData="item"
           @handleCheck="handleCheck"
           @detail="toKolDetail(item)"
@@ -55,11 +51,14 @@ export default {
   },
   data () {
     return {
-      kolHasLiked: false,
-      kolHasMsg: false,
-      kolHasChecked: true,
-      kolHasCart: false,
-      kolHasDelete: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: true,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false
+      },
       kols: [],
       checkedIds: [],
       currentPage: 0
@@ -97,7 +96,7 @@ export default {
         path: '/kol/',
         name: 'KolDetail',
         params: {
-          id: item.id
+          id: item.profile_id
         },
         query: {
           type: this.kolTypeId,

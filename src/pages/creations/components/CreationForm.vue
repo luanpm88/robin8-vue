@@ -454,12 +454,9 @@
           <kols-list-item
             v-for="item in submitData.selected_kols"
             :key="item.id"
-            :hasLiked="cartKolHasLiked"
-            :hasMsg="cartKolHasMsg"
-            :hasChecked="cartKolHasChecked"
-            :hasCart="cartKolHasCart"
-            :hasDelete="cartKolHasDel"
+            :renderStatus="kolRenderStatus"
             :renderData="item"
+            @detail="toKolDetail(item)"
           ></kols-list-item>
         </div>
       </div>
@@ -548,11 +545,14 @@ export default {
       kolsCartPage: 0,
       kolsCartPerPage: 4,
       kolsCartTotal: 0,
-      cartKolHasLiked: false,
-      cartKolHasMsg: false,
-      cartKolHasChecked: false,
-      cartKolHasCart: false,
-      cartKolHasDel: true,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: true
+      },
       canSubmit: true
     }
   },
@@ -862,6 +862,20 @@ export default {
       let _cartKolsList = this.cartKolsList
       this.checkedKolsCtrl(_id, _cartKolsList)
       console.log(this.submitData.selected_kols)
+    },
+    toKolDetail (item) {
+      console.log(this.brandKeyword)
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id
+        },
+        query: {
+          type: this.kolTypeId,
+          brand_keywords: this.brandKeyword
+        }
+      })
     },
     checkTag (data) {
       let _ids = data.ids

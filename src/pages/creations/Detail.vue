@@ -130,11 +130,7 @@
             <kols-list-item
               v-for="(item, index) in kolsList"
               :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
-              :hasCart="kolHasCart"
-              :hasDelete="kolHasDelete"
+              :renderStatus="kolRenderStatus"
               :renderData="item"
               @detail="toKolDetail(item)"
             ></kols-list-item>
@@ -168,11 +164,14 @@ export default {
         index: 0
       },
       detailData: {},
-      kolHasLiked: false,
-      kolHasMsg: false,
-      kolHasChecked: false,
-      kolHasCart: false,
-      kolHasDelete: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false
+      },
       kolsList: [],
       kolTypeId: '',
       brandKeyword: ''
@@ -236,7 +235,7 @@ export default {
         path: '/kol/',
         name: 'KolDetail',
         params: {
-          id: item.id
+          id: item.profile_id
         },
         query: {
           type: this.kolTypeId,

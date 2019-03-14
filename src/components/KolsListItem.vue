@@ -13,7 +13,7 @@
             @click="toDetail(renderData)"
           />
           <div
-            v-if="hasChecked"
+            v-if="renderStatus.hasChecked"
             class="iconfont icon-round-check-fill check-icon"
             @click="handleCheck(renderData.profile_id)"
           ></div>
@@ -28,29 +28,29 @@
         </h5>
         <p class="desc">{{renderData.description_raw}}</p>
       </div>
-      <div v-if="hasInflunce" class="media-right media-middle influnce-score">
+      <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
           <h5>Influence Score</h5>
           <p>{{renderData.avg_post_influences}}</p>
         </div>
       </div>
-      <div v-if="hasLiked || hasMsg || hasCart || hasDelete" class="media-right media-middle operation-area">
+      <div v-if="renderStatus.hasLiked || renderStatus.hasMsg || renderStatus.hasCart || renderStatus.hasDelete" class="media-right media-middle operation-area">
         <span
-          v-if="hasLiked"
+          v-if="renderStatus.hasLiked"
           class="iconfont icon-star-fill"
         ></span>
         <span
-          v-if="hasMsg"
+          v-if="renderStatus.hasMsg"
           class="iconfont icon-msg"
           @click="doChat"
         ></span>
         <span
-          v-if="hasCart"
+          v-if="renderStatus.hasCart"
           class="iconfont icon-cart active"
           @click="doAddCart"
         ></span>
         <span
-          v-if="hasDelete"
+          v-if="renderStatus.hasDelete"
           class="iconfont icon-delete"
           @click="doDelete(renderData.profile_id)"
         ></span>
@@ -68,12 +68,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'KolsListItem',
   props: {
-    hasLiked: Boolean,
-    hasMsg: Boolean,
-    hasChecked: Boolean,
-    hasInflunce: Boolean,
-    hasCart: Boolean,
-    hasDelete: Boolean,
+    renderStatus: Object,
     renderData: Object
   },
   data () {
@@ -85,6 +80,18 @@ export default {
   methods: {
     toDetail (item) {
       this.$emit('detail', item)
+
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: this.renderData.profile_id
+        },
+        query: {
+          type: this.kolTypeId,
+          brand_keywords: this.brandKeyword
+        }
+      })
     },
     handleCheck (id) {
       this.checked = !this.checked

@@ -20,12 +20,7 @@
           <kols-list-item
             v-for="(item, index) in currentList"
             :key="index"
-            :hasLiked="kolHasLiked"
-            :hasInflunce="KolHasInflunce"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
-            :hasCart="kolHasCart"
-            :hasDelete="kolHasDelete"
+            :renderStatus="kolRenderStatus"
             :renderData="item"
             @detail="toKolDetail"
           ></kols-list-item>
@@ -57,12 +52,20 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: false,
-      KolHasInflunce: true,
-      kolHasMsg: true,
-      kolHasChecked: false,
-      kolHasCart: true,
-      kolHasDelete: false,
+      // kolHasLiked: false,
+      // KolHasInflunce: true,
+      // kolHasMsg: true,
+      // kolHasChecked: false,
+      // kolHasCart: true,
+      // kolHasDelete: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: true,
+        hasChecked: false,
+        hasInflunce: true,
+        hasCart: true,
+        hasDelete: false
+      },
       tabIndex: 0,
       isShow: false,
       isLoading: true,
