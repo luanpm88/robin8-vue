@@ -36,10 +36,14 @@
         <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
           <p class="r-right-topList-tit">{{item.fixedTit}}</p>
           <div class="r-right-topList-box clearfix">
-            <span class="r-right-topList-img col-sm-6" @click="openDetails(item)">
-              <img :src="item.avatar_url" alt>
+            <span class="r-right-topList-img col-sm-6">
+              <img :src="item.avatar_url" alt @click="openDetails(item)">
             </span>
-            <span class="r-right-topList-txt col-sm-6">
+            <span
+              class="iconfont icon-cart active col-sm-1"
+              @click="doAddCart(item)"
+            ></span>
+            <span class="r-right-topList-txt col-sm-4">
               <b>{{item.profile_name}}</b>
               <b>{{item.source}}</b>
               <b>{{item.value}}</b>
@@ -57,10 +61,13 @@
       @change="handleTableChange"
       :pagination="false" :scroll="{ y: 500 }">
         <template slot="profileDec" slot-scope="dec">
-          <div class="r-tableThirtyList-name" 
-          @click="openDetails(dec)">
-            <img :src="dec.img" alt="">
-            <p>{{dec.name}}</p>
+          <div class="r-tableThirtyList-name" >
+            <img :src="dec.avatar_url" alt="" @click="openDetails(dec)">
+            <span
+              class="iconfont icon-cart active"
+              @click="doAddCart(dec)"
+            ></span>
+            <p>{{dec.profile_name}}</p>
             <p>{{dec.id}}</p>
           </div>
         </template>
@@ -108,7 +115,8 @@ export default {
       isTable: false,
       columns: totalDataJS.ranking.weixinthirtyColums,
       TableData: [],
-      totalKeywords: ''
+      totalKeywords: '',
+      cartParams: {}
     };
   },
   created() {
@@ -250,13 +258,13 @@ export default {
             _that.isTableLoding = false;
             res.data.forEach((element, index) => {
               element.profileDec = {
-                img: '',
-                name: '',
+                avatar_url: '',
+                profile_name: '',
                 id: '',
                 profile_id: ''
               }
-              element.profileDec.img = element.avatar_url;
-              element.profileDec.name = element.profile_name;
+              element.profileDec.avatar_url = element.avatar_url;
+              element.profileDec.profile_name = element.profile_name;
               element.profileDec.id = element.weixin_id;
               element.profileDec.profile_id = element.profile_id;
             });
@@ -308,9 +316,42 @@ export default {
         }
       });
     },
+    doAddCart (data) {
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = ''
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      // console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.icon-cart{
+  &.active{
+    cursor: pointer;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+    color: nth($purple, 1) !important;
+  }
+}
 </style>
