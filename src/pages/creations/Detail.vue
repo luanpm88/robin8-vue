@@ -207,6 +207,7 @@ export default {
           _kolItem.profile_id = item.profile_id
           _kolItem.profile_name = item.profile_name
           _kolItem.description_raw = item.description_raw
+          _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
           _kolItem.checked = false
           _kolsList.push(_kolItem)
         })

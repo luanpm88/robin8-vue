@@ -837,7 +837,7 @@ export default {
             _kolItem.profile_name = item.profile_name
             _kolItem.avatar_url = item.avatar_url
             _kolItem.description_raw = item.description_raw
-            _kolItem.plateform_name_type = item.plateform_name_type
+            _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
             _kolItem.checked = true
             item.checked = true
             _checkedKols.push(_kolItem)
@@ -878,9 +878,9 @@ export default {
     },
     delCheckedKol (data) {
       let _id = data.id
-      console.log(_id)
+      // console.log(_id)
       let _checkedKols = this.submitData.selected_kols
-      console.log(_checkedKols)
+      // console.log(_checkedKols)
       let _index
       _checkedKols.forEach(item => {
         if (item.profile_id == _id) {
@@ -890,7 +890,7 @@ export default {
       })
       _checkedKols.splice(_index, 1)
       this.submitData.selected_kols = _checkedKols
-      console.log(this.submitData.selected_kols)
+      // console.log(this.submitData.selected_kols)
       this.searchKolsCtrl()
       this.getCollectedKolsData()
     },

@@ -7,7 +7,7 @@
       <div class="media-left">
         <div class="avatar">
           <router-link
-            :to="'/kol/'+ renderData.profile_id +'?type='+ plateformType +'&brand_keywords='+ routerData.keywords"
+            :to="url"
           >
             <img
               :src="renderData.avatar_url"
@@ -25,7 +25,7 @@
       <div class="media-body media-middle info">
         <h5 class="name">
           <router-link
-            :to="'/kol/'+ renderData.profile_id +'?type='+ plateformType +'&brand_keywords='+ routerData.keywords"
+            :to="url"
           >
             {{renderData.profile_name}}
           </router-link>
@@ -79,7 +79,7 @@ export default {
   data () {
     return {
       checked: '',
-      plateformType: '',
+      url: '',
       cartParams: {}
     }
   },
@@ -117,25 +117,34 @@ export default {
     },
     doChat () {
       alert('敬请期待')
+    },
+    updateData (data) {
+      // let _url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : ''
+      this.checked = data.checked
+      this.url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : '/kol/'+ this.renderData.profile_id +'?type='+ this.routerData.type +'&brand_keywords='+ this.routerData.keywords
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = data.description_raw
     }
   },
-  mounted () {
+  created () {
     // console.log(this.renderData)
     // console.log(this.renderData.profile_id)
     // console.log(this.routerData.type)
     // console.log(this.routerData.keywords)
-
-    let _plateformType = !!this.renderData.plateform_name_type && this.renderData.plateform_name_type != '' ? this.renderData.plateform_name_type.toString() : ''
-
-    this.checked = this.renderData.checked
-    this.plateformType = _plateformType != '' ? _plateformType : this.routerData.type
-    this.cartParams.profile_id = this.renderData.profile_id
-    this.cartParams.profile_name = this.renderData.profile_name
-    this.cartParams.avatar_url = this.renderData.avatar_url
-    this.cartParams.description_raw = this.renderData.description_raw
+    this.updateData(this.renderData)
   },
   computed: {
     ...mapState(['authorization'])
+  },
+  watch: {
+    renderData: {
+      handler (newVal, oldVal) {
+        this.updateData(newVal)
+      },
+      deep: true
+    }
   }
 }
 </script>
