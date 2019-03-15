@@ -220,6 +220,12 @@
                         </a-tooltip>
                       </div>
                     </div>
+                    <div class="media-right media-middle operation-area">
+                      <span
+                        class="iconfont icon-cart active"
+                        @click="doAddCart(item)"
+                      ></span>
+                    </div>
                   </div>
                 </td>
                 <td class="text-center">{{item.pricing.direct_price}}</td>
@@ -341,7 +347,8 @@ export default {
       searchListBox: [],
       searchList: {},
       r8List: [],
-      totalParams: {}
+      totalParams: {},
+      cartParams: {}
     };
   },
   created() {
@@ -581,6 +588,30 @@ export default {
         _that.r8List.weibo_kols_count = commonJs.threeFormatter(_that.r8List.weibo_kols_count, 2);
       })
     },
+    doAddCart (data) {
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = data.description_raw
+      console.log(this.cartParams)
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
+    },
     onPageChange (page) {
       this.isLoading = true;
       this.currentPage = page - 1;
@@ -670,6 +701,15 @@ export default {
   .status {
     .item {
       margin-right: 10px;
+    }
+  }
+  .operation-area {
+    .iconfont {
+      margin-left: 10px;
+      cursor: pointer;
+      &.icon-cart.active {
+        color: nth($purple, 1);
+      }
     }
   }
 }

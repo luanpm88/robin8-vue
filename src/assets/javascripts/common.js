@@ -147,7 +147,7 @@ function threeFormatter(num, digits) {
   }
 }
 
-function sortByProperty(property) {
+function sortByProperty (property) {
   return function (obj1, obj2) {
     var value1 = obj1[property]
     var value2 = obj2[property]

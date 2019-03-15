@@ -414,7 +414,7 @@
     </div>
 
     <div
-      v-if="kolsList.length > 0 || cartKolsList.length > 0"
+      v-if="kolsList.length > 0"
       class="row mt20"
     >
       <div class="col-sm-6">
@@ -837,6 +837,9 @@ export default {
             _kolItem.profile_name = item.profile_name
             _kolItem.avatar_url = item.avatar_url
             _kolItem.description_raw = item.description_raw
+            _kolItem.plateform_name_type = item.plateform_name_type
+            _kolItem.checked = true
+            item.checked = true
             _checkedKols.push(_kolItem)
           } else {
             let _index
@@ -845,6 +848,8 @@ export default {
                 _index = _checkedKols.indexOf(_item)
               }
             })
+            _kolItem.checked = false
+            item.checked = false
             _checkedKols.splice(_index, 1)
           }
         }
@@ -858,14 +863,18 @@ export default {
       console.log(_id)
       let _kolsList = this.kolsList
       this.checkedKolsCtrl(_id, _kolsList)
-      console.log(this.submitData.selected_kols)
+      console.log(this.kolsList)
+      this.searchKolsCtrl()
+      // console.log(this.submitData.selected_kols)
     },
     checkedCartKols (data) {
       let _id = data.id
       console.log(_id)
       let _cartKolsList = this.cartKolsList
       this.checkedKolsCtrl(_id, _cartKolsList)
-      console.log(this.submitData.selected_kols)
+      console.log(this.cartKolsList)
+      this.getCollectedKolsData()
+      // console.log(this.submitData.selected_kols)
     },
     delCheckedKol (data) {
       let _id = data.id
@@ -882,6 +891,8 @@ export default {
       _checkedKols.splice(_index, 1)
       this.submitData.selected_kols = _checkedKols
       console.log(this.submitData.selected_kols)
+      this.searchKolsCtrl()
+      this.getCollectedKolsData()
     },
     checkTag (data) {
       let _ids = data.ids

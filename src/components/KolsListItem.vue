@@ -7,7 +7,7 @@
       <div class="media-left">
         <div class="avatar">
           <router-link
-            :to="'/kol/'+ renderData.profile_id +'?type='+ routerData.type +'&brand_keywords='+ routerData.keywords"
+            :to="'/kol/'+ renderData.profile_id +'?type='+ plateformType +'&brand_keywords='+ routerData.keywords"
           >
             <img
               :src="renderData.avatar_url"
@@ -25,7 +25,7 @@
       <div class="media-body media-middle info">
         <h5 class="name">
           <router-link
-            :to="'/kol/'+ renderData.profile_id +'?type='+ routerData.type +'&brand_keywords='+ routerData.keywords"
+            :to="'/kol/'+ renderData.profile_id +'?type='+ plateformType +'&brand_keywords='+ routerData.keywords"
           >
             {{renderData.profile_name}}
           </router-link>
@@ -79,12 +79,13 @@ export default {
   data () {
     return {
       checked: '',
+      plateformType: '',
       cartParams: {}
     }
   },
   methods: {
     handleCheck (id) {
-      this.checked = !this.checked
+      // this.checked = !this.checked
       this.$emit('handleCheck', {
         'id': id
       })
@@ -124,7 +125,10 @@ export default {
     // console.log(this.routerData.type)
     // console.log(this.routerData.keywords)
 
+    let _plateformType = !!this.renderData.plateform_name_type && this.renderData.plateform_name_type != '' ? this.renderData.plateform_name_type.toString() : ''
+
     this.checked = this.renderData.checked
+    this.plateformType = _plateformType != '' ? _plateformType : this.routerData.type
     this.cartParams.profile_id = this.renderData.profile_id
     this.cartParams.profile_name = this.renderData.profile_name
     this.cartParams.avatar_url = this.renderData.avatar_url

@@ -6,7 +6,7 @@
     <div class="panel-body">
       <div class="kols-list clearfix">
         <kols-list-item
-          v-if="kolsList.length > 0"
+          v-if="kols.length > 0"
           v-for="item in kols"
           :key="item.profile_id"
           :renderStatus="kolRenderStatus"
@@ -59,7 +59,6 @@ export default {
         hasDelete: false
       },
       kols: [],
-      checkedIds: [],
       currentPage: 0
     }
   },
@@ -72,6 +71,7 @@ export default {
       })
     },
     renderData (kolsList) {
+      console.log(kolsList)
       let _kolsList = kolsList
       let _kolItem
       this.kols = []
@@ -81,13 +81,9 @@ export default {
         _kolItem.profile_name = item.profile_name
         _kolItem.description_raw = item.description_raw
         _kolItem.checked = item.checked
-        if (item.checked) {
-          this.checkedIds.push(item.profile_id)
-        }
         this.kols.push(_kolItem)
       })
       console.log(this.kols)
-      console.log(this.checkedIds)
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {
@@ -100,8 +96,16 @@ export default {
     this.currentPage = this.kolsPage + 1
   },
   watch: {
-    kolsList (newVal, oldVal) {
-      this.renderData(newVal)
+    // kolsList (newVal, oldVal) {
+    //   this.renderData(newVal)
+    // }
+
+    kolsList: {
+      handler (newVal, oldVal) {
+        this.renderData(newVal)
+        console.log(111)
+      },
+      deep: true
     }
   }
 }
