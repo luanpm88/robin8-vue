@@ -601,7 +601,7 @@ export const lang = {
       sumTip: 'Average sum engagement'
     },
     postVue: {
-      tip: 'No Recent Post the Last 3 months'
+      tip: 'No Post in 21 Days'
     }
   },
   homePage: {

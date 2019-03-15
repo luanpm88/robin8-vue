@@ -428,8 +428,8 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('我是微博', res)
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = res.data.labels.reverse();
+            _that.competitorList.options.series[0].data = res.data.data.reverse();
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })
@@ -447,8 +447,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.competitorList.options.yAxis.data = res.data.labels;
-            _that.competitorList.options.series[0].data = res.data.data;
+            _that.competitorList.options.yAxis.data = res.data.labels.reverse();
+            _that.competitorList.options.series[0].data = res.data.data.reverse();
             _that.$refs.competitorEChart.updateOptions(_that.competitorList.options);
           }
         })

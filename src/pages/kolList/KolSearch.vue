@@ -533,35 +533,40 @@ export default {
         }
       })
     },
-    // influencerank
+    // influence 与 relevance 排序
     influencerank(value) {
       this.isShow = false;
       this.isLoading = true;
       this.currentPage = this.currentPage;
       this.currentPageAdd = this.currentPage + 1;
       this.searchListBox = [];
+      // value 为1 influence表示排序， 为2relevance 排序
       if (value === 1) {
         this.isFluenceActive = true;
         this.isRelevanceActive = false;
-        this.isFIactive = !this.isFIactive;
         this.listSortType = 1;
-        if (this.isFIactive) {
-          this.listSortDir = 'asc';
-        } else {
-          this.listSortDir = 'desc';
-        }
+        this.listSortDir = 'desc';
+        // 目前influence去掉了升序的事件
+        // this.isFIactive = !this.isFIactive;
+        // if (this.isFIactive) {
+        //   this.listSortDir = 'asc';
+        // } else {
+        //   this.listSortDir = 'desc';
+        // }
         // 重置params
         this.paramsInit();
       } else {
         this.isFluenceActive = false;
         this.isRelevanceActive = true;
-        this.isRIactive = !this.isRIactive;
         this.listSortType = 0;
-        if (this.isRIactive) {
-          this.listSortDir = 'asc';
-        } else {
-          this.listSortDir = 'desc';
-        }
+        this.listSortDir = 'desc';
+        // 目前relevance去掉了升序的事件
+        // this.isRIactive = !this.isRIactive;
+        // if (this.isRIactive) {
+        //   this.listSortDir = 'asc';
+        // } else {
+        //   this.listSortDir = 'desc';
+        // }
         // 重置params
         this.paramsInit();
       }
