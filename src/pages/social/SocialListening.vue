@@ -60,13 +60,19 @@
               <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
                 <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
                 <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-                <div class="media social-detail" @click="intoKolDetail(item)">
-                  <div class="media-left media-middle">
+                <div class="media social-detail">
+                  <div class="media-left media-middle"  @click="intoKolDetail(item)">
                     <img :src="item.imgUrl" alt class>
                   </div>
-                  <div class="media-body media-middle">
+                  <div class="media-body media-middle"  @click="intoKolDetail(item)">
                     <strong>{{item.name}}</strong>
                     <p>{{item.time}}</p>
+                  </div>
+                  <div class="media-right media-middle operation-area">
+                      <span
+                        class="iconfont icon-cart active"
+                        @click="doAddCart(item)"
+                      ></span>
                   </div>
                 </div>
                 <p class="home-post-content">'{{item.content}}'</p>
@@ -130,7 +136,8 @@ export default {
         OR_keywords: 'adidas',
         profile_ids: [],
       },
-      itemList: []
+      itemList: [],
+      cartParams: {}
     };
   },
   methods: {
@@ -256,6 +263,29 @@ export default {
         }
       });
     },
+    doAddCart (data) {
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = ''
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      // console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
+    },
   }
 };
 </script>
@@ -293,5 +323,11 @@ export default {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
+}
+.icon-cart{
+  &.active{
+    cursor: pointer;
+    color: nth($purple, 1) !important;
+  }
 }
 </style>

@@ -8,12 +8,16 @@
           <div class="panel default-panel kol-infobox">
             <div class="panel-body">
               <p class="kol-info-topbg"></p>
-              <img :src="infoList.img" alt>
+              <img :src="infoList.avatar_url" alt>
               <div class="kol-info">
                 <p>
-                  {{infoList.name}}
+                  {{infoList.profile_name}}
                   <i class="iconfont icon-female" v-if="infoList.gender == 'm'"></i>
                   <i class="iconfont icon-male" v-if="infoList.gender == 'f'"></i>
+                  <span
+                    class="iconfont icon-cart active"
+                    @click="doAddCart(infoList)"
+                  ></span>
                 </p>
                 <p>{{infoList.age}}</p>
                 <p>
@@ -247,8 +251,10 @@ export default {
         }
       },
       infoList: {
-        img: "",
-        name: "-",
+        avatar_url: "",
+        profile_name: "-",
+        profile_id: '',
+        description_raw: '',
         age: "N/A",
         region: "N/A"
       },
@@ -309,6 +315,7 @@ export default {
       isPer: false,
       isPerShow: false,
       isPerLoading: true,
+      cartParams: {}
     };
   },
   created() {
@@ -377,8 +384,10 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.img = res.data.avatar_url;
-            _that.infoList.name = res.data.profile_name;
+            _that.infoList.avatar_url = res.data.avatar_url;
+            _that.infoList.profile_name = res.data.profile_name;
+            _that.infoList.profile_id = res.data.profile_id;
+            _that.infoList.description_raw = res.data.description_raw;
             _that.infoList.gender = res.data.gender;
             _that.decValue =  Object.values(res.data.industries);
             _that.decKey = Object.keys(res.data.industries);
@@ -407,8 +416,10 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.img = res.data.avatar_url;
-            _that.infoList.name = res.data.profile_name;
+            _that.infoList.avatar_url = res.data.avatar_url;
+            _that.infoList.profile_name = res.data.profile_name;
+            _that.infoList.profile_id = res.data.profile_id;
+            _that.infoList.description_raw = res.data.description_raw;
             _that.infoList.gender = "-";
           }
         })
@@ -800,7 +811,30 @@ export default {
     },
     goback() {
       this.$router.go(-1);
-    }
+    },
+    doAddCart (data) {
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = data.description_raw
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      // console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
+    },
   }
 };
 </script>
@@ -813,5 +847,9 @@ export default {
       color: nth($purple, 1);
     }
   }
+}
+.icon-cart {
+  cursor: pointer;
+  color: nth($purple, 1);
 }
 </style>
