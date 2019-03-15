@@ -602,7 +602,7 @@ export const lang = {
       sumTip: '平均总参与度'
     },
     postVue: {
-      tip: '最近三个月没有文章'
+      tip: '最近21天没有文章'
     }
   },
   homePage: {

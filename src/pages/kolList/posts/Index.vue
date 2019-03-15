@@ -1,7 +1,7 @@
 
 <template>
   <div class="panel default-panel">
-    <div class="panel-body" style="min-height: 700px">
+    <div class="panel-body">
       <div class="nonetip" v-if="isPostShow">
         <span>{{$t('lang.kolList.postVue.tip')}}</span>
       </div>
@@ -78,7 +78,7 @@ export default {
       postTotalPage: 0,
       postPageSize: 10,
       postParams: {
-        start_date: commonJs.cPastTwentyOneDays,
+        start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
         profile_id: "MzAwMDAyMzY3OA==",
         page_no: 0,

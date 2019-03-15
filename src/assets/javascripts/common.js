@@ -16,6 +16,8 @@ let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000
 let cPastFourteenDays = moment(new Date(new Date().getTime() - 336 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去21天
 let cPastTwentyOneDays = moment(new Date(new Date().getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+// 获取过去的一年
+let cPastYears = moment(new Date(cNow.setFullYear(cNow.getFullYear() - 1))).format("YYYY-MM-DD");
 
 // 格式化数字
 function formatNumber (n) {
@@ -174,5 +176,6 @@ module.exports = {
   cPastSevenDays,
   cPastFourteenDays,
   cPastTwentyOneDays,
+  cPastYears,
   sortByProperty
 }
