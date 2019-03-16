@@ -2,12 +2,13 @@
   <div class="page">
     <page-header></page-header>
 
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
+    <div class="container mt50">
+      <!-- <main-nav class="pull-left"></main-nav>
 
       <div class="campaign-container pull-right">
         <router-view></router-view>
-      </div>
+      </div> -->
+      <router-view></router-view>
     </div>
   </div>
 </template>

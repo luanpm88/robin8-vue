@@ -1,80 +1,89 @@
 <template>
-<div class="ranking-container pull-right clearfix">
-  <!-- left -->
-  <div class="ranking-left col-sm-1">
-    <h5>Industries</h5>
-    <ul class="ranking-nav">
-      <li
-        v-for="(item, index) in rankSideList"
-        :key="index"
-        @click="listSearch(item, index)"
-        :class="{rankingcur:iscur === index}"
-      >
-        <!-- <i class="iconfont icon" v-html="item.icon">&#xe71a;</i> -->
-        {{item.label}}
-      </li>
-    </ul>
-  </div>
-  <!-- right -->
-  <div class="ranking-right col-sm-11">
-    <!-- top dec -->
-    <div class="r-top clearfix">
-      <p
-        class="r-top-dec col-sm-8"
-      >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
-      <p class="r-top-right col-sm-4">
-        <span>7 | 14 | 21</span>
-        <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
-      </p>
+  <div class="ranking-container pull-right clearfix">
+    <div class="top-control-area">
+      <button type="button" class="btn btn-purple" @click="pageBack">
+        <span class="iconfont icon-arrow-left"></span>
+        Back
+      </button>
     </div>
-    <!-- top list -->
-    <div class="r-right-topList clearfix">
-      <div class="r8-loading" v-if="isTopLoading">
-        <a-spin tip="Loading..."/>
+
+    <div class="mt20 clearfix">
+      <!-- left -->
+      <div class="ranking-left col-sm-1">
+        <h5>Industries</h5>
+        <ul class="ranking-nav">
+          <li
+            v-for="(item, index) in rankSideList"
+            :key="index"
+            @click="listSearch(item, index)"
+            :class="{rankingcur:iscur === index}"
+          >
+            <!-- <i class="iconfont icon" v-html="item.icon">&#xe71a;</i> -->
+            {{item.label}}
+          </li>
+        </ul>
       </div>
-      <div v-if="!isTopLoading">
-        <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
-          <p class="r-right-topList-tit">{{item.fixedTit}}</p>
-          <div class="r-right-topList-box clearfix">
-            <span class="r-right-topList-img col-sm-6" >
-              <img :src="item.avatar_url" alt @click="openDetails(item)">
-            </span>
-            <span
-              class="iconfont icon-cart active col-sm-1"
-              @click="doAddCart(item)"
-            ></span>
-            <span class="r-right-topList-txt col-sm-6">
-              <b>{{item.profile_name}}</b>
-              <b>{{item.source}}</b>
-              <b>{{item.value}}</b>
-            </span>
+      <!-- right -->
+      <div class="ranking-right col-sm-11">
+        <!-- top dec -->
+        <div class="r-top clearfix">
+          <p
+            class="r-top-dec col-sm-8"
+          >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
+          <p class="r-top-right col-sm-4">
+            <span>7 | 14 | 21</span>
+            <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
+          </p>
+        </div>
+        <!-- top list -->
+        <div class="r-right-topList clearfix">
+          <div class="r8-loading" v-if="isTopLoading">
+            <a-spin tip="Loading..."/>
           </div>
+          <div v-if="!isTopLoading">
+            <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
+              <p class="r-right-topList-tit">{{item.fixedTit}}</p>
+              <div class="r-right-topList-box clearfix">
+                <span class="r-right-topList-img col-sm-6" >
+                  <img :src="item.avatar_url" alt @click="openDetails(item)">
+                </span>
+                <span
+                  class="iconfont icon-cart active col-sm-1"
+                  @click="doAddCart(item)"
+                ></span>
+                <span class="r-right-topList-txt col-sm-6">
+                  <b>{{item.profile_name}}</b>
+                  <b>{{item.source}}</b>
+                  <b>{{item.value}}</b>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="r8-loading" v-if="isTableLoding">
+            <a-spin tip="Loading..."/>
+          </div>
+          <a-table
+          v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
+          @change="handleTableChange"
+          :pagination="false" :scroll="{ y: 500 }">
+            <template slot="profileDec" slot-scope="dec">
+              <div class="r-tableThirtyList-name">
+                <img :src="dec.avatar_url" alt="" @click="openDetails(dec)">
+                <span
+                  class="iconfont icon-cart active"
+                  @click="doAddCart(dec)"
+                ></span>
+                <p>{{dec.profile_name}}</p>
+                <!-- <p>{{dec.id}}</p> -->
+              </div>
+            </template>
+          </a-table>
         </div>
       </div>
     </div>
-    <div class="">
-      <div class="r8-loading" v-if="isTableLoding">
-        <a-spin tip="Loading..."/>
-      </div>
-      <a-table
-      v-if="isTable" :columns="columns" :dataSource="tableThirtyList"
-      @change="handleTableChange"
-      :pagination="false" :scroll="{ y: 500 }">
-        <template slot="profileDec" slot-scope="dec">
-          <div class="r-tableThirtyList-name">
-            <img :src="dec.avatar_url" alt="" @click="openDetails(dec)">
-            <span
-              class="iconfont icon-cart active"
-              @click="doAddCart(dec)"
-            ></span>
-            <p>{{dec.profile_name}}</p>
-            <!-- <p>{{dec.id}}</p> -->
-          </div>
-        </template>
-      </a-table>
-    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -336,6 +345,9 @@ export default {
         alert('您已成功添加至购物车')
       }
     },
+    pageBack () {
+      this.$router.go(-1)
+    }
   }
 };
 </script>

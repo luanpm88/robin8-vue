@@ -606,16 +606,8 @@ export default {
         this.cartKolsList = resData.items
         this.kolsCartTotal = parseInt(resData.paginate['X-Total'])
 
-        if (this.formType == 'create') {
-          if (resData.items.length > 0) {
-            this.cartKolsList.forEach(item => {
-              item.checked = false
-            })
-          }
-        }
-        if (this.formType == 'edit') {
-          let _selectedKols = this.submitData.selected_kols
-          console.log(_selectedKols)
+        let _selectedKols = this.submitData.selected_kols
+        if (_selectedKols.length > 0) {
           _selectedKols.forEach(item => {
             this.cartKolsList.forEach(e => {
               if (item.profile_id == e.profile_id) {
@@ -623,9 +615,28 @@ export default {
               }
             })
           })
-
-          console.log(this.cartKolsList)
         }
+
+        // if (this.formType == 'create') {
+        //   if (resData.items.length > 0) {
+        //     this.cartKolsList.forEach(item => {
+        //       item.checked = false
+        //     })
+        //   }
+        // }
+        // if (this.formType == 'edit') {
+        //   let _selectedKols = this.submitData.selected_kols
+        //   console.log(_selectedKols)
+        //   _selectedKols.forEach(item => {
+        //     this.cartKolsList.forEach(e => {
+        //       if (item.profile_id == e.profile_id) {
+        //         e.checked = true
+        //       }
+        //     })
+        //   })
+
+        //   console.log(this.cartKolsList)
+        // }
       }
     },
     getDetailData () {
@@ -724,15 +735,8 @@ export default {
       this.kolsList = resData.data
       this.kolsTotal = resData.total_record_count
 
-      if (this.formType == 'create') {
-        if (resData.data.length > 0) {
-          this.kolsList.forEach(item => {
-            item.checked = false
-          })
-        }
-      }
-      if (this.formType == 'edit') {
-        let _selectedKols = this.submitData.selected_kols
+      let _selectedKols = this.submitData.selected_kols
+      if (_selectedKols.length > 0) {
         _selectedKols.forEach(item => {
           this.kolsList.forEach(e => {
             if (item.profile_id == e.profile_id) {
@@ -741,6 +745,24 @@ export default {
           })
         })
       }
+
+      // if (this.formType == 'create') {
+      //   if (resData.data.length > 0) {
+      //     this.kolsList.forEach(item => {
+      //       item.checked = false
+      //     })
+      //   }
+      // }
+      // if (this.formType == 'edit') {
+      //   let _selectedKols = this.submitData.selected_kols
+      //   _selectedKols.forEach(item => {
+      //     this.kolsList.forEach(e => {
+      //       if (item.profile_id == e.profile_id) {
+      //         e.checked = true
+      //       }
+      //     })
+      //   })
+      // }
     },
     searchKolsCtrl () {
       let _brands_list = this.brandsList

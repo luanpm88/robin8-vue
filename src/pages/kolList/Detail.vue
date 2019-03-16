@@ -14,10 +14,17 @@
                   {{infoList.profile_name}}
                   <i class="iconfont icon-female" v-if="infoList.gender == 'm'"></i>
                   <i class="iconfont icon-male" v-if="infoList.gender == 'f'"></i>
-                  <span
-                    class="iconfont icon-cart active"
+                  <button
+                    type="button"
+                    class="btn btn-xs btn-purple"
                     @click="doAddCart(infoList)"
-                  ></span>
+                  >
+                    <span
+                      class="iconfont icon-cart"
+                      @click="doAddCart(infoList)"
+                    ></span>
+                    Add to cart
+                  </button>
                 </p>
                 <p>{{infoList.age}}</p>
                 <p>
@@ -847,9 +854,5 @@ export default {
       color: nth($purple, 1);
     }
   }
-}
-.icon-cart {
-  cursor: pointer;
-  color: nth($purple, 1);
 }
 </style>
