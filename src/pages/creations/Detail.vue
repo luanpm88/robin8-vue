@@ -50,7 +50,7 @@
                   <div class="col-sm-8">
                     <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
                     <!--  -->
-                    <p class="form-control-static">{{$t('lang.exposure')}}:{{item.exposure_value}}</p> 
+                    <p class="form-control-static">{{$('lang.exposure')}}:{{item.exposure_value}}</p> 
                   </div>
                 </div>
               </div>
