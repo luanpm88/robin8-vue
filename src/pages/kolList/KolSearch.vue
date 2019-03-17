@@ -39,7 +39,7 @@
           <div class="form-group">
             <div class="col-sm-2 control-label">{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
-              <select class="form-control" v-model="industry">
+              <select class="form-control" v-model="industry" placeholder="N/A">
                 <option value=""></option>
                 <option value="airline">{{$t('lang.kolList.search.advancedSearch.industryType.Airline')}}</option>
                 <option value="appliances">{{$t('lang.kolList.search.advancedSearch.industryType.Appliances')}}</option>
@@ -75,12 +75,14 @@
                   type="text"
                   class="form-control"
                   v-model="engagementFrom"
+                  placeholder="N/A"
                 />
                 <div class="input-group-addon">-</div>
                 <input
                   type="text"
                   class="form-control"
                   v-model="engagementTo"
+                  placeholder="N/A"
                 />
               </div>
             </div>
@@ -93,12 +95,14 @@
                   type="text"
                   class="form-control"
                   v-model="followerFrom"
+                  placeholder="N/A"
                 />
                 <div class="input-group-addon">-</div>
                 <input
                   type="text"
                   class="form-control"
                   v-model="followerTo"
+                  placeholder="N/A"
                 />
               </div>
             </div>
@@ -113,12 +117,14 @@
                   type="text"
                   class="form-control"
                   v-model="influenceFrom"
+                  placeholder="N/A"
                 />
                 <div class="input-group-addon">-</div>
                 <input
                   type="text"
                   class="form-control"
                   v-model="influenceTo"
+                  placeholder="N/A"
                 />
               </div>
             </div>
@@ -598,7 +604,7 @@ export default {
       this.cartParams.profile_name = data.profile_name
       this.cartParams.avatar_url = data.avatar_url
       this.cartParams.description_raw = data.description_raw
-      console.log(this.cartParams)
+      // console.log(this.cartParams)
       axios.post(apiConfig.kolCollectUrl, this.cartParams, {
         headers: {
           'Authorization': this.authorization

@@ -277,6 +277,16 @@ export default {
               element.profileDec.profile_name = element.profile_name;
               element.profileDec.id = element.weixin_id;
               element.profileDec.profile_id = element.profile_id;
+              element.doc_count =  commonJs.threeFormatter(element.doc_count, 2);
+              element.headline_count =  commonJs.threeFormatter(element.headline_count, 2);
+              element.total_reads =  commonJs.threeFormatter(element.total_reads, 2);
+              element.max_reads =  commonJs.threeFormatter(element.max_reads, 2);
+              element.avg_reads =  commonJs.threeFormatter(element.avg_reads, 2);
+              element.total_likes =  commonJs.threeFormatter(element.total_likes, 2);
+              element.avg_likes =  commonJs.threeFormatter(element.avg_likes, 2);
+              element.total_post_influence =  commonJs.threeFormatter(element.total_post_influence, 2);
+              element.max_post_influence =  commonJs.threeFormatter(element.max_post_influence, 2);
+              element.avg_post_influence =  commonJs.threeFormatter(element.avg_post_influence, 2);
             });
             _that.tableThirtyList = res.data;
           }

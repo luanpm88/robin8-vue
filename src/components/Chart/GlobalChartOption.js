@@ -459,10 +459,11 @@ const MockData = {
         title: 'Profile Name Weixin ID',
         dataIndex: 'profileDec',
         scopedSlots: { customRender: 'profileDec' },
-        width: '13%'
+        width: '12%'
       }, {
         title: 'Total Post Count',
         dataIndex: 'doc_count',
+        width: '8%',
         sorter: true,
         scopedSlots: { customRender: 'doc_count' },
       }, {

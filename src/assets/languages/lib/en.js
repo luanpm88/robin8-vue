@@ -435,7 +435,7 @@ export const lang = {
     tip: 'You did not choose the brand',
     addPage: {
       name: 'Brand Name:',
-      placeholderName: 'Please fill in the brandname',
+      placeholderName: 'Please enter the brand name',
       keywords: 'Brand Keywords:',
       placeholderKeywords: 'Please fill in the brand keywords',
       keywordsTips: 'Multiple keywords should be separated by commas to make them more accurate.',
@@ -459,7 +459,7 @@ export const lang = {
     tip: ' You did not choose a competitive brand',
     addPage: {
       name: 'Brand Name: ',
-      placeholderName: 'Please fill in the brandname',
+      placeholderName: 'Please enter the brand name',
       addTip: 'Add My Competitive Brand',
       placeholderDec: 'Please fill in the abbreviation of brand'
     }

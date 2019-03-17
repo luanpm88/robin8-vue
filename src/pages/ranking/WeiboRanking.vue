@@ -273,6 +273,16 @@ export default {
               element.profileDec.profile_name = element.profile_name;
               element.profileDec.id = element.profile_id;
               element.profileDec.profile_id = element.profile_id;
+              element.doc_count =  commonJs.threeFormatter(element.doc_count, 2);
+              element.total_sum_engagement =  commonJs.threeFormatter(element.total_sum_engagement, 2);
+              element.max_sum_engagement =  commonJs.threeFormatter(element.max_sum_engagement, 2);
+              element.avg_sum_engagement =  commonJs.threeFormatter(element.avg_sum_engagement, 2);
+              element.total_comments =  commonJs.threeFormatter(element.total_comments, 2);
+              element.max_comments =  commonJs.threeFormatter(element.max_comments, 2);
+              element.avg_comments =  commonJs.threeFormatter(element.avg_comments, 2);
+              element.total_likes =  commonJs.threeFormatter(element.total_likes, 2);
+              element.max_likes =  commonJs.threeFormatter(element.max_likes, 2);
+              element.avg_likes =  commonJs.threeFormatter(element.avg_likes, 2);
             });
             _that.tableThirtyList = res.data;
           }
