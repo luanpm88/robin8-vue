@@ -168,7 +168,7 @@
               <tr>
                 <th width="40%">Profile</th>
                 <th width="12%" class="text-center">Price</th>
-                <th width="12%" class="text-center">R8 KOL</th>
+                 <!--<th width="12%" class="text-center">R8 KOL</th>-->
                 <th width="18%" class="text-center">
                   Influence
                   <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
@@ -235,10 +235,10 @@
                   </div>
                 </td>
                 <td class="text-center">{{item.pricing.direct_price}}</td>
-                <td class="text-center">
+                <!--<td class="text-center">
                   <p v-if="item.kol_id">Yes</p>
                   <p v-else>No</p>
-                </td>
+                </td>-->
                 <td class="text-center">
                   <a-progress
                     type="circle"
