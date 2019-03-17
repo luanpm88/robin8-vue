@@ -23,6 +23,7 @@ export const lang = {
   yes: '是',
   no: '否',
   search: '搜索',
+  exposure: '曝光值',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
@@ -303,7 +304,10 @@ export const lang = {
       provincePlaceholder: '请选择粉丝的省份',
       cityPlaceholder: '请选择粉丝的城市',
       provinceErrorTips: '请选择粉丝的省份',
-      cityErrorTips: '请选择粉丝的城市'
+      cityErrorTips: '请选择粉丝的城市',
+    },
+    selectKolsbeen: {
+      tit: '已选择的大V'
     }
   },
   wallet: {
@@ -624,5 +628,15 @@ export const lang = {
     topic: '主题',
     source: '平台',
     kolId: 'KOL Id'
+  },
+  statusAreaVue: {
+    oneTit: '您提交的活动待审核',
+    oneSmallTit: '我们将在24小时之内完成审核',
+    twoTit: '您提交的活动未通过审核',
+    twoSmallTit: '请编辑后重新提交',
+    threeTit: '活动提交审核成功',
+    FourTit: '活动已结束',
+    FiveTit: '活动已完成',
+    sixTit: '活动已关闭',
   }
 }

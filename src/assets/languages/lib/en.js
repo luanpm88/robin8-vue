@@ -23,47 +23,48 @@ export const lang = {
   yes: 'Yes',
   no: 'No',
   search: 'Search',
+  exposure: 'Exposure',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
     availAmount: '账户余额'
   },
   companyInfo: {
-    title: '品牌资料',
+    title: 'Brand Information',
     name: {
-      title: '品牌名称',
-      placeholder: '请输入品牌名称',
-      errorTips: '请输入品牌名称'
+      title: 'Brand Name',
+      placeholder: 'Please enter the Brand Name',
+      errorTips: 'Please enter the Brand Name'
     },
     real_name: {
-      title: '真实姓名',
-      placeholder: '请输入真实姓名',
-      errorTips: '请输入真实姓名'
+      title: 'Name',
+      placeholder: 'Please enter the Name',
+      errorTips: 'Please enter the Name'
     },
     campany_name: {
-      title: '公司名称',
-      placeholder: '请输入公司名称',
-      errorTips: '请输入公司名称'
+      title: 'Company Name ',
+      placeholder: 'Please enter the company name',
+      errorTips: 'Please enter the company name'
     },
     url: {
-      title: '官方网站',
-      placeholder: '请输入官方网站',
-      errorTips: '请输入官方网站'
+      title: 'Website',
+      placeholder: 'Please enter the website',
+      errorTips: 'Please enter the website'
     },
     description: {
-      title: '品牌介绍',
-      placeholder: '请输入品牌介绍',
-      errorTips: '请输入品牌介绍'
+      title: 'Brand Description',
+      placeholder: 'Please enter the brand description',
+      errorTips: 'Please enter the brand description'
     },
     keywords: {
-      title: '品牌关键词',
-      placeholder: '请添加品牌关键词',
-      errorTips: '请添加品牌关键词'
+      title: 'Brand Keywords',
+      placeholder: 'Please enter the brand keywords',
+      errorTips: 'Please enter the brand keywords'
     },
     avatar_url: {
-      title: '品牌logo',
-      placeholder: '请上传品牌logo',
-      errorTips: '请上传品牌logo'
+      title: 'Brand Logo',
+      placeholder: 'Please upload brand logo',
+      errorTips: 'Please upload brand logo'
     }
   },
   updateBaseInfo: {
@@ -302,7 +303,10 @@ export const lang = {
       provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
       cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
+    },
+    selectKolsbeen: {
+      tit: 'Selected Big V'
     }
   },
   wallet: {
@@ -623,5 +627,15 @@ export const lang = {
     topic: 'Topic',
     source: 'Source',
     kolId: 'KOL Profile ID'
+  },
+  statusAreaVue: {
+    oneTit: 'Your campaign is pending',
+    oneSmallTit: 'We will review in 24 hours',
+    twoTit: ' Your campaign is rejected',
+    twoSmallTit: 'Please edit your campaign',
+    threeTit: 'Your campaign is passed',
+    FourTit: 'Your campaign is ended',
+    FiveTit: 'Your campaign is finished',
+    sixTit: 'Your campaign is closed',
   }
 }

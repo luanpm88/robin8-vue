@@ -584,34 +584,34 @@ export default {
             _that.dataListBox = res.data;
             if (!_that.dataListBox.pricing) {
               _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = "N/A";
+              _that.dataListBox.pricing.direct_price = " N/A";
             }
             if (_that.dataListBox.status === 'error') {
               _that.dataListBox.stats = {}
-              _that.dataListBox.stats.avg_shares = 'N/A'
-              _that.dataListBox.stats.avg_likes = 'N/A'
-              _that.dataListBox.stats.avg_reads = 'N/A'
-              _that.dataListBox.stats.avg_daily_posts = 'N/A'
-              _that.dataListBox.stats.avg_post_influences = 'N/A'
-              _that.dataListBox.stats.avg_comments = 'N/A'
+              _that.dataListBox.stats.avg_shares = ' N/A'
+              _that.dataListBox.stats.avg_likes = ' N/A'
+              _that.dataListBox.stats.avg_reads = ' N/A'
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.fans_number === '') {
-              _that.dataListBox.fans_number = 'N/A'
+              _that.dataListBox.fans_number = ' N/A'
             }
             if (!_that.dataListBox.stats.avg_shares) {
-              _that.dataListBox.stats.avg_shares = 'N/A'
+              _that.dataListBox.stats.avg_shares = ' N/A'
             }
             if (_that.dataListBox.stats.avg_likes === '') {
-              _that.dataListBox.stats.avg_likes = 'N/A'
+              _that.dataListBox.stats.avg_likes = ' N/A'
             }
             if (!_that.dataListBox.stats.avg_comments) {
-              _that.dataListBox.stats.avg_comments = 'N/A'
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.stats.avg_daily_posts === '') {
-              _that.dataListBox.stats.avg_daily_posts = 'N/A'
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
             }
             if (_that.dataListBox.stats.avg_post_influences === '') {
-              _that.dataListBox.stats.avg_post_influences = 'N/A'
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
             }
             _that.dataListBox.platform = "weixin";
             _that.dataListBox.pricing.direct_price = '¥' + commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
@@ -693,7 +693,9 @@ export default {
               _that.isPerShow = false;
               _that.isPer = true;
               res.data.data.forEach(item => {
-                item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2);
+                if (Number(item.influence_sum_engagement) !== 0) {
+                  item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2);
+                }
               })
               _that.performanceList = res.data.data;
             } else {
@@ -723,7 +725,9 @@ export default {
               _that.isPerShow = false;
               _that.isPer = true;
               res.data.data.forEach(item => {
-                item.influence_reads = commonJs.threeFormatter(item.influence_reads, 2);
+                if (Number(item.influence_reads) !== 0) {
+                  item.influence_reads = commonJs.threeFormatter(item.influence_reads, 2);
+                }
               })
               _that.performanceList = res.data.data;
             } else {

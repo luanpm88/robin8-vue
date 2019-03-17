@@ -48,7 +48,9 @@
                     </div>
                   </div>
                   <div class="col-sm-8">
-                    <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p>
+                    <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
+                    <!--  -->
+                    <p class="form-control-static">{{$t('lang.exposure')}}:{{item.exposure_value}}</p> 
                   </div>
                 </div>
               </div>
@@ -125,7 +127,7 @@
         </div>
 
         <div v-if="kolsList.length > 0">
-          <div class="line-title">已选择的大V</div>
+          <div class="line-title">{{$t('lang.creations.selectKolsbeen.tit')}}</div>
           <div class="kols-list clearfix">
             <kols-list-item
               v-for="(item, index) in kolsList"

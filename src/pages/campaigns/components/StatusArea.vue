@@ -27,8 +27,8 @@ export default {
       console.log(status)
       switch (status) {
         case 'pending':
-          this.status.title = '您提交的活动待审核'
-          this.status.desc = '我们将在24小时之内完成审核'
+          this.status.title = this.$t('lang.statusAreaVue.oneTit')
+          this.status.desc = this.$t('lang.statusAreaVue.oneSmallTit')
           break
         case 'unpassed':
           this.status.title = '您提交的活动未通过审核'

@@ -445,7 +445,7 @@
 
     <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">已选择的大V</h5>
+        <h5 class="title text-center">{{$t('lang.creations.selectKolsbeen.tit')}}</h5>
       </div>
       <div class="panel-body">
         <div class="checked-kols-list clearfix">
