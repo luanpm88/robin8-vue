@@ -188,10 +188,11 @@
                     <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
                   </tr>
                   <tr v-for="(key, index) in performanceList" :key="index">
-                    <td><a :href="key.url" target="blank">{{key.title}}</a></td>
+                    <td  v-if="type === 0"><p class="purple">{{key.title}}</p></td>
+                    <td  v-if="type === 1"><a :href="key.url" target="blank">{{key.title}}</a></td>
                     <td>{{key.post_time}}</td>
-                    <td v-if="type === 0">{{key.influence_sum_engagement}}+ </td>
-                    <td v-if="type === 1">{{key.influence_reads}}+ </td>
+                    <td v-if="type === 0">{{key.influence_sum_engagement}} </td>
+                    <td v-if="type === 1">{{key.influence_reads}}</td>
                   </tr>
                 </table>
                 <div class="nonetip" v-if="isPerShow">
@@ -539,25 +540,25 @@ export default {
             _that.dataListBox = res.data;
             if (!_that.dataListBox.pricing) {
               _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = "N/A";
+              _that.dataListBox.pricing.direct_price = " N/A";
             }
             if (_that.dataListBox.fans_number === '') {
-              _that.dataListBox.fans_number = 'N/A'
+              _that.dataListBox.fans_number = ' N/A'
             }
             if (_that.dataListBox.stats.avg_shares === '') {
-              _that.dataListBox.stats.avg_shares = 'N/A'
+              _that.dataListBox.stats.avg_shares = ' N/A'
             }
             if (_that.dataListBox.stats.avg_likes === '') {
-              _that.dataListBox.stats.avg_likes = 'N/A'
+              _that.dataListBox.stats.avg_likes = ' N/A'
             }
             if (_that.dataListBox.stats.avg_comments === '') {
-              _that.dataListBox.stats.avg_comments = 'N/A'
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.stats.avg_daily_posts === '') {
-              _that.dataListBox.stats.avg_daily_posts = 'N/A'
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
             }
             if (_that.dataListBox.stats.avg_post_influences === '') {
-              _that.dataListBox.stats.avg_post_influences = 'N/A'
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
             }
             _that.dataListBox.platform = "weibo";
             _that.dataListBox.pricing.direct_price = '¥' + commonJs.threeFormatter(_that.dataListBox.pricing.direct_price, 2);
@@ -692,7 +693,9 @@ export default {
               _that.isPer = true;
               res.data.data.forEach(item => {
                 if (Number(item.influence_sum_engagement) !== 0) {
-                  item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2);
+                  item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2) + '+';
+                } else {
+                  item.influence_sum_engagement = commonJs.threeFormatter(item.influence_sum_engagement, 2)
                 }
               })
               _that.performanceList = res.data.data;
@@ -724,6 +727,8 @@ export default {
               _that.isPer = true;
               res.data.data.forEach(item => {
                 if (Number(item.influence_reads) !== 0) {
+                  item.influence_reads = commonJs.threeFormatter(item.influence_reads, 2) + '+';
+                } else {
                   item.influence_reads = commonJs.threeFormatter(item.influence_reads, 2);
                 }
               })
@@ -848,7 +853,7 @@ export default {
 <style lang="scss" scoped>
 .kol-performance{
   .com-brand-table{
-    a{
+    a, .purple{
       display: block;
       text-align: left;
       color: nth($purple, 1);
