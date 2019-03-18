@@ -602,7 +602,19 @@ export const lang = {
         checkText: 'Only display KOLs that have prices at Robin8'
       },
       likeTip: 'Fans number',
-      sumTip: 'Average sum engagement'
+      sumTip: 'Average sum engagement',
+      tableTop: {
+        weixinBig: 'Weichat - big data profile',
+        weiboBig: 'Weibo - big data profile - 65,860,968',
+        weixinR8: 'Weichat - R8 managed',
+        weiboR8: 'Weibo - R8 managed',
+      },
+      table: {
+        profile: 'Profile',
+        price: 'Price',
+        influence: 'Influence',
+        relevance: 'Relevance'
+      }
     },
     postVue: {
       tip: 'No Post in 21 Days'

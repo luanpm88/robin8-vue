@@ -223,14 +223,14 @@ export default {
         this.conceptWeixin(this.conceptParams);
       }
       if (this.cur === 2 && topTab.index === 0) {
-        this.competitorList.options.yAxis.data = [];
-        this.competitorList.options.series[0].data = [];
+        // this.competitorList.options.yAxis.data = [];
+        // this.competitorList.options.series[0].data = [];
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
-        this.competitorList.options.yAxis.data = [];
-        this.competitorList.options.series[0].data = [];
+        // this.competitorList.options.yAxis.data = [];
+        // this.competitorList.options.series[0].data = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }
@@ -245,25 +245,38 @@ export default {
     },
     tabClick(tab) {
       this.cur = tab.index;
-      this.topTabCur = 0;
-
-      if (tab.index === 0) {
+      // this.topTabCur = 0;
+      if (tab.index === 0 && this.topTabCur === 0) {
         // trend 微博
         this.trendsWeibo(this.trendParams);
       }
-      if (tab.index === 1) {
+      if (tab.index === 0 && this.topTabCur === 1) {
+        // trend 微信
+        this.trendsWeixin(this.trendParams);
+      }
+      if (tab.index === 1 && this.topTabCur === 0) {
         // concept 微博
         this.conceptWeibo(this.conceptParams);
       }
-      if (tab.index === 2) {
+      if (tab.index === 1 && this.topTabCur === 1) {
+        // concept 微信
+        this.conceptWeixin(this.conceptParams);
+      }
+      if (tab.index === 2 && this.topTabCur === 0) {
         // competitor 微博
-        this.competitorList.options.yAxis.data = [];
-        this.competitorList.options.series[0].data = [];
         this.competitorWeibo(this.competitorParams);
       }
-      if (tab.index === 3) {
+      if (tab.index === 2 && this.topTabCur === 1) {
+        // competitor 微信
+        this.competitorWeixin(this.competitorParams);
+      }
+      if (tab.index === 3 && this.topTabCur === 0) {
         // sentiment 微博
         this.sentimentWeibo(this.sentimentParams);
+      }
+      if (tab.index === 3 && this.topTabCur === 1) {
+        // sentiment 微信
+        this.sentimentWeixin(this.sentimentParams);
       }
     },
     // trend 微博
@@ -343,6 +356,8 @@ export default {
     // competitor 微博
     competitorWeibo(params) {
       const _that = this;
+      this.competitorList.options.yAxis.data = [];
+      this.competitorList.options.series[0].data = [];
       this.labelList = [];
       axios
         .post(apiConfig.competitorWeibo, params, {
@@ -375,8 +390,10 @@ export default {
     },
     // competitor 微信
     competitorWeixin(params) {
-      const _that = this;
+      this.competitorList.options.yAxis.data = [];
+      this.competitorList.options.series[0].data = [];
       this.labelList = [];
+      const _that = this;
       axios
         .post(apiConfig.competitorWeixin, params, {
           headers: {
@@ -386,8 +403,6 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.competitorsNum = res.data.data.length;
-            _that.competitorList.options.yAxis.data = [];
-            _that.competitorList.options.series[0].data = [];
             res.data.data.forEach((element, index) => {
               let json = {
                 label: '',
