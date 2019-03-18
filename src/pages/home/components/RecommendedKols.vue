@@ -54,7 +54,7 @@ export default {
     return {
       kolRenderStatus: {
         hasLiked: false,
-        hasMsg: true,
+        hasMsg: false,
         hasChecked: false,
         hasInflunce: true,
         hasCart: true,
@@ -106,7 +106,7 @@ export default {
   methods: {
     changeLangue() {
       // vuejs 监听本地localstrage变化
-    
+
     },
     changeTab(tab) {
       this.tabIndex = tab.index

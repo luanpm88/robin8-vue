@@ -314,22 +314,22 @@
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerAge.placeholder')}}</option>
-                <option value="1">10-20 岁</option>
-                <option value="2">20-30 岁</option>
-                <option value="3">30-40 岁</option>
-                <option value="4">40-50 岁</option>
-                <option value="5">50-60 岁</option>
-                <option value="6">60 岁以上</option>
+                <option value="全部">{{$t('lang.creations.followerAge.placeholder')}}</option>
+                <option value="10,20">10-20 {{$t('lang.yearsOld')}}</option>
+                <option value="20,30">20-30 {{$t('lang.yearsOld')}}</option>
+                <option value="30,40">30-40 {{$t('lang.yearsOld')}}</option>
+                <option value="40,50">40-50 {{$t('lang.yearsOld')}}</option>
+                <option value="50,60">50-60 {{$t('lang.yearsOld')}}</option>
+                <option value="60,100">60 {{$t('lang.yearsOlder')}}</option>
               </select>
               <div class="form-tips">{{$t('lang.creations.followerAge.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerGender.placeholder')}}</option>
-                <option value="1">男</option>
-                <option value="0">女</option>
+                <option value="全部">{{$t('lang.creations.followerGender.placeholder')}}</option>
+                <option value="1">{{$t('lang.male')}}</option>
+                <option value="2">{{$t('lang.female')}}</option>
               </select>
               <div class="form-tips">{{$t('lang.creations.followerGender.errorTips')}}</div>
             </div>
@@ -399,7 +399,7 @@
                   {{item}}
                 </li>
               </ul>
-              <p v-else class="form-control-static">全部</p>
+              <p v-else class="form-control-static">{{$t('lang.all')}}</p>
             </div>
           </div>
           <div class="form-group text-center">
@@ -445,7 +445,7 @@
 
     <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.selectKolsbeen.tit')}}</h5>
+        <h5 class="title text-center">{{$t('lang.creations.bigVSelected')}}</h5>
       </div>
       <div class="panel-body">
         <div class="checked-kols-list clearfix">

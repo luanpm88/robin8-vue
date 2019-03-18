@@ -25,10 +25,15 @@ export const lang = {
   no: 'No',
   search: 'Search',
   exposure: 'Exposure',
+  all: 'All',
+  male: 'Male',
+  female: 'Female',
+  yearsOld: 'years old',
+  yearsOlder: 'years old or older',
   profile: {
-    name: '品牌名称',
-    companyName: '公司名称（抬头）',
-    availAmount: '账户余额'
+    name: 'Brand Name',
+    companyName: 'Company Name (Title)',
+    availAmount: 'Account Balance'
   },
   companyInfo: {
     title: 'Brand Information',
@@ -128,45 +133,67 @@ export const lang = {
     campaignInfo: 'Campaign Information',
     kolParticipate: 'KOL Participate',
     collaborationCompleted: 'Collaboration Completed',
-    promotionDesc: '推广简介',
-    promotionBudget: '推广预算',
-    promotionDetail: '推广详情',
-    promotionTime: '推广时间',
-    selectKols: 'KOL选择',
+    promotionDesc: 'Promotion Introduction',
+    promotionBudget: 'Promotion Bugdet',
+    promotionDetail: 'Promotion Detail',
+    promotionTime: 'Promotion Date',
+    selectKols: 'KOL Selection',
+    update: 'Update',
+    list: {
+      status: {
+        paid: 'Paid',
+        participant: 'Participant',
+        clicks: 'Clicks',
+        paidClicks: 'Paid Clicks',
+        exposure: 'Exposure',
+        repost: 'Repost'
+      },
+      btns: {
+        edit: 'edit',
+        pay: 'pay',
+        comments: 'comments',
+        repost: 'repost'
+      }
+    },
     link: {
-      title: '活动链接',
+      title: 'Campaign Linked',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
       errorTips: '请填写活动链接'
     },
     name: {
-      title: '活动标题',
+      title: 'Campaign Title',
       placeholder: '请概括您的推广，让您的内容一目了然',
       errorTips: '请填写活动标题'
     },
     description: {
-      title: '活动简介',
+      title: 'Campaign Detail',
       placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
       errorTips: '请填写活动相关介绍'
     },
     picture: {
-      title: '活动图片',
+      title: 'Campaign Picture',
       placeholder: '',
-      errorTips: '请上传活动图片'
+      errorTips: 'Please upload an image'
     },
     allBudget: {
-      title: '总预算',
-      placeholder: '请填写活动预算',
-      errorTips: '请填写活动预算'
+      title: 'Totel Bugdet',
+      placeholder: 'Totel Bugdet',
+      errorTips: 'Totel Bugdet'
     },
     platform: {
-      title: '推广平台选择',
-      placeholder: '请选择推广平台',
-      errorTips: '请选择推广平台'
+      title: 'Platform',
+      placeholder: 'Please select the platform',
+      weibo: 'Weibo',
+      wechat: 'Wechat',
+      errorTips: 'Please select the platform'
     },
     mode: {
-      title: '奖励模式选择',
-      placeholder: '请选择奖励模式',
-      errorTips: '请选择奖励模式'
+      title: 'Reward Method',
+      placeholder: 'Please select the reward method',
+      clicks: 'By Clicks',
+      repost: 'By Repost',
+      mission: 'By Mission',
+      errorTips: 'Please select the reward method'
     },
     pictureNumber: {
       title: '示例图片数量',
@@ -174,43 +201,44 @@ export const lang = {
       errorTips: '请选择示例图片数量'
     },
     budget: {
-      title: '单次预算',
-      placeholder: '请填写单次预算',
-      errorTips: '请填写单次预算'
+      title: 'One Time Bugdet',
+      placeholder: 'One Time Bugdet',
+      errorTips: 'One Time Bugdet'
     },
     time: {
-      title: '推广时间',
+      title: 'Promotion Date',
       startPlaceholder: '选择开始时间',
       endPlaceholder: '选择结束时间',
-      placeholder: '请选择您预期的推广时间',
-      errorTips: '请选择您预期的推广时间'
+      placeholder: 'Please specify your campaign timeframe',
+      errorTips: 'Please specify your campaign timeframe'
     },
     tags: {
-      title: '分类',
+      title: 'Campaign Tags',
       placeholder: '',
-      errorTips: '请选择一个分类'
+      errorTips: 'Please select the tags'
     },
     kolDistrict: {
-      title: '地域',
-      placeholder: '请选择地域',
-      provincePlaceholder: 'Please select province',
-      cityPlaceholder: 'Please select city',
-      errorTips: '请选择地域'
+      title: 'KOLs’ Location',
+      placeholder: 'Please select KOLs’ location',
+      provincePlaceholder: 'Please select the preferred province for the KOLs’.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’.'
     },
     kolAge: {
-      title: 'Age',
-      placeholder: 'all',
-      errorTips: 'Please select the age'
+      title: 'KOLs’ Age',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ age range.'
     },
     kolGender: {
-      title: 'Gender',
-      placeholder: 'all',
-      errorTips: 'Please select the gender'
+      title: 'KOLs’ Gender',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ gender.'
     },
     kolPush: {
-      title: '补推',
+      title: 'Push',
       placeholder: '',
-      errorTips: '请选择补推形式'
+      errorTips: 'Please select a push form'
     },
     evaluatePoint: {
       title: '效果打分',
@@ -246,6 +274,7 @@ export const lang = {
     kolParticipate: 'Participating KOLs',
     collaborationCompleted: 'Campaign Completed',
     bigVRequirement: 'Big V related requirement',
+    bigVSelected: 'Selected Big V',
     serchBtn: 'Search',
     name: {
       title: 'Campaign Name',
@@ -323,9 +352,6 @@ export const lang = {
       cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
       cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
-    },
-    selectKolsbeen: {
-      tit: 'Selected Big V'
     }
   },
   wallet: {

@@ -29,37 +29,37 @@
                 </div>
                 <div class="campaign-status">
                   <div class="item">
-                    <div class="title">已花费</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.paid')}}</div>
                     <div class="text">
                       ￥<span class="num">{{item.take_budget}}</span>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="title">参与人数</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.participant')}}</div>
                     <div class="text">
                       <span class="num">{{item.join_count}}</span>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="title">点击数</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.clicks')}}</div>
                     <div class="text">
                       <span class="num">{{item.total_click}}</span>
                     </div>
                   </div>
                   <div v-if="item.per_budget_type == 'cpa' || item.per_budget_type == 'click'" class="item">
-                    <div class="title">计费点击</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.paidClicks')}}</div>
                     <div class="text">
                       <span class="num">{{item.avail_click}}</span>
                     </div>
                   </div>
                   <div v-if="item.per_budget_type == 'post'" class="item">
-                    <div class="title">转发量</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.repost')}}</div>
                     <div class="text">
                       <span class="num">{{item.post_count}}</span>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="title">总曝光数</div>
+                    <div class="title">{{$t('lang.campaigns.list.status.exposure')}}</div>
                     <div class="text">
                       <span class="num">{{item.exposures_count}}</span>
                     </div>
@@ -71,22 +71,22 @@
                   v-show="item.status == 'pending' || item.status == 'unpay' || item.status == 'rejected'"
                   :to="'/campaigns/'+ item.id +'/edit'"
                   class="btn btn-sm btn-cyan btn-outline"
-                >编辑</router-link>
+                >{{$t('lang.campaigns.list.btns.edit')}}</router-link>
                 <router-link
                   v-show="item.status == 'settled' && item.evaluation_status == 'evaluating'"
                   :to="'/campaigns/'+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
-                >评价</router-link>
+                >{{$t('lang.campaigns.list.btns.comments')}}</router-link>
                 <router-link
                   v-show="item.status == 'unpay'"
                   :to="'/campaigns/'+ item.id +'/pay'"
                   class="btn btn-sm btn-cyan btn-outline"
-                >支付</router-link>
+                >{{$t('lang.campaigns.list.btns.pay')}}</router-link>
                 <router-link
                   v-show="item.status != 'pending' && item.status != 'unpay' && item.status != 'rejected'"
                   :to="'/campaigns/create?copy_id='+ item.id"
                   class="btn btn-sm btn-cyan btn-outline"
-                >再次发布</router-link>
+                >{{$t('lang.campaigns.list.btns.repost')}}</router-link>
               </div>
             </div>
           </div>
