@@ -255,8 +255,9 @@ export default {
         this.setAccount(resData.email)
         this.setNickname(resData.name)
         this.setMobile(resData.mobile_number)
-        // this.setAvatarImgUrl(resData.avatar_url)
+        this.setAvatarImgUrl(resData.avatar_url)
         this.setCompanyName(resData.campany_name)
+        alert('编辑成功')
         // this.$router.push('/')
       } else {
         alert('提交失败，请重新提交')
