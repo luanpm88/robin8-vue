@@ -37,7 +37,7 @@
               </td>
               <td>
                 <p>take budget: {{item.actual_amount}}</p>
-                <p>real nmber of kols: {{item.quote_count}}</p>
+                <p>real number of kols: {{item.quote_count}}</p>
               </td>
               <td class="text-center operation-area">
                 <router-link

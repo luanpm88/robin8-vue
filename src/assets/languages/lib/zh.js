@@ -194,6 +194,8 @@ export const lang = {
     selectKols: 'KOL选择',
     serchBtn: '搜索大V',
     update: '最后更新',
+    kolList: 'KOL列表',
+    kolAnalysis: 'KOL分析',
     list: {
       status: {
         paid: '已花费',
@@ -407,6 +409,11 @@ export const lang = {
       cityPlaceholder: '请选择粉丝的城市',
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
+    },
+    status: {
+      waiting: '待合作',
+      processing: '合作中',
+      done: '已完成'
     }
   },
   wallet: {
