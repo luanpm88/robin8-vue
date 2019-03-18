@@ -96,8 +96,7 @@ export default {
     handleDelCheckedKolSucc (res) {
       console.log(res)
       if (res.status == 201) {
-        let resData = res.data
-        this.cartList = resData.items
+        this.getListData()
       }
     }
   },
