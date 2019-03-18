@@ -35,6 +35,9 @@ const config = {
   // 已收藏kol list post
   kolCollectListUrl: `${host}/users/collected_kols`,
 
+  // 取消收藏kol post
+  kolCollectCancelUrl: `${host}/users/cancel_collect`,
+
   // 品牌主信息 get
   profileUrl: `${host}/users/profile`,
 
