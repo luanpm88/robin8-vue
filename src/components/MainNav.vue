@@ -13,7 +13,7 @@
           tag="div"
         >
           <div :class="'iconfont ' + item.icon"></div>
-          <div class="title">{{$t('lang.' + item.title)}}</div>
+          <div class="title">{{$t(`lang.${item.title}`)}}</div>
         </router-link>
 
         <div
@@ -39,7 +39,7 @@
             :to="subItem.href"
             class="item"
           >
-            {{subItem.title}}
+            {{$t(`lang.${subItem.title}`)}}
           </router-link>
         </div>
 
@@ -55,85 +55,85 @@ export default {
     return {
       navData: [
         {
-          title: 'home',
+          title: 'nav.home',
           icon: 'icon-home',
           href: '/home'
         },
         {
-          title: 'campaignsData',
+          title: 'nav.campaigns',
           icon: 'icon-data',
           href: '/creations',
           subNav: [
             {
-              title: 'Custom Content',
+              title: 'nav.customContent',
               href: '/creations'
             },
             {
-              title: 'Share-Only',
+              title: 'nav.shareOnly',
               href: '/campaigns'
             }
           ]
         },
         {
-          title: 'myKols',
+          title: 'nav.kols',
           icon: 'icon-user',
           href: '/kol/list'
         },
         {
-          title: 'myWallet',
+          title: 'nav.wallet',
           icon: 'icon-wallet',
           href: '/wallet',
           subNav: [
             {
-              title: 'Top up',
+              title: 'nav.topUp',
               href: '/wallet/recharge'
             },
             {
-              title: 'Transactions',
+              title: 'nav.transactions',
               href: '/wallet/summary'
             },
             {
-              title: 'Invoices',
+              title: 'nav.invoices',
               href: '/wallet/invoice'
             }
           ]
         },
         {
-          title: 'settings',
+          title: 'nav.setting',
           icon: 'icon-setting',
           href: '/settings',
           subNav: [
             {
-              title: 'Basic Information',
+              title: 'nav.basicInfo',
               href: '/settings/company_info'
             },
             {
-              title: 'My Brands',
+              title: 'nav.brands',
               href: '/settings/my_brands'
             },
             {
-              title: 'My Competitors',
+              title: 'nav.competitors',
               href: '/settings/my_competition_brands'
             }
           ]
         },
         {
-          title: 'ranking',
+          title: 'nav.ranking',
           icon: 'icon-rocket',
           href: '/ranking',
           subNav: [
             {
-              title: 'WechatRanking',
+              title: 'nav.wechatRanking',
               href: '/ranking/WechatRanking'
             },
             {
-              title: 'WeiboRanking',
+              title: 'nav.weiboRanking',
               href: '/ranking/WeiboRanking'
             }
           ]
         },
         {
-          title: 'socialListening',
+          title: 'nav.socialListening',
           icon: 'icon-unit',
           href: '/social/SocialListening'
         }
