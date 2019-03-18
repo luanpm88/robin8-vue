@@ -247,8 +247,8 @@ export default {
       isShow: false,
       isLoading: true,
       isTag: false,
-      isActivity: true,
-      isAnalytics: true,
+      isActivity: false,
+      isAnalytics: false,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,

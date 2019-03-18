@@ -7,17 +7,17 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">支付订单</h5>
+        <h5 class="title text-center">{{$t('lang.creations.payment.title')}}</h5>
       </div>
       <div class="panel-body">
         <div class="order-info">
           <p>邀请KOL人数: {{detailData.kols_count}}人</p>
           <p>KOL总价: ¥{{detailData.price}} | 平台服务费: ¥{{detailData.fee}}</p>
-          <p>支付总额: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+          <p>{{$t('lang.creations.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
-          <h5 class="title">支付方式:</h5>
+          <h5 class="title">{{$t('lang.creations.payment.method.title')}}:</h5>
           <ul class="method-list">
             <li
               v-for="item in payMethods"
@@ -53,7 +53,7 @@
             type="button"
             class="btn btn-cyan"
             @click="doPay"
-          >立即付款</button>
+          >{{$t('lang.payBtn')}}</button>
         </div>
       </div>
     </div>
@@ -85,8 +85,8 @@ export default {
         {
           id: '0',
           val: 'alipay',
-          name: '支付宝',
-          desc: '使用支付宝线上支付安全放心',
+          name: this.$t('lang.creations.payment.method.alipay.title'),
+          desc: this.$t('lang.creations.payment.method.alipay.desc'),
           iconClass: 'icon-alipay',
           checked: true
         },
