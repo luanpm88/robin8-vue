@@ -413,6 +413,17 @@ export const lang = {
       waiting: '待合作',
       processing: '合作中',
       done: '已完成'
+    },
+    payment: {
+      title: 'Pay Invoice',
+      amount: 'Payment Amount',
+      method: {
+        title: 'Payment Method',
+        alipay: {
+          title: 'Alipay',
+          desc: '使用支付宝线上支付安全放心'
+        }
+      }
     }
   },
   wallet: {
