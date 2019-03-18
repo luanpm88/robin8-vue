@@ -9,7 +9,7 @@
       :key="index"
       class="item"
     >
-      <router-link :to="item.path">{{item.meta.title}}</router-link>
+      <router-link :to="item.path">{{$t(`lang.router.${item.meta.title}`)}}</router-link>
       <span v-if="index !== brumblist.length - 1" class="separator">{{separator}}</span>
     </li>
   </ul>

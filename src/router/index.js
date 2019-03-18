@@ -54,7 +54,7 @@ export default new Router({
       name: 'Home',
       component: Home,
       meta: {
-        title: 'ROBIN8',
+        title: 'home',
         auth: true
       }
     },
@@ -63,7 +63,7 @@ export default new Router({
       name: 'Login',
       component: Login,
       meta: {
-        title: '登录'
+        title: 'login'
       }
     },
     {
@@ -71,7 +71,7 @@ export default new Router({
       name: 'Reg',
       component: Reg,
       meta: {
-        title: '注册'
+        title: 'reg'
       }
     },
     {
@@ -79,7 +79,7 @@ export default new Router({
       name: 'ForgetPassword',
       component: ForgetPassword,
       meta: {
-        title: '忘记密码'
+        title: 'forgetPassword'
       }
     },
     {
@@ -87,7 +87,7 @@ export default new Router({
       name: 'ChangePassword',
       component: ChangePassword,
       meta: {
-        title: '重置密码'
+        title: 'changePassword'
       }
     },
     {
@@ -95,7 +95,7 @@ export default new Router({
       name: 'Home',
       component: Home,
       meta: {
-        title: 'ROBIN8',
+        title: 'home',
         auth: true
       }
     },
@@ -104,7 +104,7 @@ export default new Router({
       name: 'HomeCreate',
       component: HomeCreate,
       meta: {
-        title: '创建新活动',
+        title: 'homeCreate',
         auth: true
       }
     },
@@ -113,7 +113,7 @@ export default new Router({
       name: 'Settings',
       component: Settings,
       meta: {
-        title: '企业设置',
+        title: 'settings',
         auth: true
       },
       children: [
@@ -122,7 +122,7 @@ export default new Router({
           name: 'CompanyInfo',
           component: CompanyInfo,
           meta: {
-            title: '基本信息',
+            title: 'companyInfo',
             auth: true
           }
         },
@@ -131,7 +131,7 @@ export default new Router({
           name: 'MyBrands',
           component: MyBrands,
           meta: {
-            title: '我的品牌',
+            title: 'myBrands',
             auth: true
           }
         },
@@ -140,7 +140,7 @@ export default new Router({
           name: 'MyBrandsCreate',
           component: MyBrandsCreate,
           meta: {
-            title: '我的品牌',
+            title: 'myBrandsCreate',
             auth: true
           }
         },
@@ -149,7 +149,7 @@ export default new Router({
           name: 'MyCompetitionBrands',
           component: MyCompetitionBrands,
           meta: {
-            title: '我的竞争品牌',
+            title: 'myCompetitionBrands',
             auth: true
           }
         },
@@ -158,7 +158,7 @@ export default new Router({
           name: 'MyCompetitionBrandsCreate',
           component: MyCompetitionBrandsCreate,
           meta: {
-            title: '我的竞争品牌增加',
+            title: 'myCompetitionBrandsCreate',
             auth: true
           }
         }
@@ -169,7 +169,7 @@ export default new Router({
       name: 'Wallet',
       component: Wallet,
       meta: {
-        title: '我的账户',
+        title: 'wallet',
         auth: true
       },
       children: [
@@ -178,7 +178,7 @@ export default new Router({
         //   name: 'WalletRecharge',
         //   component: WalletRecharge,
         //   meta: {
-        //     title: '账户充值',
+        //     title: 'walletRecharge',
         //     auth: true
         //   }
         // },
@@ -187,7 +187,7 @@ export default new Router({
           name: 'WalletRecharge',
           component: WalletRecharge,
           meta: {
-            title: '账户充值',
+            title: 'walletRecharge',
             auth: true
           }
         },
@@ -196,7 +196,7 @@ export default new Router({
           name: 'WalletSummary',
           component: WalletSummary,
           meta: {
-            title: '消费记录',
+            title: 'walletSummary',
             auth: true
           }
         },
@@ -205,7 +205,7 @@ export default new Router({
           name: 'WalletInvoice',
           component: WalletInvoice,
           meta: {
-            title: '申请发票',
+            title: 'walletInvoice',
             auth: true
           }
         },
@@ -214,7 +214,7 @@ export default new Router({
           name: 'WalletInvoiceForm',
           component: WalletInvoiceForm,
           meta: {
-            title: '发票信息',
+            title: 'walletInvoiceForm',
             auth: true
           }
         },
@@ -223,7 +223,7 @@ export default new Router({
           name: 'WalletReceiverForm',
           component: WalletReceiverForm,
           meta: {
-            title: '邮寄地址信息',
+            title: 'walletReceiverForm',
             auth: true
           }
         }
@@ -234,7 +234,7 @@ export default new Router({
       name: 'Creations',
       component: Creations,
       meta: {
-        title: '活动',
+        title: 'creations',
         auth: true
       },
       children: [
@@ -243,7 +243,7 @@ export default new Router({
           name: 'CreationList',
           component: CreationList,
           meta: {
-            title: '创作活动列表',
+            title: 'creationList',
             auth: true
           }
         },
@@ -252,7 +252,7 @@ export default new Router({
         //   name: 'CreationList',
         //   component: CreationList,
         //   meta: {
-        //     title: '创作活动列表',
+        //     title: 'creationList',
         //     auth: true
         //   }
         // },
@@ -261,7 +261,7 @@ export default new Router({
           name: 'CreationCreate',
           component: CreationCreate,
           meta: {
-            title: '创建新活动',
+            title: 'creationCreate',
             keepAlive: true,
             auth: true
           }
@@ -271,7 +271,7 @@ export default new Router({
           name: 'CreationDetail',
           component: CreationDetail,
           meta: {
-            title: '活动详情',
+            title: 'creationDetail',
             auth: true
           }
         },
@@ -280,7 +280,7 @@ export default new Router({
           name: 'CreationEdit',
           component: CreationEdit,
           meta: {
-            title: '活动编辑',
+            title: 'creationEdit',
             keepAlive: true,
             auth: true
           }
@@ -290,7 +290,7 @@ export default new Router({
           name: 'ChooseKols',
           component: ChooseKols,
           meta: {
-            title: '创建新活动',
+            title: 'chooseKols',
             auth: true
           }
         },
@@ -299,7 +299,7 @@ export default new Router({
           name: 'CreationPay',
           component: CreationPay,
           meta: {
-            title: '创建新活动',
+            title: 'creationPay',
             auth: true
           }
         }
@@ -310,7 +310,7 @@ export default new Router({
       name: 'Campaigns',
       component: Campaigns,
       meta: {
-        title: '活动',
+        title: 'campaigns',
         auth: true
       },
       children: [
@@ -319,7 +319,7 @@ export default new Router({
           name: 'CampaignList',
           component: CampaignList,
           meta: {
-            title: '小V活动列表',
+            title: 'campaignList',
             auth: true
           }
         },
@@ -328,7 +328,7 @@ export default new Router({
           name: 'CampaignCreate',
           component: CampaignCreate,
           meta: {
-            title: '创建新活动',
+            title: 'campaignCreate',
             keepAlive: true,
             auth: true
           }
@@ -338,7 +338,7 @@ export default new Router({
           name: 'CampaignDetail',
           component: CampaignDetail,
           meta: {
-            title: '活动详情',
+            title: 'campaignDetail',
             auth: true
           }
         },
@@ -347,7 +347,7 @@ export default new Router({
           name: 'CampaignEdit',
           component: CampaignEdit,
           meta: {
-            title: '活动编辑',
+            title: 'campaignEdit',
             keepAlive: true,
             auth: true
           }
@@ -357,7 +357,7 @@ export default new Router({
           name: 'CampaignPay',
           component: CampaignPay,
           meta: {
-            title: '创建新活动',
+            title: 'campaignPay',
             auth: true
           }
         }
@@ -368,7 +368,7 @@ export default new Router({
       name: 'KolList',
       component: KolList,
       meta: {
-        title: 'KOL列表',
+        title: 'kolList',
         keepAlive: true,
         auth: true
       }
@@ -379,7 +379,7 @@ export default new Router({
       name: 'KolDetail',
       component: KolDetail,
       meta: {
-        title: 'KOL详情',
+        title: 'kolDetail',
         auth: true
       }
     },
@@ -388,7 +388,7 @@ export default new Router({
       name: 'Ranking',
       component: Ranking,
       meta: {
-        title: '排名',
+        title: 'ranking',
         auth: true
       },
       children: [
@@ -397,7 +397,7 @@ export default new Router({
           name: 'wechatRanking',
           component: WechatRanking,
           meta: {
-            title: '微信排名',
+            title: 'wechatRanking',
             auth: true
           }
         },{
@@ -405,7 +405,7 @@ export default new Router({
           name: 'weiboRanking',
           component: WeiboRanking,
           meta: {
-            title: '微博排名',
+            title: 'weiboRanking',
             auth: true
           }
         },
@@ -424,7 +424,7 @@ export default new Router({
       name: 'socialListening',
       component: SocialListening,
       meta: {
-        title: '社交聆听',
+        title: 'socialListening',
         auth: true
       }
     },
