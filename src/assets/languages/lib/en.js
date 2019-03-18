@@ -138,6 +138,7 @@ export const lang = {
     promotionDetail: 'Promotion Detail',
     promotionTime: 'Promotion Date',
     selectKols: 'KOL Selection',
+    update: 'Update',
     list: {
       status: {
         paid: 'Paid',

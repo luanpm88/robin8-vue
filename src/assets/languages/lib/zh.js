@@ -139,6 +139,7 @@ export const lang = {
     promotionTime: '推广时间',
     selectKols: 'KOL选择',
     serchBtn: '搜索大V',
+    update: '最后更新',
     list: {
       status: {
         paid: '已花费',
