@@ -591,6 +591,7 @@ export const lang = {
       }
     },
     search: {
+      topKey: 'Enter a keyword, category or KOL name',
       keyword: 'Please type here...',
       search: 'Search',
       advancedSearch: {
@@ -614,7 +615,7 @@ export const lang = {
           Food: 'Food',
           Furniture: 'Furniture',
           Games: 'Games',
-          Gealth: 'Health',
+          Health: 'Health',
           Hotel: 'Hotel',
           Internet: 'Internet',
           Mobile: 'Mobile',

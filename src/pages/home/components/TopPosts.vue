@@ -92,21 +92,18 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.weibo')
+          name: () => this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: this.$t('lang.wechat')
+          name: () => this.$t('lang.wechat')
         }
       ]
 
     }
   },
   computed: {
-    ...mapState(['authorization', 'language']),
-    listenLangue() {
-      return this.language
-    }
+    ...mapState(['authorization'])
   },
   watch: {
     childKeyList: {
@@ -122,16 +119,6 @@ export default {
       },
       deep: true
     },
-    listenLangue:function(old,newd){
-      if (old === 'zh-CN') {
-        this.tabList[0].name = '微博'
-        this.tabList[1].name = '微信'
-      }
-      if (old === 'en-US') {
-        this.tabList[0].name = 'Weibo'
-        this.tabList[1].name = 'Wechat'
-      }
-    }
   },
   created() {
   },

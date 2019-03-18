@@ -2,7 +2,7 @@
   <div>
     <div class="panel default-panel kols-list-panel">
       <div class="panel-head">
-        <h5 class="title text-center">Enter a keyword, category or KOL name</h5>
+        <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal">
@@ -342,11 +342,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.weibo')
+          name: () => this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: this.$t('lang.wechat')
+          name: () => this.$t('lang.wechat')
         }
       ],
       tabIndex: 0,
@@ -382,16 +382,16 @@ export default {
     }
   },
   watch: {
-    listenLangue:function(old,newd){
-      if (old === 'zh-CN') {
-        this.tabList[0].name = '微博'
-        this.tabList[1].name = '微信'
-      }
-      if (old === 'en-US') {
-        this.tabList[0].name = 'Weibo'
-        this.tabList[1].name = 'Wechat'
-      }
-    }
+    // listenLangue:function(old,newd){
+    //   if (old === 'zh-CN') {
+    //     this.tabList[0].name = '微博'
+    //     this.tabList[1].name = '微信'
+    //   }
+    //   if (old === 'en-US') {
+    //     this.tabList[0].name = 'Weibo'
+    //     this.tabList[1].name = 'Wechat'
+    //   }
+    // }
   },
   methods: {
     // 初始化传参数

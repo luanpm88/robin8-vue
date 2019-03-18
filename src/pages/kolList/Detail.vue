@@ -301,15 +301,15 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.kolList.detail.summary')
+          name: () => this.$t('lang.kolList.detail.summary')
         },
         {
           index: 1,
-          name: this.$t('lang.kolList.detail.analytics')
+          name: () => this.$t('lang.kolList.detail.analytics')
         },
         {
           index: 2,
-          name: this.$t('lang.kolList.detail.post')
+          name: () => this.$t('lang.kolList.detail.post')
         }
       ],
       performanceList: [],
@@ -338,24 +338,7 @@ export default {
     this.tabIndexOneInit();
   },
   computed: {
-    ...mapState(["authorization", 'language']),
-    listenLangue() {
-      return this.language
-    }
-  },
-  watch: {
-    listenLangue:function(old,newd){
-      if (old === 'zh-CN') {
-        this.tabList[0].name = '总结'
-        this.tabList[1].name = '分析'
-        this.tabList[2].name = '文章'
-      }
-      if (old === 'en-US') {
-        this.tabList[0].name = 'Summary'
-        this.tabList[1].name = 'Analytics'
-        this.tabList[2].name = 'Posts'
-      }
-    }
+    ...mapState(["authorization"])
   },
   methods: {
     // summary
