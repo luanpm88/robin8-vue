@@ -100,10 +100,10 @@ export default {
   },
   created() {
     this.getBaseData();
-    if (this.$route.params.currentBrand) {
-      this.keyList.tabIndex = 0;
+    if (this.$route.query.currentBrand) {
+      this.keyList.tabIndex = 0;;
     }
-    if (this.$route.params.curentCompittor) {
+    if (this.$route.query.curentCompittor) {
       this.keyList.tabIndex = 2;
     }
   },
@@ -124,7 +124,7 @@ export default {
           } else {
             _that.isCompetitors = true;
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
-            if (JSON.stringify(_that.$route.params) == "{}") {
+            if (JSON.stringify(_that.$route.query) == "{}") {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
                   _that.keyList.name = element.name;
@@ -148,15 +148,15 @@ export default {
               // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
               if (_that.$route.params.currentBrand) {
                 // console.log(222);
-                _that.keyList.name = _that.$route.params.currentBrandName;
-                _that.keyList.brand_keywords = _that.$route.params.currentBrand;
+                _that.keyList.name = _that.$route.query.currentBrandName;
+                _that.keyList.brand_keywords = _that.$route.query.currentBrand;
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
                     _that.keyList.cb_keywords.push(element.short_name);
                   }
                 });
               }
-              if (_that.$route.params.curentCompittor) {
+              if (_that.$route.query.curentCompittor) {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
                     // console.log(3333);
@@ -170,7 +170,7 @@ export default {
                   }
                 })
                 // 赋值对比competitor
-                _that.keyList.cb_keywords = _that.$route.params.curentCompittor
+                _that.keyList.cb_keywords = _that.$route.query.curentCompittor
               }
             }
           }

@@ -152,10 +152,10 @@
     <div class="panel default-panel kols-list-panel mt20">
       <div class="panel-body">
         <div class="kols-list-statistics">
-          <span v-if="tabIndex === 1" class="item">weixin - big data profile - 5,564,575</span>
-          <span v-if="tabIndex === 0" class="item">weibo - big data profile - 65,860,968</span>
-          <span v-if="tabIndex === 1" class="item">weixin - R8 managed - {{r8List.wechat_kols_count}}</span>
-          <span v-if="tabIndex === 0" class="item">weibo - R8 managed - {{r8List.weibo_kols_count}}</span>
+          <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
+          <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
+          <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinR8')}} - {{r8List.wechat_kols_count}}</span>
+          <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboR8')}} - {{r8List.weibo_kols_count}}</span>
         </div>
 
         <default-tabs
@@ -166,20 +166,20 @@
           <table class="default-table mt20">
             <thead>
               <tr>
-                <th width="40%">Profile</th>
-                <th width="12%" class="text-center">Price</th>
+                <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
+                <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                  <!--<th width="12%" class="text-center">R8 KOL</th>-->
                 <th width="18%" class="text-center">
-                  Influence
+                  {{$t('lang.kolList.search.table.influence')}}
                   <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
-                    <i :class="{up: true, 'is-top-iactive': isFIactive}"></i>
+                    <!-- <i :class="{up: true, 'is-top-iactive': isFIactive}"></i> -->
                     <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
                   </span>
                 </th>
                 <th width="18%" class="text-center">
-                  Relevance
+                  {{$t('lang.kolList.search.table.relevance')}}
                   <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
-                    <i :class="{up: true, 'is-top-iactive': isRIactive}"></i>
+                    <!-- <i :class="{up: true, 'is-top-iactive': isRIactive}"></i> -->
                     <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
                   </span>
                 </th>
@@ -685,6 +685,7 @@ export default {
   display: inline-block;
   line-height: 20px;
   cursor: pointer;
+  vertical-align: 2px;
   i {
     width: 0;
     height: 0;

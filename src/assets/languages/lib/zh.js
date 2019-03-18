@@ -656,7 +656,19 @@ export const lang = {
         checkText: '仅显示Robin8价格的KOL'
       },
       likeTip: '粉丝数',
-      sumTip: '平均总参与度'
+      sumTip: '平均总参与度',
+      tableTop: {
+        weixinBig: '微信-大数据简介',
+        weiboBig: '微博-大数据简介',
+        weixinR8: '微信-R8管理',
+        weiboR8: '微博-R8管理',
+      },
+      table: {
+        profile: '简况',
+        price: '价格',
+        influence: '影响',
+        relevance: '关联'
+      }
     },
     postVue: {
       tip: '最近21天没有文章'

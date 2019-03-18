@@ -131,6 +131,8 @@ export default {
           this.currentCheck = element
         }
       });
+      console.log(this.currentCheck.keywords);
+      console.log(this.currentCheck.name);
       if (!this.currentCheck.name) {
         alert(this.$t('lang.myBrandPage.tip'));
       } else {
@@ -138,7 +140,7 @@ export default {
         this.$router.push({
           path: "/",
           name: "Home",
-          params: {
+          query: {
             currentBrand: this.currentCheck.keywords,
             currentBrandName: this.currentCheck.name
           }
