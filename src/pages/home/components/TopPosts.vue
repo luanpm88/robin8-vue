@@ -103,7 +103,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['authorization'])
+    ...mapState(['authorization', 'language']),
+    listenLangue() {
+      return this.language
+    }
   },
   watch: {
     childKeyList: {
@@ -118,6 +121,16 @@ export default {
         this.topPostWeibo(this.topPostParams)
       },
       deep: true
+    },
+    listenLangue:function(old,newd){
+      if (old === 'zh-CN') {
+        this.tabList[0].name = '微博'
+        this.tabList[1].name = '微信'
+      }
+      if (old === 'en-US') {
+        this.tabList[0].name = 'Weibo'
+        this.tabList[1].name = 'Wechat'
+      }
     }
   },
   created() {

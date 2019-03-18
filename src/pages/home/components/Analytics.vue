@@ -160,6 +160,24 @@ export default {
         }
       },
       deep: true
+    },
+    listenLangue:function(old,newd){
+      if (old === 'zh-CN') {
+        this.topTab[0].name = '微博'
+        this.topTab[1].name = '微信'
+        this.tabList[0].name = '趋势'
+        this.tabList[1].name = '概念'
+        this.tabList[2].name = '竞争对手'
+        this.tabList[3].name = '情绪'
+      }
+      if (old === 'en-US') {
+        this.topTab[0].name = 'Weibo'
+        this.topTab[1].name = 'Wechat'
+        this.tabList[0].name = 'Trends'
+        this.tabList[1].name = 'Concept'
+        this.tabList[2].name = 'Competitors'
+        this.tabList[3].name = 'Sentiments'
+      }
     }
   },
   created() {
@@ -167,7 +185,10 @@ export default {
     this.trendsList.options.series[0].data = [];
   },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(["authorization", 'language']),
+    listenLangue() {
+      return this.language
+    }
   },
   methods: {
     pramsInit() {

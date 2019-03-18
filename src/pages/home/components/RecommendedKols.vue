@@ -16,6 +16,7 @@
       </div>
 
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
+      </default-tabs>
         <div class="list-content-inner">
           <kols-list-item
             v-for="(item, index) in currentList"
@@ -32,7 +33,6 @@
             @click="toKolDetailMore"
           >{{$t('lang.more')}}</button>
         </div>
-      </default-tabs>
     </div>
   </div>
 </template>
@@ -87,7 +87,10 @@ export default {
     }
   },
   computed: {
-     ...mapState(['authorization'])
+    ...mapState(['authorization', 'language']),
+    listenLangue() {
+      return this.language
+    }
   },
   watch: {
     childKeyList: {
@@ -101,9 +104,23 @@ export default {
         this.kolRouterData.keywords = newKey
       },
       deep: true
+    },
+    listenLangue:function(old,newd){
+      if (old === 'zh-CN') {
+        this.tabList[0].name = '微博'
+        this.tabList[1].name = '微信'
+      }
+      if (old === 'en-US') {
+        this.tabList[0].name = 'Weibo'
+        this.tabList[1].name = 'Wechat'
+      }
     }
   },
   methods: {
+    changeLangue() {
+      // vuejs 监听本地localstrage变化
+    
+    },
     changeTab(tab) {
       this.tabIndex = tab.index
       this.currentList = [];

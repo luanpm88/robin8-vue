@@ -338,7 +338,24 @@ export default {
     this.tabIndexOneInit();
   },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(["authorization", 'language']),
+    listenLangue() {
+      return this.language
+    }
+  },
+  watch: {
+    listenLangue:function(old,newd){
+      if (old === 'zh-CN') {
+        this.tabList[0].name = '总结'
+        this.tabList[1].name = '分析'
+        this.tabList[2].name = '文章'
+      }
+      if (old === 'en-US') {
+        this.tabList[0].name = 'Summary'
+        this.tabList[1].name = 'Analytics'
+        this.tabList[2].name = 'Posts'
+      }
+    }
   },
   methods: {
     // summary
