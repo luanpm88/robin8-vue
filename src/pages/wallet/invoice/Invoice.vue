@@ -107,13 +107,13 @@
           <table class="default-table">
             <thead>
               <tr>
-                <th class="text-center">金额</th>
-                <th class="text-center">类型</th>
-                <th class="text-center">抬头</th>
-                <th class="text-center">地址</th>
-                <th class="text-center">创建时间</th>
-                <th class="text-center">状态</th>
-                <th class="text-center">快递单号</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.amount')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.type')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.title')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.address')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.createDate')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.status')}}</th>
+                <th class="text-center">{{$t('lang.wallet.invoicePage.invoiceList.tracking')}}</th>
               </tr>
             </thead>
             <tbody>
@@ -157,7 +157,7 @@
             <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.type.title')}}:</div>
             <div class="col-sm-5">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                   <label class="ctrl-label">
                     <input
                       name="type"
@@ -169,7 +169,7 @@
                     <span>{{$t('lang.wallet.invoicePage.invoiceSubmit.type.common')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                   <label class="ctrl-label">
                     <input
                       name="type"
@@ -195,7 +195,7 @@
             <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.price_sheet.title')}}:</div>
             <div class="col-sm-5">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                   <label class="ctrl-label">
                     <input
                       name="price_sheet"
@@ -207,7 +207,7 @@
                     <span>{{$t('lang.yes')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                   <label class="ctrl-label">
                     <input
                       name="price_sheet"

@@ -19,6 +19,7 @@ export const lang = {
   information: '基本信息',
   backBtn: '返回',
   submitBtn: '提交',
+  payBtn: '立即付款',
   totalNoDataTip: '暂无数据...',
   yes: '是',
   no: '否',
@@ -221,6 +222,24 @@ export const lang = {
       title: '效果评价',
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
+    },
+    payment: {
+      title: '支付订单',
+      name: '标题',
+      desc: '活动简介',
+      date: '活动时间',
+      amount: '支付总额',
+      method: {
+        title: '支付方式',
+        alipay: {
+          title: '支付宝',
+          desc: '支付宝支付暂不支持开具发票'
+        },
+        balance: {
+          title: '账户余额支付',
+          desc: '使用账户余额支付'
+        }
+      }
     }
   },
   creations: {
@@ -421,6 +440,15 @@ export const lang = {
           placeholder: '请选择是否开报价单',
           errorTips: '请选择是否开报价单'
         }
+      },
+      invoiceList: {
+        amount: '金额',
+        type: '类型',
+        title: '抬头',
+        address: '地址',
+        createDate: '创建时间',
+        status: '状态',
+        tracking: '快递单号'
       }
     }
   },

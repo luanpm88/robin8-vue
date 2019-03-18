@@ -19,6 +19,7 @@ export const lang = {
   information: 'Information',
   backBtn: 'Back',
   submitBtn: 'Submit',
+  payBtn: 'Pay',
   totalNoDataTip: 'No data...',
   yes: 'Yes',
   no: 'No',
@@ -220,6 +221,24 @@ export const lang = {
       title: '效果评价',
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
+    },
+    payment: {
+      title: 'Pay Invoice',
+      name: 'Text',
+      desc: 'Campaign Description',
+      date: 'Campaign Timeframe',
+      amount: 'Payment Amount',
+      method: {
+        title: 'Payment Method',
+        alipay: {
+          title: 'Alipay',
+          desc: 'Alipay do not provide VAT invoice now'
+        },
+        balance: {
+          title: 'Account Balance',
+          desc: 'Use account balance to pay'
+        }
+      }
     }
   },
   creations: {
@@ -311,25 +330,25 @@ export const lang = {
   },
   wallet: {
     rechargePage: {
-      profileTitle: '账户信息',
-      profileChange: '修改信息',
+      profileTitle: 'Account Information',
+      profileChange: 'Edit',
       recharge: {
-        title: '线上支付',
+        title: 'Online Payment',
         method: {
-          title: '支付方式',
-          placeholder: '请选择支付方式',
-          errorTips: '请选择支付方式',
+          title: 'Payment Method',
+          placeholder: 'Please select payment method',
+          errorTips: 'Please select payment method',
           value: 'Alipay'
         },
         credits: {
-          title: '支付金额',
-          placeholder: '请输入金额',
-          errorTips: '请输入金额'
+          title: 'Payment Amount',
+          placeholder: 'Please fill in payment amount',
+          errorTips: 'Please fill in payment amount'
         },
         invite_code: {
-          title: '邀请码(选填)',
-          placeholder: '请输入邀请码(选填)',
-          errorTips: '请输入邀请码(选填)'
+          title: 'Invitation Code',
+          placeholder: 'Please enter invitation code (optional)',
+          errorTips: 'Please enter invitation code (optional)'
         }
       }
     },
@@ -343,83 +362,92 @@ export const lang = {
     },
     invoicePage: {
       info: {
-        title: '发票信息',
-        edit: '修改发票信息',
+        title: 'Invoice Information',
+        edit: 'Edit',
         create: '添加发票信息',
         invoiceTitle: {
-          title: '发票抬头',
-          placeholder: '请输入发票抬头',
-          errorTips: '请输入发票抬头'
+          title: 'Invoice Title',
+          placeholder: 'Please fill in invoice title',
+          errorTips: 'Please fill in invoice title'
         },
         taxpayerId: {
-          title: '纳税人识别号',
-          placeholder: '请输入纳税人识别号',
-          errorTips: '请输入纳税人识别号'
+          title: 'Tax ID',
+          placeholder: 'Please fill in tax iD',
+          errorTips: 'Please fill in tax iD'
         },
         companyAddress: {
-          title: '公司地址',
-          placeholder: '请输入公司地址',
-          errorTips: '请输入公司地址'
+          title: 'Company Address',
+          placeholder: 'Please fill in company address',
+          errorTips: 'Please fill in company address'
         },
         companyMobile: {
-          title: '公司电话',
-          placeholder: '请输入公司电话',
-          errorTips: '请输入公司电话'
+          title: 'Company Tel',
+          placeholder: 'Please fill in company tel',
+          errorTips: 'Please fill in company tel'
         },
         bankName: {
-          title: '开户行',
-          placeholder: '请输入开户行',
-          errorTips: '请输入开户行'
+          title: 'Bank Name',
+          placeholder: 'Please fill in bank name',
+          errorTips: 'Please fill in bank name'
         },
         bankAccount: {
-          title: '开户行帐号',
-          placeholder: '请输入开户行帐号',
-          errorTips: '请输入开户行帐号'
+          title: 'Account #',
+          placeholder: 'Please fill in account #',
+          errorTips: 'Please fill in account #'
         }
       },
       receiver: {
-        title: '邮寄地址',
-        edit: '修改邮寄地址',
+        title: 'Mailing Address',
+        edit: 'Edit',
         create: '添加邮寄地址',
         name: {
-          title: '收件人姓名',
-          placeholder: '请输入收件人姓名',
-          errorTips: '请输入收件人姓名'
+          title: 'Mailing Name',
+          placeholder: 'Please fill in mailing name',
+          errorTips: 'Please fill in mailing name'
         },
         phone_number: {
-          title: '收件人电话',
-          placeholder: '请输入收件人电话',
-          errorTips: '请输入收件人电话'
+          title: 'Phone',
+          placeholder: 'Please fill in phone',
+          errorTips: 'Please fill in phone'
         },
         address: {
-          title: '收件人地址',
-          placeholder: '请输入收件人地址',
-          errorTips: '请输入收件人地址'
+          title: 'Mailing Address',
+          placeholder: 'Please fill in mailing address',
+          errorTips: 'Please fill in mailing address'
         }
       },
       invoiceSubmit: {
-        title: '申请发票',
+        title: 'Request Invoice',
         quota: {
           title: '可申请额度',
           tips: '已申请发票的金额不可以申请退款！'
         },
         credits: {
-          title: '申请金额',
-          placeholder: '请输入申请金额',
-          errorTips: '请输入申请金额'
+          title: 'Request Amount',
+          placeholder: 'Please fill in request amount',
+          errorTips: 'Please fill in request amount'
         },
         type: {
-          title: '发票类型',
-          placeholder: '请选择发票类型',
-          errorTips: '请选择发票类型',
-          common: '普通发票',
-          special: '增值税发票'
+          title: 'Invoice Type',
+          placeholder: 'Please select invoice type',
+          errorTips: 'Please select invoice type',
+          common: 'Regular Invoice',
+          special: 'VAT Invoice'
         },
         price_sheet: {
-          title: '是否开报价单',
-          placeholder: '请选择是否开报价单',
-          errorTips: '请选择是否开报价单'
+          title: 'Quotation?',
+          placeholder: 'Quotation?',
+          errorTips: 'Quotation?'
         }
+      },
+      invoiceList: {
+        amount: 'Amount',
+        type: 'Type',
+        title: 'Title',
+        address: 'Address',
+        createDate: 'Create Date',
+        status: 'Status',
+        tracking: 'Tracking #'
       }
     }
   },
