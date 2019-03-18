@@ -202,14 +202,10 @@ export default {
         this.conceptWeixin(this.conceptParams);
       }
       if (this.cur === 2 && topTab.index === 0) {
-        // this.competitorList.options.yAxis.data = [];
-        // this.competitorList.options.series[0].data = [];
         // competitor 微博
         this.competitorWeibo(this.competitorParams);
       }
       if (this.cur === 2 && topTab.index === 1) {
-        // this.competitorList.options.yAxis.data = [];
-        // this.competitorList.options.series[0].data = [];
         // competitor 微信
         this.competitorWeixin(this.competitorParams);
       }

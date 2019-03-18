@@ -188,8 +188,6 @@ export default {
     },
      // 跳转 kol detail
     intoKolDetail(item) {
-      // console.log(item)
-      // this.$router.push("/kol/" + item.profile_id)
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',

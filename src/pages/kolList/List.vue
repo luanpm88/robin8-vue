@@ -27,9 +27,6 @@ export default {
     KolSearch
   },
   beforeRouteLeave(to, from, next) {
-    // console.log(to)
-    // console.log(from)
-    // console.log(next)
     // 判断是下一个路由是不是进入到详情页
     if (to.name === 'KolDetail') {
       this.$route.meta.keepAlive = true
@@ -39,10 +36,7 @@ export default {
     next();
   },
   created() {
-    console.log(90)
     this.$route.meta.keepAlive = false;
-    // console.log(this.$route.params.brand_keywords);
-    // console.log(this.$route.params.type);
   },
   data () {
     return {

@@ -19,7 +19,7 @@
       </default-tabs>
         <div class="list-content-inner">
           <kols-list-item
-            v-for="(item, index) in currentList"
+            v-for="item in currentList"
             :key="item.profile_id"
             :renderStatus="kolRenderStatus"
             :renderData="item"

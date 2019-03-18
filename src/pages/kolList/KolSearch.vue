@@ -168,18 +168,15 @@
               <tr>
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
-                 <!--<th width="12%" class="text-center">R8 KOL</th>-->
                 <th width="18%" class="text-center">
                   {{$t('lang.kolList.search.table.influence')}}
                   <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
-                    <!-- <i :class="{up: true, 'is-top-iactive': isFIactive}"></i> -->
                     <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
                   </span>
                 </th>
                 <th width="18%" class="text-center">
                   {{$t('lang.kolList.search.table.relevance')}}
                   <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
-                    <!-- <i :class="{up: true, 'is-top-iactive': isRIactive}"></i> -->
                     <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
                   </span>
                 </th>
@@ -235,10 +232,6 @@
                   </div>
                 </td>
                 <td class="text-center">{{item.pricing.direct_price}}</td>
-                <!--<td class="text-center">
-                  <p v-if="item.kol_id">Yes</p>
-                  <p v-else>No</p>
-                </td>-->
                 <td class="text-center">
                   <a-progress
                     type="circle"
@@ -376,22 +369,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["authorization", 'language']),
-    listenLangue() {
-      return this.language
-    }
-  },
-  watch: {
-    // listenLangue:function(old,newd){
-    //   if (old === 'zh-CN') {
-    //     this.tabList[0].name = '微博'
-    //     this.tabList[1].name = '微信'
-    //   }
-    //   if (old === 'en-US') {
-    //     this.tabList[0].name = 'Weibo'
-    //     this.tabList[1].name = 'Wechat'
-    //   }
-    // }
+    ...mapState(["authorization"])
   },
   methods: {
     // 初始化传参数
@@ -482,11 +460,7 @@ export default {
       this.isLoading = false;
       const _that = this;
       data.forEach((element, index) => {
-        // if (element.description_raw.length > 60) {
-        //   element.description_raw = element.description_raw.substr(0, 30) + '...'
-        // }
         element.influence = parseInt(element.influence * 1000);
-        // element.correlation = parseInt(element.correlation * 100);
         if (this.keyword !== '') {
           element.colorStatus = 1;
           element.correlation = parseInt(element.correlation * 100);
@@ -526,18 +500,6 @@ export default {
       // 调用接口
       this.totalJoggle(this.tabIndex);
     },
-    // intoKolDetail(item) {
-    //   // console.log(this.keyword)
-    //   this.$router.push({
-    //     path: "/kol/",
-    //     name: "KolDetail",
-    //     params: {
-    //       id: item.profile_id,
-    //       type: this.tabIndex,
-    //       brand_keywords: this.totalKeywords
-    //     }
-    //   });
-    // },
     // 获取keyword
     getBaseData () {
       const _that = this
@@ -550,10 +512,6 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                // let newKey = '';
-                // element.keywords.split(",").forEach(item => {
-                //   newKey += '"' + item + '"'
-                // })
                 _that.totalKeywords = element.keywords;
               }
             });
@@ -574,13 +532,6 @@ export default {
         this.isRelevanceActive = false;
         this.listSortType = 1;
         this.listSortDir = 'desc';
-        // 目前influence去掉了升序的事件
-        // this.isFIactive = !this.isFIactive;
-        // if (this.isFIactive) {
-        //   this.listSortDir = 'asc';
-        // } else {
-        //   this.listSortDir = 'desc';
-        // }
         // 重置params
         this.paramsInit();
       } else {
@@ -588,13 +539,6 @@ export default {
         this.isRelevanceActive = true;
         this.listSortType = 0;
         this.listSortDir = 'desc';
-        // 目前relevance去掉了升序的事件
-        // this.isRIactive = !this.isRIactive;
-        // if (this.isRIactive) {
-        //   this.listSortDir = 'asc';
-        // } else {
-        //   this.listSortDir = 'desc';
-        // }
         // 重置params
         this.paramsInit();
       }
@@ -619,7 +563,6 @@ export default {
       this.cartParams.profile_name = data.profile_name
       this.cartParams.avatar_url = data.avatar_url
       this.cartParams.description_raw = data.description_raw
-      // console.log(this.cartParams)
       axios.post(apiConfig.kolCollectUrl, this.cartParams, {
         headers: {
           'Authorization': this.authorization
@@ -627,9 +570,7 @@ export default {
       }).then(this.handleDoAddCartSucc)
     },
     handleDoAddCartSucc (res) {
-      console.log(res)
       let resData = res.data
-      console.log(resData)
       if (res.status == 201) {
         if (!!resData.error && resData.error == 1) {
           alert(resData.detail)

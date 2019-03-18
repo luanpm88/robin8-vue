@@ -145,7 +145,6 @@ export default {
                     backgroundColor: 'rgba(0,0,0,0.8)',
                     borderRadius: 5,
                     formatter: function(param) {
-                      // return param.data[3] ;
                       param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Reads: ' + param.data[1];
                       return param;
                     },
@@ -157,7 +156,6 @@ export default {
                     shadowBlur: 10,
                     shadowColor: "rgba(0, 0, 0, 0)",
                     shadowOffsetY: 5,
-                    // borderWidth: 0,
                     color: "",
                     opacity: 0.8,
                   }
@@ -312,7 +310,6 @@ export default {
                     shadowBlur: 10,
                     shadowColor: "rgba(0, 0, 0, 0)",
                     shadowOffsetY: 5,
-                    // borderWidth: 0,
                     color: "",
                     opacity: 0.8,
                   }

@@ -94,8 +94,6 @@
             <div class="panel default-panel mt20" v-if="isActivity">
               <div class="panel-body">
                 <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
-                <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-                <p class="activity-color">AI expert has taken the following campaigns for your brands.</p> -->
                 <div class="activity-table">
                   <table class="com-brand-table">
                     <tr>
@@ -835,9 +833,7 @@ export default {
       }).then(this.handleDoAddCartSucc)
     },
     handleDoAddCartSucc (res) {
-      // console.log(res)
       let resData = res.data
-      // console.log(resData)
       if (res.status == 201) {
         if (!!resData.error && resData.error == 1) {
           alert(resData.detail)

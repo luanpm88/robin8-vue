@@ -60,7 +60,7 @@
             </div>
           </div>
         </div>
-        <div class="">
+        <div>
           <div class="r8-loading" v-if="isTableLoding">
             <a-spin tip="Loading..."/>
           </div>
