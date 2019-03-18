@@ -193,6 +193,8 @@ export const lang = {
     promotionTime: 'Promotion Date',
     selectKols: 'KOL Selection',
     update: 'Update',
+    kolList: 'KOL List',
+    kolAnalysis: 'KOL Analysis',
     list: {
       status: {
         paid: 'Paid',
@@ -406,6 +408,11 @@ export const lang = {
       cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
       cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
+    },
+    status: {
+      waiting: '待合作',
+      processing: '合作中',
+      done: '已完成'
     }
   },
   wallet: {

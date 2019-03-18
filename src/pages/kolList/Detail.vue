@@ -857,6 +857,7 @@ export default {
       display: block;
       text-align: left;
       color: nth($purple, 1);
+      word-break: break-all;
     }
   }
 }

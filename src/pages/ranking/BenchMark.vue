@@ -1,36 +1,45 @@
 <template>
-<div class="benchmark-container pull-right">
-  <div class="bench-card">
-    <div class="r8-loading" v-if="oneLoading">
-      <a-spin tip="Loading..."/>
+  <div class="benchmark-container">
+    <div class="top-control-area">
+      <button type="button" class="btn btn-purple" @click="pageBack">
+        <span class="iconfont icon-arrow-left"></span>
+        Back
+      </button>
     </div>
-    <Echarts v-else 
-      :options="benchOne.options"
-      :chartsStyle="benchOne.chartsStyle"
-      ref="benchOneChart"
-    ></Echarts>
-  </div>
-  <div class="bench-card mt20">
-    <div class="r8-loading" v-if="twoLoading">
-      <a-spin tip="Loading..."/>
+    <div class="bench-card mt20">
+      <div class="r8-loading" v-if="oneLoading">
+        <a-spin tip="Loading..."/>
+      </div>
+      <Echarts
+        v-else
+        :options="benchOne.options"
+        :chartsStyle="benchOne.chartsStyle"
+        ref="benchOneChart"
+      ></Echarts>
     </div>
-    <Echarts v-else
-      :options="benchTwo.options"
-      :chartsStyle="benchTwo.chartsStyle"
-      ref="benchTwoChart"
-    ></Echarts>
-  </div>
-  <div class="bench-card mt20">
-    <div class="r8-loading" v-if="threeLoading">
-      <a-spin tip="Loading..."/>
+    <div class="bench-card mt20">
+      <div class="r8-loading" v-if="twoLoading">
+        <a-spin tip="Loading..."/>
+      </div>
+      <Echarts
+        v-else
+        :options="benchTwo.options"
+        :chartsStyle="benchTwo.chartsStyle"
+        ref="benchTwoChart"
+      ></Echarts>
     </div>
-    <Echarts v-else
-      :options="benchThree.options"
-      :chartsStyle="benchThree.chartsStyle"
-      ref="benchThreeChart"
-    ></Echarts>
+    <div class="bench-card mt20">
+      <div class="r8-loading" v-if="threeLoading">
+        <a-spin tip="Loading..."/>
+      </div>
+      <Echarts
+        v-else
+        :options="benchThree.options"
+        :chartsStyle="benchThree.chartsStyle"
+        ref="benchThreeChart"
+      ></Echarts>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -42,7 +51,7 @@ import { mapState } from "vuex";
 export default {
   name: "benchMark",
   components: {
-    Echarts,
+    Echarts
   },
   computed: {
     ...mapState(["authorization"])
@@ -62,8 +71,8 @@ export default {
       this.weixinBeachTwo(this.totalTwoParams);
       // 微信 图表三
       this.weixinBeachThree(this.totalTwoParams);
-    } 
-    if(Number(this.$route.params.type) === 0){
+    }
+    if (Number(this.$route.params.type) === 0) {
       // 微博 图表一
       this.weiboBeachOne(this.totalParams);
       // 微博 图表二
@@ -122,15 +131,18 @@ export default {
         })
         .then(function(res) {
           _that.benchOne.options.series = [];
-           _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
-           _that.benchOne.options.xAxis.name= 'Reads';
+          _that.benchOne.options.title.text =
+            "Top 21 KOLs on " +
+            _that.totalParams.industry +
+            " benchmarking (average Likes vs average Reads)";
+          _that.benchOne.options.xAxis.name = "Reads";
           if (res.status === 200) {
             _that.oneLoading = false;
             res.data.forEach((element, index) => {
               let json = {
                 name: "",
                 data: [],
-                type: 'scatter',
+                type: "scatter",
                 symbolSize: function(data) {
                   return Math.sqrt(data[2]) / 150;
                 },
@@ -139,16 +151,24 @@ export default {
                     show: true,
                     borderWidth: 0,
                     padding: [8, 8, 8, 8],
-                    color: '#fff',
-                    align: 'left',
+                    color: "#fff",
+                    align: "left",
                     fontSize: 16,
-                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    backgroundColor: "rgba(0,0,0,0.8)",
                     borderRadius: 5,
                     formatter: function(param) {
-                      param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Reads: ' + param.data[1];
+                      param =
+                        "Doc Count: " +
+                        param.data[5] +
+                        " \n #" +
+                        param.data[3] +
+                        ": \n Likes: " +
+                        param.data[0] +
+                        "\n Reads: " +
+                        param.data[1];
                       return param;
                     },
-                    position: 'top'
+                    position: "top"
                   }
                 },
                 itemStyle: {
@@ -157,20 +177,32 @@ export default {
                     shadowColor: "rgba(0, 0, 0, 0)",
                     shadowOffsetY: 5,
                     color: "",
-                    opacity: 0.8,
+                    opacity: 0.8
                   }
                 }
               };
-              let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
+              let x,
+                y,
+                size,
+                maxBubbleSize,
+                maxCount = 0,
+                currentData = [];
               x = element.total_reads / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = res.data.length * 100 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 100 * document.body.clientWidth;
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }
-              size = 5 + (element.doc_count * maxBubbleSize);
-              json.name = '#' + element.rank_no + element.profile_name;
-              currentData.push(x, y, size, element.profile_name, element.profile_name, element.doc_count);
+              size = 5 + element.doc_count * maxBubbleSize;
+              json.name = "#" + element.rank_no + element.profile_name;
+              currentData.push(
+                x,
+                y,
+                size,
+                element.profile_name,
+                element.profile_name,
+                element.doc_count
+              );
               json.data.push(currentData);
               json.itemStyle.normal.color = _that.benchOneColorList[index];
               _that.benchOne.options.series.push(json);
@@ -192,29 +224,31 @@ export default {
         })
         .then(function(res) {
           _that.benchTwo.options.series = [];
-           _that.benchTwo.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
+          _that.benchTwo.options.title.text =
+            "Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on " +
+            _that.totalParams.industry +
+            "\n - Share of Voice over time";
           if (res.status === 200) {
             _that.twoLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
-                name: '',
-                type: 'bar',
-                stack: '总量',
-                color: '',
+                name: "",
+                type: "bar",
+                stack: "总量",
+                color: "",
                 label: {
                   normal: {
                     show: false,
-                    position: 'insideRight'
+                    position: "insideRight"
                   }
                 },
                 data: []
-              }
+              };
               json.name = res.data.profile_names[index];
               json.data = element;
               json.color = _that.benchOneColorList[index];
-              _that.benchTwo.options.series.push(json)
-
-            })
+              _that.benchTwo.options.series.push(json);
+            });
             _that.benchTwo.options.xAxis.data = res.data.date_labels;
             _that.$refs.benchTwoChart.updateOptions(_that.benchTwo.options);
           }
@@ -233,29 +267,31 @@ export default {
         })
         .then(function(res) {
           _that.benchThree.options.series = [];
-           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on '+ _that.totalParams.industry +' when comparing to overall market voice';
+          _that.benchThree.options.title.text =
+            "Share of Voice over time - Top 30 KOLs on " +
+            _that.totalParams.industry +
+            " when comparing to overall market voice";
           if (res.status === 200) {
             _that.threeLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
-                name: '',
-                type: 'bar',
-                stack: '总量',
-                color: '',
+                name: "",
+                type: "bar",
+                stack: "总量",
+                color: "",
                 label: {
                   normal: {
                     show: false,
-                    position: 'insideRight'
+                    position: "insideRight"
                   }
                 },
                 data: []
-              }
+              };
               json.name = res.data.profile_names[index];
               json.data = element;
               json.color = _that.benchOneColorList[index];
-              _that.benchThree.options.series.push(json)
-
-            })
+              _that.benchThree.options.series.push(json);
+            });
             _that.benchThree.options.xAxis.data = res.data.date_labels;
             _that.$refs.benchThreeChart.updateOptions(_that.benchThree.options);
           }
@@ -275,15 +311,18 @@ export default {
         })
         .then(function(res) {
           _that.benchOne.options.series = [];
-           _that.benchOne.options.title.text = 'Top 21 KOLs on '+ _that.totalParams.industry +' benchmarking (average Likes vs average Reads)';
-           _that.benchOne.options.xAxis.name= 'Total Sum Engagement';
+          _that.benchOne.options.title.text =
+            "Top 21 KOLs on " +
+            _that.totalParams.industry +
+            " benchmarking (average Likes vs average Reads)";
+          _that.benchOne.options.xAxis.name = "Total Sum Engagement";
           if (res.status === 200) {
             _that.oneLoading = false;
             res.data.forEach((element, index) => {
               let json = {
                 name: "",
                 data: [],
-                type: 'scatter',
+                type: "scatter",
                 symbolSize: function(data) {
                   return Math.sqrt(data[2]) / 150;
                 },
@@ -292,17 +331,25 @@ export default {
                     show: true,
                     borderWidth: 0,
                     padding: [8, 8, 8, 8],
-                    color: '#fff',
-                    align: 'left',
+                    color: "#fff",
+                    align: "left",
                     fontSize: 16,
-                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    backgroundColor: "rgba(0,0,0,0.8)",
                     borderRadius: 5,
                     formatter: function(param) {
                       // return param.data[3] ;
-                      param = 'Doc Count: ' + param.data[5] + ' \n #' + param.data[3] + ': \n Likes: ' + param.data[0] + '\n Total Sum Engagement: ' + param.data[1];
+                      param =
+                        "Doc Count: " +
+                        param.data[5] +
+                        " \n #" +
+                        param.data[3] +
+                        ": \n Likes: " +
+                        param.data[0] +
+                        "\n Total Sum Engagement: " +
+                        param.data[1];
                       return param;
                     },
-                    position: 'top'
+                    position: "top"
                   }
                 },
                 itemStyle: {
@@ -311,20 +358,32 @@ export default {
                     shadowColor: "rgba(0, 0, 0, 0)",
                     shadowOffsetY: 5,
                     color: "",
-                    opacity: 0.8,
+                    opacity: 0.8
                   }
                 }
               };
-              let x, y, size, maxBubbleSize, maxCount = 0, currentData = [];
+              let x,
+                y,
+                size,
+                maxBubbleSize,
+                maxCount = 0,
+                currentData = [];
               x = element.total_sum_engagement / element.doc_count;
               y = element.total_likes / element.doc_count;
-              maxBubbleSize = res.data.length * 50 * (document.body.clientWidth);
+              maxBubbleSize = res.data.length * 50 * document.body.clientWidth;
               if (maxCount < element.doc_count) {
                 maxCount = element.doc_count;
               }
-              size = 5 + (element.doc_count * maxBubbleSize);
-              json.name = '#' + element.rank_no + element.profile_name;
-              currentData.push(x, y, size, element.profile_name, element.profile_name, element.doc_count);
+              size = 5 + element.doc_count * maxBubbleSize;
+              json.name = "#" + element.rank_no + element.profile_name;
+              currentData.push(
+                x,
+                y,
+                size,
+                element.profile_name,
+                element.profile_name,
+                element.doc_count
+              );
               json.data.push(currentData);
               json.itemStyle.normal.color = _that.benchOneColorList[index];
               _that.benchOne.options.series.push(json);
@@ -346,29 +405,31 @@ export default {
         })
         .then(function(res) {
           _that.benchTwo.options.series = [];
-           _that.benchTwo.options.title.text = 'Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on '+ _that.totalParams.industry +'\n - Share of Voice over time';
+          _that.benchTwo.options.title.text =
+            "Share of Voice over time - Top 30 KOLs on Fashion when comparing to Top 20 KOLs on " +
+            _that.totalParams.industry +
+            "\n - Share of Voice over time";
           if (res.status === 200) {
             _that.twoLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
-                name: '',
-                type: 'bar',
-                stack: '总量',
-                color: '',
+                name: "",
+                type: "bar",
+                stack: "总量",
+                color: "",
                 label: {
                   normal: {
                     show: false,
-                    position: 'insideRight'
+                    position: "insideRight"
                   }
                 },
                 data: []
-              }
+              };
               json.name = res.data.profile_names[index];
               json.data = element;
               json.color = _that.benchOneColorList[index];
-              _that.benchTwo.options.series.push(json)
-
-            })
+              _that.benchTwo.options.series.push(json);
+            });
             _that.benchTwo.options.xAxis.data = res.data.date_labels;
             _that.$refs.benchTwoChart.updateOptions(_that.benchTwo.options);
           }
@@ -387,29 +448,31 @@ export default {
         })
         .then(function(res) {
           _that.benchThree.options.series = [];
-           _that.benchThree.options.title.text = 'Share of Voice over time - Top 30 KOLs on '+ _that.totalParams.industry +' when comparing to overall market voice';
+          _that.benchThree.options.title.text =
+            "Share of Voice over time - Top 30 KOLs on " +
+            _that.totalParams.industry +
+            " when comparing to overall market voice";
           if (res.status === 200) {
             _that.threeLoading = false;
             res.data.data.forEach((element, index) => {
               let json = {
-                name: '',
-                type: 'bar',
-                stack: '总量',
-                color: '',
+                name: "",
+                type: "bar",
+                stack: "总量",
+                color: "",
                 label: {
                   normal: {
                     show: false,
-                    position: 'insideRight'
+                    position: "insideRight"
                   }
                 },
                 data: []
-              }
+              };
               json.name = res.data.profile_names[index];
               json.data = element;
               json.color = _that.benchOneColorList[index];
-              _that.benchThree.options.series.push(json)
-
-            })
+              _that.benchThree.options.series.push(json);
+            });
             _that.benchThree.options.xAxis.data = res.data.date_labels;
             _that.$refs.benchThreeChart.updateOptions(_that.benchThree.options);
           }
@@ -417,15 +480,15 @@ export default {
         .catch(function(error) {
           // console.log(error);
         });
+    },
+    pageBack() {
+      this.$router.go(-1);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.benchmark-container {
-  width: 980px;
-}
 .bench-card {
   background: $white;
   padding: 30px;

@@ -131,8 +131,8 @@ export default {
           this.currentCheck = element
         }
       });
-      console.log(this.currentCheck.keywords);
-      console.log(this.currentCheck.name);
+      // console.log(this.currentCheck.keywords);
+      // console.log(this.currentCheck.name);
       if (!this.currentCheck.name) {
         alert(this.$t('lang.myBrandPage.tip'));
       } else {
