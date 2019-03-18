@@ -25,6 +25,11 @@ export const lang = {
   no: '否',
   search: '搜索',
   exposure: '曝光值',
+  all: '全部',
+  male: '男',
+  female: '女',
+  yearsOld: '岁',
+  yearsOlder: '岁以上',
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
@@ -134,6 +139,22 @@ export const lang = {
     promotionTime: '推广时间',
     selectKols: 'KOL选择',
     serchBtn: '搜索大V',
+    list: {
+      status: {
+        paid: '已花费',
+        participant: '参与人数',
+        clicks: '点击数',
+        paidClicks: '计费点击',
+        exposure: '总曝光数',
+        repost: '转发量'
+      },
+      btns: {
+        edit: '编辑',
+        pay: '支付',
+        comments: '评价',
+        repost: '再次发布'
+      }
+    },
     link: {
       title: '活动链接',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
@@ -162,11 +183,16 @@ export const lang = {
     platform: {
       title: '推广平台选择',
       placeholder: '请选择推广平台',
+      weibo: '分享到微博',
+      wechat: '分享到朋友圈',
       errorTips: '请选择推广平台'
     },
     mode: {
       title: '奖励模式选择',
       placeholder: '请选择奖励模式',
+      clicks: '按照点击奖励KOL',
+      repost: '按照转发奖励KOL',
+      mission: '按照完成任务奖励KOL',
       errorTips: '请选择奖励模式'
     },
     pictureNumber: {
@@ -196,7 +222,8 @@ export const lang = {
       placeholder: '请选择地域',
       provincePlaceholder: '请选择省份',
       cityPlaceholder: '请选择城市',
-      errorTips: '请选择地域'
+      provinceErrorTips: '请选择省份',
+      cityErrorTips: '请选择城市'
     },
     kolAge: {
       title: '年龄',
@@ -247,6 +274,7 @@ export const lang = {
     kolParticipate: 'KOL参与',
     collaborationCompleted: '合作完成',
     bigVRequirement: '大V 相关要求',
+    bigVSelected: '已选择的大V',
     serchBtn: '搜索大V',
     name: {
       title: '活动名称',
@@ -324,9 +352,6 @@ export const lang = {
       cityPlaceholder: '请选择粉丝的城市',
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
-    },
-    selectKolsbeen: {
-      tit: '已选择的大V'
     }
   },
   wallet: {

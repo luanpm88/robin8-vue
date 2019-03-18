@@ -127,7 +127,7 @@
         </div>
 
         <div v-if="kolsList.length > 0">
-          <div class="line-title">{{$t('lang.creations.selectKolsbeen.tit')}}</div>
+          <div class="line-title">{{$t('lang.creations.bigVSelected')}}</div>
           <div class="kols-list clearfix">
             <kols-list-item
               v-for="(item, index) in kolsList"
