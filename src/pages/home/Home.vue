@@ -146,7 +146,7 @@ export default {
               // 假如_that.$route.params 不为空，代表路由是从my brands 的 View selected 或者 my comtitive brands 的 View selected 按钮进到首页的
               // _that.$route.params.currentBrand 不为空 表示从my brands 的 View selected按钮进到首页
               // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
-              if (_that.$route.params.currentBrand) {
+              if (_that.$route.query.currentBrand) {
                 // console.log(222);
                 _that.keyList.name = _that.$route.query.currentBrandName;
                 _that.keyList.brand_keywords = _that.$route.query.currentBrand;
