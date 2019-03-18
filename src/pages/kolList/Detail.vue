@@ -94,8 +94,6 @@
             <div class="panel default-panel mt20" v-if="isActivity">
               <div class="panel-body">
                 <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
-                <!-- <p class="activity-color">AI expert has not taken any campaigns for your brand so far.</p>
-                <p class="activity-color">AI expert has taken the following campaigns for your brands.</p> -->
                 <div class="activity-table">
                   <table class="com-brand-table">
                     <tr>
@@ -301,15 +299,15 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.kolList.detail.summary')
+          name: () => this.$t('lang.kolList.detail.summary')
         },
         {
           index: 1,
-          name: this.$t('lang.kolList.detail.analytics')
+          name: () => this.$t('lang.kolList.detail.analytics')
         },
         {
           index: 2,
-          name: this.$t('lang.kolList.detail.post')
+          name: () => this.$t('lang.kolList.detail.post')
         }
       ],
       performanceList: [],
@@ -338,24 +336,7 @@ export default {
     this.tabIndexOneInit();
   },
   computed: {
-    ...mapState(["authorization", 'language']),
-    listenLangue() {
-      return this.language
-    }
-  },
-  watch: {
-    listenLangue:function(old,newd){
-      if (old === 'zh-CN') {
-        this.tabList[0].name = '总结'
-        this.tabList[1].name = '分析'
-        this.tabList[2].name = '文章'
-      }
-      if (old === 'en-US') {
-        this.tabList[0].name = 'Summary'
-        this.tabList[1].name = 'Analytics'
-        this.tabList[2].name = 'Posts'
-      }
-    }
+    ...mapState(["authorization"])
   },
   methods: {
     // summary
@@ -852,9 +833,7 @@ export default {
       }).then(this.handleDoAddCartSucc)
     },
     handleDoAddCartSucc (res) {
-      // console.log(res)
       let resData = res.data
-      // console.log(resData)
       if (res.status == 201) {
         if (!!resData.error && resData.error == 1) {
           alert(resData.detail)

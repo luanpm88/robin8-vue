@@ -670,6 +670,7 @@ export const lang = {
       }
     },
     search: {
+      topKey: '输入关键字、行业分类或KOL名称',
       keyword: '请在这里键入…',
       search: '搜索',
       advancedSearch: {
