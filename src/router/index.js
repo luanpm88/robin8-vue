@@ -30,6 +30,8 @@ import MyBrands from '@/pages/settings/myBrands/MyBrands'
 import MyBrandsCreate from '@/pages/settings/myBrands/Create'
 import MyCompetitionBrands from '@/pages/settings/myCompetitionBrands/MyCompetitionBrands'
 import MyCompetitionBrandsCreate from '@/pages/settings/myCompetitionBrands/Create'
+import MyShoppingCart from '@/pages/settings/ShoppingCart'
+
 import Ranking from '@/pages/ranking/Ranking'
 import WechatRanking from '@/pages/ranking/WechatRanking'
 import WeiboRanking from '@/pages/ranking/WeiboRanking'
@@ -159,6 +161,15 @@ export default new Router({
           component: MyCompetitionBrandsCreate,
           meta: {
             title: 'myCompetitionBrandsCreate',
+            auth: true
+          }
+        },
+        {
+          path: 'shopping_cart',
+          name: 'MyShoppingCart',
+          component: MyShoppingCart,
+          meta: {
+            title: 'myShoppingCart',
             auth: true
           }
         }

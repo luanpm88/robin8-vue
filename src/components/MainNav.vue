@@ -114,6 +114,10 @@ export default {
             {
               title: 'nav.competitors',
               href: '/settings/my_competition_brands'
+            },
+            {
+              title: 'nav.cart',
+              href: '/settings/shopping_cart'
             }
           ]
         },
