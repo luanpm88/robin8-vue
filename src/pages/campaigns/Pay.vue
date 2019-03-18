@@ -2,18 +2,18 @@
   <div class="campaign-pay-container">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">支付订单</h5>
+        <h5 class="title text-center">{{$t('lang.campaigns.payment.title')}}</h5>
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>标题: {{detailData.name}}</p>
-          <p>活动简介: {{detailData.description}}</p>
-          <p>活动时间: {{detailData.time_range}}</p>
-          <p>支付总额: <span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
+          <p>{{$t('lang.campaigns.payment.name')}}: {{detailData.name}}</p>
+          <p>{{$t('lang.campaigns.payment.desc')}}: {{detailData.description}}</p>
+          <p>{{$t('lang.campaigns.payment.date')}}: {{detailData.time_range}}</p>
+          <p>{{$t('lang.campaigns.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
         </div>
 
         <div class="pay-method">
-          <h5 class="title">支付方式:</h5>
+          <h5 class="title">{{$t('lang.campaigns.payment.method.title')}}:</h5>
           <ul class="method-list">
             <li class="item">
               <label class="media">
@@ -29,8 +29,8 @@
                 <div class="media-body media-middle">
                   <div class="pay-icon iconfont icon-alipay"></div>
                   <div class="info">
-                    <div class="method">支付宝</div>
-                    <div class="desc">支付宝支付暂不支持开具发票</div>
+                    <div class="method">{{$t('lang.campaigns.payment.method.alipay.title')}}</div>
+                    <div class="desc">{{$t('lang.campaigns.payment.method.alipay.desc')}}</div>
                   </div>
                 </div>
               </label>
@@ -48,8 +48,8 @@
                 </div>
                 <div class="media-body media-middle">
                   <div class="info">
-                    <div class="method">账户余额支付</div>
-                    <div class="desc">使用账户余额支付(余额 ￥{{availAmount}})</div>
+                    <div class="method">{{$t('lang.campaigns.payment.method.balance.title')}}</div>
+                    <div class="desc">{{$t('lang.campaigns.payment.method.balance.desc')}}(￥{{availAmount}})</div>
                   </div>
                 </div>
               </label>
@@ -62,7 +62,7 @@
             type="button"
             class="btn btn-cyan"
             @click="doPay"
-          >立即付款</button>
+          >{{$t('lang.payBtn')}}</button>
         </div>
       </div>
     </div>
