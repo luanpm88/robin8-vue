@@ -6,50 +6,86 @@
       <main-nav class="pull-left"></main-nav>
 
       <div class="socail-container pull-right">
-        <div class="social-search clearfix">
-          <div class="social-line clearfix col-xs-6">
-            <span class="social-line-left col-xs-2">Topic:</span>
-            <input class="col-xs-10 oneinput" v-model="topic">
-          </div>
-          <div class="social-line clearfix col-xs-6">
-            <span class="social-line-left col-xs-2">Source:</span>
-            <select class="col-xs-10 oneselect" v-model="source">
-              <option value="0">{{$t('lang.weibo')}}</option>
-              <option value="1">{{$t('lang.wechat')}}</option>
-            </select>
-          </div>
-          <div class="form-group text-right">
-            <button type="button" class="btn btn-blue btn-outline" @click="totalSearch">Search</button>
-          </div>
-        </div>
-        <div class="social-content clearfix mt20">
-          <div class="nonetip" v-if="isShow">
-            <span>{{$t('lang.totalNoDataTip')}}</span>
-          </div>
-          <div class="r8-loading" v-if="isLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <div v-if="isContent">
-            <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-              <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
-              <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-              <div class="home-post-detail"  @click="intoKolDetail(item)">
-                <img :src="item.imgUrl" alt class>
-                <div>
-                  <strong>{{item.name}}</strong>
-                  <p>{{item.time}}</p>
+        <div class="panel default-panel social-search">
+          <div class="panel-body">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
+                <div class="col-sm-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="topic"
+                  />
+                </div>
+                <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
+                <div class="col-sm-4">
+                  <select class="form-control" v-model="source">
+                    <option value="0">{{$t('lang.weibo')}}</option>
+                    <option value="1">{{$t('lang.wechat')}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
+                <div class="col-sm-4 mt20">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="profileId"
+                  />
                 </div>
               </div>
-              <p class="home-post-content">'{{item.content}}'</p>
+
+              <div class="text-center mt30">
+                <button
+                  type="button"
+                  class="btn btn-blue btn-outline"
+                  @click="totalSearch"
+                >
+                  {{$t('lang.search')}}
+                </button>
+              </div>
             </div>
-            <div class="btn-area">
-              <a-pagination
-                :defaultCurrent="currentPage"
-                v-model="currentPageAdd"
-                :defaultPageSize="kolsPerPage"
-                :total="kolsTotal"
-                @change="onPageChange"
-              />
+          </div>
+        </div>
+
+        <div class="panel default-panel social-search mt20">
+          <div class="panel-body">
+            <div class="nonetip" v-if="isShow">
+              <span>{{$t('lang.totalNoDataTip')}}</span>
+            </div>
+            <div class="r8-loading" v-if="isLoading">
+              <a-spin tip="Loading..."/>
+            </div>
+            <div v-if="isContent">
+              <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
+                <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
+                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <div class="media social-detail">
+                  <div class="media-left media-middle"  @click="intoKolDetail(item)">
+                    <img :src="item.imgUrl" alt class>
+                  </div>
+                  <div class="media-body media-middle"  @click="intoKolDetail(item)">
+                    <strong>{{item.name}}</strong>
+                    <p>{{item.time}}</p>
+                  </div>
+                  <div class="media-right media-middle operation-area">
+                      <span
+                        class="iconfont icon-cart active"
+                        @click="doAddCart(item)"
+                      ></span>
+                  </div>
+                </div>
+                <p class="home-post-content">'{{item.content}}'</p>
+              </div>
+              <div class="text-center mt20">
+                <a-pagination
+                  :defaultCurrent="currentPage"
+                  v-model="currentPageAdd"
+                  :defaultPageSize="kolsPerPage"
+                  :total="kolsTotal"
+                  @change="onPageChange"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -84,6 +120,7 @@ export default {
     return {
       source: 0,
       topic: 'adidas',
+      profileId: '',
       currentPage: 0,
       currentPageAdd: 1,
       kolsPerPage: 10,
@@ -97,8 +134,10 @@ export default {
         start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
         OR_keywords: 'adidas',
+        profile_ids: [],
       },
-      itemList: []
+      itemList: [],
+      cartParams: {}
     };
   },
   methods: {
@@ -182,6 +221,8 @@ export default {
       this.currentPage = 0;
       this.currentPageAdd = this.currentPage + 1;
       this.totalParams.OR_keywords = this.topic;
+      this.totalParams.profile_ids = this.profileId.split(",");
+      // console.log(this.profileId.split(","))
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -198,6 +239,7 @@ export default {
       this.currentPageAdd = page;
       this.currentPage = page - 1;
       this.totalParams.OR_keywords = this.topic;
+      this.totalParams.profile_ids = this.profileId.split(",");
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -214,10 +256,35 @@ export default {
         name: 'KolDetail',
         params: {
           id: item.profile_id,
+        },
+        query: {
           type: Number(this.source),
           brand_keywords: this.topic
-        },
+        }
       });
+    },
+    doAddCart (data) {
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = ''
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      // console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
     },
   }
 };
@@ -231,15 +298,23 @@ export default {
     padding-right: 10px;
   }
 }
-.social-search, .social-content{
-  background: $white;
-  padding: 30px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
+.social-search, .social-content {
+  .panel-body {
+    padding: 30px;
+  }
+}
+.social-detail{
+  cursor: pointer;
+  img{
+    border-radius: 50%;
+    max-width: 50px;
+  }
 }
 .home-post-title {
   color: nth($purple, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
+  margin:20px 0px 10px;
 }
 .home-post-detail{
   display: inline-block;
@@ -249,8 +324,10 @@ export default {
   font-size: $font-sm;
   line-height: 20px;
 }
-.btn-area{
-  text-align: right;
-  margin-top: 20px;
+.icon-cart{
+  &.active{
+    cursor: pointer;
+    color: nth($purple, 1) !important;
+  }
 }
 </style>

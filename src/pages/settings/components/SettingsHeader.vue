@@ -1,6 +1,6 @@
 <template>
   <div class="container-header">
-    <div class="container-title">{{title}}</div>
+    <div class="container-title">{{$t(`lang.router.${title}`)}}</div>
     <breadcrumb separator="-"></breadcrumb>
   </div>
 </template>

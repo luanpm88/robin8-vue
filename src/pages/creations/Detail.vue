@@ -48,7 +48,9 @@
                     </div>
                   </div>
                   <div class="col-sm-8">
-                    <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p>
+                    <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
+                    <!--  -->
+                    <p class="form-control-static">{{$t('lang.exposure')}}: {{item.exposure_value}}</p>
                   </div>
                 </div>
               </div>
@@ -125,16 +127,14 @@
         </div>
 
         <div v-if="kolsList.length > 0">
-          <div class="line-title">已选择的大V</div>
-          <div class="kols-list">
+          <div class="line-title">{{$t('lang.creations.bigVSelected')}}</div>
+          <div class="kols-list clearfix">
             <kols-list-item
               v-for="(item, index) in kolsList"
-              :key="index"
-              :hasLiked="kolHasLiked"
-              :hasMsg="kolHasMsg"
-              :hasChecked="kolHasChecked"
+              :key="item.profile_id"
+              :renderStatus="kolRenderStatus"
               :renderData="item"
-              @detail="toKolDetail(item)"
+              :routerData="kolRouterData"
             ></kols-list-item>
           </div>
         </div>
@@ -166,12 +166,19 @@ export default {
         index: 0
       },
       detailData: {},
-      kolHasLiked: false,
-      kolHasMsg: false,
-      kolHasChecked: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false
+      },
       kolsList: [],
-      kolTypeId: '',
-      brandKeyword: ''
+      kolRouterData: {
+        type: '',
+        keywords: ''
+      }
     }
   },
   methods: {
@@ -188,15 +195,21 @@ export default {
       if (res.status == 200 && resData) {
         console.log(resData)
         this.detailData = resData
-        this.brandKeyword = resData.trademark_keywords
+        if (resData.status == 'ended' || resData.status == 'finished' || resData.status == 'closed') {
+          this.processStatus.current = 4
+          this.processStatus.index = 3
+        }
+
+        this.kolRouterData.keywords = resData.trademark_keywords
 
         let _kolsList = this.kolsList
         let _kolItem
         resData.selected_kols.forEach(item => {
-          _kolItem = commonJs.buildObjData('avatar', item.avatar_url)
-          _kolItem.id = item.plateform_uuid
-          _kolItem.name = item.name
-          _kolItem.desc = item.desc
+          _kolItem = commonJs.buildObjData('avatar_url', item.avatar_url)
+          _kolItem.profile_id = item.profile_id
+          _kolItem.profile_name = item.profile_name
+          _kolItem.description_raw = item.description_raw
+          _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
           _kolItem.checked = false
           _kolsList.push(_kolItem)
         })
@@ -208,30 +221,18 @@ export default {
           switch (item.short_name) {
             case 'public_wechat_account':
               item.iconClass = 'icon-wechat-circle'
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
               break
             case 'weibo':
               item.iconClass = 'icon-weibo-circle'
-              this.kolTypeId = '0'
+              this.kolRouterData.type = '0'
               break
             default:
               item.iconClass = ''
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
           }
         })
       }
-    },
-    toKolDetail (item) {
-      // console.log(item)
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.id,
-          type: this.kolTypeId,
-          brand_keywords: this.brandKeyword
-        }
-      })
     }
   },
   mounted () {
@@ -246,9 +247,8 @@ export default {
 <style lang="scss" scoped>
 .kols-list {
   padding: 24px 60px;
-  font-size: 0;
   & > .kols-list-item {
-    display: inline-block;
+    float: left;
     width: 33.33333%;
     padding: 0 10px;
   }

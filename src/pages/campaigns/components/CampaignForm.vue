@@ -172,7 +172,7 @@
                       v-validate="'required'"
                       @change="subTypeChange"
                     />
-                    <span>分享到朋友圈</span>
+                    <span>{{$t('lang.campaigns.platform.wechat')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -185,7 +185,7 @@
                       v-validate="'required'"
                       @change="subTypeChange"
                     />
-                    <span>分享到微博</span>
+                    <span>{{$t('lang.campaigns.platform.weibo')}}</span>
                   </label>
                 </div>
               </div>
@@ -213,7 +213,7 @@
                       v-validate="'required'"
                       @change="perBudgetChange"
                     />
-                    <span>按照点击奖励KOL</span>
+                    <span>{{$t('lang.campaigns.mode.clicks')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -226,7 +226,7 @@
                       v-validate="'required'"
                       @change="perBudgetChange"
                     />
-                    <span>按照转发奖励KOL</span>
+                    <span>{{$t('lang.campaigns.mode.repost')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -239,7 +239,7 @@
                       v-validate="'required'"
                       @change="perBudgetChange"
                     />
-                    <span>按照完成任务奖励KOL</span>
+                    <span>{{$t('lang.campaigns.mode.mission')}}</span>
                   </label>
                 </div>
               </div>
@@ -411,6 +411,7 @@
                       {{item.provinceName}}
                     </option>
                   </select>
+                  <div class="form-tips">{{$t('lang.campaigns.kolDistrict.provinceErrorTips')}}</div>
                 </div>
                 <div class="col-sm-6">
                   <select
@@ -429,6 +430,7 @@
                       {{item.citysName}}
                     </option>
                   </select>
+                  <div class="form-tips">{{$t('lang.campaigns.kolDistrict.cityErrorTips')}}</div>
                 </div>
               </div>
               <input
@@ -436,12 +438,6 @@
                 name="region"
                 v-model="checkedCitys"
               >
-              <div
-                class="form-tips danger"
-                v-show="errors.has('region')"
-              >
-                {{$t('lang.campaigns.kolDistrict.errorTips')}}
-              </div>
             </div>
           </div>
           <div class="form-group">
@@ -460,7 +456,7 @@
                   {{item}}
                 </li>
               </ul>
-              <p v-else class="form-control-static">全部</p>
+              <p v-else class="form-control-static">{{$t('lang.all')}}</p>
             </div>
           </div>
           <div class="form-group">
@@ -474,12 +470,12 @@
                 v-validate="'required'"
               >
                 <option value="全部">{{$t('lang.campaigns.kolAge.placeholder')}}</option>
-                <option value="10,20">10-20 岁</option>
-                <option value="20,30">20-30 岁</option>
-                <option value="30,40">30-40 岁</option>
-                <option value="40,50">40-50 岁</option>
-                <option value="50,60">50-60 岁</option>
-                <option value="60,100">60 岁以上</option>
+                <option value="10,20">10-20 {{$t('lang.yearsOld')}}</option>
+                <option value="20,30">20-30 {{$t('lang.yearsOld')}}</option>
+                <option value="30,40">30-40 {{$t('lang.yearsOld')}}</option>
+                <option value="40,50">40-50 {{$t('lang.yearsOld')}}</option>
+                <option value="50,60">50-60 {{$t('lang.yearsOld')}}</option>
+                <option value="60,100">60 {{$t('lang.yearsOlder')}}</option>
               </select>
               <div
                 class="form-tips danger"
@@ -498,8 +494,8 @@
                 v-validate="'required'"
               >
                 <option value="全部">{{$t('lang.campaigns.kolGender.placeholder')}}</option>
-                <option value="1">男</option>
-                <option value="2">女</option>
+                <option value="1">{{$t('lang.male')}}</option>
+                <option value="2">{{$t('lang.female')}}</option>
               </select>
               <div
                 class="form-tips danger"
@@ -595,7 +591,7 @@ export default {
         start_time: '',
         deadline: '',
         target: {
-          tags: '',
+          tags: '全部',
           region: '',
           age: '全部',
           gender: '全部',
@@ -650,7 +646,7 @@ export default {
         this.campaignTime = []
         this.campaignTime[0] = resData.start_time
         this.campaignTime[1] = resData.deadline
-        this.submitData.target.tags = resData.tags.toString()
+        this.submitData.target.tags = resData.tags.length > 0 ? resData.tags.toString() : '全部'
         this.submitData.target.region = resData.region
         this.submitData.target.age = resData.age
         this.submitData.target.gender = resData.gender
@@ -701,7 +697,7 @@ export default {
       })
       console.log(_checkedTags)
       this.checkedTags = _checkedTags
-      this.submitData.target.tags = _checkedTags.toString()
+      this.submitData.target.tags = _checkedTags.length > 0 ? _checkedTags.toString() : '全部'
     },
     imageuploaded (res) {
       console.log(res)

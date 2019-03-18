@@ -29,7 +29,7 @@
               <p class="home-post-content">{{item.content}}</p>
               <div class="home-post-form">
                 <span>
-                  <i class="iconfont icon-like"></i>
+                  <i class="iconfont icon-heart"></i>
                   <b>{{item.post_influence.likes}}</b>
                 </span>
                 <span v-if="postType === 0">
@@ -37,7 +37,7 @@
                   <b>{{item.post_influence.shares}}</b>
                 </span>
                 <span>
-                  <i class="iconfont icon-pinglun"></i>
+                  <i class="iconfont icon-comment"></i>
                   <b>{{item.post_influence.comments}}</b>
                 </span>
               </div>
@@ -62,13 +62,11 @@
 import axios from "axios"
 import apiConfig from "@/config"
 import commonJs from '@javascripts/common.js'
-import DefaultTabs from "@components/DefaultTabs"
-import KolsListItem from '@components/KolsListItem'
+import DefaultTabs from '@components/DefaultTabs'
 import { mapState } from 'vuex'
 export default {
   components: {
-    DefaultTabs,
-    KolsListItem
+    DefaultTabs
   },
   props: ['childKeyList'],
   data() {
@@ -94,11 +92,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.weibo')
+          name: () => this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: this.$t('lang.wechat')
+          name: () => this.$t('lang.wechat')
         }
       ]
 
@@ -120,7 +118,7 @@ export default {
         this.topPostWeibo(this.topPostParams)
       },
       deep: true
-    }
+    },
   },
   created() {
   },
@@ -190,16 +188,16 @@ export default {
     },
      // 跳转 kol detail
     intoKolDetail(item) {
-      // console.log(item)
-      // this.$router.push("/kol/" + item.profile_id)
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',
         params: {
           id: item.profile_id,
+        },
+        query: {
           type: this.tabIndex,
           brand_keywords: this.childKeyList.brand_keywords
-        },
+        }
       });
     },
     PostShowMore() {

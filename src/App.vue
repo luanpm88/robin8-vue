@@ -9,7 +9,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+    const name = this.$route.meta.title || 'home'
+    const title = this.$i18n.t(`lang.router.${name}`)
+    window.document.title = title
+  }
 }
 </script>
 

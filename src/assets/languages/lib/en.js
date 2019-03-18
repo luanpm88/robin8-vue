@@ -1,15 +1,9 @@
 export const lang = {
   login: 'Log In',
   logout: 'Log Out',
-  home: 'Home',
-  campaignsData: 'Campaigns',
-  myKols: 'KOL Search Engine',
-  myWallet: 'Wallet',
-  settings: 'Settings',
-  ranking: 'Ranking',
-  socialListening: 'Social Listening',
   wechat: 'Wechat',
   weibo: 'Weibo',
+  seeMore: 'Show More',
   more: 'load more',
   edit: 'edit',
   delete: 'delete',
@@ -18,50 +12,119 @@ export const lang = {
   information: 'Information',
   backBtn: 'Back',
   submitBtn: 'Submit',
+  payBtn: 'Pay',
   totalNoDataTip: 'No data...',
-  yes: 'yes',
-  no: 'no',
+  yes: 'Yes',
+  no: 'No',
+  search: 'Search',
+  exposure: 'Exposure',
+  all: 'All',
+  male: 'Male',
+  female: 'Female',
+  yearsOld: 'years old',
+  yearsOlder: 'years old or older',
+  router: {
+    login: 'Log In',
+    reg: 'Reg',
+    forgetPassword: 'Forget Password',
+    changePassword: 'Change Password',
+    home: 'Home',
+    homeCreate: 'Create Campaign',
+    settings: 'Settings',
+    companyInfo: 'Basic Information',
+    myBrands: 'My Brands',
+    myBrandsCreate: 'Create My Brands',
+    myCompetitionBrands: 'My Competition Brands',
+    myCompetitionBrandsCreate: 'Create My Competition Brands',
+    myShoppingCart: 'My Shopping Cart',
+    wallet: 'My Account',
+    walletRecharge: 'Recharge',
+    walletSummary: 'Transaction Record',
+    walletInvoice: 'Request Invoice',
+    walletInvoiceForm: 'Invoice Information',
+    walletReceiverForm: 'Mailing Address',
+    creations: 'Campaign',
+    creationList: 'Create Campaign',
+    creationCreate: 'Create Campaign',
+    creationDetail: 'Campaign Detail',
+    creationEdit: 'Edit Campaign',
+    chooseKols: 'KOLs',
+    creationPay: 'Payment',
+    campaigns: 'Campaign',
+    campaignList: 'Small V Activity List',
+    campaignCreate: 'Create Campaign',
+    campaignDetail: 'Campaign Detail',
+    campaignEdit: 'Edit Campaign',
+    campaignPay: 'Payment',
+    kolList: 'KOLs List',
+    kolDetail: 'KOL Detail',
+    ranking: 'Ranking',
+    wechatRanking: 'Wechat Ranking',
+    weiboRanking: 'Weibo Ranking',
+    benchMark: 'Bench Mark',
+    socialListening: 'Social Listening'
+  },
+  nav: {
+    home: 'Home',
+    campaigns: 'Campaigns',
+    customContent: 'Custom Content',
+    shareOnly: 'Share Only',
+    kols: 'KOL Search Engine',
+    wallet: 'Wallet',
+    topUp: 'Top Up',
+    transactions: 'Transactions',
+    invoices: 'Invoices',
+    setting: 'Settings',
+    basicInfo: 'Basic Information',
+    brands: 'My Brands',
+    competitors: 'My Competitors',
+    cart: 'My Shopping Cart',
+    ranking: 'Ranking',
+    wechatRanking: 'Wechat Ranking',
+    weiboRanking: 'Weibo Ranking',
+    socialListening: 'Social Listening'
+  },
   profile: {
-    name: '品牌名称',
-    companyName: '公司名称（抬头）',
-    availAmount: '账户余额'
+    name: 'Brand Name',
+    companyName: 'Company Name (Title)',
+    availAmount: 'Account Balance'
   },
   companyInfo: {
-    title: '品牌资料',
+    title: 'Brand Information',
     name: {
-      title: '品牌名称',
-      placeholder: '请输入品牌名称',
-      errorTips: '请输入品牌名称'
+      title: 'Brand Name',
+      placeholder: 'Please enter the Brand Name',
+      errorTips: 'Please enter the Brand Name'
     },
     real_name: {
-      title: '真实姓名',
-      placeholder: '请输入真实姓名',
-      errorTips: '请输入真实姓名'
+      title: 'Name',
+      placeholder: 'Please enter the Name',
+      errorTips: 'Please enter the Name'
     },
     campany_name: {
-      title: '公司名称',
-      placeholder: '请输入公司名称',
-      errorTips: '请输入公司名称'
+      title: 'Company Name ',
+      placeholder: 'Please enter the company name',
+      errorTips: 'Please enter the company name'
     },
     url: {
-      title: '官方网站',
-      placeholder: '请输入官方网站',
-      errorTips: '请输入官方网站'
+      title: 'Website',
+      placeholder: 'Please enter the website',
+      errorTips: 'Please enter the website'
     },
     description: {
-      title: '品牌介绍',
-      placeholder: '请输入品牌介绍',
-      errorTips: '请输入品牌介绍'
+      title: 'Brand Description',
+      placeholder: 'Please enter the brand description',
+      errorTips: 'Please enter the brand description'
     },
     keywords: {
-      title: '品牌关键词',
-      placeholder: '请添加品牌关键词',
-      errorTips: '请添加品牌关键词'
+      title: 'Brand Keywords',
+      placeholder: 'Please enter the brand keywords',
+      errorTips: 'Please enter the brand keywords'
     },
     avatar_url: {
-      title: '品牌logo',
-      placeholder: '请上传品牌logo',
-      errorTips: '请上传品牌logo'
+      title: 'Brand Logo',
+      placeholder: 'Please upload brand logo',
+      errorTips: 'Please upload brand logo'
     }
   },
   updateBaseInfo: {
@@ -124,45 +187,67 @@ export const lang = {
     campaignInfo: 'Campaign Information',
     kolParticipate: 'KOL Participate',
     collaborationCompleted: 'Collaboration Completed',
-    promotionDesc: '推广简介',
-    promotionBudget: '推广预算',
-    promotionDetail: '推广详情',
-    promotionTime: '推广时间',
-    selectKols: 'KOL选择',
+    promotionDesc: 'Promotion Introduction',
+    promotionBudget: 'Promotion Bugdet',
+    promotionDetail: 'Promotion Detail',
+    promotionTime: 'Promotion Date',
+    selectKols: 'KOL Selection',
+    update: 'Update',
+    list: {
+      status: {
+        paid: 'Paid',
+        participant: 'Participant',
+        clicks: 'Clicks',
+        paidClicks: 'Paid Clicks',
+        exposure: 'Exposure',
+        repost: 'Repost'
+      },
+      btns: {
+        edit: 'edit',
+        pay: 'pay',
+        comments: 'comments',
+        repost: 'repost'
+      }
+    },
     link: {
-      title: '活动链接',
+      title: 'Campaign Linked',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
       errorTips: '请填写活动链接'
     },
     name: {
-      title: '活动标题',
+      title: 'Campaign Title',
       placeholder: '请概括您的推广，让您的内容一目了然',
       errorTips: '请填写活动标题'
     },
     description: {
-      title: '活动简介',
+      title: 'Campaign Detail',
       placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
       errorTips: '请填写活动相关介绍'
     },
     picture: {
-      title: '活动图片',
+      title: 'Campaign Picture',
       placeholder: '',
-      errorTips: '请上传活动图片'
+      errorTips: 'Please upload an image'
     },
     allBudget: {
-      title: '总预算',
-      placeholder: '请填写活动预算',
-      errorTips: '请填写活动预算'
+      title: 'Totel Bugdet',
+      placeholder: 'Totel Bugdet',
+      errorTips: 'Totel Bugdet'
     },
     platform: {
-      title: '推广平台选择',
-      placeholder: '请选择推广平台',
-      errorTips: '请选择推广平台'
+      title: 'Platform',
+      placeholder: 'Please select the platform',
+      weibo: 'Weibo',
+      wechat: 'Wechat',
+      errorTips: 'Please select the platform'
     },
     mode: {
-      title: '奖励模式选择',
-      placeholder: '请选择奖励模式',
-      errorTips: '请选择奖励模式'
+      title: 'Reward Method',
+      placeholder: 'Please select the reward method',
+      clicks: 'By Clicks',
+      repost: 'By Repost',
+      mission: 'By Mission',
+      errorTips: 'Please select the reward method'
     },
     pictureNumber: {
       title: '示例图片数量',
@@ -170,43 +255,44 @@ export const lang = {
       errorTips: '请选择示例图片数量'
     },
     budget: {
-      title: '单次预算',
-      placeholder: '请填写单次预算',
-      errorTips: '请填写单次预算'
+      title: 'One Time Bugdet',
+      placeholder: 'One Time Bugdet',
+      errorTips: 'One Time Bugdet'
     },
     time: {
-      title: '推广时间',
+      title: 'Promotion Date',
       startPlaceholder: '选择开始时间',
       endPlaceholder: '选择结束时间',
-      placeholder: '请选择您预期的推广时间',
-      errorTips: '请选择您预期的推广时间'
+      placeholder: 'Please specify your campaign timeframe',
+      errorTips: 'Please specify your campaign timeframe'
     },
     tags: {
-      title: '分类',
+      title: 'Campaign Tags',
       placeholder: '',
-      errorTips: '请选择一个分类'
+      errorTips: 'Please select the tags'
     },
     kolDistrict: {
-      title: '地域',
-      placeholder: '请选择地域',
-      provincePlaceholder: 'Please select province',
-      cityPlaceholder: 'Please select city',
-      errorTips: '请选择地域'
+      title: 'KOLs’ Location',
+      placeholder: 'Please select KOLs’ location',
+      provincePlaceholder: 'Please select the preferred province for the KOLs’.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’.'
     },
     kolAge: {
-      title: 'Age',
-      placeholder: 'all',
-      errorTips: 'Please select the age'
+      title: 'KOLs’ Age',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ age range.'
     },
     kolGender: {
-      title: 'Gender',
-      placeholder: 'all',
-      errorTips: 'Please select the gender'
+      title: 'KOLs’ Gender',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOLs’ gender.'
     },
     kolPush: {
-      title: '补推',
+      title: 'Push',
       placeholder: '',
-      errorTips: '请选择补推形式'
+      errorTips: 'Please select a push form'
     },
     evaluatePoint: {
       title: '效果打分',
@@ -217,6 +303,24 @@ export const lang = {
       title: '效果评价',
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
+    },
+    payment: {
+      title: 'Pay Invoice',
+      name: 'Text',
+      desc: 'Campaign Description',
+      date: 'Campaign Timeframe',
+      amount: 'Payment Amount',
+      method: {
+        title: 'Payment Method',
+        alipay: {
+          title: 'Alipay',
+          desc: 'Alipay do not provide VAT invoice now'
+        },
+        balance: {
+          title: 'Account Balance',
+          desc: 'Use account balance to pay'
+        }
+      }
     }
   },
   creations: {
@@ -224,6 +328,7 @@ export const lang = {
     kolParticipate: 'Participating KOLs',
     collaborationCompleted: 'Campaign Completed',
     bigVRequirement: 'Big V related requirement',
+    bigVSelected: 'Selected Big V',
     serchBtn: 'Search',
     name: {
       title: 'Campaign Name',
@@ -300,30 +405,30 @@ export const lang = {
       provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
       cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
     }
   },
   wallet: {
     rechargePage: {
-      profileTitle: '账户信息',
-      profileChange: '修改信息',
+      profileTitle: 'Account Information',
+      profileChange: 'Edit',
       recharge: {
-        title: '线上支付',
+        title: 'Online Payment',
         method: {
-          title: '支付方式',
-          placeholder: '请选择支付方式',
-          errorTips: '请选择支付方式',
+          title: 'Payment Method',
+          placeholder: 'Please select payment method',
+          errorTips: 'Please select payment method',
           value: 'Alipay'
         },
         credits: {
-          title: '支付金额',
-          placeholder: '请输入金额',
-          errorTips: '请输入金额'
+          title: 'Payment Amount',
+          placeholder: 'Please fill in payment amount',
+          errorTips: 'Please fill in payment amount'
         },
         invite_code: {
-          title: '邀请码(选填)',
-          placeholder: '请输入邀请码(选填)',
-          errorTips: '请输入邀请码(选填)'
+          title: 'Invitation Code',
+          placeholder: 'Please enter invitation code (optional)',
+          errorTips: 'Please enter invitation code (optional)'
         }
       }
     },
@@ -337,83 +442,92 @@ export const lang = {
     },
     invoicePage: {
       info: {
-        title: '发票信息',
-        edit: '修改发票信息',
+        title: 'Invoice Information',
+        edit: 'Edit',
         create: '添加发票信息',
         invoiceTitle: {
-          title: '发票抬头',
-          placeholder: '请输入发票抬头',
-          errorTips: '请输入发票抬头'
+          title: 'Invoice Title',
+          placeholder: 'Please fill in invoice title',
+          errorTips: 'Please fill in invoice title'
         },
         taxpayerId: {
-          title: '纳税人识别号',
-          placeholder: '请输入纳税人识别号',
-          errorTips: '请输入纳税人识别号'
+          title: 'Tax ID',
+          placeholder: 'Please fill in tax iD',
+          errorTips: 'Please fill in tax iD'
         },
         companyAddress: {
-          title: '公司地址',
-          placeholder: '请输入公司地址',
-          errorTips: '请输入公司地址'
+          title: 'Company Address',
+          placeholder: 'Please fill in company address',
+          errorTips: 'Please fill in company address'
         },
         companyMobile: {
-          title: '公司电话',
-          placeholder: '请输入公司电话',
-          errorTips: '请输入公司电话'
+          title: 'Company Tel',
+          placeholder: 'Please fill in company tel',
+          errorTips: 'Please fill in company tel'
         },
         bankName: {
-          title: '开户行',
-          placeholder: '请输入开户行',
-          errorTips: '请输入开户行'
+          title: 'Bank Name',
+          placeholder: 'Please fill in bank name',
+          errorTips: 'Please fill in bank name'
         },
         bankAccount: {
-          title: '开户行帐号',
-          placeholder: '请输入开户行帐号',
-          errorTips: '请输入开户行帐号'
+          title: 'Account #',
+          placeholder: 'Please fill in account #',
+          errorTips: 'Please fill in account #'
         }
       },
       receiver: {
-        title: '邮寄地址',
-        edit: '修改邮寄地址',
+        title: 'Mailing Address',
+        edit: 'Edit',
         create: '添加邮寄地址',
         name: {
-          title: '收件人姓名',
-          placeholder: '请输入收件人姓名',
-          errorTips: '请输入收件人姓名'
+          title: 'Mailing Name',
+          placeholder: 'Please fill in mailing name',
+          errorTips: 'Please fill in mailing name'
         },
         phone_number: {
-          title: '收件人电话',
-          placeholder: '请输入收件人电话',
-          errorTips: '请输入收件人电话'
+          title: 'Phone',
+          placeholder: 'Please fill in phone',
+          errorTips: 'Please fill in phone'
         },
         address: {
-          title: '收件人地址',
-          placeholder: '请输入收件人地址',
-          errorTips: '请输入收件人地址'
+          title: 'Mailing Address',
+          placeholder: 'Please fill in mailing address',
+          errorTips: 'Please fill in mailing address'
         }
       },
       invoiceSubmit: {
-        title: '申请发票',
+        title: 'Request Invoice',
         quota: {
           title: '可申请额度',
           tips: '已申请发票的金额不可以申请退款！'
         },
         credits: {
-          title: '申请金额',
-          placeholder: '请输入申请金额',
-          errorTips: '请输入申请金额'
+          title: 'Request Amount',
+          placeholder: 'Please fill in request amount',
+          errorTips: 'Please fill in request amount'
         },
         type: {
-          title: '发票类型',
-          placeholder: '请选择发票类型',
-          errorTips: '请选择发票类型',
-          common: '普通发票',
-          special: '增值税发票'
+          title: 'Invoice Type',
+          placeholder: 'Please select invoice type',
+          errorTips: 'Please select invoice type',
+          common: 'Regular Invoice',
+          special: 'VAT Invoice'
         },
         price_sheet: {
-          title: '是否开报价单',
-          placeholder: '请选择是否开报价单',
-          errorTips: '请选择是否开报价单'
+          title: 'Quotation?',
+          placeholder: 'Quotation?',
+          errorTips: 'Quotation?'
         }
+      },
+      invoiceList: {
+        amount: 'Amount',
+        type: 'Type',
+        title: 'Title',
+        address: 'Address',
+        createDate: 'Create Date',
+        status: 'Status',
+        tracking: 'Tracking #'
       }
     }
   },
@@ -433,7 +547,7 @@ export const lang = {
     tip: 'You did not choose the brand',
     addPage: {
       name: 'Brand Name:',
-      placeholderName: 'Please fill in the brandname',
+      placeholderName: 'Please enter the brand name',
       keywords: 'Brand Keywords:',
       placeholderKeywords: 'Please fill in the brand keywords',
       keywordsTips: 'Multiple keywords should be separated by commas to make them more accurate.',
@@ -457,7 +571,7 @@ export const lang = {
     tip: ' You did not choose a competitive brand',
     addPage: {
       name: 'Brand Name: ',
-      placeholderName: 'Please fill in the brandname',
+      placeholderName: 'Please enter the brand name',
       addTip: 'Add My Competitive Brand',
       placeholderDec: 'Please fill in the abbreviation of brand'
     }
@@ -557,6 +671,7 @@ export const lang = {
       }
     },
     search: {
+      topKey: 'Enter a keyword, category or KOL name',
       keyword: 'Please type here...',
       search: 'Search',
       advancedSearch: {
@@ -580,7 +695,7 @@ export const lang = {
           Food: 'Food',
           Furniture: 'Furniture',
           Games: 'Games',
-          Gealth: 'Health',
+          Health: 'Health',
           Hotel: 'Hotel',
           Internet: 'Internet',
           Mobile: 'Mobile',
@@ -596,7 +711,22 @@ export const lang = {
         checkText: 'Only display KOLs that have prices at Robin8'
       },
       likeTip: 'Fans number',
-      sumTip: 'Average sum engagement'
+      sumTip: 'Average sum engagement',
+      tableTop: {
+        weixinBig: 'Weichat - big data profile',
+        weiboBig: 'Weibo - big data profile - 65,860,968',
+        weixinR8: 'Weichat - R8 managed',
+        weiboR8: 'Weibo - R8 managed',
+      },
+      table: {
+        profile: 'Profile',
+        price: 'Price',
+        influence: 'Influence',
+        relevance: 'Relevance'
+      }
+    },
+    postVue: {
+      tip: 'No Post in 21 Days'
     }
   },
   homePage: {
@@ -613,5 +743,20 @@ export const lang = {
     topPosts: {
       title: 'Top Posts'
     }
+  },
+  socialPage: {
+    topic: 'Topic',
+    source: 'Source',
+    kolId: 'KOL Profile ID'
+  },
+  statusAreaVue: {
+    oneTit: 'Your campaign is pending',
+    oneSmallTit: 'We will review in 24 hours',
+    twoTit: ' Your campaign is rejected',
+    twoSmallTit: 'Please edit your campaign',
+    threeTit: 'Your campaign is passed',
+    FourTit: 'Your campaign is ended',
+    FiveTit: 'Your campaign is finished',
+    sixTit: 'Your campaign is closed',
   }
 }

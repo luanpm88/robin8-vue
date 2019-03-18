@@ -24,30 +24,29 @@ export default {
   },
   methods: {
     renderData (status) {
-      console.log(status)
       switch (status) {
         case 'pending':
-          this.status.title = '您提交的活动待审核'
-          this.status.desc = '我们将在24小时之内完成审核'
+          this.status.title = this.$t('lang.statusAreaVue.oneTit')
+          this.status.desc = this.$t('lang.statusAreaVue.oneSmallTit')
           break
         case 'unpassed':
-          this.status.title = '您提交的活动未通过审核'
-          this.status.desc = '请编辑后重新提交'
+          this.status.title = this.$t('lang.statusAreaVue.twoTit')
+          this.status.desc = this.$t('lang.statusAreaVue.twoSmallTit')
           break
         case 'passed':
-          this.status.title = '活动提交审核成功'
+          this.status.title = this.$t('lang.statusAreaVue.threeTit')
           this.status.desc = ''
           break
         case 'ended':
-          this.status.title = '活动已结束'
+          this.status.title = this.$t('lang.statusAreaVue.FourTit')
           this.status.desc = ''
           break
         case 'finished':
-          this.status.title = '活动已完成'
+          this.status.title = this.$t('lang.statusAreaVue.FiveTit')
           this.status.desc = ''
           break
         case 'closed':
-          this.status.title = '活动已关闭'
+          this.status.title = this.$t('lang.statusAreaVue.sixTit')
           this.status.desc = ''
           break
         default:

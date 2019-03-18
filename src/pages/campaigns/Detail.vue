@@ -18,23 +18,23 @@
                   :to="'/campaigns/' + detailData.id"
                 >{{detailData.name}}</router-link>
               </h5>
-              <div class="date">最后更新:{{detailData.updated_at}} 按照<span class="per-budget-type">{{detailData.per_budget_type_show}}</span>奖励</div>
+              <div class="date">{{$t('lang.campaigns.update')}}:{{detailData.updated_at}} 按照<span class="per-budget-type">{{detailData.per_budget_type_show}}</span>奖励</div>
               <div class="desc">{{detailData.description}}</div>
-              <div class="desc">活动网址:<a :href="detailData.url" target="_blank">{{detailData.url}}</a></div>
+              <div class="desc">{{$t('lang.campaigns.link.title')}}:<a :href="detailData.url" target="_blank">{{detailData.url}}</a></div>
             </div>
             <div class="campaign-status">
               <div class="item">
-                <div class="title">起止时间</div>
+                <div class="title">{{$t('lang.campaigns.promotionTime')}}</div>
                 <div class="text">{{detailData.time_range}}</div>
               </div>
               <div class="item">
-                <div class="title">总预算</div>
+                <div class="title">{{$t('lang.campaigns.promotionBudget')}}</div>
                 <div class="text">
                   ￥<span class="num">{{detailData.budget}}</span>
                 </div>
               </div>
               <div class="item">
-                <div class="title">一次点击</div>
+                <div class="title">{{$t('lang.campaigns.budget.title')}}</div>
                 <div class="text">
                   ￥<span class="num">{{detailData.per_action_budget}}</span>
                 </div>
@@ -83,31 +83,31 @@
       <div class="panel-body">
         <div class="statistics-panel">
           <div class="item">
-            <div class="title">已花费</div>
+            <div class="title">{{$t('lang.campaigns.list.status.paid')}}</div>
             <div class="text">
               <span class="num">{{detailData.take_budget}}</span>
             </div>
           </div>
           <div class="item">
-            <div class="title">参与人数</div>
+            <div class="title">{{$t('lang.campaigns.list.status.exposure')}}</div>
             <div class="text">
               <span class="num">{{detailData.join_count}}</span>
             </div>
           </div>
           <div class="item">
-            <div class="title">点击数</div>
+            <div class="title">{{$t('lang.campaigns.list.status.clicks')}}</div>
             <div class="text">
               <span class="num">{{detailData.total_click}}</span>
             </div>
           </div>
           <div v-if="detailData.per_budget_type == 'cpa' || detailData.per_budget_type == 'click'" class="item">
-            <div class="title">计费点击</div>
+            <div class="title">{{$t('lang.campaigns.list.status.paidClicks')}}</div>
             <div class="text">
               <span class="num">{{detailData.avail_click}}</span>
             </div>
           </div>
           <div v-if="detailData.per_budget_type == 'post'" class="item">
-            <div class="title">转发量</div>
+            <div class="title">{{$t('lang.campaigns.list.status.repost')}}</div>
             <div class="text">
               <span class="num">{{detailData.post_count}}</span>
             </div>

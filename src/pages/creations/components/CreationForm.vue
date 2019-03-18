@@ -314,22 +314,22 @@
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerAge.placeholder')}}</option>
-                <option value="1">10-20 岁</option>
-                <option value="2">20-30 岁</option>
-                <option value="3">30-40 岁</option>
-                <option value="4">40-50 岁</option>
-                <option value="5">50-60 岁</option>
-                <option value="6">60 岁以上</option>
+                <option value="全部">{{$t('lang.creations.followerAge.placeholder')}}</option>
+                <option value="10,20">10-20 {{$t('lang.yearsOld')}}</option>
+                <option value="20,30">20-30 {{$t('lang.yearsOld')}}</option>
+                <option value="30,40">30-40 {{$t('lang.yearsOld')}}</option>
+                <option value="40,50">40-50 {{$t('lang.yearsOld')}}</option>
+                <option value="50,60">50-60 {{$t('lang.yearsOld')}}</option>
+                <option value="60,100">60 {{$t('lang.yearsOlder')}}</option>
               </select>
               <div class="form-tips">{{$t('lang.creations.followerAge.errorTips')}}</div>
             </div>
             <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
-                <option value="">{{$t('lang.creations.followerGender.placeholder')}}</option>
-                <option value="1">男</option>
-                <option value="0">女</option>
+                <option value="全部">{{$t('lang.creations.followerGender.placeholder')}}</option>
+                <option value="1">{{$t('lang.male')}}</option>
+                <option value="2">{{$t('lang.female')}}</option>
               </select>
               <div class="form-tips">{{$t('lang.creations.followerGender.errorTips')}}</div>
             </div>
@@ -399,7 +399,7 @@
                   {{item}}
                 </li>
               </ul>
-              <p v-else class="form-control-static">全部</p>
+              <p v-else class="form-control-static">{{$t('lang.all')}}</p>
             </div>
           </div>
           <div class="form-group text-center">
@@ -413,37 +413,53 @@
       </div>
     </div>
 
-    <kols-list-panel
+    <div
       v-if="kolsList.length > 0"
-      class="mt20"
-      title="为您推荐的大V"
-      :kolsList="kolsList"
-      :kolsPage="kolsPage"
-      :kolsPerPage="kolsPerPage"
-      :kolsTotal="kolsTotal"
-      :keyword="brandKeyword"
-      :kolTypeId="kolTypeId"
-      @checkedKols="checkedKols"
-      @changeKolsPage="changeKolsPage"
-    ></kols-list-panel>
-
-    <!-- <div class="row mt20">
-      <div class="col-sm-4">
+      class="row mt20"
+    >
+      <div class="col-sm-6">
         <kols-list-panel
           title="为您推荐的大V"
+          :kolsList="kolsList"
+          :kolsPage="kolsPage"
+          :kolsPerPage="kolsPerPage"
+          :kolsTotal="kolsTotal"
+          :routerData="kolRouterData"
+          @checkedKols="checkedKols"
+          @changeKolsPage="changeKolsPage"
         ></kols-list-panel>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <kols-list-panel
-          title="您可能感兴趣的大V"
+          title="Shopping Cart"
+          :kolsList="cartKolsList"
+          :kolsPage="kolsCartPage"
+          :kolsPerPage="kolsCartPerPage"
+          :kolsTotal="kolsCartTotal"
+          :routerData="kolRouterData"
+          @checkedKols="checkedCartKols"
+          @changeKolsPage="changeCartKolsPage"
         ></kols-list-panel>
       </div>
-      <div class="col-sm-4">
-        <kols-list-panel
-          title="您收藏的大V"
-        ></kols-list-panel>
+    </div>
+
+    <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.creations.bigVSelected')}}</h5>
       </div>
-    </div> -->
+      <div class="panel-body">
+        <div class="checked-kols-list clearfix">
+          <kols-list-item
+            v-for="item in submitData.selected_kols"
+            :key="item.profile_id"
+            :renderStatus="kolRenderStatus"
+            :renderData="item"
+            :routerData="kolRouterData"
+            @handleDelete="delCheckedKol"
+          ></kols-list-item>
+        </div>
+      </div>
+    </div>
 
     <div class="text-center create-btn-area">
       <button
@@ -463,6 +479,7 @@ import commonJs from '@javascripts/common.js'
 import cityJs from '@javascripts/cities.js'
 import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
+import KolsListItem from '@components/KolsListItem'
 import KolsListPanel from './KolsListPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
@@ -475,6 +492,7 @@ export default {
   components: {
     Datepicker,
     TagsList,
+    KolsListItem,
     KolsListPanel,
     VueCoreImageUpload
   },
@@ -482,14 +500,14 @@ export default {
     return {
       detailData: {},
       brandsList: [],
-      brandKeyword: '',
       tagsList: [],
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
       kolsParams: {},
       kolsList: [],
-      kolTypeId: '',
+      cartKolsParams: {},
+      cartKolsList: [],
       plateformName: '',
       uploadImageUrl: apiConfig.uploadImageUrl,
       loading: false,
@@ -519,8 +537,23 @@ export default {
         notice: ''
       },
       kolsPage: 0,
-      kolsPerPage: 12,
+      kolsPerPage: 4,
       kolsTotal: 0,
+      kolsCartPage: 0,
+      kolsCartPerPage: 4,
+      kolsCartTotal: 0,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: true
+      },
+      kolRouterData: {
+        type: '',
+        keywords: ''
+      },
       canSubmit: true
     }
   },
@@ -556,6 +589,54 @@ export default {
           item.val = ''
         })
         this.terracesList = _terracesList
+      }
+    },
+    getCollectedKolsData () {
+      axios.get(apiConfig.kolCollectListUrl, {
+        params: this.cartKolsParams,
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetCollectedKolsDataSucc)
+    },
+    handleGetCollectedKolsDataSucc (res) {
+      console.log(res)
+      if (res.status == 200 && res.data) {
+        const resData = res.data
+        this.cartKolsList = resData.items
+        this.kolsCartTotal = parseInt(resData.paginate['X-Total'])
+
+        let _selectedKols = this.submitData.selected_kols
+        if (_selectedKols.length > 0) {
+          _selectedKols.forEach(item => {
+            this.cartKolsList.forEach(e => {
+              if (item.profile_id == e.profile_id) {
+                e.checked = true
+              }
+            })
+          })
+        }
+
+        // if (this.formType == 'create') {
+        //   if (resData.items.length > 0) {
+        //     this.cartKolsList.forEach(item => {
+        //       item.checked = false
+        //     })
+        //   }
+        // }
+        // if (this.formType == 'edit') {
+        //   let _selectedKols = this.submitData.selected_kols
+        //   console.log(_selectedKols)
+        //   _selectedKols.forEach(item => {
+        //     this.cartKolsList.forEach(e => {
+        //       if (item.profile_id == e.profile_id) {
+        //         e.checked = true
+        //       }
+        //     })
+        //   })
+
+        //   console.log(this.cartKolsList)
+        // }
       }
     },
     getDetailData () {
@@ -633,6 +714,9 @@ export default {
         // console.log(this.checkedCitys)
 
         this.searchKolsCtrl()
+        this.cartKolsParams.page = this.kolsCartPage + 1
+        this.cartKolsParams.per_page = this.kolsCartPerPage
+        this.getCollectedKolsData()
         // console.log(this.kolsList)
       }
     },
@@ -651,33 +735,44 @@ export default {
       this.kolsList = resData.data
       this.kolsTotal = resData.total_record_count
 
-      if (this.formType == 'create') {
-        if (resData.data.length > 0) {
-          this.kolsList.forEach(item => {
-            item.checked = false
-          })
-        }
-      }
-      if (this.formType == 'edit') {
-        let _selectedKols = this.submitData.selected_kols
+      let _selectedKols = this.submitData.selected_kols
+      if (_selectedKols.length > 0) {
         _selectedKols.forEach(item => {
           this.kolsList.forEach(e => {
-            if (item.plateform_uuid == e.profile_id) {
+            if (item.profile_id == e.profile_id) {
               e.checked = true
             }
           })
         })
       }
+
+      // if (this.formType == 'create') {
+      //   if (resData.data.length > 0) {
+      //     this.kolsList.forEach(item => {
+      //       item.checked = false
+      //     })
+      //   }
+      // }
+      // if (this.formType == 'edit') {
+      //   let _selectedKols = this.submitData.selected_kols
+      //   _selectedKols.forEach(item => {
+      //     this.kolsList.forEach(e => {
+      //       if (item.profile_id == e.profile_id) {
+      //         e.checked = true
+      //       }
+      //     })
+      //   })
+      // }
     },
     searchKolsCtrl () {
       let _brands_list = this.brandsList
       let _checked_trademark_id = this.submitData.trademark_id
       _brands_list.forEach(item => {
         if (_checked_trademark_id == item.id) {
-          this.brandKeyword = item.keywords
+          this.kolRouterData.keywords = item.keywords
         }
       })
-      console.log(this.brandKeyword)
+      console.log(this.kolRouterData.keywords)
 
       let _terraces = this.submitData.terraces
       console.log(_terraces)
@@ -719,48 +814,107 @@ export default {
             if (hasWechat) {
               this.searchKols(apiConfig.kolWxSearchUrl)
               this.plateformName = 'public_wechat_account'
-              this.kolTypeId = '1'
+              this.kolRouterData.type = '1'
             } else {
               this.searchKols(apiConfig.kolWbSearchUrl)
               this.plateformName = 'weibo'
-              this.kolTypeId = '0'
+              this.kolRouterData.type = '0'
             }
           } else {
             this.searchKols(apiConfig.kolWxSearchUrl)
             this.plateformName = 'public_wechat_account'
-            this.kolTypeId = '1'
+            this.kolRouterData.type = '1'
           }
         }
       })
-
-      console.log(this.kolTypeId)
     },
     changeKolsPage (data) {
       console.log(data.page)
       this.kolsPage = data.page - 1
       this.searchKolsCtrl()
     },
-    checkedKols (data) {
-      let _ids = data.ids
-      console.log(_ids)
-      let _kolsList = this.kolsList
-      let _checkedKols = []
-      let _kolItem
+    changeCartKolsPage (data) {
+      console.log(data.page)
+      this.cartKolsParams.page = data.page
+      this.getCollectedKolsData()
+    },
+    checkedKolsCtrl (id, list) {
+      let _id = id
+      console.log(_id)
+      let _list = list
+      let _checkedKols = this.submitData.selected_kols
+      let _kolItem = commonJs.buildObjData('profile_id', _id)
 
-      _ids.forEach(item => {
-        _kolsList.forEach(e => {
-          if (e.profile_id == item) {
-            _kolItem = commonJs.buildObjData('plateform_uuid', item)
+      let result = _checkedKols.some(item => {
+        if (item.profile_id == _id) {
+          return true
+        }
+      })
+
+      _list.forEach(item => {
+        console.log(item)
+        if (item.profile_id == _id) {
+          if (!result) {
             _kolItem.plateform_name = this.plateformName
-            _kolItem.name = e.profile_name
-            _kolItem.avatar_url = e.avatar_url
-            _kolItem.desc = e.description_raw
+            _kolItem.profile_name = item.profile_name
+            _kolItem.avatar_url = item.avatar_url
+            _kolItem.description_raw = item.description_raw
+            _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
+            _kolItem.checked = true
+            item.checked = true
             _checkedKols.push(_kolItem)
+          } else {
+            let _index
+            _checkedKols.forEach(_item => {
+              if (item.profile_id == _item.profile_id) {
+                _index = _checkedKols.indexOf(_item)
+              }
+            })
+            _kolItem.checked = false
+            item.checked = false
+            _checkedKols.splice(_index, 1)
           }
-        })
+        }
       })
       console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
+      console.log(this.submitData.selected_kols)
+    },
+    checkedKols (data) {
+      let _id = data.id
+      console.log(_id)
+      let _kolsList = this.kolsList
+      this.checkedKolsCtrl(_id, _kolsList)
+      console.log(this.kolsList)
+      this.searchKolsCtrl()
+      // console.log(this.submitData.selected_kols)
+    },
+    checkedCartKols (data) {
+      let _id = data.id
+      console.log(_id)
+      let _cartKolsList = this.cartKolsList
+      this.checkedKolsCtrl(_id, _cartKolsList)
+      console.log(this.cartKolsList)
+      this.getCollectedKolsData()
+      // console.log(this.submitData.selected_kols)
+    },
+    delCheckedKol (data) {
+      let _id = data.id
+      // console.log(_id)
+      let _checkedKols = this.submitData.selected_kols
+      // console.log(_checkedKols)
+      let _index
+      _checkedKols.forEach(item => {
+        if (item.profile_id == _id) {
+          _index = _checkedKols.indexOf(item)
+          console.log(_index)
+        }
+      })
+      _checkedKols.splice(_index, 1)
+      this.submitData.selected_kols = _checkedKols
+      // console.log(this.submitData.selected_kols)
+      this.searchKolsCtrl()
+      this.getCollectedKolsData()
     },
     checkTag (data) {
       let _ids = data.ids
@@ -862,10 +1016,6 @@ export default {
     },
     doSubmit () {
       let _self = this
-      if (!_self.canSubmit) {
-        return false
-      }
-      _self.canSubmit = false
       let submitParams = {}
       if (_self.formType == 'create') {
         submitParams = {
@@ -878,6 +1028,12 @@ export default {
           'creation': _self.submitData
         }
       }
+
+      if (!_self.canSubmit) {
+        return false
+      }
+      _self.canSubmit = false
+      console.log(submitParams)
       axios.post(apiConfig.creationsUrl, submitParams, {
         headers: {
           'Authorization': _self.authorization
@@ -946,6 +1102,9 @@ export default {
       }, 500)
     } else {
       this.getBaseData()
+      this.cartKolsParams.page = this.kolsCartPage + 1
+      this.cartKolsParams.per_page = this.kolsCartPerPage
+      this.getCollectedKolsData()
     }
 
     this.provinceData = cityJs.citiesData.provinces
@@ -970,10 +1129,19 @@ export default {
   }
 }
 .creation-form /deep/ .kols-list {
+  height: 352px;
   padding: 24px 60px;
   font-size: 0;
+  // & > .kols-list-item {
+  //   display: inline-block;
+  //   width: 33.33333%;
+  //   padding: 0 10px;
+  // }
+}
+.checked-kols-list {
+  padding: 24px 60px;
   & > .kols-list-item {
-    display: inline-block;
+    float: left;
     width: 33.33333%;
     padding: 0 10px;
   }

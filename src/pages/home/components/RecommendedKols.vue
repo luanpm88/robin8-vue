@@ -8,7 +8,6 @@
     </div>
 
     <div class="panel-body list-content recommendkol">
-      <span class="kol-score">Influence Score</span>
       <div class="nonetip" v-if="isShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -17,26 +16,23 @@
       </div>
 
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
+      </default-tabs>
         <div class="list-content-inner">
           <kols-list-item
-            v-for="(item, index) in currentList"
-            :key="index"
-            :hasLiked="kolHasLiked"
-            :hasInflunce="KolHasInflunce"
-            :hasMsg="kolHasMsg"
-            :hasChecked="kolHasChecked"
+            v-for="item in currentList"
+            :key="item.profile_id"
+            :renderStatus="kolRenderStatus"
             :renderData="item"
-            @detail="intoKolDetail"
+            :routerData="kolRouterData"
           ></kols-list-item>
         </div>
         <div class="text-center mt20">
           <button
             type="button"
             class="btn btn-sm btn-outline btn-circle btn-purple"
-            @click="intoKolDetailMore"
+            @click="toKolDetailMore"
           >{{$t('lang.more')}}</button>
         </div>
-      </default-tabs>
     </div>
   </div>
 </template>
@@ -56,10 +52,18 @@ export default {
   },
   data() {
     return {
-      kolHasLiked: false,
-      KolHasInflunce: true,
-      kolHasMsg: true,
-      kolHasChecked: false,
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: false,
+        hasChecked: false,
+        hasInflunce: true,
+        hasCart: true,
+        hasDelete: false
+      },
+      kolRouterData: {
+        type: '',
+        keywords: ''
+      },
       tabIndex: 0,
       isShow: false,
       isLoading: true,
@@ -73,17 +77,17 @@ export default {
       tabList: [
         {
           index: 0,
-          name: this.$t('lang.weibo')
+          name: () => this.$t('lang.weibo')
         },
         {
           index: 1,
-          name: this.$t('lang.wechat')
+          name: () => this.$t('lang.wechat')
         }
       ]
     }
   },
   computed: {
-     ...mapState(['authorization'])
+    ...mapState(['authorization'])
   },
   watch: {
     childKeyList: {
@@ -94,15 +98,16 @@ export default {
         });
         this.params.brand_keywords = newKey
         this.weiboKol(this.params)
+        this.kolRouterData.keywords = newKey
       },
       deep: true
     }
   },
-  created() {
-    // this.params.brand_keywords = this.childKeyList.brand_keywords;
-    // this.weiboKol(this.params)
-  },
   methods: {
+    changeLangue() {
+      // vuejs 监听本地localstrage变化
+
+    },
     changeTab(tab) {
       this.tabIndex = tab.index
       this.currentList = [];
@@ -115,21 +120,10 @@ export default {
         // 微信接口
         this.weixinKol(this.params)
       }
-    },
-    // 跳转 kol detail
-    intoKolDetail(item) {
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id,
-          type: this.tabIndex,
-          brand_keywords: this.childKeyList.brand_keywords
-        },
-      });
+      this.kolRouterData.type = tab.index
     },
     // 跳转kol list
-    intoKolDetailMore() {
+    toKolDetailMore() {
       this.$router.push({
         path: '/kol/list',
         name: 'KolList',
@@ -149,17 +143,11 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
-            _that.isShow = true;
+            _that.isShow = true
           } else {
-            _that.isShow = false;
-            res.data.forEach(element => {
-              element.name = element.profile_name
-              element.desc = element.description_raw
-              element.avatar = element.avatar_url
-              element.influnce = element.avg_post_influences
-            })
+            _that.isShow = false
             _that.currentList = res.data.slice(0, 5)
           }
         })
@@ -177,17 +165,11 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
-            _that.isShow = true;
+            _that.isShow = true
           } else {
-            _that.isShow = false;
-            res.data.forEach(element => {
-              element.name = element.profile_name
-              element.desc = element.description_raw
-              element.avatar = element.avatar_url
-              element.influnce = element.avg_post_influences
-            })
+            _that.isShow = false
             _that.currentList = res.data.slice(0, 5)
           }
         })
@@ -195,6 +177,9 @@ export default {
           console.log(error)
         })
     }
+  },
+  mounted () {
+    this.kolRouterData.type = this.tabIndex
   }
 }
 </script>

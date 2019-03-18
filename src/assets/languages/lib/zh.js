@@ -1,15 +1,9 @@
 export const lang = {
   login: '登录',
   logout: '退出',
-  home: '首页',
-  campaignsData: '营销数据',
-  myKols: 'KOL搜索',
-  myWallet: '我的钱包',
-  settings: '企业设置',
-  ranking: '排名',
-  socialListening: '社交聆听',
   wechat: '微信',
   weibo: '微博',
+  seeMore: '显示更多',
   more: '查看更多',
   edit: '编辑',
   delete: '删除',
@@ -18,9 +12,78 @@ export const lang = {
   information: '基本信息',
   backBtn: '返回',
   submitBtn: '提交',
+  payBtn: '立即付款',
   totalNoDataTip: '暂无数据...',
   yes: '是',
   no: '否',
+  search: '搜索',
+  exposure: '曝光值',
+  all: '全部',
+  male: '男',
+  female: '女',
+  yearsOld: '岁',
+  yearsOlder: '岁以上',
+  router: {
+    login: '登录',
+    reg: '注册',
+    forgetPassword: '忘记密码',
+    changePassword: '重置密码',
+    home: '首页',
+    homeCreate: '创建新活动',
+    settings: '企业设置',
+    companyInfo: '基本信息',
+    myBrands: '我的品牌',
+    myBrandsCreate: '创建我的品牌',
+    myCompetitionBrands: '我的竞争品牌',
+    myCompetitionBrandsCreate: '新增我的竞争品牌',
+    myShoppingCart: '我的购物车',
+    wallet: '我的账户',
+    walletRecharge: '账户充值',
+    walletSummary: '消费记录',
+    walletInvoice: '申请发票',
+    walletInvoiceForm: '发票信息',
+    walletReceiverForm: '邮寄地址信息',
+    creations: '创作活动',
+    creationList: '创作活动列表',
+    creationCreate: '创建新活动',
+    creationDetail: '活动详情',
+    creationEdit: '活动编辑',
+    chooseKols: '创建新活动',
+    creationPay: '创建新活动',
+    campaigns: '小V活动',
+    campaignList: '小V活动列表',
+    campaignCreate: '创建新活动',
+    campaignDetail: '活动详情',
+    campaignEdit: '活动编辑',
+    campaignPay: '创建新活动',
+    kolList: 'KOL列表',
+    kolDetail: 'KOL详情',
+    ranking: '排名',
+    wechatRanking: '微信排名',
+    weiboRanking: '微博排名',
+    benchMark: 'benchMark',
+    socialListening: '社交聆听'
+  },
+  nav: {
+    home: '首页',
+    campaigns: '营销数据',
+    customContent: '大V活动',
+    shareOnly: '小V活动',
+    kols: 'KOL搜索',
+    wallet: '我的钱包',
+    topUp: '账户充值',
+    transactions: '消费记录',
+    invoices: '申请发票',
+    setting: '企业设置',
+    basicInfo: '基本信息',
+    brands: '我的品牌',
+    competitors: '我的竞争品牌',
+    cart: '我的购物车',
+    ranking: '排名',
+    wechatRanking: '微信排名',
+    weiboRanking: '微博排名',
+    socialListening: '社交聆听'
+  },
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
@@ -130,6 +193,23 @@ export const lang = {
     promotionTime: '推广时间',
     selectKols: 'KOL选择',
     serchBtn: '搜索大V',
+    update: '最后更新',
+    list: {
+      status: {
+        paid: '已花费',
+        participant: '参与人数',
+        clicks: '点击数',
+        paidClicks: '计费点击',
+        exposure: '总曝光数',
+        repost: '转发量'
+      },
+      btns: {
+        edit: '编辑',
+        pay: '支付',
+        comments: '评价',
+        repost: '再次发布'
+      }
+    },
     link: {
       title: '活动链接',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
@@ -158,11 +238,16 @@ export const lang = {
     platform: {
       title: '推广平台选择',
       placeholder: '请选择推广平台',
+      weibo: '分享到微博',
+      wechat: '分享到朋友圈',
       errorTips: '请选择推广平台'
     },
     mode: {
       title: '奖励模式选择',
       placeholder: '请选择奖励模式',
+      clicks: '按照点击奖励KOL',
+      repost: '按照转发奖励KOL',
+      mission: '按照完成任务奖励KOL',
       errorTips: '请选择奖励模式'
     },
     pictureNumber: {
@@ -192,7 +277,8 @@ export const lang = {
       placeholder: '请选择地域',
       provincePlaceholder: '请选择省份',
       cityPlaceholder: '请选择城市',
-      errorTips: '请选择地域'
+      provinceErrorTips: '请选择省份',
+      cityErrorTips: '请选择城市'
     },
     kolAge: {
       title: '年龄',
@@ -218,6 +304,24 @@ export const lang = {
       title: '效果评价',
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
+    },
+    payment: {
+      title: '支付订单',
+      name: '标题',
+      desc: '活动简介',
+      date: '活动时间',
+      amount: '支付总额',
+      method: {
+        title: '支付方式',
+        alipay: {
+          title: '支付宝',
+          desc: '支付宝支付暂不支持开具发票'
+        },
+        balance: {
+          title: '账户余额支付',
+          desc: '使用账户余额支付'
+        }
+      }
     }
   },
   creations: {
@@ -225,6 +329,7 @@ export const lang = {
     kolParticipate: 'KOL参与',
     collaborationCompleted: '合作完成',
     bigVRequirement: '大V 相关要求',
+    bigVSelected: '已选择的大V',
     serchBtn: '搜索大V',
     name: {
       title: '活动名称',
@@ -301,7 +406,7 @@ export const lang = {
       provincePlaceholder: '请选择粉丝的省份',
       cityPlaceholder: '请选择粉丝的城市',
       provinceErrorTips: '请选择粉丝的省份',
-      cityErrorTips: '请选择粉丝的城市'
+      cityErrorTips: '请选择粉丝的城市',
     }
   },
   wallet: {
@@ -415,6 +520,15 @@ export const lang = {
           placeholder: '请选择是否开报价单',
           errorTips: '请选择是否开报价单'
         }
+      },
+      invoiceList: {
+        amount: '金额',
+        type: '类型',
+        title: '抬头',
+        address: '地址',
+        createDate: '创建时间',
+        status: '状态',
+        tracking: '快递单号'
       }
     }
   },
@@ -558,6 +672,7 @@ export const lang = {
       }
     },
     search: {
+      topKey: '输入关键字、行业分类或KOL名称',
       keyword: '请在这里键入…',
       search: '搜索',
       advancedSearch: {
@@ -597,7 +712,22 @@ export const lang = {
         checkText: '仅显示Robin8价格的KOL'
       },
       likeTip: '粉丝数',
-      sumTip: '平均总参与度'
+      sumTip: '平均总参与度',
+      tableTop: {
+        weixinBig: '微信-大数据简介',
+        weiboBig: '微博-大数据简介',
+        weixinR8: '微信-R8管理',
+        weiboR8: '微博-R8管理',
+      },
+      table: {
+        profile: '简况',
+        price: '价格',
+        influence: '影响',
+        relevance: '关联'
+      }
+    },
+    postVue: {
+      tip: '最近21天没有文章'
     }
   },
   homePage: {
@@ -614,5 +744,20 @@ export const lang = {
     topPosts: {
       title: '热门文章'
     }
+  },
+  socialPage: {
+    topic: '主题',
+    source: '平台',
+    kolId: 'KOL Id'
+  },
+  statusAreaVue: {
+    oneTit: '您提交的活动待审核',
+    oneSmallTit: '我们将在24小时之内完成审核',
+    twoTit: '您提交的活动未通过审核',
+    twoSmallTit: '请编辑后重新提交',
+    threeTit: '活动提交审核成功',
+    FourTit: '活动已结束',
+    FiveTit: '活动已完成',
+    sixTit: '活动已关闭',
   }
 }

@@ -131,7 +131,7 @@ export default {
         this.$router.push({
           path: "/",
           name: "Home",
-          params: {
+          query: {
             curentCompittor: this.currentCheckList
           }
         });

@@ -6,70 +6,147 @@
     <div class="media inner">
       <div class="media-left">
         <div class="avatar">
-          <img
-            :src="renderData.avatar"
-            alt=""
-            class="avatar-img"
-            @click="toDetail(renderData)"
-          />
+          <router-link
+            :to="url"
+          >
+            <img
+              :src="renderData.avatar_url"
+              alt=""
+              class="avatar-img"
+            />
+          </router-link>
           <div
-            v-if="hasChecked"
+            v-if="renderStatus.hasChecked"
             class="iconfont icon-round-check-fill check-icon"
-            @click="handleCheck(renderData.id)"
+            @click="handleCheck(renderData.profile_id)"
           ></div>
         </div>
       </div>
       <div class="media-body media-middle info">
-        <h5
-          class="name"
-          @click="toDetail(renderData)"
-        >
-          {{renderData.name}}
+        <h5 class="name">
+          <router-link
+            :to="url"
+          >
+            {{renderData.profile_name}}
+          </router-link>
         </h5>
-        <p class="desc">{{renderData.desc}}</p>
+        <p class="desc">{{renderData.description_raw}}</p>
       </div>
-      <div v-if="hasLiked || hasMsg" class="media-right media-middle operation-area">
-        <span v-if="hasInflunce" class="media-right-txt">{{renderData.influnce}}</span>
-        <span v-if="hasLiked" class="iconfont icon-star-fill"></span>
-        <span v-if="hasMsg" class="iconfont icon-msg" @click="alertMessage"></span>
+      <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
+        <div class="text-center">
+          <h5>Influence Score</h5>
+          <p>{{renderData.avg_post_influences}}</p>
+        </div>
+      </div>
+      <div v-if="renderStatus.hasLiked || renderStatus.hasMsg || renderStatus.hasCart || renderStatus.hasDelete" class="media-right media-middle operation-area">
+        <span
+          v-if="renderStatus.hasLiked"
+          class="iconfont icon-star-fill"
+        ></span>
+        <span
+          v-if="renderStatus.hasMsg"
+          class="iconfont icon-msg"
+          @click="doChat"
+        ></span>
+        <span
+          v-if="renderStatus.hasCart"
+          class="iconfont icon-cart active"
+          @click="doAddCart"
+        ></span>
+        <span
+          v-if="renderStatus.hasDelete"
+          class="iconfont icon-delete"
+          @click="doDelete(renderData.profile_id)"
+        ></span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
+import commonJs from '@javascripts/common.js'
+import { mapState } from 'vuex'
+
 export default {
-  name: "KolsListItem",
+  name: 'KolsListItem',
   props: {
-    hasLiked: Boolean,
-    hasMsg: Boolean,
-    hasChecked: Boolean,
+    renderStatus: Object,
     renderData: Object,
-    hasInflunce: Boolean
+    routerData: Object
   },
   data () {
     return {
-      checked: ''
+      checked: '',
+      url: '',
+      cartParams: {}
     }
   },
   methods: {
-    toDetail (item) {
-      this.$emit('detail', item)
-    },
     handleCheck (id) {
-      this.checked = !this.checked
+      // this.checked = !this.checked
       this.$emit('handleCheck', {
         'id': id
       })
     },
-    alertMessage() {
-      alert('敬请期待');
+    doAddCart () {
+      console.log(this.cartParams)
+      axios.post(apiConfig.kolCollectUrl, this.cartParams, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleDoAddCartSucc)
+    },
+    handleDoAddCartSucc (res) {
+      console.log(res)
+      let resData = res.data
+      console.log(resData)
+      if (res.status == 201) {
+        if (!!resData.error && resData.error == 1) {
+          alert(resData.detail)
+          return false
+        }
+        alert('您已成功添加至购物车')
+      }
+    },
+    doDelete (id) {
+      this.$emit('handleDelete', {
+        'id': id
+      })
+    },
+    doChat () {
+      alert('敬请期待')
+    },
+    updateData (data) {
+      // let _url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : ''
+      this.checked = data.checked
+      this.url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : '/kol/'+ this.renderData.profile_id +'?type='+ this.routerData.type +'&brand_keywords='+ this.routerData.keywords
+      this.cartParams.profile_id = data.profile_id
+      this.cartParams.profile_name = data.profile_name
+      this.cartParams.avatar_url = data.avatar_url
+      this.cartParams.description_raw = data.description_raw
     }
   },
-  mounted () {
-    this.checked = this.renderData.checked
+  created () {
+    // console.log(this.renderData)
+    // console.log(this.renderData.profile_id)
+    // console.log(this.routerData.type)
+    // console.log(this.routerData.keywords)
+    this.updateData(this.renderData)
+  },
+  computed: {
+    ...mapState(['authorization'])
+  },
+  watch: {
+    renderData: {
+      handler (newVal, oldVal) {
+        this.updateData(newVal)
+      },
+      deep: true
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -106,11 +183,17 @@ export default {
       font-size: $font-sm;
       font-weight: 600;
       cursor: pointer;
+      a {
+        color: rgba(#000, .85);
+      }
     }
     .desc {
       @include limit-line(1);
       font-size: 0.8rem;
     }
+  }
+  .influnce-score {
+    color: #333;
   }
   .operation-area {
     .iconfont {
@@ -121,6 +204,9 @@ export default {
       }
       &.icon-star-fill.active {
         color: nth($yellow, 1);
+      }
+      &.icon-cart.active {
+        color: nth($purple, 1);
       }
     }
   }
@@ -141,8 +227,5 @@ export default {
     background-color: #ebedf2;
     overflow: hidden;
   }
-}
-.media-right-txt{
-  color:#333;
 }
 </style>

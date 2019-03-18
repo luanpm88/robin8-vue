@@ -8,7 +8,7 @@
       <div class="campaign-container pull-right">
         <!-- <router-view></router-view> -->
         <!-- kol search 页面 -->
-        <kol-search :keyWord='keyList' ></kol-search>
+        <kol-search :keyWord="keyList"></kol-search>
       </div>
     </div>
   </div>
@@ -18,6 +18,7 @@
 import PageHeader from '@components/PageHeader'
 import MainNav from '@components/MainNav'
 import KolSearch from './KolSearch'
+
 export default {
   name: 'KolList',
   components: {
@@ -26,9 +27,6 @@ export default {
     KolSearch
   },
   beforeRouteLeave(to, from, next) {
-    // console.log(to)
-    // console.log(from)
-    // console.log(next)
     // 判断是下一个路由是不是进入到详情页
     if (to.name === 'KolDetail') {
       this.$route.meta.keepAlive = true
@@ -38,17 +36,14 @@ export default {
     next();
   },
   created() {
-    console.log(90)
     this.$route.meta.keepAlive = false;
-    // console.log(this.$route.params.brand_keywords);
-    // console.log(this.$route.params.type);
   },
   data () {
     return {
       keyList: {
         brand_keywords: this.$route.params.brand_keywords,
         type: this.$route.params.type
-      } 
+      }
     }
   }
 }

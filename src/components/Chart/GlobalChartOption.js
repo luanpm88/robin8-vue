@@ -1,8 +1,3 @@
-import echarts from 'echarts'
-let dataList = [
-  [[26424, 75.7, 57110117, 'United Kingdom', 1990], [37062, 75.4, 252847810, 'United States', 1990]],
-  [[19360, 76.5, 78665830, 'Turkey', 2015], [38225, 81.4, 64715810, 'United Kingdom', 2015], [53354, 79.1, 321773631, 'United States', 2015]]
-];
 const MockData = {
   trendOptions: {
     tooltip: {
@@ -286,7 +281,8 @@ const MockData = {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow'
-      }
+      },
+      formatter: "{a} <br/>{b}: {c}%"
     },
     legend: {
       show: false,
@@ -342,7 +338,7 @@ const MockData = {
     },
     series: [
       {
-        name: 'competitors',
+        name: 'Industries',
         type: 'bar',
         color: "rgba(179,127,235,0.5)",
         data: []
@@ -452,73 +448,140 @@ const MockData = {
       label: 'Travel',
       value: 'travel'
     }],
-    thirtyColums: [{
+    weixinthirtyColums: [
+      {
+        title: 'Rank No.',
+        dataIndex: 'rank_no',
+        width: '5%',
+        sorter: true,
+        scopedSlots: { customRender: 'rank_no' },
+      }, {
+        title: 'Profile Name Weixin ID',
+        dataIndex: 'profileDec',
+        scopedSlots: { customRender: 'profileDec' },
+        width: '12%'
+      }, {
+        title: 'Total Post Count',
+        dataIndex: 'doc_count',
+        width: '8%',
+        sorter: true,
+        scopedSlots: { customRender: 'doc_count' },
+      }, {
+        title: 'Head Lines',
+        dataIndex: 'headline_count',
+        sorter: true,
+        scopedSlots: { customRender: 'headline_count' },
+      }, {
+        title: 'Total Read Count',
+        dataIndex: 'total_reads',
+        sorter: true,
+        scopedSlots: { customRender: 'total_reads' },
+      }, {
+        title: 'Max Read Count',
+        dataIndex: 'max_reads',
+        sorter: true,
+        scopedSlots: { customRender: 'max_reads' },
+      }, {
+        title: 'Avg Read Count',
+        dataIndex: 'avg_reads',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_reads' },
+      }, {
+        title: 'Total Like Count',
+        dataIndex: 'total_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'total_likes' },
+      }, {
+        title: 'Max Like Count',
+        dataIndex: 'max_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'max_likes' },
+      }, {
+        title: 'Avg Like Count',
+        dataIndex: 'avg_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_likes' },
+      }, {
+        title: 'Total Influence',
+        dataIndex: 'total_post_influence',
+        sorter: true,
+        scopedSlots: { customRender: 'total_post_influence' },
+      }, {
+        title: 'Max Post Influence',
+        dataIndex: 'max_post_influence',
+        sorter: true,
+        scopedSlots: { customRender: 'max_post_influence' },
+      }, {
+        title: 'Avg Post influence',
+        dataIndex: 'avg_post_influence',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_post_influence' },
+      }
+    ],
+    weibothirtyColums: [
+      {
       title: 'Rank No.',
       dataIndex: 'rank_no',
       width: '5%',
       sorter: true,
       scopedSlots: { customRender: 'rank_no' },
-    }, {
-      title: 'Profile Name Weixin ID',
-      dataIndex: 'profileDec',
-      scopedSlots: { customRender: 'profileDec' },
-      width: '13%'
-    }, {
-      title: 'Total Post Count',
-      dataIndex: 'doc_count',
-      sorter: true,
-      scopedSlots: { customRender: 'doc_count' },
-    }, {
-      title: 'Head Lines',
-      dataIndex: 'headline_count',
-      sorter: true,
-      scopedSlots: { customRender: 'headline_count' },
-    }, {
-      title: 'Total Read Count',
-      dataIndex: 'total_reads',
-      sorter: true,
-      scopedSlots: { customRender: 'total_reads' },
-    }, {
-      title: 'Max Read Count',
-      dataIndex: 'max_reads',
-      sorter: true,
-      scopedSlots: { customRender: 'max_reads' },
-    }, {
-      title: 'Avg Read Count',
-      dataIndex: 'avg_reads',
-      sorter: true,
-      scopedSlots: { customRender: 'avg_reads' },
-    }, {
-      title: 'Total Like Count',
-      dataIndex: 'total_likes',
-      sorter: true,
-      scopedSlots: { customRender: 'total_likes' },
-    }, {
-      title: 'Max Like Count',
-      dataIndex: 'max_likes',
-      sorter: true,
-      scopedSlots: { customRender: 'max_likes' },
-    }, {
-      title: 'Avg Like Count',
-      dataIndex: 'avg_likes',
-      sorter: true,
-      scopedSlots: { customRender: 'avg_likes' },
-    }, {
-      title: 'Total Influence',
-      dataIndex: 'total_post_influence',
-      sorter: true,
-      scopedSlots: { customRender: 'total_post_influence' },
-    }, {
-      title: 'Max Post Influence',
-      dataIndex: 'max_post_influence',
-      sorter: true,
-      scopedSlots: { customRender: 'max_post_influence' },
-    }, {
-      title: 'Avg Post influence',
-      dataIndex: 'avg_post_influence',
-      sorter: true,
-      scopedSlots: { customRender: 'avg_post_influence' },
-    }]
+      }, {
+        title: 'Profile Name Weixin ID',
+        dataIndex: 'profileDec',
+        scopedSlots: { customRender: 'profileDec' },
+        width: '13%'
+      }, {
+        title: 'Total Post Count',
+        dataIndex: 'doc_count',
+        sorter: true,
+        scopedSlots: { customRender: 'doc_count' },
+      },{
+        title: 'Total Sum Engagement',
+        dataIndex: 'total_sum_engagement',
+        sorter: true,
+        scopedSlots: { customRender: 'total_sum_engagement' },
+      }, {
+        title: 'Max Sum Engagement',
+        dataIndex: 'max_sum_engagement',
+        sorter: true,
+        scopedSlots: { customRender: 'max_sum_engagement' },
+      },{
+        title: 'Avg Sum Engagement',
+        dataIndex: 'avg_sum_engagement',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_sum_engagement' },
+      }, {
+        title: 'Total Comments',
+        dataIndex: 'total_comments',
+        sorter: true,
+        scopedSlots: { customRender: 'total_comments' },
+      }, {
+        title: 'Max Comments',
+        dataIndex: 'max_comments',
+        sorter: true,
+        scopedSlots: { customRender: 'max_comments' },
+      }, {
+        title: 'Avg Comments',
+        dataIndex: 'avg_comments',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_comments' },
+      },{
+        title: 'Total Likes',
+        dataIndex: 'total_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'total_likes' },
+      }, {
+        title: 'Max Likes',
+        dataIndex: 'max_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'max_likes' },
+      }, {
+        title: 'Avg Likes',
+        dataIndex: 'avg_likes',
+        sorter: true,
+        scopedSlots: { customRender: 'avg_likes' },
+      }
+    ]
   },
   // weixin benchMark
   benchOneOptions: {

@@ -44,7 +44,6 @@ const i18n = new VueI18n({
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
-    // document.title = i18n.t(to.meta.title)
   }
   if (to.matched.some( m => m.meta.auth)) {
     // 已经登陆

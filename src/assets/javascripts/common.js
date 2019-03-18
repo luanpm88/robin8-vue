@@ -10,14 +10,14 @@ let cNow = new Date(cPastOneday.replace(/\-/g, "/"));
 let cPastOneMonth = moment(new Date(cNow.setMonth(cNow.getMonth() - 1))).format("YYYY-MM-DD");
 // 获取当天日子
 let cCurrentDay = moment(new Date()).format("YYYY-MM-DD");
-// let cCurrentDay = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去七天
 let cPastSevenDays = moment(new Date(new Date().getTime() - 168 * 60 * 60 * 1000)).format("YYYY-MM-DD");
-// let cPastSevenDays = moment(new Date(new Date().getTime() - 312 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去14天
 let cPastFourteenDays = moment(new Date(new Date().getTime() - 336 * 60 * 60 * 1000)).format("YYYY-MM-DD");
 // 获取过去21天
 let cPastTwentyOneDays = moment(new Date(new Date().getTime() - 504 * 60 * 60 * 1000)).format("YYYY-MM-DD");
+// 获取过去的一年
+let cPastYears = moment(new Date(cNow.setFullYear(cNow.getFullYear() - 1))).format("YYYY-MM-DD");
 
 // 格式化数字
 function formatNumber (n) {
@@ -149,13 +149,15 @@ function threeFormatter(num, digits) {
   }
 }
 
-function sortByProperty(property) {
+function sortByProperty (property) {
   return function (obj1, obj2) {
     var value1 = obj1[property]
     var value2 = obj2[property]
     return value1 - value2
   }
 }
+
+// 计算日期
 
 module.exports = {
   setLocalData,
@@ -174,5 +176,6 @@ module.exports = {
   cPastSevenDays,
   cPastFourteenDays,
   cPastTwentyOneDays,
+  cPastYears,
   sortByProperty
 }
