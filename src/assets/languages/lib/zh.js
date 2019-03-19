@@ -738,6 +738,7 @@ export const lang = {
         weiboR8: '微博-R8管理',
       },
       table: {
+        check: '勾选',
         profile: '简况',
         price: '价格',
         influence: '影响',

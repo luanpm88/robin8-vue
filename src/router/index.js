@@ -436,6 +436,7 @@ export default new Router({
       component: SocialListening,
       meta: {
         title: 'socialListening',
+        keepAlive: true,
         auth: true
       }
     },
