@@ -105,29 +105,29 @@ export default {
       topTab: [
         {
           index: 0,
-          name: () => this.$t('lang.weibo')
+          name: ('weibo')
         },
         {
           index: 1,
-          name: () => this.$t('lang.wechat')
+          name: ('wechat')
         }
       ],
       tabList: [
         {
           index: 0,
-          name: () => this.$t('lang.homePage.anlytics.trend')
+          name: ('homePage.anlytics.trend')
         },
         {
           index: 1,
-          name: () => this.$t('lang.homePage.anlytics.concept')
+          name: ('homePage.anlytics.concept')
         },
         {
           index: 2,
-          name: () => this.$t('lang.homePage.anlytics.competitors')
+          name: ('homePage.anlytics.competitors')
         },
         {
           index: 3,
-          name: () => this.$t('lang.homePage.anlytics.sentiments')
+          name: ('homePage.anlytics.sentiments')
         }
       ],
       trendsWeiboList: {

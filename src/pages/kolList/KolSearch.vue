@@ -339,11 +339,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: () => this.$t('lang.weibo')
+          name: ('weibo')
         },
         {
           index: 1,
-          name: () => this.$t('lang.wechat')
+          name: ('wechat')
         }
       ],
       tabIndex: 0,

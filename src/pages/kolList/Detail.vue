@@ -300,15 +300,15 @@ export default {
       tabList: [
         {
           index: 0,
-          name: () => this.$t('lang.kolList.detail.summary')
+          name: ('kolList.detail.summary')
         },
         {
           index: 1,
-          name: () => this.$t('lang.kolList.detail.analytics')
+          name: ('kolList.detail.analytics')
         },
         {
           index: 2,
-          name: () => this.$t('lang.kolList.detail.post')
+          name: ('kolList.detail.post')
         }
       ],
       performanceList: [],
