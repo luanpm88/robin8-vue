@@ -430,6 +430,32 @@ export const lang = {
           desc: '使用支付宝线上支付安全放心'
         }
       }
+    },
+    statusArea: {
+      pending: {
+        title: 'Your campaign is pending',
+        desc: 'We will review in 24 hours'
+      },
+      rejected: {
+        title: 'Your campaign is rejected',
+        desc: 'Please edit your campaign'
+      },
+      passed: {
+        title: 'Your campaign is passed',
+        desc: ''
+      },
+      ended: {
+        title: 'Your campaign is ended',
+        desc: ''
+      },
+      finished: {
+        title: 'Your campaign is finished',
+        desc: ''
+      },
+      closed: {
+        title: 'Your campaign is closed',
+        desc: ''
+      }
     }
   },
   wallet: {
@@ -772,15 +798,5 @@ export const lang = {
     topic: 'Topic',
     source: 'Source',
     kolId: 'KOL Profile ID'
-  },
-  statusAreaVue: {
-    oneTit: 'Your campaign is pending',
-    oneSmallTit: 'We will review in 24 hours',
-    twoTit: ' Your campaign is rejected',
-    twoSmallTit: 'Please edit your campaign',
-    threeTit: 'Your campaign is passed',
-    FourTit: 'Your campaign is ended',
-    FiveTit: 'Your campaign is finished',
-    sixTit: 'Your campaign is closed',
   }
 }

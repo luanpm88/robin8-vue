@@ -2,8 +2,8 @@
   <div class="campaign-status-area">
     <div class="iconfont icon-success success"></div>
     <div class="info">
-      <h5 class="title">{{status.title}}</h5>
-      <p>{{status.desc}}</p>
+      <h5 class="title">{{$t(`lang.creations.statusArea.${status.title}`)}}</h5>
+      <p>{{$t(`lang.creations.statusArea.${status.desc}`)}}</p>
     </div>
   </div>
 </template>
@@ -26,28 +26,28 @@ export default {
     renderData (status) {
       switch (status) {
         case 'pending':
-          this.status.title = this.$t('lang.statusAreaVue.oneTit')
-          this.status.desc = this.$t('lang.statusAreaVue.oneSmallTit')
+          this.status.title = 'pending.title'
+          this.status.desc = 'pending.desc'
           break
         case 'unpassed':
-          this.status.title = this.$t('lang.statusAreaVue.twoTit')
-          this.status.desc = this.$t('lang.statusAreaVue.twoSmallTit')
+          this.status.title = 'rejected.title'
+          this.status.desc = 'rejected.desc'
           break
         case 'passed':
-          this.status.title = this.$t('lang.statusAreaVue.threeTit')
-          this.status.desc = ''
+          this.status.title = 'passed.title'
+          this.status.desc = 'passed.desc'
           break
         case 'ended':
-          this.status.title = this.$t('lang.statusAreaVue.FourTit')
-          this.status.desc = ''
+          this.status.title = 'ended.title'
+          this.status.desc = 'ended.desc'
           break
         case 'finished':
-          this.status.title = this.$t('lang.statusAreaVue.FiveTit')
-          this.status.desc = ''
+          this.status.title = 'finished.title'
+          this.status.desc = 'finished.desc'
           break
         case 'closed':
-          this.status.title = this.$t('lang.statusAreaVue.sixTit')
-          this.status.desc = ''
+          this.status.title = 'closed.title'
+          this.status.desc = 'closed.desc'
           break
         default:
           this.status.title = ''
