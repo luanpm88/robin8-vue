@@ -8,6 +8,7 @@ import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import { Pagination, Spin, InputNumber } from 'ant-design-vue'
 import store from './store'
+import 'babel-polyfill'
 import 'ant-design-vue/lib/table/style/css'
 import 'ant-design-vue/lib/input-number/style/css'
 import 'ant-design-vue/lib/tooltip/style/css'
@@ -63,6 +64,19 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+// 让IE11支持Vue-router跳转功能
+if (
+  '-ms-scroll-limit' in document.documentElement.style &&
+  '-ms-ime-align' in document.documentElement.style
+) { // detect it's IE11
+  window.addEventListener('hashchange', function(event) {
+    var currentPath = window.location.hash.slice(1);
+    if (store.state.route.path !== currentPath) {
+      router.push(currentPath)
+    }
+  }, false)
+}
 
 /* eslint-disable no-new */
 new Vue({
