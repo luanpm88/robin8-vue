@@ -267,7 +267,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传1张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.onePic')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -280,7 +280,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传2张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.twoPic')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -293,7 +293,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传3张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.threePic')}}</span>
                   </label>
                 </div>
               </div>
@@ -515,8 +515,8 @@
                 v-model="submitData.enable_append_push"
                 v-validate="'required'"
               >
-                <option value="true">允许补推</option>
-                <option value="false">禁止补推</option>
+                <option value="true">{{$t('lang.campaigns.kolPush.allow')}}</option>
+                <option value="false">{{$t('lang.campaigns.kolPush.notAllow')}}</option>
               </select>
               <div
                 class="form-tips danger"
@@ -531,7 +531,7 @@
     </div>
 
     <div class="text-center create-btn-area">
-      <p class="tips">活动一旦通过审核将不能更改，我们将在2小时内审核当天18:00前提交的订单，其余时间段提交的订单次日审核</p>
+      <p class="tips">{{$t('lang.campaigns.createTips')}}</p>
       <button
         type="button"
         class="btn btn-cyan next-btn mt20"

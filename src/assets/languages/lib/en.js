@@ -188,7 +188,7 @@ export const lang = {
     kolParticipate: 'KOL Participate',
     collaborationCompleted: 'Collaboration Completed',
     promotionDesc: 'Promotion Introduction',
-    promotionBudget: 'Promotion Bugdet',
+    promotionBudget: 'Promotion Budget',
     promotionDetail: 'Promotion Detail',
     promotionTime: 'Promotion Date',
     selectKols: 'KOL Selection',
@@ -212,7 +212,7 @@ export const lang = {
       }
     },
     link: {
-      title: 'Campaign Linked',
+      title: 'Campaign URL',
       placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
       errorTips: '请填写活动链接'
     },
@@ -222,7 +222,7 @@ export const lang = {
       errorTips: '请填写活动标题'
     },
     description: {
-      title: 'Campaign Detail',
+      title: 'Campaign Details',
       placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
       errorTips: '请填写活动相关介绍'
     },
@@ -232,34 +232,37 @@ export const lang = {
       errorTips: 'Please upload an image'
     },
     allBudget: {
-      title: 'Totel Bugdet',
-      placeholder: 'Totel Bugdet',
-      errorTips: 'Totel Bugdet'
+      title: 'Totel Budget',
+      placeholder: 'Totel Budget',
+      errorTips: 'Totel Budget'
     },
     platform: {
-      title: 'Platform',
-      placeholder: 'Please select the platform',
+      title: 'Social Platform',
+      placeholder: 'Please select the social platform',
       weibo: 'Weibo',
       wechat: 'Wechat',
-      errorTips: 'Please select the platform'
+      errorTips: 'Please select the social platform'
     },
     mode: {
-      title: 'Reward Method',
+      title: 'Payment Method',
       placeholder: 'Please select the reward method',
-      clicks: 'By Clicks',
-      repost: 'By Repost',
-      mission: 'By Mission',
+      clicks: 'CPC (Cost Per Click)',
+      repost: 'CPP (Cost Per Post)',
+      mission: 'CPT (Cost Per Task)',
       errorTips: 'Please select the reward method'
     },
     pictureNumber: {
-      title: '示例图片数量',
-      placeholder: '请选择示例图片数量',
-      errorTips: '请选择示例图片数量'
+      title: 'Number Of Images',
+      placeholder: 'Please select the number of images',
+      onePic: 'Need to upload 1 image',
+      twoPic: 'Need to upload 2 image',
+      threePic: 'Need to upload 3 image',
+      errorTips: 'Please select the number of images'
     },
     budget: {
-      title: 'One Time Bugdet',
-      placeholder: 'One Time Bugdet',
-      errorTips: 'One Time Bugdet'
+      title: 'Budget',
+      placeholder: 'Budget',
+      errorTips: 'Budget'
     },
     time: {
       title: 'Promotion Date',
@@ -274,27 +277,29 @@ export const lang = {
       errorTips: 'Please select the tags'
     },
     kolDistrict: {
-      title: 'KOLs’ Location',
-      placeholder: 'Please select KOLs’ location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’.',
-      provinceErrorTips: 'Please select the preferred province for the KOLs’.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’.'
+      title: 'KOL’s Location',
+      placeholder: 'Please select KOL’s location',
+      provincePlaceholder: 'Please select the preferred province for the KOL’s.',
+      cityPlaceholder: 'Please select the preferred city for the KOL’s.',
+      provinceErrorTips: 'Please select the preferred province for the KOL’s.',
+      cityErrorTips: 'Please select the preferred city for the KOL’s.'
     },
     kolAge: {
-      title: 'KOLs’ Age',
+      title: 'KOL’s Age',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ age range.'
+      errorTips: 'Please select the preferred KOL’s age range.'
     },
     kolGender: {
-      title: 'KOLs’ Gender',
+      title: 'KOL’s Gender',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ gender.'
+      errorTips: 'Please select the preferred KOL’s gender.'
     },
     kolPush: {
-      title: 'Push',
+      title: 'Target',
       placeholder: '',
-      errorTips: 'Please select a push form'
+      allow: 'Outside Target Match',
+      notAllow: 'Only Target Match',
+      errorTips: 'Please select a target form'
     },
     evaluatePoint: {
       title: '效果打分',
@@ -306,6 +311,7 @@ export const lang = {
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
     },
+    createTips: 'Once your campaign has been approved, you will not be able to make any changes.  All campaigns submitted before 6 pm China will be reviewed within 2 hours.  Campaigns submitted after 6 pm China time, will be processed the next day.',
     payment: {
       title: 'Pay Invoice',
       name: 'Text',
@@ -394,20 +400,20 @@ export const lang = {
     followerAge: {
       title: 'Audience’s Age',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ audience age range.'
+      errorTips: 'Please select the preferred KOL’s audience age range.'
     },
     followerGender: {
       title: 'Audience’s Gender',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ audience gender.'
+      errorTips: 'Please select the preferred KOL’s audience gender.'
     },
     followerDistrict: {
       title: 'Audience’s Location',
       placeholder: 'Please select audience’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
-      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
+      provincePlaceholder: 'Please select the preferred province for the KOL’s audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOL’s audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
+      cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
     status: {
       waiting: '待合作',

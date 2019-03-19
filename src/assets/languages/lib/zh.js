@@ -255,6 +255,9 @@ export const lang = {
     pictureNumber: {
       title: '示例图片数量',
       placeholder: '请选择示例图片数量',
+      onePic: '需要用户上传1张图片',
+      twoPic: '需要用户上传2张图片',
+      threePic: '需要用户上传3张图片',
       errorTips: '请选择示例图片数量'
     },
     budget: {
@@ -295,6 +298,8 @@ export const lang = {
     kolPush: {
       title: '补推',
       placeholder: '',
+      allow: '允许补推',
+      notAllow: '禁止补推',
       errorTips: '请选择补推形式'
     },
     evaluatePoint: {
@@ -307,6 +312,7 @@ export const lang = {
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
     },
+    createTips: '活动一旦通过审核将不能更改，我们将在2小时内审核当天18:00前提交的订单，其余时间段提交的订单次日审核',
     payment: {
       title: '支付订单',
       name: '标题',
