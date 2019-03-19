@@ -769,6 +769,7 @@ export const lang = {
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
+        check: 'Check',
         profile: 'Profile',
         price: 'Price',
         influence: 'Influence',

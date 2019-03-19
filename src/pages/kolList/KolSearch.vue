@@ -166,6 +166,7 @@
           <table class="default-table mt20">
             <thead>
               <tr>
+                <!-- <th>Check</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                 <th width="18%" class="text-center">
@@ -184,6 +185,9 @@
             </thead>
             <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
               <tr v-for="(item, index) in key" :key="index">
+                <!-- <td>
+                  <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
+                </td> -->
                 <td>
                   <div class="media kol-profile">
                     <div class="media-left media-middle">
@@ -347,7 +351,8 @@ export default {
       searchList: {},
       r8List: [],
       totalParams: {},
-      cartParams: {}
+      cartParams: {},
+      compareList: []
     };
   },
   created() {
@@ -461,6 +466,7 @@ export default {
       const _that = this;
       data.forEach((element, index) => {
         element.influence = parseInt(element.influence * 1000);
+        element.isCheck = false;
         if (this.keyword !== '') {
           element.colorStatus = 1;
           element.correlation = parseInt(element.correlation * 100);
@@ -588,7 +594,25 @@ export default {
       this.paramsInit();
       // 调用接口
       this.totalJoggle(this.tabIndex);
-    }
+    },
+    // 选中几条对比kol
+    checkItem(item) {
+      // console.log(item);
+      // console.log(!item.isCheck);
+      if (!item.isCheck) {
+        this.compareList.push(item.profile_id)
+        console.log('woshi true', this.compareList)
+      } else {
+        console.log('woshi 4', item.profile_id);
+        this.compareList.forEach((element, index) => {
+          if (element.profile_id === item.profile_id) {
+            console.log('我是相等的信息')
+            this.compareList.splice(index, 1)
+          }
+        })
+        // console.log('woshi false', this.compareList)
+      }
+    },
   }
 };
 </script>
