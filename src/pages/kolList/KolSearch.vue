@@ -597,20 +597,17 @@ export default {
     },
     // 选中几条对比kol
     checkItem(item) {
-      // console.log(item);
-      // console.log(!item.isCheck);
       if (!item.isCheck) {
         this.compareList.push(item.profile_id)
-        console.log('woshi true', this.compareList)
       } else {
-        console.log('woshi 4', item.profile_id);
-        this.compareList.forEach((element, index) => {
-          if (element.profile_id === item.profile_id) {
-            console.log('我是相等的信息')
+        this.compareList.forEach((ele, index) => {
+          if(ele === item.profile_id) {
             this.compareList.splice(index, 1)
           }
-        })
-        // console.log('woshi false', this.compareList)
+        });
+      }
+      if (this.compareList.length > 1) {
+        // 控制按钮出现
       }
     },
   }
