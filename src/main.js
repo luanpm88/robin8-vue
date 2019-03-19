@@ -44,7 +44,10 @@ const i18n = new VueI18n({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = to.meta.title
+    // document.title = to.meta.title
+    const _name = to.meta.title || 'Robin8'
+    const _title = i18n.t(`lang.router.${_name}`)
+    window.document.title = _title
   }
   if (to.matched.some( m => m.meta.auth)) {
     // 已经登陆
