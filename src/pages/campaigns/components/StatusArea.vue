@@ -2,8 +2,8 @@
   <div class="campaign-status-area">
     <div class="iconfont icon-success success"></div>
     <div class="info">
-      <h5 class="title">{{status.title}}</h5>
-      <p>{{status.desc}}</p>
+      <h5 class="title">{{$t(`lang.creations.statusArea.${status.title}`)}}</h5>
+      <p>{{$t(`lang.creations.statusArea.${status.desc}`)}}</p>
     </div>
   </div>
 </template>
@@ -24,31 +24,30 @@ export default {
   },
   methods: {
     renderData (status) {
-      console.log(status)
       switch (status) {
         case 'pending':
-          this.status.title = this.$t('lang.statusAreaVue.oneTit')
-          this.status.desc = this.$t('lang.statusAreaVue.oneSmallTit')
+          this.status.title = 'pending.title'
+          this.status.desc = 'pending.desc'
           break
         case 'unpassed':
-          this.status.title = '您提交的活动未通过审核'
-          this.status.desc = '请编辑后重新提交'
+          this.status.title = 'rejected.title'
+          this.status.desc = 'rejected.desc'
           break
         case 'passed':
-          this.status.title = '活动提交审核成功'
-          this.status.desc = ''
+          this.status.title = 'passed.title'
+          this.status.desc = 'passed.desc'
           break
         case 'ended':
-          this.status.title = '活动已结束'
-          this.status.desc = ''
+          this.status.title = 'ended.title'
+          this.status.desc = 'ended.desc'
           break
         case 'finished':
-          this.status.title = '活动已完成'
-          this.status.desc = ''
+          this.status.title = 'finished.title'
+          this.status.desc = 'finished.desc'
           break
         case 'closed':
-          this.status.title = '活动已关闭'
-          this.status.desc = ''
+          this.status.title = 'closed.title'
+          this.status.desc = 'closed.desc'
           break
         default:
           this.status.title = ''

@@ -431,6 +431,32 @@ export const lang = {
           desc: '使用支付宝线上支付安全放心'
         }
       }
+    },
+    statusArea: {
+      pending: {
+        title: '您提交的活动待审核',
+        desc: '我们将在24小时之内完成审核'
+      },
+      rejected: {
+        title: '您提交的活动未通过审核',
+        desc: '请编辑后重新提交'
+      },
+      passed: {
+        title: '活动提交审核成功',
+        desc: ''
+      },
+      ended: {
+        title: '活动已结束',
+        desc: ''
+      },
+      finished: {
+        title: '活动已完成',
+        desc: ''
+      },
+      closed: {
+        title: '活动已关闭',
+        desc: ''
+      }
     }
   },
   wallet: {
@@ -774,15 +800,5 @@ export const lang = {
     topic: '主题',
     source: '平台',
     kolId: 'KOL Id'
-  },
-  statusAreaVue: {
-    oneTit: '您提交的活动待审核',
-    oneSmallTit: '我们将在24小时之内完成审核',
-    twoTit: '您提交的活动未通过审核',
-    twoSmallTit: '请编辑后重新提交',
-    threeTit: '活动提交审核成功',
-    FourTit: '活动已结束',
-    FiveTit: '活动已完成',
-    sixTit: '活动已关闭',
   }
 }

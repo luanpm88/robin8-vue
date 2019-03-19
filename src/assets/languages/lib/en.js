@@ -205,10 +205,10 @@ export const lang = {
         repost: 'Repost'
       },
       btns: {
-        edit: 'edit',
-        pay: 'pay',
-        comments: 'comments',
-        repost: 'repost'
+        edit: 'Edit',
+        pay: 'Pay',
+        comments: 'Comments',
+        repost: 'Repost'
       }
     },
     link: {
@@ -252,11 +252,11 @@ export const lang = {
       errorTips: 'Please select the reward method'
     },
     pictureNumber: {
-      title: 'Number Of Images',
+      title: 'Require Campaign Screenshot Upload(s) by User',
       placeholder: 'Please select the number of images',
-      onePic: 'Need to upload 1 image',
-      twoPic: 'Need to upload 2 image',
-      threePic: 'Need to upload 3 image',
+      onePic: 'Upload 1 Screenshot',
+      twoPic: 'Upload 2 Screenshot',
+      threePic: 'Upload 3 Screenshot',
       errorTips: 'Please select the number of images'
     },
     budget: {
@@ -279,10 +279,10 @@ export const lang = {
     kolDistrict: {
       title: 'KOL’s Location',
       placeholder: 'Please select KOL’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOL’s.',
-      cityPlaceholder: 'Please select the preferred city for the KOL’s.',
-      provinceErrorTips: 'Please select the preferred province for the KOL’s.',
-      cityErrorTips: 'Please select the preferred city for the KOL’s.'
+      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
     kolAge: {
       title: 'KOL’s Age',
@@ -429,6 +429,32 @@ export const lang = {
           title: 'Alipay',
           desc: '使用支付宝线上支付安全放心'
         }
+      }
+    },
+    statusArea: {
+      pending: {
+        title: 'Your campaign is pending',
+        desc: 'We will review in 24 hours'
+      },
+      rejected: {
+        title: 'Your campaign is rejected',
+        desc: 'Please edit your campaign'
+      },
+      passed: {
+        title: 'Your campaign is passed',
+        desc: ''
+      },
+      ended: {
+        title: 'Your campaign is ended',
+        desc: ''
+      },
+      finished: {
+        title: 'Your campaign is finished',
+        desc: ''
+      },
+      closed: {
+        title: 'Your campaign is closed',
+        desc: ''
       }
     }
   },
@@ -773,15 +799,5 @@ export const lang = {
     topic: 'Topic',
     source: 'Source',
     kolId: 'KOL Profile ID'
-  },
-  statusAreaVue: {
-    oneTit: 'Your campaign is pending',
-    oneSmallTit: 'We will review in 24 hours',
-    twoTit: ' Your campaign is rejected',
-    twoSmallTit: 'Please edit your campaign',
-    threeTit: 'Your campaign is passed',
-    FourTit: 'Your campaign is ended',
-    FiveTit: 'Your campaign is finished',
-    sixTit: 'Your campaign is closed',
   }
 }

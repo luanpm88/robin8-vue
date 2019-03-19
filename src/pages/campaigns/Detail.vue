@@ -360,13 +360,11 @@ export default {
       tabList: [
         {
           index: 0,
-          // name: 'KOL列表'
-          name: () => this.$t('lang.campaigns.kolList')
+          name: 'campaigns.kolList'
         },
         {
           index: 1,
-          // name: 'KOL分析'
-          name: () => this.$t('lang.campaigns.kolAnalysis')
+          name: 'campaigns.kolAnalysis'
         }
       ],
       evaluationStatus: '',
