@@ -8,6 +8,7 @@ import Home from '@/pages/home/Home'
 import HomeCreate from '@/pages/home/Create'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
+import kolCompare from '@/pages/kolList/Compare'
 
 import Creations from '@/pages/creations/Creations'
 import CreationList from '@/pages/creations/List'
@@ -391,6 +392,15 @@ export default new Router({
       component: KolDetail,
       meta: {
         title: 'kolDetail',
+        auth: true
+      }
+    },
+    {
+      path: '/kolList/Compare/:type',
+      name: 'kolCompare',
+      component: kolCompare,
+      meta: {
+        title: 'kolCompare',
         auth: true
       }
     },
