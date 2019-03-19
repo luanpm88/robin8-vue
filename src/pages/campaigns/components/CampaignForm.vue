@@ -111,8 +111,8 @@
                 v-validate="'required'"
               >
               <div
-                class="form-tips danger"
-                v-show="errors.has('img_url')"
+                class="form-tips"
+                :class="[errors.has('img_url') ? 'danger' : '']"
               >
                 {{$t('lang.campaigns.picture.errorTips')}}
               </div>

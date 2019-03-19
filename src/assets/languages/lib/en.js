@@ -205,10 +205,10 @@ export const lang = {
         repost: 'Repost'
       },
       btns: {
-        edit: 'edit',
-        pay: 'pay',
-        comments: 'comments',
-        repost: 'repost'
+        edit: 'Edit',
+        pay: 'Pay',
+        comments: 'Comments',
+        repost: 'Repost'
       }
     },
     link: {
@@ -252,11 +252,11 @@ export const lang = {
       errorTips: 'Please select the reward method'
     },
     pictureNumber: {
-      title: 'Number Of Images',
+      title: 'Require Campaign Screenshot Upload(s) by User',
       placeholder: 'Please select the number of images',
-      onePic: 'Need to upload 1 image',
-      twoPic: 'Need to upload 2 image',
-      threePic: 'Need to upload 3 image',
+      onePic: 'Upload 1 Screenshot',
+      twoPic: 'Upload 2 Screenshot',
+      threePic: 'Upload 3 Screenshot',
       errorTips: 'Please select the number of images'
     },
     budget: {
@@ -279,10 +279,10 @@ export const lang = {
     kolDistrict: {
       title: 'KOL’s Location',
       placeholder: 'Please select KOL’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOL’s.',
-      cityPlaceholder: 'Please select the preferred city for the KOL’s.',
-      provinceErrorTips: 'Please select the preferred province for the KOL’s.',
-      cityErrorTips: 'Please select the preferred city for the KOL’s.'
+      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
     kolAge: {
       title: 'KOL’s Age',

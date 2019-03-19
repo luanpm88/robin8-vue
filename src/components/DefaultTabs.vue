@@ -7,7 +7,7 @@
         v-for="(tab, index) in tabList"
         :key="index"
         @click="changeTab(tab)"
-      >{{tab.name()}}</div>
+      >{{$t(`lang.${tab.name}`)}}</div>
     </div>
     <div class="tabs-content">
       <slot></slot>
