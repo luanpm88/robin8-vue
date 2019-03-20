@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       weiboData: []
-    };
+    } 
   },
   created() {
     // console.log(this.$route.query)
@@ -70,18 +70,18 @@ export default {
           profile_id: element
         }
         this.kolWeiboInfo(params)
-      });
+      }) 
     } else {
 
     }
   },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(['authorization'])
   },
   methods: {
     // weibo info
     kolWeiboInfo(params) {
-      const _that = this;
+      const _that = this 
       axios
         .post(apiConfig.kolWeiboInfo, params, {
           headers: {
@@ -90,6 +90,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            // console.log('woshiweibo', res)
             let currentData = {
               profileData: {}
             }
@@ -100,7 +101,7 @@ export default {
     },
     // weixin info
     kolWeiXinInfo(params) {
-      const _that = this;
+      const _that = this 
       axios
         .post(apiConfig.kolWeiXinInfo, params, {
           headers: {
@@ -117,7 +118,7 @@ export default {
       this.$router.go(-1)
     }
   }
-};
+} 
 </script>
 <style lang="scss" scoped>
 
