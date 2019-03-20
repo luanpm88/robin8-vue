@@ -33,10 +33,10 @@ export default {
     } else {
       this.$route.meta.keepAlive = false
     }
-    next();
+    next() 
   },
   created() {
-    this.$route.meta.keepAlive = false;
+    this.$route.meta.keepAlive = false 
   },
   data () {
     return {

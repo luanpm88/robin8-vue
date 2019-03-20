@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
+import axios from 'axios'
+import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import DefaultTabs from '@components/DefaultTabs'
 import { mapState } from 'vuex'
@@ -82,7 +82,7 @@ export default {
       topPostParams: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW",
+        brand_keywords: 'BMW',
         page_no: 0,
         page_size: 4
       },
@@ -108,12 +108,12 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        let newKey = '';
-        this.childKeyList.brand_keywords.split(",").forEach(item => {
+        let newKey = ''
+        this.childKeyList.brand_keywords.split(',').forEach(item => {
           newKey += '"' + item + '"'
-        });
-        this.topPostParams.page_no = this.postWeiboCurrentPage;
-        this.topPostParams.brand_keywords = newKey;
+        }) 
+        this.topPostParams.page_no = this.postWeiboCurrentPage 
+        this.topPostParams.brand_keywords = newKey 
         // 微博
         this.topPostWeibo(this.topPostParams)
       },
@@ -125,9 +125,9 @@ export default {
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
-      this.postListBox = [];
-      this.isShow = false;
-      this.isLoading = true;
+      this.postListBox = [] 
+      this.isShow = false 
+      this.isLoading = true 
       if (tab.index === 0) {
         // 微博
         this.topPostWeibo(this.topPostParams)
@@ -146,19 +146,19 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
-            _that.isShow = true;
+            _that.isShow = true 
           } else {
-            _that.isShow = false;
+            _that.isShow = false 
             _that.postType = 0
-            _that.postListBox.push(res.data.data);
-            _that.postWeiboCurrentPage ++;
+            _that.postListBox.push(res.data.data) 
+            _that.postWeiboCurrentPage ++ 
           }
         })
         .catch(function(error) {
-          console.log(error);
-          alert(error);
+          console.log(error) 
+          alert(error) 
         })
     },
     // 微信的接口
@@ -171,19 +171,19 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
+          _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
-            _that.isShow = true;
+            _that.isShow = true 
           } else {
-            _that.isShow = false;
+            _that.isShow = false 
             _that.postType = 1
-            _that.postListBox.push(res.data.data);
-            _that.postWeixinCurrentPage ++;
+            _that.postListBox.push(res.data.data) 
+            _that.postWeixinCurrentPage ++ 
           }
         })
         .catch(function(error) {
-          console.log(error);
-          alert(error);
+          console.log(error) 
+          alert(error) 
         })
     },
      // 跳转 kol detail
@@ -198,16 +198,16 @@ export default {
           type: this.tabIndex,
           brand_keywords: this.childKeyList.brand_keywords
         }
-      });
+      }) 
     },
     PostShowMore() {
-      this.isLoading = true;
+      this.isLoading = true 
       if (this.tabIndex === 0) {
-        this.topPostParams.page_no = this.postWeiboCurrentPage;
+        this.topPostParams.page_no = this.postWeiboCurrentPage 
         // 微博
         this.topPostWeibo(this.topPostParams)
       } else {
-        this.topPostParams.page_no = this.postWeixinCurrentPage;
+        this.topPostParams.page_no = this.postWeixinCurrentPage 
         // 微信
         this.topPostWeixin(this.topPostParams)
       }
@@ -218,7 +218,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-top-post /deep/ .pills-btn {
-  position: absolute;
+  position: absolute ;
   right: 30px;
   top: 16px;
 }
