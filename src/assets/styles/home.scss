@@ -61,7 +61,7 @@
 .ranking-container {
   width: 1280px;
   margin: 0 auto;
-  color: #333;
+  color: $text-color
 }
 .ranking-left{
   background: $white;
@@ -199,7 +199,7 @@
 }
 .social-line-left{
   line-height: 34px;
-  color: #333;
+  color: $text-color;
 }
 .social-item {
   margin-bottom: 20px;
@@ -216,7 +216,7 @@
   }
 }
 .social-item-txt{
-  color: #333;
+  color: $text-color;
   b{
     display: block;
   }
@@ -242,7 +242,7 @@
 .kol-detail-wrap {
   width: 900px;
   margin: 0px auto;
-  color: #333;
+  color: $text-color;
 }
 .kol-detail-title {
   font-weight: 600;
@@ -339,12 +339,12 @@
   color: blue;
 }
 .com-brand-table {
-  color: #333;
+  color: $text-color;
   width: 100%;
   tr {
     border-bottom: 1px solid #ddd;
     th {
-      color: #333;
+      color: $text-color;
       font-size: 14px;
       text-align: center;
       padding: 5px 0px;
@@ -372,7 +372,7 @@
 }
 .d-postcontent{
   padding: 20px 0px 0px;
-  color: #333;
+  color: $text-color;
 }
 .d-post-left{
   // background: #f0f;
@@ -432,5 +432,19 @@
 .d-post-right{
   .iconfont{
       margin-right: 5px;
+  }
+}
+.compare-content{
+  color: $text-color
+}
+.compare-info{
+  border-bottom: 1px solid nth($btn-active, 1);
+  padding-bottom: 20px;
+  img{
+    max-width: 80px;
+    border-radius: 50%;
+  }
+  p{
+    font-size: $font-nm-s;
   }
 }

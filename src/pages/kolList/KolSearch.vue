@@ -1,5 +1,15 @@
 <template>
   <div>
+    <!-- 对比按钮 -->
+    <transition name="fade">
+      <div v-if="comparePop" class="panel default-panel compare-pop">
+        <div class="panel-body">
+          <span class="copmare-close" @click="closeCompare">X</span>
+          <button type="button" class="btn btn-purple" @click="toComparePage">To compare</button>
+        </div>
+      </div>
+    </transition>
+
     <div class="panel default-panel kols-list-panel">
       <div class="panel-head">
         <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
@@ -148,7 +158,6 @@
         </div>
       </div>
     </div>
-
     <div class="panel default-panel kols-list-panel mt20">
       <div class="panel-body">
         <div class="kols-list-statistics">
@@ -166,7 +175,7 @@
           <table class="default-table mt20">
             <thead>
               <tr>
-                <!-- <th>Check</th> -->
+                <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                 <th width="18%" class="text-center">
@@ -307,6 +316,7 @@ export default {
   props: ["keyWord"],
   data() {
     return {
+      comparePop: false,
       listSortType: 1,
       listSortDir: 'desc',
       isLoading: true,
@@ -608,8 +618,25 @@ export default {
       }
       if (this.compareList.length > 1) {
         // 控制按钮出现
+        this.comparePop = true
       }
     },
+    // 关闭比一比的按钮
+    closeCompare() {
+      this.comparePop = false
+    },
+    toComparePage() {
+      this.$router.push({
+        path: '/kolList/Compare/',
+        name: 'kolCompare',
+        params: {
+          type: this.tabIndex,
+        },
+        query: {
+          list: this.compareList
+        }
+      });
+    }
   }
 };
 </script>
@@ -700,6 +727,33 @@ export default {
         color: nth($purple, 1);
       }
     }
+  }
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 2s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 2s;
+}
+.compare-pop{
+  position: fixed;
+  right: 0px;
+  bottom: 45%;
+  .panel-body{
+    padding: 30px;
+  }
+  .copmare-close{
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+    color: nth($font-color, 1);
   }
 }
 </style>
