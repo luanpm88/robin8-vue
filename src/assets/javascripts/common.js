@@ -89,6 +89,8 @@ function checkObj (obj) {
 
 const verifyPhone = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57]|19[89])[0-9]{8}$/
 
+const verifyEmail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
+
 function buildObjData(key, value) {
   var obj = {}
   obj[key] = value
@@ -168,6 +170,7 @@ module.exports = {
   isWeixin,
   isAndroid,
   verifyPhone,
+  verifyEmail,
   buildObjData,
   threeFormatter,
   cPastOneday,

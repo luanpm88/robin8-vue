@@ -70,7 +70,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     // login joggle
     loginUrl (params) {
       const _that = this
@@ -87,6 +87,7 @@ export default {
             _that.setAccount(params.login)
             _that.setNickname(resData.name)
             _that.setMobile(resData.mobile_number)
+            _that.setEmail(resData.email)
             _that.setAvatarImgUrl(resData.avatar_url)
             _that.setCompanyName(resData.campany_name)
             _that.loginStatus = false
