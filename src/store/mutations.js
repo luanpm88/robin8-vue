@@ -29,6 +29,13 @@ export default {
       commonJs.setLocalData('robin8Account', account, 604700)
     } catch (e) {}
   },
+  setEmail (state, email) {
+    console.log(email)
+    state.email = email
+    try {
+      commonJs.setLocalData('robin8Email', email, 604700)
+    } catch (e) {}
+  },
   setAvatarImgUrl (state, avatarImgUrl) {
     console.log(avatarImgUrl)
     state.avatarImgUrl = avatarImgUrl
@@ -72,6 +79,12 @@ export default {
     state.account = ''
     try {
       commonJs.removeLocalData('robin8Account')
+    } catch (e) {}
+  },
+  removeEmail (state) {
+    state.email = ''
+    try {
+      commonJs.removeLocalData('robin8Email')
     } catch (e) {}
   },
   removeAvatarImgUrl (state) {

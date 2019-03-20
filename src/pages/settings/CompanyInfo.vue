@@ -200,7 +200,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     getProfileData () {
       axios.get(apiConfig.profileUrl, {
         headers: {
@@ -252,7 +252,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        this.setAccount(resData.email)
+        this.setEmail(resData.email)
         this.setNickname(resData.name)
         this.setMobile(resData.mobile_number)
         this.setAvatarImgUrl(resData.avatar_url)

@@ -36,6 +36,15 @@ try {
   }
 } catch (e) {}
 
+let email = ''
+let localEmail = commonJs.getLocalData('robin8Email')
+console.log('当前email：' + localEmail)
+try {
+  if (!!localEmail && localEmail != '') {
+    email = localEmail
+  }
+} catch (e) {}
+
 
 let avatarImgUrl = ''
 let localImgUrl = commonJs.getLocalData('robin8AvatarImgUrl')
@@ -69,6 +78,7 @@ export default {
   nickname,
   mobile,
   account,
+  email,
   avatarImgUrl,
   companyName,
   language

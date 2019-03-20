@@ -60,13 +60,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeAvatarImgUrl', 'removeCompanyName', 'setLanguage']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompanyName', 'setLanguage']),
     logOut () {
       // window.localStorage.clear()
       this.removeAuthorization()
       this.removeNickname()
       this.removeMobile()
       this.removeAccount()
+      this.removeEmail()
       this.removeAvatarImgUrl()
       this.removeCompanyName()
       this.$router.replace('/login')

@@ -305,11 +305,11 @@ export default {
   mounted () {
     this.submitData.base_info.name = this.nickname
     this.submitData.base_info.campany_name = this.companyName
-    this.submitData.base_info.email = this.account
+    this.submitData.base_info.email = this.email
     this.submitData.base_info.mobile_number = this.mobile
   },
   computed: {
-    ...mapState(['authorization', 'nickname', 'mobile', 'account', 'companyName'])
+    ...mapState(['authorization', 'nickname', 'mobile', 'email', 'companyName'])
   }
 }
 </script>
