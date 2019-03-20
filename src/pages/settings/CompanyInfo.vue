@@ -19,13 +19,14 @@
               </div>
               <vue-core-image-upload
                 :class="['btn', 'btn-cyan']"
-                :crop="false"
+                crop="local"
+                crop-ratio="1:1"
                 @imageuploaded="imageuploaded"
                 @imageuploading="imageuploading"
                 inputOfFile="image"
                 :text="$t('lang.companyInfo.avatar_url.title')"
                 :max-file-size="5242880"
-                :compress="30"
+                :compress="80"
                 :max-width="200"
                 input-accept="image/*"
                 :headers="{'Authorization': authorization}"

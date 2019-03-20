@@ -142,7 +142,8 @@
                   <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
-              <!-- <vue-core-image-upload
+              <vue-core-image-upload
+                v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 crop="local"
                 crop-ratio="4:3"
@@ -151,22 +152,8 @@
                 inputOfFile="image"
                 text=""
                 :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
-                input-accept="image/*"
-                :url="uploadImageUrl">
-              </vue-core-image-upload> -->
-              <vue-core-image-upload
-                v-else
-                :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                :crop="false"
-                @imageuploaded="imageuploaded"
-                @imageuploading="imageuploading"
-                inputOfFile="image"
-                text=""
-                :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
+                :compress="80"
+                :max-width="400"
                 input-accept="image/*"
                 :headers="{'Authorization': authorization}"
                 :url="uploadImageUrl">
