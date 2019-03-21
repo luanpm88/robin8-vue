@@ -20,17 +20,17 @@
                 >
               </div>
               <div class="media-body media-middle">
-                <p>Profile Name: <b>{{item.profileData.profile_name}}</b></p>
-                <p>Weixin Id:{{item.profileData.profile_id}}</p>
-                <p>Description:{{item.profileData.description_raw}}</p>
+                <p>{{$t('lang.kolCompare.name')}}: <b>{{item.profileData.profile_name}}</b></p>
+                <p>{{$t('lang.kolCompare.id')}}:{{item.profileData.profile_id}}</p>
+                <p>{{$t('lang.kolCompare.dec')}}:{{item.profileData.description_raw}}</p>
               </div>
             </div>
             <div class="panel default-panel">
               <div class="panel-head">
-                <h5 class="title text-center">Performance</h5>
+                <h5 class="title text-center">{{$t('lang.kolCompare.performance')}}</h5>
               </div>
               <div class="panel-body">
-                wohsi Performance
+                
               </div>
             </div>
           </div>

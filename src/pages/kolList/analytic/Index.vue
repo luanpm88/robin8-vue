@@ -55,7 +55,7 @@ export default {
         countParams: {
           type: 'doc',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -73,7 +73,7 @@ export default {
         countParams: {
           type: 'read',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -91,7 +91,7 @@ export default {
         countParams: {
           type: 'like',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -109,7 +109,7 @@ export default {
         countParams: {
           type: 'doc',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -127,7 +127,7 @@ export default {
         countParams: {
           type: 'read',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -145,7 +145,7 @@ export default {
         countParams: {
           type: 'like',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -165,7 +165,7 @@ export default {
         countParams: {
           type: 'doc',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -183,7 +183,7 @@ export default {
         countParams: {
           type: 'comment',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -201,7 +201,7 @@ export default {
         countParams: {
           type: 'share',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -219,7 +219,7 @@ export default {
         countParams: {
           type: 'like',
           mode: 'daily',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -237,7 +237,7 @@ export default {
         countParams: {
           type: 'doc',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -255,7 +255,7 @@ export default {
         countParams: {
           type: 'comment',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }
@@ -273,7 +273,7 @@ export default {
         countParams: {
           type: 'share',
           mode: 'hourly',
-          start_date: commonJs.cPastTwentyOneDays,
+          start_date: commonJs.cPastYears,
           end_date: commonJs.cPastOneday,
           profile_id: 'MzAwMDAyMzY3OA=='
         }

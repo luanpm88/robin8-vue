@@ -800,5 +800,11 @@ export const lang = {
     topic: '主题',
     source: '平台',
     kolId: 'KOL Id'
+  },
+  kolCompare: {
+    name: '名字',
+    id: 'ID',
+    dec: '简述',
+    performance: '表现'
   }
 }
