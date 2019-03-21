@@ -799,5 +799,11 @@ export const lang = {
     topic: 'Topic',
     source: 'Source',
     kolId: 'KOL Profile ID'
+  },
+  kolCompare: {
+    name: 'Profile Name',
+    id: 'ID',
+    dec: 'Description',
+    performance: 'Performance'
   }
 }
