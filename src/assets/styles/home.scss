@@ -369,7 +369,7 @@
   margin-top: 20px;
 }
 .d-postcontent{
-  padding: 20px 0px 0px;
+  padding: 0px 0px 20px;
   color: $text-color;
 }
 .d-post-left{
@@ -445,4 +445,7 @@
   p{
     font-size: $font-nm-s;
   }
+}
+.highlight{
+  color: nth($orange, 1);
 }

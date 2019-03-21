@@ -5,11 +5,11 @@ currentId 当前数据的Id
 -->
 <template>
   <div class="panel default-panel">
-    <div class="panel-head">
+    <!-- <div class="panel-head">
       <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
-    </div>
+    </div> -->
     <div class="panel-body prl30">
-      <!-- <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p> -->
+      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
       <div class="nonetip" v-if="isAnalyOneShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
