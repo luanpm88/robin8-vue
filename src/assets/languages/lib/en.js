@@ -804,6 +804,11 @@ export const lang = {
     name: 'Profile Name',
     id: 'ID',
     dec: 'Description',
-    performance: 'Performance'
+    performance: {
+      tit: 'Performance'
+    },
+    price: {
+      tit: 'Price Summary'
+    }
   }
 }

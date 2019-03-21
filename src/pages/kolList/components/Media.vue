@@ -1,8 +1,11 @@
 <!-- media -->
 <template>
   <div class="panel default-panel mt20">
-    <div class="panel-body">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
+    <div class="panel-head">
+      <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</h5>
+    </div>
+    <div class="panel-body prl30">
+      <!-- <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p> -->
       <div class="nonetip" v-if="isMediaShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>

@@ -1,3 +1,4 @@
+.prl30 {padding: 10px 30px 20px; overflow: hidden;}
 .home-top-post{
   .home-post {
     padding: 10px 0px 2px;
@@ -227,8 +228,8 @@
 
 // detail
 .kol-detail{
-  .panel-body{
-    padding: 20px;
+  .chart-tag{
+    margin-left: -33px;
   }
 }
 .kol-back-btn{
@@ -322,9 +323,6 @@
 .activity-color {
   line-height: 30px;
   color: nth($purple, 1);
-}
-.activity-table {
-  margin: 16px 0px 0px;
 }
 .activity-border {
   border: 1px solid nth($purple, 1);

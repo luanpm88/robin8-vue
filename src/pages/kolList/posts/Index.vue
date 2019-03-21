@@ -1,7 +1,7 @@
 
 <template>
   <div class="panel default-panel">
-    <div class="panel-body">
+    <div class="panel-body prl30">
       <div class="nonetip" v-if="isPostShow">
         <span>{{$t('lang.kolList.postVue.tip')}}</span>
       </div>

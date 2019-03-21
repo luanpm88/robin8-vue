@@ -805,6 +805,11 @@ export const lang = {
     name: '名字',
     id: 'ID',
     dec: '简述',
-    performance: '表现'
+    performance: {
+      tit: '表现'
+    },
+    price: {
+      tit: '价格简列'
+    }
   }
 }
