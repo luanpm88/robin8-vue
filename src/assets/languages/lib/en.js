@@ -213,18 +213,18 @@ export const lang = {
     },
     link: {
       title: 'Campaign URL',
-      placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
-      errorTips: '请填写活动链接'
+      placeholder: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.',
+      errorTips: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.'
     },
     name: {
       title: 'Campaign Title',
-      placeholder: '请概括您的推广，让您的内容一目了然',
-      errorTips: '请填写活动标题'
+      placeholder: 'A good campaign name will help you attract more KOLs to participate to your campaign.',
+      errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
       title: 'Campaign Details',
-      placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
-      errorTips: '请填写活动相关介绍'
+      placeholder: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.',
+      errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     picture: {
       title: 'Campaign Picture',
