@@ -28,6 +28,7 @@ export const lang = {
     reg: 'Reg',
     forgetPassword: 'Forget Password',
     changePassword: 'Change Password',
+    help: 'Help',
     home: 'Home',
     homeCreate: 'Create Campaign',
     settings: 'Settings',
@@ -82,7 +83,8 @@ export const lang = {
     ranking: 'Ranking',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
-    socialListening: 'Social Listening'
+    socialListening: 'Social Listening',
+    help: 'Help'
   },
   profile: {
     name: 'Brand Name',
@@ -188,7 +190,7 @@ export const lang = {
     kolParticipate: 'KOL Participate',
     collaborationCompleted: 'Collaboration Completed',
     promotionDesc: 'Promotion Introduction',
-    promotionBudget: 'Promotion Bugdet',
+    promotionBudget: 'Promotion Budget',
     promotionDetail: 'Promotion Detail',
     promotionTime: 'Promotion Date',
     selectKols: 'KOL Selection',
@@ -205,26 +207,26 @@ export const lang = {
         repost: 'Repost'
       },
       btns: {
-        edit: 'edit',
-        pay: 'pay',
-        comments: 'comments',
-        repost: 'repost'
+        edit: 'Edit',
+        pay: 'Pay',
+        comments: 'Comments',
+        repost: 'Repost'
       }
     },
     link: {
-      title: 'Campaign Linked',
-      placeholder: 'Robin8将根据此链接统计点击次数，请确定链接真实有效',
-      errorTips: '请填写活动链接'
+      title: 'Campaign URL',
+      placeholder: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.',
+      errorTips: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.'
     },
     name: {
       title: 'Campaign Title',
-      placeholder: '请概括您的推广，让您的内容一目了然',
-      errorTips: '请填写活动标题'
+      placeholder: 'A good campaign name will help you attract more KOLs to participate to your campaign.',
+      errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
-      title: 'Campaign Detail',
-      placeholder: '生动有趣的活动介绍，能让KOL对你的活动好感倍增',
-      errorTips: '请填写活动相关介绍'
+      title: 'Campaign Details',
+      placeholder: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.',
+      errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     picture: {
       title: 'Campaign Picture',
@@ -232,34 +234,37 @@ export const lang = {
       errorTips: 'Please upload an image'
     },
     allBudget: {
-      title: 'Totel Bugdet',
-      placeholder: 'Totel Bugdet',
-      errorTips: 'Totel Bugdet'
+      title: 'Totel Budget',
+      placeholder: 'Totel Budget',
+      errorTips: 'Totel Budget'
     },
     platform: {
-      title: 'Platform',
-      placeholder: 'Please select the platform',
+      title: 'Social Platform',
+      placeholder: 'Please select the social platform',
       weibo: 'Weibo',
       wechat: 'Wechat',
-      errorTips: 'Please select the platform'
+      errorTips: 'Please select the social platform'
     },
     mode: {
-      title: 'Reward Method',
+      title: 'Payment Method',
       placeholder: 'Please select the reward method',
-      clicks: 'By Clicks',
-      repost: 'By Repost',
-      mission: 'By Mission',
+      clicks: 'CPC (Cost Per Click)',
+      repost: 'CPP (Cost Per Post)',
+      mission: 'CPT (Cost Per Task)',
       errorTips: 'Please select the reward method'
     },
     pictureNumber: {
-      title: '示例图片数量',
-      placeholder: '请选择示例图片数量',
-      errorTips: '请选择示例图片数量'
+      title: 'Require Campaign Screenshot Upload(s) by User',
+      placeholder: 'Please select the number of images',
+      onePic: 'Upload 1 Screenshot',
+      twoPic: 'Upload 2 Screenshot',
+      threePic: 'Upload 3 Screenshot',
+      errorTips: 'Please select the number of images'
     },
     budget: {
-      title: 'One Time Bugdet',
-      placeholder: 'One Time Bugdet',
-      errorTips: 'One Time Bugdet'
+      title: 'Budget',
+      placeholder: 'Budget',
+      errorTips: 'Budget'
     },
     time: {
       title: 'Promotion Date',
@@ -274,27 +279,29 @@ export const lang = {
       errorTips: 'Please select the tags'
     },
     kolDistrict: {
-      title: 'KOLs’ Location',
-      placeholder: 'Please select KOLs’ location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’.',
-      provinceErrorTips: 'Please select the preferred province for the KOLs’.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’.'
+      title: 'KOL’s Location',
+      placeholder: 'Please select KOL’s location',
+      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
     kolAge: {
-      title: 'KOLs’ Age',
+      title: 'KOL’s Age',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ age range.'
+      errorTips: 'Please select the preferred KOL’s age range.'
     },
     kolGender: {
-      title: 'KOLs’ Gender',
+      title: 'KOL’s Gender',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ gender.'
+      errorTips: 'Please select the preferred KOL’s gender.'
     },
     kolPush: {
-      title: 'Push',
+      title: 'Target',
       placeholder: '',
-      errorTips: 'Please select a push form'
+      allow: 'Outside Target Match',
+      notAllow: 'Only Target Match',
+      errorTips: 'Please select a target form'
     },
     evaluatePoint: {
       title: '效果打分',
@@ -306,6 +313,7 @@ export const lang = {
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
     },
+    createTips: 'Once your campaign has been approved, you will not be able to make any changes.  All campaigns submitted before 6 pm China will be reviewed within 2 hours.  Campaigns submitted after 6 pm China time, will be processed the next day.',
     payment: {
       title: 'Pay Invoice',
       name: 'Text',
@@ -394,20 +402,20 @@ export const lang = {
     followerAge: {
       title: 'Audience’s Age',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ audience age range.'
+      errorTips: 'Please select the preferred KOL’s audience age range.'
     },
     followerGender: {
       title: 'Audience’s Gender',
       placeholder: 'All',
-      errorTips: 'Please select the preferred KOLs’ audience gender.'
+      errorTips: 'Please select the preferred KOL’s audience gender.'
     },
     followerDistrict: {
       title: 'Audience’s Location',
       placeholder: 'Please select audience’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
-      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
-      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.',
+      provincePlaceholder: 'Please select the preferred province for the KOL’s audience.',
+      cityPlaceholder: 'Please select the preferred city for the KOL’s audience.',
+      provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
+      cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
     status: {
       waiting: '待合作',
@@ -423,6 +431,32 @@ export const lang = {
           title: 'Alipay',
           desc: '使用支付宝线上支付安全放心'
         }
+      }
+    },
+    statusArea: {
+      pending: {
+        title: 'Your campaign is pending',
+        desc: 'We will review in 24 hours'
+      },
+      rejected: {
+        title: 'Your campaign is rejected',
+        desc: 'Please edit your campaign'
+      },
+      passed: {
+        title: 'Your campaign is passed',
+        desc: ''
+      },
+      ended: {
+        title: 'Your campaign is ended',
+        desc: ''
+      },
+      finished: {
+        title: 'Your campaign is finished',
+        desc: ''
+      },
+      closed: {
+        title: 'Your campaign is closed',
+        desc: ''
       }
     }
   },
@@ -737,6 +771,7 @@ export const lang = {
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
+        check: 'Check',
         profile: 'Profile',
         price: 'Price',
         influence: 'Influence',
@@ -767,14 +802,15 @@ export const lang = {
     source: 'Source',
     kolId: 'KOL Profile ID'
   },
-  statusAreaVue: {
-    oneTit: 'Your campaign is pending',
-    oneSmallTit: 'We will review in 24 hours',
-    twoTit: ' Your campaign is rejected',
-    twoSmallTit: 'Please edit your campaign',
-    threeTit: 'Your campaign is passed',
-    FourTit: 'Your campaign is ended',
-    FiveTit: 'Your campaign is finished',
-    sixTit: 'Your campaign is closed',
+  kolCompare: {
+    name: 'Profile Name',
+    id: 'ID',
+    dec: 'Description',
+    performance: {
+      tit: 'Performance'
+    },
+    price: {
+      tit: 'Price Summary'
+    }
   }
 }

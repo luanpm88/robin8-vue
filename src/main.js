@@ -8,6 +8,7 @@ import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import { Pagination, Spin, InputNumber } from 'ant-design-vue'
 import store from './store'
+import 'babel-polyfill'
 import 'ant-design-vue/lib/table/style/css'
 import 'ant-design-vue/lib/input-number/style/css'
 import 'ant-design-vue/lib/tooltip/style/css'
@@ -43,7 +44,10 @@ const i18n = new VueI18n({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = to.meta.title
+    // document.title = to.meta.title
+    const _name = to.meta.title || 'Robin8'
+    const _title = i18n.t(`lang.router.${_name}`)
+    window.document.title = _title
   }
   if (to.matched.some( m => m.meta.auth)) {
     // 已经登陆
@@ -63,6 +67,19 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+// 让IE11支持Vue-router跳转功能
+if (
+  '-ms-scroll-limit' in document.documentElement.style &&
+  '-ms-ime-align' in document.documentElement.style
+) { // detect it's IE11
+  window.addEventListener('hashchange', function(event) {
+    var currentPath = window.location.hash.slice(1);
+    if (store.state.route.path !== currentPath) {
+      router.push(currentPath)
+    }
+  }, false)
+}
 
 /* eslint-disable no-new */
 new Vue({

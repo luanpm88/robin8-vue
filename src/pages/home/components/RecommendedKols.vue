@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import axios from "axios"
-import apiConfig from "@/config"
+import axios from 'axios'
+import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
-import DefaultTabs from "@components/DefaultTabs"
+import DefaultTabs from '@components/DefaultTabs'
 import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
 export default {
@@ -70,18 +70,18 @@ export default {
       params: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW",
-        order_by: "doc_count"
+        brand_keywords: 'BMW',
+        order_by: 'doc_count'
       },
       currentList: [],
       tabList: [
         {
           index: 0,
-          name: () => this.$t('lang.weibo')
+          name: ('weibo')
         },
         {
           index: 1,
-          name: () => this.$t('lang.wechat')
+          name: ('wechat')
         }
       ]
     }
@@ -92,10 +92,10 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        let newKey = '';
-        this.childKeyList.brand_keywords.split(",").forEach(item => {
+        let newKey = ''
+        this.childKeyList.brand_keywords.split(',').forEach(item => {
           newKey += '"' + item + '"'
-        });
+        }) 
         this.params.brand_keywords = newKey
         this.weiboKol(this.params)
         this.kolRouterData.keywords = newKey
@@ -110,9 +110,9 @@ export default {
     },
     changeTab(tab) {
       this.tabIndex = tab.index
-      this.currentList = [];
-      this.isShow = false;
-      this.isLoading = true;
+      this.currentList = [] 
+      this.isShow = false 
+      this.isLoading = true 
       if (tab.index === 0) {
         // 微博接口
         this.weiboKol(this.params)
@@ -131,7 +131,7 @@ export default {
           brand_keywords: this.childKeyList.brand_keywords,
           type: this.tabIndex
         }
-      });
+      }) 
     },
     // 微博的接口
     weiboKol(params) {
@@ -186,7 +186,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-top-post /deep/ .pills-btn {
-  position: absolute;
+  position: absolute ;
   right: 30px;
   top: 16px;
 }

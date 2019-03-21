@@ -19,13 +19,14 @@
               </div>
               <vue-core-image-upload
                 :class="['btn', 'btn-cyan']"
-                :crop="false"
+                crop="local"
+                crop-ratio="1:1"
                 @imageuploaded="imageuploaded"
                 @imageuploading="imageuploading"
                 inputOfFile="image"
                 :text="$t('lang.companyInfo.avatar_url.title')"
                 :max-file-size="5242880"
-                :compress="30"
+                :compress="80"
                 :max-width="200"
                 input-accept="image/*"
                 :headers="{'Authorization': authorization}"
@@ -200,7 +201,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     getProfileData () {
       axios.get(apiConfig.profileUrl, {
         headers: {
@@ -252,7 +253,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        this.setAccount(resData.email)
+        this.setEmail(resData.email)
         this.setNickname(resData.name)
         this.setMobile(resData.mobile_number)
         this.setAvatarImgUrl(resData.avatar_url)

@@ -79,18 +79,15 @@ export default {
       tabList: [
         {
           index: 0,
-          // name: '待合作'
-          name: () => this.$t('lang.creations.status.waiting')
+          name: 'creations.status.waiting'
         },
         {
           index: 1,
-          // name: '合作中'
-          name: () => this.$t('lang.creations.status.processing')
+          name: 'creations.status.processing'
         },
         {
           index: 2,
-          // name: '已完成'
-          name: () => this.$t('lang.creations.status.done')
+          name: 'creations.status.done'
         }
       ],
       currentList: [],

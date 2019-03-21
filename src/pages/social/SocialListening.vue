@@ -75,7 +75,7 @@
                       ></span>
                   </div>
                 </div>
-                <p class="home-post-content">'{{item.content}}'</p>
+                <p class="home-post-content" v-html="item.content"></p>
               </div>
               <div class="text-center mt20">
                 <a-pagination
@@ -323,6 +323,9 @@ export default {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
+  i{
+    color: nth($purple, 1) !important;
+  }
 }
 .icon-cart{
   &.active{

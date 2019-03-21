@@ -28,6 +28,7 @@ export const lang = {
     reg: '注册',
     forgetPassword: '忘记密码',
     changePassword: '重置密码',
+    help: '使用帮助',
     home: '首页',
     homeCreate: '创建新活动',
     settings: '企业设置',
@@ -82,7 +83,8 @@ export const lang = {
     ranking: '排名',
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
-    socialListening: '社交聆听'
+    socialListening: '社交聆听',
+    help: '使用帮助'
   },
   profile: {
     name: '品牌名称',
@@ -255,6 +257,9 @@ export const lang = {
     pictureNumber: {
       title: '示例图片数量',
       placeholder: '请选择示例图片数量',
+      onePic: '需要用户上传1张图片',
+      twoPic: '需要用户上传2张图片',
+      threePic: '需要用户上传3张图片',
       errorTips: '请选择示例图片数量'
     },
     budget: {
@@ -295,6 +300,8 @@ export const lang = {
     kolPush: {
       title: '补推',
       placeholder: '',
+      allow: '允许补推',
+      notAllow: '禁止补推',
       errorTips: '请选择补推形式'
     },
     evaluatePoint: {
@@ -307,6 +314,7 @@ export const lang = {
       placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
       errorTips: '请输入效果评价'
     },
+    createTips: '活动一旦通过审核将不能更改，我们将在2小时内审核当天18:00前提交的订单，其余时间段提交的订单次日审核',
     payment: {
       title: '支付订单',
       name: '标题',
@@ -424,6 +432,32 @@ export const lang = {
           title: '支付宝',
           desc: '使用支付宝线上支付安全放心'
         }
+      }
+    },
+    statusArea: {
+      pending: {
+        title: '您提交的活动待审核',
+        desc: '我们将在24小时之内完成审核'
+      },
+      rejected: {
+        title: '您提交的活动未通过审核',
+        desc: '请编辑后重新提交'
+      },
+      passed: {
+        title: '活动提交审核成功',
+        desc: ''
+      },
+      ended: {
+        title: '活动已结束',
+        desc: ''
+      },
+      finished: {
+        title: '活动已完成',
+        desc: ''
+      },
+      closed: {
+        title: '活动已关闭',
+        desc: ''
       }
     }
   },
@@ -738,6 +772,7 @@ export const lang = {
         weiboR8: '微博-R8管理',
       },
       table: {
+        check: '勾选',
         profile: '简况',
         price: '价格',
         influence: '影响',
@@ -768,14 +803,15 @@ export const lang = {
     source: '平台',
     kolId: 'KOL Id'
   },
-  statusAreaVue: {
-    oneTit: '您提交的活动待审核',
-    oneSmallTit: '我们将在24小时之内完成审核',
-    twoTit: '您提交的活动未通过审核',
-    twoSmallTit: '请编辑后重新提交',
-    threeTit: '活动提交审核成功',
-    FourTit: '活动已结束',
-    FiveTit: '活动已完成',
-    sixTit: '活动已关闭',
+  kolCompare: {
+    name: '名字',
+    id: 'ID',
+    dec: '简述',
+    performance: {
+      tit: '表现'
+    },
+    price: {
+      tit: '价格简列'
+    }
   }
 }

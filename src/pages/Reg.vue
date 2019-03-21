@@ -113,7 +113,7 @@ export default {
    }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
     // 邮箱和手机注册切换
     checkType () {
       if (this.flag === true) {
@@ -147,8 +147,9 @@ export default {
             _that.setAuthorization(res.data.access_token)
             _that.setAvatarImgUrl(res.data.avatar_url)
             _that.setCompanyName(res.data.campany_name)
+            _that.setAccount(params.login)
             if (params.type === 'email') {
-              _that.setAccount(params.login)
+              _that.setEmail(params.login)
             } else {
               _that.setMobile(params.login)
             }

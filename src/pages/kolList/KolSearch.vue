@@ -1,5 +1,15 @@
 <template>
   <div>
+    <!-- 对比按钮 -->
+    <transition name="fade">
+      <div v-if="comparePop" class="panel default-panel compare-pop">
+        <div class="panel-body">
+          <span class="copmare-close" @click="closeCompare">X</span>
+          <button type="button" class="btn btn-purple" @click="toComparePage">To compare</button>
+        </div>
+      </div>
+    </transition>
+
     <div class="panel default-panel kols-list-panel">
       <div class="panel-head">
         <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
@@ -148,7 +158,6 @@
         </div>
       </div>
     </div>
-
     <div class="panel default-panel kols-list-panel mt20">
       <div class="panel-body">
         <div class="kols-list-statistics">
@@ -166,6 +175,7 @@
           <table class="default-table mt20">
             <thead>
               <tr>
+                <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                 <th width="18%" class="text-center">
@@ -184,6 +194,9 @@
             </thead>
             <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
               <tr v-for="(item, index) in key" :key="index">
+                <!-- <td>
+                  <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
+                </td> -->
                 <td>
                   <div class="media kol-profile">
                     <div class="media-left media-middle">
@@ -286,12 +299,12 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
-import DefaultTabs from "@components/DefaultTabs";
-import { Progress, Tooltip } from "ant-design-vue";
-import { mapState } from "vuex";
-import commonJs from '@javascripts/common.js';
+import axios from 'axios'
+import apiConfig from '@/config' 
+import DefaultTabs from '@components/DefaultTabs' 
+import { Progress, Tooltip } from 'ant-design-vue' 
+import { mapState } from 'vuex' 
+import commonJs from '@javascripts/common.js' 
 
 export default {
   name: 'kolsearch',
@@ -300,9 +313,10 @@ export default {
     ATooltip: Tooltip,
     DefaultTabs
   },
-  props: ["keyWord"],
+  props: ['keyWord'],
   data() {
     return {
+      comparePop: false,
       listSortType: 1,
       listSortDir: 'desc',
       isLoading: true,
@@ -314,18 +328,18 @@ export default {
       isRelevanceActive: false,
       isRelevanceSort: 'asc',
       // top 用户输入的key
-      keyword: "",
+      keyword: '',
       // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: '',
-      industry: "",
-      engagementFrom: "",
-      engagementTo: "",
-      followerFrom: "",
-      followerTo: "",
-      influenceFrom: "",
-      influenceTo: "",
+      industry: '',
+      engagementFrom: '',
+      engagementTo: '',
+      followerFrom: '',
+      followerTo: '',
+      influenceFrom: '',
+      influenceTo: '',
       kolOnly: false,
-      kolOnlyText: "N",
+      kolOnlyText: 'N',
       currentPage: 0,
       currentPageAdd: 1,
       selectPage: 0,
@@ -335,11 +349,11 @@ export default {
       tabList: [
         {
           index: 0,
-          name: () => this.$t('lang.weibo')
+          name: ('weibo')
         },
         {
           index: 1,
-          name: () => this.$t('lang.wechat')
+          name: ('wechat')
         }
       ],
       tabIndex: 0,
@@ -347,75 +361,76 @@ export default {
       searchList: {},
       r8List: [],
       totalParams: {},
-      cartParams: {}
-    };
+      cartParams: {},
+      compareList: []
+    } 
   },
   created() {
-    this.r8Kol();
+    this.r8Kol() 
     // 获取keywords
-    this.getBaseData();
+    this.getBaseData() 
     if (this.keyWord.brand_keywords) {
-      this.tabIndex = this.keyWord.type;
-      this.keyword = this.keyWord.brand_keywords;
+      this.tabIndex = this.keyWord.type 
+      this.keyword = this.keyWord.brand_keywords 
       // 初始化参数
-      this.paramsInit();
+      this.paramsInit() 
       // 调用接口
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
     } else {
       // 初始化参数
-      this.paramsInit();
+      this.paramsInit() 
       // 调用接口
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
     }
   },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(['authorization'])
   },
   methods: {
     // 初始化传参数
     paramsInit() {
       if (this.kolOnly) {
-        this.kolOnlyText = "Y";
+        this.kolOnlyText = 'Y' 
       } else {
-        this.kolOnlyText = "N";
+        this.kolOnlyText = 'N' 
       }
-      this.totalParams.page_no = this.currentPage;
-      this.totalParams.page_size = 10;
-      this.totalParams.industry = this.industry;
-      this.totalParams.engagement_from = this.engagementFrom;
-      this.totalParams.engagement_to = this.engagementTo;
-      this.totalParams.influence_from = this.influenceFrom;
-      this.totalParams.influence_to = this.influenceTo;
+      this.totalParams.page_no = this.currentPage 
+      this.totalParams.page_size = 10 
+      this.totalParams.industry = this.industry 
+      this.totalParams.engagement_from = this.engagementFrom 
+      this.totalParams.engagement_to = this.engagementTo 
+      this.totalParams.influence_from = this.influenceFrom 
+      this.totalParams.influence_to = this.influenceTo 
       if (this.keyword === '') {
-        this.totalParams.keywords = '';
+        this.totalParams.keywords = '' 
       } else {
-        let newKey = '';
-        this.keyword.split(",").forEach(item => {
+        let newKey = '' 
+        this.keyword.split(',').forEach(item => {
           newKey += '"' + item + '"'
-        });
-        this.totalParams.keywords = newKey;
+        }) 
+        this.totalParams.keywords = newKey 
       }
-      this.totalParams.profile_sort_col = this.listSortType;
-      this.totalParams.profile_sort_dir = this.listSortDir;
-      this.totalParams.r8_registered_kol_only = this.kolOnlyText;;
+      this.totalParams.profile_sort_col = this.listSortType 
+      this.totalParams.profile_sort_dir = this.listSortDir 
+      this.totalParams.r8_registered_kol_only = this.kolOnlyText  
     },
     // 调用接口
     totalJoggle(type) {
       // type = 0 微博
       // type = 1 微信
       if (type === 0) {
-        this.totalParams.folllower_from = this.followerFrom;
-        this.totalParams.follower_to = this.followerTo;
+        this.totalParams.folllower_from = this.followerFrom 
+        this.totalParams.follower_to = this.followerTo 
         // 微博的接口
-        this.kollistJoggle(type, this.totalParams);
+        this.kollistJoggle(type, this.totalParams) 
       } else {
         // weixin的接口
-        this.kollistJoggle(type, this.totalParams);
+        this.kollistJoggle(type, this.totalParams) 
       }
     },
     // 微博和微信的接口
     kollistJoggle(type, params) {
-      const _that = this;
+      const _that = this 
       if (type === 0) {
         // weibo
         axios
@@ -426,14 +441,14 @@ export default {
           })
           .then(function(res) {
             if (res.status === 200) {
-              // console.log("我是weibo接口", res);
-              _that.kolsTotal = res.data.total_page_count;
-              _that.jogDataInit(res.data.data);
+              // console.log('我是weibo接口', res) 
+              _that.kolsTotal = res.data.total_page_count 
+              _that.jogDataInit(res.data.data) 
             }
           })
           .catch(function(error) {
-            console.log(error);
-          });
+            console.log(error) 
+          }) 
       } else {
         // weixin
         axios
@@ -443,62 +458,63 @@ export default {
             }
           })
           .then(function(res) {
-            // console.log("我是weixin接口", res);
-            _that.kolsTotal = res.data.total_page_count;
-            _that.jogDataInit(res.data.data);
+            // console.log('我是weixin接口', res) 
+            _that.kolsTotal = res.data.total_page_count 
+            _that.jogDataInit(res.data.data) 
           })
           .catch(function(error) {
-            console.log(error);
-          });
+            console.log(error) 
+          }) 
       }
     },
     // 处理接口数据函数
     jogDataInit(data) {
       if (data.length === 0 || !data.length) {
-        this.isShow = true;
+        this.isShow = true 
       }
-      this.isLoading = false;
-      const _that = this;
+      this.isLoading = false 
+      const _that = this 
       data.forEach((element, index) => {
-        element.influence = parseInt(element.influence * 1000);
+        element.influence = parseInt(element.influence * 1000) 
+        element.isCheck = false 
         if (this.keyword !== '') {
-          element.colorStatus = 1;
-          element.correlation = parseInt(element.correlation * 100);
+          element.colorStatus = 1 
+          element.correlation = parseInt(element.correlation * 100) 
         } else {
-          element.colorStatus = 0;
-          element.correlation = 'N/A';
+          element.colorStatus = 0 
+          element.correlation = 'N/A' 
         }
         if (!element.pricing) {
-          (element.pricing = {}), (element.pricing.direct_price = "N/A");
+          (element.pricing = {}), (element.pricing.direct_price = 'N/A') 
         }
-      });
-      _that.searchList = data;
-      _that.searchListBox.push(_that.searchList);
+      }) 
+      _that.searchList = data 
+      _that.searchListBox.push(_that.searchList) 
     },
     showMoreSearch() {
-      this.advancedSearch = !this.advancedSearch;
+      this.advancedSearch = !this.advancedSearch 
     },
     changeTab(tab) {
-      this.isLoading = true;
-      this.tabIndex = tab.index;
-      this.currentPage = 0;
-      this.currentPageAdd = this.currentPage + 1;
-      this.searchListBox = [];
+      this.isLoading = true 
+      this.tabIndex = tab.index 
+      this.currentPage = 0 
+      this.currentPageAdd = this.currentPage + 1 
+      this.searchListBox = [] 
       // 初始化参数
-      this.paramsInit();
+      this.paramsInit() 
       // 调用接口
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
     },
     totalSearch() {
-      this.isShow = false;
-      this.isLoading = true;
-      this.currentPage = 0;
-      this.currentPageAdd = this.currentPage + 1;
-      this.searchListBox = [];
+      this.isShow = false 
+      this.isLoading = true 
+      this.currentPage = 0 
+      this.currentPageAdd = this.currentPage + 1 
+      this.searchListBox = [] 
       // 初始化参数
-      this.paramsInit();
+      this.paramsInit() 
       // 调用接口
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
     },
     // 获取keyword
     getBaseData () {
@@ -512,38 +528,38 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                _that.totalKeywords = element.keywords;
+                _that.totalKeywords = element.keywords 
               }
-            });
+            }) 
           }
         }
       })
     },
     // influence 与 relevance 排序
     influencerank(value) {
-      this.isShow = false;
-      this.isLoading = true;
-      this.currentPage = this.currentPage;
-      this.currentPageAdd = this.currentPage + 1;
-      this.searchListBox = [];
+      this.isShow = false 
+      this.isLoading = true 
+      this.currentPage = this.currentPage 
+      this.currentPageAdd = this.currentPage + 1 
+      this.searchListBox = [] 
       // value 为1 influence表示排序， 为2relevance 排序
       if (value === 1) {
-        this.isFluenceActive = true;
-        this.isRelevanceActive = false;
-        this.listSortType = 1;
-        this.listSortDir = 'desc';
+        this.isFluenceActive = true 
+        this.isRelevanceActive = false 
+        this.listSortType = 1 
+        this.listSortDir = 'desc' 
         // 重置params
-        this.paramsInit();
+        this.paramsInit() 
       } else {
-        this.isFluenceActive = false;
-        this.isRelevanceActive = true;
-        this.listSortType = 0;
-        this.listSortDir = 'desc';
+        this.isFluenceActive = false 
+        this.isRelevanceActive = true 
+        this.listSortType = 0 
+        this.listSortDir = 'desc' 
         // 重置params
-        this.paramsInit();
+        this.paramsInit() 
       }
       // 调用接口的函数
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
     },
     // top头部微信的数字
     r8Kol() {
@@ -554,8 +570,8 @@ export default {
         }
       }).then(function (res) {
         _that.r8List = res.data
-        _that.r8List.wechat_kols_count = commonJs.threeFormatter(_that.r8List.wechat_kols_count, 2);
-        _that.r8List.weibo_kols_count = commonJs.threeFormatter(_that.r8List.weibo_kols_count, 2);
+        _that.r8List.wechat_kols_count = commonJs.threeFormatter(_that.r8List.wechat_kols_count, 2) 
+        _that.r8List.weibo_kols_count = commonJs.threeFormatter(_that.r8List.weibo_kols_count, 2) 
       })
     },
     doAddCart (data) {
@@ -580,17 +596,49 @@ export default {
       }
     },
     onPageChange (page) {
-      this.isLoading = true;
-      this.currentPage = page - 1;
-      this.currentPageAdd = page;
-      this.searchListBox = [];
+      this.isLoading = true 
+      this.currentPage = page - 1 
+      this.currentPageAdd = page 
+      this.searchListBox = [] 
       // 初始化参数
-      this.paramsInit();
+      this.paramsInit() 
       // 调用接口
-      this.totalJoggle(this.tabIndex);
+      this.totalJoggle(this.tabIndex) 
+    },
+    // 选中几条对比kol
+    checkItem(item) {
+      if (!item.isCheck) {
+        this.compareList.push(item.profile_id)
+      } else {
+        this.compareList.forEach((ele, index) => {
+          if(ele === item.profile_id) {
+            this.compareList.splice(index, 1)
+          }
+        }) 
+      }
+      if (this.compareList.length > 1) {
+        // 控制按钮出现
+        this.comparePop = true
+      }
+    },
+    // 关闭比一比的按钮
+    closeCompare() {
+      this.comparePop = false
+    },
+    toComparePage() {
+      this.$router.push({
+        path: '/kolList/Compare/',
+        name: 'kolCompare',
+        params: {
+          type: this.tabIndex,
+        },
+        query: {
+          list: this.compareList
+        }
+      }) 
     }
   }
-};
+} 
 </script>
 
 <style lang="scss" scoped>
@@ -679,6 +727,33 @@ export default {
         color: nth($purple, 1);
       }
     }
+  }
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 2s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 2s;
+}
+.compare-pop{
+  position: fixed;
+  right: 0px;
+  bottom: 45%;
+  .panel-body{
+    padding: 30px;
+  }
+  .copmare-close{
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+    color: nth($font-color, 1);
   }
 }
 </style>

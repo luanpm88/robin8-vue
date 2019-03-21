@@ -4,10 +4,12 @@ import Login from '@/pages/Login'
 import Reg from '@/pages/Reg'
 import ForgetPassword from '@/pages/ForgetPassword'
 import ChangePassword from '@/pages/ChangePassword'
+import Help from '@/pages/Help'
 import Home from '@/pages/home/Home'
 import HomeCreate from '@/pages/home/Create'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
+import kolCompare from '@/pages/kolList/Compare'
 
 import Creations from '@/pages/creations/Creations'
 import CreationList from '@/pages/creations/List'
@@ -90,6 +92,14 @@ export default new Router({
       component: ChangePassword,
       meta: {
         title: 'changePassword'
+      }
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: Help,
+      meta: {
+        title: 'help'
       }
     },
     {
@@ -395,6 +405,15 @@ export default new Router({
       }
     },
     {
+      path: '/kolList/Compare/:type',
+      name: 'kolCompare',
+      component: kolCompare,
+      meta: {
+        title: 'kolCompare',
+        auth: true
+      }
+    },
+    {
       path: '/ranking',
       name: 'Ranking',
       component: Ranking,
@@ -436,6 +455,7 @@ export default new Router({
       component: SocialListening,
       meta: {
         title: 'socialListening',
+        keepAlive: true,
         auth: true
       }
     },

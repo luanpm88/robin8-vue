@@ -75,7 +75,8 @@
                   <div class="iconfont icon-close close-btn" @click="delPhoto"></div>
                 </div>
               </div>
-              <!-- <vue-core-image-upload
+              <vue-core-image-upload
+                v-else
                 :class="['upload-img-btn', 'iconfont', 'icon-image']"
                 crop="local"
                 crop-ratio="4:3"
@@ -84,22 +85,8 @@
                 inputOfFile="image"
                 text=""
                 :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
-                input-accept="image/*"
-                :url="uploadImageUrl">
-              </vue-core-image-upload> -->
-              <vue-core-image-upload
-                v-else
-                :class="['upload-img-btn', 'iconfont', 'icon-image']"
-                :crop="false"
-                @imageuploaded="imageuploaded"
-                @imageuploading="imageuploading"
-                inputOfFile="image"
-                text=""
-                :max-file-size="5242880"
-                :compress="30"
-                :max-width="200"
+                :compress="80"
+                :max-width="400"
                 input-accept="image/*"
                 :headers="{'Authorization': authorization}"
                 :url="uploadImageUrl">
@@ -111,8 +98,8 @@
                 v-validate="'required'"
               >
               <div
-                class="form-tips danger"
-                v-show="errors.has('img_url')"
+                class="form-tips"
+                :class="[errors.has('img_url') ? 'danger' : '']"
               >
                 {{$t('lang.campaigns.picture.errorTips')}}
               </div>
@@ -267,7 +254,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传1张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.onePic')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -280,7 +267,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传2张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.twoPic')}}</span>
                   </label>
                 </div>
                 <div class="col-sm-4">
@@ -293,7 +280,7 @@
                       v-validate="'required'"
                       @change="imgCountChange"
                     />
-                    <span>需要用户上传3张图片</span>
+                    <span>{{$t('lang.campaigns.pictureNumber.threePic')}}</span>
                   </label>
                 </div>
               </div>
@@ -515,8 +502,8 @@
                 v-model="submitData.enable_append_push"
                 v-validate="'required'"
               >
-                <option value="true">允许补推</option>
-                <option value="false">禁止补推</option>
+                <option value="true">{{$t('lang.campaigns.kolPush.allow')}}</option>
+                <option value="false">{{$t('lang.campaigns.kolPush.notAllow')}}</option>
               </select>
               <div
                 class="form-tips danger"
@@ -531,7 +518,7 @@
     </div>
 
     <div class="text-center create-btn-area">
-      <p class="tips">活动一旦通过审核将不能更改，我们将在2小时内审核当天18:00前提交的订单，其余时间段提交的订单次日审核</p>
+      <p class="tips">{{$t('lang.campaigns.createTips')}}</p>
       <button
         type="button"
         class="btn btn-cyan next-btn mt20"
