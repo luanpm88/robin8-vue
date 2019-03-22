@@ -1,7 +1,12 @@
 <template>
-  <div class="container-header">
-    <div class="container-title">{{$t(`lang.router.${title}`)}}</div>
-    <breadcrumb separator="-"></breadcrumb>
+  <div class="container-header clearfix">
+    <div class="pull-left">
+      <div class="container-title">{{$t(`lang.router.${title}`)}}</div>
+      <breadcrumb separator="-"></breadcrumb>
+    </div>
+    <div class="pull-right">
+      <router-link to="/campaigns/create" class="btn btn-cyan btn-sm">{{$t('lang.router.campaignCreate')}}</router-link>
+    </div>
   </div>
 </template>
 
