@@ -15,31 +15,33 @@
         class="panel-tab"
       >
         <div class="list-content-inner">
-          <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
-            <div class="home-post" v-for="(item, index) in key" :key="index">
-              <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
-              <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-              <div class="home-post-detail" @click="intoKolDetail(item)">
-                <img :src="item.avatar_url" alt class>
-                <div>
-                  <strong>{{item.profile_name}}</strong>
-                  <p>{{item.post_time}}</p>
+          <div v-if="isPost">
+            <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
+              <div class="home-post" v-for="(item, index) in key" :key="index">
+                <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
+                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <div class="home-post-detail" @click="intoKolDetail(item)">
+                  <img :src="item.avatar_url" alt class>
+                  <div>
+                    <strong>{{item.profile_name}}</strong>
+                    <p>{{item.post_time}}</p>
+                  </div>
                 </div>
-              </div>
-              <p class="home-post-content">{{item.content}}</p>
-              <div class="home-post-form">
-                <span>
-                  <i class="iconfont icon-heart"></i>
-                  <b>{{item.post_influence.likes}}</b>
-                </span>
-                <span v-if="postType === 0">
-                  <i class="iconfont icon-share"></i>
-                  <b>{{item.post_influence.shares}}</b>
-                </span>
-                <span>
-                  <i class="iconfont icon-comment"></i>
-                  <b>{{item.post_influence.comments}}</b>
-                </span>
+                <p class="home-post-content">{{item.content}}</p>
+                <div class="home-post-form">
+                  <span>
+                    <i class="iconfont icon-heart"></i>
+                    <b>{{item.post_influence.likes}}</b>
+                  </span>
+                  <span v-if="postType === 0">
+                    <i class="iconfont icon-share"></i>
+                    <b>{{item.post_influence.shares}}</b>
+                  </span>
+                  <span>
+                    <i class="iconfont icon-comment"></i>
+                    <b>{{item.post_influence.comments}}</b>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -48,6 +50,9 @@
           </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
+          </div>
+          <div class="nonetip" v-if="isBrandShow">
+            <span>{{$t('lang.homePage.noBrand')}}</span>
           </div>
         </div>
         <div class="text-center mt20">
@@ -68,7 +73,7 @@ export default {
   components: {
     DefaultTabs
   },
-  props: ['childKeyList'],
+  props: ['childKeyList', 'isSelectBrand'],
   data() {
     return {
       kolHasLiked: true,
@@ -76,6 +81,8 @@ export default {
       kolHasChecked: false,
       isShow: false,
       isLoading: true,
+      isBrandShow: false,
+      isPost: false,
       postWeiboCurrentPage: 0,
       postWeixinCurrentPage: 0,
       tabIndex: 0,
@@ -108,20 +115,35 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        let newKey = ''
-        this.childKeyList.brand_keywords.split(',').forEach(item => {
-          newKey += '"' + item + '"'
-        }) 
-        this.topPostParams.page_no = this.postWeiboCurrentPage 
-        this.topPostParams.brand_keywords = newKey 
-        // 微博
-        this.topPostWeibo(this.topPostParams)
+        if (this.isSelectBrand) {
+          this.isLoading = false
+          this.isBrandShow = false
+          this.isShow = false
+          this.isPost = true
+          let newKey = ''
+          this.childKeyList.brand_keywords.split(',').forEach(item => {
+            newKey += '"' + item + '"'
+          }) 
+          this.topPostParams.page_no = this.postWeiboCurrentPage 
+          this.topPostParams.brand_keywords = newKey 
+          // 微博
+          this.topPostWeibo(this.topPostParams)
+        } else {
+          this.isLoading = false
+          this.isBrandShow = true
+          this.isShow = false
+          this.isPost = false
+        }
       },
       deep: true
     },
   },
   created() {
-    if (this.childKeyList  !== '{}') {
+    if (this.isSelectBrand) {
+      this.isLoading = false
+      this.isBrandShow = false
+      this.isShow = false
+      this.isPost = true
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
         newKey += '"' + item + '"'
@@ -130,6 +152,11 @@ export default {
       this.topPostParams.brand_keywords = newKey 
       // 微博
       this.topPostWeibo(this.topPostParams)
+    } else {
+      this.isLoading = false
+      this.isBrandShow = true
+      this.isShow = false
+      this.isPost = false
     }
   },
   methods: {
@@ -159,8 +186,12 @@ export default {
           _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
             _that.isShow = true 
+            _that.isBrandShow = false
+            _that.isPost = false
           } else {
             _that.isShow = false 
+            _that.isBrandShow = false
+            _that.isPost = true
             _that.postType = 0
             _that.postListBox.push(res.data.data) 
             _that.postWeiboCurrentPage ++ 
@@ -184,8 +215,12 @@ export default {
           _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
             _that.isShow = true 
+            _that.isBrandShow = false
+            _that.isPost = false
           } else {
             _that.isShow = false 
+            _that.isBrandShow = false
+            _that.isPost = true
             _that.postType = 1
             _that.postListBox.push(res.data.data) 
             _that.postWeixinCurrentPage ++ 

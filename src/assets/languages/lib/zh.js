@@ -784,9 +784,12 @@ export const lang = {
     }
   },
   homePage: {
+    brandTop: '品牌',
+    noBrandTip: '请选择品牌',
+    noBrand: '您没有选择品牌',
     anlytics: {
       title: '分析',
-      trend: '趋势',
+      trend: '提及次数',
       concept: '概念',
       competitors: '竞争对手',
       sentiments: '情绪'

@@ -449,3 +449,13 @@
 .highlight{
   color: nth($orange, 1);
 }
+.no-brand-tip{
+  font-size: $font-nm-s;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: right;
+  line-height: 34px;
+}
+.no-brand-select{
+  width: 300px;
+}

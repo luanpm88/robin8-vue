@@ -35,14 +35,15 @@
         <!-- 内容开始 -->
         <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
         <div v-if="isCompetitors">
-          <!-- <div class="panel default-panel mt20">
+          <div class="panel default-panel mt20">
             <div class="panel-head">
-              <h5 class="title text-center">选择品牌</h5>
+              <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
             </div>
-            <div class="panel-body prl30">
+            <div class="panel-body prl30 clearfix">
+              <span class="no-brand-tip col-sm-3">{{$t('lang.homePage.noBrandTip')}}:</span>
               <select
                 name="seletBrand"
-                class="form-control"
+                class="form-control no-brand-select col-sm-8"
                 v-model="seletBrandId"
                 @change="changeBrand"
               >
@@ -55,16 +56,16 @@
                 </option>
               </select>
             </div>
-          </div> -->
+          </div>
 
-          <home-analytic class="mt20" :childKeyList='keyList'></home-analytic>
+          <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic>
 
           <div class="home-show row mt20">
             <div class="col-xs-6">
-              <home-recommended-kols :childKeyList='keyList'></home-recommended-kols>
+              <home-recommended-kols :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-recommended-kols>
             </div>
             <div  class="col-xs-6">
-              <home-top-posts :childKeyList='keyList'></home-top-posts>
+              <home-top-posts :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-top-posts>
             </div>
           </div>
         </div>
@@ -115,14 +116,24 @@ export default {
         brand_keywords: '',
         cb_keywords: [],
         cb_names: [],
-        tabIndex: 0
+        tabIndex: 0,
       },
       allBrandList: [],
-      seletBrandId: ''
+      seletBrandId: '',
+      isTotalBrand: false
     }
   },
   created() {
     this.getBaseData()
+    if (!this.isTotalBrand) {
+      this.keyList =  {
+        name: '',
+        brand_keywords: '',
+        cb_keywords: [],
+        cb_names: [],
+        tabIndex: 0,
+      }
+    }
     if (this.$route.query.currentBrand) {
       this.keyList.tabIndex = 0  
     }
@@ -147,6 +158,13 @@ export default {
             _that.isCompetitors = true 
             // select 时候的判断
             _that.allBrandList = res.data.trademarks_list
+            _that.allBrandList.forEach(element => {
+              if (element.status === 1) {
+                _that.seletBrandId = element.id
+                _that.isTotalBrand = true
+              }
+            })
+            console.log(_that.isTotalBrand);
             // console.log(_that.allBrandList);
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.query) == '{}') {
@@ -154,7 +172,7 @@ export default {
                 if (element.status === 1) {
                   _that.seletBrandId = element.id 
                   _that.keyList.name = element.name 
-                  _that.keyList.brand_keywords = element.keywords 
+                  _that.keyList.brand_keywords = element.keywords
                 }
               })
 
@@ -201,13 +219,33 @@ export default {
         this.isCompetitors = true 
       }
     },
+    // 修改选中 brand
+    totalJoggle(Id, params) {
+  
+    },
     changeBrand(value) {
-      // console.log(value);
-      console.log(this.seletBrandId);
+      const _that = this
       let params = {
-        id: item.id,
+        id: this.seletBrandId,
         status: 1
       }
+      axios.post(apiConfig.createBrandUrl + '/' + this.seletBrandId, params, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(function(res) {
+        if (res.status = 201) {
+          _that.keyList =  {
+            name: '',
+            brand_keywords: '',
+            cb_keywords: [],
+            cb_names: [],
+            tabIndex: 0,
+          }
+          // 从新渲染内容
+          _that.getBaseData();
+        }
+      })
     }
   }
 }

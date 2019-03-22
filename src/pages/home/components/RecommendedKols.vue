@@ -8,6 +8,9 @@
     </div>
 
     <div class="panel-body list-content recommendkol">
+      <div class="nonetip" v-if="isBrandShow">
+        <span>{{$t('lang.homePage.noBrand')}}</span>
+      </div>
       <div class="nonetip" v-if="isShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -18,13 +21,15 @@
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
       </default-tabs>
         <div class="list-content-inner">
-          <kols-list-item
+          <div  v-if="isKol">
+            <kols-list-item
             v-for="item in currentList"
             :key="item.profile_id"
             :renderStatus="kolRenderStatus"
             :renderData="item"
             :routerData="kolRouterData"
-          ></kols-list-item>
+            ></kols-list-item>
+          </div>
         </div>
         <div class="text-center mt20">
           <button
@@ -45,13 +50,14 @@ import DefaultTabs from '@components/DefaultTabs'
 import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
 export default {
-  props: ['childKeyList'],
+  props: ['childKeyList', 'isSelectBrand'],
   components: {
     DefaultTabs,
     KolsListItem
   },
   data() {
     return {
+      isBrandShow: false,
       kolRenderStatus: {
         hasLiked: false,
         hasMsg: false,
@@ -67,6 +73,7 @@ export default {
       tabIndex: 0,
       isShow: false,
       isLoading: true,
+      isKol: false,
       params: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
@@ -92,19 +99,31 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        let newKey = ''
-        this.childKeyList.brand_keywords.split(',').forEach(item => {
-          newKey += '"' + item + '"'
-        }) 
-        this.params.brand_keywords = newKey
-        this.weiboKol(this.params)
-        this.kolRouterData.keywords = newKey
+        if (this.isSelectBrand) {
+          this.isBrandShow = false
+          this.isLoading = false
+          this.isKol = true
+          let newKey = ''
+          this.childKeyList.brand_keywords.split(',').forEach(item => {
+            newKey += '"' + item + '"'
+          }) 
+          this.params.brand_keywords = newKey
+          this.weiboKol(this.params)
+          this.kolRouterData.keywords = newKey
+        } else {
+          this.isBrandShow = true
+          this.isLoading = false
+          this.isKol = false
+        }
       },
       deep: true
     }
   },
   created() {
-    if (this.childKeyList  !== '{}') {
+    if (this.isSelectBrand) {
+      this.isBrandShow = false
+      this.isLoading = false
+      this.isKol = true
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
         newKey += '"' + item + '"'
@@ -112,6 +131,10 @@ export default {
       this.params.brand_keywords = newKey
       this.weiboKol(this.params)
       this.kolRouterData.keywords = newKey
+    } else {
+      this.isBrandShow = true
+      this.isLoading = false
+      this.isKol = false
     }
   },
   methods: {
@@ -157,8 +180,10 @@ export default {
           _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
             _that.isShow = true
+            _that.isKol = false
           } else {
             _that.isShow = false
+            _that.isKol = true
             _that.currentList = res.data.slice(0, 5)
           }
         })
@@ -179,8 +204,10 @@ export default {
           _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
             _that.isShow = true
+            _that.isKol = false
           } else {
             _that.isShow = false
+            _that.isKol = true
             _that.currentList = res.data.slice(0, 5)
           }
         })

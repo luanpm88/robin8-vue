@@ -783,9 +783,12 @@ export const lang = {
     }
   },
   homePage: {
+    brandTop: 'Brand',
+    noBrandTip: ' Please choose the brand ',
+    noBrand: 'You did not choose the brand',
     anlytics: {
       title: 'Analytics',
-      trend: 'Trends',
+      trend: 'Mentions',
       concept: 'Concept',
       competitors: 'Competitors',
       sentiments: 'Sentiments'
