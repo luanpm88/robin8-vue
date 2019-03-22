@@ -147,12 +147,25 @@ export default {
       this.currentList = [] 
       this.isShow = false 
       this.isLoading = true 
+      this.isBrandShow = false
       if (tab.index === 0) {
-        // 微博接口
-        this.weiboKol(this.params)
+        if (this.isSelectBrand) {
+          // 微博接口
+          this.weiboKol(this.params)
+        } else {
+          this.isBrandShow = true
+          this.isLoading = false
+          this.isKol = false
+        }
       } else {
-        // 微信接口
-        this.weixinKol(this.params)
+        if (this.isSelectBrand) {
+          // 微信接口
+          this.weixinKol(this.params)
+        } else {
+          this.isBrandShow = true
+          this.isLoading = false
+          this.isKol = false
+        }
       }
       this.kolRouterData.type = tab.index
     },

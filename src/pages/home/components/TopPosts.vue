@@ -165,12 +165,27 @@ export default {
       this.postListBox = [] 
       this.isShow = false 
       this.isLoading = true 
+      this.isBrandShow = false
       if (tab.index === 0) {
-        // 微博
-        this.topPostWeibo(this.topPostParams)
+        if (this.isSelectBrand) {
+          // 微博
+          this.topPostWeibo(this.topPostParams)
+        } else {
+          this.isLoading = false
+          this.isBrandShow = true
+          this.isShow = false
+          this.isPost = false
+        }
       } else {
-        // 微信
-        this.topPostWeixin(this.topPostParams)
+        if (this.isSelectBrand) {
+          // 微信
+          this.topPostWeixin(this.topPostParams)
+        } else {
+          this.isLoading = false
+          this.isBrandShow = true
+          this.isShow = false
+          this.isPost = false
+        }
       }
     },
     // 微博的接口
@@ -247,14 +262,31 @@ export default {
     },
     PostShowMore() {
       this.isLoading = true 
+      this.isBrandShow = false
+      this.isShow = false
+      this.isPost = true
       if (this.tabIndex === 0) {
-        this.topPostParams.page_no = this.postWeiboCurrentPage 
-        // 微博
-        this.topPostWeibo(this.topPostParams)
+        if (this.isSelectBrand) {
+          this.topPostParams.page_no = this.postWeiboCurrentPage 
+          // 微博
+          this.topPostWeibo(this.topPostParams)
+        } else {
+          this.isLoading = false
+          this.isBrandShow = true
+          this.isShow = false
+          this.isPost = false
+        }
       } else {
-        this.topPostParams.page_no = this.postWeixinCurrentPage 
-        // 微信
-        this.topPostWeixin(this.topPostParams)
+        if (this.isSelectBrand) {
+          this.topPostParams.page_no = this.postWeixinCurrentPage 
+          // 微信
+          this.topPostWeixin(this.topPostParams)
+        } else {
+          this.isLoading = false
+          this.isBrandShow = true
+          this.isShow = false
+          this.isPost = false
+        }
       }
     }
   }

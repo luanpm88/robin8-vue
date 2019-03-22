@@ -14,6 +14,9 @@
             <div class="r8-loading" v-if="isLoading">
               <a-spin tip="Loading..."/>
             </div>
+            <div class="nonetip" v-if="isShow">
+              <span>{{$t('lang.totalNoDataTip')}}</span>
+            </div>
             <div v-if="cur === 0" class="analytic-chart-box">
               <div class="nonetip" v-if="isTrendShow">
                 <span>{{$t('lang.homePage.noBrand')}}</span>
@@ -104,6 +107,7 @@ export default {
       isConcept: false,
       isCompetitor: false,
       isSentiment: false,
+      isShow: false,
       trendTitle: "",
       trendsList: {
         options: ChartOption.trendOptions,
@@ -240,48 +244,65 @@ export default {
   },
   methods: {
     pramsInit() {
-      this.trendTitle = this.childKeyList.name;
-      this.cur = this.childKeyList.tabIndex;
-      let newKey = "";
+      this.trendTitle = this.childKeyList.name
+      this.cur = this.childKeyList.tabIndex
+      let newKey = ""
       this.childKeyList.brand_keywords.split(",").forEach(item => {
-        newKey += '"' + item + '"';
+        newKey += '"' + item + '"'
       });
-      this.trendParams.brand_keywords = newKey;
-      this.sentimentParams.brand_keywords = newKey;
-      this.conceptParams.brand_keywords = newKey;
-      this.competitorParams.cb_names = this.childKeyList.cb_names;
-      this.competitorParams.cb_keywords = this.childKeyList.cb_keywords;
+      this.trendParams.brand_keywords = newKey
+      this.sentimentParams.brand_keywords = newKey
+      this.conceptParams.brand_keywords = newKey
+      this.competitorParams.cb_names = this.childKeyList.cb_names
+      this.competitorParams.cb_keywords = this.childKeyList.cb_keywords
       // 操作竞争者的cb_keywords
-      let _arr = [];
+      let _arr = []
       this.competitorParams.cb_keywords.forEach(element => {
-        let twoKey = [];
-        let _items = element.split(",");
+        let twoKey = []
+        let _items = element.split(",")
         if (_items.length > 1) {
           _items.forEach(item => {
-            twoKey.push('"' + item.replace(/^\s+|\s+$/g, "") + '"');
+            twoKey.push('"' + item.replace(/^\s+|\s+$/g, "") + '"')
           });
         } else {
           _items.forEach(item => {
-            twoKey.push(item.replace(/^\s+|\s+$/g, ""));
+            twoKey.push(item.replace(/^\s+|\s+$/g, ""))
           });
         }
-        twoKey = twoKey.join(" ");
+        twoKey = twoKey.join(" ")
         _arr.push(twoKey);
       });
-      this.competitorParams.cb_keywords = _arr;
+      this.competitorParams.cb_keywords = _arr
     },
     topTabClick(topTab) {
-      this.topTabCur = topTab.index;
-      this.isLoading = true;
+      this.topTabCur = topTab.index
+      this.isLoading = true
+      this.isShow = false
       if (this.cur === 0 && topTab.index === 0) {
         this.isTrend = false;
-        // trend 微博
-        this.trendsWeibo(this.trendParams);
+        // // trend 微博
+        // this.trendsWeibo(this.trendParams);
+        if (this.isSelectBrand) {
+          // trend 微博
+          this.trendsWeibo(this.trendParams);
+        } else {
+          this.isTrend = false
+          this.isTrendShow = true
+          this.isLoading = false
+        }
       }
       if (this.cur === 0 && topTab.index === 1) {
         this.isTrend = false;
         // trend 微信
-        this.trendsWeixin(this.trendParams);
+        // this.trendsWeixin(this.trendParams);
+        if (this.isSelectBrand) {
+          // trend 微博
+          this.trendsWeixin(this.trendParams);
+        } else {
+          this.isTrend = false
+          this.isTrendShow = true
+          this.isLoading = false
+        }
       }
       if (this.cur === 1 && topTab.index === 0) {
         this.isConcept = false;
@@ -317,16 +338,29 @@ export default {
     tabClick(tab) {
       this.cur = tab.index;
       // this.topTabCur = 0
-      this.isLoading = true;
+      this.isLoading = true
+      this.isShow = false
       if (tab.index === 0 && this.topTabCur === 0) {
         this.isTrend = false;
-        // trend 微博
-        this.trendsWeibo(this.trendParams);
+        if (this.isSelectBrand) {
+          // trend 微博
+          this.trendsWeibo(this.trendParams);
+        } else {
+          this.isTrend = false
+          this.isTrendShow = true
+          this.isLoading = false
+        }
       }
       if (tab.index === 0 && this.topTabCur === 1) {
         this.isTrend = false;
-        // trend 微信
-        this.trendsWeixin(this.trendParams);
+        if (this.isSelectBrand) {
+          // trend 微博
+          this.trendsWeixin(this.trendParams);
+        } else {
+          this.isTrend = false
+          this.isTrendShow = true
+          this.isLoading = false
+        }
       }
       if (tab.index === 1 && this.topTabCur === 0) {
         this.isConcept = false;
@@ -416,9 +450,15 @@ export default {
         })
         .then(function(res) {
           _that.isLoading = false;
-          _that.isConcept = true;
-          _that.parentTags = [];
-          _that.parentTags = res.data.slice(0, 100);
+            if (res.data.length === 0 || !res.data.length) {
+              _that.isShow = true
+              _that.isConcept = false
+            } else {
+              _that.isShow = false
+              _that.isConcept = true
+              _that.parentTags = []
+              _that.parentTags = res.data.slice(0, 100);
+            }
         })
         .catch(function(error) {
           // console.log(error)
@@ -434,10 +474,18 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false;
-          _that.isConcept = true;
-          _that.parentTags = [];
-          _that.parentTags = res.data.slice(0, 100);
+          if (res.status === 200) {
+            _that.isLoading = false;
+            if (res.data.length === 0 || !res.data.length) {
+              _that.isShow = true
+              _that.isConcept = false
+            } else {
+              _that.isShow = false
+              _that.isConcept = true
+              _that.parentTags = []
+              _that.parentTags = res.data.slice(0, 100);
+            }
+          }
           // console.log('我是微信', res)
         })
         .catch(function(error) {
