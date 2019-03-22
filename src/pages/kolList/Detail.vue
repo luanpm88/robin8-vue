@@ -179,7 +179,7 @@
                       <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                      <th>{{$t('lang.kolList.detail.socialData.postLast')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
                     </tr>
                     <tr>
