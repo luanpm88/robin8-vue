@@ -215,17 +215,17 @@ export const lang = {
     },
     link: {
       title: 'Campaign URL',
-      placeholder: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.',
+      placeholder: 'This url will be used to calculate campaign results.',
       errorTips: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.'
     },
     name: {
       title: 'Campaign Title',
-      placeholder: 'A good campaign name will help you attract more KOLs to participate to your campaign.',
+      placeholder: 'Please enter your campaign title.',
       errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
       title: 'Campaign Details',
-      placeholder: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.',
+      placeholder: 'Please describe your campaign.',
       errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     picture: {
@@ -281,8 +281,8 @@ export const lang = {
     kolDistrict: {
       title: 'KOL’s Location',
       placeholder: 'Please select KOL’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
       cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
@@ -412,8 +412,8 @@ export const lang = {
     followerDistrict: {
       title: 'Audience’s Location',
       placeholder: 'Please select audience’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOL’s audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOL’s audience.',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
       provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
       cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
