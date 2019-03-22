@@ -32,9 +32,31 @@
             </div>
           </router-link>
         </div>
-        <!-- analytics -->
+        <!-- 内容开始 -->
         <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
         <div v-if="isCompetitors">
+          <!-- <div class="panel default-panel mt20">
+            <div class="panel-head">
+              <h5 class="title text-center">选择品牌</h5>
+            </div>
+            <div class="panel-body prl30">
+              <select
+                name="seletBrand"
+                class="form-control"
+                v-model="seletBrandId"
+                @change="changeBrand"
+              >
+                <option
+                  v-for="(item, index) of allBrandList"
+                  :key="index"
+                  :value="item.id"
+                >
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div> -->
+
           <home-analytic class="mt20" :childKeyList='keyList'></home-analytic>
 
           <div class="home-show row mt20">
@@ -94,7 +116,9 @@ export default {
         cb_keywords: [],
         cb_names: [],
         tabIndex: 0
-      }
+      },
+      allBrandList: [],
+      seletBrandId: ''
     }
   },
   created() {
@@ -121,10 +145,14 @@ export default {
             _that.isCompetitors = false 
           } else {
             _that.isCompetitors = true 
+            // select 时候的判断
+            _that.allBrandList = res.data.trademarks_list
+            // console.log(_that.allBrandList);
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.query) == '{}') {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
+                  _that.seletBrandId = element.id 
                   _that.keyList.name = element.name 
                   _that.keyList.brand_keywords = element.keywords 
                 }
@@ -133,7 +161,7 @@ export default {
               res.data.competitors.forEach(element => {
                 if (element.status === 1) {
                   _that.keyList.cb_names.push(element.name)
-                  _that.keyList.cb_keywords.push(element.short_name) 
+                  _that.keyList.cb_keywords.push(element.short_name)
                 }
               }) 
             } else {
@@ -154,7 +182,7 @@ export default {
               if (_that.$route.query.curentCompittor) {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
-                    // console.log(3333) 
+                    _that.seletBrandId = element.id 
                     _that.keyList.name = element.name 
                     _that.keyList.brand_keywords = element.keywords 
                   }
@@ -171,6 +199,14 @@ export default {
     changeHomStatus(type) {
       if (type) {
         this.isCompetitors = true 
+      }
+    },
+    changeBrand(value) {
+      // console.log(value);
+      console.log(this.seletBrandId);
+      let params = {
+        id: item.id,
+        status: 1
       }
     }
   }
