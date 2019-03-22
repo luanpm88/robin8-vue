@@ -282,8 +282,8 @@ export const lang = {
     kolDistrict: {
       title: '地域',
       placeholder: '请选择地域',
-      provincePlaceholder: '请选择省份',
-      cityPlaceholder: '请选择城市',
+      provincePlaceholder: '所有省份',
+      cityPlaceholder: '所有城市',
       provinceErrorTips: '请选择省份',
       cityErrorTips: '请选择城市'
     },
@@ -413,8 +413,8 @@ export const lang = {
     followerDistrict: {
       title: '粉丝地域',
       placeholder: '请选择粉丝的地域要求',
-      provincePlaceholder: '请选择粉丝的省份',
-      cityPlaceholder: '请选择粉丝的城市',
+      provincePlaceholder: '所有省份',
+      cityPlaceholder: '所有城市',
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
     },
