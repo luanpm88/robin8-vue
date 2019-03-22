@@ -27,7 +27,9 @@
       </tr>
     </table>
     <div class="com-add mt20">
-      <span @click="checkInsight">{{$t('lang.myCompetitionBrands.contrastButton')}}</span>
+      <button type="button" class="btn btn-purple" @click="checkInsight">
+      {{$t('lang.myCompetitionBrands.contrastButton')}}
+    </button>
     </div>
   </div>
 </template>

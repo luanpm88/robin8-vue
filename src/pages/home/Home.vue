@@ -115,7 +115,6 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        console.log(res) 
         if (res.status === 200) {
           // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
