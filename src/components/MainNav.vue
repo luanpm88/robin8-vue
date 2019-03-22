@@ -140,6 +140,11 @@ export default {
           title: 'nav.socialListening',
           icon: 'icon-unit',
           href: '/social/SocialListening'
+        },
+        {
+          title: 'nav.help',
+          icon: 'icon-doc',
+          href: '/help'
         }
       ],
       active: false,

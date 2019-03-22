@@ -4,6 +4,7 @@ import Login from '@/pages/Login'
 import Reg from '@/pages/Reg'
 import ForgetPassword from '@/pages/ForgetPassword'
 import ChangePassword from '@/pages/ChangePassword'
+import Help from '@/pages/Help'
 import Home from '@/pages/home/Home'
 import HomeCreate from '@/pages/home/Create'
 import KolList from '@/pages/kolList/List'
@@ -91,6 +92,14 @@ export default new Router({
       component: ChangePassword,
       meta: {
         title: 'changePassword'
+      }
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: Help,
+      meta: {
+        title: 'help'
       }
     },
     {
