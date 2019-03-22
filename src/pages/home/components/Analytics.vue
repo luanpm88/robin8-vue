@@ -11,22 +11,33 @@
       <div class="mt30">
         <div class="analytic-box">
           <div class="analytic-chart">
+            <div class="r8-loading" v-if="isLoading">
+              <a-spin tip="Loading..."/>
+            </div>
             <div v-if="cur === 0" class="analytic-chart-box">
-              <p class="analytic-chart-title">Trends over past 7 days for  {{trendTitle}}</p>
-              <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
+              <div v-if="isTrend">
+                <p class="analytic-chart-title">Trends over past 7 days for  {{trendTitle}}</p>
+                <Echarts :options="trendsList.options" :chartsStyle="trendsList.chartsStyle" ref="tendsEChart"></Echarts>
+              </div>
             </div>
             <div v-if="cur === 1">
-              <p class="analytic-chart-title">Top keywords</p>
-              <tag-charts :width="830" :height="480" :taglist="parentTags"></tag-charts>
+              <div v-if="isConcept">
+                <p class="analytic-chart-title">Top keywords</p>
+                <tag-charts :width="830" :height="480" :taglist="parentTags"></tag-charts>
+              </div>
             </div>
             <div v-if="cur === 2" class="analytic-chart-box">
-              <p class="analytic-chart-title">Top {{competitorsNum}} competitors</p>
-              <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
+              <div v-if="isCompetitor">
+                <p class="analytic-chart-title">Top {{competitorsNum}} competitors</p>
+                <Echarts :options="competitorList.options" :chartsStyle="competitorList.chartsStyle" ref="competitorEChart"></Echarts>
+              </div>
             </div>
             <div v-if="cur === 3">
-              <p class="analytic-chart-title">Sentiment for {{trendTitle}}</p>
+              <div v-if="isSentiment">
+                <p class="analytic-chart-title">Sentiment for {{trendTitle}}</p>
+                <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
+              </div>
             </div>
-            <Echarts :options="SentimentList.options" :chartsStyle="SentimentList.chartsStyle" ref="sentimentChart" v-if="cur === 3"></Echarts>
           </div>
         </div>
       </div>
@@ -60,6 +71,11 @@ export default {
       competitorsNum: '',
       topTabCur: 0,
       cur: 0,
+      isLoading: true,
+      isTrend: false,
+      isConcept: false,
+      isCompetitor: false,
+      isSentiment: false,
       trendTitle: '',
       trendsList: {
         options: ChartOption.trendOptions,
@@ -185,35 +201,44 @@ export default {
     },
     topTabClick(topTab) {
       this.topTabCur = topTab.index 
+      this.isLoading = true
       if (this.cur === 0 && topTab.index === 0) {
+        this.isTrend = false
         // trend 微博
         this.trendsWeibo(this.trendParams) 
       }
       if (this.cur === 0 && topTab.index === 1) {
+        this.isTrend = false
         // trend 微信
         this.trendsWeixin(this.trendParams) 
       }
       if (this.cur === 1 && topTab.index === 0) {
+        this.isConcept = false
         // concept 微博
         this.conceptWeibo(this.conceptParams) 
       }
       if (this.cur === 1 && topTab.index === 1) {
+        this.isConcept = false
         // concept 微信
         this.conceptWeixin(this.conceptParams) 
       }
       if (this.cur === 2 && topTab.index === 0) {
+        this.isCompetitor = false
         // competitor 微博
         this.competitorWeibo(this.competitorParams) 
       }
       if (this.cur === 2 && topTab.index === 1) {
+        this.isCompetitor = false
         // competitor 微信
         this.competitorWeixin(this.competitorParams) 
       }
       if (this.cur === 3 && topTab.index === 0) {
+        this.isSentiment = false
         // sentiment 微博
         this.sentimentWeibo(this.sentimentParams) 
       }
       if (this.cur === 3 && topTab.index === 1) {
+        this.isSentiment = false
         // sentiment 微信
         this.sentimentWeixin(this.sentimentParams) 
       }
@@ -221,35 +246,44 @@ export default {
     tabClick(tab) {
       this.cur = tab.index 
       // this.topTabCur = 0 
+      this.isLoading = true
       if (tab.index === 0 && this.topTabCur === 0) {
+        this.isTrend = false
         // trend 微博
         this.trendsWeibo(this.trendParams) 
       }
       if (tab.index === 0 && this.topTabCur === 1) {
+        this.isTrend = false
         // trend 微信
         this.trendsWeixin(this.trendParams) 
       }
       if (tab.index === 1 && this.topTabCur === 0) {
+        this.isConcept = false
         // concept 微博
         this.conceptWeibo(this.conceptParams) 
       }
       if (tab.index === 1 && this.topTabCur === 1) {
+        this.isConcept = false
         // concept 微信
         this.conceptWeixin(this.conceptParams) 
       }
       if (tab.index === 2 && this.topTabCur === 0) {
+        this.isCompetitor = false
         // competitor 微博
         this.competitorWeibo(this.competitorParams) 
       }
       if (tab.index === 2 && this.topTabCur === 1) {
+        this.isCompetitor = false
         // competitor 微信
         this.competitorWeixin(this.competitorParams) 
       }
       if (tab.index === 3 && this.topTabCur === 0) {
+        this.isSentiment = false
         // sentiment 微博
         this.sentimentWeibo(this.sentimentParams) 
       }
       if (tab.index === 3 && this.topTabCur === 1) {
+        this.isSentiment = false
         // sentiment 微信
         this.sentimentWeixin(this.sentimentParams) 
       }
@@ -264,8 +298,9 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('我是微博', res) 
           if (res.status === 200) {
+            _that.isLoading = false
+            _that.isTrend = true
             _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7) 
             _that.trendsList.options.series[0].data = res.data.data.slice(0, 7) 
             _that.$refs.tendsEChart.updateOptions(_that.trendsList.options) 
@@ -285,12 +320,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false
+          _that.isTrend = true
           _that.trendsList.options.xAxis.data = res.data.labels.slice(0, 7) 
           _that.trendsList.options.series[0].data = res.data.data.slice(0, 7) 
           _that.$refs.tendsEChart.updateOptions(_that.trendsList.options) 
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // concept 微博
@@ -303,11 +340,13 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false
+          _that.isConcept = true
           _that.parentTags = [] 
           _that.parentTags = res.data.slice(0, 100) 
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // concept 微信
@@ -320,12 +359,14 @@ export default {
           }
         })
         .then(function(res) {
+          _that.isLoading = false
+          _that.isConcept = true
           _that.parentTags = [] 
           _that.parentTags = res.data.slice(0, 100) 
           // console.log('我是微信', res)
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // competitor 微博
@@ -342,6 +383,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            _that.isLoading = false
+            _that.isCompetitor = true
             _that.competitorsNum = res.data.data.length 
             res.data.data.forEach((element, index) => {
               let json = {
@@ -360,7 +403,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // competitor 微信
@@ -377,6 +420,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            _that.isLoading = false
+            _that.isCompetitor = true
             _that.competitorsNum = res.data.data.length 
             res.data.data.forEach((element, index) => {
               let json = {
@@ -396,7 +441,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // sentiment 微博
@@ -410,6 +455,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            _that.isLoading = false
+            _that.isSentiment = true
             let newArr = res.data.labels.map((item, index) => {
               let json = {} 
               json.name = item 
@@ -422,7 +469,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // sentiment 微信
@@ -436,6 +483,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            _that.isLoading = false
+            _that.isSentiment = true
             _that.SentimentList.options.series[0].data = [] 
             let newArr = res.data.labels.map((item, index) => {
               let json = {} 
@@ -449,7 +498,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
         }) 
     },
     // competitor 排序函数
