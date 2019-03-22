@@ -164,8 +164,7 @@ export default {
                 _that.isTotalBrand = true
               }
             })
-            console.log(_that.isTotalBrand);
-            // console.log(_that.allBrandList);
+            // console.log(_that.allBrandList) 
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.query) == '{}') {
               res.data.trademarks_list.forEach(element => {
@@ -243,7 +242,7 @@ export default {
             tabIndex: 0,
           }
           // 从新渲染内容
-          _that.getBaseData();
+          _that.getBaseData() 
         }
       })
     }
