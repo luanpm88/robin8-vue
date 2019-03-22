@@ -28,7 +28,7 @@ export const lang = {
     reg: '注册',
     forgetPassword: '忘记密码',
     changePassword: '重置密码',
-    help: '使用帮助',
+    help: '数据说明',
     home: '首页',
     homeCreate: '创建新活动',
     settings: '企业设置',
@@ -84,7 +84,7 @@ export const lang = {
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     socialListening: '社交聆听',
-    help: '使用帮助'
+    help: '数据说明'
   },
   profile: {
     name: '品牌名称',

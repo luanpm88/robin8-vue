@@ -201,6 +201,9 @@ export default {
           @include transition(.4s);
         }
         &.active, &.router-link-active, &.open {
+          .iconfont {
+            color: nth($blue, 1);
+          }
           .title {
             font-weight: 500;
             color: nth($blue, 1);

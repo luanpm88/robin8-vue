@@ -28,7 +28,7 @@ export const lang = {
     reg: 'Reg',
     forgetPassword: 'Forget Password',
     changePassword: 'Change Password',
-    help: 'Help',
+    help: 'Data Explanation',
     home: 'Home',
     homeCreate: 'Create Campaign',
     settings: 'Settings',
@@ -84,7 +84,7 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     socialListening: 'Social Listening',
-    help: 'Help'
+    help: 'Data Explanation'
   },
   profile: {
     name: 'Brand Name',
