@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <tab :tabList="tabList" :tabIndex="cur" @changeTab="tabClick" class="analytic-bottom-tab"></tab>
+      <tab :tabList="tabList" :tabIndex="cur" @changeTab="tabClick" class="analytic-bottom-tab mt10"></tab>
       <p class="analytic-type">&nbsp;</p>
     </div>
   </div>
@@ -167,10 +167,14 @@ export default {
     childKeyList: {
       handler() {
         this.pramsInit() 
+        this.isLoading = true
+        console.log('woshi 000000');
         if (this.cur === 0) {
           // trend 微博
+          this.isTrend = false
           this.trendsWeibo(this.trendParams) 
         } else {
+          this.isCompetitor = false
           // competitor 微博
           this.competitorWeibo(this.competitorParams) 
         }
@@ -179,6 +183,19 @@ export default {
     }
   },
   created() {
+    if (this.childKeyList  !== '{}') {
+      this.pramsInit() 
+      this.isLoading = true
+      if (this.cur === 0) {
+        // trend 微博
+        this.isTrend = false
+        this.trendsWeibo(this.trendParams) 
+      } else {
+        this.isCompetitor = false
+        // competitor 微博
+        this.competitorWeibo(this.competitorParams) 
+      }
+    }
     this.trendsList.options.xAxis.data = [] 
     this.trendsList.options.series[0].data = [] 
   },

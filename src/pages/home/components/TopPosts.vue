@@ -121,6 +121,16 @@ export default {
     },
   },
   created() {
+    if (this.childKeyList  !== '{}') {
+      let newKey = ''
+      this.childKeyList.brand_keywords.split(',').forEach(item => {
+        newKey += '"' + item + '"'
+      }) 
+      this.topPostParams.page_no = this.postWeiboCurrentPage 
+      this.topPostParams.brand_keywords = newKey 
+      // 微博
+      this.topPostWeibo(this.topPostParams)
+    }
   },
   methods: {
     changeTab(tab) {

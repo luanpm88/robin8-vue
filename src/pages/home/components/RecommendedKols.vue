@@ -103,6 +103,17 @@ export default {
       deep: true
     }
   },
+  created() {
+    if (this.childKeyList  !== '{}') {
+      let newKey = ''
+      this.childKeyList.brand_keywords.split(',').forEach(item => {
+        newKey += '"' + item + '"'
+      }) 
+      this.params.brand_keywords = newKey
+      this.weiboKol(this.params)
+      this.kolRouterData.keywords = newKey
+    }
+  },
   methods: {
     changeLangue() {
       // vuejs 监听本地localstrage变化

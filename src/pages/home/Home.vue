@@ -33,7 +33,7 @@
           </router-link>
         </div>
         <!-- analytics -->
-        <!-- 假如有品牌渲染图表 -->
+        <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
         <div v-if="isCompetitors">
           <home-analytic class="mt20" :childKeyList='keyList'></home-analytic>
 
@@ -46,9 +46,8 @@
             </div>
           </div>
         </div>
-        <!-- 没有品牌渲染提交接口 -->
+        <!-- 刚注册的用户 假如没有输入竞争者和品牌 展现表格让用户填  -->
         <div v-else>
-          <!-- <brand-submit :status='isHomeStatus' @childStatus='changeHomStatus'></brand-submit> -->
           <update-base-info @updateStatus="changeHomStatus"></update-base-info>
         </div>
       </div>
@@ -67,7 +66,6 @@ import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
 import UpdateBaseInfo from './components/UpdateBaseInfo'
-// import brandSubmit from '@/pages/settings/myCompetitionBrands/Create'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
@@ -87,7 +85,7 @@ export default {
   },
   data () {
     return {
-      isCompetitors: true,
+      isCompetitors: false,
       isHomeStatus: 'Yes',
       parentSentiment: '',
       keyList: {
@@ -116,7 +114,7 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        // console.log(res) 
+        console.log(res) 
         if (res.status === 200) {
           // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
@@ -124,7 +122,8 @@ export default {
           } else {
             _that.isCompetitors = true 
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
-            if (JSON.stringify(_that.$route.query) == '') {
+            if (JSON.stringify(_that.$route.query) == '{}') {
+              console.log('woshi jiujiu')
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
                   _that.keyList.name = element.name 
