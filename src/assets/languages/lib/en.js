@@ -356,7 +356,7 @@ export const lang = {
       errorTips: 'To add a new brand name in the selection drop down, please go to the settings tab and create a new brand name.'
     },
     platform: {
-      title: 'Campaign Name',
+      title: 'Social Platform',
       placeholder: 'Exposure Target',
       errorTips: 'Please select the platform'
     },
