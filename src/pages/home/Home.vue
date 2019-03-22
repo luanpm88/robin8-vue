@@ -85,13 +85,14 @@ export default {
   },
   data () {
     return {
-      isCompetitors: false,
+      isCompetitors: true,
       isHomeStatus: 'Yes',
       parentSentiment: '',
       keyList: {
         name: '',
         brand_keywords: '',
         cb_keywords: [],
+        cb_names: [],
         tabIndex: 0
       }
     }
@@ -123,7 +124,6 @@ export default {
             _that.isCompetitors = true 
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.query) == '{}') {
-              console.log('woshi jiujiu')
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
                   _that.keyList.name = element.name 
@@ -133,6 +133,7 @@ export default {
 
               res.data.competitors.forEach(element => {
                 if (element.status === 1) {
+                  _that.keyList.cb_names.push(element.name)
                   _that.keyList.cb_keywords.push(element.short_name) 
                 }
               }) 
@@ -146,6 +147,7 @@ export default {
                 _that.keyList.brand_keywords = _that.$route.query.currentBrand 
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
+                    _that.keyList.cb_names.push(element.name)
                     _that.keyList.cb_keywords.push(element.short_name) 
                   }
                 }) 
@@ -159,6 +161,7 @@ export default {
                   }
                 })
                 // 赋值对比competitor
+                _that.keyList.cb_names = _that.$route.query.curentName
                 _that.keyList.cb_keywords = _that.$route.query.curentCompittor
               }
             }

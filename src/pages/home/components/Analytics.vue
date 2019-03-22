@@ -168,7 +168,6 @@ export default {
       handler() {
         this.pramsInit() 
         this.isLoading = true
-        console.log('woshi 000000');
         if (this.cur === 0) {
           // trend 微博
           this.isTrend = false
@@ -213,8 +212,26 @@ export default {
       this.trendParams.brand_keywords = newKey 
       this.sentimentParams.brand_keywords = newKey 
       this.conceptParams.brand_keywords = newKey 
-      this.competitorParams.cb_names = this.childKeyList.cb_keywords 
+      this.competitorParams.cb_names = this.childKeyList.cb_names 
       this.competitorParams.cb_keywords = this.childKeyList.cb_keywords 
+      // 操作竞争者的cb_keywords
+      let _arr = []
+      this.competitorParams.cb_keywords.forEach(element => {
+        let twoKey = []
+        let _items = element.split(',')
+        if (_items.length > 1) {
+          _items.forEach(item => {
+            twoKey.push('\"' + item.replace(/^\s+|\s+$/g, '') + '\"')
+          })
+        } else {
+          _items.forEach(item => {
+            twoKey.push(item.replace(/^\s+|\s+$/g, ''))
+          })
+        }
+        twoKey = twoKey.join(' ')
+        _arr.push(twoKey)
+      })
+      this.competitorParams.cb_keywords = _arr
     },
     topTabClick(topTab) {
       this.topTabCur = topTab.index 

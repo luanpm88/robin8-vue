@@ -33,7 +33,7 @@
     </tr>
   </table>
   <div class="com-add mt20">
-    <span @click="checkInsight">{{$t('lang.myBrandPage.contrastButton')}}</span>
+    <button @click="checkInsight">{{$t('lang.myBrandPage.contrastButton')}}</button>
   </div>
 </div>
 </template>

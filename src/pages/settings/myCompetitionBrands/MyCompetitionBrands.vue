@@ -48,6 +48,7 @@ export default {
       dataList: {},
       dataListBox: [],
       currentCheckList: [],
+      currentCheckName: [],
     }
   },
   created() {
@@ -120,10 +121,12 @@ export default {
     },
     checkInsight() {
       this.currentCheckList = [];
+      this.currentCheckName = [];
       this.dataListBox.forEach(key => {
         // console.log(key);
         if (key.status === 1) {
           this.currentCheckList.push(key.short_name);
+          this.currentCheckName.push(key.name);
         }
       });
       if (this.currentCheckList.length > 0) {
@@ -132,7 +135,8 @@ export default {
           path: "/",
           name: "Home",
           query: {
-            curentCompittor: this.currentCheckList
+            curentCompittor: this.currentCheckList,
+            curentName: this.currentCheckName
           }
         });
       } else {

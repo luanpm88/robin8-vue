@@ -177,7 +177,7 @@ const MockData = {
       nameLocation: "middle",
       nameTextStyle: {
         fontSize: 16,
-        padding: [0, 0, 60, 0]
+        padding: [0, 0, 70, 0]
         // padding: [20],
         // shadowOffsetY: 30,
       },
