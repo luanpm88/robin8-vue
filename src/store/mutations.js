@@ -43,11 +43,25 @@ export default {
       commonJs.setLocalData('robin8AvatarImgUrl', avatarImgUrl, 604700)
     } catch (e) {}
   },
+  setCompany (state, company) {
+    console.log(company)
+    state.company = company
+    try {
+      commonJs.setLocalData('robin8Company', company, 604700)
+    } catch (e) {}
+  },
   setCompanyName (state, companyName) {
     console.log(companyName)
     state.companyName = companyName
     try {
       commonJs.setLocalData('robin8CompanyName', companyName, 604700)
+    } catch (e) {}
+  },
+  setCompanyLogo (state, companyLogo) {
+    console.log(companyLogo)
+    state.companyLogo = companyLogo
+    try {
+      commonJs.setLocalData('robin8CompanyLogo', companyLogo, 604700)
     } catch (e) {}
   },
   setLanguage (state, language) {
@@ -93,10 +107,22 @@ export default {
       commonJs.removeLocalData('robin8AvatarImgUrl')
     } catch (e) {}
   },
+  removeCompany (state) {
+    state.company = ''
+    try {
+      commonJs.removeLocalData('robin8Company')
+    } catch (e) {}
+  },
   removeCompanyName (state) {
     state.companyName = ''
     try {
       commonJs.removeLocalData('robin8CompanyName')
+    } catch (e) {}
+  },
+  removeCompanyLogo (state) {
+    state.companyLogo = ''
+    try {
+      commonJs.removeLocalData('robin8CompanyLogo')
     } catch (e) {}
   },
   removeLanguage (state) {

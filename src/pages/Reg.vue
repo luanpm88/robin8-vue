@@ -120,7 +120,7 @@ export default {
    }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo']),
     // 邮箱和手机注册切换
     checkType () {
       if (this.flag === true) {
@@ -155,6 +155,14 @@ export default {
             _that.setAvatarImgUrl(res.data.avatar_url)
             _that.setCompanyName(res.data.campany_name)
             _that.setAccount(params.login)
+
+            let regTag = !!_that.$route.query.reg_tag && _that.$route.query.reg_tag != '' ? _that.$route.query.reg_tag : ''
+            console.log(regTag)
+            if (!!regTag && regTag != '' && !!res.data.company && res.data.company != '') {
+              _that.setCompany(res.data.company)
+              _that.setCompanyLogo(res.data.partner_logo)
+            }
+
             if (params.type === 'email') {
               _that.setEmail(params.login)
             } else {
@@ -202,10 +210,12 @@ export default {
         })
     },
     reg () {
+      let regTag = !!this.$route.query.reg_tag && this.$route.query.reg_tag != '' ? this.$route.query.reg_tag : ''
       let params = {
         login: this.typeVal,
         code: this.code,
-        password: this.password
+        password: this.password,
+        reg_tag: regTag
       }
       if (this.flag) {
         params.type = 'mobile_number'

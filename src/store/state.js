@@ -55,12 +55,30 @@ try {
   }
 } catch (e) {}
 
+let company = ''
+let localCompany = commonJs.getLocalData('robin8Company')
+console.log('当前company：' + localCompany)
+try {
+  if (!!localCompany && localCompany != '') {
+    company = localCompany
+  }
+} catch (e) {}
+
 let companyName = ''
 let localCompanyName = commonJs.getLocalData('robin8CompanyName')
 console.log('当前companyName：' + localCompanyName)
 try {
   if (!!localCompanyName && localCompanyName != '') {
     companyName = localCompanyName
+  }
+} catch (e) {}
+
+let companyLogo = ''
+let localCompanyLogo = commonJs.getLocalData('robin8CompanyLogo')
+console.log('当前companyLogo：' + localCompanyLogo)
+try {
+  if (!!localCompanyLogo && localCompanyLogo != '') {
+    companyLogo = localCompanyLogo
   }
 } catch (e) {}
 
@@ -80,6 +98,8 @@ export default {
   account,
   email,
   avatarImgUrl,
+  company,
   companyName,
+  companyLogo,
   language
 }
