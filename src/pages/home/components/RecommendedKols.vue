@@ -105,7 +105,7 @@ export default {
           this.isKol = true
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '"' + item + '"'
+            newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
           }) 
           this.params.brand_keywords = newKey
           this.weiboKol(this.params)
@@ -126,7 +126,7 @@ export default {
       this.isKol = true
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '"' + item + '"'
+        newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
       }) 
       this.params.brand_keywords = newKey
       this.weiboKol(this.params)

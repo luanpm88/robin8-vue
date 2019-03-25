@@ -122,7 +122,7 @@ export default {
           this.isPost = true
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '"' + item + '"'
+            newKey += '\\"' + item + '\\"'
           }) 
           this.topPostParams.page_no = this.postWeiboCurrentPage 
           this.topPostParams.brand_keywords = newKey 
@@ -146,7 +146,7 @@ export default {
       this.isPost = true
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '"' + item + '"'
+        newKey += '\\"' + item + '\\"'
       }) 
       this.topPostParams.page_no = this.postWeiboCurrentPage 
       this.topPostParams.brand_keywords = newKey 
