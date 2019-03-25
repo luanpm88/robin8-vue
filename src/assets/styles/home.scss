@@ -453,8 +453,9 @@
   font-size: $font-nm-s;
   color: #333;
   margin-bottom: 10px;
-  text-align: right;
   line-height: 34px;
+  float: left;
+  margin-right: 10px;
 }
 .no-brand-select{
   width: 300px;
