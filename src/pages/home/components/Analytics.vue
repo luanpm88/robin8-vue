@@ -248,7 +248,7 @@ export default {
       this.cur = this.childKeyList.tabIndex
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '"' + item + '"'
+        newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
       }) 
       this.trendParams.brand_keywords = newKey
       this.sentimentParams.brand_keywords = newKey
@@ -262,7 +262,7 @@ export default {
         let _items = element.split(',')
         if (_items.length > 1) {
           _items.forEach(item => {
-            twoKey.push('"' + item.replace(/^\s+|\s+$/g, '') + '"')
+            twoKey.push('\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"')
           }) 
         } else {
           _items.forEach(item => {
@@ -271,7 +271,10 @@ export default {
         }
         twoKey = twoKey.join(" ")
         _arr.push(twoKey) 
-      }) 
+      })
+      _arr.push(newKey)
+      this.competitorParams.cb_names = this.competitorParams.cb_names.slice(0, this.competitorParams.cb_names.length)
+      this.competitorParams.cb_names.push(this.trendTitle)
       this.competitorParams.cb_keywords = _arr
     },
     topTabClick(topTab) {
@@ -518,7 +521,7 @@ export default {
               json.label = res.data.labels[index] 
               _that.labelList.push(json) 
             }) 
-            _that.labelList.sort(_that.compare('data')).forEach(element => {
+            _that.labelList.forEach(element => {
               _that.competitorList.options.yAxis.data.push(element.label) 
               _that.competitorList.options.series[0].data.push(element.data) 
             }) 
@@ -557,10 +560,9 @@ export default {
               json.label = res.data.labels[index] 
               _that.labelList.push(json) 
             }) 
-            // console.log()
-            _that.labelList.sort(_that.compare('data')).forEach(element => {
+            _that.labelList.forEach(element => {
               _that.competitorList.options.yAxis.data.push(element.label) 
-              _that.competitorList.options.series[0].data.push(element.data) 
+              _that.competitorList.options.series[0].data.push(element.data)
             }) 
             _that.$refs.competitorEChart.updateOptions(
               _that.competitorList.options

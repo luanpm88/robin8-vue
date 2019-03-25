@@ -351,7 +351,7 @@ export default {
     // console.log(this.$route.query)
     let newKey = '' 
     this.$route.query.brand_keywords.split(',').forEach(item => {
-      newKey += '"' + item + '"'
+      newKey += '\\"' + item + '\\"'
     }) 
     this.trendParams.brand_keywords = newKey 
     this.sentimentParams.brand_keywords = newKey 
