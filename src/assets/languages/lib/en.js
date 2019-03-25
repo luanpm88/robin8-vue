@@ -142,6 +142,7 @@ export const lang = {
       errorTips: 'Enter valid code'
     },
     login: 'Sign In',
+    reg: 'Sign Up',
     submit: 'Next'
   },
   changePw: {
@@ -157,6 +158,7 @@ export const lang = {
       errorTips: 'Please confirm your password'
     },
     login: 'Sign In',
+    prev: 'Prev',
     submit: 'Submit'
   },
   profile: {

@@ -54,6 +54,15 @@ Validator.extend('phone', {
   }
 })
 
+Validator.extend('email', {
+  messages: {
+    zh_CN: field => field + '格式不正确',
+  },
+  validate: value => {
+    return commonJs.verifyEmail.test(value)
+  }
+})
+
 Validator.extend('number', {
   messages: {
     zh_CN: field => field + '格式不正确',

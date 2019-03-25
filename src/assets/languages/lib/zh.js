@@ -142,6 +142,7 @@ export const lang = {
       errorTips: '请输入验证码'
     },
     login: '去登录',
+    reg: '去注册',
     submit: '下一步'
   },
   changePw: {
@@ -157,6 +158,7 @@ export const lang = {
       errorTips: '请确认新密码'
     },
     login: '去登录',
+    prev: '上一步',
     submit: '确定'
   },
   profile: {
