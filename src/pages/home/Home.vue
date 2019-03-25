@@ -40,7 +40,7 @@
               <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
             </div>
             <div class="panel-body prl30 clearfix">
-              <span class="no-brand-tip col-sm-3">{{$t('lang.homePage.noBrandTip')}}:</span>
+              <span class="no-brand-tip">{{$t('lang.homePage.noBrandTip')}}:</span>
               <select
                 name="seletBrand"
                 class="form-control no-brand-select col-sm-8"

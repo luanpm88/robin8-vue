@@ -100,6 +100,7 @@ export default {
     return {
       competitorsNum: '',
       topTabCur: 0,
+      // 底部tab当前的index
       cur: 0,
       isLoading: true,
       isTrendShow: true,
@@ -216,27 +217,28 @@ export default {
           this.isLoading = false
         }
       },
+      immediate:true,
       deep: true
     }
   },
   created() {
-    if (this.isSelectBrand) {
-      this.isTrendShow = false
-      this.pramsInit() 
-      if (this.cur === 0) {
-        // trend 微博
-        this.isTrend = false 
-        this.trendsWeibo(this.trendParams) 
-      } else {
-        this.isCompetitor = false 
-        // competitor 微博
-        this.competitorWeibo(this.competitorParams) 
-      }
-    } else {
-      this.isTrend = false
-      this.isTrendShow = true
-      this.isLoading = false
-    }
+    // if (this.isSelectBrand) {
+    //   this.isTrendShow = false
+    //   this.pramsInit() 
+    //   if (this.cur === 0) {
+    //     // trend 微博
+    //     this.isTrend = false 
+    //     this.trendsWeibo(this.trendParams) 
+    //   } else {
+    //     this.isCompetitor = false 
+    //     // competitor 微博
+    //     this.competitorWeibo(this.competitorParams) 
+    //   }
+    // } else {
+    //   this.isTrend = false
+    //   this.isTrendShow = true
+    //   this.isLoading = false
+    // }
     
   },
   computed: {
@@ -272,129 +274,145 @@ export default {
         twoKey = twoKey.join(" ")
         _arr.push(twoKey) 
       })
+      // 将brand_keywords 和name 放进competitor中，然后展示在页面中
       _arr.push(newKey)
       this.competitorParams.cb_names = this.competitorParams.cb_names.slice(0, this.competitorParams.cb_names.length)
       this.competitorParams.cb_names.push(this.trendTitle)
       this.competitorParams.cb_keywords = _arr
     },
+
+    // analytic 头部右侧微信和微博判 tab切换事件判断
     topTabClick(topTab) {
       this.topTabCur = topTab.index
       this.isLoading = true
       this.isShow = false
-      if (this.cur === 0 && topTab.index === 0) {
+    
+      // cur 为底部当前index，切换为0 是为mention
+      if (this.cur === 0) {
         this.isTrend = false 
-        // // trend 微博
-        // this.trendsWeibo(this.trendParams) 
+        // 因为mention 还有没有品牌的一种情况
         if (this.isSelectBrand) {
-          // trend 微博
-          this.trendsWeibo(this.trendParams) 
+          if (topTab.index === 0) {
+            // trend 微博
+            this.trendsWeibo(this.trendParams) 
+          }
+          if (topTab.index === 1) {
+            // trend 微信
+            this.trendsWeixin(this.trendParams) 
+          }
         } else {
           this.isTrend = false
           this.isTrendShow = true
           this.isLoading = false
         }
       }
-      if (this.cur === 0 && topTab.index === 1) {
-        this.isTrend = false 
-        // trend 微信
-        // this.trendsWeixin(this.trendParams) 
-        if (this.isSelectBrand) {
-          // trend 微博
-          this.trendsWeixin(this.trendParams) 
-        } else {
-          this.isTrend = false
-          this.isTrendShow = true
-          this.isLoading = false
+
+      // cur 为底部当前index，底部为切换为1 是为concept
+      if (this.cur === 1) {
+        this.isConcept = false
+        if (topTab.index === 0) {
+          // concept 微博
+          this.conceptWeibo(this.conceptParams)
+        }
+        if (topTab.index === 1) {
+          // concept 微信
+          this.conceptWeixin(this.conceptParams) 
         }
       }
-      if (this.cur === 1 && topTab.index === 0) {
-        this.isConcept = false 
-        // concept 微博
-        this.conceptWeibo(this.conceptParams) 
-      }
-      if (this.cur === 1 && topTab.index === 1) {
-        this.isConcept = false 
-        // concept 微信
-        this.conceptWeixin(this.conceptParams) 
-      }
-      if (this.cur === 2 && topTab.index === 0) {
+
+      // cur 为底部当前index，底部为切换为2 是为competitor
+      if (this.cur === 2) {
         this.isCompetitor = false 
-        // competitor 微博
-        this.competitorWeibo(this.competitorParams) 
+        if (topTab.index === 0) {
+          // competitor 微博
+          this.competitorWeibo(this.competitorParams) 
+        }
+        if (topTab.index === 1) {
+          // competitor 微信
+          this.competitorWeixin(this.competitorParams) 
+        }
       }
-      if (this.cur === 2 && topTab.index === 1) {
-        this.isCompetitor = false 
-        // competitor 微信
-        this.competitorWeixin(this.competitorParams) 
-      }
-      if (this.cur === 3 && topTab.index === 0) {
+
+      //cur 为底部当前index，底部为切换为3 是为sentiment
+      if (this.cur === 3) {
         this.isSentiment = false 
-        // sentiment 微博
-        this.sentimentWeibo(this.sentimentParams) 
+        if (topTab.index === 0) {
+          // sentiment 微博
+          this.sentimentWeibo(this.sentimentParams) 
+        }
+        if (topTab.index === 1) {
+          // sentiment 微信
+          this.sentimentWeixin(this.sentimentParams) 
+        }
       }
-      if (this.cur === 3 && topTab.index === 1) {
-        this.isSentiment = false 
-        // sentiment 微信
-        this.sentimentWeixin(this.sentimentParams) 
-      }
+
     },
+    // analytic底部tab切换判断
     tabClick(tab) {
+      // tab.index 底部tab当前的类型，topTabCur 头部右侧哪种平台类型
       this.cur = tab.index 
-      // this.topTabCur = 0
       this.isLoading = true
       this.isShow = false
-      if (tab.index === 0 && this.topTabCur === 0) {
+
+      // tab.index 为底部当前index，切换为0 是为mention
+      if (tab.index === 0) {
         this.isTrend = false 
+        // 因为mention 还有没有品牌的一种情况
         if (this.isSelectBrand) {
-          // trend 微博
-          this.trendsWeibo(this.trendParams) 
+          if (this.topTabCur === 0) {
+            // trend 微博
+            this.trendsWeibo(this.trendParams) 
+          }
+          if (this.topTabCur === 1) {
+            // trend 微信
+            this.trendsWeixin(this.trendParams) 
+          }
         } else {
           this.isTrend = false
           this.isTrendShow = true
           this.isLoading = false
         }
       }
-      if (tab.index === 0 && this.topTabCur === 1) {
-        this.isTrend = false 
-        if (this.isSelectBrand) {
-          // trend 微博
-          this.trendsWeixin(this.trendParams) 
-        } else {
-          this.isTrend = false
-          this.isTrendShow = true
-          this.isLoading = false
+
+      // tab.index 为底部当前index，切换为1 是为concept
+      if (tab.index === 1) {
+        this.isConcept = false 
+        if (this.topTabCur === 0) {
+          // concept 微博
+          this.conceptWeibo(this.conceptParams) 
+        }
+        if (this.topTabCur === 1) {
+          // concept 微信
+          this.conceptWeixin(this.conceptParams)
         }
       }
-      if (tab.index === 1 && this.topTabCur === 0) {
-        this.isConcept = false 
-        // concept 微博
-        this.conceptWeibo(this.conceptParams) 
-      }
-      if (tab.index === 1 && this.topTabCur === 1) {
-        this.isConcept = false 
-        // concept 微信
-        this.conceptWeixin(this.conceptParams) 
-      }
-      if (tab.index === 2 && this.topTabCur === 0) {
+
+      // tab.index 为底部当前index，切换为2 是为competitor
+      if (tab.index === 2) {
         this.isCompetitor = false 
-        // competitor 微博
-        this.competitorWeibo(this.competitorParams) 
+        if (this.topTabCur === 0) {
+          // competitor 微博
+          this.competitorWeibo(this.competitorParams) 
+        }
+        if (this.topTabCur === 1) {
+          // competitor 微信
+          this.competitorWeixin(this.competitorParams) 
+        }
       }
-      if (tab.index === 2 && this.topTabCur === 1) {
-        this.isCompetitor = false 
-        // competitor 微信
-        this.competitorWeixin(this.competitorParams) 
-      }
-      if (tab.index === 3 && this.topTabCur === 0) {
+
+      // tab.index 为底部当前index，切换为3 是为sentiment
+      if (tab.index === 3) {
         this.isSentiment = false 
-        // sentiment 微博
-        this.sentimentWeibo(this.sentimentParams) 
+        if (this.topTabCur === 0) {
+          // sentiment 微博
+          this.sentimentWeibo(this.sentimentParams) 
+        }
+        if (this.topTabCur === 1) {
+          // sentiment 微信
+          this.sentimentWeixin(this.sentimentParams) 
+        }
       }
-      if (tab.index === 3 && this.topTabCur === 1) {
-        this.isSentiment = false 
-        // sentiment 微信
-        this.sentimentWeixin(this.sentimentParams) 
-      }
+      
     },
     // trend 微博
     trendsWeibo(params) {
