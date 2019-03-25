@@ -2,33 +2,34 @@
   <div class="page">
     <div class="panel default-panel forget-panel">
       <div class="panel-head">
-        <h5 class="title text-center">重置帐号密码</h5>
+        <h5 class="title text-center">{{$t('lang.changePw.title')}}</h5>
       </div>
       <div class="panel-body">
         <div class="forget-container">
           <div class="form-horizontal default-form forget-form">
             <div class="form-group">
-              <div class="col-sm-4 control-label">新密码:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-12">
                 <input
                   type="password"
                   class="form-control input-sm"
-                  placeholder="输入新密码"
+                  :placeholder="$t('lang.changePw.password.placeholder')"
                 >
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-4 control-label">确认新密码:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-12">
                 <input
                   type="password"
                   class="form-control input-sm"
-                  placeholder="确认新密码"
+                  :placeholder="$t('lang.changePw.confirmPw.placeholder')"
                 >
               </div>
             </div>
             <div class="form-group mt40 text-center">
-              <button type="button" class="btn btn-cyan confirm-btn">确定</button>
+              <button
+                type="button"
+                class="btn btn-cyan confirm-btn"
+              >{{$t('lang.changePw.submit')}}</button>
             </div>
           </div>
         </div>

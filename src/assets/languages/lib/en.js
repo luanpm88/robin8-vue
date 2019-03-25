@@ -25,7 +25,7 @@ export const lang = {
   yearsOlder: 'years old or older',
   router: {
     login: 'Log In',
-    reg: 'Reg',
+    reg: 'Sign Up',
     forgetPassword: 'Forget Password',
     changePassword: 'Change Password',
     help: 'Data Explanation',
@@ -85,6 +85,79 @@ export const lang = {
     weiboRanking: 'Weibo Ranking',
     socialListening: 'Social Listening',
     help: 'Data Explanation'
+  },
+  login: {
+    title: 'Log In',
+    account: {
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
+    },
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
+    },
+    forget: 'Forgot Password?',
+    submit: 'Sign In'
+  },
+  signUp: {
+    title: 'Sign Up',
+    email: {
+      title: 'Email',
+      placeholder: 'Please enter your email',
+      errorTips: 'Please enter your email'
+    },
+    phone: {
+      title: 'Phone',
+      placeholder: 'Please enter your phone number',
+      errorTips: 'Please enter your phone number'
+    },
+    code: {
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
+    },
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
+    },
+    toggleTips: {
+      email: 'Sign up with email',
+      phone: 'Sign up with mobile number'
+    },
+    submit: 'Sign Up'
+  },
+  forgetPw: {
+    title: 'Forget Password',
+    account: {
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
+    },
+    code: {
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
+    },
+    login: 'Sign In',
+    submit: 'Next'
+  },
+  changePw: {
+    title: 'Change Password',
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter new password',
+      errorTips: 'Please enter new password'
+    },
+    confirmPw: {
+      title: 'Confirm Password',
+      placeholder: 'Please confirm your password',
+      errorTips: 'Please confirm your password'
+    },
+    login: 'Sign In',
+    submit: 'Submit'
   },
   profile: {
     name: 'Brand Name',

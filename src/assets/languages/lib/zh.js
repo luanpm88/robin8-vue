@@ -86,6 +86,79 @@ export const lang = {
     socialListening: '社交聆听',
     help: '数据说明'
   },
+  login: {
+    title: '登录',
+    account: {
+      title: '账户',
+      placeholder: '请输入邮箱或手机号',
+      errorTips: '请输入邮箱或手机号'
+    },
+    password: {
+      title: '密码',
+      placeholder: '请输入密码',
+      errorTips: '请输入密码'
+    },
+    forget: '忘记密码？',
+    submit: '登录'
+  },
+  signUp: {
+    title: '注册',
+    email: {
+      title: '电子邮箱',
+      placeholder: '请输入电子邮箱',
+      errorTips: '请输入电子邮箱'
+    },
+    phone: {
+      title: '手机号码',
+      placeholder: '请输入手机号码',
+      errorTips: '请输入手机号码'
+    },
+    code: {
+      title: '验证码',
+      placeholder: '请输入验证码',
+      errorTips: '请输入验证码'
+    },
+    password: {
+      title: '密码',
+      placeholder: '请输入密码',
+      errorTips: '请输入密码'
+    },
+    toggleTips: {
+      email: '用邮箱注册',
+      phone: '用手机注册'
+    },
+    submit: '注册'
+  },
+  forgetPw: {
+    title: '找回帐号密码',
+    account: {
+      title: '账户',
+      placeholder: '请输入邮箱或手机号',
+      errorTips: '请输入邮箱或手机号'
+    },
+    code: {
+      title: '验证码',
+      placeholder: '请输入验证码',
+      errorTips: '请输入验证码'
+    },
+    login: '去登录',
+    submit: '下一步'
+  },
+  changePw: {
+    title: '重置帐号密码',
+    password: {
+      title: '新密码',
+      placeholder: '请输入新密码',
+      errorTips: '请输入新密码'
+    },
+    confirmPw: {
+      title: '确认新密码',
+      placeholder: '请确认新密码',
+      errorTips: '请确认新密码'
+    },
+    login: '去登录',
+    submit: '确定'
+  },
   profile: {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
