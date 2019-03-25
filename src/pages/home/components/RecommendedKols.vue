@@ -78,7 +78,7 @@ export default {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
         brand_keywords: 'BMW',
-        order_by: 'doc_count'
+        order_by: 'influence'
       },
       currentList: [],
       tabList: [
@@ -100,72 +100,78 @@ export default {
     childKeyList: {
       handler() {
         if (this.isSelectBrand) {
+          // console.log('woshiyou watch 品牌')
           this.isBrandShow = false
-          this.isLoading = false
-          this.isKol = true
+          this.isLoading = true
+          this.isKol = false
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
             newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
           }) 
           this.params.brand_keywords = newKey
-          this.weiboKol(this.params)
           this.kolRouterData.keywords = newKey
+          if (Number(this.tabIndex) === 0) {
+            // weibo 
+            this.weiboKol(this.params)
+          } 
+          if (Number(this.tabIndex) === 1) {
+            // 微信接口
+            this.weixinKol(this.params)
+          }
         } else {
+          // console.log('woshiyou watch无品牌')
+          this.tabIndex = 0
           this.isBrandShow = true
           this.isLoading = false
           this.isKol = false
         }
       },
+      immediate:true,
       deep: true
     }
   },
   created() {
-    if (this.isSelectBrand) {
-      this.isBrandShow = false
-      this.isLoading = false
-      this.isKol = true
-      let newKey = ''
-      this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
-      }) 
-      this.params.brand_keywords = newKey
-      this.weiboKol(this.params)
-      this.kolRouterData.keywords = newKey
-    } else {
-      this.isBrandShow = true
-      this.isLoading = false
-      this.isKol = false
-    }
+    // if (this.isSelectBrand) {
+    //   //  console.log('woshiyou creatr 品牌')
+    //   this.isLoading = true
+    //   this.isBrandShow = false
+    //   this.isKol = false
+    //   let newKey = ''
+    //   this.childKeyList.brand_keywords.split(',').forEach(item => {
+    //     newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
+    //   }) 
+    //   this.tabIndex = 0
+    //   this.params.brand_keywords = newKey
+    //   this.weiboKol(this.params)
+    //   this.kolRouterData.keywords = newKey
+    // } else {
+    //   // console.log('woshiyou creatr无品牌')
+    //   this.isLoading = false
+    //   this.isBrandShow = true
+    //   this.isKol = false
+    //   this.tabIndex = 0
+    // }
   },
   methods: {
-    changeLangue() {
-      // vuejs 监听本地localstrage变化
-
-    },
     changeTab(tab) {
       this.tabIndex = tab.index
       this.currentList = [] 
       this.isShow = false 
       this.isLoading = true 
       this.isBrandShow = false
-      if (tab.index === 0) {
-        if (this.isSelectBrand) {
+      if (this.isSelectBrand) {
+        if (tab.index === 0) {
           // 微博接口
           this.weiboKol(this.params)
-        } else {
-          this.isBrandShow = true
-          this.isLoading = false
-          this.isKol = false
         }
-      } else {
-        if (this.isSelectBrand) {
+        if (tab.index === 1) {
           // 微信接口
           this.weixinKol(this.params)
-        } else {
-          this.isBrandShow = true
-          this.isLoading = false
-          this.isKol = false
         }
+      } else {
+        this.isBrandShow = true
+        this.isLoading = false
+        this.isKol = false
       }
       this.kolRouterData.type = tab.index
     },

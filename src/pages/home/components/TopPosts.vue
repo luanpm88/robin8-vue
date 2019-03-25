@@ -116,18 +116,27 @@ export default {
     childKeyList: {
       handler() {
         if (this.isSelectBrand) {
-          this.isLoading = false
+          this.isLoading = true
           this.isBrandShow = false
           this.isShow = false
-          this.isPost = true
+          this.isPost = false
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
             newKey += '\\"' + item + '\\"'
           }) 
-          this.topPostParams.page_no = this.postWeiboCurrentPage 
           this.topPostParams.brand_keywords = newKey 
-          // 微博
-          this.topPostWeibo(this.topPostParams)
+          if (Number(this.tabIndex) === 0) {
+            this.postWeiboCurrentPage = 0
+            this.topPostParams.page_no = this.postWeiboCurrentPage 
+            // 微博
+            this.topPostWeibo(this.topPostParams)
+          } 
+          if (Number(this.tabIndex) === 1) {
+            this.postWeixinCurrentPage = 0
+            this.topPostParams.page_no = this.postWeixinCurrentPage 
+            // 微信
+            this.topPostWeixin(this.topPostParams)
+          }
         } else {
           this.isLoading = false
           this.isBrandShow = true
@@ -135,29 +144,30 @@ export default {
           this.isPost = false
         }
       },
+      immediate:true,
       deep: true
     },
   },
   created() {
-    if (this.isSelectBrand) {
-      this.isLoading = false
-      this.isBrandShow = false
-      this.isShow = false
-      this.isPost = true
-      let newKey = ''
-      this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '\\"' + item + '\\"'
-      }) 
-      this.topPostParams.page_no = this.postWeiboCurrentPage 
-      this.topPostParams.brand_keywords = newKey 
-      // 微博
-      this.topPostWeibo(this.topPostParams)
-    } else {
-      this.isLoading = false
-      this.isBrandShow = true
-      this.isShow = false
-      this.isPost = false
-    }
+    // if (this.isSelectBrand) {
+    //   this.isLoading = true
+    //   this.isBrandShow = false
+    //   this.isShow = false
+    //   this.isPost = false
+    //   let newKey = ''
+    //   this.childKeyList.brand_keywords.split(',').forEach(item => {
+    //     newKey += '\\"' + item + '\\"'
+    //   }) 
+    //   this.topPostParams.page_no = this.postWeiboCurrentPage 
+    //   this.topPostParams.brand_keywords = newKey 
+    //   // 微博
+    //   this.topPostWeibo(this.topPostParams)
+    // } else {
+    //   this.isLoading = false
+    //   this.isBrandShow = true
+    //   this.isShow = false
+    //   this.isPost = false
+    // }
   },
   methods: {
     changeTab(tab) {
@@ -166,26 +176,24 @@ export default {
       this.isShow = false 
       this.isLoading = true 
       this.isBrandShow = false
-      if (tab.index === 0) {
-        if (this.isSelectBrand) {
+      if (this.isSelectBrand) {
+        if (tab.index === 0) {
+          this.postWeiboCurrentPage = 0
+          this.topPostParams.page_no = this.postWeiboCurrentPage 
           // 微博
           this.topPostWeibo(this.topPostParams)
-        } else {
-          this.isLoading = false
-          this.isBrandShow = true
-          this.isShow = false
-          this.isPost = false
         }
-      } else {
-        if (this.isSelectBrand) {
+        if (tab.index === 1) {
+          this.postWeixinCurrentPage = 0
+          this.topPostParams.page_no = this.postWeixinCurrentPage 
           // 微信
           this.topPostWeixin(this.topPostParams)
-        } else {
-          this.isLoading = false
-          this.isBrandShow = true
-          this.isShow = false
-          this.isPost = false
         }
+      } else {
+        this.isLoading = false
+        this.isBrandShow = true
+        this.isShow = false
+        this.isPost = false
       }
     },
     // 微博的接口
@@ -200,9 +208,17 @@ export default {
         .then(function(res) {
           _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
-            _that.isShow = true 
-            _that.isBrandShow = false
-            _that.isPost = false
+            if (Number(_that.postWeiboCurrentPage) === 0) {
+              _that.isShow = true 
+              _that.isBrandShow = false
+              _that.isPost = false
+            }
+            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏 
+            if (Number(_that.postWeiboCurrentPage) !== 0) {
+              _that.isShow = true 
+              _that.isBrandShow = false
+              _that.isPost = true
+            }
           } else {
             _that.isShow = false 
             _that.isBrandShow = false
@@ -213,7 +229,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
           alert(error) 
         })
     },
@@ -229,9 +245,17 @@ export default {
         .then(function(res) {
           _that.isLoading = false 
           if (res.data.data.length === 0 || !res.data.data.length) {
-            _that.isShow = true 
-            _that.isBrandShow = false
-            _that.isPost = false
+            if (Number(_that.postWeixinCurrentPage) === 0) {
+              _that.isShow = true 
+              _that.isBrandShow = false
+              _that.isPost = false
+            }
+            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏 
+            if (Number(_that.postWeixinCurrentPage) !== 0) {
+              _that.isShow = true 
+              _that.isBrandShow = false
+              _that.isPost = true
+            }
           } else {
             _that.isShow = false 
             _that.isBrandShow = false
@@ -242,7 +266,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log(error) 
+          // console.log(error) 
           alert(error) 
         })
     },
@@ -265,28 +289,23 @@ export default {
       this.isBrandShow = false
       this.isShow = false
       this.isPost = true
-      if (this.tabIndex === 0) {
-        if (this.isSelectBrand) {
+
+      if (this.isSelectBrand) {
+        if (this.tabIndex === 0) {
           this.topPostParams.page_no = this.postWeiboCurrentPage 
           // 微博
           this.topPostWeibo(this.topPostParams)
-        } else {
-          this.isLoading = false
-          this.isBrandShow = true
-          this.isShow = false
-          this.isPost = false
         }
-      } else {
-        if (this.isSelectBrand) {
+        if (this.tabIndex === 1) {
           this.topPostParams.page_no = this.postWeixinCurrentPage 
           // 微信
           this.topPostWeixin(this.topPostParams)
-        } else {
-          this.isLoading = false
-          this.isBrandShow = true
-          this.isShow = false
-          this.isPost = false
         }
+      } else {
+        this.isLoading = false
+        this.isBrandShow = true
+        this.isShow = false
+        this.isPost = false
       }
     }
   }
