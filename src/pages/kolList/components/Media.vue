@@ -1,11 +1,11 @@
 <!-- media -->
 <template>
   <div class="panel default-panel mt20">
-    <!-- <div class="panel-head">
+    <div class="panel-head" v-if="titleType === 1">
       <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</h5>
-    </div> -->
+    </div>
     <div class="panel-body prl30">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
+      <p class="kol-cloumn mb10" v-if="titleType === 0">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</p>
       <div class="nonetip" v-if="isMediaShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -49,7 +49,7 @@ import commonJs from '@javascripts/common.js'
 import { mapState } from 'vuex'
 export default {
   name: 'Media',
-  props: ['currentId'],
+  props: ['currentId', 'titleType'],
   data () {
     return {
       // Media

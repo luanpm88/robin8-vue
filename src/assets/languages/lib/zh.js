@@ -63,7 +63,8 @@ export const lang = {
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     benchMark: 'benchMark',
-    socialListening: '社交聆听'
+    socialListening: '社交聆听',
+    kolCompare: 'kol对比'
   },
   nav: {
     home: '首页',
@@ -891,5 +892,8 @@ export const lang = {
     price: {
       tit: '价格简列'
     }
+  },
+  radarVue: {
+    tit: '行业分类标签 Radar'
   }
 }

@@ -468,10 +468,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
     /* autoprefixer: on */
     font-size: $font-sm;
+  }
+  .activity-table{
+    width: 100%;
+    overflow: scroll;
+    height: 200px;
   }
 }
