@@ -148,27 +148,7 @@ export default {
       deep: true
     },
   },
-  created() {
-    // if (this.isSelectBrand) {
-    //   this.isLoading = true
-    //   this.isBrandShow = false
-    //   this.isShow = false
-    //   this.isPost = false
-    //   let newKey = ''
-    //   this.childKeyList.brand_keywords.split(',').forEach(item => {
-    //     newKey += '\\"' + item + '\\"'
-    //   }) 
-    //   this.topPostParams.page_no = this.postWeiboCurrentPage 
-    //   this.topPostParams.brand_keywords = newKey 
-    //   // 微博
-    //   this.topPostWeibo(this.topPostParams)
-    // } else {
-    //   this.isLoading = false
-    //   this.isBrandShow = true
-    //   this.isShow = false
-    //   this.isPost = false
-    // }
-  },
+  created() {},
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index

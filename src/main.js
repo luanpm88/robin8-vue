@@ -6,7 +6,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Pagination, Spin, InputNumber } from 'ant-design-vue'
+import { Pagination, Spin, InputNumber, Tooltip } from 'ant-design-vue'
 import store from './store'
 import 'babel-polyfill'
 import 'ant-design-vue/lib/table/style/css'
@@ -28,6 +28,7 @@ import '@styles/home.scss'
 Vue.use(VueI18n)
 Vue.use(Pagination)
 Vue.use(Spin)
+Vue.use(Tooltip)
 Vue.use(InputNumber)
 Vue.config.productionTip = false
 fastClick.attach(document.body)

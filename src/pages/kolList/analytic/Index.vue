@@ -2,11 +2,11 @@
 <template>
   <div>
     <!-- distribution -->
-    <distribution :currentType="this.$route.query.type" :currentId="this.$route.params.id"></distribution>
+    <distribution :currentType="this.$route.query.type" :currentId="this.$route.params.id" :titleType='0'></distribution>
 
     <!-- weixin Media  微博没有 Media-->
     <div v-if="Number(type) === 1">
-      <media :currentId="this.$route.params.id"></media>
+      <media :currentId="this.$route.params.id" :titleType='0'></media>
     </div>
 
     <!-- 微博图表渲染模版  -->

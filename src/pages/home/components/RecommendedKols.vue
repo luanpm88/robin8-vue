@@ -130,28 +130,7 @@ export default {
       deep: true
     }
   },
-  created() {
-    // if (this.isSelectBrand) {
-    //   //  console.log('woshiyou creatr 品牌')
-    //   this.isLoading = true
-    //   this.isBrandShow = false
-    //   this.isKol = false
-    //   let newKey = ''
-    //   this.childKeyList.brand_keywords.split(',').forEach(item => {
-    //     newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
-    //   }) 
-    //   this.tabIndex = 0
-    //   this.params.brand_keywords = newKey
-    //   this.weiboKol(this.params)
-    //   this.kolRouterData.keywords = newKey
-    // } else {
-    //   // console.log('woshiyou creatr无品牌')
-    //   this.isLoading = false
-    //   this.isBrandShow = true
-    //   this.isKol = false
-    //   this.tabIndex = 0
-    // }
-  },
+  created() {},
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index

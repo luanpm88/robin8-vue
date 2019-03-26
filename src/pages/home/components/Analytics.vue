@@ -79,7 +79,6 @@ import ChartOption from '@components/Chart/GlobalChartOption'
 import TagCharts from '@components/Chart/chartTags'
 import Tab from '@components/DefaultTabs'
 import { mapState } from 'vuex'
-let key = "&application_id=local-001&application_key=vue-001"
 import commonJs from '@javascripts/common.js'
 let colorList = [
   'rgba(179,127,235,0.5)',
@@ -221,26 +220,7 @@ export default {
       deep: true
     }
   },
-  created() {
-    // if (this.isSelectBrand) {
-    //   this.isTrendShow = false
-    //   this.pramsInit() 
-    //   if (this.cur === 0) {
-    //     // trend 微博
-    //     this.isTrend = false 
-    //     this.trendsWeibo(this.trendParams) 
-    //   } else {
-    //     this.isCompetitor = false 
-    //     // competitor 微博
-    //     this.competitorWeibo(this.competitorParams) 
-    //   }
-    // } else {
-    //   this.isTrend = false
-    //   this.isTrendShow = true
-    //   this.isLoading = false
-    // }
-    
-  },
+  created() { },
   computed: {
     ...mapState(["authorization"])
   },
@@ -322,7 +302,7 @@ export default {
 
       // cur 为底部当前index，底部为切换为2 是为competitor
       if (this.cur === 2) {
-        this.isCompetitor = false 
+        this.isCompetitor = false
         if (topTab.index === 0) {
           // competitor 微博
           this.competitorWeibo(this.competitorParams) 
@@ -539,13 +519,15 @@ export default {
               json.label = res.data.labels[index] 
               _that.labelList.push(json) 
             }) 
-            _that.labelList.forEach(element => {
-              _that.competitorList.options.yAxis.data.push(element.label) 
-              _that.competitorList.options.series[0].data.push(element.data) 
-            }) 
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            ) 
+            if (_that.competitorList.options.yAxis.data.length === 0) {
+              _that.labelList.forEach(element => {
+                _that.competitorList.options.yAxis.data.push(element.label) 
+                _that.competitorList.options.series[0].data.push(element.data) 
+              }) 
+              _that.$refs.competitorEChart.updateOptions(
+                _that.competitorList.options
+              ) 
+            }
           }
         })
         .catch(function(error) {
@@ -554,10 +536,10 @@ export default {
     },
     // competitor 微信
     competitorWeixin(params) {
+      const _that = this 
       this.competitorList.options.yAxis.data = [] 
       this.competitorList.options.series[0].data = [] 
       this.labelList = [] 
-      const _that = this 
       axios
         .post(apiConfig.competitorWeixin, params, {
           headers: {
@@ -577,14 +559,16 @@ export default {
               json.data = element 
               json.label = res.data.labels[index] 
               _that.labelList.push(json) 
-            }) 
-            _that.labelList.forEach(element => {
-              _that.competitorList.options.yAxis.data.push(element.label) 
-              _that.competitorList.options.series[0].data.push(element.data)
-            }) 
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            ) 
+            })
+            if (_that.competitorList.options.yAxis.data.length === 0) {
+              _that.labelList.forEach(element => {
+                _that.competitorList.options.yAxis.data.push(element.label) 
+                _that.competitorList.options.series[0].data.push(element.data)
+              }) 
+              _that.$refs.competitorEChart.updateOptions(
+                _that.competitorList.options
+              ) 
+            }
           }
         })
         .catch(function(error) {

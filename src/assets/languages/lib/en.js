@@ -1,3 +1,5 @@
+import { Radar } from "vue-chartjs";
+
 export const lang = {
   login: 'Log In',
   logout: 'Log Out',
@@ -63,7 +65,8 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Social Listening'
+    socialListening: 'Social Listening',
+    kolCompare: 'kolCompare'
   },
   nav: {
     home: 'Home',
@@ -840,9 +843,9 @@ export const lang = {
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement',
       tableTop: {
-        weixinBig: 'Weichat - big data profile',
+        weixinBig: 'WeChat - big data profile',
         weiboBig: 'Weibo - big data profile - 65,860,968',
-        weixinR8: 'Weichat - R8 managed',
+        weixinR8: 'WeChat - R8 managed',
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
@@ -859,7 +862,7 @@ export const lang = {
   },
   homePage: {
     brandTop: 'Brand',
-    noBrandTip: ' Please choose the brand ',
+    noBrandTip: 'Please select brand',
     noBrand: 'You did not choose the brand',
     anlytics: {
       title: 'Analytics',
@@ -890,5 +893,8 @@ export const lang = {
     price: {
       tit: 'Price Summary'
     }
+  },
+  radarVue: {
+    tit: 'Industry Classification Label Radar'
   }
 }

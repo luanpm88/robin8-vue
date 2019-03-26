@@ -302,7 +302,7 @@
 import axios from 'axios'
 import apiConfig from '@/config' 
 import DefaultTabs from '@components/DefaultTabs' 
-import { Progress, Tooltip } from 'ant-design-vue' 
+import { Progress} from 'ant-design-vue' 
 import { mapState } from 'vuex' 
 import commonJs from '@javascripts/common.js' 
 
@@ -310,7 +310,6 @@ export default {
   name: 'kolsearch',
   components: {
     AProgress: Progress,
-    ATooltip: Tooltip,
     DefaultTabs
   },
   props: ['keyWord'],
@@ -469,6 +468,7 @@ export default {
     },
     // 处理接口数据函数
     jogDataInit(data) {
+      let newSearchListBox = []
       if (data.length === 0 || !data.length) {
         this.isShow = true 
       }
@@ -489,7 +489,8 @@ export default {
         }
       }) 
       _that.searchList = data 
-      _that.searchListBox.push(_that.searchList) 
+      newSearchListBox.push(_that.searchList) 
+      _that.searchListBox = newSearchListBox
     },
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch 
