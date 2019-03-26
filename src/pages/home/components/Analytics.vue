@@ -79,7 +79,6 @@ import ChartOption from '@components/Chart/GlobalChartOption'
 import TagCharts from '@components/Chart/chartTags'
 import Tab from '@components/DefaultTabs'
 import { mapState } from 'vuex'
-let key = "&application_id=local-001&application_key=vue-001"
 import commonJs from '@javascripts/common.js'
 let colorList = [
   'rgba(179,127,235,0.5)',
@@ -221,26 +220,7 @@ export default {
       deep: true
     }
   },
-  created() {
-    // if (this.isSelectBrand) {
-    //   this.isTrendShow = false
-    //   this.pramsInit() 
-    //   if (this.cur === 0) {
-    //     // trend 微博
-    //     this.isTrend = false 
-    //     this.trendsWeibo(this.trendParams) 
-    //   } else {
-    //     this.isCompetitor = false 
-    //     // competitor 微博
-    //     this.competitorWeibo(this.competitorParams) 
-    //   }
-    // } else {
-    //   this.isTrend = false
-    //   this.isTrendShow = true
-    //   this.isLoading = false
-    // }
-    
-  },
+  created() { },
   computed: {
     ...mapState(["authorization"])
   },

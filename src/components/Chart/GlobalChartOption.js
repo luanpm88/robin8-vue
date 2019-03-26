@@ -520,11 +520,11 @@ const MockData = {
     ],
     weibothirtyColums: [
       {
-      title: 'Rank No.',
-      dataIndex: 'rank_no',
-      width: '5%',
-      sorter: true,
-      scopedSlots: { customRender: 'rank_no' },
+        title: 'Rank No.',
+        dataIndex: 'rank_no',
+        width: '5%',
+        sorter: true,
+        scopedSlots: { customRender: 'rank_no' },
       }, {
         title: 'Profile Name Weixin ID',
         dataIndex: 'profileDec',
@@ -535,7 +535,7 @@ const MockData = {
         dataIndex: 'doc_count',
         sorter: true,
         scopedSlots: { customRender: 'doc_count' },
-      },{
+      }, {
         title: 'Total Sum Engagement',
         dataIndex: 'total_sum_engagement',
         sorter: true,
@@ -545,7 +545,7 @@ const MockData = {
         dataIndex: 'max_sum_engagement',
         sorter: true,
         scopedSlots: { customRender: 'max_sum_engagement' },
-      },{
+      }, {
         title: 'Avg Sum Engagement',
         dataIndex: 'avg_sum_engagement',
         sorter: true,
@@ -565,7 +565,7 @@ const MockData = {
         dataIndex: 'avg_comments',
         sorter: true,
         scopedSlots: { customRender: 'avg_comments' },
-      },{
+      }, {
         title: 'Total Likes',
         dataIndex: 'total_likes',
         sorter: true,
@@ -1671,5 +1671,65 @@ const MockData = {
       }
     ]
   },
+  compareRadarOptions: {
+    title: {
+      text: ''
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      show: false,
+      x: 'center',
+    },
+    radar: [
+      {
+        indicator: [
+          { text: '品牌', max: 100 },
+          { text: '内容', max: 100 },
+          { text: '可用性', max: 100 },
+          { text: '功能', max: 100 }
+        ],
+        radius: 100,
+
+        axisTick: {
+          lineStyle: {
+            color: "#00000014"
+          }
+        },
+        splitArea: {
+          areaStyle: {
+            color: 'rgba(0,0,0,0)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#999'
+          }
+        },
+        splitLine: {
+          lineStyle: {
+            color: '#00000014'
+          }
+        }
+      }
+    ],
+    series: [
+      {
+        type: 'radar',
+        color: 'rgba(179,127,235,0.5)',
+        tooltip: {
+          trigger: 'item'
+        },
+        itemStyle: { normal: { areaStyle: { type: 'default' } } },
+        data: [
+          {
+            value: [60, 73, 85, 40],
+            name: 'Radar'
+          }
+        ]
+      }
+    ]
+  }
 }
 export default MockData;

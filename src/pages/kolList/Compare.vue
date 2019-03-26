@@ -11,7 +11,7 @@
       <!-- content -->
       <div class="compare-wrap mt20">
         <div class="compare-content clearfix" >
-          <div class="col-sm-6 compare-list" v-for="(item, index) in weiboData" :key='index'>
+          <div class="compare-list" v-for="(item, index) in weiboData" :key='index'>
             <div class="media compare-info">
               <div class="media-left media-middle">
                 <img
@@ -22,7 +22,9 @@
               <div class="media-body media-middle">
                 <p>{{$t('lang.kolCompare.name')}}: <b>{{item.profileData.profile_name}}</b></p>
                 <p>{{$t('lang.kolCompare.id')}}:{{item.profileData.profile_id}}</p>
-                <p>{{$t('lang.kolCompare.dec')}}:{{item.profileData.description_raw}}</p>
+                  <a-tooltip placement="topLeft" :title="item.profileData.description_raw">
+                  <p class="desc">{{$t('lang.kolCompare.dec')}}:{{item.profileData.description_raw}}</p>
+                </a-tooltip>
               </div>
             </div>
             <!-- weibo Performance -->
@@ -65,7 +67,7 @@
             </div>
 
             <!-- Radar -->
-            <radar></radar>
+            <radar :currentType="type" :currentId="item.profileData.profile_id"></radar>
           </div>
         </div>
       </div>
@@ -114,6 +116,7 @@ export default {
         this.kolWeiboInfo(params)
         // performance
         this.kolWeiboSocial(params, index);
+
       }) 
     } else {
 
@@ -154,7 +157,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('woshiweixin', res)
+            // console.log('woshiweixin', res)
           }
         })
     },
@@ -169,7 +172,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('weibo', res)
+            // console.log('weibo', res)
             _that.weiboData[currentIndex].socialData = res.data
           }
         })
@@ -188,7 +191,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('weixin', res);
+            // console.log('weixin', res);
           }
         })
         .catch(function(error) {

@@ -857,7 +857,7 @@ export const lang = {
   },
   homePage: {
     brandTop: 'Brand',
-    noBrandTip: ' Please choose the brand ',
+    noBrandTip: 'Please select brand',
     noBrand: 'You did not choose the brand',
     anlytics: {
       title: 'Analytics',
