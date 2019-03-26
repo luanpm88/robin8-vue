@@ -36,25 +36,31 @@
         <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
         <div v-if="isCompetitors">
           <div class="panel default-panel mt20">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
-            </div>
-            <div class="panel-body prl30 clearfix">
-              <span class="no-brand-tip">{{$t('lang.homePage.noBrandTip')}}:</span>
-              <select
-                name="seletBrand"
-                class="form-control no-brand-select col-sm-8"
-                v-model="seletBrandId"
-                @change="changeBrand"
-              >
-                <option
-                  v-for="(item, index) of allBrandList"
-                  :key="index"
-                  :value="item.id"
-                >
-                  {{item.name}}
-                </option>
-              </select>
+            </div> -->
+            <div class="panel-body p30 clearfix">
+              <div class="form-horizontal default-form">
+                <div class="form-group">
+                  <div class="col-sm-4 control-label">{{$t('lang.homePage.noBrandTip')}}:</div>
+                  <div class="col-sm-6">
+                    <select
+                      name="seletBrand"
+                      class="form-control"
+                      v-model="seletBrandId"
+                      @change="changeBrand"
+                    >
+                      <option
+                        v-for="(item, index) of allBrandList"
+                        :key="index"
+                        :value="item.id"
+                      >
+                        {{item.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -135,10 +141,10 @@ export default {
       }
     }
     if (this.$route.query.currentBrand) {
-      this.keyList.tabIndex = 0  
+      this.keyList.tabIndex = 0
     }
     if (this.$route.query.curentCompittor) {
-      this.keyList.tabIndex = 2 
+      this.keyList.tabIndex = 2
     }
   },
   methods: {
@@ -153,9 +159,9 @@ export default {
         if (res.status === 200) {
           // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
-            _that.isCompetitors = false 
+            _that.isCompetitors = false
           } else {
-            _that.isCompetitors = true 
+            _that.isCompetitors = true
             // select 时候的判断
             _that.allBrandList = res.data.trademarks_list
             _that.allBrandList.forEach(element => {
@@ -164,13 +170,13 @@ export default {
                 _that.isTotalBrand = true
               }
             })
-            // console.log(_that.allBrandList) 
+            // console.log(_that.allBrandList)
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
             if (JSON.stringify(_that.$route.query) == '{}') {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
-                  _that.seletBrandId = element.id 
-                  _that.keyList.name = element.name 
+                  _that.seletBrandId = element.id
+                  _that.keyList.name = element.name
                   _that.keyList.brand_keywords = element.keywords
                 }
               })
@@ -180,28 +186,28 @@ export default {
                   _that.keyList.cb_names.push(element.name)
                   _that.keyList.cb_keywords.push(element.short_name)
                 }
-              }) 
+              })
             } else {
               // 假如_that.$route.params 不为空，代表路由是从my brands 的 View selected 或者 my comtitive brands 的 View selected 按钮进到首页的
               // _that.$route.params.currentBrand 不为空 表示从my brands 的 View selected按钮进到首页
               // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
               if (_that.$route.query.currentBrand) {
-                // console.log(222) 
-                _that.keyList.name = _that.$route.query.currentBrandName 
-                _that.keyList.brand_keywords = _that.$route.query.currentBrand 
+                // console.log(222)
+                _that.keyList.name = _that.$route.query.currentBrandName
+                _that.keyList.brand_keywords = _that.$route.query.currentBrand
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
                     _that.keyList.cb_names.push(element.name)
-                    _that.keyList.cb_keywords.push(element.short_name) 
+                    _that.keyList.cb_keywords.push(element.short_name)
                   }
-                }) 
+                })
               }
               if (_that.$route.query.curentCompittor) {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
-                    _that.seletBrandId = element.id 
-                    _that.keyList.name = element.name 
-                    _that.keyList.brand_keywords = element.keywords 
+                    _that.seletBrandId = element.id
+                    _that.keyList.name = element.name
+                    _that.keyList.brand_keywords = element.keywords
                   }
                 })
                 // 赋值对比competitor
@@ -215,12 +221,12 @@ export default {
     },
     changeHomStatus(type) {
       if (type) {
-        this.isCompetitors = true 
+        this.isCompetitors = true
       }
     },
     // 修改选中 brand
     totalJoggle(Id, params) {
-  
+
     },
     changeBrand(value) {
       const _that = this
@@ -242,7 +248,7 @@ export default {
             tabIndex: 0,
           }
           // 从新渲染内容
-          _that.getBaseData() 
+          _that.getBaseData()
         }
       })
     }

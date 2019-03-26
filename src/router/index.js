@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Login from '@/pages/Login'
 import Reg from '@/pages/Reg'
 import ForgetPassword from '@/pages/ForgetPassword'
-import ChangePassword from '@/pages/ChangePassword'
 import Help from '@/pages/Help'
 import Home from '@/pages/home/Home'
 import HomeCreate from '@/pages/home/Create'
@@ -84,14 +83,6 @@ export default new Router({
       component: ForgetPassword,
       meta: {
         title: 'forgetPassword'
-      }
-    },
-    {
-      path: '/change_password',
-      name: 'ChangePassword',
-      component: ChangePassword,
-      meta: {
-        title: 'changePassword'
       }
     },
     {

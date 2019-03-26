@@ -2,8 +2,11 @@
   <div class="page-header">
     <div class="container clearfix">
       <h1 class="logo pull-left">
+        <span v-if="!!company && company != ''" class="partner-logo">
+          <img :src="companyLogo" :alt="company" class="partner-logo-img" />
+        </span>
         <router-link to="/">
-          <img src="@images/logo.png" alt="ROBIN8" class="logo-img" />
+          <img src="@images/logo.png" alt="Robin8" class="logo-img" />
         </router-link>
       </h1>
       <div class="user-info pull-right">
@@ -52,7 +55,7 @@ import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'PageHeader',
   computed: {
-    ...mapState(['avatarImgUrl', 'nickname']),
+    ...mapState(['avatarImgUrl', 'nickname', 'company', 'companyLogo']),
   },
   data () {
     return {
@@ -60,7 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompanyName', 'setLanguage']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompany', 'removeCompanyName', 'removeCompanyLogo', 'setLanguage']),
     logOut () {
       // window.localStorage.clear()
       this.removeAuthorization()
@@ -69,7 +72,9 @@ export default {
       this.removeAccount()
       this.removeEmail()
       this.removeAvatarImgUrl()
+      this.removeCompany()
       this.removeCompanyName()
+      this.removeCompanyLogo()
       this.$router.replace('/login')
     },
     toggleLang (lang) {
@@ -91,7 +96,15 @@ export default {
     padding: 20px;
     background-color: #3e3b4f;
     .logo {
-      height: 40px;
+      height: 30px;
+      .partner-logo {
+        padding-right: 20px;
+        margin-right: 20px;
+        border-right: 1px solid #fff;
+      }
+      .partner-logo-img {
+        height: 100%;
+      }
       .logo-img {
         height: 100%;
       }

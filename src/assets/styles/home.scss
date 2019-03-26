@@ -449,37 +449,3 @@
 .highlight{
   color: nth($orange, 1);
 }
-.no-brand-tip{
-  font-size: $font-nm-s;
-  color: #333;
-  margin-bottom: 10px;
-  line-height: 34px;
-  float: left;
-  margin-right: 10px;
-}
-.no-brand-select{
-  width: 300px;
-}
-.compare-wrap{
-  width: 100%;
-  min-height: 800px;
-  overflow: scroll;
-}
-.compare-content{
-  width: 1000%;
-}
-.compare-list{
-  float: left;
-  width: 640px;
-  padding: 0px 10px;
-  .desc{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
-    /* autoprefixer: on */
-    font-size: $font-sm;
-  }
-}
