@@ -703,7 +703,8 @@ export const lang = {
       placeholderName: '请填写竞争品牌名称',
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
-    }
+    },
+    overThreeTip: '您最多只能选择3条竞争者'
   },
   kolList: {
     detail: {

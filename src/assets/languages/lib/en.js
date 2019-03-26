@@ -704,7 +704,9 @@ export const lang = {
       placeholderName: 'Please enter the brand name',
       addTip: 'Add My Competitive Brand',
       placeholderDec: 'Please fill in the abbreviation of brand'
-    }
+    },
+    overThreeTip: 'You can only choose three competitors at most',
+    noneComTip: "You didn't choose a comparative brand."
   },
   kolList: {
     detail: {

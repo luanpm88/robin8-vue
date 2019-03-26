@@ -468,7 +468,6 @@ export default {
     },
     // 处理接口数据函数
     jogDataInit(data) {
-      let newSearchListBox = []
       if (data.length === 0 || !data.length) {
         this.isShow = true 
       }
@@ -489,8 +488,7 @@ export default {
         }
       }) 
       _that.searchList = data 
-      newSearchListBox.push(_that.searchList) 
-      _that.searchListBox = newSearchListBox
+      _that.searchListBox.push(_that.searchList) 
     },
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch 

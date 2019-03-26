@@ -13,7 +13,7 @@
       </tr>
       <tr v-for="(key, index) in dataListBox" :key="index">
         <td>
-          <input type="checkbox" v-model="key.isCheck" @click="checkItem(key)">
+          <input type="checkbox" v-model="key.isCheck" @click="checkItem(key)" :disabled="key.isDisable">
         </td>
         <td>{{key.id}}</td>
         <td>{{key.name}}</td>
@@ -51,9 +51,11 @@ export default {
       dataListBox: [],
       currentCheckList: [],
       currentCheckName: [],
+      selectBox: []
     }
   },
   created() {
+    this.selectBox = []
     this.getBaseData();
   },
   methods: {
@@ -64,17 +66,20 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
+        _that.selectBox = [];
         // console.log('我是competition', res);
         if (res.status === 200) {
           _that.dataListBox = res.data.competitors;
           _that.dataListBox.forEach((item, index) => {
+            item.isDisable = false
             if (item.status === 0) {
               item.isCheck = false
             } else {
               item.isCheck = true
+              _that.selectBox.push(item)
             }
           })
-          // console.log(_that.dataListBox);
+          _that.selectBox = [...new Set(_that.selectBox)]
         }
       })
     },
@@ -95,14 +100,23 @@ export default {
     },
     // 选中一条
     checkItem(item) {
-      // console.log(item);
       let params = {
         id: item.id
       }
       if (item.isCheck) {
         params.status = 0
+        this.selectBox.forEach((element, index) => {
+          if (Number(item.id) === Number(element.id)) {
+            this.selectBox.splice(index, 1);
+          }
+        });
       } else {
-        params.status = 1
+        if (this.selectBox.length < 3) {
+          this.selectBox.push(item)
+          params.status = 1
+        } else {
+          alert(this.$t('lang.myCompetitionBrands.overThreeTip'))
+        }
       }
       this.totalJoggle(item, params)
     },
@@ -142,7 +156,7 @@ export default {
           }
         });
       } else {
-        alert('您没有选择对比的品牌');
+        alert(this.$t('lang.myCompetitionBrands.noneComTip'));
       }
       
     }
