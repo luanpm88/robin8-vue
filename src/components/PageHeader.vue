@@ -1,10 +1,54 @@
 <template>
   <div class="page-header">
-    <div class="container clearfix">
+    <div v-if="!!company && company != ''" class="container clearfix">
+      <h1 class="partner-logo pull-left">
+        <img :src="companyLogo" :alt="company" class="logo-img" />
+      </h1>
+      <div class="user-info pull-right">
+        <div class="media">
+          <div class="media-left">
+            <div v-if="!!avatarImgUrl && avatarImgUrl != 'null'" class="avatar">
+              <router-link to="/settings/company_info">
+                <img :src="avatarImgUrl" alt="" class="avatar-img" />
+              </router-link>
+            </div>
+            <div v-else class="avatar">
+              <router-link to="/settings/company_info">
+                <img src="@images/user.png" alt="" class="avatar-img" />
+              </router-link>
+            </div>
+          </div>
+          <div class="media-body media-middle">
+            <h5 class="name">
+              <router-link to="/settings/company_info">{{nickname}}</router-link>
+            </h5>
+            <p class="logout-btn">
+              <span @click="logOut">{{$t('lang.logout')}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="languages-ctrl pull-right">
+        <span
+          class="item"
+          :class="[lang == 'zh-CN' ? 'active' : '']"
+          @click="toggleLang('zh-CN')"
+        >中文</span>
+        <span
+          class="item"
+          :class="[lang == 'en-US' ? 'active' : '']"
+          @click="toggleLang('en-US')"
+        >En</span>
+      </div>
+      <div class="sub-logo pull-right">
+        <span class="text">Powered by</span>
+        <router-link to="/">
+          <img src="@images/logo.png" alt="Robin8" class="logo-img" />
+        </router-link>
+      </div>
+    </div>
+    <div v-else class="container clearfix">
       <h1 class="logo pull-left">
-        <span v-if="!!company && company != ''" class="partner-logo">
-          <img :src="companyLogo" :alt="company" class="partner-logo-img" />
-        </span>
         <router-link to="/">
           <img src="@images/logo.png" alt="Robin8" class="logo-img" />
         </router-link>
@@ -95,17 +139,22 @@ export default {
   .container {
     padding: 20px;
     background-color: #3e3b4f;
-    .logo {
-      height: 30px;
-      .partner-logo {
-        padding-right: 20px;
-        margin-right: 20px;
-        border-right: 1px solid #fff;
-      }
-      .partner-logo-img {
+    .logo, .partner-logo {
+      height: 40px;
+      padding: 5px 0;
+      .logo-img {
+        vertical-align: top;
         height: 100%;
       }
+    }
+    .sub-logo {
+      height: 40px;
+      padding: 8px 0;
+      .text {
+        padding-right: 10px;
+      }
       .logo-img {
+        vertical-align: top;
         height: 100%;
       }
     }
