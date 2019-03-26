@@ -175,7 +175,7 @@
           <table class="default-table mt20">
             <thead>
               <tr>
-                <th>{{$t('lang.kolList.search.table.check')}}</th>
+                <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                 <th width="18%" class="text-center">
@@ -194,9 +194,9 @@
             </thead>
             <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
               <tr v-for="(item, index) in key" :key="index">
-                <td>
+                <!-- <td>
                   <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
-                </td>
+                </td> -->
                 <td>
                   <div class="media kol-profile">
                     <div class="media-left media-middle">
