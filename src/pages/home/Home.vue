@@ -32,23 +32,51 @@
             </div>
           </router-link>
         </div>
-        <!-- analytics -->
-        <!-- 假如有品牌渲染图表 -->
+        <!-- 内容开始 -->
+        <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
         <div v-if="isCompetitors">
-          <home-analytic class="mt20" :childKeyList='keyList'></home-analytic>
+          <div class="panel default-panel mt20">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
+            </div> -->
+            <div class="panel-body p30 clearfix">
+              <div class="form-horizontal default-form">
+                <div class="form-group">
+                  <div class="col-sm-4 control-label">{{$t('lang.homePage.noBrandTip')}}:</div>
+                  <div class="col-sm-6">
+                    <select
+                      name="seletBrand"
+                      class="form-control"
+                      v-model="seletBrandId"
+                      @change="changeBrand"
+                    >
+                      <option
+                        v-for="(item, index) of allBrandList"
+                        :key="index"
+                        :value="item.id"
+                      >
+                        {{item.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic>
 
           <div class="home-show row mt20">
             <div class="col-xs-6">
-              <home-recommended-kols :childKeyList='keyList'></home-recommended-kols>
+              <home-recommended-kols :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-recommended-kols>
             </div>
             <div  class="col-xs-6">
-              <home-top-posts :childKeyList='keyList'></home-top-posts>
+              <home-top-posts :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-top-posts>
             </div>
           </div>
         </div>
-        <!-- 没有品牌渲染提交接口 -->
+        <!-- 刚注册的用户 假如没有输入竞争者和品牌 展现表格让用户填  -->
         <div v-else>
-          <!-- <brand-submit :status='isHomeStatus' @childStatus='changeHomStatus'></brand-submit> -->
           <update-base-info @updateStatus="changeHomStatus"></update-base-info>
         </div>
       </div>
@@ -67,7 +95,6 @@ import HomeAnalytic from './components/Analytics'
 import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
 import UpdateBaseInfo from './components/UpdateBaseInfo'
-// import brandSubmit from '@/pages/settings/myCompetitionBrands/Create'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
@@ -94,17 +121,30 @@ export default {
         name: '',
         brand_keywords: '',
         cb_keywords: [],
-        tabIndex: 0
-      }
+        cb_names: [],
+        tabIndex: 0,
+      },
+      allBrandList: [],
+      seletBrandId: '',
+      isTotalBrand: false
     }
   },
   created() {
     this.getBaseData()
+    if (!this.isTotalBrand) {
+      this.keyList =  {
+        name: '',
+        brand_keywords: '',
+        cb_keywords: [],
+        cb_names: [],
+        tabIndex: 0,
+      }
+    }
     if (this.$route.query.currentBrand) {
-      this.keyList.tabIndex = 0  
+      this.keyList.tabIndex = 0
     }
     if (this.$route.query.curentCompittor) {
-      this.keyList.tabIndex = 2 
+      this.keyList.tabIndex = 2
     }
   },
   methods: {
@@ -116,50 +156,62 @@ export default {
           'Authorization': _that.authorization
         }
       }).then(function(res) {
-        // console.log(res) 
         if (res.status === 200) {
           // 判断有没有竞争者，假如没有竞争者，要控制页面视图让用户输入竞争者
           if (res.data.competitors.length == 0 && res.data.trademarks_list.length == 0) {
-            _that.isCompetitors = false 
+            _that.isCompetitors = false
           } else {
-            _that.isCompetitors = true 
+            _that.isCompetitors = true
+            // select 时候的判断
+            _that.allBrandList = res.data.trademarks_list
+            _that.allBrandList.forEach(element => {
+              if (element.status === 1) {
+                _that.seletBrandId = element.id
+                _that.isTotalBrand = true
+              }
+            })
+            // console.log(_that.allBrandList)
             // 假如假如_that.$route.params 为空，就将res.data.trademarks_list 中status 为1的name 赋值给brand_keywords 展示趋势（trends）图表。就将res.data.competitors 中status 为1的short_name 赋值给cb_keywords 展示在竞争者（competitors）图表。
-            if (JSON.stringify(_that.$route.query) == '') {
+            if (JSON.stringify(_that.$route.query) == '{}') {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
-                  _that.keyList.name = element.name 
-                  _that.keyList.brand_keywords = element.keywords 
+                  _that.seletBrandId = element.id
+                  _that.keyList.name = element.name
+                  _that.keyList.brand_keywords = element.keywords
                 }
               })
 
               res.data.competitors.forEach(element => {
                 if (element.status === 1) {
-                  _that.keyList.cb_keywords.push(element.short_name) 
+                  _that.keyList.cb_names.push(element.name)
+                  _that.keyList.cb_keywords.push(element.short_name)
                 }
-              }) 
+              })
             } else {
               // 假如_that.$route.params 不为空，代表路由是从my brands 的 View selected 或者 my comtitive brands 的 View selected 按钮进到首页的
               // _that.$route.params.currentBrand 不为空 表示从my brands 的 View selected按钮进到首页
               // _that.$route.params.curentCompittor 不为空 表示从my comtitive brands 的 View selected 按钮进到首页
               if (_that.$route.query.currentBrand) {
-                // console.log(222) 
-                _that.keyList.name = _that.$route.query.currentBrandName 
-                _that.keyList.brand_keywords = _that.$route.query.currentBrand 
+                // console.log(222)
+                _that.keyList.name = _that.$route.query.currentBrandName
+                _that.keyList.brand_keywords = _that.$route.query.currentBrand
                 res.data.competitors.forEach(element => {
                   if (element.status === 1) {
-                    _that.keyList.cb_keywords.push(element.short_name) 
+                    _that.keyList.cb_names.push(element.name)
+                    _that.keyList.cb_keywords.push(element.short_name)
                   }
-                }) 
+                })
               }
               if (_that.$route.query.curentCompittor) {
                 res.data.trademarks_list.forEach(element => {
                   if (element.status === 1) {
-                    // console.log(3333) 
-                    _that.keyList.name = element.name 
-                    _that.keyList.brand_keywords = element.keywords 
+                    _that.seletBrandId = element.id
+                    _that.keyList.name = element.name
+                    _that.keyList.brand_keywords = element.keywords
                   }
                 })
                 // 赋值对比competitor
+                _that.keyList.cb_names = _that.$route.query.curentName
                 _that.keyList.cb_keywords = _that.$route.query.curentCompittor
               }
             }
@@ -169,8 +221,36 @@ export default {
     },
     changeHomStatus(type) {
       if (type) {
-        this.isCompetitors = true 
+        this.isCompetitors = true
       }
+    },
+    // 修改选中 brand
+    totalJoggle(Id, params) {
+
+    },
+    changeBrand(value) {
+      const _that = this
+      let params = {
+        id: this.seletBrandId,
+        status: 1
+      }
+      axios.post(apiConfig.createBrandUrl + '/' + this.seletBrandId, params, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(function(res) {
+        if (res.status = 201) {
+          _that.keyList =  {
+            name: '',
+            brand_keywords: '',
+            cb_keywords: [],
+            cb_names: [],
+            tabIndex: 0,
+          }
+          // 从新渲染内容
+          _that.getBaseData()
+        }
+      })
     }
   }
 }

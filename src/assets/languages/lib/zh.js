@@ -28,7 +28,7 @@ export const lang = {
     reg: '注册',
     forgetPassword: '忘记密码',
     changePassword: '重置密码',
-    help: '使用帮助',
+    help: '数据说明',
     home: '首页',
     homeCreate: '创建新活动',
     settings: '企业设置',
@@ -63,7 +63,8 @@ export const lang = {
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     benchMark: 'benchMark',
-    socialListening: '社交聆听'
+    socialListening: '社交聆听',
+    kolCompare: 'kol对比'
   },
   nav: {
     home: '首页',
@@ -84,7 +85,82 @@ export const lang = {
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     socialListening: '社交聆听',
-    help: '使用帮助'
+    help: '数据说明'
+  },
+  login: {
+    title: '登录',
+    account: {
+      title: '账户',
+      placeholder: '请输入邮箱或手机号',
+      errorTips: '请输入邮箱或手机号'
+    },
+    password: {
+      title: '密码',
+      placeholder: '请输入密码',
+      errorTips: '请输入密码'
+    },
+    forget: '忘记密码？',
+    submit: '登录'
+  },
+  signUp: {
+    title: '注册',
+    email: {
+      title: '电子邮箱',
+      placeholder: '请输入电子邮箱',
+      errorTips: '请输入电子邮箱'
+    },
+    phone: {
+      title: '手机号码',
+      placeholder: '请输入手机号码',
+      errorTips: '请输入手机号码'
+    },
+    code: {
+      title: '验证码',
+      placeholder: '请输入验证码',
+      errorTips: '请输入验证码'
+    },
+    password: {
+      title: '密码',
+      placeholder: '请输入密码',
+      errorTips: '请输入密码'
+    },
+    toggleTips: {
+      email: '用邮箱注册',
+      phone: '用手机注册'
+    },
+    submit: '注册'
+  },
+  forgetPw: {
+    title: '找回帐号密码',
+    account: {
+      title: '账户',
+      placeholder: '请输入邮箱或手机号',
+      errorTips: '请输入邮箱或手机号'
+    },
+    code: {
+      title: '验证码',
+      placeholder: '请输入验证码',
+      errorTips: '请输入验证码'
+    },
+    login: '去登录',
+    reg: '去注册',
+    submit: '下一步'
+  },
+  changePw: {
+    title: '重置帐号密码',
+    password: {
+      title: '新密码',
+      placeholder: '请输入新密码',
+      errorTips: '请输入新密码'
+    },
+    confirmPw: {
+      title: '确认新密码',
+      placeholder: '请确认新密码',
+      errorTips: '请确认新密码'
+    },
+    login: '去登录',
+    prev: '上一步',
+    submit: '确定'
   },
   profile: {
     name: '品牌名称',
@@ -282,8 +358,8 @@ export const lang = {
     kolDistrict: {
       title: '地域',
       placeholder: '请选择地域',
-      provincePlaceholder: '请选择省份',
-      cityPlaceholder: '请选择城市',
+      provincePlaceholder: '所有省份',
+      cityPlaceholder: '所有城市',
       provinceErrorTips: '请选择省份',
       cityErrorTips: '请选择城市'
     },
@@ -413,8 +489,8 @@ export const lang = {
     followerDistrict: {
       title: '粉丝地域',
       placeholder: '请选择粉丝的地域要求',
-      provincePlaceholder: '请选择粉丝的省份',
-      cityPlaceholder: '请选择粉丝的城市',
+      provincePlaceholder: '所有省份',
+      cityPlaceholder: '所有城市',
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
     },
@@ -627,7 +703,8 @@ export const lang = {
       placeholderName: '请填写竞争品牌名称',
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
-    }
+    },
+    overThreeTip: '您最多只能选择3条竞争者'
   },
   kolList: {
     detail: {
@@ -784,9 +861,12 @@ export const lang = {
     }
   },
   homePage: {
+    brandTop: '品牌',
+    noBrandTip: '请选择品牌',
+    noBrand: '您没有选择品牌',
     anlytics: {
       title: '分析',
-      trend: '趋势',
+      trend: '提及次数',
       concept: '概念',
       competitors: '竞争对手',
       sentiments: '情绪'
@@ -813,5 +893,8 @@ export const lang = {
     price: {
       tit: '价格简列'
     }
+  },
+  radarVue: {
+    tit: '行业分类标签 Radar'
   }
 }

@@ -8,6 +8,9 @@
     </div>
 
     <div class="panel-body list-content recommendkol">
+      <div class="nonetip" v-if="isBrandShow">
+        <span>{{$t('lang.homePage.noBrand')}}</span>
+      </div>
       <div class="nonetip" v-if="isShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -18,13 +21,15 @@
       <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
       </default-tabs>
         <div class="list-content-inner">
-          <kols-list-item
+          <div  v-if="isKol">
+            <kols-list-item
             v-for="item in currentList"
             :key="item.profile_id"
             :renderStatus="kolRenderStatus"
             :renderData="item"
             :routerData="kolRouterData"
-          ></kols-list-item>
+            ></kols-list-item>
+          </div>
         </div>
         <div class="text-center mt20">
           <button
@@ -45,13 +50,14 @@ import DefaultTabs from '@components/DefaultTabs'
 import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
 export default {
-  props: ['childKeyList'],
+  props: ['childKeyList', 'isSelectBrand'],
   components: {
     DefaultTabs,
     KolsListItem
   },
   data() {
     return {
+      isBrandShow: false,
       kolRenderStatus: {
         hasLiked: false,
         hasMsg: false,
@@ -67,11 +73,12 @@ export default {
       tabIndex: 0,
       isShow: false,
       isLoading: true,
+      isKol: false,
       params: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
         brand_keywords: 'BMW',
-        order_by: 'doc_count'
+        order_by: 'influence'
       },
       currentList: [],
       tabList: [
@@ -92,33 +99,58 @@ export default {
   watch: {
     childKeyList: {
       handler() {
-        let newKey = ''
-        this.childKeyList.brand_keywords.split(',').forEach(item => {
-          newKey += '"' + item + '"'
-        }) 
-        this.params.brand_keywords = newKey
-        this.weiboKol(this.params)
-        this.kolRouterData.keywords = newKey
+        if (this.isSelectBrand) {
+          // console.log('woshiyou watch 品牌')
+          this.isBrandShow = false
+          this.isLoading = true
+          this.isKol = false
+          let newKey = ''
+          this.childKeyList.brand_keywords.split(',').forEach(item => {
+            newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
+          }) 
+          this.params.brand_keywords = newKey
+          this.kolRouterData.keywords = newKey
+          if (Number(this.tabIndex) === 0) {
+            // weibo 
+            this.weiboKol(this.params)
+          } 
+          if (Number(this.tabIndex) === 1) {
+            // 微信接口
+            this.weixinKol(this.params)
+          }
+        } else {
+          // console.log('woshiyou watch无品牌')
+          this.tabIndex = 0
+          this.isBrandShow = true
+          this.isLoading = false
+          this.isKol = false
+        }
       },
+      immediate:true,
       deep: true
     }
   },
+  created() {},
   methods: {
-    changeLangue() {
-      // vuejs 监听本地localstrage变化
-
-    },
     changeTab(tab) {
       this.tabIndex = tab.index
       this.currentList = [] 
       this.isShow = false 
       this.isLoading = true 
-      if (tab.index === 0) {
-        // 微博接口
-        this.weiboKol(this.params)
+      this.isBrandShow = false
+      if (this.isSelectBrand) {
+        if (tab.index === 0) {
+          // 微博接口
+          this.weiboKol(this.params)
+        }
+        if (tab.index === 1) {
+          // 微信接口
+          this.weixinKol(this.params)
+        }
       } else {
-        // 微信接口
-        this.weixinKol(this.params)
+        this.isBrandShow = true
+        this.isLoading = false
+        this.isKol = false
       }
       this.kolRouterData.type = tab.index
     },
@@ -146,8 +178,10 @@ export default {
           _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
             _that.isShow = true
+            _that.isKol = false
           } else {
             _that.isShow = false
+            _that.isKol = true
             _that.currentList = res.data.slice(0, 5)
           }
         })
@@ -168,8 +202,10 @@ export default {
           _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
             _that.isShow = true
+            _that.isKol = false
           } else {
             _that.isShow = false
+            _that.isKol = true
             _that.currentList = res.data.slice(0, 5)
           }
         })

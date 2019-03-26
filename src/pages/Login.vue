@@ -1,42 +1,44 @@
 <template>
   <div class="page">
     <div class="panel default-panel login-panel">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.login.title')}}</h5>
+      </div>
       <div class="panel-body">
-        <div class="banner">
-          <img src="@images/login_banner.jpg" alt class="banner-img">
-          <img src="@images/logo.png" alt class="logo">
-        </div>
-
         <div class="login-container">
           <div class="tabs">
             <div class="item active">
-              <router-link to="/login">Log In</router-link>
+              <router-link to="/login">{{$t('lang.login.title')}}</router-link>
             </div>
             <div class="item">
-              <router-link to="/reg">Sign Up</router-link>
+              <router-link to="/reg">{{$t('lang.signUp.title')}}</router-link>
             </div>
           </div>
 
-          <div class="default-form login-form">
+          <div class="form-horizontal default-form login-form">
             <div class="form-group">
-              <input
-                type="text"
-                name="userName"
-                class="form-control"
-                v-model="userName"
-                placeholder="Account"
-              >
+              <div class="col-sm-12">
+                <input
+                  type="text"
+                  name="userName"
+                  class="form-control"
+                  v-model="userName"
+                  :placeholder="$t('lang.login.account.placeholder')"
+                >
+              </div>
             </div>
             <div class="form-group">
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                v-model="password"
-                placeholder="Password"
-              >
-              <div class="form-tips text-right">
-                <!-- <router-link to="/forget_password">Forgot Password？</router-link> -->
+              <div class="col-sm-12">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  v-model="password"
+                  :placeholder="$t('lang.login.password.placeholder')"
+                >
+                <div class="form-tips text-right">
+                  <router-link to="/forget_password">{{$t('lang.login.forget')}}</router-link>
+                </div>
               </div>
             </div>
             <div class="form-group text-center">
@@ -45,7 +47,7 @@
                 class="btn btn-cyan confirm-btn"
                 @click="login"
                 :disabled="loginStatus"
-              >Sign In</button>
+              >{{$t('lang.login.submit')}}</button>
             </div>
           </div>
         </div>
@@ -70,7 +72,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo']),
     // login joggle
     loginUrl (params) {
       const _that = this
@@ -90,6 +92,10 @@ export default {
             _that.setEmail(resData.email)
             _that.setAvatarImgUrl(resData.avatar_url)
             _that.setCompanyName(resData.campany_name)
+            if (!!resData.company && resData.company != '') {
+              _that.setCompany(resData.company)
+              _that.setCompanyLogo(resData.partner_logo)
+            }
             _that.loginStatus = false
             _that.$router.push('/')
           }

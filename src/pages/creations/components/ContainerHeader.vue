@@ -1,5 +1,5 @@
 <template>
-  <div class="container-header">
+  <div class="container-header clearfix">
     <div class="container-title">{{$t(`lang.router.${title}`)}}</div>
     <breadcrumb separator="-"></breadcrumb>
   </div>

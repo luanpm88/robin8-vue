@@ -5,11 +5,11 @@ currentId 当前数据的Id
 -->
 <template>
   <div class="panel default-panel">
-    <!-- <div class="panel-head">
+    <div class="panel-head" v-if="titleType === 1">
       <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
-    </div> -->
+    </div>
     <div class="panel-body prl30">
-      <p class="kol-cloumn mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
+      <p class="kol-cloumn mb10" v-if="titleType === 0">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</p>
       <div class="nonetip" v-if="isAnalyOneShow">
         <span>{{$t('lang.totalNoDataTip')}}</span>
       </div>
@@ -17,11 +17,11 @@ currentId 当前数据的Id
         <a-spin tip="Loading..."/>
       </div>
       <div class="activity-table" v-if="isAnalyOne">
-        <div v-if="Number(currentType) === 0">
+        <div v-if="Number(currentType) === 0" class="activity-table-box">
           <!-- weibo 组件 -->
           <weibo-distribution :distributionData="analyOne"></weibo-distribution>
         </div>
-        <div v-if="Number(currentType) === 1">
+        <div v-if="Number(currentType) === 1" class="activity-table-box">
           <!-- 微信 组件 -->
           <weixin-distribution :distributionData="analyOne"></weixin-distribution>
         </div>
@@ -40,7 +40,7 @@ import weixinDistribution from '@/pages/kolList/components/WeixinDistribution'
 import weiboDistribution from '@/pages/kolList/components/WeiboDistribution'
 export default {
   name: 'distribution',
-  props: ['currentType', 'currentId'],
+  props: ['currentType', 'currentId', 'titleType'],
   components: {
     weiboDistribution,
     weixinDistribution

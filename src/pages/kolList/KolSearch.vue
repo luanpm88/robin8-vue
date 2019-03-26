@@ -302,7 +302,7 @@
 import axios from 'axios'
 import apiConfig from '@/config' 
 import DefaultTabs from '@components/DefaultTabs' 
-import { Progress, Tooltip } from 'ant-design-vue' 
+import { Progress} from 'ant-design-vue' 
 import { mapState } from 'vuex' 
 import commonJs from '@javascripts/common.js' 
 
@@ -310,7 +310,6 @@ export default {
   name: 'kolsearch',
   components: {
     AProgress: Progress,
-    ATooltip: Tooltip,
     DefaultTabs
   },
   props: ['keyWord'],
@@ -406,7 +405,7 @@ export default {
       } else {
         let newKey = '' 
         this.keyword.split(',').forEach(item => {
-          newKey += '"' + item + '"'
+          newKey += '\\"' + item + '\\"'
         }) 
         this.totalParams.keywords = newKey 
       }

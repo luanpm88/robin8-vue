@@ -1,3 +1,5 @@
+import { Radar } from "vue-chartjs";
+
 export const lang = {
   login: 'Log In',
   logout: 'Log Out',
@@ -25,10 +27,10 @@ export const lang = {
   yearsOlder: 'years old or older',
   router: {
     login: 'Log In',
-    reg: 'Reg',
+    reg: 'Sign Up',
     forgetPassword: 'Forget Password',
     changePassword: 'Change Password',
-    help: 'Help',
+    help: 'Data Explanation',
     home: 'Home',
     homeCreate: 'Create Campaign',
     settings: 'Settings',
@@ -63,7 +65,8 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Social Listening'
+    socialListening: 'Social Listening',
+    kolCompare: 'kolCompare'
   },
   nav: {
     home: 'Home',
@@ -84,7 +87,82 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     socialListening: 'Social Listening',
-    help: 'Help'
+    help: 'Data Explanation'
+  },
+  login: {
+    title: 'Log In',
+    account: {
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
+    },
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
+    },
+    forget: 'Forgot Password?',
+    submit: 'Sign In'
+  },
+  signUp: {
+    title: 'Sign Up',
+    email: {
+      title: 'Email',
+      placeholder: 'Please enter your email',
+      errorTips: 'Please enter your email'
+    },
+    phone: {
+      title: 'Phone',
+      placeholder: 'Please enter your phone number',
+      errorTips: 'Please enter your phone number'
+    },
+    code: {
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
+    },
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
+    },
+    toggleTips: {
+      email: 'Sign up with email',
+      phone: 'Sign up with mobile number'
+    },
+    submit: 'Sign Up'
+  },
+  forgetPw: {
+    title: 'Forget Password',
+    account: {
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
+    },
+    code: {
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
+    },
+    login: 'Sign In',
+    reg: 'Sign Up',
+    submit: 'Next'
+  },
+  changePw: {
+    title: 'Change Password',
+    password: {
+      title: 'Password',
+      placeholder: 'Please enter new password',
+      errorTips: 'Please enter new password'
+    },
+    confirmPw: {
+      title: 'Confirm Password',
+      placeholder: 'Please confirm your password',
+      errorTips: 'Please confirm your password'
+    },
+    login: 'Sign In',
+    prev: 'Prev',
+    submit: 'Submit'
   },
   profile: {
     name: 'Brand Name',
@@ -215,17 +293,17 @@ export const lang = {
     },
     link: {
       title: 'Campaign URL',
-      placeholder: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.',
+      placeholder: 'This url will be used to calculate campaign results.',
       errorTips: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.'
     },
     name: {
       title: 'Campaign Title',
-      placeholder: 'A good campaign name will help you attract more KOLs to participate to your campaign.',
+      placeholder: 'Please enter your campaign title.',
       errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
       title: 'Campaign Details',
-      placeholder: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.',
+      placeholder: 'Please describe your campaign.',
       errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     picture: {
@@ -281,8 +359,8 @@ export const lang = {
     kolDistrict: {
       title: 'KOL’s Location',
       placeholder: 'Please select KOL’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOLs’ audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOLs’ audience.',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
       provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
       cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
@@ -356,7 +434,7 @@ export const lang = {
       errorTips: 'To add a new brand name in the selection drop down, please go to the settings tab and create a new brand name.'
     },
     platform: {
-      title: 'Campaign Name',
+      title: 'Social Platform',
       placeholder: 'Exposure Target',
       errorTips: 'Please select the platform'
     },
@@ -412,8 +490,8 @@ export const lang = {
     followerDistrict: {
       title: 'Audience’s Location',
       placeholder: 'Please select audience’s location',
-      provincePlaceholder: 'Please select the preferred province for the KOL’s audience.',
-      cityPlaceholder: 'Please select the preferred city for the KOL’s audience.',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
       provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
       cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
@@ -626,7 +704,9 @@ export const lang = {
       placeholderName: 'Please enter the brand name',
       addTip: 'Add My Competitive Brand',
       placeholderDec: 'Please fill in the abbreviation of brand'
-    }
+    },
+    overThreeTip: 'You can only choose three competitors at most',
+    noneComTip: "You didn't choose a comparative brand."
   },
   kolList: {
     detail: {
@@ -765,9 +845,9 @@ export const lang = {
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement',
       tableTop: {
-        weixinBig: 'Weichat - big data profile',
+        weixinBig: 'WeChat - big data profile',
         weiboBig: 'Weibo - big data profile - 65,860,968',
-        weixinR8: 'Weichat - R8 managed',
+        weixinR8: 'WeChat - R8 managed',
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
@@ -783,9 +863,12 @@ export const lang = {
     }
   },
   homePage: {
+    brandTop: 'Brand',
+    noBrandTip: 'Please select brand',
+    noBrand: 'You did not choose the brand',
     anlytics: {
       title: 'Analytics',
-      trend: 'Trends',
+      trend: 'Mentions',
       concept: 'Concept',
       competitors: 'Competitors',
       sentiments: 'Sentiments'
@@ -812,5 +895,8 @@ export const lang = {
     price: {
       tit: 'Price Summary'
     }
+  },
+  radarVue: {
+    tit: 'Industry Classification Label Radar'
   }
 }

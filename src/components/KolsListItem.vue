@@ -59,6 +59,12 @@
           @click="doDelete(renderData.profile_id)"
         ></span>
       </div>
+
+      <!-- <transition
+        enter-active-class="animated fadeOutUp"
+      >
+        <div v-if="cartPop">+1</div>
+      </transition> -->
     </div>
   </div>
 </template>
@@ -80,7 +86,8 @@ export default {
     return {
       checked: '',
       url: '',
-      cartParams: {}
+      cartParams: {},
+      cartPop: false
     }
   },
   methods: {
@@ -91,7 +98,7 @@ export default {
       })
     },
     doAddCart () {
-      console.log(this.cartParams)
+      // console.log(this.cartParams)
       axios.post(apiConfig.kolCollectUrl, this.cartParams, {
         headers: {
           'Authorization': this.authorization
@@ -99,10 +106,11 @@ export default {
       }).then(this.handleDoAddCartSucc)
     },
     handleDoAddCartSucc (res) {
-      console.log(res)
+      // console.log(res)
       let resData = res.data
-      console.log(resData)
+      // console.log(resData)
       if (res.status == 201) {
+        // this.cartPop = true
         if (!!resData.error && resData.error == 1) {
           alert(resData.detail)
           return false

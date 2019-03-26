@@ -6,12 +6,13 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Pagination, Spin, InputNumber } from 'ant-design-vue'
+import { Pagination, Spin, InputNumber, Tooltip } from 'ant-design-vue'
 import store from './store'
 import 'babel-polyfill'
 import 'ant-design-vue/lib/table/style/css'
 import 'ant-design-vue/lib/input-number/style/css'
 import 'ant-design-vue/lib/tooltip/style/css'
+import 'animate.css/animate.min.css'
 import '@javascripts/validate.js'
 import '@styles/iconfont.css'
 import '@styles/btn.scss'
@@ -27,6 +28,7 @@ import '@styles/home.scss'
 Vue.use(VueI18n)
 Vue.use(Pagination)
 Vue.use(Spin)
+Vue.use(Tooltip)
 Vue.use(InputNumber)
 Vue.config.productionTip = false
 fastClick.attach(document.body)

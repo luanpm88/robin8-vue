@@ -179,7 +179,7 @@
                       <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                      <th>{{$t('lang.kolList.detail.socialData.postLast')}}</th>
                       <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
                     </tr>
                     <tr>
@@ -351,7 +351,7 @@ export default {
     // console.log(this.$route.query)
     let newKey = '' 
     this.$route.query.brand_keywords.split(',').forEach(item => {
-      newKey += '"' + item + '"'
+      newKey += '\\"' + item + '\\"'
     }) 
     this.trendParams.brand_keywords = newKey 
     this.sentimentParams.brand_keywords = newKey 

@@ -1,19 +1,17 @@
 <template>
   <div class="page">
     <div class="panel default-panel login-panel">
+      <div class="panel-head">
+        <h5 class="title text-center">{{$t('lang.signUp.title')}}</h5>
+      </div>
       <div class="panel-body">
-        <div class="banner">
-          <img src="@images/login_banner.jpg" alt class="banner-img">
-          <img src="@images/logo.png" alt class="logo">
-        </div>
-
         <div class="login-container">
           <div class="tabs">
             <div class="item">
-              <router-link to="/login">Log In</router-link>
+              <router-link to="/login">{{$t('lang.login.title')}}</router-link>
             </div>
             <div class="item active">
-              <router-link to="/reg">Sign Up</router-link>
+              <router-link to="/reg">{{$t('lang.signUp.title')}}</router-link>
             </div>
           </div>
 
@@ -22,41 +20,45 @@
               <div class="col-sm-12">
                 <input
                   v-if="flag"
-                  type="text"
+                  type="tel"
                   name="typeVal"
                   class="form-control"
                   v-model="typeVal"
-                  placeholder="Enter your mobile number"
+                  :placeholder="$t('lang.signUp.phone.placeholder')"
                   ref="type1"
                 >
                 <input
                   v-else
-                  type="text"
+                  type="email"
                   name="typeVal"
                   class="form-control"
                   v-model="typeVal"
-                  placeholder="Enter your email"
+                  :placeholder="$t('lang.signUp.email.placeholder')"
                 >
                 <div class="form-tips text-right" v-if="flag">or
-                  <span class="link" @click="checkType">sign up with email</span>
+                  <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.email')}}</span>
                 </div>
                 <div class="form-tips text-right" v-else>or
-                  <span class="link" @click="checkType">sign up with mobile number</span>
+                  <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.phone')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-6">
+              <div class="col-sm-6 col-xs-6">
                 <input
                   type="text"
                   name="code"
                   class="form-control"
                   v-model="code"
-                  placeholder="Enter valid code"
+                  :placeholder="$t('lang.signUp.code.placeholder')"
                 >
               </div>
-              <div class="col-sm-6">
-                <button class="btn btn-block btn-cyan" :disabled="disabled" @click="codeUrl">{{btntxt}}</button>
+              <div class="col-sm-6 col-xs-6">
+                <button
+                  class="btn btn-block btn-cyan"
+                  :disabled="disabled"
+                  @click="codeUrl"
+                >{{btntxt}}</button>
               </div>
             </div>
             <div class="form-group">
@@ -66,12 +68,17 @@
                   name="password"
                   class="form-control"
                   v-model="password"
-                  placeholder="Enter your password"
+                  :placeholder="$t('lang.signUp.password.placeholder')"
                 >
               </div>
             </div>
             <div class="form-group text-center">
-              <button type="button" class="btn btn-cyan confirm-btn" @click="reg" :disabled="loginStatus">Sign Up</button>
+              <button
+                type="button"
+                class="btn btn-cyan confirm-btn"
+                @click="reg"
+                :disabled="loginStatus"
+              >{{$t('lang.signUp.submit')}}</button>
             </div>
           </div>
         </div>
@@ -113,7 +120,7 @@ export default {
    }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompanyName']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo']),
     // 邮箱和手机注册切换
     checkType () {
       if (this.flag === true) {
@@ -148,6 +155,14 @@ export default {
             _that.setAvatarImgUrl(res.data.avatar_url)
             _that.setCompanyName(res.data.campany_name)
             _that.setAccount(params.login)
+
+            let regTag = !!_that.$route.query.reg_tag && _that.$route.query.reg_tag != '' ? _that.$route.query.reg_tag : ''
+            console.log(regTag)
+            if (!!regTag && regTag != '' && !!res.data.company && res.data.company != '') {
+              _that.setCompany(res.data.company)
+              _that.setCompanyLogo(res.data.partner_logo)
+            }
+
             if (params.type === 'email') {
               _that.setEmail(params.login)
             } else {
@@ -195,10 +210,12 @@ export default {
         })
     },
     reg () {
+      let regTag = !!this.$route.query.reg_tag && this.$route.query.reg_tag != '' ? this.$route.query.reg_tag : ''
       let params = {
         login: this.typeVal,
         code: this.code,
-        password: this.password
+        password: this.password,
+        reg_tag: regTag
       }
       if (this.flag) {
         params.type = 'mobile_number'
