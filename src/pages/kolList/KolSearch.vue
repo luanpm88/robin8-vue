@@ -365,12 +365,13 @@ export default {
     } 
   },
   created() {
+    this.tabIndex = 0
     this.r8Kol() 
     // 获取keywords
-    this.getBaseData() 
-    if (this.keyWord.brand_keywords) {
-      this.tabIndex = this.keyWord.type 
-      this.keyword = this.keyWord.brand_keywords 
+    this.getBaseData()
+    if (this.$route.query.brand_keywords) {
+      this.tabIndex = this.$route.query.type 
+      this.keyword = this.$route.query.brand_keywords
       // 初始化参数
       this.paramsInit() 
       // 调用接口
