@@ -178,7 +178,7 @@ export default {
               if (element.status === 1) {
                 let newKey = '' 
                 element.keywords.split(',').forEach(item => {
-                  newKey += '\\"' + item + '\\"'
+                  newKey += '"' + item + '"'
                 })
                 _that.totalKeywords = newKey 
               }
