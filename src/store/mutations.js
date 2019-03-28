@@ -2,70 +2,70 @@ import commonJs from '@javascripts/common.js'
 
 export default {
   setAuthorization (state, token) {
-    console.log(token)
+    // console.log(token)
     state.authorization = token
     try {
       commonJs.setLocalData('robin8Authorization', token, 604700)
     } catch (e) {}
   },
   setNickname (state, nickname) {
-    console.log(nickname)
+    // console.log(nickname)
     state.nickname = nickname
     try {
       commonJs.setLocalData('robin8UserName', nickname, 604700)
     } catch (e) {}
   },
   setMobile (state, mobile) {
-    console.log(mobile)
+    // console.log(mobile)
     state.mobile = mobile
     try {
       commonJs.setLocalData('robin8Mobile', mobile, 604700)
     } catch (e) {}
   },
   setAccount (state, account) {
-    console.log(account)
+    // console.log(account)
     state.account = account
     try {
       commonJs.setLocalData('robin8Account', account, 604700)
     } catch (e) {}
   },
   setEmail (state, email) {
-    console.log(email)
+    // console.log(email)
     state.email = email
     try {
       commonJs.setLocalData('robin8Email', email, 604700)
     } catch (e) {}
   },
   setAvatarImgUrl (state, avatarImgUrl) {
-    console.log(avatarImgUrl)
+    // console.log(avatarImgUrl)
     state.avatarImgUrl = avatarImgUrl
     try {
       commonJs.setLocalData('robin8AvatarImgUrl', avatarImgUrl, 604700)
     } catch (e) {}
   },
   setCompany (state, company) {
-    console.log(company)
+    // console.log(company)
     state.company = company
     try {
       commonJs.setLocalData('robin8Company', company, 604700)
     } catch (e) {}
   },
   setCompanyName (state, companyName) {
-    console.log(companyName)
+    // console.log(companyName)
     state.companyName = companyName
     try {
       commonJs.setLocalData('robin8CompanyName', companyName, 604700)
     } catch (e) {}
   },
   setCompanyLogo (state, companyLogo) {
-    console.log(companyLogo)
+    // console.log(companyLogo)
     state.companyLogo = companyLogo
     try {
       commonJs.setLocalData('robin8CompanyLogo', companyLogo, 604700)
     } catch (e) {}
   },
   setLanguage (state, language) {
-    console.log(language)
+    // console.log(language)
     state.language = language
     try {
       commonJs.setLocalData('robin8Language', language, 604700)
