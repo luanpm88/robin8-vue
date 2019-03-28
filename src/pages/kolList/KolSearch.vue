@@ -405,7 +405,7 @@ export default {
       } else {
         let newKey = '' 
         this.keyword.split(',').forEach(item => {
-          newKey += '\\"' + item + '\\"'
+          newKey += '"' + item + '" '
         }) 
         this.totalParams.keywords = newKey 
       }

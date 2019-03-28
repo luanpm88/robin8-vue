@@ -869,6 +869,23 @@ export default {
         alert('您已成功添加至购物车')
       }
     },
+    // 获取my brand 页面
+    // getBaseData () {
+    //   const _that = this
+    //   axios.get(apiConfig.baseInfosUrl, {
+    //     headers: {
+    //       'Authorization': _that.authorization
+    //     }
+    //   }).then(function(res) {
+    //     if (res.status === 200) {
+    //       res.data.trademarks_list.forEach(element => {
+    //         if (element.status === 1) {
+    //           _that. = element.name 
+    //         }
+    //       })
+    //     }
+    //   })
+    // },
   }
 } 
 </script>
