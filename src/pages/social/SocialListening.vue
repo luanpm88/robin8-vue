@@ -222,52 +222,6 @@ export default {
           // console.log(error);
         });
     },
-    // weiboselect
-    socialWeiboSelect(params, callback) {
-      const _that = this;
-      axios
-        .post(apiConfig.socialWeiboSelect, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            console.log("0000000", res);
-            if ((currentValue = value)) {
-              const result = res.data.data;
-              const data = [];
-              result.forEach(item => {
-                data.push({
-                  value: item.profile_id,
-                  text: item.profile_name
-                });
-              });
-              callback(data);
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error);
-        });
-    },
-    // sociallWeixinSelect
-    socialWeixinSelect(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.socialWeixinSelect, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-          }
-        })
-        .catch(function(error) {
-          // console.log(error);
-        });
-    },
     totalSearch() {
       this.isLoading = true;
       this.isContent = false;
@@ -275,7 +229,7 @@ export default {
       this.currentPage = 0;
       this.currentPageAdd = this.currentPage + 1;
       this.totalParams.OR_keywords = this.topic;
-      this.totalParams.profile_ids = this.profileId.split(",");
+      this.totalParams.profile_ids = this.selectIdValue.split(",");
       // console.log(this.profileId.split(","))
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
@@ -374,7 +328,7 @@ export default {
     handleChange(value) {
       console.log(value);
       this.selectIdValue = value;
-      // fetch(value, data => this.data = data);
+      // this.selectIdInit(value, data => (this.data = data));
     },
     selectIdInit(value, callback) {
       if (timeout) {
