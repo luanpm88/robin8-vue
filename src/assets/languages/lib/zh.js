@@ -3,6 +3,7 @@ export const lang = {
   logout: '退出',
   wechat: '微信',
   weibo: '微博',
+  redBook: '小红书',
   seeMore: '显示更多',
   more: '查看更多',
   edit: '编辑',

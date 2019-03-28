@@ -5,6 +5,7 @@ export const lang = {
   logout: 'Log Out',
   wechat: 'Wechat',
   weibo: 'Weibo',
+  redBook: 'xiaohongshu',
   seeMore: 'Show More',
   more: 'load more',
   edit: 'edit',

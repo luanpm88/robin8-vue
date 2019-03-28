@@ -320,6 +320,7 @@ export default {
       listSortDir: 'desc',
       isLoading: true,
       isShow: false,
+      isTable: false,
       isFIactive: false,
       isFluenceActive: true,
       isFluenceSort: 'asc',
@@ -353,13 +354,17 @@ export default {
         {
           index: 1,
           name: ('wechat')
-        }
+        }, {
+          index: 2,
+          name: ('redBook')
+        },
       ],
       tabIndex: 0,
       searchListBox: [],
       searchList: {},
       r8List: [],
       totalParams: {},
+      redBookParams: {},
       cartParams: {},
       compareList: []
     } 
@@ -402,14 +407,21 @@ export default {
       this.totalParams.influence_to = this.influenceTo 
       if (this.keyword === '') {
         this.totalParams.keywords = '' 
+        this.redBookParams.keywords = '' 
       } else {
         let newKey = '' 
         this.keyword.split(',').forEach(item => {
           newKey += '\\"' + item + '\\"'
         }) 
-        this.totalParams.keywords = newKey 
+        this.totalParams.keywords = newKey
+        this.redBookParams.keywords = newKey  
       }
-      this.totalParams.profile_sort_col = this.listSortType 
+      if (this.tabIndex === 2) {
+        // 小红书目前只支持关联度排序
+        this.totalParams.profile_sort_col = 0
+      } else {
+        this.totalParams.profile_sort_col = this.listSortType 
+      }
       this.totalParams.profile_sort_dir = this.listSortDir 
       this.totalParams.r8_registered_kol_only = this.kolOnlyText  
     },
@@ -417,13 +429,21 @@ export default {
     totalJoggle(type) {
       // type = 0 微博
       // type = 1 微信
+      // type = 2 xiaohongshu
       if (type === 0) {
         this.totalParams.folllower_from = this.followerFrom 
         this.totalParams.follower_to = this.followerTo 
         // 微博的接口
         this.kollistJoggle(type, this.totalParams) 
-      } else {
+      } 
+      if (type === 1) {
         // weixin的接口
+        this.kollistJoggle(type, this.totalParams) 
+      }
+      if (type === 2) {
+        this.totalParams.folllower_from = this.followerFrom 
+        this.totalParams.follower_to = this.followerTo 
+        // xiaohongshu接口
         this.kollistJoggle(type, this.totalParams) 
       }
     },
@@ -448,7 +468,8 @@ export default {
           .catch(function(error) {
             console.log(error) 
           }) 
-      } else {
+      } 
+      if (type === 1) {
         // weixin
         axios
           .post(apiConfig.kollistWeixinTable, params, {
@@ -465,13 +486,32 @@ export default {
             console.log(error) 
           }) 
       }
+      if (type === 2) {
+        // xiaohongshu
+        axios
+          .post(apiConfig.kollistRedBookTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            // console.log('我是小红书接口', res) 
+            _that.kolsTotal = res.data.total_page_count 
+            _that.jogDataInit(res.data.data) 
+          })
+          .catch(function(error) {
+            console.log(error) 
+          }) 
+      }
     },
     // 处理接口数据函数
     jogDataInit(data) {
       if (data.length === 0 || !data.length) {
         this.isShow = true 
+        this.isTable = false
       }
       this.isLoading = false 
+      this.isTable = true
       const _that = this 
       data.forEach((element, index) => {
         element.influence = parseInt(element.influence * 1000) 
@@ -507,6 +547,7 @@ export default {
     totalSearch() {
       this.isShow = false 
       this.isLoading = true 
+      this.isTable = false
       this.currentPage = 0 
       this.currentPageAdd = this.currentPage + 1 
       this.searchListBox = [] 
@@ -550,6 +591,7 @@ export default {
         // 重置params
         this.paramsInit() 
       } else {
+        // 后面加上小红书直接走了
         this.isFluenceActive = false 
         this.isRelevanceActive = true 
         this.listSortType = 0 
