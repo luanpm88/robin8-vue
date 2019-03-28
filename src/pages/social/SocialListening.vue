@@ -109,10 +109,6 @@ export default {
   },
   created() {
     this.getBaseData();
-    // weibo
-    this.socialWeibo(this.totalParams);
-    // weixin
-    // this.socialWeixin(this.totalParams);
   },
   computed: {
     ...mapState(["authorization"])
@@ -301,6 +297,9 @@ export default {
               _that.topic = element.name 
             }
           })
+          _that.totalParams.OR_keywords = _that.topic
+          // weibo
+          _that.socialWeibo(_that.totalParams);
         }
       })
     },
