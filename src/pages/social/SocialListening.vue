@@ -231,7 +231,6 @@ export default {
             Authorization: _that.authorization
           }
         })
-
         .then(function(res) {
           if (res.status === 200) {
             console.log("0000000", res);
@@ -368,7 +367,7 @@ export default {
         });
     },
     handleSearch(value) {
-      if (value !== '') {
+      if (value !== "") {
         this.selectIdInit(value, data => (this.data = data));
       }
     },
@@ -388,7 +387,8 @@ export default {
         page_no: 0,
         page_size: 10
       };
-      if (this.source === 0) {
+      // 微博select
+      if (Number(this.source) === 0) {
         const _that = this;
         axios
           .post(apiConfig.socialWeiboSelect, params, {
@@ -399,6 +399,36 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log("0000000", res);
+              if ((currentValue = value)) {
+                const result = res.data.data;
+                const data = [];
+                result.forEach(item => {
+                  data.push({
+                    value: item.profile_id,
+                    text: item.profile_name
+                  });
+                });
+                callback(data);
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error);
+          });
+      }
+      // 微信select
+      if (Number(this.source) === 1) {
+        console.log(88);
+        const _that = this;
+        axios
+          .post(apiConfig.socialWeixinSelect, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log("0000000 微信", res);
               if ((currentValue = value)) {
                 const result = res.data.data;
                 const data = [];
