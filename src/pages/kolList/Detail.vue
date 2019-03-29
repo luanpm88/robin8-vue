@@ -38,6 +38,12 @@
               <div class="kol-brand">
                 <p class="clearfix">
                   <span>
+                    {{$t('lang.kolList.detail.currentBrandName')}}
+                  </span>
+                  <b>{{currentBrandName}}</b>
+                </p>
+                <p class="clearfix">
+                  <span>
                     <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.mentionsTip')">
                       {{$t('lang.kolList.detail.mentions')}}
                     </a-tooltip>
@@ -343,7 +349,8 @@ export default {
       isPer: false,
       isPerShow: false,
       isPerLoading: true,
-      cartParams: {}
+      cartParams: {},
+      currentBrandName: ''
     } 
   },
   created() {
@@ -351,7 +358,7 @@ export default {
     // console.log(this.$route.query)
     let newKey = '' 
     this.$route.query.brand_keywords.split(',').forEach(item => {
-      newKey += '\\"' + item + '\\"'
+      newKey += '"' + item + '" '
     }) 
     this.trendParams.brand_keywords = newKey 
     this.sentimentParams.brand_keywords = newKey 
@@ -365,8 +372,10 @@ export default {
     // summary
     tabIndexOneInit() {
       let totalParams = {} 
-      // console.log('woshi totalParams', totalParams) 
+      // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
       this.kolActivityUrl(totalParams) 
+      // 调用获取品牌
+      this.getBaseData()
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id) 
@@ -868,6 +877,24 @@ export default {
         }
         alert('您已成功添加至购物车')
       }
+    },
+    // 获取my brand 页面
+    getBaseData () {
+      const _that = this
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': _that.authorization
+        }
+      }).then(function(res) {
+        if (res.status === 200) {
+          res.data.trademarks_list.forEach(element => {
+            if (element.status === 1) {
+              _that.currentBrandName = element.name 
+              console.log('currentBrandName', _that.currentBrandName);
+            }
+          })
+        }
+      })
     },
   }
 } 
