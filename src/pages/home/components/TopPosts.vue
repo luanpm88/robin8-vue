@@ -122,7 +122,7 @@ export default {
           this.isPost = false
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '\\"' + item + '\\"'
+            newKey += '"' + item + '" '
           }) 
           this.topPostParams.brand_keywords = newKey 
           if (Number(this.tabIndex) === 0) {

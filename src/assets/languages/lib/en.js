@@ -721,6 +721,7 @@ export const lang = {
         clients: 'No. of Clients',
         clientTip: 'The number of clients that this KOL works for. A high number of clients indicates a track record that proves the amplification potential of a KOL. On the other hand, a KOL who has not worked for other brands yet or worked only for a few brands might be an attractive and economic choice since he does not yet have a reputation of producing commercial content. '
       },
+      currentBrandName: 'Brand Name:',
       mentions: 'Brand Mentions:',
       mentionsTip: 'Number of times the brand was mentioned in our social channels in the last 7 days.',
       sentiment: 'Brand Sentiment:',

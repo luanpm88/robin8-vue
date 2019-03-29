@@ -230,7 +230,7 @@ export default {
       this.cur = this.childKeyList.tabIndex
       let newKey = ''
       this.childKeyList.brand_keywords.split(',').forEach(item => {
-        newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
+        newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
       }) 
       this.trendParams.brand_keywords = newKey
       this.sentimentParams.brand_keywords = newKey
@@ -244,7 +244,8 @@ export default {
         let _items = element.split(',')
         if (_items.length > 1) {
           _items.forEach(item => {
-            twoKey.push('\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"')
+            // twoKey.push('\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"')
+            twoKey.push('"' + item.replace(/^\s+|\s+$/g, '') + '" ')
           }) 
         } else {
           _items.forEach(item => {
