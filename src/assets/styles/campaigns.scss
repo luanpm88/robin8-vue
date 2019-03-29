@@ -10,6 +10,12 @@
       position: relative;
       cursor: pointer;
 
+      .icon-img {
+        width: 34px;
+        height: 34px;
+        filter: grayscale(100%);
+      }
+
       .iconfont {
         font-size: $font-lg;
         color: nth($gray, 1);
@@ -39,6 +45,10 @@
         .icon-check {
           color: #fff;
           background-color: nth($blue, 1);
+        }
+
+        .icon-img {
+          filter: grayscale(0%);
         }
       }
     }

@@ -44,7 +44,7 @@
                 >
                   <div class="col-sm-3 text-center">
                     <div class="check-icon checked">
-                      <div :class="'iconfont ' + item.iconClass"></div>
+                      <img :src="item.avatar" alt="" class="icon-img" />
                     </div>
                   </div>
                   <div class="col-sm-8">
@@ -220,15 +220,12 @@ export default {
           console.log(item)
           switch (item.short_name) {
             case 'public_wechat_account':
-              item.iconClass = 'icon-wechat-circle'
               this.kolRouterData.type = '1'
               break
             case 'weibo':
-              item.iconClass = 'icon-weibo-circle'
               this.kolRouterData.type = '0'
               break
             default:
-              item.iconClass = ''
               this.kolRouterData.type = '1'
           }
         })

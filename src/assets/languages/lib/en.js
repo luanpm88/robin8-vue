@@ -495,6 +495,7 @@ export const lang = {
       provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
       cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
+    recommendedKOLs: 'Recommended KOLs',
     status: {
       waiting: '待合作',
       processing: '合作中',

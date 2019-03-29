@@ -494,6 +494,7 @@ export const lang = {
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
     },
+    recommendedKOLs: '为您推荐的大V',
     status: {
       waiting: '待合作',
       processing: '合作中',

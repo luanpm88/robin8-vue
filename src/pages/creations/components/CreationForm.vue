@@ -88,7 +88,7 @@
                 <div
                   v-for="(item, index) in terracesList"
                   :key="item.id"
-                  class="col-sm-6"
+                  class="col-sm-6 platform-item"
                 >
                   <div class="col-sm-2 text-center">
                     <div
@@ -96,9 +96,7 @@
                       :class="[item.checked ? 'checked' : '']"
                       @click="terraceCheck(item.id)"
                     >
-                      <div
-                        :class="'iconfont ' + item.iconClass"
-                      ></div>
+                      <img :src="item.avatar" alt="" class="icon-img" />
                       <div class="iconfont icon-check"></div>
                     </div>
                   </div>
@@ -405,8 +403,9 @@
       class="row mt20"
     >
       <div class="col-sm-6">
-        <kols-list-panel
-          title="为您推荐的大V"
+        <recommended-panel
+          :title="$t('lang.creations.recommendedKOLs')"
+          :terracesList="terracesList"
           :kolsList="kolsList"
           :kolsPage="kolsPage"
           :kolsPerPage="kolsPerPage"
@@ -414,7 +413,8 @@
           :routerData="kolRouterData"
           @checkedKols="checkedKols"
           @changeKolsPage="changeKolsPage"
-        ></kols-list-panel>
+          @changePlatform="changePlatform"
+        ></recommended-panel>
       </div>
       <div class="col-sm-6">
         <kols-list-panel
@@ -468,6 +468,7 @@ import Datepicker from 'vue2-datepicker'
 import TagsList from '@components/TagsList'
 import KolsListItem from '@components/KolsListItem'
 import KolsListPanel from './KolsListPanel'
+import RecommendedPanel from './RecommendedPanel'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { mapState } from 'vuex'
 
@@ -481,6 +482,7 @@ export default {
     TagsList,
     KolsListItem,
     KolsListPanel,
+    RecommendedPanel,
     VueCoreImageUpload
   },
   data () {
@@ -561,17 +563,20 @@ export default {
 
         let _terracesList = data.terraces_list
         _terracesList.forEach(item => {
-          let _shortName = item.short_name
-          switch (_shortName) {
-            case 'public_wechat_account':
-              item.iconClass = 'icon-wechat-circle'
-              break
-            case 'weibo':
-              item.iconClass = 'icon-weibo-circle'
-              break
-            default:
-              item.iconClass = ''
-          }
+          // let _shortName = item.short_name
+          // switch (_shortName) {
+          //   case 'public_wechat_account':
+          //     item.iconClass = 'icon-wechat-circle'
+          //     break
+          //   case 'weibo':
+          //     item.iconClass = 'icon-weibo-circle'
+          //     break
+          //   case 'xiaohongshu':
+          //     item.iconClass = 'icon-xiaohongshu'
+          //     break
+          //   default:
+          //     item.iconClass = ''
+          // }
           item.checked = false
           item.val = ''
         })
@@ -903,6 +908,20 @@ export default {
       this.searchKolsCtrl()
       this.getCollectedKolsData()
     },
+    changePlatform (data) {
+      console.log(data.platformName)
+      let platformName = data.platformName
+      switch (platformName) {
+        case 'public_wechat_account':
+          this.searchKols(apiConfig.kolWxSearchUrl)
+          break
+        case 'weibo':
+          this.searchKols(apiConfig.kolWbSearchUrl)
+          break
+        default:
+          this.searchKols(apiConfig.kolWxSearchUrl)
+      }
+    },
     checkTag (data) {
       let _ids = data.ids
       let _tagsList = this.tagsList
@@ -1107,6 +1126,9 @@ export default {
   .form-group {
     padding: 20px 60px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
+  }
+  .platform-item {
+    margin: 10px 0;
   }
 }
 .create-btn-area {
