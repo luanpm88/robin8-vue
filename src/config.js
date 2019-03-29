@@ -132,6 +132,18 @@ const config = {
   // kol微博搜索
   kolWbSearchUrl: `${searchHost}/price/weibo/price/kol_search?${searchHostKey}`,
 
+  // kol小红书搜索
+  kolXhsSearchUrl: `${searchHost}/price/xiaohongshu/price/kol_search?${searchHostKey}`,
+
+  // kol抖音搜索
+  kolDySearchUrl: `${searchHost}/price/kuaishou/price/kol_search?${searchHostKey}`,
+
+  // kol bilibili搜索
+  kolBlSearchUrl: `${searchHost}/price/bilibili/price/kol_search?${searchHostKey}`,
+
+  // kol快手搜索
+  kolKsSearchUrl: `${searchHost}/price/douyin/price/kol_search?${searchHostKey}`,
+
   // kol search r8头部的东西
   r8_kols: `${host}/base_infos/r8_kols`,
 
@@ -214,7 +226,7 @@ const config = {
   kolBilibiliInfo: `${searchHost}/price/bilibili/price/kol_info?${searchHostKey}`,
 
   // info douyin
-  koldDouyinInfo: `${searchHost}/price/douyin/price/kol_info?${searchHostKey}`,
+  kolDouyinInfo: `${searchHost}/price/douyin/price/kol_info?${searchHostKey}`,
 
   // top industry
   // industry weibo

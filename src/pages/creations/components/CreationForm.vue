@@ -910,6 +910,7 @@ export default {
     },
     changePlatform (data) {
       console.log(data.platformName)
+      this.kolsParams.page_no = 0
       let platformName = data.platformName
       switch (platformName) {
         case 'public_wechat_account':
@@ -917,6 +918,18 @@ export default {
           break
         case 'weibo':
           this.searchKols(apiConfig.kolWbSearchUrl)
+          break
+        case 'xiaohongshu':
+          this.searchKols(apiConfig.kolXhsSearchUrl)
+          break
+        case 'douyin':
+          this.searchKols(apiConfig.kolDySearchUrl)
+          break
+        case 'bilibili':
+          this.searchKols(apiConfig.kolBlSearchUrl)
+          break
+        case 'kuaishou':
+          this.searchKols(apiConfig.kolKsSearchUrl)
           break
         default:
           this.searchKols(apiConfig.kolWxSearchUrl)
