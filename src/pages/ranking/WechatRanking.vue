@@ -138,6 +138,7 @@ export default {
     })
     // 获取最新的report_date
     this.RankingDate(totalParams) 
+    this.getBaseData()
   },
   methods: {
     // ranking 升降序函数
@@ -176,11 +177,7 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                let newKey = '' 
-                element.keywords.split(',').forEach(item => {
-                  newKey += '\\"' + item + '\\"'
-                })
-                _that.totalKeywords = newKey 
+                _that.totalKeywords = element.keywords 
               }
             }) 
           }
@@ -324,6 +321,7 @@ export default {
     },
     // 跳转detail
     openDetails(item) {
+      console.log('this.totalKeywords', this.totalKeywords)
       this.$router.push({
         path: '/kol/',
         name: 'KolDetail',

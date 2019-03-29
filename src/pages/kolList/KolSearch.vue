@@ -172,116 +172,119 @@
           :tabIndex="tabIndex"
           @changeTab="changeTab"
         >
-          <table class="default-table mt20">
-            <thead>
-              <tr>
-                <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
-                <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
-                <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
-                <th width="18%" class="text-center">
-                  {{$t('lang.kolList.search.table.influence')}}
-                  <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
-                    <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
-                  </span>
-                </th>
-                <th width="18%" class="text-center">
-                  {{$t('lang.kolList.search.table.relevance')}}
-                  <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
-                    <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
-              <tr v-for="(item, index) in key" :key="index">
-                <!-- <td>
-                  <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
-                </td> -->
-                <td>
-                  <div class="media kol-profile">
-                    <div class="media-left media-middle">
-                      <div class="avatar">
-                        <router-link
-                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
-                        >
-                          <img :src="item.avatar_url" alt="" class="avatar-img" />
-                        </router-link>
-                      </div>
-                    </div>
-                    <div class="media-body media-middle">
-                      <h5 class="title">
-                        <router-link
-                          :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
-                        >
-                          {{item.profile_name}}
-                        </router-link>
-                      </h5>
-                      <p class="desc">{{item.description_raw}}</p>
-                      <div class="status">
-                        <a-tooltip
-                          placement="topLeft"
-                          :title="$t('lang.kolList.search.likeTip')"
-                          class="item"
-                        >
-                          <i class="iconfont icon-user-heart"></i>
-                          {{item.fans_number}}
-                        </a-tooltip>
-                        <a-tooltip
-                          placement="topLeft"
-                          :title="$t('lang.kolList.search.sumTip')"
-                          class="item"
-                        >
-                          <i class="iconfont icon-app"></i>
-                          {{item.stats.avg_sum_engagement}}
-                        </a-tooltip>
-                      </div>
-                    </div>
-                    <div class="media-right media-middle operation-area">
-                      <span
-                        class="iconfont icon-cart active"
-                        @click="doAddCart(item)"
-                      ></span>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">{{item.pricing.direct_price}}</td>
-                <td class="text-center">
-                  <a-progress
-                    type="circle"
-                    :percent="item.influence / 10"
-                    :width="100"
-                    :strokeWidth="9"
-                    strokeColor="#b37feb"
-                    :format="() => item.influence"
-                  />
-                </td>
-                <td class="text-center">
-                  <a-progress
-                    type="circle"
-                    :percent="item.correlation"
-                    :width="100"
-                    :strokeWidth="9"
-                    strokeColor="#b37feb"
-                    :format="() => item.correlation + '%'"
-                    v-if="item.colorStatus === 1"
-                  />
-                  <a-progress
-                    type="circle"
-                    :width="100"
-                    :strokeWidth="9"
-                    strokeColor="#ddd"
-                    :format="() => item.correlation"
-                    v-if="item.colorStatus === 0"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
           <div class="nonetip" v-if="isShow">
             <span>{{$t('lang.totalNoDataTip')}}</span>
           </div>
           <div class="r8-loading" v-if="isLoading">
             <a-spin tip="Loading..."/>
+          </div>
+          <div v-if="isTable">
+            <table class="default-table mt20">
+              <thead>
+                <tr>
+                  <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
+                  <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
+                  <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
+                  <th width="18%" class="text-center">
+                    {{$t('lang.kolList.search.table.influence')}}
+                    <span @click="influencerank(1)"  :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}">
+                      <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
+                    </span>
+                  </th>
+                  <th width="18%" class="text-center">
+                    {{$t('lang.kolList.search.table.relevance')}}
+                    <span @click="influencerank(2)" :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}">
+                      <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
+                <tr v-for="(item, index) in key" :key="index">
+                  <!-- <td>
+                    <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
+                  </td> -->
+                  <td>
+                    <div class="media kol-profile">
+                      <div class="media-left media-middle">
+                        <div class="avatar">
+                          <router-link
+                            :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
+                          >
+                            <img :src="item.avatar_url" alt="" class="avatar-img" />
+                          </router-link>
+                        </div>
+                      </div>
+                      <div class="media-body media-middle">
+                        <h5 class="title">
+                          <router-link
+                            :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
+                          >
+                            {{item.profile_name}}
+                          </router-link>
+                        </h5>
+                        <p class="desc">{{item.description_raw}}</p>
+                        <div class="status">
+                          <a-tooltip
+                            placement="topLeft"
+                            :title="$t('lang.kolList.search.likeTip')"
+                            class="item"
+                          >
+                            <i class="iconfont icon-user-heart"></i>
+                            {{item.fans_number}}
+                          </a-tooltip>
+                          <a-tooltip
+                            placement="topLeft"
+                            :title="$t('lang.kolList.search.sumTip')"
+                            class="item"
+                          >
+                            <i class="iconfont icon-app"></i>
+                            {{item.stats.avg_sum_engagement}}
+                          </a-tooltip>
+                        </div>
+                      </div>
+                      <div class="media-right media-middle operation-area">
+                        <span
+                          class="iconfont icon-cart active"
+                          @click="doAddCart(item)"
+                        ></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center">{{item.pricing.direct_price}}</td>
+                  <td class="text-center">
+                    <a-progress
+                      type="circle"
+                      :percent="item.influence / 10"
+                      :width="100"
+                      :strokeWidth="9"
+                      strokeColor="#b37feb"
+                      :format="() => item.influence"
+                    />
+                  </td>
+                  <td class="text-center">
+                    <a-progress
+                      type="circle"
+                      :percent="item.correlation"
+                      :width="100"
+                      :strokeWidth="9"
+                      strokeColor="#b37feb"
+                      :format="() => item.correlation + '%'"
+                      v-if="item.colorStatus === 1"
+                    />
+                    <a-progress
+                      type="circle"
+                      :width="100"
+                      :strokeWidth="9"
+                      strokeColor="#ddd"
+                      :format="() => item.correlation"
+                      v-if="item.colorStatus === 0"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="text-center p30">
             <a-pagination
@@ -320,6 +323,7 @@ export default {
       listSortDir: 'desc',
       isLoading: true,
       isShow: false,
+      isTable: false,
       isFIactive: false,
       isFluenceActive: true,
       isFluenceSort: 'asc',
@@ -353,6 +357,18 @@ export default {
         {
           index: 1,
           name: ('wechat')
+        }, {
+          index: 2,
+          name: ('xiaohongshu')
+        }, {
+          index: 3,
+          name: ('kuaishou')
+        }, {
+          index: 4,
+          name: ('bilibili')
+        }, {
+          index: 5,
+          name: ('douyin')
         }
       ],
       tabIndex: 0,
@@ -365,12 +381,13 @@ export default {
     } 
   },
   created() {
+    this.tabIndex = 0
     this.r8Kol() 
     // 获取keywords
-    this.getBaseData() 
-    if (this.keyWord.brand_keywords) {
-      this.tabIndex = this.keyWord.type 
-      this.keyword = this.keyWord.brand_keywords 
+    this.getBaseData()
+    if (this.$route.query.brand_keywords) {
+      this.tabIndex = this.$route.query.type 
+      this.keyword = this.$route.query.brand_keywords
       // 初始化参数
       this.paramsInit() 
       // 调用接口
@@ -403,13 +420,20 @@ export default {
       if (this.keyword === '') {
         this.totalParams.keywords = '' 
       } else {
+        // this.keyword 转英文逗号
+        this.keyword = this.keyword.replace(/，/ig,',')
         let newKey = '' 
         this.keyword.split(',').forEach(item => {
-          newKey += '\\"' + item + '\\"'
+          newKey += '"' + item + '" '
         }) 
         this.totalParams.keywords = newKey 
       }
-      this.totalParams.profile_sort_col = this.listSortType 
+      if (this.tabIndex === 2 || this.tabIndex === 3 || this.tabIndex === 4 || this.tabIndex === 5) {
+        // 小红书、 快手、哔哩哔哩、抖音目前只支持关联度排序
+        this.totalParams.profile_sort_col = 0
+      } else {
+        this.totalParams.profile_sort_col = this.listSortType 
+      }
       this.totalParams.profile_sort_dir = this.listSortDir 
       this.totalParams.r8_registered_kol_only = this.kolOnlyText  
     },
@@ -417,17 +441,20 @@ export default {
     totalJoggle(type) {
       // type = 0 微博
       // type = 1 微信
-      if (type === 0) {
+      // type = 2 xiaohongshu
+      // type = 3 kuaishou
+      // type = 4 bilibili
+      // type = 5 douyin
+      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4) {
+        // 微博、小红书、快手、
         this.totalParams.folllower_from = this.followerFrom 
-        this.totalParams.follower_to = this.followerTo 
-        // 微博的接口
+        this.totalParams.follower_to = this.followerTo
         this.kollistJoggle(type, this.totalParams) 
-      } else {
-        // weixin的接口
+      }  else {
         this.kollistJoggle(type, this.totalParams) 
       }
     },
-    // 微博和微信的接口
+    // 平台数据 接口
     kollistJoggle(type, params) {
       const _that = this 
       if (type === 0) {
@@ -441,14 +468,23 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('我是weibo接口', res) 
-              _that.kolsTotal = res.data.total_page_count 
-              _that.jogDataInit(res.data.data) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
             }
           })
           .catch(function(error) {
-            console.log(error) 
+            // console.log(error) 
           }) 
-      } else {
+      } 
+      if (type === 1) {
         // weixin
         axios
           .post(apiConfig.kollistWeixinTable, params, {
@@ -457,12 +493,130 @@ export default {
             }
           })
           .then(function(res) {
-            // console.log('我是weixin接口', res) 
-            _that.kolsTotal = res.data.total_page_count 
-            _that.jogDataInit(res.data.data) 
+            if (res.status === 200) {
+              // console.log('我是weixin接口', res) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error) 
+          }) 
+      }
+      if (type === 2) {
+        // xiaohongshu
+        axios
+          .post(apiConfig.kollistRedBookTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('我是小红书接口', res) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
+            }
           })
           .catch(function(error) {
             console.log(error) 
+          }) 
+      }
+      if (type === 3) {
+        // kuaishou
+        axios
+          .post(apiConfig.kollistKuaishouTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('kollistKuaishouTable', res) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error) 
+          }) 
+      }
+      if (type === 4) {
+        // bilibili
+        axios
+          .post(apiConfig.kollistBilibiliTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('kollistBilibiliTable', res) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error) 
+          }) 
+      }
+      if (type === 5) {
+        // douyin
+        axios
+          .post(apiConfig.kollistDouyinTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('kollistDouyinTable', res) 
+              _that.isLoading = false
+              if (res.data.data.length > 0) {
+                _that.isShow  = false
+                _that.isTable  = true
+                _that.kolsTotal = res.data.total_page_count 
+                _that.jogDataInit(res.data.data) 
+              } else {
+                _that.isShow  = true
+                _that.isTable  = false
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error) 
           }) 
       }
     },
@@ -487,6 +641,9 @@ export default {
           (element.pricing = {}), (element.pricing.direct_price = 'N/A') 
         }
       }) 
+      // if (tabIndex === 3) {
+      //   .replace("https","http")
+      // }
       _that.searchList = data 
       _that.searchListBox.push(_that.searchList) 
     },
@@ -494,7 +651,10 @@ export default {
       this.advancedSearch = !this.advancedSearch 
     },
     changeTab(tab) {
+      this.kolsTotal = 0
       this.isLoading = true 
+      this.isShow = false
+      this.isTable = false
       this.tabIndex = tab.index 
       this.currentPage = 0 
       this.currentPageAdd = this.currentPage + 1 
@@ -505,8 +665,10 @@ export default {
       this.totalJoggle(this.tabIndex) 
     },
     totalSearch() {
-      this.isShow = false 
+      this.kolsTotal = 0
       this.isLoading = true 
+      this.isShow = false 
+      this.isTable = false
       this.currentPage = 0 
       this.currentPageAdd = this.currentPage + 1 
       this.searchListBox = [] 
@@ -550,6 +712,7 @@ export default {
         // 重置params
         this.paramsInit() 
       } else {
+        // 后面加上小红书直接走了
         this.isFluenceActive = false 
         this.isRelevanceActive = true 
         this.listSortType = 0 
@@ -596,6 +759,8 @@ export default {
     },
     onPageChange (page) {
       this.isLoading = true 
+      this.isShow = false
+      this.isTable = false
       this.currentPage = page - 1 
       this.currentPageAdd = page 
       this.searchListBox = [] 

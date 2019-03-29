@@ -7,7 +7,11 @@ const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
 // const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
-const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
+// fergus 接口qa地址
+// const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
+
+// fergus 接口测试地址
+const searchHost = 'http://api_beta.robin8.net:8080//api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
 
 const config = {
@@ -174,6 +178,18 @@ const config = {
   // kollist 表格微信接口
   kollistWeixinTable: `${searchHost}/weixin/profile/kol_search_profile?${searchHostKey}`,
 
+  // xiaohongshu 表格接口
+  kollistRedBookTable: `${searchHost}/xiaohongshu/profile/kol_search_profile?${searchHostKey}`,
+
+  // kuaishou
+  kollistKuaishouTable: `${searchHost}/kuaishou/profile/kol_search_profile?${searchHostKey}`,
+
+  // bilibili
+  kollistBilibiliTable: `${searchHost}/bilibili/profile/kol_search_profile?${searchHostKey}`,
+
+  // douyin
+  kollistDouyinTable: `${searchHost}/douyin/profile/kol_search_profile?${searchHostKey}`,
+
   // 首页接口结束------------------------
 
   // 我的竞争品牌 增加品牌 提交接口
@@ -187,6 +203,18 @@ const config = {
 
   // info weixin
   kolWeiXinInfo: `${searchHost}/weixin/profile/info?${searchHostKey}`,
+
+  // info xiaohongshu
+  kolXiaohongshuInfo: `${searchHost}/price/xiaohongshu/price/kol_info?${searchHostKey}`,
+
+  // info kuaishou
+  kolKuaishouInfo: `${searchHost}/price/kuaishou/price/kol_info?${searchHostKey}`,
+
+  // info bilibili
+  kolBilibiliInfo: `${searchHost}/price/bilibili/price/kol_info?${searchHostKey}`,
+
+  // info douyin
+  koldDouyinInfo: `${searchHost}/price/douyin/price/kol_info?${searchHostKey}`,
 
   // top industry
   // industry weibo
@@ -276,6 +304,10 @@ const config = {
   socialWeibo: `${searchHost}/weibo/post/query?${searchHostKey}`,
 
   socialWeixin: `${searchHost}/weixin/post/query?${searchHostKey}`,
+
+  socialWeiboSelect: `${searchHost}/price/weibo/price/kol_search_by_profile_name?${searchHostKey}`,
+
+  socialWeixinSelect: `${searchHost}/price/weixin/price/kol_search_by_profile_name?${searchHostKey}`,
 }
 
 module.exports = config

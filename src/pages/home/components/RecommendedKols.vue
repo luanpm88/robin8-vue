@@ -106,7 +106,7 @@ export default {
           this.isKol = false
           let newKey = ''
           this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '\\"' + item.replace(/^\s+|\s+$/g, '') + '\\"'
+            newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
           }) 
           this.params.brand_keywords = newKey
           this.kolRouterData.keywords = newKey
@@ -159,7 +159,7 @@ export default {
       this.$router.push({
         path: '/kol/list',
         name: 'KolList',
-        params: {
+        query: {
           brand_keywords: this.childKeyList.brand_keywords,
           type: this.tabIndex
         }

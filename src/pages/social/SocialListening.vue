@@ -58,8 +58,8 @@
             </div>
             <div v-if="isContent">
               <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-                <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
-                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
+                <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
                 <div class="media social-detail">
                   <div class="media-left media-middle"  @click="intoKolDetail(item)">
                     <img :src="item.imgUrl" alt class>
@@ -109,10 +109,6 @@ export default {
   },
   created() {
     this.getBaseData();
-    // weibo
-    this.socialWeibo(this.totalParams);
-    // weixin
-    // this.socialWeixin(this.totalParams);
   },
   computed: {
     ...mapState(["authorization"])
@@ -134,7 +130,7 @@ export default {
         page_size: 10,
         start_date: commonJs.cPastSevenDays,
         end_date: commonJs.cPastOneday,
-        OR_keywords: 'adidas',
+        OR_keywords: '',
         profile_ids: [],
       },
       itemList: [],
@@ -221,9 +217,14 @@ export default {
       this.isShow = false;
       this.currentPage = 0;
       this.currentPageAdd = this.currentPage + 1;
-      this.totalParams.OR_keywords = this.topic;
+      // this.topic 转英文逗号
+      this.topic = this.topic.replace(/，/ig,',')
+      let newKey = ''
+      this.topic.split(',').forEach(item => {
+        newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
+      })
+      this.totalParams.OR_keywords = newKey;
       this.totalParams.profile_ids = this.profileId.split(",");
-      // console.log(this.profileId.split(","))
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -239,7 +240,13 @@ export default {
       this.isShow = false;
       this.currentPageAdd = page;
       this.currentPage = page - 1;
-      this.totalParams.OR_keywords = this.topic;
+      // this.topic 转英文逗号
+      this.topic = this.topic.replace(/，/ig,',')
+      let newKey = ''
+      this.topic.split(',').forEach(item => {
+        newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
+      })
+      this.totalParams.OR_keywords = newKey;
       this.totalParams.profile_ids = this.profileId.split(",");
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
@@ -301,6 +308,9 @@ export default {
               _that.topic = element.name 
             }
           })
+          _that.totalParams.OR_keywords = _that.topic
+          // weibo
+          _that.socialWeibo(_that.totalParams);
         }
       })
     },
