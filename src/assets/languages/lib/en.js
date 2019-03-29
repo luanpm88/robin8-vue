@@ -5,7 +5,10 @@ export const lang = {
   logout: 'Log Out',
   wechat: 'Wechat',
   weibo: 'Weibo',
-  redBook: 'xiaohongshu',
+  xiaohongshu: 'xiaohongshu',
+  kuaishou: 'kuaishou',
+  bilibili: 'bilibili',
+  douyin: 'douyin',
   seeMore: 'Show More',
   more: 'load more',
   edit: 'edit',
@@ -16,7 +19,7 @@ export const lang = {
   backBtn: 'Back',
   submitBtn: 'Submit',
   payBtn: 'Pay',
-  totalNoDataTip: 'No data...',
+  totalNoDataTip: 'Soon to launch...',
   yes: 'Yes',
   no: 'No',
   search: 'Search',
@@ -722,6 +725,7 @@ export const lang = {
         clients: 'No. of Clients',
         clientTip: 'The number of clients that this KOL works for. A high number of clients indicates a track record that proves the amplification potential of a KOL. On the other hand, a KOL who has not worked for other brands yet or worked only for a few brands might be an attractive and economic choice since he does not yet have a reputation of producing commercial content. '
       },
+      currentBrandName: 'Brand Name',
       mentions: 'Brand Mentions:',
       mentionsTip: 'Number of times the brand was mentioned in our social channels in the last 7 days.',
       sentiment: 'Brand Sentiment:',
@@ -748,6 +752,14 @@ export const lang = {
         comments: 'Comments',
         postLast: 'Post-last 21 days',
         influence: 'Influence Score'
+      },
+      otherSocialData: {
+        title: 'Social Data',
+        platform: 'Platform',
+        gender: 'Gender',
+        price: 'Price',
+        followers: 'Followers',
+        tagsDescription: 'Tags Description'
       },
       bestPosts: {
         title: 'Best Performance Posts',

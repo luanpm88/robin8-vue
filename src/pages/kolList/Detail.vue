@@ -12,8 +12,8 @@
               <div class="kol-info">
                 <p>
                   {{infoList.profile_name}}
-                  <i class="iconfont icon-female" v-if="infoList.gender == 'm'"></i>
-                  <i class="iconfont icon-male" v-if="infoList.gender == 'f'"></i>
+                  <i class="iconfont icon-female" v-if="infoList.gender == 'm' || infoList.gender == 'M'"></i>
+                  <i class="iconfont icon-male" v-if="infoList.gender == 'f' || infoList.gender == 'F'"></i>
                   <button
                     type="button"
                     class="btn btn-xs btn-purple"
@@ -42,7 +42,7 @@
                   </span>
                   <b>{{currentBrandName}}</b>
                 </p>
-                <p class="clearfix">
+                <p class="clearfix" v-if="type === 0 || type === 1">
                   <span>
                     <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.mentionsTip')">
                       {{$t('lang.kolList.detail.mentions')}}
@@ -50,7 +50,7 @@
                   </span>
                   <b>{{MentionsNum}}</b>
                 </p>
-                <p class="clearfix">
+                <p class="clearfix" v-if="type === 0 || type === 1">
                   <span>
                     <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.sentimentTip')">
                       {{$t('lang.kolList.detail.sentiment')}}
@@ -67,14 +67,21 @@
             </div> -->
             <div class="panel-body prl30">
               <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
-              <Echarts
-                :options="competitorList.options"
-                :chartsStyle="competitorList.chartsStyle"
-                ref="competitorEChart"
-              ></Echarts>
+              <div v-if="type === 0 || type === 1">
+                <Echarts
+                  :options="competitorList.options"
+                  :chartsStyle="competitorList.chartsStyle"
+                  ref="competitorEChart"
+                ></Echarts>
+              </div>
+              <div v-else>
+                <div class="nonetip">
+                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="panel default-panel mt20">
+          <div class="panel default-panel mt20" >
             <!-- <div class="panel-head">
               <h5 class="title text-center">
                 <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
@@ -88,17 +95,24 @@
                   {{$t('lang.kolList.detail.keywords')}}
                 </a-tooltip>
               </p>
-              <div class="nonetip" v-if="isShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
+              <div v-if="type === 0 || type === 1">
+                <div class="nonetip" v-if="isShow">
+                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                </div>
+                <div class="r8-loading" v-if="isLoading">
+                  <a-spin tip="Loading..."/>
+                </div>
+                <tag-charts v-if="isTag" :width="240" :height="180" :taglist="parentTags" class="mt20"></tag-charts>
               </div>
-              <div class="r8-loading" v-if="isLoading">
-                <a-spin tip="Loading..."/>
+              <div v-else>
+                <div class="nonetip">
+                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                </div>
               </div>
-              <tag-charts v-if="isTag" :width="240" :height="180" :taglist="parentTags" class="mt20"></tag-charts>
             </div>
           </div>
         </div>
-        <div class="kol-detail-con">
+        <div class="kol-detail-con" v-if="type === 0 || type === 1">
           <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
           <default-tabs
             :tabList="tabList"
@@ -239,6 +253,33 @@
             <posts></posts>
           </div>
         </div>
+        <!-- 除了微信和微博  其他平台只展示 socialData -->
+        <div class="kol-detail-con" v-else>
+          <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
+          <div class="panel default-panel mt20">
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.otherSocialData.title')}}</p>
+              <div class="activity-table">
+                <table class="com-brand-table">
+                  <tr>
+                    <th>{{$t('lang.kolList.detail.otherSocialData.platform')}}</th>
+                    <th>{{$t('lang.kolList.detail.otherSocialData.gender')}}</th>
+                    <th>{{$t('lang.kolList.detail.otherSocialData.price')}}</th>
+                    <th>{{$t('lang.kolList.detail.otherSocialData.followers')}}</th>
+                    <th>{{$t('lang.kolList.detail.otherSocialData.tagsDescription')}}</th>
+                  </tr>
+                  <tr>
+                    <td>{{otherSocialData.platform}}</td>
+                    <td>{{otherSocialData.gender}}</td>
+                    <td>{{otherSocialData.price}}</td>
+                    <td>{{otherSocialData.followers}}</td>
+                    <td>{{otherSocialData.tagsDescription}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -350,7 +391,14 @@ export default {
       isPerShow: false,
       isPerLoading: true,
       cartParams: {},
-      currentBrandName: ''
+      currentBrandName: '',
+      otherSocialData: {
+        platform: 'N/A',
+        gender: 'N/A',
+        price: 'N/A',
+        followers: 'N/A',
+        tagsDescription: 'N/A'
+      }
     } 
   },
   created() {
@@ -376,10 +424,10 @@ export default {
       this.kolActivityUrl(totalParams) 
       // 调用获取品牌
       this.getBaseData()
+      totalParams.language = 'en' 
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
-        totalParams.profile_id = Number(this.$route.params.id) 
-        totalParams.language = 'en' 
+        totalParams.profile_id = Number(this.$route.params.id)
         this.kolWeiboIndustry(totalParams) 
         this.kolWeiboKeyword(totalParams) 
         this.kolWeiboSocial(totalParams) 
@@ -391,10 +439,10 @@ export default {
         this.performanceParams.profile_id = String(this.$route.params.id) 
         this.performanceParams.order_type = 'sum_engagement'
         this.performanceWeibo(this.performanceParams) 
-      } else {
+      } 
+      if (Number(this.$route.query.type) === 1) {
         // 微信相关接口
         totalParams.profile_id = this.$route.params.id 
-        totalParams.language = 'en' 
         this.kolWeiXinIndustry(totalParams) 
         this.kolWeiXinKeyword(totalParams) 
         this.kolWeixinSocial(totalParams) 
@@ -405,6 +453,26 @@ export default {
         // best performance 参数
         this.performanceParams.profile_id = this.$route.params.id 
         this.performanceWeixin(this.performanceParams) 
+      }
+      if (Number(this.$route.query.type) === 2) {
+        // xiaohongshu
+        totalParams.profile_id = this.$route.params.id
+        
+      }
+      if (Number(this.$route.query.type) === 3) {
+        // kuaishou
+        totalParams.profile_id = this.$route.params.id
+        
+      }
+      if (Number(this.$route.query.type) === 4) {
+        // bilibili
+        totalParams.profile_id = this.$route.params.id 
+        
+      }
+      if (Number(this.$route.query.type) === 5) {
+        // douyin
+        totalParams.profile_id = this.$route.params.id 
+        
       }
     },
     changeTab(tab) {
@@ -458,6 +526,159 @@ export default {
             _that.infoList.profile_id = res.data.profile_id 
             _that.infoList.description_raw = res.data.description_raw 
             _that.infoList.gender = '-' 
+          }
+        })
+        .catch(function(error) {
+          // console.log(error) 
+        }) 
+    },
+    // info xiaohongshu的接口
+    kolXiaohongshuInfo(params) {
+      const _that = this 
+      axios
+        .post(apiConfig.kolXiaohongshuInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoList.avatar_url = res.data.avatar_url 
+            _that.infoList.profile_name = res.data.profile_name 
+            _that.infoList.profile_id = res.data.profile_id 
+            _that.infoList.description_raw = res.data.description_raw 
+            _that.infoList.gender = res.data.gender 
+            _that.decValue =  Object.values(res.data.industries) 
+            _that.decKey = Object.keys(res.data.industries) 
+            _that.decValue.forEach((item, index) => {
+              item.keyName = _that.decKey[index] 
+            }) 
+            _that.decValue.forEach((item, index) => {
+              if (item.n_posts === 1) {
+                _that.dec.push(item.keyName) 
+              }
+            }) 
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'xiaohongshu'
+            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
+            _that.otherSocialData.gender = res.data.gender
+            _that.otherSocialData.followers = res.data.fans_number
+            _that.otherSocialData.tagsDescription = res.data.tags_description
+          }
+        })
+        .catch(function(error) {
+          // console.log(error) 
+        }) 
+    },
+    // info kolKuaishouInfo的接口
+    kolKuaishouInfo(params) {
+      const _that = this 
+      axios
+        .post(apiConfig.kolKuaishouInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          // console.log('kolKuaishouInfo', res)
+          if (res.status === 200) {
+            _that.infoList.avatar_url = res.data.avatar_url 
+            _that.infoList.profile_name = res.data.profile_name 
+            _that.infoList.profile_id = res.data.profile_id 
+            _that.infoList.description_raw = res.data.description_raw 
+            _that.infoList.gender = res.data.gender 
+            _that.decValue =  Object.values(res.data.industries) 
+            _that.decKey = Object.keys(res.data.industries) 
+            _that.decValue.forEach((item, index) => {
+              item.keyName = _that.decKey[index] 
+            }) 
+            _that.decValue.forEach((item, index) => {
+              if (item.n_posts === 1) {
+                _that.dec.push(item.keyName) 
+              }
+            }) 
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'kuaishou'
+            _that.otherSocialData.gender = res.data.gender
+            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
+            _that.otherSocialData.followers = res.data.fans_number
+            _that.otherSocialData.tagsDescription = res.data.tags_description
+          }
+        })
+        .catch(function(error) {
+          // console.log(error) 
+        }) 
+    },
+    // info kolBilibiliInfo的接口
+    kolBilibiliInfo(params) {
+      const _that = this 
+      axios
+        .post(apiConfig.kolBilibiliInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoList.avatar_url = res.data.avatar_url 
+            _that.infoList.profile_name = res.data.profile_name 
+            _that.infoList.profile_id = res.data.profile_id 
+            _that.infoList.description_raw = res.data.description_raw 
+            _that.infoList.gender = res.data.gender 
+            _that.decValue =  Object.values(res.data.industries) 
+            _that.decKey = Object.keys(res.data.industries) 
+            _that.decValue.forEach((item, index) => {
+              item.keyName = _that.decKey[index] 
+            }) 
+            _that.decValue.forEach((item, index) => {
+              if (item.n_posts === 1) {
+                _that.dec.push(item.keyName) 
+              }
+            }) 
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'bilibili'
+            _that.otherSocialData.gender = res.data.gender
+            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
+            _that.otherSocialData.followers = res.data.fans_number
+            _that.otherSocialData.tagsDescription = res.data.tags_description
+          }
+        })
+        .catch(function(error) {
+          // console.log(error) 
+        }) 
+    },
+    // info koldDouyinInfo的接口
+    koldDouyinInfo(params) {
+      const _that = this 
+      axios
+        .post(apiConfig.koldDouyinInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoList.avatar_url = res.data.avatar_url 
+            _that.infoList.profile_name = res.data.profile_name 
+            _that.infoList.profile_id = res.data.profile_id 
+            _that.infoList.description_raw = res.data.description_raw 
+            _that.infoList.gender = res.data.gender 
+            _that.decValue =  Object.values(res.data.industries) 
+            _that.decKey = Object.keys(res.data.industries) 
+            _that.decValue.forEach((item, index) => {
+              item.keyName = _that.decKey[index] 
+            }) 
+            _that.decValue.forEach((item, index) => {
+              if (item.n_posts === 1) {
+                _that.dec.push(item.keyName) 
+              }
+            }) 
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'douyin'
+            _that.otherSocialData.gender = res.data.gender
+            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
+            _that.otherSocialData.followers = res.data.fans_number
+            _that.otherSocialData.tagsDescription = res.data.tags_description
           }
         })
         .catch(function(error) {
@@ -688,9 +909,26 @@ export default {
               if (Number(_that.$route.query.type) === 0) {
                 // 调用Fergus 微博info
                 _that.kolWeiboInfo(params) 
-              } else {
+              }
+              if (Number(_that.$route.query.type) === 1) {
                 // 调用Fergus weixin info
                 _that.kolWeiXinInfo(params) 
+              }
+              if (Number(_that.$route.query.type) === 2) {
+                // 调用Fergus xiaohongshu
+                _that.kolXiaohongshuInfo(params) 
+              }
+              if (Number(_that.$route.query.type) === 3) {
+                // 调用Fergus kolKuaishouInfo
+                _that.kolKuaishouInfo(params) 
+              }
+              if (Number(_that.$route.query.type) === 4) {
+                // 调用Fergus bilibili
+                _that.kolBilibiliInfo(params) 
+              }
+              if (Number(_that.$route.query.type) === 5) {
+                // 调用Fergus douyin
+                _that.koldDouyinInfo(params) 
               }
             } else {
               _that.isActivity = true 
@@ -889,8 +1127,7 @@ export default {
         if (res.status === 200) {
           res.data.trademarks_list.forEach(element => {
             if (element.status === 1) {
-              _that.currentBrandName = element.name 
-              console.log('currentBrandName', _that.currentBrandName);
+              _that.currentBrandName = element.name
             }
           })
         }
