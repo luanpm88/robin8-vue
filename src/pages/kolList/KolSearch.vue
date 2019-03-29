@@ -404,6 +404,8 @@ export default {
       if (this.keyword === '') {
         this.totalParams.keywords = '' 
       } else {
+        // this.keyword 转英文逗号
+        this.keyword = this.keyword.replace(/，/ig,',')
         let newKey = '' 
         this.keyword.split(',').forEach(item => {
           newKey += '"' + item + '" '

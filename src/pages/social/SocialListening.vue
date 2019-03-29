@@ -58,8 +58,8 @@
             </div>
             <div v-if="isContent">
               <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-                <p v-if="Number(source) === 0" class="home-post-title">{{item.title}}</p>
-                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
+                <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
                 <div class="media social-detail">
                   <div class="media-left media-middle"  @click="intoKolDetail(item)">
                     <img :src="item.imgUrl" alt class>
