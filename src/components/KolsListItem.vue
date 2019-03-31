@@ -28,6 +28,12 @@
             :to="url"
           >
             {{renderData.profile_name}}
+            <img
+              v-if="!!renderData.terrace_avatar && renderData.terrace_avatar !=''"
+              :src="renderData.terrace_avatar"
+              alt=""
+              class="platform-icon"
+            />
           </router-link>
         </h5>
         <p class="desc">{{renderData.description_raw}}</p>
@@ -190,6 +196,13 @@ export default {
       font-size: $font-sm;
       font-weight: 600;
       cursor: pointer;
+      .platform-icon {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin: -4px 0 0 8px;
+        vertical-align: middle;
+      }
       a {
         color: rgba(#000, .85);
       }

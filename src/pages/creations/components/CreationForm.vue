@@ -700,9 +700,9 @@ export default {
       }
     },
     searchKols (postUrl) {
-      console.log(postUrl)
-      console.log(this.kolsParams)
-      console.log(this.kolsPage)
+      // console.log(postUrl)
+      // console.log(this.kolsParams)
+      // console.log(this.kolsPage)
       axios.post(postUrl, this.kolsParams, {
         headers: {
           'Authorization': this.authorization
@@ -780,7 +780,7 @@ export default {
 
       // 全部平台
       let _terraces = this.terracesList
-      // console.log(_terraces)
+      console.log(_terraces)
 
       this.kolsList = []
       this.$validator.validateAll().then((msg) => {
@@ -843,7 +843,7 @@ export default {
     changeKolsPage (data) {
       // console.log(data.page)
       let _plateformName = this.plateformName
-      console.log(_plateformName)
+      // console.log(_plateformName)
       this.checkingPlatform(_plateformName)
       this.kolsPage = data.page - 1
       // this.searchKolsCtrl()
@@ -907,8 +907,8 @@ export default {
 
       let _plateformName = this.plateformName
 
-      console.log(this.plateformName)
-      console.log(this.kolRouterData.type)
+      // console.log(this.plateformName)
+      // console.log(this.kolRouterData.type)
       this.checkingPlatform(_plateformName)
       this.searchKols(this.kolSearchUrl)
       // console.log(this.submitData.selected_kols)
