@@ -270,7 +270,8 @@
                   </tr>
                   <tr>
                     <td>{{otherSocialData.platform}}</td>
-                    <td>{{otherSocialData.gender}}</td>
+                    <td v-if="otherSocialData.gender">{{otherSocialData.gender}}</td>
+                    <td v-else> N/A </td>
                     <td>{{otherSocialData.price}}</td>
                     <td>{{otherSocialData.followers}}</td>
                     <td>{{otherSocialData.tagsDescription}}</td>

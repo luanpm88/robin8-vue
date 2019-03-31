@@ -381,18 +381,18 @@ export default {
     } 
   },
   created() {
-    this.tabIndex = 0
     this.r8Kol() 
     // 获取keywords
     this.getBaseData()
     if (this.$route.query.brand_keywords) {
-      this.tabIndex = this.$route.query.type 
+      this.tabIndex = Number(this.$route.query.type)
       this.keyword = this.$route.query.brand_keywords
       // 初始化参数
       this.paramsInit() 
       // 调用接口
       this.totalJoggle(this.tabIndex) 
     } else {
+      this.tabIndex = 0
       // 初始化参数
       this.paramsInit() 
       // 调用接口
@@ -445,8 +445,8 @@ export default {
       // type = 3 kuaishou
       // type = 4 bilibili
       // type = 5 douyin
-      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4) {
-        // 微博、小红书、快手、
+      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4 || type === 5) {
+        // 微博、小红书、快手、抖音
         this.totalParams.folllower_from = this.followerFrom 
         this.totalParams.follower_to = this.followerTo
         this.kollistJoggle(type, this.totalParams) 
@@ -472,7 +472,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -499,7 +499,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -526,7 +526,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -553,7 +553,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -580,7 +580,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -607,7 +607,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -628,7 +628,11 @@ export default {
       this.isLoading = false 
       const _that = this 
       data.forEach((element, index) => {
-        element.influence = parseInt(element.influence * 1000) 
+        if (element.influence) {
+          element.influence = parseInt(element.influence * 1000) 
+        } else {
+          element.influence = 'N/A' 
+        }
         element.isCheck = false 
         if (this.keyword !== '') {
           element.colorStatus = 1 
