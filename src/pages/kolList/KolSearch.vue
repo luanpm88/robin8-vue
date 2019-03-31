@@ -629,7 +629,7 @@ export default {
       this.isLoading = false
       const _that = this
       data.forEach((element, index) => {
-        if (element.influence) {
+        if (element.influence || element.influence === 0) {
           element.influence = parseInt(element.influence * 1000)
         } else {
           element.influence = 'N/A'
@@ -705,6 +705,7 @@ export default {
     influencerank(value) {
       this.isShow = false
       this.isLoading = true
+      this.isTable = false
       this.currentPage = this.currentPage
       this.currentPageAdd = this.currentPage + 1
       this.searchListBox = []
