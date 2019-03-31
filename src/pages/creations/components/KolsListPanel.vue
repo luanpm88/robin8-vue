@@ -65,13 +65,13 @@ export default {
   methods: {
     handleCheck (data) {
       let _id = data.id
-      console.log(_id)
+      // console.log(_id)
       this.$emit('checkedKols', {
         'id': _id
       })
     },
     renderData (kolsList) {
-      console.log(kolsList)
+      // console.log(kolsList)
       let _kolsList = kolsList
       let _kolItem
       this.kols = []
@@ -84,7 +84,7 @@ export default {
         _kolItem.checked = item.checked
         this.kols.push(_kolItem)
       })
-      console.log(this.kols)
+      // console.log(this.kols)
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {

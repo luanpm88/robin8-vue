@@ -493,6 +493,7 @@ export default {
       checkedIds: [],
       checkedTags: [],
       terracesList: [],
+      kolSearchUrl: '',
       kolsParams: {},
       kolsList: [],
       cartKolsParams: {},
@@ -555,7 +556,7 @@ export default {
       }).then(this.handleGetBaseDataSucc)
     },
     handleGetBaseDataSucc (res) {
-      console.log(res)
+      // console.log(res)
       if (res.status == 200 && res.data) {
         const data = res.data
         this.brandsList = data.trademarks_list
@@ -563,20 +564,6 @@ export default {
 
         let _terracesList = data.terraces_list
         _terracesList.forEach(item => {
-          // let _shortName = item.short_name
-          // switch (_shortName) {
-          //   case 'public_wechat_account':
-          //     item.iconClass = 'icon-wechat-circle'
-          //     break
-          //   case 'weibo':
-          //     item.iconClass = 'icon-weibo-circle'
-          //     break
-          //   case 'xiaohongshu':
-          //     item.iconClass = 'icon-xiaohongshu'
-          //     break
-          //   default:
-          //     item.iconClass = ''
-          // }
           item.checked = false
           item.val = ''
         })
@@ -592,7 +579,7 @@ export default {
       }).then(this.handleGetCollectedKolsDataSucc)
     },
     handleGetCollectedKolsDataSucc (res) {
-      console.log(res)
+      // console.log(res)
       if (res.status == 200 && res.data) {
         const resData = res.data
         this.cartKolsList = resData.items
@@ -627,7 +614,7 @@ export default {
         //     })
         //   })
 
-        //   console.log(this.cartKolsList)
+        // console.log(this.cartKolsList)
         // }
       }
     },
@@ -642,7 +629,7 @@ export default {
       // console.log(res)
       let resData = res.data
       if (res.status == 200 && resData) {
-        console.log(resData)
+        // console.log(resData)
         this.detailData = resData
         this.submitData.name = resData.name
         this.submitData.description = resData.description
@@ -713,6 +700,9 @@ export default {
       }
     },
     searchKols (postUrl) {
+      console.log(postUrl)
+      console.log(this.kolsParams)
+      console.log(this.kolsPage)
       axios.post(postUrl, this.kolsParams, {
         headers: {
           'Authorization': this.authorization
@@ -720,9 +710,9 @@ export default {
       }).then(this.handleSearchKolsSucc)
     },
     handleSearchKolsSucc (res) {
-      console.log(res)
+      // console.log(res)
       let resData = res.data
-      console.log(resData)
+      // console.log(resData)
       this.kolsList = []
       this.kolsList = resData.data
       this.kolsTotal = resData.total_record_count
@@ -764,10 +754,6 @@ export default {
           this.kolRouterData.keywords = item.keywords
         }
       })
-      console.log(this.kolRouterData.keywords)
-
-      let _terraces = this.submitData.terraces
-      console.log(_terraces)
 
       let _startTime = new Date(this.campaignTime[0])
       let _endTime = new Date(this.campaignTime[1])
@@ -789,50 +775,89 @@ export default {
         price_to: _price[1]
       }
 
+      // 已选择平台
+      // let _terraces = this.submitData.terraces
+
+      // 全部平台
+      let _terraces = this.terracesList
+      // console.log(_terraces)
+
       this.kolsList = []
       this.$validator.validateAll().then((msg) => {
-        console.log(msg)
+        // console.log(msg)
         if (msg) {
-          console.log('验证通过')
-          if (_terraces.length > 0) {
-            let hasWechat = _terraces.some(item => {
-              if (item.short_name == 'public_wechat_account') {
-                return true
-              } else {
-                return false
-              }
-            })
-            console.log(hasWechat)
-            if (hasWechat) {
-              this.searchKols(apiConfig.kolWxSearchUrl)
-              this.plateformName = 'public_wechat_account'
-              this.kolRouterData.type = '1'
-            } else {
-              this.searchKols(apiConfig.kolWbSearchUrl)
-              this.plateformName = 'weibo'
-              this.kolRouterData.type = '0'
-            }
-          } else {
-            this.searchKols(apiConfig.kolWxSearchUrl)
-            this.plateformName = 'public_wechat_account'
-            this.kolRouterData.type = '1'
-          }
+          // console.log('验证通过')
+          let _firstPlatform = _terraces[0].short_name
+          // console.log(_firstPlatform)
+          this.checkingPlatform(_firstPlatform)
+          console.log(this.kolSearchUrl)
+          this.searchKols(this.kolSearchUrl)
+
+          // if (_terraces.length > 0) {
+          //   let _checkedPlatform = _terraces[0].short_name
+          //   console.log(_checkedPlatform)
+          //   switch (_checkedPlatform) {
+          //     case 'public_wechat_account':
+          //       this.searchKols(apiConfig.kolWxSearchUrl)
+          //       this.plateformName = 'public_wechat_account'
+          //       this.kolRouterData.type = '1'
+          //       break
+          //     case 'weibo':
+          //       this.searchKols(apiConfig.kolWbSearchUrl)
+          //       this.plateformName = 'weibo'
+          //       this.kolRouterData.type = '0'
+          //       break
+          //     case 'xiaohongshu':
+          //       this.searchKols(apiConfig.kolXhsSearchUrl)
+          //       this.plateformName = 'xiaohongshu'
+          //       this.kolRouterData.type = '2'
+          //       break
+          //     case 'douyin':
+          //       this.searchKols(apiConfig.kolDySearchUrl)
+          //       this.plateformName = 'douyin'
+          //       this.kolRouterData.type = '5'
+          //       break
+          //     case 'bilibili':
+          //       this.searchKols(apiConfig.kolBlSearchUrl)
+          //       this.plateformName = 'bilibili'
+          //       this.kolRouterData.type = '4'
+          //       break
+          //     case 'kuaishou':
+          //       this.searchKols(apiConfig.kolKsSearchUrl)
+          //       this.plateformName = 'kuaishou'
+          //       this.kolRouterData.type = '3'
+          //       break
+          //     default:
+          //       this.searchKols(apiConfig.kolWxSearchUrl)
+          //       this.plateformName = 'public_wechat_account'
+          //       this.kolRouterData.type = '1'
+          //   }
+          // } else {
+          //   this.searchKols(apiConfig.kolWxSearchUrl)
+          //   this.plateformName = 'public_wechat_account'
+          //   this.kolRouterData.type = '1'
+          // }
         }
       })
     },
     changeKolsPage (data) {
-      console.log(data.page)
+      // console.log(data.page)
+      let _plateformName = this.plateformName
+      console.log(_plateformName)
+      this.checkingPlatform(_plateformName)
       this.kolsPage = data.page - 1
-      this.searchKolsCtrl()
+      // this.searchKolsCtrl()
+      this.kolsParams.page_no = data.page - 1
+      this.searchKols(this.kolSearchUrl)
     },
     changeCartKolsPage (data) {
-      console.log(data.page)
+      // console.log(data.page)
       this.cartKolsParams.page = data.page
       this.getCollectedKolsData()
     },
     checkedKolsCtrl (id, list) {
       let _id = id
-      console.log(_id)
+      // console.log(_id)
       let _list = list
       let _checkedKols = this.submitData.selected_kols
       let _kolItem = commonJs.buildObjData('profile_id', _id)
@@ -844,7 +869,7 @@ export default {
       })
 
       _list.forEach(item => {
-        console.log(item)
+        // console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
             _kolItem.plateform_name = this.plateformName
@@ -868,25 +893,32 @@ export default {
           }
         }
       })
-      console.log(_checkedKols)
+      // console.log(_checkedKols)
       this.submitData.selected_kols = _checkedKols
-      console.log(this.submitData.selected_kols)
+      // console.log(this.submitData.selected_kols)
     },
     checkedKols (data) {
       let _id = data.id
-      console.log(_id)
+      // console.log(_id)
       let _kolsList = this.kolsList
       this.checkedKolsCtrl(_id, _kolsList)
-      console.log(this.kolsList)
-      this.searchKolsCtrl()
+      // console.log(this.kolsList)
+      // this.searchKolsCtrl()
+
+      let _plateformName = this.plateformName
+
+      console.log(this.plateformName)
+      console.log(this.kolRouterData.type)
+      this.checkingPlatform(_plateformName)
+      this.searchKols(this.kolSearchUrl)
       // console.log(this.submitData.selected_kols)
     },
     checkedCartKols (data) {
       let _id = data.id
-      console.log(_id)
+      // console.log(_id)
       let _cartKolsList = this.cartKolsList
       this.checkedKolsCtrl(_id, _cartKolsList)
-      console.log(this.cartKolsList)
+      // console.log(this.cartKolsList)
       this.getCollectedKolsData()
       // console.log(this.submitData.selected_kols)
     },
@@ -899,40 +931,99 @@ export default {
       _checkedKols.forEach(item => {
         if (item.profile_id == _id) {
           _index = _checkedKols.indexOf(item)
-          console.log(_index)
+          // console.log(_index)
         }
       })
       _checkedKols.splice(_index, 1)
       this.submitData.selected_kols = _checkedKols
       // console.log(this.submitData.selected_kols)
-      this.searchKolsCtrl()
+      // this.searchKolsCtrl()
+
+      let _plateformName = this.plateformName
+      this.checkingPlatform(_plateformName)
+      this.searchKols(this.kolSearchUrl)
       this.getCollectedKolsData()
     },
     changePlatform (data) {
-      console.log(data.platformName)
+      // console.log(data.platformName)
+      this.kolsPage = 0
       this.kolsParams.page_no = 0
       let platformName = data.platformName
-      switch (platformName) {
+      this.checkingPlatform(platformName)
+      this.searchKols(this.kolSearchUrl)
+      // switch (platformName) {
+      //   case 'public_wechat_account':
+      //     this.searchKols(apiConfig.kolWxSearchUrl)
+      //     this.plateformName = 'public_wechat_account'
+      //     this.kolRouterData.type = '1'
+      //     break
+      //   case 'weibo':
+      //     this.searchKols(apiConfig.kolWbSearchUrl)
+      //     this.plateformName = 'weibo'
+      //     this.kolRouterData.type = '0'
+      //     break
+      //   case 'xiaohongshu':
+      //     this.searchKols(apiConfig.kolXhsSearchUrl)
+      //     this.plateformName = 'xiaohongshu'
+      //     this.kolRouterData.type = '2'
+      //     break
+      //   case 'douyin':
+      //     this.searchKols(apiConfig.kolDySearchUrl)
+      //     this.plateformName = 'douyin'
+      //     this.kolRouterData.type = '5'
+      //     break
+      //   case 'bilibili':
+      //     this.searchKols(apiConfig.kolBlSearchUrl)
+      //     this.plateformName = 'bilibili'
+      //     this.kolRouterData.type = '4'
+      //     break
+      //   case 'kuaishou':
+      //     this.searchKols(apiConfig.kolKsSearchUrl)
+      //     this.plateformName = 'kuaishou'
+      //     this.kolRouterData.type = '3'
+      //     break
+      //   default:
+      //     this.searchKols(apiConfig.kolWxSearchUrl)
+      //     this.plateformName = 'public_wechat_account'
+      //     this.kolRouterData.type = '1'
+      // }
+    },
+    checkingPlatform (platform) {
+      switch (platform) {
         case 'public_wechat_account':
-          this.searchKols(apiConfig.kolWxSearchUrl)
+          this.kolSearchUrl = apiConfig.kolWxSearchUrl
+          this.plateformName = 'public_wechat_account'
+          this.kolRouterData.type = '1'
           break
         case 'weibo':
-          this.searchKols(apiConfig.kolWbSearchUrl)
+          this.kolSearchUrl = apiConfig.kolWbSearchUrl
+          this.plateformName = 'weibo'
+          this.kolRouterData.type = '0'
           break
         case 'xiaohongshu':
-          this.searchKols(apiConfig.kolXhsSearchUrl)
+          this.kolSearchUrl = apiConfig.kolXhsSearchUrl
+          this.plateformName = 'xiaohongshu'
+          this.kolRouterData.type = '2'
           break
         case 'douyin':
-          this.searchKols(apiConfig.kolDySearchUrl)
+          this.kolSearchUrl = apiConfig.kolDySearchUrl
+          this.plateformName = 'douyin'
+          this.kolRouterData.type = '5'
           break
         case 'bilibili':
-          this.searchKols(apiConfig.kolBlSearchUrl)
+          this.kolSearchUrl = apiConfig.kolBlSearchUrl
+          this.plateformName = 'bilibili'
+          this.kolRouterData.type = '4'
           break
         case 'kuaishou':
-          this.searchKols(apiConfig.kolKsSearchUrl)
+          this.kolSearchUrl = apiConfig.kolKsSearchUrl
+          this.plateformName = 'kuaishou'
+          this.kolRouterData.type = '3'
           break
         default:
-          this.searchKols(apiConfig.kolWxSearchUrl)
+          this.kolSearchUrl = apiConfig.kolWxSearchUrl
+          this.plateformName = 'public_wechat_account'
+          this.kolRouterData.type = '1'
       }
     },
     checkTag (data) {
@@ -947,12 +1038,12 @@ export default {
           }
         })
       })
-      console.log(_checkedTags)
+      // console.log(_checkedTags)
       this.checkedTags = _checkedTags
       this.submitData.target.industries = _checkedTags.toString()
     },
     imageuploaded (res) {
-      console.log(res)
+      // console.log(res)
       this.submitData.img_url = res
     },
     imageuploading (res) {
@@ -993,12 +1084,12 @@ export default {
         }
       })
       this.submitData.terraces = _terraces
-      console.log(this.submitData.terraces)
+      // console.log(this.submitData.terraces)
     },
     changeProvince (e) {
       const _self = this
       let selectedVal = e.target.value
-      console.log(selectedVal)
+      // console.log(selectedVal)
       if (selectedVal == '') {
         _self.cityData = []
         _self.city = ''
@@ -1006,7 +1097,7 @@ export default {
       this.provinceData.forEach(function (item, index) {
         if (item.provinceName == selectedVal) {
           _self.cityData = item.citys
-          console.log(_self.cityData)
+          // console.log(_self.cityData)
           _self.city = ''
         }
       })
@@ -1015,7 +1106,7 @@ export default {
       const _self = this
       let selectedVal = e.target.value
       let citys = _self.checkedCitys
-      console.log(selectedVal)
+      // console.log(selectedVal)
       if (selectedVal != '') {
         let _index = citys.indexOf(selectedVal)
         if (_index == -1) {
@@ -1023,7 +1114,7 @@ export default {
         }
         _self.city = ''
       }
-      console.log(_self.checkedCitys)
+      // console.log(_self.checkedCitys)
     },
     delCity (city) {
       let citys = this.checkedCitys
@@ -1031,7 +1122,7 @@ export default {
       if (_index != -1) {
         citys.splice(_index, 1)
       }
-      console.log(this.checkedCitys)
+      // console.log(this.checkedCitys)
     },
     doSubmit () {
       let _self = this
@@ -1052,7 +1143,7 @@ export default {
         return false
       }
       _self.canSubmit = false
-      console.log(submitParams)
+      // console.log(submitParams)
       axios.post(apiConfig.creationsUrl, submitParams, {
         headers: {
           'Authorization': _self.authorization
@@ -1060,16 +1151,16 @@ export default {
       })
       .then(_self.handleDoSubmitSucc)
       .catch(function(error) {
-        console.log(error)
+        // console.log(error)
         alert('提交失败，请重新提交')
         _self.canSubmit = true
       })
     },
     handleDoSubmitSucc (res) {
-      console.log(res)
+      // console.log(res)
       if (res.status == 201) {
         let resData = res.data
-        console.log(resData)
+        // console.log(resData)
         this.$router.push('/creations/' + resData.id)
       } else {
         alert('提交失败，请重新提交')
@@ -1080,7 +1171,7 @@ export default {
       let _terraces = this.submitData.terraces
       let _terracesList = this.terracesList
       _terraces.forEach(item => {
-        console.log(item)
+        // console.log(item)
         _terracesList.forEach(originalItem => {
           if (!!item && item.terrace_id == originalItem.id) {
             item.exposure_value = originalItem.val
@@ -1101,12 +1192,12 @@ export default {
       this.submitData.target.price_from = _price[0]
       this.submitData.target.price_to = _price[1]
 
-      console.log(this.submitData)
+      // console.log(this.submitData)
 
       this.$validator.validateAll().then((msg) => {
-        console.log(msg)
+        // console.log(msg)
         if (msg) {
-          console.log('验证通过')
+          // console.log('验证通过')
           this.doSubmit()
         }
       })

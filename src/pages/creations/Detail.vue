@@ -40,7 +40,7 @@
                 <div
                   v-for="item in detailData.terraces"
                   :key="item.terrace_id"
-                  class="col-sm-6"
+                  class="col-sm-6 platform-item"
                 >
                   <div class="col-sm-3 text-center">
                     <div class="check-icon checked">
@@ -225,6 +225,18 @@ export default {
             case 'weibo':
               this.kolRouterData.type = '0'
               break
+            case 'xiaohongshu':
+              this.kolRouterData.type = '2'
+              break
+            case 'douyin':
+              this.kolRouterData.type = '5'
+              break
+            case 'bilibili':
+              this.kolRouterData.type = '4'
+              break
+            case 'kuaishou':
+              this.kolRouterData.type = '3'
+              break
             default:
               this.kolRouterData.type = '1'
           }
@@ -242,6 +254,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.platform-item {
+  margin: 10px 0;
+}
 .kols-list {
   padding: 24px 60px;
   & > .kols-list-item {
