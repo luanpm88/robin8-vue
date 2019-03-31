@@ -445,8 +445,8 @@ export default {
       // type = 3 kuaishou
       // type = 4 bilibili
       // type = 5 douyin
-      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4) {
-        // 微博、小红书、快手、
+      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4 || type === 5) {
+        // 微博、小红书、快手、抖音
         this.totalParams.folllower_from = this.followerFrom 
         this.totalParams.follower_to = this.followerTo
         this.kollistJoggle(type, this.totalParams) 
