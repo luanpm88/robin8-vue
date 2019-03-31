@@ -780,7 +780,7 @@ export default {
 
       // 全部平台
       let _terraces = this.terracesList
-      console.log(_terraces)
+      // console.log(_terraces)
 
       this.kolsList = []
       this.$validator.validateAll().then((msg) => {
@@ -790,7 +790,7 @@ export default {
           let _firstPlatform = _terraces[0].short_name
           // console.log(_firstPlatform)
           this.checkingPlatform(_firstPlatform)
-          console.log(this.kolSearchUrl)
+          // console.log(this.kolSearchUrl)
           this.searchKols(this.kolSearchUrl)
 
           // if (_terraces.length > 0) {
