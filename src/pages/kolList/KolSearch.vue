@@ -472,7 +472,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -499,7 +499,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -526,7 +526,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -553,7 +553,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -580,7 +580,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true
@@ -607,7 +607,7 @@ export default {
               if (res.data.data.length > 0) {
                 _that.isShow  = false
                 _that.isTable  = true
-                _that.kolsTotal = res.data.total_page_count 
+                _that.kolsTotal = res.data.total_record_count 
                 _that.jogDataInit(res.data.data) 
               } else {
                 _that.isShow  = true

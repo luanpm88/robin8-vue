@@ -144,7 +144,7 @@ export default {
           // console.log('woshipost list', res) 
           if (res.status === 200) {
             _that.isPostLoading = false 
-            _that.postTotalPage = res.data.total_page_count 
+            _that.postTotalPage = res.data.total_record_count 
             if (res.data.data.length > 0) {
               _that.isPostShow = false 
               _that.isPostList = true 
@@ -175,7 +175,7 @@ export default {
           // console.log('微博post list', res) 
           if (res.status === 200) {
             _that.isPostLoading = false 
-            _that.postTotalPage = res.data.total_page_count 
+            _that.postTotalPage = res.data.total_record_count 
             if (res.data.data.length > 0) {
               _that.isPostShow = false 
               _that.isPostList = true 

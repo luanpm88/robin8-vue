@@ -152,7 +152,7 @@ export default {
           if (res.status === 200) {
             // console.log('我是微博', res);
             _that.isLoading = false;
-            _that.kolsTotal = res.data.total_page_count;
+            _that.kolsTotal = res.data.total_record_count;
             if (res.data.data.length > 0) {
               _that.isContent = true;
               _that.isShow = false;
@@ -188,7 +188,7 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             _that.isLoading = false;
-            _that.kolsTotal = res.data.total_page_count;
+            _that.kolsTotal = res.data.total_record_count;
             if (res.data.data.length > 0) {
               _that.isContent = true;
               _that.isShow = false;
