@@ -1,7 +1,22 @@
 <template>
   <div class="panel default-panel">
-    <div class="panel-head">
-      <h5 class="title">{{title}}</h5>
+    <div class="panel-head clearfix">
+      <h5 class="title pull-left">{{title}}</h5>
+      <div class="tail-area pull-right">
+        <select
+          class="platform-select form-control"
+          @change="onPlatformChange($event)"
+        >
+          <option
+            v-for="item in terracesList"
+            :key="item.id"
+            :value="item.short_name"
+            v-model="platformName"
+          >
+            {{item.name}}
+          </option>
+        </select>
+      </div>
     </div>
     <div class="panel-body">
       <div class="kols-list clearfix">
@@ -14,14 +29,13 @@
           :routerData="routerData"
           @handleCheck="handleCheck"
         ></kols-list-item>
-
         <div v-else class="empty-area text-center">暂无数据...</div>
       </div>
 
       <div class="btn-area">
         <a-pagination
           size="small"
-          :defaultCurrent="currentPage"
+          :current="currentPage"
           :defaultPageSize="kolsPerPage"
           :total="kolsTotal"
           @change="onPageChange"
@@ -34,11 +48,13 @@
 <script>
 import commonJs from '@javascripts/common.js'
 import KolsListItem from '@components/KolsListItem'
+import DefaultTabs from "@components/DefaultTabs"
 
 export default {
-  name: 'CreationKolsListPanel',
+  name: 'CreationRecommendedPanel',
   components: {
-    KolsListItem
+    KolsListItem,
+    DefaultTabs
   },
   props: {
     title: String,
@@ -46,7 +62,8 @@ export default {
     kolsPage: Number,
     kolsPerPage: Number,
     kolsTotal: Number,
-    routerData: Object
+    routerData: Object,
+    terracesList: Array
   },
   data () {
     return {
@@ -59,7 +76,8 @@ export default {
         hasDelete: false
       },
       kols: [],
-      currentPage: 0
+      currentPage: 0,
+      platformName: ''
     }
   },
   methods: {
@@ -90,16 +108,30 @@ export default {
       this.$emit('changeKolsPage', {
         'page': page
       })
+    },
+    onPlatformChange (event) {
+      let platformName = event.target.value
+      // console.log(platformName)
+      this.$emit('changePlatform', {
+        'platformName': platformName
+      })
     }
   },
   created () {
     this.renderData(this.kolsList)
     this.currentPage = this.kolsPage + 1
+    this.platformName = this.terracesList[0].short_name
   },
   watch: {
     kolsList: {
       handler (newVal, oldVal) {
         this.renderData(newVal)
+      },
+      deep: true
+    },
+    kolsPage: {
+      handler (newVal, oldVal) {
+        this.currentPage = newVal + 1
       },
       deep: true
     }
@@ -117,5 +149,9 @@ export default {
 .btn-area {
   padding: 30px;
   text-align: center;
+}
+.platform-select {
+  margin-top: -7px;
+  margin-bottom: -7px;
 }
 </style>

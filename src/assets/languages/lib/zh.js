@@ -3,6 +3,10 @@ export const lang = {
   logout: '退出',
   wechat: '微信',
   weibo: '微博',
+  xiaohongshu: '小红书',
+  kuaishou: '快手',
+  bilibili: '哔哩哔哩',
+  douyin: '抖音',
   seeMore: '显示更多',
   more: '查看更多',
   edit: '编辑',
@@ -13,7 +17,7 @@ export const lang = {
   backBtn: '返回',
   submitBtn: '提交',
   payBtn: '立即付款',
-  totalNoDataTip: '暂无数据...',
+  totalNoDataTip: '即将推出...',
   yes: '是',
   no: '否',
   search: '搜索',
@@ -494,6 +498,7 @@ export const lang = {
       provinceErrorTips: '请选择粉丝的省份',
       cityErrorTips: '请选择粉丝的城市',
     },
+    recommendedKOLs: '为您推荐的大V',
     status: {
       waiting: '待合作',
       processing: '合作中',
@@ -719,7 +724,7 @@ export const lang = {
         clients: '客户数量',
         clientTip: '此KOL适用的客户端数量。 大量客户表示跟踪记录证明了KOL的放大潜力。 另一方面，一个尚未为其他品牌工作或仅为少数品牌工作的KOL可能是一个有吸引力和经济的选择，因为他还没有生产商业内容的声誉。'
       },
-      currentBrandName: '品牌名字:',
+      currentBrandName: '品牌名字',
       mentions: '品牌提及:',
       mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
       sentiment: '品牌情绪:',
@@ -746,6 +751,14 @@ export const lang = {
         comments: '评论',
         postLast: '最近21天发布',
         influence: '影响力分数'
+      },
+      otherSocialData: {
+        title: '社会数据',
+        platform: '平台',
+        gender: '性别',
+        price: '价格',
+        followers: '粉丝数',
+        tagsDescription: '标签描述'
       },
       bestPosts: {
         title: '最佳绩效文章',

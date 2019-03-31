@@ -40,11 +40,11 @@
                 <div
                   v-for="item in detailData.terraces"
                   :key="item.terrace_id"
-                  class="col-sm-6"
+                  class="col-sm-6 platform-item"
                 >
                   <div class="col-sm-3 text-center">
                     <div class="check-icon checked">
-                      <div :class="'iconfont ' + item.iconClass"></div>
+                      <img :src="item.avatar" alt="" class="icon-img" />
                     </div>
                   </div>
                   <div class="col-sm-8">
@@ -220,15 +220,24 @@ export default {
           console.log(item)
           switch (item.short_name) {
             case 'public_wechat_account':
-              item.iconClass = 'icon-wechat-circle'
               this.kolRouterData.type = '1'
               break
             case 'weibo':
-              item.iconClass = 'icon-weibo-circle'
               this.kolRouterData.type = '0'
               break
+            case 'xiaohongshu':
+              this.kolRouterData.type = '2'
+              break
+            case 'douyin':
+              this.kolRouterData.type = '5'
+              break
+            case 'bilibili':
+              this.kolRouterData.type = '4'
+              break
+            case 'kuaishou':
+              this.kolRouterData.type = '3'
+              break
             default:
-              item.iconClass = ''
               this.kolRouterData.type = '1'
           }
         })
@@ -245,6 +254,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.platform-item {
+  margin: 10px 0;
+}
 .kols-list {
   padding: 24px 60px;
   & > .kols-list-item {
