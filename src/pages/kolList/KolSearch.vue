@@ -628,7 +628,11 @@ export default {
       this.isLoading = false 
       const _that = this 
       data.forEach((element, index) => {
-        element.influence = parseInt(element.influence * 1000) 
+        if (element.influence) {
+          element.influence = parseInt(element.influence * 1000) 
+        } else {
+          element.influence = 'N/A' 
+        }
         element.isCheck = false 
         if (this.keyword !== '') {
           element.colorStatus = 1 
