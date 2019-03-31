@@ -859,9 +859,9 @@ export const lang = {
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement',
       tableTop: {
-        weixinBig: 'WeChat - big data profile',
+        weixinBig: 'Wechat - big data profile',
         weiboBig: 'Weibo - big data profile - 65,860,968',
-        weixinR8: 'WeChat - R8 managed',
+        weixinR8: 'Wechat - R8 managed',
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
