@@ -381,18 +381,18 @@ export default {
     } 
   },
   created() {
-    this.tabIndex = 0
     this.r8Kol() 
     // 获取keywords
     this.getBaseData()
     if (this.$route.query.brand_keywords) {
-      this.tabIndex = this.$route.query.type 
+      this.tabIndex = Number(this.$route.query.type)
       this.keyword = this.$route.query.brand_keywords
       // 初始化参数
       this.paramsInit() 
       // 调用接口
       this.totalJoggle(this.tabIndex) 
     } else {
+      this.tabIndex = 0
       // 初始化参数
       this.paramsInit() 
       // 调用接口
