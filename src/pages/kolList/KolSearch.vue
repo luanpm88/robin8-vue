@@ -238,6 +238,7 @@
                             placement="topLeft"
                             :title="$t('lang.kolList.search.sumTip')"
                             class="item"
+                            v-if="tabIndex === 0 || tabIndex === 1"
                           >
                             <i class="iconfont icon-app"></i>
                             {{item.stats.avg_sum_engagement}}
@@ -252,7 +253,8 @@
                       </div>
                     </div>
                   </td>
-                  <td class="text-center">{{item.pricing.direct_price}}</td>
+                  <td class="text-center" v-if="tabIndex === 0 || tabIndex === 1">{{item.pricing.direct_price}}</td>
+                  <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
                   <td class="text-center">
                     <a-progress
                       type="circle"
@@ -642,13 +644,25 @@ export default {
           element.colorStatus = 0
           element.correlation = 'N/A'
         }
-        if (!element.pricing) {
-          (element.pricing = {}), (element.pricing.direct_price = 'N/A')
+        if (_that.tabIndex === 0 || _that.tabIndex === 1) {
+          if (!element.pricing) {
+            console.log(5555)
+            element.pricing = {}
+            element.pricing.direct_price = 'N/A'
+          } else {
+            console.log(9999)
+            element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+          }
+        } else {
+          if (!element.pricing) {
+          element.pricing = {}
+          element.pricing.ref_price = 'N/A'
+            
+          } else {
+            element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+          }
         }
       })
-      // if (tabIndex === 3) {
-      //   .replace("https","http")
-      // }
       _that.searchList = data
       _that.searchListBox.push(_that.searchList)
     },
