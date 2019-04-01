@@ -364,6 +364,14 @@ export default {
         brand_keywords: 'BMW',
         type: 'doc'
       },
+      brandNameParams: {
+        profile_id: '',
+        start_date: commonJs.cPastYears,
+        end_date: commonJs.cPastOneday,
+        brand_keywords: 'BMW',
+        type: 'doc',
+        language: 'en'
+      },
       MentionsList: [],
       MentionsNum: 0,
       tabIndex: 0,
@@ -411,6 +419,7 @@ export default {
     })
     this.trendParams.brand_keywords = newKey
     this.sentimentParams.brand_keywords = newKey
+    this.brandNameParams.brand_keywords = newKey
     this.type = Number(this.$route.query.type)
     this.tabIndexOneInit()
   },
@@ -423,8 +432,6 @@ export default {
       let totalParams = {}
       // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
       this.kolActivityUrl(totalParams)
-      // 调用获取品牌
-      this.getBaseData()
       totalParams.language = 'en'
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
@@ -440,6 +447,9 @@ export default {
         this.performanceParams.profile_id = String(this.$route.params.id)
         this.performanceParams.order_type = 'sum_engagement'
         this.performanceWeibo(this.performanceParams)
+        // 调用微博品牌名字接口
+        this.brandNameParams.profile_id = Number(this.$route.params.id)
+        this.detailWeiboBrandName(this.brandNameParams)
       }
       if (Number(this.$route.query.type) === 1) {
         // 微信相关接口
@@ -454,6 +464,9 @@ export default {
         // best performance 参数
         this.performanceParams.profile_id = this.$route.params.id
         this.performanceWeixin(this.performanceParams)
+        // 调用微信品牌名字接口
+        this.brandNameParams.profile_id = this.$route.params.id
+        this.detailWeixinBrandName(this.brandNameParams)
       }
       if (Number(this.$route.query.type) === 2) {
         // xiaohongshu
@@ -1117,22 +1130,57 @@ export default {
         alert('您已成功添加至购物车')
       }
     },
-    // 获取my brand 页面
-    getBaseData () {
+    // 获取My brandname 微博页面
+    detailWeiboBrandName(params) {
       const _that = this
-      axios.get(apiConfig.baseInfosUrl, {
-        headers: {
-          'Authorization': _that.authorization
-        }
-      }).then(function(res) {
-        if (res.status === 200) {
-          res.data.trademarks_list.forEach(element => {
-            if (element.status === 1) {
-              _that.currentBrandName = element.name
+      axios
+        .post(apiConfig.detailWeiboBrandName, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            if (res.data.data.length > 0) {
+              let name = []
+              res.data.data.forEach(element => {
+                name.push(element.text)
+              });
+              _that.currentBrandName = name.join(',')
+            } else {
+              _that.currentBrandName = 'N/A'
             }
-          })
-        }
-      })
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
+    },
+    // 获取My brandname 微信页面
+    detailWeixinBrandName(params) {
+      const _that = this
+      axios
+        .post(apiConfig.detailWeixinBrandName, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            if (res.data.data.length > 0) {
+              let name = []
+              res.data.data.forEach(element => {
+                name.push(element.text)
+              });
+              _that.currentBrandName = name.join(',')
+            } else {
+              _that.currentBrandName = 'N/A'
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
     },
   }
 }

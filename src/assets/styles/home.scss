@@ -303,15 +303,16 @@
   padding: 0px 30px 15px;
   p {
     span {
-      float: left;
       line-height: 25px;
     }
     b {
-      float: right;
       color: #948de1ff;
       font-weight: normal;
       line-height: 25px;
       font-size: $font-nm-s;
+      display: block;
+      width: 100%;
+      overflow-wrap: break-word;
     }
   }
 }

@@ -277,6 +277,11 @@ const config = {
   // postlist weibo
   detailPostWeibo: `${searchHost}/weibo/post/post_by_profile_id?${searchHostKey}`,
 
+  // 获取detail品牌接口
+  detailWeiboBrandName: `${searchHost}/weibo/brand/brand_distribution?${searchHostKey}`,
+
+  detailWeixinBrandName: `${searchHost}/weixin/brand/brand_distribution?${searchHostKey}`,
+
   // ranking--------------------------
 
   // 微信 ranking 在调用right 两个列表之前 获取最新的report_date
