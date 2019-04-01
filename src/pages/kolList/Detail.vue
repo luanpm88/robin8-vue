@@ -8,7 +8,9 @@
           <div class="panel default-panel kol-infobox">
             <div class="panel-body">
               <p class="kol-info-topbg"></p>
-              <img :src="infoList.avatar_url" alt>
+              <div class="kol-small-avatar">
+                <img :src="infoList.avatar_url" alt>
+              </div>
               <div class="kol-info">
                 <p>
                   {{infoList.profile_name}}
