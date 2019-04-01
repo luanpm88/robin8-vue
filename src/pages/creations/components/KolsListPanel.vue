@@ -71,7 +71,7 @@ export default {
       })
     },
     renderData (kolsList) {
-      console.log(kolsList)
+      // console.log(kolsList)
       let _kolsList = kolsList
       let _kolItem
       this.kols = []

@@ -869,7 +869,7 @@ export default {
       })
 
       _list.forEach(item => {
-        // console.log(item)
+        console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
             _kolItem.plateform_name = this.plateformName
@@ -878,6 +878,7 @@ export default {
             _kolItem.description_raw = item.description_raw
             _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
             _kolItem.checked = true
+            _kolItem.terrace_avatar = item.terrace_avatar
             item.checked = true
             _checkedKols.push(_kolItem)
           } else {
