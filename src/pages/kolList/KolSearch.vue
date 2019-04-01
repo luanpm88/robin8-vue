@@ -646,11 +646,9 @@ export default {
         }
         if (_that.tabIndex === 0 || _that.tabIndex === 1) {
           if (!element.pricing) {
-            console.log(5555)
             element.pricing = {}
             element.pricing.direct_price = 'N/A'
           } else {
-            console.log(9999)
             element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
           }
         } else {

@@ -35,7 +35,7 @@
               <ul class="clearfix">
                 <li v-for="(item, index) in dec" :key="index">{{item}}</li>
               </ul>
-              <div class="kol-brand">
+              <div class="kol-brand" v-if="type === 0 || type === 1">
                 <p class="clearfix">
                   <span>
                     {{$t('lang.kolList.detail.currentBrandName')}}
