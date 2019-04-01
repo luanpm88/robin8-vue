@@ -5,6 +5,10 @@ export const lang = {
   logout: 'Log Out',
   wechat: 'Wechat',
   weibo: 'Weibo',
+  xiaohongshu: 'Xiaohongshu',
+  kuaishou: 'Kuaishou',
+  bilibili: 'Bilibili',
+  douyin: 'Douyin',
   seeMore: 'Show More',
   more: 'load more',
   edit: 'edit',
@@ -15,7 +19,7 @@ export const lang = {
   backBtn: 'Back',
   submitBtn: 'Submit',
   payBtn: 'Pay',
-  totalNoDataTip: 'No data...',
+  totalNoDataTip: 'Soon to launch...',
   yes: 'Yes',
   no: 'No',
   search: 'Search',
@@ -495,6 +499,7 @@ export const lang = {
       provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
       cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
+    recommendedKOLs: 'Recommended KOLs',
     status: {
       waiting: '待合作',
       processing: '合作中',
@@ -749,6 +754,14 @@ export const lang = {
         postLast: 'Post-last 21 days',
         influence: 'Influence Score'
       },
+      otherSocialData: {
+        title: 'Social Data',
+        platform: 'Platform',
+        gender: 'Gender',
+        price: 'Price',
+        followers: 'Followers',
+        tagsDescription: 'Tags Description'
+      },
       bestPosts: {
         title: 'Best Performance Posts',
         tableTitle: 'Title',
@@ -846,9 +859,9 @@ export const lang = {
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement',
       tableTop: {
-        weixinBig: 'WeChat - big data profile',
+        weixinBig: 'Wechat - big data profile',
         weiboBig: 'Weibo - big data profile - 65,860,968',
-        weixinR8: 'WeChat - R8 managed',
+        weixinR8: 'Wechat - R8 managed',
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
