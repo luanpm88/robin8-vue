@@ -700,9 +700,9 @@ export default {
       }
     },
     searchKols (postUrl) {
-      console.log(postUrl)
-      console.log(this.kolsParams)
-      console.log(this.kolsPage)
+      // console.log(postUrl)
+      // console.log(this.kolsParams)
+      // console.log(this.kolsPage)
       axios.post(postUrl, this.kolsParams, {
         headers: {
           'Authorization': this.authorization
@@ -790,7 +790,7 @@ export default {
           let _firstPlatform = _terraces[0].short_name
           // console.log(_firstPlatform)
           this.checkingPlatform(_firstPlatform)
-          console.log(this.kolSearchUrl)
+          // console.log(this.kolSearchUrl)
           this.searchKols(this.kolSearchUrl)
 
           // if (_terraces.length > 0) {
@@ -843,7 +843,7 @@ export default {
     changeKolsPage (data) {
       // console.log(data.page)
       let _plateformName = this.plateformName
-      console.log(_plateformName)
+      // console.log(_plateformName)
       this.checkingPlatform(_plateformName)
       this.kolsPage = data.page - 1
       // this.searchKolsCtrl()
@@ -869,7 +869,7 @@ export default {
       })
 
       _list.forEach(item => {
-        // console.log(item)
+        console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
             _kolItem.plateform_name = this.plateformName
@@ -878,6 +878,7 @@ export default {
             _kolItem.description_raw = item.description_raw
             _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
             _kolItem.checked = true
+            _kolItem.terrace_avatar = item.terrace_avatar
             item.checked = true
             _checkedKols.push(_kolItem)
           } else {
@@ -907,8 +908,8 @@ export default {
 
       let _plateformName = this.plateformName
 
-      console.log(this.plateformName)
-      console.log(this.kolRouterData.type)
+      // console.log(this.plateformName)
+      // console.log(this.kolRouterData.type)
       this.checkingPlatform(_plateformName)
       this.searchKols(this.kolSearchUrl)
       // console.log(this.submitData.selected_kols)

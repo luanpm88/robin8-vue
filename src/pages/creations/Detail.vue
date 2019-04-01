@@ -211,6 +211,7 @@ export default {
           _kolItem.description_raw = item.description_raw
           _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
           _kolItem.checked = false
+          _kolItem.terrace_avatar = item.terrace_avatar
           _kolsList.push(_kolItem)
         })
         console.log(_kolsList)

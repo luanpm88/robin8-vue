@@ -13,7 +13,7 @@
             :value="item.short_name"
             v-model="platformName"
           >
-            {{item.name}}
+            {{language == 'en-US' ? item.name_en : item.name}}
           </option>
         </select>
       </div>
@@ -49,6 +49,7 @@
 import commonJs from '@javascripts/common.js'
 import KolsListItem from '@components/KolsListItem'
 import DefaultTabs from "@components/DefaultTabs"
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreationRecommendedPanel',
@@ -135,6 +136,9 @@ export default {
       },
       deep: true
     }
+  },
+  computed: {
+    ...mapState(['language'])
   }
 }
 </script>
