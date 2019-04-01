@@ -212,7 +212,7 @@
                           <router-link
                             :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
                           >
-                            <img :src="item.avatar_url" alt="" class="avatar-img" />
+                            <img :src="item.avatar_url" alt="" class="avatar-img"/>
                           </router-link>
                         </div>
                       </div>
