@@ -208,21 +208,14 @@
                   <td>
                     <div class="media kol-profile">
                       <div class="media-left media-middle">
-                        <div class="avatar">
-                          <router-link
-                            :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
-                          >
-                            <img :src="item.avatar_url" alt="" class="avatar-img"/>
-                          </router-link>
+                        <div class="avatar" @click="intoKolDetail(item)">
+                          <img :src="item.avatar_url" alt="" class="avatar-img"/>
                         </div>
                       </div>
                       <div class="media-body media-middle">
                         <h5 class="title">
-                          <router-link
-                            :to="'/kol/'+ item.profile_id + '?type=' + tabIndex + '&brand_keywords='+ totalKeywords"
-                          >
-                            {{item.profile_name}}
-                          </router-link>
+                          <span @click="intoKolDetail(item)" class="kol-tit-span">
+                          {{item.profile_name}}</span>
                         </h5>
                         <p class="desc">{{item.description_raw}}</p>
                         <div class="status">
@@ -372,6 +365,16 @@ export default {
           index: 5,
           name: ('douyin')
         }
+        // , {
+        //   index: 6,
+        //   name: ('instagram')
+        // }, {
+        //   index: 7,
+        //   name: ('youtube')
+        // }, {
+        //   index: 8,
+        //   name: ('facebook')
+        // }
       ],
       tabIndex: 0,
       searchListBox: [],
@@ -431,11 +434,11 @@ export default {
         })
         this.totalParams.keywords = newKey
       }
-      if (this.tabIndex === 2 || this.tabIndex === 3 || this.tabIndex === 4 || this.tabIndex === 5) {
-        // 小红书、 快手、哔哩哔哩、抖音目前只支持关联度排序
-        this.totalParams.profile_sort_col = 0
-      } else {
+      if (this.tabIndex === 0 || this.tabIndex === 1) {
         this.totalParams.profile_sort_col = this.listSortType
+      } else {
+        // 小红书、快手、抖音,Instagram,Youtube,Facebook目前只支持关联度排序
+        this.totalParams.profile_sort_col = 0
       }
       this.totalParams.profile_sort_dir = this.listSortDir
       this.totalParams.r8_registered_kol_only = this.kolOnlyText
@@ -448,12 +451,16 @@ export default {
       // type = 3 kuaishou
       // type = 4 bilibili
       // type = 5 douyin
-      if (type === 0 || type === 2 || this.tabIndex === 3 || type === 4 || type === 5) {
-        // 微博、小红书、快手、抖音
-        this.totalParams.folllower_from = this.followerFrom
-        this.totalParams.follower_to = this.followerTo
+      // type = 6 Instagram
+      // type = 7 Youtube
+      // type = 8 Facebook
+      if (type === 1) {
+        // 微信
         this.kollistJoggle(type, this.totalParams)
       }  else {
+        // 微博、小红书、快手、抖音,Instagram,Youtube,Facebook
+        this.totalParams.folllower_from = this.followerFrom
+        this.totalParams.follower_to = this.followerTo
         this.kollistJoggle(type, this.totalParams)
       }
     },
@@ -471,16 +478,7 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('我是weibo接口', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -498,16 +496,7 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('我是weixin接口', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -525,16 +514,7 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('我是小红书接口', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -552,16 +532,7 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('kollistKuaishouTable', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -579,16 +550,7 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('kollistBilibiliTable', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -606,16 +568,61 @@ export default {
           .then(function(res) {
             if (res.status === 200) {
               // console.log('kollistDouyinTable', res)
-              _that.isLoading = false
-              if (res.data.data.length > 0) {
-                _that.isShow  = false
-                _that.isTable  = true
-                _that.kolsTotal = res.data.total_record_count
-                _that.jogDataInit(res.data.data)
-              } else {
-                _that.isShow  = true
-                _that.isTable  = false
-              }
+              _that.jogDataInit(res.data)
+            }
+          })
+          .catch(function(error) {
+            // console.log(error)
+          })
+      }
+      if (type === 6) {
+        // Instagram
+        axios
+          .post(apiConfig.kollistInstagramTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('kollistInstagramTable', res)
+              _that.jogDataInit(res.data)
+            }
+          })
+          .catch(function(error) {
+            // console.log(error)
+          })
+      }
+      if (type === 7) {
+        // Youtub
+        axios
+          .post(apiConfig.kollistYoutubeTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('Youtub', res)
+              _that.jogDataInit(res.data)
+            }
+          })
+          .catch(function(error) {
+            // console.log(error)
+          })
+      }
+      if (type === 8) {
+        // Facebook
+        axios
+          .post(apiConfig.kollistFacebookTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              // console.log('Facebook', res)
+              _that.jogDataInit(res.data)
             }
           })
           .catch(function(error) {
@@ -625,47 +632,71 @@ export default {
     },
     // 处理接口数据函数
     jogDataInit(data) {
-      if (data.length === 0 || !data.length) {
-        this.isShow = true
-      }
-      this.isLoading = false
       const _that = this
-      data.forEach((element, index) => {
-        if (element.influence || element.influence === 0) {
-          element.influence = parseInt(element.influence * 1000)
-        } else {
-          element.influence = 'N/A'
-        }
-        element.isCheck = false
-        if (this.keyword !== '') {
-          element.colorStatus = 1
-          element.correlation = parseInt(element.correlation * 100)
-        } else {
-          element.colorStatus = 0
-          element.correlation = 'N/A'
-        }
-        if (_that.tabIndex === 0 || _that.tabIndex === 1) {
-          if (!element.pricing) {
-            element.pricing = {}
-            element.pricing.direct_price = 'N/A'
+      _that.isLoading = false
+      _that.kolsTotal = data.total_record_count
+      if (data.data.length > 0) {
+        _that.isShow  = false
+        _that.isTable  = true
+        data.data.forEach((element, index) => {
+          if (element.influence || element.influence === 0) {
+            element.influence = parseInt(element.influence * 1000)
           } else {
-            element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+            element.influence = 'N/A'
           }
-        } else {
-          if (!element.pricing) {
-          element.pricing = {}
-          element.pricing.ref_price = 'N/A'
-            
+          element.isCheck = false
+          if (this.keyword !== '') {
+            element.colorStatus = 1
+            element.correlation = parseInt(element.correlation * 100)
           } else {
-            element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+            element.colorStatus = 0
+            element.correlation = 'N/A'
           }
-        }
-      })
-      _that.searchList = data
-      _that.searchListBox.push(_that.searchList)
+          if (_that.tabIndex === 0 || _that.tabIndex === 1) {
+            if (!element.pricing) {
+              element.pricing = {}
+              element.pricing.direct_price = 'N/A'
+            } else {
+              element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+            }
+          } else {
+            if (!element.pricing) {
+              element.pricing = {}
+              element.pricing.ref_price = 'N/A'
+            } else {
+              if (element.pricing.ref_price) {
+                element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+              } else {
+                element.pricing.ref_price = 'N/A'
+              }
+            }
+          }
+        })
+        _that.searchList = data.data
+        _that.searchListBox.push(_that.searchList)
+      } else {
+        _that.isShow  = true
+        _that.isTable  = false
+      }
     },
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch
+    },
+    // 跳转 kol detail
+    intoKolDetail(item) {
+      item.profile_id = item.profile_id.replace(/\//g, '\\/')
+      item.profile_id = item.profile_id.replace(/\./g , '\\/')
+      this.$router.push({
+        path: '/kol/',
+        name: 'KolDetail',
+        params: {
+          id: item.profile_id,
+        },
+        query: {
+          type: Number(this.tabIndex),
+          brand_keywords: this.totalKeywords
+        }
+      });
     },
     changeTab(tab) {
       this.kolsTotal = 0
@@ -888,6 +919,7 @@ export default {
     height: 80px;
     border-radius: 50%;
     overflow: hidden;
+    cursor: pointer;
     .avatar-img {
       width: 100%;
       height: 100%;
@@ -908,6 +940,12 @@ export default {
       &.icon-cart.active {
         color: nth($purple, 1);
       }
+    }
+  }
+  .title{
+    .kol-tit-span{
+      cursor: pointer;
+      color: nth($text-color, 2);
     }
   }
 }
