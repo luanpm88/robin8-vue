@@ -234,7 +234,7 @@
                   <tr v-for="(key, index) in performanceList" :key="index">
                     <td  v-if="type === 0"><p class="purple">{{key.title}}</p></td>
                     <td  v-if="type === 1"><a :href="key.url" target="blank">{{key.title}}</a></td>
-                    <td>{{key.post_time}}</td>
+                    <td style="min-width:200px">{{key.post_time}}</td>
                     <td v-if="type === 0">{{key.influence_sum_engagement}} </td>
                     <td v-if="type === 1">{{key.influence_reads}}</td>
                   </tr>
@@ -1145,7 +1145,7 @@ export default {
           if (res.status === 200) {
             if (res.data.data.length > 0) {
               let name = []
-              res.data.data.forEach(element => {
+              res.data.data.slice(0, 10).forEach(element => {
                 name.push(element.text)
               });
               _that.currentBrandName = name.join(',')
