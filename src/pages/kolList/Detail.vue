@@ -1171,7 +1171,7 @@ export default {
           if (res.status === 200) {
             if (res.data.data.length > 0) {
               let name = []
-              res.data.data.forEach(element => {
+              res.data.data.slice(0, 10).forEach(element => {
                 name.push(element.text)
               });
               _that.currentBrandName = name.join(',')
