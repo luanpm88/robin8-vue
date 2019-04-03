@@ -275,7 +275,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-8">
               <select
                 name="price"
                 class="form-control"
@@ -295,7 +295,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
@@ -386,7 +386,7 @@
               </ul>
               <p v-else class="form-control-static">{{$t('lang.all')}}</p>
             </div>
-          </div>
+          </div> -->
           <div class="form-group text-center">
             <button
               type="button"
@@ -716,6 +716,40 @@ export default {
       this.kolsList = []
       this.kolsList = resData.data
       this.kolsTotal = resData.total_record_count
+      console.log(this.kolsList)
+      this.kolsList.forEach(item => {
+        switch (this.plateformName) {
+          case 'public_wechat_account':
+            item.terrace_avatar = 'http://img.robin8.net/wechat.png'
+            break
+          case 'weibo':
+            item.terrace_avatar = 'http://img.robin8.net/weibo.png'
+            break
+          case 'xiaohongshu':
+            item.terrace_avatar = 'http://img.robin8.net/xiaohongshu.png'
+            break
+          case 'douyin':
+            item.terrace_avatar = 'http://img.robin8.net/douyin.png'
+            break
+          case 'bilibili':
+            item.terrace_avatar = 'http://img.robin8.net/bilibili.png'
+            break
+          case 'kuaishou':
+            item.terrace_avatar = 'http://img.robin8.net/kuaishou.png'
+            break
+          case 'instagram':
+            item.terrace_avatar = 'http://img.robin8.net/instagram.png'
+            break
+          case 'youtube':
+            item.terrace_avatar = 'http://img.robin8.net/youtube.png'
+            break
+          case 'facebook':
+            item.terrace_avatar = 'http://img.robin8.net/facebook.png'
+            break
+          default:
+            item.terrace_avatar = ''
+        }
+      })
 
       let _selectedKols = this.submitData.selected_kols
       if (_selectedKols.length > 0) {
@@ -880,7 +914,41 @@ export default {
             _kolItem.description_raw = item.description_raw
             _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
             _kolItem.checked = true
-            _kolItem.terrace_avatar = item.terrace_avatar
+            if (!!item.terrace_avatar && item.terrace_avatar != '') {
+              _kolItem.terrace_avatar = item.terrace_avatar
+            } else {
+              switch (this.plateformName) {
+                case 'public_wechat_account':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/wechat.png'
+                  break
+                case 'weibo':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/weibo.png'
+                  break
+                case 'xiaohongshu':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/xiaohongshu.png'
+                  break
+                case 'douyin':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/douyin.png'
+                  break
+                case 'bilibili':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/bilibili.png'
+                  break
+                case 'kuaishou':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/kuaishou.png'
+                  break
+                case 'instagram':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/instagram.png'
+                  break
+                case 'youtube':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/youtube.png'
+                  break
+                case 'facebook':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/facebook.png'
+                  break
+                default:
+                  _kolItem.terrace_avatar = ''
+              }
+            }
             item.checked = true
             _checkedKols.push(_kolItem)
           } else {

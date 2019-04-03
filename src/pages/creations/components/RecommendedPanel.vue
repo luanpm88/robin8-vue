@@ -100,6 +100,7 @@ export default {
         _kolItem.description_raw = item.description_raw
         _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
         _kolItem.checked = item.checked
+        _kolItem.terrace_avatar = item.terrace_avatar
         this.kols.push(_kolItem)
       })
     },
