@@ -100,7 +100,8 @@ export default {
     childKeyList: {
       handler() {
         if (this.isSelectBrand) {
-          // console.log('woshiyou watch 品牌')
+          // console.log('woshiyou watch 有品牌')
+          console.log(this.childKeyList)
           this.isBrandShow = false
           this.isLoading = true
           this.isKol = false
@@ -126,7 +127,7 @@ export default {
           this.isKol = false
         }
       },
-      immediate:true,
+      immediate: true,
       deep: true
     }
   },
