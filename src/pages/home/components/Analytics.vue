@@ -200,15 +200,17 @@ export default {
       handler() {
         if (this.isSelectBrand) {
           this.isTrendShow = false
-          this.pramsInit() 
-          if (this.cur === 0) {
-            // trend 微博
-            this.isTrend = false 
-            this.trendsWeibo(this.trendParams) 
-          } else {
-            this.isCompetitor = false 
-            // competitor 微博
-            this.competitorWeibo(this.competitorParams) 
+          if (this.childKeyList.brand_keywords !== '') {
+            this.pramsInit() 
+            if (this.cur === 0) {
+              // trend 微博
+              this.isTrend = false 
+              this.trendsWeibo(this.trendParams) 
+            } else {
+              this.isCompetitor = false 
+              // competitor 微博
+              this.competitorWeibo(this.competitorParams) 
+            }
           }
         } else {
           this.isTrend = false

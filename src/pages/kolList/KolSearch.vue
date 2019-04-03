@@ -683,7 +683,8 @@ export default {
     },
     // 跳转 kol detail
     intoKolDetail(item) {
-      item.profile_id = item.profile_id.replace(/\//g, '\\/')
+      item.profile_id = encodeURIComponent(item.profile_id)
+      console.log(item.profile_id)
       // item.profile_id = item.profile_id.replace(/\./g , '\\/')
       this.$router.push({
         path: '/kol/',

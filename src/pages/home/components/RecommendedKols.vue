@@ -77,7 +77,7 @@ export default {
       params: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
-        brand_keywords: 'BMW',
+        brand_keywords: '',
         order_by: 'influence'
       },
       currentList: [],
@@ -100,34 +100,36 @@ export default {
     childKeyList: {
       handler() {
         if (this.isSelectBrand) {
-          // console.log('woshiyou watch 有品牌')
-          console.log(this.childKeyList)
+          console.log('woshiyou watch 有品牌')
+          console.log(this.childKeyList.brand_keywords)
           this.isBrandShow = false
           this.isLoading = true
           this.isKol = false
-          let newKey = ''
-          this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
-          }) 
-          this.params.brand_keywords = newKey
-          this.kolRouterData.keywords = newKey
-          if (Number(this.tabIndex) === 0) {
-            // weibo 
-            this.weiboKol(this.params)
-          } 
-          if (Number(this.tabIndex) === 1) {
-            // 微信接口
-            this.weixinKol(this.params)
+          if (this.childKeyList.brand_keywords !== '') {
+            let newKey = ''
+            this.childKeyList.brand_keywords.split(',').forEach(item => {
+              newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
+            }) 
+            this.params.brand_keywords = newKey
+            this.kolRouterData.keywords = newKey
+            if (Number(this.tabIndex) === 0) {
+              // weibo 
+              this.weiboKol(this.params)
+            } 
+            if (Number(this.tabIndex) === 1) {
+              // 微信接口
+              this.weixinKol(this.params)
+            }
           }
         } else {
-          // console.log('woshiyou watch无品牌')
+          console.log('woshiyou watch无品牌')
           this.tabIndex = 0
           this.isBrandShow = true
           this.isLoading = false
           this.isKol = false
         }
       },
-      immediate: true,
+      immediate:true,
       deep: true
     }
   },
