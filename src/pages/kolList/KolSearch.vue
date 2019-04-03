@@ -364,17 +364,16 @@ export default {
         }, {
           index: 5,
           name: ('douyin')
+        }, {
+          index: 6,
+          name: ('instagram')
+        }, {
+          index: 7,
+          name: ('youtube')
+        }, {
+          index: 8,
+          name: ('facebook')
         }
-        // , {
-        //   index: 6,
-        //   name: ('instagram')
-        // }, {
-        //   index: 7,
-        //   name: ('youtube')
-        // }, {
-        //   index: 8,
-        //   name: ('facebook')
-        // }
       ],
       tabIndex: 0,
       searchListBox: [],
