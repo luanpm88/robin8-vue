@@ -22,7 +22,7 @@
                   type="text"
                   name="userName"
                   class="form-control"
-                  v-model="userName"
+                  v-model.trim="userName"
                   :placeholder="$t('lang.login.account.placeholder')"
                 >
               </div>

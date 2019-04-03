@@ -23,7 +23,7 @@
                   type="tel"
                   name="typeVal"
                   class="form-control"
-                  v-model="typeVal"
+                  v-model.trim="typeVal"
                   :placeholder="$t('lang.signUp.phone.placeholder')"
                   ref="type1"
                 >
@@ -32,7 +32,7 @@
                   type="email"
                   name="typeVal"
                   class="form-control"
-                  v-model="typeVal"
+                  v-model.trim="typeVal"
                   :placeholder="$t('lang.signUp.email.placeholder')"
                 >
                 <div class="form-tips text-right" v-if="flag">or
@@ -49,7 +49,7 @@
                   type="text"
                   name="code"
                   class="form-control"
-                  v-model="code"
+                  v-model.trim="code"
                   :placeholder="$t('lang.signUp.code.placeholder')"
                 >
               </div>
