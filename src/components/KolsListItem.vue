@@ -139,6 +139,7 @@ export default {
       this.cartParams.profile_name = data.profile_name
       this.cartParams.avatar_url = data.avatar_url
       this.cartParams.description_raw = data.description_raw
+      console.log(this.url)
     }
   },
   created () {

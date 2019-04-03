@@ -90,7 +90,6 @@ export default {
       })
     },
     renderData (kolsList) {
-      // console.log(kolsList)
       let _kolsList = kolsList
       let _kolItem
       this.kols = []
@@ -103,7 +102,6 @@ export default {
         _kolItem.checked = item.checked
         this.kols.push(_kolItem)
       })
-      // console.log(this.kols)
     },
     onPageChange (page) {
       this.$emit('changeKolsPage', {

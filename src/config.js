@@ -254,7 +254,7 @@ const config = {
 
   // info Facebook
   kolFacebookInfo: `${searchHost}/price/facebook/price/kol_info?${searchHostKey}`,
-  
+
 
   // top industry
   // industry weibo
