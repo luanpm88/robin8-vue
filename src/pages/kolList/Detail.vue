@@ -475,7 +475,7 @@ export default {
           totalParams.profile_id = this.$route.params.id
         }
       }
-      
+
     },
     changeTab(tab) {
       this.tabIndex = tab.index
@@ -584,7 +584,7 @@ export default {
             _that.infoDataInit(2, res)
             // 操作social data 数据
             _that.otherSocialData.platform = 'xiaohongshu'
-            
+
           }
         })
         .catch(function(error) {
