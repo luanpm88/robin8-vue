@@ -211,6 +211,15 @@ const config = {
   // douyin
   kollistDouyinTable: `${searchHost}/douyin/profile/kol_search_profile?${searchHostKey}`,
 
+  // Instagram
+  kollistInstagramTable: `${searchHost}/instagram/profile/kol_search_profile?${searchHostKey}`,
+
+  // Youtube
+  kollistYoutubeTable: `${searchHost}/youtube/profile/kol_search_profile?${searchHostKey}`,
+
+  // Facebook
+  kollistFacebookTable: `${searchHost}/facebook/profile/kol_search_profile?${searchHostKey}`,
+
   // 首页接口结束------------------------
 
   // 我的竞争品牌 增加品牌 提交接口
@@ -236,6 +245,16 @@ const config = {
 
   // info douyin
   kolDouyinInfo: `${searchHost}/price/douyin/price/kol_info?${searchHostKey}`,
+
+  // info instagram
+  kolInstagramInfo: `${searchHost}/price/instagram/price/kol_info?${searchHostKey}`,
+
+  // info Youtube
+  kolYoutubeInfo: `${searchHost}/price/youtube/price/kol_info?${searchHostKey}`,
+
+  // info Facebook
+  kolFacebookInfo: `${searchHost}/price/facebook/price/kol_info?${searchHostKey}`,
+  
 
   // top industry
   // industry weibo

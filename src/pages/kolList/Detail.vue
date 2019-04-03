@@ -432,8 +432,9 @@ export default {
     // summary
     tabIndexOneInit() {
       let totalParams = {}
-      // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
-      this.kolActivityUrl(totalParams)
+      // // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
+      // this.kolActivityUrl(totalParams)
+      this.infoJoggle(totalParams)
       totalParams.language = 'en'
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
@@ -452,47 +453,82 @@ export default {
         // 调用微博品牌名字接口
         this.brandNameParams.profile_id = Number(this.$route.params.id)
         this.detailWeiboBrandName(this.brandNameParams)
+      } else {
+        if (Number(this.$route.query.type) === 1) {
+          // 微信相关接口
+          totalParams.profile_id = this.$route.params.id
+          this.kolWeiXinIndustry(totalParams)
+          this.kolWeiXinKeyword(totalParams)
+          this.kolWeixinSocial(totalParams)
+          // 计算sentiment
+          this.sentimentWeixin(this.sentimentParams)
+          // 计算Mentions
+          this.trendsWeixin(this.trendParams)
+          // best performance 参数
+          this.performanceParams.profile_id = this.$route.params.id
+          this.performanceWeixin(this.performanceParams)
+          // 调用微信品牌名字接口
+          this.brandNameParams.profile_id = this.$route.params.id
+          this.detailWeixinBrandName(this.brandNameParams)
+        } else {
+          totalParams.profile_id = this.$route.params.id
+        }
       }
-      if (Number(this.$route.query.type) === 1) {
-        // 微信相关接口
-        totalParams.profile_id = this.$route.params.id
-        this.kolWeiXinIndustry(totalParams)
-        this.kolWeiXinKeyword(totalParams)
-        this.kolWeixinSocial(totalParams)
-        // 计算sentiment
-        this.sentimentWeixin(this.sentimentParams)
-        // 计算Mentions
-        this.trendsWeixin(this.trendParams)
-        // best performance 参数
-        this.performanceParams.profile_id = this.$route.params.id
-        this.performanceWeixin(this.performanceParams)
-        // 调用微信品牌名字接口
-        this.brandNameParams.profile_id = this.$route.params.id
-        this.detailWeixinBrandName(this.brandNameParams)
-      }
-      if (Number(this.$route.query.type) === 2) {
-        // xiaohongshu
-        totalParams.profile_id = this.$route.params.id
-
-      }
-      if (Number(this.$route.query.type) === 3) {
-        // kuaishou
-        totalParams.profile_id = this.$route.params.id
-
-      }
-      if (Number(this.$route.query.type) === 4) {
-        // bilibili
-        totalParams.profile_id = this.$route.params.id
-
-      }
-      if (Number(this.$route.query.type) === 5) {
-        // douyin
-        totalParams.profile_id = this.$route.params.id
-
-      }
+      
     },
     changeTab(tab) {
       this.tabIndex = tab.index
+    },
+    // info 接口初始化
+    infoDataInit(type, res) {
+      console.log(type, res)
+      const _that = this
+      // type = 0 微博
+      // type = 1 微信
+      // type = 2 xiaohongshu
+      // type = 3 kuaishou
+      // type = 4 bilibili
+      // type = 5 douyin
+      // type = 6 Instagram
+      // type = 7 Youtube
+      // type = 8 Facebook
+      if (type === 1) {
+        _that.infoList.avatar_url = res.data.avatar_url
+        _that.infoList.profile_name = res.data.profile_name
+        _that.infoList.profile_id = res.data.profile_id
+        _that.infoList.description_raw = res.data.description_raw
+        _that.infoList.gender = '-'
+      } else {
+        _that.infoList.avatar_url = res.data.avatar_url
+        _that.infoList.profile_name = res.data.profile_name
+        _that.infoList.profile_id = res.data.profile_id
+        _that.infoList.description_raw = res.data.description_raw
+        _that.infoList.gender = res.data.gender
+        _that.decValue =  Object.values(res.data.industries)
+        _that.decKey = Object.keys(res.data.industries)
+        _that.decValue.forEach((item, index) => {
+          item.keyName = _that.decKey[index]
+        })
+        _that.decValue.forEach((item, index) => {
+          if (item.n_posts === 1) {
+            _that.dec.push(item.keyName)
+          }
+        })
+
+        if(type !== 0) {
+          // 其他平台与微信微博的social data的数据不一样
+          _that.otherSocialData.gender = res.data.gender
+          if (res.data.pricing.ref_price) {
+            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing.ref_price, 2)
+          }
+          if (res.data.fans_number) {
+            _that.otherSocialData.followers = res.data.fans_number
+          }
+          if (res.data.tags_description) {
+            _that.otherSocialData.tagsDescription = res.data.tags_description
+          }
+        }
+      }
     },
     // info 微博的接口
     kolWeiboInfo(params) {
@@ -505,21 +541,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = res.data.gender
-            _that.decValue =  Object.values(res.data.industries)
-            _that.decKey = Object.keys(res.data.industries)
-            _that.decValue.forEach((item, index) => {
-              item.keyName = _that.decKey[index]
-            })
-            _that.decValue.forEach((item, index) => {
-              if (item.n_posts === 1) {
-                _that.dec.push(item.keyName)
-              }
-            })
+            // 处理数据
+            _that.infoDataInit(0, res)
           }
         })
         .catch(function(error) {
@@ -537,11 +560,8 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = '-'
+            // 处理数据
+            _that.infoDataInit(1, res)
           }
         })
         .catch(function(error) {
@@ -559,27 +579,11 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = res.data.gender
-            _that.decValue =  Object.values(res.data.industries)
-            _that.decKey = Object.keys(res.data.industries)
-            _that.decValue.forEach((item, index) => {
-              item.keyName = _that.decKey[index]
-            })
-            _that.decValue.forEach((item, index) => {
-              if (item.n_posts === 1) {
-                _that.dec.push(item.keyName)
-              }
-            })
+            // 处理数据
+            _that.infoDataInit(2, res)
             // 操作social data 数据
             _that.otherSocialData.platform = 'xiaohongshu'
-            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
-            _that.otherSocialData.gender = res.data.gender
-            _that.otherSocialData.followers = res.data.fans_number
-            _that.otherSocialData.tagsDescription = res.data.tags_description
+            
           }
         })
         .catch(function(error) {
@@ -598,27 +602,10 @@ export default {
         .then(function(res) {
           // console.log('kolKuaishouInfo', res)
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = res.data.gender
-            _that.decValue =  Object.values(res.data.industries)
-            _that.decKey = Object.keys(res.data.industries)
-            _that.decValue.forEach((item, index) => {
-              item.keyName = _that.decKey[index]
-            })
-            _that.decValue.forEach((item, index) => {
-              if (item.n_posts === 1) {
-                _that.dec.push(item.keyName)
-              }
-            })
+            // 处理数据
+            _that.infoDataInit(3, res)
             // 操作social data 数据
             _that.otherSocialData.platform = 'kuaishou'
-            _that.otherSocialData.gender = res.data.gender
-            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
-            _that.otherSocialData.followers = res.data.fans_number
-            _that.otherSocialData.tagsDescription = res.data.tags_description
           }
         })
         .catch(function(error) {
@@ -636,27 +623,10 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = res.data.gender
-            _that.decValue =  Object.values(res.data.industries)
-            _that.decKey = Object.keys(res.data.industries)
-            _that.decValue.forEach((item, index) => {
-              item.keyName = _that.decKey[index]
-            })
-            _that.decValue.forEach((item, index) => {
-              if (item.n_posts === 1) {
-                _that.dec.push(item.keyName)
-              }
-            })
+            // 处理数据
+            _that.infoDataInit(4, res)
             // 操作social data 数据
             _that.otherSocialData.platform = 'bilibili'
-            _that.otherSocialData.gender = res.data.gender
-            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
-            _that.otherSocialData.followers = res.data.fans_number
-            _that.otherSocialData.tagsDescription = res.data.tags_description
           }
         })
         .catch(function(error) {
@@ -674,27 +644,69 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.infoList.avatar_url = res.data.avatar_url
-            _that.infoList.profile_name = res.data.profile_name
-            _that.infoList.profile_id = res.data.profile_id
-            _that.infoList.description_raw = res.data.description_raw
-            _that.infoList.gender = res.data.gender
-            _that.decValue =  Object.values(res.data.industries)
-            _that.decKey = Object.keys(res.data.industries)
-            _that.decValue.forEach((item, index) => {
-              item.keyName = _that.decKey[index]
-            })
-            _that.decValue.forEach((item, index) => {
-              if (item.n_posts === 1) {
-                _that.dec.push(item.keyName)
-              }
-            })
+            _that.infoDataInit(5, res)
             // 操作social data 数据
             _that.otherSocialData.platform = 'douyin'
-            _that.otherSocialData.gender = res.data.gender
-            _that.otherSocialData.price = '¥ ' + commonJs.threeFormatter(res.data.pricing. ref_price, 2)
-            _that.otherSocialData.followers = res.data.fans_number
-            _that.otherSocialData.tagsDescription = res.data.tags_description
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
+    },
+    // info kolInstagramInfo的接口
+    kolInstagramInfo(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolInstagramInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoDataInit(6, res)
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'instagram'
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
+    },
+    // info kolYoutubeInfo的接口
+    kolYoutubeInfo(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolYoutubeInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoDataInit(7, res)
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'youtube'
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
+    },
+    // info kolFacebookInfo的接口
+    kolFacebookInfo(params) {
+      const _that = this
+      axios
+        .post(apiConfig.kolFacebookInfo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.infoDataInit(8, res)
+            // 操作social data 数据
+            _that.otherSocialData.platform = 'facebook'
           }
         })
         .catch(function(error) {
@@ -888,14 +900,54 @@ export default {
           // console.log(error)
         })
     },
+    infoJoggle(params) {
+      const _that = this
+      if (Number(_that.$route.query.type) === 0) {
+        // 调用Fergus 微博info
+        _that.kolWeiboInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 1) {
+        // 调用Fergus weixin info
+        _that.kolWeiXinInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 2) {
+        // 调用Fergus xiaohongshu
+        _that.kolXiaohongshuInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 3) {
+        // 调用Fergus kolKuaishouInfo
+        _that.kolKuaishouInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 4) {
+        // 调用Fergus bilibili
+        _that.kolBilibiliInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 5) {
+        // 调用Fergus douyin
+        _that.kolDouyinInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 6) {
+        // 调用Fergus instagram
+        _that.kolInstagramInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 7) {
+        // 调用Fergus Youtube
+        _that.kolYoutubeInfo(params)
+      }
+      if (Number(_that.$route.query.type) === 8) {
+        // 调用Fergus Facebook
+        _that.kolFacebookInfo(params)
+      }
+    },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口
     kolActivityUrl(params) {
       const _that = this
+      console
       axios
         .get(
           apiConfig.kolActivityUrl +
             '/' +
-            this.$route.params.id +
+            this.$route.params.id.replace(/\./g , '\\/') +
             '/big_v_details',
           params,
           {
@@ -945,6 +997,18 @@ export default {
               if (Number(_that.$route.query.type) === 5) {
                 // 调用Fergus douyin
                 _that.kolDouyinInfo(params)
+              }
+              if (Number(_that.$route.query.type) === 6) {
+                // 调用Fergus instagram
+                _that.kolInstagramInfo(params)
+              }
+              if (Number(_that.$route.query.type) === 7) {
+                // 调用Fergus Youtube
+                _that.kolYoutubeInfo(params)
+              }
+              if (Number(_that.$route.query.type) === 8) {
+                // 调用Fergus Facebook
+                _that.kolFacebookInfo(params)
               }
             } else {
               _that.isActivity = true
