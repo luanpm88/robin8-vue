@@ -238,6 +238,15 @@ export default {
             case 'kuaishou':
               this.kolRouterData.type = '3'
               break
+            case 'instagram':
+              this.kolRouterData.type = '6'
+              break
+            case 'youtube':
+              this.kolRouterData.type = '7'
+              break
+            case 'facebook':
+              this.kolRouterData.type = '8'
+              break
             default:
               this.kolRouterData.type = '1'
           }

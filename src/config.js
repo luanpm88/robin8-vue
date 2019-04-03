@@ -144,6 +144,15 @@ const config = {
   // kol快手搜索
   kolKsSearchUrl: `${searchHost}/price/kuaishou/price/kol_search?${searchHostKey}`,
 
+  // kol ins搜索
+  kolInsSearchUrl: `${searchHost}/price/instagram/price/kol_search?${searchHostKey}`,
+
+  // kol youtube搜索
+  kolYoutSearchUrl: `${searchHost}/price/youtube/price/kol_search?${searchHostKey}`,
+
+  // kol facebook搜索
+  kolFbSearchUrl: `${searchHost}/price/facebook/price/kol_search?${searchHostKey}`,
+
   // kol search r8头部的东西
   r8_kols: `${host}/base_infos/r8_kols`,
 
