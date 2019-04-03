@@ -459,7 +459,7 @@ export default {
         this.kollistJoggle(type, this.totalParams)
       }  else {
         // 微博、小红书、快手、抖音,Instagram,Youtube,Facebook
-        this.totalParams.folllower_from = this.followerFrom
+        this.totalParams.follower_from = this.followerFrom
         this.totalParams.follower_to = this.followerTo
         this.kollistJoggle(type, this.totalParams)
       }
