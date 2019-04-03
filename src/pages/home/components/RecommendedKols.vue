@@ -100,8 +100,8 @@ export default {
     childKeyList: {
       handler() {
         if (this.isSelectBrand) {
-          console.log('woshiyou watch 有品牌')
-          console.log(this.childKeyList.brand_keywords)
+          // console.log('woshiyou watch 有品牌')
+          // console.log(this.childKeyList.brand_keywords)
           this.isBrandShow = false
           this.isLoading = true
           this.isKol = false
@@ -122,7 +122,7 @@ export default {
             }
           }
         } else {
-          console.log('woshiyou watch无品牌')
+          // console.log('woshiyou watch无品牌')
           this.tabIndex = 0
           this.isBrandShow = true
           this.isLoading = false
