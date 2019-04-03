@@ -223,6 +223,7 @@
                             placement="topLeft"
                             :title="$t('lang.kolList.search.likeTip')"
                             class="item"
+                            v-if="tabIndex === 0 || tabIndex === 1 || tabIndex === 2  || tabIndex === 3  || tabIndex === 4 || tabIndex === 5"
                           >
                             <i class="iconfont icon-user-heart"></i>
                             {{item.fans_number}}
