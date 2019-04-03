@@ -131,15 +131,16 @@ export default {
   },
   created() {
     this.getBaseData()
-    if (!this.isTotalBrand) {
-      this.keyList =  {
-        name: '',
-        brand_keywords: '',
-        cb_keywords: [],
-        cb_names: [],
-        tabIndex: 0,
-      }
-    }
+    // if (this.seletBrandId === '') {
+    //   console.log(9999);
+    //   this.keyList =  {
+    //     name: '',
+    //     brand_keywords: '',
+    //     cb_keywords: [],
+    //     cb_names: [],
+    //     tabIndex: 0,
+    //   }
+    // }
     if (this.$route.query.currentBrand) {
       this.keyList.tabIndex = 0
     }
