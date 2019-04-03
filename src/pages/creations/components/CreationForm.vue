@@ -952,42 +952,6 @@ export default {
       let platformName = data.platformName
       this.checkingPlatform(platformName)
       this.searchKols(this.kolSearchUrl)
-      // switch (platformName) {
-      //   case 'public_wechat_account':
-      //     this.searchKols(apiConfig.kolWxSearchUrl)
-      //     this.plateformName = 'public_wechat_account'
-      //     this.kolRouterData.type = '1'
-      //     break
-      //   case 'weibo':
-      //     this.searchKols(apiConfig.kolWbSearchUrl)
-      //     this.plateformName = 'weibo'
-      //     this.kolRouterData.type = '0'
-      //     break
-      //   case 'xiaohongshu':
-      //     this.searchKols(apiConfig.kolXhsSearchUrl)
-      //     this.plateformName = 'xiaohongshu'
-      //     this.kolRouterData.type = '2'
-      //     break
-      //   case 'douyin':
-      //     this.searchKols(apiConfig.kolDySearchUrl)
-      //     this.plateformName = 'douyin'
-      //     this.kolRouterData.type = '5'
-      //     break
-      //   case 'bilibili':
-      //     this.searchKols(apiConfig.kolBlSearchUrl)
-      //     this.plateformName = 'bilibili'
-      //     this.kolRouterData.type = '4'
-      //     break
-      //   case 'kuaishou':
-      //     this.searchKols(apiConfig.kolKsSearchUrl)
-      //     this.plateformName = 'kuaishou'
-      //     this.kolRouterData.type = '3'
-      //     break
-      //   default:
-      //     this.searchKols(apiConfig.kolWxSearchUrl)
-      //     this.plateformName = 'public_wechat_account'
-      //     this.kolRouterData.type = '1'
-      // }
     },
     checkingPlatform (platform) {
       switch (platform) {
@@ -1020,6 +984,21 @@ export default {
           this.kolSearchUrl = apiConfig.kolKsSearchUrl
           this.plateformName = 'kuaishou'
           this.kolRouterData.type = '3'
+          break
+        case 'instagram':
+          this.kolSearchUrl = apiConfig.kolInsSearchUrl
+          this.plateformName = 'instagram'
+          this.kolRouterData.type = '6'
+          break
+        case 'youtube':
+          this.kolSearchUrl = apiConfig.kolYoutSearchUrl
+          this.plateformName = 'youtube'
+          this.kolRouterData.type = '7'
+          break
+        case 'facebook':
+          this.kolSearchUrl = apiConfig.kolFbSearchUrl
+          this.plateformName = 'facebook'
+          this.kolRouterData.type = '8'
           break
         default:
           this.kolSearchUrl = apiConfig.kolWxSearchUrl
