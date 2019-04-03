@@ -75,7 +75,7 @@
                   class="form-control"
                   :class="[errors.has('account') ? 'danger' : '']"
                   :placeholder="$t('lang.forgetPw.account.placeholder')"
-                  v-model="account"
+                  v-model.trim="account"
                   v-validate="'required'"
                 >
                 <div class="form-tips text-right">
@@ -93,7 +93,7 @@
                   class="form-control"
                   :class="[errors.has('code') ? 'danger' : '']"
                   :placeholder="$t('lang.forgetPw.code.placeholder')"
-                  v-model="code"
+                  v-model.trim="code"
                   v-validate="'required|alpha_num'"
                 >
               </div>
