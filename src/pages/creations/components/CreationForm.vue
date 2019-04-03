@@ -869,10 +869,12 @@ export default {
       })
 
       _list.forEach(item => {
-        console.log(item)
+        // console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
-            _kolItem.plateform_name = this.plateformName
+            // console.log(this.plateformName)
+            // _kolItem.plateform_name = this.plateformName
+            _kolItem.plateform_name = !!item.plateform_name && item.plateform_name != '' ? item.plateform_name : this.plateformName
             _kolItem.profile_name = item.profile_name
             _kolItem.avatar_url = item.avatar_url
             _kolItem.description_raw = item.description_raw
