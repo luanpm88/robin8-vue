@@ -3,9 +3,9 @@
 // 张春明
 // const host = 'http://192.168.50.203:3001/brand_api/v2'
 // qa
-const host = 'https://qa.robin8.net/brand_api/v2'
+// const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
-// const host = 'https://robin8.net/brand_api/v2'
+const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
 // fergus 接口qa地址
 const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
@@ -144,6 +144,15 @@ const config = {
   // kol快手搜索
   kolKsSearchUrl: `${searchHost}/price/kuaishou/price/kol_search?${searchHostKey}`,
 
+  // kol ins搜索
+  kolInsSearchUrl: `${searchHost}/price/instagram/price/kol_search?${searchHostKey}`,
+
+  // kol youtube搜索
+  kolYoutSearchUrl: `${searchHost}/price/youtube/price/kol_search?${searchHostKey}`,
+
+  // kol facebook搜索
+  kolFbSearchUrl: `${searchHost}/price/facebook/price/kol_search?${searchHostKey}`,
+
   // kol search r8头部的东西
   r8_kols: `${host}/base_infos/r8_kols`,
 
@@ -202,6 +211,15 @@ const config = {
   // douyin
   kollistDouyinTable: `${searchHost}/douyin/profile/kol_search_profile?${searchHostKey}`,
 
+  // Instagram
+  kollistInstagramTable: `${searchHost}/instagram/profile/kol_search_profile?${searchHostKey}`,
+
+  // Youtube
+  kollistYoutubeTable: `${searchHost}/youtube/profile/kol_search_profile?${searchHostKey}`,
+
+  // Facebook
+  kollistFacebookTable: `${searchHost}/facebook/profile/kol_search_profile?${searchHostKey}`,
+
   // 首页接口结束------------------------
 
   // 我的竞争品牌 增加品牌 提交接口
@@ -227,6 +245,16 @@ const config = {
 
   // info douyin
   kolDouyinInfo: `${searchHost}/price/douyin/price/kol_info?${searchHostKey}`,
+
+  // info instagram
+  kolInstagramInfo: `${searchHost}/price/instagram/price/kol_info?${searchHostKey}`,
+
+  // info Youtube
+  kolYoutubeInfo: `${searchHost}/price/youtube/price/kol_info?${searchHostKey}`,
+
+  // info Facebook
+  kolFacebookInfo: `${searchHost}/price/facebook/price/kol_info?${searchHostKey}`,
+
 
   // top industry
   // industry weibo

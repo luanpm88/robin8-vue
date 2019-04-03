@@ -62,7 +62,7 @@
 .ranking-container {
   width: 1280px;
   margin: 0 auto;
-  color: $text-color
+  color: nth($text-color, 1);
 }
 .ranking-left{
   background: $white;
@@ -200,7 +200,7 @@
 }
 .social-line-left{
   line-height: 34px;
-  color: $text-color;
+  color: nth($text-color, 1);
 }
 .social-item {
   margin-bottom: 20px;
@@ -217,7 +217,7 @@
   }
 }
 .social-item-txt{
-  color: $text-color;
+  color: nth($text-color, 1);
   b{
     display: block;
   }
@@ -243,7 +243,7 @@
 .kol-detail-wrap {
   width: 900px;
   margin: 0px auto;
-  color: $text-color;
+  color: nth($text-color, 1);
 }
 .kol-detail-title {
   font-weight: 600;
@@ -320,6 +320,7 @@
       display: block;
       width: 100%;
       overflow-wrap: break-word;
+      text-indent: 30px;
     }
   }
 }
@@ -345,12 +346,12 @@
   color: blue;
 }
 .com-brand-table {
-  color: $text-color;
+  color: nth($text-color, 1);
   width: 100%;
   tr {
     border-bottom: 1px solid #ddd;
     th {
-      color: $text-color;
+      color: nth($text-color, 1);
       font-size: 14px;
       text-align: center;
       padding: 5px 0px;
@@ -378,7 +379,7 @@
 }
 .d-postcontent{
   padding: 0px 0px 20px;
-  color: $text-color;
+  color: nth($text-color, 1);
 }
 .d-post-left{
   // background: #f0f;
@@ -441,7 +442,7 @@
   }
 }
 .compare-content{
-  color: $text-color
+  color: nth($text-color, 1);
 }
 .compare-info{
   border-bottom: 1px solid nth($btn-active, 1);

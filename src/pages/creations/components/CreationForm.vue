@@ -275,7 +275,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-8">
               <select
                 name="price"
                 class="form-control"
@@ -295,7 +295,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-3">
               <select class="form-control">
@@ -386,7 +386,7 @@
               </ul>
               <p v-else class="form-control-static">{{$t('lang.all')}}</p>
             </div>
-          </div>
+          </div> -->
           <div class="form-group text-center">
             <button
               type="button"
@@ -716,6 +716,40 @@ export default {
       this.kolsList = []
       this.kolsList = resData.data
       this.kolsTotal = resData.total_record_count
+      console.log(this.kolsList)
+      this.kolsList.forEach(item => {
+        switch (this.plateformName) {
+          case 'public_wechat_account':
+            item.terrace_avatar = 'http://img.robin8.net/wechat.png'
+            break
+          case 'weibo':
+            item.terrace_avatar = 'http://img.robin8.net/weibo.png'
+            break
+          case 'xiaohongshu':
+            item.terrace_avatar = 'http://img.robin8.net/xiaohongshu.png'
+            break
+          case 'douyin':
+            item.terrace_avatar = 'http://img.robin8.net/douyin.png'
+            break
+          case 'bilibili':
+            item.terrace_avatar = 'http://img.robin8.net/bilibili.png'
+            break
+          case 'kuaishou':
+            item.terrace_avatar = 'http://img.robin8.net/kuaishou.png'
+            break
+          case 'instagram':
+            item.terrace_avatar = 'http://img.robin8.net/instagram.png'
+            break
+          case 'youtube':
+            item.terrace_avatar = 'http://img.robin8.net/youtube.png'
+            break
+          case 'facebook':
+            item.terrace_avatar = 'http://img.robin8.net/facebook.png'
+            break
+          default:
+            item.terrace_avatar = ''
+        }
+      })
 
       let _selectedKols = this.submitData.selected_kols
       if (_selectedKols.length > 0) {
@@ -869,16 +903,52 @@ export default {
       })
 
       _list.forEach(item => {
-        console.log(item)
+        // console.log(item)
         if (item.profile_id == _id) {
           if (!result) {
-            _kolItem.plateform_name = this.plateformName
+            // console.log(this.plateformName)
+            // _kolItem.plateform_name = this.plateformName
+            _kolItem.plateform_name = !!item.plateform_name && item.plateform_name != '' ? item.plateform_name : this.plateformName
             _kolItem.profile_name = item.profile_name
             _kolItem.avatar_url = item.avatar_url
             _kolItem.description_raw = item.description_raw
             _kolItem.bigv_url = !!item.bigv_url && item.bigv_url != '' ? item.bigv_url : ''
             _kolItem.checked = true
-            _kolItem.terrace_avatar = item.terrace_avatar
+            if (!!item.terrace_avatar && item.terrace_avatar != '') {
+              _kolItem.terrace_avatar = item.terrace_avatar
+            } else {
+              switch (this.plateformName) {
+                case 'public_wechat_account':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/wechat.png'
+                  break
+                case 'weibo':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/weibo.png'
+                  break
+                case 'xiaohongshu':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/xiaohongshu.png'
+                  break
+                case 'douyin':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/douyin.png'
+                  break
+                case 'bilibili':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/bilibili.png'
+                  break
+                case 'kuaishou':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/kuaishou.png'
+                  break
+                case 'instagram':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/instagram.png'
+                  break
+                case 'youtube':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/youtube.png'
+                  break
+                case 'facebook':
+                  _kolItem.terrace_avatar = 'http://img.robin8.net/facebook.png'
+                  break
+                default:
+                  _kolItem.terrace_avatar = ''
+              }
+            }
             item.checked = true
             _checkedKols.push(_kolItem)
           } else {
@@ -952,42 +1022,6 @@ export default {
       let platformName = data.platformName
       this.checkingPlatform(platformName)
       this.searchKols(this.kolSearchUrl)
-      // switch (platformName) {
-      //   case 'public_wechat_account':
-      //     this.searchKols(apiConfig.kolWxSearchUrl)
-      //     this.plateformName = 'public_wechat_account'
-      //     this.kolRouterData.type = '1'
-      //     break
-      //   case 'weibo':
-      //     this.searchKols(apiConfig.kolWbSearchUrl)
-      //     this.plateformName = 'weibo'
-      //     this.kolRouterData.type = '0'
-      //     break
-      //   case 'xiaohongshu':
-      //     this.searchKols(apiConfig.kolXhsSearchUrl)
-      //     this.plateformName = 'xiaohongshu'
-      //     this.kolRouterData.type = '2'
-      //     break
-      //   case 'douyin':
-      //     this.searchKols(apiConfig.kolDySearchUrl)
-      //     this.plateformName = 'douyin'
-      //     this.kolRouterData.type = '5'
-      //     break
-      //   case 'bilibili':
-      //     this.searchKols(apiConfig.kolBlSearchUrl)
-      //     this.plateformName = 'bilibili'
-      //     this.kolRouterData.type = '4'
-      //     break
-      //   case 'kuaishou':
-      //     this.searchKols(apiConfig.kolKsSearchUrl)
-      //     this.plateformName = 'kuaishou'
-      //     this.kolRouterData.type = '3'
-      //     break
-      //   default:
-      //     this.searchKols(apiConfig.kolWxSearchUrl)
-      //     this.plateformName = 'public_wechat_account'
-      //     this.kolRouterData.type = '1'
-      // }
     },
     checkingPlatform (platform) {
       switch (platform) {
@@ -1020,6 +1054,21 @@ export default {
           this.kolSearchUrl = apiConfig.kolKsSearchUrl
           this.plateformName = 'kuaishou'
           this.kolRouterData.type = '3'
+          break
+        case 'instagram':
+          this.kolSearchUrl = apiConfig.kolInsSearchUrl
+          this.plateformName = 'instagram'
+          this.kolRouterData.type = '6'
+          break
+        case 'youtube':
+          this.kolSearchUrl = apiConfig.kolYoutSearchUrl
+          this.plateformName = 'youtube'
+          this.kolRouterData.type = '7'
+          break
+        case 'facebook':
+          this.kolSearchUrl = apiConfig.kolFbSearchUrl
+          this.plateformName = 'facebook'
+          this.kolRouterData.type = '8'
           break
         default:
           this.kolSearchUrl = apiConfig.kolWxSearchUrl

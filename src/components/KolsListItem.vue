@@ -133,12 +133,15 @@ export default {
     },
     updateData (data) {
       // let _url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : ''
+      let _profileId = encodeURIComponent(this.renderData.profile_id)
+      // console.log(_profileId)
       this.checked = data.checked
-      this.url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : '/kol/'+ this.renderData.profile_id +'?type='+ this.routerData.type +'&brand_keywords='+ this.routerData.keywords
+      this.url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : '/kol/'+ _profileId +'?type='+ this.routerData.type +'&brand_keywords='+ this.routerData.keywords
       this.cartParams.profile_id = data.profile_id
       this.cartParams.profile_name = data.profile_name
       this.cartParams.avatar_url = data.avatar_url
       this.cartParams.description_raw = data.description_raw
+      // console.log(this.url)
     }
   },
   created () {

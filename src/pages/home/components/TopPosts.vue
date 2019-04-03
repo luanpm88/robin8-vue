@@ -120,22 +120,24 @@ export default {
           this.isBrandShow = false
           this.isShow = false
           this.isPost = false
-          let newKey = ''
-          this.childKeyList.brand_keywords.split(',').forEach(item => {
-            newKey += '"' + item + '" '
-          }) 
-          this.topPostParams.brand_keywords = newKey 
-          if (Number(this.tabIndex) === 0) {
-            this.postWeiboCurrentPage = 0
-            this.topPostParams.page_no = this.postWeiboCurrentPage 
-            // 微博
-            this.topPostWeibo(this.topPostParams)
-          } 
-          if (Number(this.tabIndex) === 1) {
-            this.postWeixinCurrentPage = 0
-            this.topPostParams.page_no = this.postWeixinCurrentPage 
-            // 微信
-            this.topPostWeixin(this.topPostParams)
+          if (this.childKeyList.brand_keywords !== '') {
+            let newKey = ''
+            this.childKeyList.brand_keywords.split(',').forEach(item => {
+              newKey += '"' + item + '" '
+            }) 
+            this.topPostParams.brand_keywords = newKey 
+            if (Number(this.tabIndex) === 0) {
+              this.postWeiboCurrentPage = 0
+              this.topPostParams.page_no = this.postWeiboCurrentPage 
+              // 微博
+              this.topPostWeibo(this.topPostParams)
+            } 
+            if (Number(this.tabIndex) === 1) {
+              this.postWeixinCurrentPage = 0
+              this.topPostParams.page_no = this.postWeixinCurrentPage 
+              // 微信
+              this.topPostWeixin(this.topPostParams)
+            }
           }
         } else {
           this.isLoading = false

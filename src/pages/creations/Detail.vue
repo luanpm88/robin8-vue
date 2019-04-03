@@ -106,7 +106,7 @@
               <p class="form-control-static">{{detailData.price_range}}</p>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
             <div class="col-sm-8">
               <p class="form-control-static">18～40</p>
@@ -123,7 +123,7 @@
             <div class="col-sm-8">
               <p class="form-control-static">北京 / 上海 / 深圳</p>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div v-if="kolsList.length > 0">
@@ -237,6 +237,15 @@ export default {
               break
             case 'kuaishou':
               this.kolRouterData.type = '3'
+              break
+            case 'instagram':
+              this.kolRouterData.type = '6'
+              break
+            case 'youtube':
+              this.kolRouterData.type = '7'
+              break
+            case 'facebook':
+              this.kolRouterData.type = '8'
               break
             default:
               this.kolRouterData.type = '1'
