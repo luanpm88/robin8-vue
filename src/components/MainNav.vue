@@ -121,21 +121,23 @@ export default {
             }
           ]
         },
-        // {
-        //   title: 'nav.ranking',
-        //   icon: 'icon-rocket',
-        //   href: '/ranking',
-        //   subNav: [
-        //     {
-        //       title: 'nav.wechatRanking',
-        //       href: '/ranking/WechatRanking'
-        //     },
-        //     {
-        //       title: 'nav.weiboRanking',
-        //       href: '/ranking/WeiboRanking'
-        //     }
-        //   ]
-        // },
+        {
+          title: 'nav.ranking',
+          icon: 'icon-rocket',
+          href: '/ranking',
+          subNav: [
+            {
+              title: 'nav.wechatRanking',
+              // href: '/ranking/WechatRanking'
+              href: '#WechatRanking'
+            },
+            {
+              title: 'nav.weiboRanking',
+              // href: '/ranking/WeiboRanking'
+              href: '#WeiboRanking'
+            }
+          ]
+        },
         {
           title: 'nav.socialListening',
           icon: 'icon-unit',

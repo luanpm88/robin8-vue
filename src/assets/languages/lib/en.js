@@ -90,7 +90,7 @@ export const lang = {
     brands: 'My Brands',
     competitors: 'My Competitors',
     cart: 'My Shopping Cart',
-    ranking: 'Ranking',
+    ranking: 'Ranking - Coming Soon',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     socialListening: 'Social Listening',
