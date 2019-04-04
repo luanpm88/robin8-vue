@@ -336,7 +336,7 @@ export default {
       industry: '',
       engagementFrom: '',
       engagementTo: '',
-      followerFrom: '',
+      followerFrom: '100000',
       followerTo: '',
       influenceFrom: '',
       influenceTo: '',
@@ -708,6 +708,13 @@ export default {
       this.isShow = false
       this.isTable = false
       this.tabIndex = tab.index
+      if (tab.index == 0) {
+        this.followerFrom = '100000'
+      } else if (tab.index == 1) {
+        this.followerFrom = '30000'
+      } else {
+        this.followerFrom = ''
+      }
       this.currentPage = 0
       this.currentPageAdd = this.currentPage + 1
       this.searchListBox = []
