@@ -250,17 +250,19 @@
                   <td class="text-center" v-if="tabIndex === 0 || tabIndex === 1">{{item.pricing.direct_price}}</td>
                   <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
                   <td class="text-center">
-                    <a-progress
+                    <!-- <a-progress
                       type="circle"
                       :percent="item.influence / 10"
                       :width="100"
                       :strokeWidth="9"
                       strokeColor="#b37feb"
                       :format="() => item.influence"
-                    />
+                    /> -->
+                    <!-- {{$t('lang.kolList.search.influenceTip')}} -->
+                    Coming Soon
                   </td>
                   <td class="text-center">
-                    <a-progress
+                    <!-- <a-progress
                       type="circle"
                       :percent="item.correlation"
                       :width="100"
@@ -276,7 +278,8 @@
                       strokeColor="#ddd"
                       :format="() => item.correlation"
                       v-if="item.colorStatus === 0"
-                    />
+                    /> -->
+                    Coming Soon
                   </td>
                 </tr>
               </tbody>
@@ -684,8 +687,12 @@ export default {
     },
     // 跳转 kol detail
     intoKolDetail(item) {
-      item.profile_id = encodeURIComponent(item.profile_id)
-      console.log(item.profile_id)
+      if (Number(this.tabIndex) === 0 || Number(this.tabIndex) === 1) {
+        item.profile_id = item.profile_id
+      }
+      if (Number(this.tabIndex) === 2 || Number(this.tabIndex) === 3 || Number(this.tabIndex) === 4 || Number(this.tabIndex) === 5 || Number(this.tabIndex) === 6 || Number(this.tabIndex) === 7 || Number(this.tabIndex) === 8) {
+        item.profile_id = encodeURIComponent(item.profile_id)
+      }
       // item.profile_id = item.profile_id.replace(/\./g , '\\/')
       this.$router.push({
         path: '/kol/',

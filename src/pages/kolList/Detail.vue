@@ -212,7 +212,10 @@
                       <td>{{dataListBox.stats.avg_shares}}</td>
                       <td>{{dataListBox.stats.avg_comments}}</td>
                       <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                      <td>{{dataListBox.stats.avg_post_influences}}</td>
+                      <td>
+                        <!-- {{dataListBox.stats.avg_post_influences}} -->
+                        Coming Soon
+                      </td>
                     </tr>
                   </table>
                 </div>

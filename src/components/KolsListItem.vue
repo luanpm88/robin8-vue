@@ -41,7 +41,8 @@
       <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
           <h5>Influence Score</h5>
-          <p>{{renderData.avg_post_influences}}</p>
+          <!-- <p>{{renderData.avg_post_influences}}</p> -->
+          Coming Soon
         </div>
       </div>
       <div v-if="renderStatus.hasLiked || renderStatus.hasMsg || renderStatus.hasCart || renderStatus.hasDelete" class="media-right media-middle operation-area">
