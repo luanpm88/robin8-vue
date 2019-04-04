@@ -160,12 +160,12 @@
     </div>
     <div class="panel default-panel kols-list-panel mt20">
       <div class="panel-body">
-        <div class="kols-list-statistics">
+        <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinR8')}} - {{r8List.wechat_kols_count}}</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboR8')}} - {{r8List.weibo_kols_count}}</span>
-        </div>
+        </div> -->
 
         <default-tabs
           :tabList="tabList"
@@ -340,8 +340,8 @@ export default {
       followerTo: '',
       influenceFrom: '',
       influenceTo: '',
-      kolOnly: false,
-      kolOnlyText: 'N',
+      kolOnly: true,
+      kolOnlyText: 'Y',
       currentPage: 0,
       currentPageAdd: 1,
       selectPage: 0,
