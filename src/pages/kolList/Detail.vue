@@ -474,7 +474,9 @@ export default {
           this.brandNameParams.profile_id = this.$route.params.id
           this.detailWeixinBrandName(this.brandNameParams)
         } else {
-          totalParams.profile_id = decodeURIComponent(this.$route.params.id)
+          // console.log(this.$route.params.id)
+          totalParams.profile_id = decodeURIComponent(decodeURIComponent(this.$route.params.id))
+          // console.log(totalParams.profile_id)
         }
       }
 

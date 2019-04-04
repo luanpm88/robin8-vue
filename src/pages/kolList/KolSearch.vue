@@ -368,16 +368,17 @@ export default {
         }, {
           index: 5,
           name: ('douyin')
-        }, {
-          index: 6,
-          name: ('instagram')
-        }, {
-          index: 7,
-          name: ('youtube')
-        }, {
-          index: 8,
-          name: ('facebook')
         }
+        // , {
+        //   index: 6,
+        //   name: ('instagram')
+        // }, {
+        //   index: 7,
+        //   name: ('youtube')
+        // }, {
+        //   index: 8,
+        //   name: ('facebook')
+        // }
       ],
       tabIndex: 0,
       searchListBox: [],
@@ -457,15 +458,9 @@ export default {
       // type = 6 Instagram
       // type = 7 Youtube
       // type = 8 Facebook
-      if (type === 1) {
-        // 微信
-        this.kollistJoggle(type, this.totalParams)
-      }  else {
-        // 微博、小红书、快手、抖音,Instagram,Youtube,Facebook
-        this.totalParams.follower_from = this.followerFrom
-        this.totalParams.follower_to = this.followerTo
-        this.kollistJoggle(type, this.totalParams)
-      }
+      this.totalParams.follower_from = this.followerFrom
+      this.totalParams.follower_to = this.followerTo
+      this.kollistJoggle(type, this.totalParams)
     },
     // 平台数据 接口
     kollistJoggle(type, params) {
@@ -692,6 +687,7 @@ export default {
       }
       if (Number(this.tabIndex) === 2 || Number(this.tabIndex) === 3 || Number(this.tabIndex) === 4 || Number(this.tabIndex) === 5 || Number(this.tabIndex) === 6 || Number(this.tabIndex) === 7 || Number(this.tabIndex) === 8) {
         item.profile_id = encodeURIComponent(item.profile_id)
+        // console.log(item.profile_id)
       }
       // item.profile_id = item.profile_id.replace(/\./g , '\\/')
       this.$router.push({
