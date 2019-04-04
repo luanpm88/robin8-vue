@@ -160,12 +160,12 @@
     </div>
     <div class="panel default-panel kols-list-panel mt20">
       <div class="panel-body">
-        <div class="kols-list-statistics">
+        <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinR8')}} - {{r8List.wechat_kols_count}}</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboR8')}} - {{r8List.weibo_kols_count}}</span>
-        </div>
+        </div> -->
 
         <default-tabs
           :tabList="tabList"
@@ -336,12 +336,12 @@ export default {
       industry: '',
       engagementFrom: '',
       engagementTo: '',
-      followerFrom: '',
+      followerFrom: '100000',
       followerTo: '',
       influenceFrom: '',
       influenceTo: '',
-      kolOnly: false,
-      kolOnlyText: 'N',
+      kolOnly: true,
+      kolOnlyText: 'Y',
       currentPage: 0,
       currentPageAdd: 1,
       selectPage: 0,
@@ -655,7 +655,11 @@ export default {
               element.pricing = {}
               element.pricing.direct_price = 'N/A'
             } else {
-              element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+              if (!!element.pricing.direct_price && element.pricing.direct_price != '') {
+                element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+              } else {
+                element.pricing.direct_price = 'N/A'
+              }
             }
           } else {
             if (!element.pricing) {
@@ -663,7 +667,11 @@ export default {
               element.pricing.ref_price = 'N/A'
             } else {
               if (element.pricing.ref_price) {
-                element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+                if (!!element.pricing.ref_price && element.pricing.ref_price != '') {
+                  element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+                } else {
+                  element.pricing.ref_price = 'N/A'
+                }
               } else {
                 element.pricing.ref_price = 'N/A'
               }
@@ -708,6 +716,13 @@ export default {
       this.isShow = false
       this.isTable = false
       this.tabIndex = tab.index
+      if (tab.index == 0) {
+        this.followerFrom = '100000'
+      } else if (tab.index == 1) {
+        this.followerFrom = '30000'
+      } else {
+        this.followerFrom = ''
+      }
       this.currentPage = 0
       this.currentPageAdd = this.currentPage + 1
       this.searchListBox = []
