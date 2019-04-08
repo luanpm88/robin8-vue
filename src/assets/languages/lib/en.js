@@ -79,7 +79,7 @@ export const lang = {
     home: 'Home',
     campaigns: 'Campaigns',
     customContent: 'Custom Content',
-    shareOnly: 'Share Only',
+    shareOnly: 'Consumer Content Amplification',
     kols: 'KOL Search Engine',
     wallet: 'Wallet',
     topUp: 'Top Up',
@@ -736,7 +736,7 @@ export const lang = {
       sentimentTip: 'The sentiment score is a number between 0 (very negative) and 100 (very positive). ',
       industries: 'Top Industries',
       brandDistribution: 'Brand Distribution',
-      keywords: 'Keywords', 
+      keywords: 'Keywords',
       keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
       activity: 'Activity',
       activityData: {

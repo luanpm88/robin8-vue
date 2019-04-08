@@ -25,7 +25,7 @@
             <div class="box">
               <div class="iconfont icon-doc"></div>
               <h5 class="title">创建小V活动</h5>
-              <h6 class="sub-title">Content Amplification</h6>
+              <h6 class="sub-title">Consumer Content Amplification</h6>
             </div>
           </router-link>
         </div>
