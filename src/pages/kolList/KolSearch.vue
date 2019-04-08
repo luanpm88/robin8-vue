@@ -655,7 +655,7 @@ export default {
               element.pricing = {}
               element.pricing.direct_price = 'N/A'
             } else {
-              if (element.pricing.direct_price) {
+              if (!!element.pricing.direct_price && element.pricing.direct_price != '') {
                 element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
               } else {
                 element.pricing.direct_price = 'N/A'
@@ -667,7 +667,11 @@ export default {
               element.pricing.ref_price = 'N/A'
             } else {
               if (element.pricing.ref_price) {
-                element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+                if (!!element.pricing.ref_price && element.pricing.ref_price != '') {
+                  element.pricing.ref_price = '¥ ' +  commonJs.threeFormatter(element.pricing.ref_price, 2)
+                } else {
+                  element.pricing.ref_price = 'N/A'
+                }
               } else {
                 element.pricing.ref_price = 'N/A'
               }
