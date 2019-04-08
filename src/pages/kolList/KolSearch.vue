@@ -655,7 +655,11 @@ export default {
               element.pricing = {}
               element.pricing.direct_price = 'N/A'
             } else {
-              element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+              if (element.pricing.direct_price) {
+                element.pricing.direct_price = '¥ ' +  commonJs.threeFormatter(element.pricing.direct_price, 2)
+              } else {
+                element.pricing.direct_price = 'N/A'
+              }
             }
           } else {
             if (!element.pricing) {
