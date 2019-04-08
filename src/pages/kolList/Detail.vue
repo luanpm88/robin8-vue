@@ -1251,7 +1251,7 @@ export default {
           }
         })
         .then(function(res) {
-          console.log('weibo bran dis', res)
+          // console.log('weibo bran dis', res)
           if (res.status === 200) {
             _that.isbrandDisLoading = false
             if (res.data.data.length > 0) {
