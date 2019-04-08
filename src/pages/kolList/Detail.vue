@@ -486,28 +486,28 @@ export default {
     changeKeyWord(language) {
       let totalParams = {}
       totalParams.language = language
-      this.brandNameParams.language = language
+      // this.brandNameParams.language = language
       this.isLoading = true
       this.isTag = false
       this.isShow = false
-      this.isbrandDisLoading = true
-      this.isbrandDisTag = false
-      this.isbrandDisShow = false
+      // this.isbrandDisLoading = true
+      // this.isbrandDisTag = false
+      // this.isbrandDisShow = false
       if (Number(this.$route.query.type) === 0) {
           // 微博相关接口
           totalParams.profile_id = Number(this.$route.params.id)
           this.kolWeiboKeyword(totalParams)
-          // 调用微博品牌名字接口
-          this.brandNameParams.profile_id = Number(this.$route.params.id);
-          this.detailWeiboBrandName(this.brandNameParams);
+          // // 调用微博品牌名字接口
+          // this.brandNameParams.profile_id = Number(this.$route.params.id);
+          // this.detailWeiboBrandName(this.brandNameParams);
         }
         if (Number(this.$route.query.type) === 1) {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinKeyword(totalParams)
-          // 调用微信品牌名字接口
-          this.brandNameParams.profile_id = this.$route.params.id;
-          this.detailWeixinBrandName(this.brandNameParams);
+          // // 调用微信品牌名字接口
+          // this.brandNameParams.profile_id = this.$route.params.id;
+          // this.detailWeixinBrandName(this.brandNameParams);
         }
     },
     // summary
@@ -520,11 +520,11 @@ export default {
       this.getBaseData();
       if (this.$i18n.locale === 'zh-CN') {
         totalParams.language = "zh"
-        this.brandNameParams.language = "zh"
+        // this.brandNameParams.language = "zh"
       }
       if (this.$i18n.locale === 'en-US') {
         totalParams.language = "en"
-        this.brandNameParams.language = "en"
+        // this.brandNameParams.language = "en"
       }
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
