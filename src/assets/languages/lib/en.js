@@ -79,7 +79,7 @@ export const lang = {
     home: 'Home',
     campaigns: 'Campaigns',
     customContent: 'Custom Content',
-    shareOnly: 'Share Only',
+    shareOnly: 'Consumer Content Amplication',
     kols: 'KOL Search Engine',
     wallet: 'Wallet',
     topUp: 'Top Up',
