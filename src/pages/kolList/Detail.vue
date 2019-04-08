@@ -897,7 +897,12 @@ export default {
               _that.isTag = true;
               _that.isShow = false;
               _that.parentTags = [];
-              _that.parentTags = res.data.slice(0, 25);
+              res.data = res.data.slice(0, 100);
+              res.data.forEach(item => {
+                item.name = item.text;
+                item.value = item.weight;
+              });
+              _that.parentTags = res.data;
             } else {
               _that.isTag = false;
               _that.isShow = true;
