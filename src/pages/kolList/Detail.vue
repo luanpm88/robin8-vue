@@ -84,6 +84,27 @@
             </div>
           </div>
           <div class="panel default-panel mt20" >
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">
+                {{$t('lang.kolList.detail.brandDistribution')}}
+              </p>
+              <div v-if="type === 0 || type === 1">
+                <div class="nonetip" v-if="isbrandDisShow">
+                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                </div>
+                <div class="r8-loading" v-if="isbrandDisLoading">
+                  <a-spin tip="Loading..."/>
+                </div>
+                <tag-charts v-if="isbrandDisTag" :width="240" :height="180" :taglist="parentbrandDisTags" class="mt20"></tag-charts>
+              </div>
+              <div v-else>
+                <div class="nonetip">
+                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel default-panel mt20" >
             <!-- <div class="panel-head">
               <h5 class="title text-center">
                 <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
@@ -115,12 +136,17 @@
           </div>
         </div>
         <div class="kol-detail-con" v-if="type === 0 || type === 1">
-          <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
+          <div class="top-control-area">
+            <button type="button" class="btn btn-purple" @click="goback">
+              <span class="iconfont icon-arrow-left"></span>
+              {{$t('lang.kolList.detail.btn')}}
+            </button>
+          </div>
           <default-tabs
             :tabList="tabList"
             :tabIndex="tabIndex"
             @changeTab="changeTab"
-            class="panel-tab"
+            class="panel-tab mt20"
           ></default-tabs>
           <div class="mt20" v-if="tabIndex === 0">
             <div class="panel default-panel mt20" v-if="isActivity">
@@ -260,7 +286,12 @@
         </div>
         <!-- 除了微信和微博  其他平台只展示 socialData -->
         <div class="kol-detail-con" v-else>
-          <span class="kol-back-btn" @click="goback">{{$t('lang.kolList.detail.btn')}}</span>
+          <div class="top-control-area">
+            <button type="button" class="btn btn-purple" @click="goback">
+              <span class="iconfont icon-arrow-left"></span>
+              {{$t('lang.kolList.detail.btn')}}
+            </button>
+          </div>
           <div class="panel default-panel mt20">
             <div class="panel-body prl30">
               <p class="kol-cloumn">{{$t('lang.kolList.detail.otherSocialData.title')}}</p>
@@ -412,7 +443,11 @@ export default {
         price: 'N/A',
         followers: 'N/A',
         tagsDescription: 'N/A'
-      }
+      },
+      isbrandDisShow: false,
+      isbrandDisLoading: true,
+      isbrandDisTag: false,
+      parentbrandDisTags: []
     }
   },
   created() {
@@ -438,6 +473,8 @@ export default {
       // // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
       // this.kolActivityUrl(totalParams)
       this.infoJoggle(totalParams)
+      // 获取brandName
+      this.getBaseData()
       totalParams.language = 'en'
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
@@ -486,7 +523,7 @@ export default {
     },
     // info 接口初始化
     infoDataInit(type, res) {
-      console.log(type, res)
+      // console.log(type, res)
       const _that = this
       // type = 0 微博
       // type = 1 微信
@@ -905,6 +942,7 @@ export default {
           // console.log(error)
         })
     },
+    // 初始化 fergus的info 接口
     infoJoggle(params) {
       const _that = this
       if (Number(_that.$route.query.type) === 0) {
@@ -944,7 +982,7 @@ export default {
         _that.kolFacebookInfo(params)
       }
     },
-    // activity analytics 还有info 假如没有info 调用 Fergus的info 接口
+    // activity analytics 还有info 假如没有info 调用 Fergus的info 接口 ---- 目前平台没有在这边，所以只用了 fergus初始化的接口
     kolActivityUrl(params) {
       const _that = this
       console
@@ -1177,9 +1215,11 @@ export default {
           // console.log(error)
         })
     },
+    // 返回上一级
     goback() {
       this.$router.go(-1)
     },
+    // 加入购物车
     doAddCart (data) {
       this.cartParams.profile_id = data.profile_id
       this.cartParams.profile_name = data.profile_name
@@ -1211,15 +1251,17 @@ export default {
           }
         })
         .then(function(res) {
+          // console.log('weibo bran dis', res)
           if (res.status === 200) {
+            _that.isbrandDisLoading = false
             if (res.data.data.length > 0) {
-              let name = []
-              res.data.data.slice(0, 10).forEach(element => {
-                name.push(element.text)
-              });
-              _that.currentBrandName = name.join(',')
+              _that.isbrandDisTag = true
+              _that.isbrandDisShow = false
+              _that.parentbrandDisTags = []
+              _that.parentbrandDisTags = res.data.data.slice(0, 25)
             } else {
-              _that.currentBrandName = 'N/A'
+              _that.parentbrandDisTags = false
+              _that.isbrandDisShow = true
             }
           }
         })
@@ -1238,20 +1280,40 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            _that.isbrandDisLoading = false
             if (res.data.data.length > 0) {
-              let name = []
-              res.data.data.slice(0, 10).forEach(element => {
-                name.push(element.text)
-              });
-              _that.currentBrandName = name.join(',')
+              _that.isbrandDisTag = true
+              _that.isbrandDisShow = false
+              _that.parentbrandDisTags = []
+              _that.parentbrandDisTags = res.data.data.slice(0, 25)
             } else {
-              _that.currentBrandName = 'N/A'
+              _that.parentbrandDisTags = false
+              _that.isbrandDisShow = true
             }
           }
         })
         .catch(function(error) {
           // console.log(error)
         })
+    },
+    // 获取keyword brand name
+    getBaseData () {
+      const _that = this
+      axios.get(apiConfig.baseInfosUrl, {
+        headers: {
+          'Authorization': _that.authorization
+        }
+      }).then(function(res) {
+        if (res.status === 200) {
+          if (!res.data.competitors.length == 0) {
+            res.data.trademarks_list.forEach(element => {
+              if (element.status === 1) {
+                _that.currentBrandName = element.name
+              }
+            })
+          }
+        }
+      })
     },
   }
 }
