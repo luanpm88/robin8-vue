@@ -23,6 +23,7 @@ export const lang = {
   submitBtn: 'Submit',
   payBtn: 'Pay',
   totalNoDataTip: 'Soon to launch...',
+  brandDisNoDataTip: 'NA',
   yes: 'Yes',
   no: 'No',
   search: 'Search',

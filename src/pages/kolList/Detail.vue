@@ -265,7 +265,7 @@
                   {{$t('lang.kolList.detail.brandDistribution')}} {{currentBrandName}}
                 </p>
                 <div class="nonetip" v-if="isbrandDisShow">
-                  <span>{{$t('lang.totalNoDataTip')}}</span>
+                  <span>{{$t('lang.brandDisNoDataTip')}}</span>
                 </div>
                 <div class="r8-loading" v-if="isbrandDisLoading">
                   <a-spin tip="Loading..."/>
