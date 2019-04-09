@@ -469,9 +469,11 @@ export default {
     this.$route.query.brand_keywords.split(",").forEach(item => {
       newKey += '"' + item + '" '
     })
+    console.log(newKey)
     this.trendParams.brand_keywords = newKey
     this.sentimentParams.brand_keywords = newKey
     this.brandNameParams.brand_keywords = newKey
+    console.log(this.brandNameParams.brand_keywords)
     this.type = Number(this.$route.query.type)
     this.tabIndexOneInit()
   },
@@ -826,6 +828,7 @@ export default {
           }
         })
         .catch(function(error) {
+          console.log('kolWeiboIndustry error', error)
           // console.log(error)
         });
     },
@@ -1329,6 +1332,7 @@ export default {
     },
     // 获取My brandname 微博页面
     detailWeiboBrandName(params) {
+      console.log('weibo', params)
       const _that = this;
       axios
         .post(apiConfig.detailWeiboBrandName, params, {
@@ -1361,6 +1365,7 @@ export default {
     },
     // 获取My brandname 微信页面
     detailWeixinBrandName(params) {
+      console.log('weixin', params)
       const _that = this;
       axios
         .post(apiConfig.detailWeixinBrandName, params, {
