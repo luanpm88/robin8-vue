@@ -735,7 +735,7 @@ export const lang = {
       sentiment: 'Brand Sentiment:',
       sentimentTip: 'The sentiment score is a number between 0 (very negative) and 100 (very positive). ',
       industries: 'Top Industries',
-      brandDistribution: 'Brand Distribution',
+      brandDistribution: 'Brand Distribution To',
       keywords: 'Keywords',
       keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
       activity: 'Activity',

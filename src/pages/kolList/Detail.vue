@@ -259,10 +259,10 @@
               </div>
             </div>
             <!-- Brand Distribution  -->
-            <!-- <div class="panel default-panel mt20" >
+            <div class="panel default-panel mt20" >
               <div class="panel-body prl30">
                 <p class="kol-cloumn">
-                  {{$t('lang.kolList.detail.brandDistribution')}}
+                  {{$t('lang.kolList.detail.brandDistribution')}} {{currentBrandName}}
                 </p>
                 <div class="nonetip" v-if="isbrandDisShow">
                   <span>{{$t('lang.totalNoDataTip')}}</span>
@@ -272,7 +272,7 @@
                 </div>
                 <cloud v-if="isbrandDisTag" :defaultWords="parentbrandDisTags" :height="wordHeight"></cloud>
               </div>
-            </div> -->
+            </div>
           </div>
 
           <!-- analytic -->
@@ -497,17 +497,17 @@ export default {
           // 微博相关接口
           totalParams.profile_id = Number(this.$route.params.id)
           this.kolWeiboKeyword(totalParams)
-          // // 调用微博品牌名字接口
-          // this.brandNameParams.profile_id = Number(this.$route.params.id);
-          // this.detailWeiboBrandName(this.brandNameParams);
+          // 调用微博品牌名字接口
+          this.brandNameParams.profile_id = Number(this.$route.params.id);
+          this.detailWeiboBrandName(this.brandNameParams);
         }
         if (Number(this.$route.query.type) === 1) {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinKeyword(totalParams)
-          // // 调用微信品牌名字接口
-          // this.brandNameParams.profile_id = this.$route.params.id;
-          // this.detailWeixinBrandName(this.brandNameParams);
+          // 调用微信品牌名字接口
+          this.brandNameParams.profile_id = this.$route.params.id;
+          this.detailWeixinBrandName(this.brandNameParams);
         }
     },
     // summary
@@ -540,9 +540,9 @@ export default {
         this.performanceParams.profile_id = String(this.$route.params.id);
         this.performanceParams.order_type = "sum_engagement";
         this.performanceWeibo(this.performanceParams);
-        // // 调用微博品牌名字接口
-        // this.brandNameParams.profile_id = Number(this.$route.params.id);
-        // this.detailWeiboBrandName(this.brandNameParams);
+        // 调用微博品牌名字接口
+        this.brandNameParams.profile_id = Number(this.$route.params.id);
+        this.detailWeiboBrandName(this.brandNameParams);
       } else {
         if (Number(this.$route.query.type) === 1) {
           // 微信相关接口
@@ -557,9 +557,9 @@ export default {
           // best performance 参数
           this.performanceParams.profile_id = this.$route.params.id;
           this.performanceWeixin(this.performanceParams);
-          // // 调用微信品牌名字接口
-          // this.brandNameParams.profile_id = this.$route.params.id;
-          // this.detailWeixinBrandName(this.brandNameParams);
+          // 调用微信品牌名字接口
+          this.brandNameParams.profile_id = this.$route.params.id;
+          this.detailWeixinBrandName(this.brandNameParams);
         } else {
           // console.log(this.$route.params.id)
           totalParams.profile_id = decodeURIComponent(
