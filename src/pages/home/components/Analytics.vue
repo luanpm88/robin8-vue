@@ -33,7 +33,7 @@
             <div v-if="cur === 1">
               <div v-if="isConcept">
                 <p class="analytic-chart-title">Top keywords</p>
-                <tag-charts :width="830" :height="480" :taglist="parentTags"></tag-charts>
+                <cloud :defaultWords="parentTags" :height="wordHeight"></cloud>
               </div>
             </div>
             <div v-if="cur === 2" class="analytic-chart-box">
@@ -76,7 +76,7 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import Echarts from '@components/Chart/GlobalEcharts'
 import ChartOption from '@components/Chart/GlobalChartOption'
-import TagCharts from '@components/Chart/chartTags'
+import cloud from "@components/Chart/chatCloud"
 import Tab from '@components/DefaultTabs'
 import { mapState } from 'vuex'
 import commonJs from '@javascripts/common.js'
@@ -91,7 +91,7 @@ let colorTwoList = ['#7DCEA0', '#F5B7B1']
 export default {
   props: ['childKeyList', 'isSelectBrand'],
   components: {
-    TagCharts,
+    cloud,
     Tab,
     Echarts
   },
@@ -192,7 +192,9 @@ export default {
       },
       parentTags: [],
       labelList: [],
-      tagColor: 'purple'
+      tagColor: 'purple',
+      wordHeight: '450px',
+      currentLangue: ''
     } 
   },
   watch: {
@@ -220,14 +222,55 @@ export default {
       },
       immediate:true,
       deep: true
+    },
+    listenLangue:function(old,newd){
+      this.currentLangue = old
+      if (old === 'zh-CN') {
+        this.changeLangueJoggle('zh')
+      }
+      if (old === 'en-US') {
+        this.changeLangueJoggle('en')
+      }
     }
   },
-  created() { },
+  created() { 
+    this.currentLangue = this.$i18n.locale
+  },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(['authorization', 'language']),
+    listenLangue() {
+      return this.language
+    }
   },
   methods: {
+    // 单独中英文切换 概念的标签 重新调用接口
+    changeLangueJoggle(language) {
+      this.conceptParams.language = language
+      this.isConcept = false
+      this.isLoading = true
+      if (this.topTabCur === 0 && this.cur === 1) {
+        console.log('woshi weibo 22')
+        // concept 微博
+        this.conceptWeibo(this.conceptParams)
+      }
+      if (this.topTabCur === 1 && this.cur === 1) {
+        console.log('woshi xin 22')
+        // concept 微信
+        this.conceptWeixin(this.conceptParams)
+      }
+    },
+    // 概念参数切换中英文
+    changeConpectParams() {
+      if (this.currentLangue === 'zh-CN') {
+        this.conceptParams.language = "zh"
+      }
+      if (this.currentLangue === 'en-US') {
+        this.conceptParams.language = "en"
+      }
+    },
     pramsInit() {
+      // 概念参数切换中英文
+      this.changeConpectParams()
       this.trendTitle = this.childKeyList.name
       this.cur = this.childKeyList.tabIndex
       let newKey = ''
@@ -269,7 +312,7 @@ export default {
       this.topTabCur = topTab.index
       this.isLoading = true
       this.isShow = false
-    
+
       // cur 为底部当前index，切换为0 是为mention
       if (this.cur === 0) {
         this.isTrend = false 
@@ -293,6 +336,8 @@ export default {
       // cur 为底部当前index，底部为切换为1 是为concept
       if (this.cur === 1) {
         this.isConcept = false
+        // 概念参数切换中英文
+        this.changeConpectParams()
         if (topTab.index === 0) {
           // concept 微博
           this.conceptWeibo(this.conceptParams)
@@ -359,6 +404,8 @@ export default {
 
       // tab.index 为底部当前index，切换为1 是为concept
       if (tab.index === 1) {
+        // 概念参数切换中英文
+        this.changeConpectParams()
         this.isConcept = false 
         if (this.topTabCur === 0) {
           // concept 微博
@@ -461,7 +508,12 @@ export default {
               _that.isShow = false
               _that.isConcept = true
               _that.parentTags = []
-              _that.parentTags = res.data.slice(0, 100) 
+              res.data = res.data.slice(0, 100) 
+              res.data.forEach(item => {
+                item.name = item.text;
+                item.value = item.weight;
+              });
+              _that.parentTags = res.data;
             }
         })
         .catch(function(error) {
@@ -487,7 +539,12 @@ export default {
               _that.isShow = false
               _that.isConcept = true
               _that.parentTags = []
-              _that.parentTags = res.data.slice(0, 100) 
+              res.data = res.data.slice(0, 100) 
+              res.data.forEach(item => {
+                item.name = item.text;
+                item.value = item.weight;
+              });
+              _that.parentTags = res.data;
             }
           }
           // console.log('我是微信', res)

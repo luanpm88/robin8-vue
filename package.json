@@ -27,7 +27,9 @@
     "vue-i18n": "^8.7.0",
     "vue-router": "^3.0.1",
     "vue-tags-ball": "^1.2.0",
+    "vue-wordcloud": "^1.1.1",
     "vue2-datepicker": "^2.10.0",
+    "vuewordcloud": "^18.7.11",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

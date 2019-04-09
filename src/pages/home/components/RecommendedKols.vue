@@ -111,7 +111,8 @@ export default {
               newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
             }) 
             this.params.brand_keywords = newKey
-            this.kolRouterData.keywords = newKey
+            // 传给当前列 kolsListItem.vue 的值 传原始的 this.childKeyList.brand_keywords 因为在 kolsListItem.vue中会再次传给detail detail 再做截取的判断
+            this.kolRouterData.keywords = this.childKeyList.brand_keywords
             if (Number(this.tabIndex) === 0) {
               // weibo 
               this.weiboKol(this.params)
