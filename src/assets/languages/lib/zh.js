@@ -735,6 +735,7 @@ export const lang = {
       sentimentTip: '情绪分数是介于0（非常消极）和100（非常积极）之间的数字。',
       industries: '顶级产业',
       brandDistribution: '品牌分布 -',
+      allBrandTag: '品牌分布',
       keywords: '关键词',
       keywordsTip: '标签云显示KOL内容中经常出现的关键词（品牌，产品，地域和其他基本概念）。',
       activity: '活动',

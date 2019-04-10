@@ -249,12 +249,12 @@ export default {
       this.isConcept = false
       this.isLoading = true
       if (this.topTabCur === 0 && this.cur === 1) {
-        console.log('woshi weibo 22')
+        // console.log('woshi weibo 22')
         // concept 微博
         this.conceptWeibo(this.conceptParams)
       }
       if (this.topTabCur === 1 && this.cur === 1) {
-        console.log('woshi xin 22')
+        // console.log('woshi xin 22')
         // concept 微信
         this.conceptWeixin(this.conceptParams)
       }
