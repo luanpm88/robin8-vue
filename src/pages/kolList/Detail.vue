@@ -259,7 +259,7 @@
               </div>
             </div>
             <!--all Brand  tag  -->
-            <div class="panel default-panel mt20">
+            <div class="panel default-panel mt20" v-if=" allBrand">
               <div class="panel-body prl30">
                 <p class="kol-cloumn">{{$t('lang.kolList.detail.allBrandTag')}}</p>
                 <div class="nonetip" v-if="isAllbrandDisShow">
@@ -272,7 +272,7 @@
               </div>
             </div>
             <!--single  Brand  Distribution  -->
-            <div class="panel default-panel mt20">
+            <div class="panel default-panel mt20" v-if="isSingleBrand">
               <div class="panel-body prl30">
                 <p
                   class="kol-cloumn"
@@ -457,6 +457,7 @@ export default {
         type: "doc",
         language: "en"
       },
+      isSingleBrand: true,
       isbrandDisShow: false,
       isbrandDisLoading: true,
       isbrandDisTag: false,
@@ -468,6 +469,7 @@ export default {
         profile_id: "MzAwMDAyMzY3OA==",
         language: "en"
       },
+      allBrand: true,
       isAllbrandDisLoading: true,
       isAllbrandDisShow: false,
       isAllbrandDisTag: false,
@@ -487,6 +489,8 @@ export default {
   created() {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
+    this.isSingleBrand = true;
+    this.allBrand = true;
     let newKey = "";
     this.$route.query.brand_keywords.split(",").forEach(item => {
       newKey += '"' + item + '" ';
@@ -513,9 +517,12 @@ export default {
       this.isLoading = true;
       this.isTag = false;
       this.isShow = false;
+      this.isSingleBrand = true;
       this.isbrandDisLoading = true;
       this.isbrandDisTag = false;
       this.isbrandDisShow = false;
+
+      this.allBrand = true;
       this.isAllbrandDisLoading = true;
       this.isAllbrandDisTag = false;
       this.isAllbrandDisShow = false;
@@ -577,10 +584,12 @@ export default {
         this.performanceParams.order_type = "sum_engagement";
         this.performanceWeibo(this.performanceParams);
         // 调用微博单个品牌 标签接口
+        this.isSingleBrand = true;
         this.brandNameParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboBrandName(this.brandNameParams);
 
         // 调用微博 all 品牌 标签接口
+        this.allBrand = true;
         this.allBrandTagParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboTotalTag(this.allBrandTagParams);
 
@@ -599,10 +608,12 @@ export default {
           this.performanceParams.profile_id = this.$route.params.id;
           this.performanceWeixin(this.performanceParams);
           // 调用微信品牌名字接口
+          this.isSingleBrand = true;
           this.brandNameParams.profile_id = this.$route.params.id;
           this.detailWeixinBrandName(this.brandNameParams);
 
           // 调用weixin all 品牌 标签接口
+          this.allBrand = true;
           this.allBrandTagParams.profile_id = this.$route.params.id;
           this.detailWeixinTotalTag(this.allBrandTagParams);
         } else {
@@ -1397,8 +1408,10 @@ export default {
               });
               _that.parentbrandDisTags = res.data.data.slice(0, 100);
             } else {
+              console.log(99999999)
               _that.isbrandDisTag = false;
               _that.isbrandDisShow = true;
+              _that.isSingleBrand = false;
             }
           }
         })
@@ -1431,6 +1444,7 @@ export default {
             } else {
               _that.isbrandDisTag = false;
               _that.isbrandDisShow = true;
+              _that.isSingleBrand = false;
             }
           }
         })
@@ -1464,6 +1478,7 @@ export default {
             } else {
               _that.isAllbrandDisTag = false;
               _that.isAllbrandDisShow = true;
+              _that.allBrand = false;
             }
           }
         })
@@ -1497,6 +1512,7 @@ export default {
             } else {
               _that.isAllbrandDisTag = false;
               _that.isAllbrandDisShow = true;
+              _that.allBrand = false;
             }
           }
         })
