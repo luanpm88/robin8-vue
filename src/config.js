@@ -305,10 +305,20 @@ const config = {
   // postlist weibo
   detailPostWeibo: `${searchHost}/weibo/post/post_by_profile_id?${searchHostKey}`,
 
-  // 获取detail品牌接口
+  // 获取detail weibo单个品牌标签接口
   detailWeiboBrandName: `${searchHost}/weibo/brand/brand_distribution?${searchHostKey}`,
 
+  // 获取detail weixin单个品牌标签接口
   detailWeixinBrandName: `${searchHost}/weixin/brand/brand_distribution?${searchHostKey}`,
+
+  // 获取detail Weibo total品牌标签接口
+  detailWeiboTotalTag: `${searchHost}/weibo/profile/brand_distribution?${searchHostKey}`,
+
+  // 获取detail Weixin total品牌标签接口
+  detailWeixinTotalTag: `${searchHost}/weixin/profile/brand_distribution?${searchHostKey}`,
+
+
+
 
   // ranking--------------------------
 
