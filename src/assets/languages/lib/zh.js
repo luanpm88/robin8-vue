@@ -21,6 +21,7 @@ export const lang = {
   submitBtn: '提交',
   payBtn: '立即付款',
   totalNoDataTip: '即将推出...',
+  searchListNoDataTip: '没有结果。尝试高级搜索以获得更好的结果...',
   brandDisNoDataTip: 'NA',
   yes: '是',
   no: '否',
