@@ -658,6 +658,7 @@ export default {
     },
     // 保存topInputKey
     kollistSaveKey(params) {
+      const _that = this;
       axios
         .post(apiConfig.kollistSaveKey, params, {
           headers: {
@@ -665,8 +666,8 @@ export default {
           }
         })
         .then(function(res) {
-          console.loh('woshi baocunjiekou', res)
           if (res.status === 200) {
+            // console.log('保存key 成功', res)
           }
         })
         .catch(function(error) {
@@ -808,11 +809,13 @@ export default {
       this.totalJoggle(this.tabIndex);
 
       // 将头部的输入的key 传给Evan 后台
-      // let saveKeyParams = {
-      //   keywords: this.keyword
+      // if (this.keyword !== '') {
+      //   let saveKeyParams = {
+      //     keywords: this.keyword
+      //   }
+      //   // 保存keyword 的接口
+      //   this.kollistSaveKey(saveKeyParams)
       // }
-      // 保存keyword 的接口
-      // this.kollistSaveKey(saveKeyParams)
     },
     // 获取keyword
     getBaseData() {
