@@ -1,5 +1,3 @@
-import { Radar } from "vue-chartjs";
-
 export const lang = {
   login: 'Log In',
   logout: 'Log Out',
