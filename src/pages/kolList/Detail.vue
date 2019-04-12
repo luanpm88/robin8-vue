@@ -22,15 +22,26 @@
                     class="iconfont icon-male"
                     v-if="infoList.gender == 'f' || infoList.gender == 'F'"
                   ></i>
-                  <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
-                    <span class="iconfont icon-cart" @click="doAddCart(infoList)"></span>
-                    Add to cart
-                  </button>
                 </p>
                 <p>{{infoList.age}}</p>
                 <p>
                   <i class="iconfont icon-location"></i>
                   {{infoList.region}}
+                </p>
+                <p>
+                  <a
+                    v-if="!!kolProfileLink && kolProfileLink != ''"
+                    :href="kolProfileLink"
+                    target="_blank"
+                    class="btn btn-xs btn-purple btn-outline"
+                  >
+                    <span class="iconfont icon-user"></span>
+                    KOL Profile
+                  </a>
+                  <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
+                    <span class="iconfont icon-cart"></span>
+                    Add to cart
+                  </button>
                 </p>
               </div>
               <ul class="clearfix">
@@ -473,7 +484,8 @@ export default {
       isAllbrandDisLoading: true,
       isAllbrandDisShow: false,
       isAllbrandDisTag: false,
-      allbrandDisTags: []
+      allbrandDisTags: [],
+      kolProfileLink: ''
     };
   },
   watch: {
@@ -1080,38 +1092,47 @@ export default {
       if (Number(_that.$route.query.type) === 0) {
         // 调用Fergus 微博info
         _that.kolWeiboInfo(params);
+        _that.kolProfileLink = 'https://weibo.com/u/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 1) {
         // 调用Fergus weixin info
         _that.kolWeiXinInfo(params);
+        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 2) {
         // 调用Fergus xiaohongshu
         _that.kolXiaohongshuInfo(params);
+        _that.kolProfileLink = 'https://www.xiaohongshu.com/user/profile/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 3) {
         // 调用Fergus kolKuaishouInfo
         _that.kolKuaishouInfo(params);
+        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 4) {
         // 调用Fergus bilibili
         _that.kolBilibiliInfo(params);
+        _that.kolProfileLink = 'https://space.bilibili.com/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 5) {
         // 调用Fergus douyin
         _that.kolDouyinInfo(params);
+        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 6) {
         // 调用Fergus instagram
         _that.kolInstagramInfo(params);
+        _that.kolProfileLink = 'https://www.instagram.com/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 7) {
         // 调用Fergus Youtube
         _that.kolYoutubeInfo(params);
+        _that.kolProfileLink = 'https://www.youtube.com/channel/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 8) {
         // 调用Fergus Facebook
         _that.kolFacebookInfo(params);
+        _that.kolProfileLink = 'https://www.facebook.com/'+ _that.$route.params.id
       }
     },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口 ---- 目前平台没有在这边，所以只用了 fergus初始化的接口
@@ -1408,7 +1429,6 @@ export default {
               });
               _that.parentbrandDisTags = res.data.data.slice(0, 100);
             } else {
-              console.log(99999999)
               _that.isbrandDisTag = false;
               _that.isbrandDisShow = true;
               _that.isSingleBrand = false;
