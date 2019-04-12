@@ -705,6 +705,7 @@ export default {
           if (res.status === 200) {
             // 处理数据
             _that.infoDataInit(0, res);
+            _that.kolProfileLink = 'https://weibo.com/u/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -724,6 +725,7 @@ export default {
           if (res.status === 200) {
             // 处理数据
             _that.infoDataInit(1, res);
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -745,6 +747,7 @@ export default {
             _that.infoDataInit(2, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "xiaohongshu";
+            _that.kolProfileLink = 'https://www.xiaohongshu.com/user/profile/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -767,6 +770,7 @@ export default {
             _that.infoDataInit(3, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "kuaishou";
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -788,6 +792,7 @@ export default {
             _that.infoDataInit(4, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "bilibili";
+            _that.kolProfileLink = 'https://space.bilibili.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -808,6 +813,7 @@ export default {
             _that.infoDataInit(5, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "douyin";
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -828,6 +834,7 @@ export default {
             _that.infoDataInit(6, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "instagram";
+            _that.kolProfileLink = 'https://www.instagram.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -845,9 +852,11 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            console.log(res)
             _that.infoDataInit(7, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "youtube";
+            _that.kolProfileLink = 'https://www.youtube.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -868,6 +877,7 @@ export default {
             _that.infoDataInit(8, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "facebook";
+            _that.kolProfileLink = 'https://www.facebook.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -1092,47 +1102,38 @@ export default {
       if (Number(_that.$route.query.type) === 0) {
         // 调用Fergus 微博info
         _that.kolWeiboInfo(params);
-        _that.kolProfileLink = 'https://weibo.com/u/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 1) {
         // 调用Fergus weixin info
         _that.kolWeiXinInfo(params);
-        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 2) {
         // 调用Fergus xiaohongshu
         _that.kolXiaohongshuInfo(params);
-        _that.kolProfileLink = 'https://www.xiaohongshu.com/user/profile/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 3) {
         // 调用Fergus kolKuaishouInfo
         _that.kolKuaishouInfo(params);
-        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 4) {
         // 调用Fergus bilibili
         _that.kolBilibiliInfo(params);
-        _that.kolProfileLink = 'https://space.bilibili.com/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 5) {
         // 调用Fergus douyin
         _that.kolDouyinInfo(params);
-        _that.kolProfileLink = ''
       }
       if (Number(_that.$route.query.type) === 6) {
         // 调用Fergus instagram
         _that.kolInstagramInfo(params);
-        _that.kolProfileLink = 'https://www.instagram.com/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 7) {
         // 调用Fergus Youtube
         _that.kolYoutubeInfo(params);
-        _that.kolProfileLink = 'https://www.youtube.com/user/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 8) {
         // 调用Fergus Facebook
         _that.kolFacebookInfo(params);
-        _that.kolProfileLink = 'https://www.facebook.com/'+ _that.$route.params.id
       }
     },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口 ---- 目前平台没有在这边，所以只用了 fergus初始化的接口
