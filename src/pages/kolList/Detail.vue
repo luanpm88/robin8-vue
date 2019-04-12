@@ -1088,7 +1088,7 @@ export default {
     },
     // 初始化 fergus的info 接口
     infoJoggle(params) {
-      const _that = this;
+      const _that = this
       if (Number(_that.$route.query.type) === 0) {
         // 调用Fergus 微博info
         _that.kolWeiboInfo(params);
@@ -1127,7 +1127,7 @@ export default {
       if (Number(_that.$route.query.type) === 7) {
         // 调用Fergus Youtube
         _that.kolYoutubeInfo(params);
-        _that.kolProfileLink = 'https://www.youtube.com/channel/'+ _that.$route.params.id
+        _that.kolProfileLink = 'https://www.youtube.com/user/'+ _that.$route.params.id
       }
       if (Number(_that.$route.query.type) === 8) {
         // 调用Fergus Facebook
