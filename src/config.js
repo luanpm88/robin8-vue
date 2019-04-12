@@ -1,9 +1,9 @@
 // 小燕
-// const host = 'http://192.168.50.131:3000/brand_api/v2'
+const host = 'http://192.168.50.131:3000/brand_api/v2'
 // 张春明
 // const host = 'http://192.168.50.203:3001/brand_api/v2'
 // qa
-const host = 'https://qa.robin8.net/brand_api/v2'
+// const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
 // const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
@@ -193,6 +193,9 @@ const config = {
   // top post 微信
   topPostWeixin: `${searchHost}/weixin/brand/top_posts?${searchHostKey}`,
 
+  // kollist 保存topInputKey
+  kollistSaveKey: `${host}/base_infos/search_keyword`,
+  
   // kollist 表格weibo接口
   kollistWeiboTable: `${searchHost}/weibo/profile/kol_search_profile?${searchHostKey}`,
 
