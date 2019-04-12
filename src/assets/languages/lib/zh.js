@@ -32,6 +32,7 @@ export const lang = {
   female: '女',
   yearsOld: '岁',
   yearsOlder: '岁以上',
+  qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   router: {
     login: '登录',
     reg: '注册',

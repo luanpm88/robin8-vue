@@ -5,10 +5,7 @@
   >
     <div v-if="showCode" class="service-qrcode">
       <img src="@images/service_qr.jpg" alt="" class="qr-img" />
-      <div class="title">
-        <p>Please scan the</p>
-        <p>QR code for assistance</p>
-      </div>
+      <div class="title" v-html="$t('lang.qrTips')"></div>
     </div>
     <div class="customer-service-btn" @click="showQrCode">
       <span v-if="!showCode" class="iconfont icon-service"></span>

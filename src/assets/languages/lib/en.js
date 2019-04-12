@@ -32,6 +32,7 @@ export const lang = {
   female: 'Female',
   yearsOld: 'years old',
   yearsOlder: 'years old or older',
+  qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
   router: {
     login: 'Log In',
     reg: 'Sign Up',
