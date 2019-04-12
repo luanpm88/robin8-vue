@@ -343,6 +343,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -351,6 +353,7 @@ import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
 import PageHeader from "@components/PageHeader";
+import PageFooter from '@components/PageFooter'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from "@javascripts/common.js";
@@ -366,6 +369,7 @@ export default {
   components: {
     Echarts,
     PageHeader,
+    PageFooter,
     DefaultTabs,
     Analytics,
     Posts,

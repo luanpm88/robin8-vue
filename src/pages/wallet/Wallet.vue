@@ -10,11 +10,14 @@
         <router-view></router-view>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import WalletHeader from './components/WalletHeader'
 
@@ -22,6 +25,7 @@ export default {
   name: 'Wallet',
   components: {
     PageHeader,
+    PageFooter,
     MainNav,
     WalletHeader
   },

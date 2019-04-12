@@ -11,11 +11,14 @@
         <kol-search :keyWord="keyList"></kol-search>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import KolSearch from './KolSearch'
 
@@ -23,6 +26,7 @@ export default {
   name: 'KolList',
   components: {
     PageHeader,
+    PageFooter,
     MainNav,
     KolSearch
   },
@@ -33,10 +37,10 @@ export default {
     } else {
       this.$route.meta.keepAlive = false
     }
-    next() 
+    next()
   },
   created() {
-    this.$route.meta.keepAlive = false 
+    this.$route.meta.keepAlive = false
   },
   data () {
     return {

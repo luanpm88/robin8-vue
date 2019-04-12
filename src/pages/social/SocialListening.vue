@@ -91,6 +91,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -98,6 +100,7 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import PageHeader from "@components/PageHeader";
+import PageFooter from '@components/PageFooter'
 import MainNav from "@components/MainNav";
 import { mapState } from "vuex";
 import commonJs from '@javascripts/common.js';
@@ -105,6 +108,7 @@ export default {
   name: "socialListening",
   components: {
     PageHeader,
+    PageFooter,
     MainNav
   },
   created() {
@@ -305,7 +309,7 @@ export default {
         if (res.status === 200) {
           res.data.trademarks_list.forEach(element => {
             if (element.status === 1) {
-              _that.topic = element.name 
+              _that.topic = element.name
             }
           })
           _that.totalParams.OR_keywords = _that.topic
