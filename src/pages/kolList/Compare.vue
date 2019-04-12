@@ -34,6 +34,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -41,6 +43,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import Echarts from '@components/Chart/GlobalEcharts'
 import ChartOption from '@components/Chart/GlobalChartOption'
 import commonJs from '@javascripts/common.js'
@@ -55,6 +58,7 @@ export default {
   components: {
     Echarts,
     PageHeader,
+    PageFooter,
     kolinfo,
     performance,
     distribution,
@@ -65,7 +69,7 @@ export default {
     return {
       type: 0,
       weiboData: []
-    } 
+    }
   },
   created() {
     this.type = this.$route.params.type
@@ -75,7 +79,7 @@ export default {
       }
       // top detail
       this.weiboData.push(params)
-    }) 
+    })
   },
   computed: {
     ...mapState(['authorization'])
@@ -85,7 +89,7 @@ export default {
       this.$router.go(-1)
     }
   }
-} 
+}
 </script>
 <style lang="scss" scoped>
 

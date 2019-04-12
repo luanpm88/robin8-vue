@@ -81,6 +81,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -88,6 +90,7 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import ProfilePanel from '@components/ProfilePanel'
 import HomeBanner from './components/HomeBanner'
@@ -100,6 +103,7 @@ export default {
   name: 'Home',
   components: {
     PageHeader,
+    PageFooter,
     MainNav,
     ProfilePanel,
     HomeBanner,

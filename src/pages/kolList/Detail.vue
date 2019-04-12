@@ -22,15 +22,26 @@
                     class="iconfont icon-male"
                     v-if="infoList.gender == 'f' || infoList.gender == 'F'"
                   ></i>
-                  <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
-                    <span class="iconfont icon-cart" @click="doAddCart(infoList)"></span>
-                    Add to cart
-                  </button>
                 </p>
                 <p>{{infoList.age}}</p>
                 <p>
                   <i class="iconfont icon-location"></i>
                   {{infoList.region}}
+                </p>
+                <p>
+                  <a
+                    v-if="!!kolProfileLink && kolProfileLink != ''"
+                    :href="kolProfileLink"
+                    target="_blank"
+                    class="btn btn-xs btn-purple btn-outline"
+                  >
+                    <span class="iconfont icon-user"></span>
+                    KOL Profile
+                  </a>
+                  <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
+                    <span class="iconfont icon-cart"></span>
+                    Add to cart
+                  </button>
                 </p>
               </div>
               <ul class="clearfix">
@@ -332,6 +343,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -340,6 +353,7 @@ import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
 import PageHeader from "@components/PageHeader";
+import PageFooter from '@components/PageFooter'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from "@javascripts/common.js";
@@ -355,6 +369,7 @@ export default {
   components: {
     Echarts,
     PageHeader,
+    PageFooter,
     DefaultTabs,
     Analytics,
     Posts,
@@ -473,7 +488,8 @@ export default {
       isAllbrandDisLoading: true,
       isAllbrandDisShow: false,
       isAllbrandDisTag: false,
-      allbrandDisTags: []
+      allbrandDisTags: [],
+      kolProfileLink: ''
     };
   },
   watch: {
@@ -693,6 +709,7 @@ export default {
           if (res.status === 200) {
             // 处理数据
             _that.infoDataInit(0, res);
+            _that.kolProfileLink = 'https://weibo.com/u/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -712,6 +729,7 @@ export default {
           if (res.status === 200) {
             // 处理数据
             _that.infoDataInit(1, res);
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -733,6 +751,7 @@ export default {
             _that.infoDataInit(2, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "xiaohongshu";
+            _that.kolProfileLink = 'https://www.xiaohongshu.com/user/profile/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -755,6 +774,7 @@ export default {
             _that.infoDataInit(3, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "kuaishou";
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -776,6 +796,7 @@ export default {
             _that.infoDataInit(4, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "bilibili";
+            _that.kolProfileLink = 'https://space.bilibili.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -796,6 +817,7 @@ export default {
             _that.infoDataInit(5, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "douyin";
+            _that.kolProfileLink = ''
           }
         })
         .catch(function(error) {
@@ -816,6 +838,7 @@ export default {
             _that.infoDataInit(6, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "instagram";
+            _that.kolProfileLink = 'https://www.instagram.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -833,9 +856,11 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
+            console.log(res)
             _that.infoDataInit(7, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "youtube";
+            _that.kolProfileLink = 'https://www.youtube.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -856,6 +881,7 @@ export default {
             _that.infoDataInit(8, res);
             // 操作social data 数据
             _that.otherSocialData.platform = "facebook";
+            _that.kolProfileLink = 'https://www.facebook.com/'+ res.data.profile_id
           }
         })
         .catch(function(error) {
@@ -1076,7 +1102,7 @@ export default {
     },
     // 初始化 fergus的info 接口
     infoJoggle(params) {
-      const _that = this;
+      const _that = this
       if (Number(_that.$route.query.type) === 0) {
         // 调用Fergus 微博info
         _that.kolWeiboInfo(params);
@@ -1408,7 +1434,6 @@ export default {
               });
               _that.parentbrandDisTags = res.data.data.slice(0, 100);
             } else {
-              console.log(99999999)
               _that.isbrandDisTag = false;
               _that.isbrandDisShow = true;
               _that.isSingleBrand = false;

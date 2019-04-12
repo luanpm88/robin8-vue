@@ -21,6 +21,7 @@ export const lang = {
   submitBtn: '提交',
   payBtn: '立即付款',
   totalNoDataTip: '即将推出...',
+  searchListNoDataTip: '没有结果,尝试取消KOL价格或减少粉丝数量以获得更好的结果...',
   brandDisNoDataTip: 'NA',
   yes: '是',
   no: '否',
@@ -31,6 +32,7 @@ export const lang = {
   female: '女',
   yearsOld: '岁',
   yearsOlder: '岁以上',
+  qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   router: {
     login: '登录',
     reg: '注册',

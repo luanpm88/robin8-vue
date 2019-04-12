@@ -84,6 +84,8 @@
         </div>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -91,12 +93,14 @@
 import axios from 'axios'
 import apiConfig from '@/config'
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 
 export default {
   name: 'Help',
   components: {
     PageHeader,
+    PageFooter,
     MainNav
   },
   data() {

@@ -10,11 +10,14 @@
         <router-view></router-view>
       </div>
     </div>
+
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import PageHeader from '@components/PageHeader'
+import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import ContainerHeader from './components/ContainerHeader'
 
@@ -22,6 +25,7 @@ export default {
   name: 'Campaigns',
   components: {
     PageHeader,
+    PageFooter,
     MainNav,
     ContainerHeader
   },
