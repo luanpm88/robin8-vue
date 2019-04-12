@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="kol-search">
     <!-- 对比按钮 -->
     <transition name="fade">
       <div v-if="comparePop" class="panel default-panel compare-pop">
