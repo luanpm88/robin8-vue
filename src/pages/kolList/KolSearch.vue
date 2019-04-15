@@ -203,7 +203,7 @@
             <table class="default-table mt20">
               <thead>
                 <tr>
-                  <!-- <th>{{$t('lang.kolList.search.table.check')}}</th> -->
+                  <!-- <th v-if="tabIndex === 0 || tabIndex === 1" width="6%">{{$t('lang.kolList.search.table.check')}}</th> -->
                   <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                   <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
                   <th width="18%" class="text-center">
@@ -228,9 +228,9 @@
               </thead>
               <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
                 <tr v-for="(item, index) in key" :key="index">
-                  <!-- <td>
+                  <!-- <td v-if="tabIndex === 0 || tabIndex === 1">
                     <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
-                  </td>-->
+                  </td> -->
                   <td>
                     <div class="media kol-profile">
                       <div class="media-left media-middle">
@@ -939,6 +939,9 @@ export default {
       if (this.compareList.length > 1) {
         // 控制按钮出现
         this.comparePop = true;
+      } else {
+        // 控制按钮隐藏
+        this.comparePop = false;
       }
     },
     // 关闭比一比的按钮

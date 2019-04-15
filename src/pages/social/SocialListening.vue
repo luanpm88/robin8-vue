@@ -29,6 +29,20 @@
                   class="form-control"
                   v-model="profileId"
                 />
+                <!-- <a-select
+                  showSearch
+                  :value="selectIdValue"
+                  placeholder
+                  style="width: 200px"
+                  :defaultActiveFirstOption="false"
+                  :showArrow="false"
+                  :filterOption="false"
+                  @search="handleSearch"
+                  @change="handleChange"
+                  :notFoundContent="null"
+                >
+                  <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
+                </a-select> -->
               </div>
             </div>
 
@@ -96,7 +110,8 @@ import apiConfig from '@/config'
 import MainNav from '@components/MainNav'
 import { mapState } from 'vuex'
 import commonJs from '@javascripts/common.js'
-
+let timeout;
+let currentValue;
 export default {
   name: 'socialListening',
   components: {
@@ -129,7 +144,10 @@ export default {
         profile_ids: [],
       },
       itemList: [],
-      cartParams: {}
+      cartParams: {},
+      data: [],
+      selectIdValue: undefined,
+      selectIdValueName: ''
     };
   },
   methods: {
@@ -206,6 +224,7 @@ export default {
           console.log(error);
         });
     },
+    // 头部搜索
     totalSearch() {
       this.isLoading = true;
       this.isContent = false;
@@ -229,6 +248,7 @@ export default {
         this.socialWeixin(this.totalParams);
       }
     },
+    // 点击分页的时候
     onPageChange (page) {
       this.isLoading = true;
       this.isContent = false;
@@ -266,6 +286,7 @@ export default {
         }
       });
     },
+    // 加入购入车
     doAddCart (data) {
       this.cartParams.profile_id = data.profile_id
       this.cartParams.profile_name = data.profile_name
@@ -277,6 +298,7 @@ export default {
         }
       }).then(this.handleDoAddCartSucc)
     },
+    // 加入购物车执行的函数
     handleDoAddCartSucc (res) {
       // console.log(res)
       let resData = res.data
@@ -309,6 +331,90 @@ export default {
         }
       })
     },
+    // kol ID 只要一变化就触发事件
+    handleSearch(value) {
+      if (value !== '') {
+        this.selectIdInit(value, data => (this.data = data));
+      }
+    },
+    // kol ID 选中事件
+    handleChange(value) {
+      // console.log(value);
+      this.selectIdValue = value;
+      this.selectIdInit(value, data => (this.data = data));
+      this.profileId = value;
+    },
+    // 当kol id 改变或者 选中时候都会进行数据重置
+    selectIdInit(value, callback) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      currentValue = value;
+      let params = {
+        profile_name: value,
+        page_no: 0,
+        page_size: 10
+      };
+      // 微博select
+      if (this.source === 0) {
+        const _that = this;
+        axios
+          .post(apiConfig.socialWeiboSelect, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              if ((currentValue = value)) {
+                const result = res.data.data;
+                const data = [];
+                result.forEach(item => {
+                  data.push({
+                    value: item.profile_id,
+                    text: item.profile_name
+                  });
+                });
+                callback(data);
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error);
+          });
+      }
+      // 微信select
+      if (Number(this.source) === 1) {
+        console.log(88);
+        const _that = this;
+        axios
+          .post(apiConfig.socialWeixinSelect, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              console.log('0000000 微信', res);
+              if ((currentValue = value)) {
+                const result = res.data.data;
+                const data = [];
+                result.forEach(item => {
+                  data.push({
+                    value: item.profile_id,
+                    text: item.profile_name
+                  });
+                });
+                callback(data);
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error);
+          });
+      }
+    }
   }
 };
 </script>
