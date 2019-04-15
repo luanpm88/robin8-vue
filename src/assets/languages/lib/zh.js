@@ -427,6 +427,7 @@ export const lang = {
     bigVRequirement: '大V 相关要求',
     bigVSelected: '已选择的大V',
     serchBtn: '搜索大V',
+    kolsNoResult: '暂无结果，请选择较少的行业标签以获得更好的结果。',
     name: {
       title: '活动名称',
       placeholder: '请填写活动名称',

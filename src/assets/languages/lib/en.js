@@ -426,6 +426,7 @@ export const lang = {
     bigVRequirement: 'Big V related requirement',
     bigVSelected: 'Selected Big V',
     serchBtn: 'Search',
+    kolsNoResult: 'No results. Please select fewer industries for better results.',
     name: {
       title: 'Campaign Name',
       placeholder: 'Please enter your campaign name.',
