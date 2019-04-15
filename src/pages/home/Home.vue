@@ -1,96 +1,88 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
+  <div class="container mt50 clearfix">
+    <main-nav class="pull-left"></main-nav>
 
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
+    <div class="home-container pull-right">
+      <!-- <home-banner></home-banner> -->
+      <!-- <profile-panel></profile-panel> -->
 
-      <div class="home-container pull-right">
-        <!-- <home-banner></home-banner> -->
-        <!-- <profile-panel></profile-panel> -->
-
-        <div class="icon-grid-panel">
-          <router-link to="/kol/list" tag="div" class="item">
-            <div class="box">
-              <div class="iconfont icon-search"></div>
-              <h5 class="title">查找KOL</h5>
-              <h6 class="sub-title">Search Engine</h6>
-            </div>
-          </router-link>
-          <router-link to="/home/create" tag="div" class="item">
-            <div class="box">
-              <div class="iconfont icon-doc"></div>
-              <h5 class="title">创建新活动</h5>
-              <h6 class="sub-title">Create Campaign</h6>
-            </div>
-          </router-link>
-          <router-link to="/campaigns" tag="div" class="item">
-            <div class="box">
-              <div class="iconfont icon-trophy"></div>
-              <h5 class="title">活动列表</h5>
-              <h6 class="sub-title">My Campaigns</h6>
-            </div>
-          </router-link>
-        </div>
-        <!-- 内容开始 -->
-        <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
-        <div v-if="isCompetitors">
-          <div class="panel default-panel mt20">
-            <!-- <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
-            </div> -->
-            <div class="panel-body p30 clearfix">
-              <div class="form-horizontal default-form">
-                <div class="form-group">
-                  <div class="col-sm-4 control-label">{{$t('lang.homePage.noBrandTip')}}:</div>
-                  <div class="col-sm-6">
-                    <select
-                      name="seletBrand"
-                      class="form-control"
-                      v-model="seletBrandId"
-                      @change="changeBrand"
+      <div class="icon-grid-panel">
+        <router-link to="/kol/list" tag="div" class="item">
+          <div class="box">
+            <div class="iconfont icon-search"></div>
+            <h5 class="title">查找KOL</h5>
+            <h6 class="sub-title">Search Engine</h6>
+          </div>
+        </router-link>
+        <router-link to="/home/create" tag="div" class="item">
+          <div class="box">
+            <div class="iconfont icon-doc"></div>
+            <h5 class="title">创建新活动</h5>
+            <h6 class="sub-title">Create Campaign</h6>
+          </div>
+        </router-link>
+        <router-link to="/campaigns" tag="div" class="item">
+          <div class="box">
+            <div class="iconfont icon-trophy"></div>
+            <h5 class="title">活动列表</h5>
+            <h6 class="sub-title">My Campaigns</h6>
+          </div>
+        </router-link>
+      </div>
+      <!-- 内容开始 -->
+      <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
+      <div v-if="isCompetitors">
+        <div class="panel default-panel mt20">
+          <!-- <div class="panel-head">
+            <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
+          </div> -->
+          <div class="panel-body p30 clearfix">
+            <div class="form-horizontal default-form">
+              <div class="form-group">
+                <div class="col-sm-4 control-label">{{$t('lang.homePage.noBrandTip')}}:</div>
+                <div class="col-sm-6">
+                  <select
+                    name="seletBrand"
+                    class="form-control"
+                    v-model="seletBrandId"
+                    @change="changeBrand"
+                  >
+                    <option
+                      v-for="(item, index) of allBrandList"
+                      :key="index"
+                      :value="item.id"
                     >
-                      <option
-                        v-for="(item, index) of allBrandList"
-                        :key="index"
-                        :value="item.id"
-                      >
-                        {{item.name}}
-                      </option>
-                    </select>
-                  </div>
+                      {{item.name}}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic>
+        <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic>
 
-          <div class="home-show row mt20">
-            <div class="col-xs-6">
-              <home-recommended-kols :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-recommended-kols>
-            </div>
-            <div  class="col-xs-6">
-              <home-top-posts :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-top-posts>
-            </div>
+        <div class="home-show row mt20">
+          <div class="col-xs-6">
+            <home-recommended-kols :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-recommended-kols>
+          </div>
+          <div  class="col-xs-6">
+            <home-top-posts :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-top-posts>
           </div>
         </div>
-        <!-- 刚注册的用户 假如没有输入竞争者和品牌 展现表格让用户填  -->
-        <div v-else>
-          <update-base-info @updateStatus="changeHomStatus"></update-base-info>
-        </div>
+      </div>
+      <!-- 刚注册的用户 假如没有输入竞争者和品牌 展现表格让用户填  -->
+      <div v-else>
+        <update-base-info @updateStatus="changeHomStatus"></update-base-info>
       </div>
     </div>
-
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import apiConfig from '@/config'
-import PageHeader from '@components/PageHeader'
-import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import ProfilePanel from '@components/ProfilePanel'
 import HomeBanner from './components/HomeBanner'
@@ -99,11 +91,10 @@ import HomeRecommendedKols from './components/RecommendedKols'
 import HomeTopPosts from './components/TopPosts'
 import UpdateBaseInfo from './components/UpdateBaseInfo'
 import { mapState } from 'vuex'
+
 export default {
   name: 'Home',
   components: {
-    PageHeader,
-    PageFooter,
     MainNav,
     ProfilePanel,
     HomeBanner,
