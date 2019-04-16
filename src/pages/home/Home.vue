@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic>
+        <!-- <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic> -->
 
         <div class="home-show row mt20">
           <div class="col-xs-6">

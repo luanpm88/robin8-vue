@@ -430,11 +430,12 @@ export default {
         {
           index: 1,
           name: "kolList.detail.analytics"
-        },
-        {
-          index: 2,
-          name: "kolList.detail.post"
         }
+        // ,
+        // {
+        //   index: 2,
+        //   name: "kolList.detail.post"
+        // }
       ],
       performanceList: [],
       performanceParams: {
