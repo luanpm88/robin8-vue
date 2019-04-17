@@ -398,35 +398,43 @@
       </div>
     </div>
 
-    <div
-      v-if="kolsList.length > 0"
-      class="row mt20"
-    >
-      <div class="col-sm-6">
-        <recommended-panel
-          :title="$t('lang.creations.recommendedKOLs')"
-          :terracesList="terracesList"
-          :kolsList="kolsList"
-          :kolsPage="kolsPage"
-          :kolsPerPage="kolsPerPage"
-          :kolsTotal="kolsTotal"
-          :routerData="kolRouterData"
-          @checkedKols="checkedKols"
-          @changeKolsPage="changeKolsPage"
-          @changePlatform="changePlatform"
-        ></recommended-panel>
+    <div v-if="showKols">
+      <div
+        v-if="kolsList.length > 0"
+        class="row mt20"
+      >
+        <div class="col-sm-6">
+          <recommended-panel
+            :title="$t('lang.creations.recommendedKOLs')"
+            :terracesList="terracesList"
+            :kolsList="kolsList"
+            :kolsPage="kolsPage"
+            :kolsPerPage="kolsPerPage"
+            :kolsTotal="kolsTotal"
+            :routerData="kolRouterData"
+            @checkedKols="checkedKols"
+            @changeKolsPage="changeKolsPage"
+            @changePlatform="changePlatform"
+          ></recommended-panel>
+        </div>
+        <div class="col-sm-6">
+          <kols-list-panel
+            title="Shopping Cart"
+            :kolsList="cartKolsList"
+            :kolsPage="kolsCartPage"
+            :kolsPerPage="kolsCartPerPage"
+            :kolsTotal="kolsCartTotal"
+            :routerData="kolRouterData"
+            @checkedKols="checkedCartKols"
+            @changeKolsPage="changeCartKolsPage"
+          ></kols-list-panel>
+        </div>
       </div>
-      <div class="col-sm-6">
-        <kols-list-panel
-          title="Shopping Cart"
-          :kolsList="cartKolsList"
-          :kolsPage="kolsCartPage"
-          :kolsPerPage="kolsCartPerPage"
-          :kolsTotal="kolsCartTotal"
-          :routerData="kolRouterData"
-          @checkedKols="checkedCartKols"
-          @changeKolsPage="changeCartKolsPage"
-        ></kols-list-panel>
+
+      <div v-else class="panel default-panel mt20">
+        <div class="panel-body">
+          <div class="empty-area text-center">{{$t('lang.creations.kolsNoResult')}}</div>
+        </div>
       </div>
     </div>
 
@@ -544,6 +552,7 @@ export default {
         type: '',
         keywords: ''
       },
+      showKols: false,
       canSubmit: true
     }
   },
@@ -826,6 +835,7 @@ export default {
           this.checkingPlatform(_firstPlatform)
           // console.log(this.kolSearchUrl)
           this.searchKols(this.kolSearchUrl)
+          this.showKols = true
 
           // if (_terraces.length > 0) {
           //   let _checkedPlatform = _terraces[0].short_name
@@ -1308,6 +1318,9 @@ export default {
     width: 33.33333%;
     padding: 0 10px;
   }
+}
+.empty-area {
+  padding: 60px 0;
 }
 .pr0 {
   padding-right: 0;

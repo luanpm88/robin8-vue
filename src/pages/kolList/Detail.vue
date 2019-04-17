@@ -1,350 +1,345 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
-    <div class="container mt50 clearfix">
-      <div class="kol-detail clearfix">
-        <div class="kol-detail-side">
-          <!-- info -->
-          <div class="panel default-panel kol-infobox">
-            <div class="panel-body">
-              <p class="kol-info-topbg"></p>
-              <div class="kol-small-avatar">
-                <img :src="infoList.avatar_url" alt>
-              </div>
-              <div class="kol-info">
-                <p>
-                  {{infoList.profile_name}}
-                  <i
-                    class="iconfont icon-female"
-                    v-if="infoList.gender == 'm' || infoList.gender == 'M'"
-                  ></i>
-                  <i
-                    class="iconfont icon-male"
-                    v-if="infoList.gender == 'f' || infoList.gender == 'F'"
-                  ></i>
-                </p>
-                <p>{{infoList.age}}</p>
-                <p>
-                  <i class="iconfont icon-location"></i>
-                  {{infoList.region}}
-                </p>
-                <p>
-                  <a
-                    v-if="!!kolProfileLink && kolProfileLink != ''"
-                    :href="kolProfileLink"
-                    target="_blank"
-                    class="btn btn-xs btn-purple btn-outline"
-                  >
-                    <span class="iconfont icon-user"></span>
-                    KOL Profile
-                  </a>
-                  <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
-                    <span class="iconfont icon-cart"></span>
-                    Add to cart
-                  </button>
-                </p>
-              </div>
-              <ul class="clearfix">
-                <li v-for="(item, index) in dec" :key="index">{{item}}</li>
-              </ul>
-              <div class="kol-brand" v-if="type === 0 || type === 1">
-                <p class="clearfix">
-                  <span>{{$t('lang.kolList.detail.currentBrandName')}}</span>
-                  <b>{{currentBrandName}}</b>
-                </p>
-                <p class="clearfix" v-if="type === 0 || type === 1">
-                  <span>
-                    <a-tooltip
-                      placement="topLeft"
-                      :title="$t('lang.kolList.detail.mentionsTip')"
-                    >{{$t('lang.kolList.detail.mentions')}}</a-tooltip>
-                  </span>
-                  <b>{{MentionsNum}}</b>
-                </p>
-                <p class="clearfix" v-if="type === 0 || type === 1">
-                  <span>
-                    <a-tooltip
-                      placement="topLeft"
-                      :title="$t('lang.kolList.detail.sentimentTip')"
-                    >{{$t('lang.kolList.detail.sentiment')}}</a-tooltip>
-                  </span>
-                  <b>{{Sentiment}}</b>
-                </p>
-              </div>
+  <div class="container mt50 clearfix">
+    <div class="kol-detail clearfix">
+      <div class="kol-detail-side">
+        <!-- info -->
+        <div class="panel default-panel kol-infobox">
+          <div class="panel-body">
+            <p class="kol-info-topbg"></p>
+            <div class="kol-small-avatar">
+              <img :src="infoList.avatar_url" alt>
             </div>
-          </div>
-          <div class="panel default-panel mt20">
-            <!-- <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
-            </div>-->
-            <div class="panel-body prl30">
-              <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
-              <div v-if="type === 0 || type === 1">
-                <Echarts
-                  :options="competitorList.options"
-                  :chartsStyle="competitorList.chartsStyle"
-                  ref="competitorEChart"
-                ></Echarts>
-              </div>
-              <div v-else>
-                <div class="nonetip">
-                  <span>{{$t('lang.totalNoDataTip')}}</span>
-                </div>
-              </div>
+            <div class="kol-info">
+              <p>
+                {{infoList.profile_name}}
+                <i
+                  class="iconfont icon-female"
+                  v-if="infoList.gender == 'm' || infoList.gender == 'M'"
+                ></i>
+                <i
+                  class="iconfont icon-male"
+                  v-if="infoList.gender == 'f' || infoList.gender == 'F'"
+                ></i>
+              </p>
+              <p>{{infoList.age}}</p>
+              <p>
+                <i class="iconfont icon-location"></i>
+                {{infoList.region}}
+              </p>
+              <p>
+                <a
+                  v-if="!!kolProfileLink && kolProfileLink != ''"
+                  :href="kolProfileLink"
+                  target="_blank"
+                  class="btn btn-xs btn-purple btn-outline"
+                >
+                  <span class="iconfont icon-user"></span>
+                  KOL Profile
+                </a>
+                <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
+                  <span class="iconfont icon-cart"></span>
+                  Add to cart
+                </button>
+              </p>
             </div>
-          </div>
-        </div>
-        <div class="kol-detail-con" v-if="type === 0 || type === 1">
-          <div class="top-control-area">
-            <button type="button" class="btn btn-purple" @click="goback">
-              <span class="iconfont icon-arrow-left"></span>
-              {{$t('lang.kolList.detail.btn')}}
-            </button>
-          </div>
-          <default-tabs
-            :tabList="tabList"
-            :tabIndex="tabIndex"
-            @changeTab="changeTab"
-            class="panel-tab mt20"
-          ></default-tabs>
-          <div class="mt20" v-if="tabIndex === 0">
-            <!-- Activity -->
-            <div class="panel default-panel mt20" v-if="isActivity">
-              <!-- <div class="panel-head">
-                <h5 class="title text-center">{{$t('lang.kolList.detail.activity')}}</h5>
-              </div>-->
-              <div class="panel-body prl30">
-                <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
-                <div class="activity-table">
-                  <table class="com-brand-table">
-                    <tr>
-                      <th>{{$t('lang.kolList.detail.activityData.id')}}</th>
-                      <th>{{$t('lang.kolList.detail.activityData.title')}}</th>
-                      <th>{{$t('lang.kolList.detail.activityData.date')}}</th>
-                      <th>{{$t('lang.kolList.detail.activityData.performance')}}</th>
-                    </tr>
-                    <tr v-for="(key, index) in activeList.creations_list" :key="index">
-                      <td>{{key.id}}</td>
-                      <td>{{key.title}}</td>
-                      <td>{{key.date}}</td>
-                      <td>{{key.amount}}</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- Analytics -->
-            <div class="panel default-panel mt20" v-if="isAnalytics">
-              <!-- <div class="panel-head">
-                <h5 class="title text-center">{{$t('lang.kolList.detail.analytics')}}</h5>
-              </div>-->
-              <div class="panel-body prl30">
-                <p class="kol-cloumn">{{$t('lang.kolList.detail.analytics')}}</p>
-                <div class="activity-contable">
-                  <table class="com-brand-table">
-                    <tr>
-                      <th></th>
-                      <th>{{$t('lang.kolList.detail.analyticsData.campaigns')}}</th>
-                      <th>
-                        <a-tooltip
-                          placement="topLeft"
-                          :title="$t('lang.kolList.detail.analyticsData.performTip')"
-                        >{{$t('lang.kolList.detail.analyticsData.performance')}}</a-tooltip>
-                      </th>
-                      <th>
-                        <a-tooltip
-                          placement="topLeft"
-                          :title="$t('lang.kolList.detail.analyticsData.clientTip')"
-                        >{{$t('lang.kolList.detail.analyticsData.clients')}}</a-tooltip>
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>{{$t('lang.kolList.detail.analyticsTotal')}}</td>
-                      <td v-for="(item, index) in activeList.total_info" :key="index">
-                        <p class="activity-border">{{item}}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>{{$t('lang.kolList.detail.analyticsDay')}}</td>
-                      <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
-                        <p class="activity-border">{{item}}</p>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- socialData -->
-            <div class="panel default-panel mt20">
-              <!-- <div class="panel-head">
-                <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
-              </div>-->
-              <div class="panel-body prl30">
-                <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData.title')}}</p>
-                <div class="activity-table">
-                  <table class="com-brand-table">
-                    <tr>
-                      <th>{{$t('lang.kolList.detail.socialData.platform')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.price')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.followers')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.postLast')}}</th>
-                      <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
-                    </tr>
-                    <tr>
-                      <td>{{dataListBox.platform}}</td>
-                      <td>{{dataListBox.pricing.direct_price}}</td>
-                      <td>{{dataListBox.fans_number}}</td>
-                      <td>{{dataListBox.stats.avg_likes}}</td>
-                      <td>{{dataListBox.stats.avg_shares}}</td>
-                      <td>{{dataListBox.stats.avg_comments}}</td>
-                      <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                      <td>
-                        <!-- {{dataListBox.stats.avg_post_influences}} -->
-                        Coming Soon
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- performance -->
-            <div class="panel default-panel mt20 kol-performance">
-              <!-- <div class="panel-head">
-                <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
-              </div>-->
-              <div class="panel-body prl30">
-                <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts.title')}}</p>
-                <table class="com-brand-table" v-if="isPer">
-                  <tr>
-                    <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
-                    <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
-                    <th v-if="type === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
-                    <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
-                  </tr>
-                  <tr v-for="(key, index) in performanceList" :key="index">
-                    <td v-if="type === 0">
-                      <p class="purple">{{key.title}}</p>
-                    </td>
-                    <td v-if="type === 1">
-                      <a :href="key.url" target="blank">{{key.title}}</a>
-                    </td>
-                    <td style="min-width:200px">{{key.post_time}}</td>
-                    <td v-if="type === 0">{{key.influence_sum_engagement}}</td>
-                    <td v-if="type === 1">{{key.influence_reads}}</td>
-                  </tr>
-                </table>
-                <div class="nonetip" v-if="isPerShow">
-                  <span>{{$t('lang.totalNoDataTip')}}</span>
-                </div>
-                <div class="r8-loading" v-if="isPerLoading">
-                  <a-spin tip="Loading..."/>
-                </div>
-              </div>
-            </div>
-            <!-- Keywords -->
-            <div class="panel default-panel mt20">
-              <!-- <div class="panel-head">
-                <h5 class="title text-center">
-                  <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
-                    {{$t('lang.kolList.detail.keywords')}}
-                  </a-tooltip>
-                </h5>
-              </div>-->
-              <div class="panel-body prl30">
-                <p class="kol-cloumn">
+            <ul class="clearfix">
+              <li v-for="(item, index) in dec" :key="index">{{item}}</li>
+            </ul>
+            <div class="kol-brand" v-if="type === 0 || type === 1">
+              <p class="clearfix">
+                <span>{{$t('lang.kolList.detail.currentBrandName')}}</span>
+                <b>{{currentBrandName}}</b>
+              </p>
+              <p class="clearfix" v-if="type === 0 || type === 1">
+                <span>
                   <a-tooltip
                     placement="topLeft"
-                    :title="$t('lang.kolList.detail.keywordsTip')"
-                  >{{$t('lang.kolList.detail.keywords')}}</a-tooltip>
-                </p>
-                <div class="nonetip" v-if="isShow">
-                  <span>{{$t('lang.totalNoDataTip')}}</span>
-                </div>
-                <div class="r8-loading" v-if="isLoading">
-                  <a-spin tip="Loading..."/>
-                </div>
-                <cloud v-if="isTag" :defaultWords="parentTags" :height="wordHeight"></cloud>
-              </div>
+                    :title="$t('lang.kolList.detail.mentionsTip')"
+                  >{{$t('lang.kolList.detail.mentions')}}</a-tooltip>
+                </span>
+                <b>{{MentionsNum}}</b>
+              </p>
+              <p class="clearfix" v-if="type === 0 || type === 1">
+                <span>
+                  <a-tooltip
+                    placement="topLeft"
+                    :title="$t('lang.kolList.detail.sentimentTip')"
+                  >{{$t('lang.kolList.detail.sentiment')}}</a-tooltip>
+                </span>
+                <b>{{Sentiment}}</b>
+              </p>
             </div>
-            <!--all Brand  tag  -->
-            <div class="panel default-panel mt20" v-if=" allBrand">
-              <div class="panel-body prl30">
-                <p class="kol-cloumn">{{$t('lang.kolList.detail.allBrandTag')}}</p>
-                <div class="nonetip" v-if="isAllbrandDisShow">
-                  <span>{{$t('lang.totalNoDataTip')}}</span>
-                </div>
-                <div class="r8-loading" v-if="isAllbrandDisLoading">
-                  <a-spin tip="Loading..."/>
-                </div>
-                <cloud v-if="isAllbrandDisTag" :defaultWords="allbrandDisTags" :height="wordHeight"></cloud>
-              </div>
-            </div>
-            <!--single  Brand  Distribution  -->
-            <div class="panel default-panel mt20" v-if="isSingleBrand">
-              <div class="panel-body prl30">
-                <p
-                  class="kol-cloumn"
-                >{{$t('lang.kolList.detail.brandDistribution')}} {{currentBrandName}}</p>
-                <div class="nonetip" v-if="isbrandDisShow">
-                  <span>{{$t('lang.brandDisNoDataTip')}}</span>
-                </div>
-                <div class="r8-loading" v-if="isbrandDisLoading">
-                  <a-spin tip="Loading..."/>
-                </div>
-                <cloud v-if="isbrandDisTag" :defaultWords="parentbrandDisTags" :height="wordHeight"></cloud>
-              </div>
-            </div>
-          </div>
-
-          <!-- analytic -->
-          <div class="mt20" v-if="tabIndex === 1">
-            <analytics></analytics>
-          </div>
-          <!-- post -->
-          <div class="mt20" v-if="tabIndex === 2">
-            <posts></posts>
           </div>
         </div>
-        <!-- 除了微信和微博  其他平台只展示 socialData -->
-        <div class="kol-detail-con" v-else>
-          <div class="top-control-area">
-            <button type="button" class="btn btn-purple" @click="goback">
-              <span class="iconfont icon-arrow-left"></span>
-              {{$t('lang.kolList.detail.btn')}}
-            </button>
-          </div>
-          <div class="panel default-panel mt20">
-            <div class="panel-body prl30">
-              <p class="kol-cloumn">{{$t('lang.kolList.detail.otherSocialData.title')}}</p>
-              <div class="activity-table">
-                <table class="com-brand-table">
-                  <tr>
-                    <th>{{$t('lang.kolList.detail.otherSocialData.platform')}}</th>
-                    <th>{{$t('lang.kolList.detail.otherSocialData.gender')}}</th>
-                    <th>{{$t('lang.kolList.detail.otherSocialData.price')}}</th>
-                    <th>{{$t('lang.kolList.detail.otherSocialData.followers')}}</th>
-                    <th>{{$t('lang.kolList.detail.otherSocialData.tagsDescription')}}</th>
-                  </tr>
-                  <tr>
-                    <td>{{otherSocialData.platform}}</td>
-                    <td v-if="otherSocialData.gender">{{otherSocialData.gender}}</td>
-                    <td v-else>N/A</td>
-                    <td>{{otherSocialData.price}}</td>
-                    <td>{{otherSocialData.followers}}</td>
-                    <td>{{otherSocialData.tagsDescription}}</td>
-                  </tr>
-                </table>
+        <div class="panel default-panel mt20">
+          <!-- <div class="panel-head">
+            <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
+          </div>-->
+          <div class="panel-body prl30">
+            <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
+            <div v-if="type === 0 || type === 1">
+              <Echarts
+                :options="competitorList.options"
+                :chartsStyle="competitorList.chartsStyle"
+                ref="competitorEChart"
+              ></Echarts>
+            </div>
+            <div v-else>
+              <div class="nonetip">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="kol-detail-con" v-if="type === 0 || type === 1">
+        <div class="top-control-area">
+          <button type="button" class="btn btn-purple" @click="goback">
+            <span class="iconfont icon-arrow-left"></span>
+            {{$t('lang.kolList.detail.btn')}}
+          </button>
+        </div>
+        <default-tabs
+          :tabList="tabList"
+          :tabIndex="tabIndex"
+          @changeTab="changeTab"
+          class="panel-tab mt20"
+        ></default-tabs>
+        <div class="mt20" v-if="tabIndex === 0">
+          <!-- Activity -->
+          <div class="panel default-panel mt20" v-if="isActivity">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.activity')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
+              <div class="activity-table">
+                <table class="com-brand-table">
+                  <tr>
+                    <th>{{$t('lang.kolList.detail.activityData.id')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.title')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.date')}}</th>
+                    <th>{{$t('lang.kolList.detail.activityData.performance')}}</th>
+                  </tr>
+                  <tr v-for="(key, index) in activeList.creations_list" :key="index">
+                    <td>{{key.id}}</td>
+                    <td>{{key.title}}</td>
+                    <td>{{key.date}}</td>
+                    <td>{{key.amount}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Analytics -->
+          <div class="panel default-panel mt20" v-if="isAnalytics">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.analytics')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.analytics')}}</p>
+              <div class="activity-contable">
+                <table class="com-brand-table">
+                  <tr>
+                    <th></th>
+                    <th>{{$t('lang.kolList.detail.analyticsData.campaigns')}}</th>
+                    <th>
+                      <a-tooltip
+                        placement="topLeft"
+                        :title="$t('lang.kolList.detail.analyticsData.performTip')"
+                      >{{$t('lang.kolList.detail.analyticsData.performance')}}</a-tooltip>
+                    </th>
+                    <th>
+                      <a-tooltip
+                        placement="topLeft"
+                        :title="$t('lang.kolList.detail.analyticsData.clientTip')"
+                      >{{$t('lang.kolList.detail.analyticsData.clients')}}</a-tooltip>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>{{$t('lang.kolList.detail.analyticsTotal')}}</td>
+                    <td v-for="(item, index) in activeList.total_info" :key="index">
+                      <p class="activity-border">{{item}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{{$t('lang.kolList.detail.analyticsDay')}}</td>
+                    <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
+                      <p class="activity-border">{{item}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- socialData -->
+          <div class="panel default-panel mt20">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData.title')}}</p>
+              <div class="activity-table">
+                <table class="com-brand-table">
+                  <tr>
+                    <th>{{$t('lang.kolList.detail.socialData.platform')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.price')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.followers')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.postLast')}}</th>
+                    <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
+                  </tr>
+                  <tr>
+                    <td>{{dataListBox.platform}}</td>
+                    <td>{{dataListBox.pricing.direct_price}}</td>
+                    <td>{{dataListBox.fans_number}}</td>
+                    <td>{{dataListBox.stats.avg_likes}}</td>
+                    <td>{{dataListBox.stats.avg_shares}}</td>
+                    <td>{{dataListBox.stats.avg_comments}}</td>
+                    <td>{{dataListBox.stats.avg_daily_posts}}</td>
+                    <td>
+                      <!-- {{dataListBox.stats.avg_post_influences}} -->
+                      Coming Soon
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- performance -->
+          <div class="panel default-panel mt20 kol-performance">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts.title')}}</p>
+              <table class="com-brand-table" v-if="isPer">
+                <tr>
+                  <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
+                  <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
+                  <th v-if="type === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
+                  <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
+                </tr>
+                <tr v-for="(key, index) in performanceList" :key="index">
+                  <td v-if="type === 0">
+                    <p class="purple">{{key.title}}</p>
+                  </td>
+                  <td v-if="type === 1">
+                    <a :href="key.url" target="blank">{{key.title}}</a>
+                  </td>
+                  <td style="min-width:200px">{{key.post_time}}</td>
+                  <td v-if="type === 0">{{key.influence_sum_engagement}}</td>
+                  <td v-if="type === 1">{{key.influence_reads}}</td>
+                </tr>
+              </table>
+              <div class="nonetip" v-if="isPerShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isPerLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+            </div>
+          </div>
+          <!-- Keywords -->
+          <div class="panel default-panel mt20">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">
+                <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
+                  {{$t('lang.kolList.detail.keywords')}}
+                </a-tooltip>
+              </h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">
+                <a-tooltip
+                  placement="topLeft"
+                  :title="$t('lang.kolList.detail.keywordsTip')"
+                >{{$t('lang.kolList.detail.keywords')}}</a-tooltip>
+              </p>
+              <div class="nonetip" v-if="isShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+              <cloud v-if="isTag" :defaultWords="parentTags" :height="wordHeight"></cloud>
+            </div>
+          </div>
+          <!--all Brand  tag  -->
+          <div class="panel default-panel mt20" v-if=" allBrand">
+            <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.allBrandTag')}}</p>
+              <div class="nonetip" v-if="isAllbrandDisShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isAllbrandDisLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+              <cloud v-if="isAllbrandDisTag" :defaultWords="allbrandDisTags" :height="wordHeight"></cloud>
+            </div>
+          </div>
+          <!--single  Brand  Distribution  -->
+          <div class="panel default-panel mt20" v-if="isSingleBrand">
+            <div class="panel-body prl30">
+              <p
+                class="kol-cloumn"
+              >{{$t('lang.kolList.detail.brandDistribution')}} {{currentBrandName}}</p>
+              <div class="nonetip" v-if="isbrandDisShow">
+                <span>{{$t('lang.brandDisNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isbrandDisLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+              <cloud v-if="isbrandDisTag" :defaultWords="parentbrandDisTags" :height="wordHeight"></cloud>
+            </div>
+          </div>
+        </div>
 
-    <page-footer></page-footer>
+        <!-- analytic -->
+        <div class="mt20" v-if="tabIndex === 1">
+          <analytics></analytics>
+        </div>
+        <!-- post -->
+        <div class="mt20" v-if="tabIndex === 2">
+          <posts></posts>
+        </div>
+      </div>
+      <!-- 除了微信和微博  其他平台只展示 socialData -->
+      <div class="kol-detail-con" v-else>
+        <div class="top-control-area">
+          <button type="button" class="btn btn-purple" @click="goback">
+            <span class="iconfont icon-arrow-left"></span>
+            {{$t('lang.kolList.detail.btn')}}
+          </button>
+        </div>
+        <div class="panel default-panel mt20">
+          <div class="panel-body prl30">
+            <p class="kol-cloumn">{{$t('lang.kolList.detail.otherSocialData.title')}}</p>
+            <div class="activity-table">
+              <table class="com-brand-table">
+                <tr>
+                  <th>{{$t('lang.kolList.detail.otherSocialData.platform')}}</th>
+                  <th>{{$t('lang.kolList.detail.otherSocialData.gender')}}</th>
+                  <th>{{$t('lang.kolList.detail.otherSocialData.price')}}</th>
+                  <th>{{$t('lang.kolList.detail.otherSocialData.followers')}}</th>
+                  <th>{{$t('lang.kolList.detail.otherSocialData.tagsDescription')}}</th>
+                </tr>
+                <tr>
+                  <td>{{otherSocialData.platform}}</td>
+                  <td v-if="otherSocialData.gender">{{otherSocialData.gender}}</td>
+                  <td v-else>N/A</td>
+                  <td>{{otherSocialData.price}}</td>
+                  <td>{{otherSocialData.followers}}</td>
+                  <td>{{otherSocialData.tagsDescription}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -352,8 +347,6 @@
 import axios from "axios";
 import apiConfig from "@/config";
 import DefaultTabs from "@components/DefaultTabs";
-import PageHeader from "@components/PageHeader";
-import PageFooter from '@components/PageFooter'
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from "@javascripts/common.js";
@@ -368,8 +361,6 @@ export default {
   name: "KolDetail",
   components: {
     Echarts,
-    PageHeader,
-    PageFooter,
     DefaultTabs,
     Analytics,
     Posts,
@@ -439,11 +430,12 @@ export default {
         {
           index: 1,
           name: "kolList.detail.analytics"
-        },
-        {
-          index: 2,
-          name: "kolList.detail.post"
         }
+        // ,
+        // {
+        //   index: 2,
+        //   name: "kolList.detail.post"
+        // }
       ],
       performanceList: [],
       performanceParams: {

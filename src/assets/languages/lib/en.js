@@ -73,7 +73,7 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     kolCompare: 'kolCompare'
   },
   nav: {
@@ -94,7 +94,7 @@ export const lang = {
     ranking: 'Ranking - Coming Soon',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     help: 'Data Explanation'
   },
   login: {
@@ -426,6 +426,7 @@ export const lang = {
     bigVRequirement: 'Big V related requirement',
     bigVSelected: 'Selected Big V',
     serchBtn: 'Search',
+    kolsNoResult: 'No results. Please select fewer industries for better results.',
     name: {
       title: 'Campaign Name',
       placeholder: 'Please enter your campaign name.',

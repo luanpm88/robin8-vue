@@ -1,31 +1,21 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
+  <div class="container mt50 clearfix">
+    <main-nav class="pull-left"></main-nav>
 
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
-
-      <div class="wallet-container pull-right">
-        <wallet-header></wallet-header>
-        <router-view></router-view>
-      </div>
+    <div class="wallet-container pull-right">
+      <wallet-header></wallet-header>
+      <router-view></router-view>
     </div>
-
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
-import PageHeader from '@components/PageHeader'
-import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import WalletHeader from './components/WalletHeader'
 
 export default {
   name: 'Wallet',
   components: {
-    PageHeader,
-    PageFooter,
     MainNav,
     WalletHeader
   },

@@ -1,46 +1,38 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
+  <div class="container mt50 clearfix">
+    <main-nav class="pull-left"></main-nav>
 
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
+    <div class="home-container pull-right">
+      <!-- <home-banner></home-banner> -->
+      <!-- <profile-panel></profile-panel> -->
 
-      <div class="home-container pull-right">
-        <!-- <home-banner></home-banner> -->
-        <!-- <profile-panel></profile-panel> -->
-
-        <div class="icon-grid-panel">
-          <router-link to="/creations/create" tag="div" class="item">
-            <div class="box">
-              <div class="iconfont icon-doc"></div>
-              <h5 class="title">创建大V活动</h5>
-              <h6 class="sub-title">Custom Content</h6>
-              <div class="tips">
-                <p>KOLS create custom content</p>
-                <p>(e.g. article, video, live streaming, review, etc.)</p>
-              </div>
+      <div class="icon-grid-panel">
+        <router-link to="/creations/create" tag="div" class="item">
+          <div class="box">
+            <div class="iconfont icon-doc"></div>
+            <h5 class="title">创建大V活动</h5>
+            <h6 class="sub-title">Custom Content</h6>
+            <div class="tips">
+              <p>KOLS create custom content</p>
+              <p>(e.g. article, video, live streaming, review, etc.)</p>
             </div>
-          </router-link>
-          <router-link to="/campaigns/create" tag="div" class="item">
-            <div class="box">
-              <div class="iconfont icon-doc"></div>
-              <h5 class="title">创建小V活动</h5>
-              <h6 class="sub-title">Consumer Content Amplification</h6>
-            </div>
-          </router-link>
-        </div>
+          </div>
+        </router-link>
+        <router-link to="/campaigns/create" tag="div" class="item">
+          <div class="box">
+            <div class="iconfont icon-doc"></div>
+            <h5 class="title">创建小V活动</h5>
+            <h6 class="sub-title">Consumer Content Amplification</h6>
+          </div>
+        </router-link>
       </div>
     </div>
-
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import apiConfig from '@/config'
-import PageHeader from '@components/PageHeader'
-import PageFooter from '@components/PageFooter'
 import MainNav from '@components/MainNav'
 import ProfilePanel from '@components/ProfilePanel'
 import HomeBanner from './components/HomeBanner'
@@ -49,14 +41,12 @@ import { mapState } from 'vuex'
 export default {
   name: 'HomeCreate',
   components: {
-    PageHeader,
-    PageFooter,
     MainNav,
     ProfilePanel,
     HomeBanner
   },
   computed: {
-     ...mapState(['authorization'])
+    ...mapState(['authorization'])
   },
   data () {
     return {

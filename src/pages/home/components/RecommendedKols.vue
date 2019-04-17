@@ -103,6 +103,7 @@ export default {
           // console.log('woshiyou watch 有品牌')
           // console.log(this.childKeyList.brand_keywords)
           this.isBrandShow = false
+          this.isShow = false
           this.isLoading = true
           this.isKol = false
           if (this.childKeyList.brand_keywords !== '') {
@@ -127,6 +128,7 @@ export default {
           this.tabIndex = 0
           this.isBrandShow = true
           this.isLoading = false
+          this.isShow = false
           this.isKol = false
         }
       },
@@ -182,9 +184,11 @@ export default {
           _that.isLoading = false
           if (res.data.length === 0 || !res.data.length) {
             _that.isShow = true
+            _that.isBrandShow = false
             _that.isKol = false
           } else {
             _that.isShow = false
+            _that.isBrandShow = false
             _that.isKol = true
             _that.currentList = res.data.slice(0, 5)
           }

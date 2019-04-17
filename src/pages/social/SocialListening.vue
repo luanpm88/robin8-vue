@@ -1,114 +1,120 @@
 <template>
-  <div class="page">
-    <page-header></page-header>
+  <div class="container mt50 clearfix">
+    <main-nav class="pull-left"></main-nav>
 
-    <div class="container mt50 clearfix">
-      <main-nav class="pull-left"></main-nav>
-
-      <div class="socail-container pull-right">
-        <div class="panel default-panel social-search">
-          <div class="panel-body">
-            <div class="form-horizontal">
-              <div class="form-group">
-                <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
-                <div class="col-sm-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="topic"
-                  />
-                </div>
-                <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
-                <div class="col-sm-4">
-                  <select class="form-control" v-model="source">
-                    <option value="0">{{$t('lang.weibo')}}</option>
-                    <option value="1">{{$t('lang.wechat')}}</option>
-                  </select>
-                </div>
-                <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
-                <div class="col-sm-4 mt20">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="profileId"
-                  />
-                </div>
+    <div class="socail-container pull-right">
+      <div class="panel default-panel social-search">
+        <div class="panel-body">
+          <div class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="topic"
+                />
               </div>
-
-              <div class="text-center mt30">
-                <button
-                  type="button"
-                  class="btn btn-blue btn-outline"
-                  @click="totalSearch"
+              <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
+              <div class="col-sm-4">
+                <select class="form-control" v-model="source">
+                  <option value="0">{{$t('lang.weibo')}}</option>
+                  <option value="1">{{$t('lang.wechat')}}</option>
+                </select>
+              </div>
+              <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
+              <div class="col-sm-4 mt20">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="profileId"
+                />
+                <!-- <a-select
+                  showSearch
+                  :value="selectIdValue"
+                  placeholder
+                  style="width: 200px"
+                  :defaultActiveFirstOption="false"
+                  :showArrow="false"
+                  :filterOption="false"
+                  @search="handleSearch"
+                  @change="handleChange"
+                  :notFoundContent="null"
                 >
-                  {{$t('lang.search')}}
-                </button>
+                  <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
+                </a-select> -->
               </div>
+            </div>
+
+            <div class="text-center mt30">
+              <button
+                type="button"
+                class="btn btn-blue btn-outline"
+                @click="totalSearch"
+              >
+                {{$t('lang.search')}}
+              </button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="panel default-panel social-search mt20">
-          <div class="panel-body">
-            <div class="nonetip" v-if="isShow">
-              <span>{{$t('lang.totalNoDataTip')}}</span>
-            </div>
-            <div class="r8-loading" v-if="isLoading">
-              <a-spin tip="Loading..."/>
-            </div>
-            <div v-if="isContent">
-              <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-                <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
-                <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
-                <div class="media social-detail">
-                  <div class="media-left media-middle"  @click="intoKolDetail(item)">
-                    <img :src="item.imgUrl" alt class>
-                  </div>
-                  <div class="media-body media-middle"  @click="intoKolDetail(item)">
-                    <strong>{{item.name}}</strong>
-                    <p>{{item.time}}</p>
-                  </div>
-                  <div class="media-right media-middle operation-area">
-                      <span
-                        class="iconfont icon-cart active"
-                        @click="doAddCart(item)"
-                      ></span>
-                  </div>
+      <div class="panel default-panel social-search mt20">
+        <div class="panel-body">
+          <div class="nonetip" v-if="isShow">
+            <span>{{$t('lang.totalNoDataTip')}}</span>
+          </div>
+          <div class="r8-loading" v-if="isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <div v-if="isContent">
+            <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
+              <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
+              <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
+              <div class="media social-detail">
+                <div class="media-left media-middle"  @click="intoKolDetail(item)">
+                  <img :src="item.imgUrl" alt class>
                 </div>
-                <p class="home-post-content" v-html="item.content"></p>
+                <div class="media-body media-middle"  @click="intoKolDetail(item)">
+                  <strong>{{item.name}}</strong>
+                  <p>{{item.time}}</p>
+                </div>
+                <div class="media-right media-middle operation-area">
+                    <span
+                      class="iconfont icon-cart active"
+                      @click="doAddCart(item)"
+                    ></span>
+                </div>
               </div>
-              <div class="text-center mt20">
-                <a-pagination
-                  :defaultCurrent="currentPage"
-                  v-model="currentPageAdd"
-                  :defaultPageSize="kolsPerPage"
-                  :total="kolsTotal"
-                  @change="onPageChange"
-                />
-              </div>
+              <p class="home-post-content" v-html="item.content"></p>
+            </div>
+            <div class="text-center mt20">
+              <a-pagination
+                :defaultCurrent="currentPage"
+                v-model="currentPageAdd"
+                :defaultPageSize="kolsPerPage"
+                :total="kolsTotal"
+                @change="onPageChange"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
-import PageHeader from "@components/PageHeader";
-import PageFooter from '@components/PageFooter'
-import MainNav from "@components/MainNav";
-import { mapState } from "vuex";
-import commonJs from '@javascripts/common.js';
+import axios from 'axios'
+import apiConfig from '@/config'
+import MainNav from '@components/MainNav'
+import { mapState } from 'vuex'
+import commonJs from '@javascripts/common.js'
+let timeout;
+let currentValue;
 export default {
-  name: "socialListening",
+  name: 'socialListening',
   components: {
-    PageHeader,
-    PageFooter,
     MainNav
   },
   created() {
@@ -138,7 +144,10 @@ export default {
         profile_ids: [],
       },
       itemList: [],
-      cartParams: {}
+      cartParams: {},
+      data: [],
+      selectIdValue: undefined,
+      selectIdValueName: ''
     };
   },
   methods: {
@@ -215,6 +224,7 @@ export default {
           console.log(error);
         });
     },
+    // 头部搜索
     totalSearch() {
       this.isLoading = true;
       this.isContent = false;
@@ -238,6 +248,7 @@ export default {
         this.socialWeixin(this.totalParams);
       }
     },
+    // 点击分页的时候
     onPageChange (page) {
       this.isLoading = true;
       this.isContent = false;
@@ -275,6 +286,7 @@ export default {
         }
       });
     },
+    // 加入购入车
     doAddCart (data) {
       this.cartParams.profile_id = data.profile_id
       this.cartParams.profile_name = data.profile_name
@@ -286,6 +298,7 @@ export default {
         }
       }).then(this.handleDoAddCartSucc)
     },
+    // 加入购物车执行的函数
     handleDoAddCartSucc (res) {
       // console.log(res)
       let resData = res.data
@@ -318,6 +331,90 @@ export default {
         }
       })
     },
+    // kol ID 只要一变化就触发事件
+    handleSearch(value) {
+      if (value !== '') {
+        this.selectIdInit(value, data => (this.data = data));
+      }
+    },
+    // kol ID 选中事件
+    handleChange(value) {
+      // console.log(value);
+      this.selectIdValue = value;
+      this.selectIdInit(value, data => (this.data = data));
+      this.profileId = value;
+    },
+    // 当kol id 改变或者 选中时候都会进行数据重置
+    selectIdInit(value, callback) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      currentValue = value;
+      let params = {
+        profile_name: value,
+        page_no: 0,
+        page_size: 10
+      };
+      // 微博select
+      if (this.source === 0) {
+        const _that = this;
+        axios
+          .post(apiConfig.socialWeiboSelect, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              if ((currentValue = value)) {
+                const result = res.data.data;
+                const data = [];
+                result.forEach(item => {
+                  data.push({
+                    value: item.profile_id,
+                    text: item.profile_name
+                  });
+                });
+                callback(data);
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error);
+          });
+      }
+      // 微信select
+      if (Number(this.source) === 1) {
+        console.log(88);
+        const _that = this;
+        axios
+          .post(apiConfig.socialWeixinSelect, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            if (res.status === 200) {
+              console.log('0000000 微信', res);
+              if ((currentValue = value)) {
+                const result = res.data.data;
+                const data = [];
+                result.forEach(item => {
+                  data.push({
+                    value: item.profile_id,
+                    text: item.profile_name
+                  });
+                });
+                callback(data);
+              }
+            }
+          })
+          .catch(function(error) {
+            // console.log(error);
+          });
+      }
+    }
   }
 };
 </script>
