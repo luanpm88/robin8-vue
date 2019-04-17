@@ -384,6 +384,7 @@ export default {
             // console.log(error);
           });
       }
+      
       // 微信select
       if (Number(this.source) === 1) {
         const _that = this;
