@@ -40,6 +40,7 @@
                   @search="handleSearch"
                   @change="handleChange"
                   :notFoundContent="null"
+                  :allowClear="true"
                 >
                   <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
                 </a-select>
