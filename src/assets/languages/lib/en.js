@@ -33,6 +33,7 @@ export const lang = {
   yearsOld: 'years old',
   yearsOlder: 'years old or older',
   qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
+  noData: 'No Data',
   router: {
     login: 'Log In',
     reg: 'Sign Up',
@@ -73,7 +74,7 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     kolCompare: 'kolCompare'
   },
   nav: {
@@ -94,7 +95,7 @@ export const lang = {
     ranking: 'Ranking',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     help: 'Data Explanation'
   },
   login: {
@@ -296,7 +297,8 @@ export const lang = {
         edit: 'Edit',
         pay: 'Pay',
         comments: 'Comments',
-        repost: 'Repost'
+        repost: 'Repost',
+        cancel: 'Cancel'
       }
     },
     link: {
@@ -506,18 +508,27 @@ export const lang = {
     },
     recommendedKOLs: 'Recommended KOLs',
     status: {
-      waiting: '待合作',
-      processing: '合作中',
-      done: '已完成'
+      waiting: 'Preparing',
+      processing: 'Cooperation',
+      done: 'Completed'
+    },
+    kols: {
+      totalPrice: 'Total Price',
+      weiboExposure: 'Weibo Exposure',
+      wechatExposure: 'Wechat Exposure',
+      confirm: 'Confirm cooperation and pay'
     },
     payment: {
       title: 'Pay Invoice',
+      kolCount: 'KOLs’ Count',
+      kolTotalPrice: 'KOLs’ Total Price',
+      platformFee: 'Platform Service Fee',
       amount: 'Payment Amount',
       method: {
         title: 'Payment Method',
         alipay: {
           title: 'Alipay',
-          desc: '使用支付宝线上支付安全放心'
+          desc: 'Use Alipay online payment safe and secure'
         }
       }
     },

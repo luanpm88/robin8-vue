@@ -29,19 +29,19 @@
                 @selectKol="selectKol"
               ></kol-item>
             </div>
-            <div v-else class="empty-area text-center">暂无内容</div>
+            <div v-else class="empty-area text-center">{{$t('lang.noData')}}</div>
           </div>
         </default-tabs>
       </div>
 
       <div v-if="currentList.length > 0 && tabIndex == 0" class="panel-foot clearfix">
-        <div class="select-statistics pull-left">微博总曝光值: <span class="num">0</span> | 微信总曝光值: <span class="num">0</span> | 总报价: <span class="num">{{totalPrice}}</span></div>
+        <div class="select-statistics pull-left">{{$t('lang.creations.kols.weiboExposure')}}: <span class="num">0</span> | {{$t('lang.creations.kols.wechatExposure')}}: <span class="num">0</span> | {{$t('lang.creations.kols.totalPrice')}}: <span class="num">{{totalPrice}}</span></div>
         <button
           type="button"
           class="btn btn-cyan pull-right"
           :disabled="!kolsCheckedIds.length > 0"
           @click="doPay"
-        >确认合作，立即支付</button>
+        >{{$t('lang.creations.kols.confirm')}}</button>
       </div>
     </div>
 
@@ -127,20 +127,20 @@ export default {
     },
     handleGetTendersDataSucc (res) {
       let resData = res.data
-      console.log(resData.items)
+      // console.log(resData.items)
       this.currentList = resData.items
     },
-    changeTab(tab) {
+    changeTab (tab) {
       this.tabIndex = tab.index
       if (tab.index === 0) {
         this.getTendersData(apiConfig.pendingTendersUrl)
-        console.log(this.currentList)
+        // console.log(this.currentList)
       } else if (tab.index === 1) {
         this.getTendersData(apiConfig.cooperationTendersUrl)
-        console.log(this.currentList)
+        // console.log(this.currentList)
       } else {
         this.getTendersData(apiConfig.finishedTendersUrl)
-        console.log(this.currentList)
+        // console.log(this.currentList)
       }
     },
     selectKol (data) {

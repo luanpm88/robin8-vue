@@ -11,8 +11,8 @@
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>邀请KOL人数: {{detailData.kols_count}}人</p>
-          <p>KOL总价: ¥{{detailData.price}} | 平台服务费: ¥{{detailData.fee}}</p>
+          <p>{{$t('lang.creations.payment.kolCount')}}: {{detailData.kols_count}}人</p>
+          <p>{{$t('lang.creations.payment.kolTotalPrice')}}: ¥{{detailData.price}} | {{$t('lang.creations.payment.platformFee')}}: ¥{{detailData.fee}}</p>
           <p>{{$t('lang.creations.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
         </div>
 
@@ -39,8 +39,8 @@
                     :class="item.iconClass"
                   ></div>
                   <div class="info">
-                    <div class="method">{{item.name}}</div>
-                    <div class="desc">{{item.desc}}</div>
+                    <div class="method">{{$t(`lang.${item.name}`)}}</div>
+                    <div class="desc">{{$t(`lang.${item.desc}`)}}</div>
                   </div>
                 </div>
               </label>
@@ -85,8 +85,8 @@ export default {
         {
           id: '0',
           val: 'alipay',
-          name: this.$t('lang.creations.payment.method.alipay.title'),
-          desc: this.$t('lang.creations.payment.method.alipay.desc'),
+          name: 'creations.payment.method.alipay.title',
+          desc: 'creations.payment.method.alipay.desc',
           iconClass: 'icon-alipay',
           checked: true
         },

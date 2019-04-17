@@ -33,6 +33,7 @@ export const lang = {
   yearsOld: '岁',
   yearsOlder: '岁以上',
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
+  noData: '暂无内容',
   router: {
     login: '登录',
     reg: '注册',
@@ -297,7 +298,8 @@ export const lang = {
         edit: '编辑',
         pay: '支付',
         comments: '评价',
-        repost: '再次发布'
+        repost: '再次发布',
+        cancel: '撤销活动'
       }
     },
     link: {
@@ -511,8 +513,17 @@ export const lang = {
       processing: '合作中',
       done: '已完成'
     },
+    kols: {
+      totalPrice: '合计',
+      weiboExposure: '微博总曝光值',
+      wechatExposure: '微信总曝光值',
+      confirm: '确认合作，立即支付'
+    },
     payment: {
       title: '支付订单',
+      kolCount: '邀请KOL人数',
+      kolTotalPrice: 'KOL总价',
+      platformFee: '平台服务费',
       amount: '支付总额',
       method: {
         title: '支付方式',
