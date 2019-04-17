@@ -24,12 +24,12 @@
               </div>
               <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
               <div class="col-sm-4 mt20">
-                <input
+                <!-- <input
                   type="text"
                   class="form-control"
                   v-model="profileId"
-                />
-                <!-- <a-select
+                /> -->
+                <a-select
                   showSearch
                   :value="selectIdValue"
                   placeholder
@@ -42,7 +42,7 @@
                   :notFoundContent="null"
                 >
                   <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
-                </a-select> -->
+                </a-select>
               </div>
             </div>
 
@@ -357,7 +357,7 @@ export default {
         page_size: 10
       };
       // 微博select
-      if (this.source === 0) {
+      if (Number(this.source) === 0) {
         const _that = this;
         axios
           .post(apiConfig.socialWeiboSelect, params, {
@@ -386,7 +386,6 @@ export default {
       }
       // 微信select
       if (Number(this.source) === 1) {
-        console.log(88);
         const _that = this;
         axios
           .post(apiConfig.socialWeixinSelect, params, {
@@ -396,7 +395,7 @@ export default {
           })
           .then(function(res) {
             if (res.status === 200) {
-              console.log('0000000 微信', res);
+              // console.log('0000000 微信', res);
               if ((currentValue = value)) {
                 const result = res.data.data;
                 const data = [];

@@ -365,7 +365,7 @@ const config = {
 
   socialWeiboSelect: `${searchHost}/price/weibo/price/kol_search_by_profile_name?${searchHostKey}`,
 
-  socialWeixinSelect: `${searchHost}/price/weixin/price/kol_search_by_profile_name?${searchHostKey}`,
+  socialWeixinSelect: `${searchHost}/price/price/kol_search_by_profile_name?${searchHostKey}`,
 }
 
 module.exports = config
