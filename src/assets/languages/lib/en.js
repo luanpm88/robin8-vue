@@ -73,7 +73,7 @@ export const lang = {
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     kolCompare: 'kolCompare'
   },
   nav: {
@@ -94,7 +94,7 @@ export const lang = {
     ranking: 'Ranking',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
-    socialListening: 'Social Listening',
+    socialListening: 'KOL Listening',
     help: 'Data Explanation'
   },
   login: {
