@@ -7,14 +7,14 @@
         <div class="panel-body">
           <div class="form-horizontal">
             <div class="form-group">
-              <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
+              <!-- <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
               <div class="col-sm-4">
                 <input
                   type="text"
                   class="form-control"
                   v-model="topic"
                 />
-              </div>
+              </div> -->
               <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
               <div class="col-sm-4">
                 <select class="form-control" v-model="source">
@@ -22,8 +22,8 @@
                   <option value="1">{{$t('lang.wechat')}}</option>
                 </select>
               </div>
-              <div class="col-sm-2 control-label mt20">{{$t('lang.socialPage.kolId')}}</div>
-              <div class="col-sm-4 mt20">
+              <div class="col-sm-2 control-label">{{$t('lang.socialPage.kolId')}}</div>
+              <div class="col-sm-4">
                 <!-- <input
                   type="text"
                   class="form-control"
@@ -139,16 +139,15 @@ export default {
       totalParams: {
         page_no: 0,
         page_size: 10,
-        start_date: commonJs.cPastSevenDays,
+        start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
-        OR_keywords: '',
+        OR_keywords: '“”',
         profile_ids: [],
       },
       itemList: [],
       cartParams: {},
       data: [],
-      selectIdValue: undefined,
-      selectIdValueName: ''
+      selectIdValue: undefined
     };
   },
   methods: {
@@ -233,13 +232,17 @@ export default {
       this.currentPage = 0;
       this.currentPageAdd = this.currentPage + 1;
       // this.topic 转英文逗号
-      this.topic = this.topic.replace(/，/ig,',')
-      let newKey = ''
-      this.topic.split(',').forEach(item => {
-        newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
-      })
-      this.totalParams.OR_keywords = newKey;
-      this.totalParams.profile_ids = this.profileId.split(",");
+      // this.topic = this.topic.replace(/，/ig,',')
+      // let newKey = ''
+      // this.topic.split(',').forEach(item => {
+      //   newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
+      // })
+      // this.totalParams.OR_keywords = newKey;
+      if (this.profileId) {
+        this.totalParams.profile_ids = this.profileId.split(",");
+      } else {
+        this.totalParams.profile_ids = [];
+      }
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -257,13 +260,17 @@ export default {
       this.currentPageAdd = page;
       this.currentPage = page - 1;
       // this.topic 转英文逗号
-      this.topic = this.topic.replace(/，/ig,',')
-      let newKey = ''
-      this.topic.split(',').forEach(item => {
-        newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
-      })
-      this.totalParams.OR_keywords = newKey;
-      this.totalParams.profile_ids = this.profileId.split(",");
+      // this.topic = this.topic.replace(/，/ig,',')
+      // let newKey = ''
+      // this.topic.split(',').forEach(item => {
+      //   newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
+      // })
+      // this.totalParams.OR_keywords = newKey;
+      if (this.profileId) {
+        this.totalParams.profile_ids = this.profileId.split(",");
+      } else {
+        this.totalParams.profile_ids = [];
+      }
       this.totalParams.page_no = this.currentPage;
       if (Number(this.source) === 0) {
         // weibo
@@ -326,7 +333,7 @@ export default {
               _that.topic = element.name
             }
           })
-          _that.totalParams.OR_keywords = _that.topic
+          // _that.totalParams.OR_keywords = _that.topic
           // weibo
           _that.socialWeibo(_that.totalParams);
         }

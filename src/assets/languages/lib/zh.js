@@ -915,7 +915,7 @@ export const lang = {
   socialPage: {
     topic: '主题',
     source: '平台',
-    kolId: 'KOL Id'
+    kolId: 'KOL 名字'
   },
   kolCompare: {
     name: '名字',

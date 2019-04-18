@@ -916,7 +916,7 @@ export const lang = {
   socialPage: {
     topic: 'Topic',
     source: 'Source',
-    kolId: 'KOL Profile ID'
+    kolId: 'KOL Profile Name'
   },
   kolCompare: {
     name: 'Profile Name',
