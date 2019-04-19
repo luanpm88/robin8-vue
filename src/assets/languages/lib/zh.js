@@ -179,6 +179,10 @@ export const lang = {
     companyName: '公司名称（抬头）',
     availAmount: '账户余额'
   },
+  messages: {
+    noData: '暂无消息',
+    sender: '来自'
+  },
   companyInfo: {
     title: '品牌资料',
     name: {

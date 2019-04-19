@@ -26,12 +26,34 @@
                 </div>
               </div>
               <div v-show="active && activeId == item.id" class="msg-content">
-                <h5>来自: {{item.sender}}</h5>
+                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
                 <div class="desc" v-html="item.title"></div>
               </div>
             </li>
+
+            <!-- <li
+              v-for="(item, index) in messagesList"
+              :key="item.id"
+              class="item"
+              :class="[item.is_read ? 'is-read' : '']"
+              @click="toggleOpen(item.id)"
+            >
+              <div
+                class="title-bar with-arr"
+                :class="[item.open ? 'open' : '']"
+              >
+                <div class="title">
+                  <span v-if="!item.is_read" class="dot"></span>
+                  {{item.name}}
+                </div>
+              </div>
+              <div v-show="item.open" class="msg-content">
+                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
+                <div class="desc" v-html="item.title"></div>
+              </div>
+            </li> -->
           </ul>
-          <div v-else class="p30 text-center">{{$t('lang.noData')}}</div>
+          <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
         </div>
 
         <div v-if="messagesList.length > 0" class="panel-foot">
@@ -83,7 +105,7 @@ export default {
     },
     handleGetListDataSucc (res) {
       let resData = res.data
-      console.log(resData)
+      // console.log(resData)
       if (res.status == 200 && resData) {
         this.messagesList = resData.items
         this.total = parseInt(resData.paginate['X-Total'])
@@ -120,6 +142,33 @@ export default {
           }
         })
       }
+
+      // this.activeId = id
+      // if (this.activeId == id) {
+      //   this.readMsg(id)
+      //   this.messagesList.forEach(item => {
+      //     if (item.id == id) {
+      //       item.is_read = true
+      //     }
+      //   })
+      // }
+
+      // this.messagesList.forEach(item => {
+      //   if (item.id == id) {
+      //     // this.activeId = id
+      //     if (item.open) {
+      //       item.open = false
+      //     } else {
+      //       item.open = true
+      //     }
+      //     this.readMsg(id)
+      //     item.is_read = true
+      //   } else {
+      //     item.open = false
+      //   }
+      // })
+
+      console.log(this.messagesList)
 
       // console.log(this.activeId)
       // console.log(this.active)
