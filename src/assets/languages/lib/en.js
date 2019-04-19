@@ -40,6 +40,7 @@ export const lang = {
     forgetPassword: 'Forget Password',
     changePassword: 'Change Password',
     help: 'Data Explanation',
+    messages: 'Messages',
     home: 'Home',
     homeCreate: 'Create Campaign',
     settings: 'Settings',

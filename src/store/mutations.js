@@ -71,6 +71,12 @@ export default {
       commonJs.setLocalData('robin8Language', language, 604700)
     } catch (e) {}
   },
+  setMsgCount (state, msg) {
+    state.messages = msg
+    try {
+      commonJs.setLocalData('robin8Messages', msg, 604700)
+    } catch (e) {}
+  },
   removeAuthorization (state) {
     state.authorization = ''
     try {
@@ -129,6 +135,12 @@ export default {
     state.language = ''
     try {
       commonJs.removeLocalData('robin8Language')
+    } catch (e) {}
+  },
+  removeMsgCount (state) {
+    state.messages = ''
+    try {
+      commonJs.removeLocalData('robin8Messages')
     } catch (e) {}
   }
 }

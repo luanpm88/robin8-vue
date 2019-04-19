@@ -40,6 +40,7 @@ export const lang = {
     forgetPassword: '忘记密码',
     changePassword: '重置密码',
     help: '数据说明',
+    messages: '系统消息',
     home: '首页',
     homeCreate: '创建新活动',
     settings: '企业设置',

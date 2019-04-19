@@ -91,6 +91,15 @@ try {
   }
 } catch (e) {}
 
+let messages = ''
+let localMessages = commonJs.getLocalData('robin8Messages')
+// console.log('当前messages：' + localMessages)
+try {
+  if (!!localMessages && localMessages != '') {
+    messages = localMessages
+  }
+} catch (e) {}
+
 export default {
   authorization,
   nickname,
@@ -101,5 +110,6 @@ export default {
   company,
   companyName,
   companyLogo,
-  language
+  language,
+  messages
 }

@@ -6,9 +6,10 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Pagination, Spin, InputNumber, Tooltip, 
-  Select } from 'ant-design-vue'
+import { Pagination, Spin, InputNumber, Tooltip, Select } from 'ant-design-vue'
 import store from './store'
+import axios from 'axios'
+import apiConfig from '@/config'
 import 'babel-polyfill'
 import 'ant-design-vue/lib/table/style/css'
 import 'ant-design-vue/lib/input-number/style/css'
@@ -53,10 +54,23 @@ router.beforeEach((to, from, next) => {
     const _title = i18n.t(`lang.router.${_name}`)
     window.document.title = _title
   }
-  if (to.matched.some( m => m.meta.auth)) {
+  if (to.matched.some(m => m.meta.auth)) {
     // 已经登陆
     if (!!store.state.authorization && store.state.authorization != '') {
       // 正常跳转到你设置好的页面
+      // 获取未读消息
+      axios.get(apiConfig.messagesCountUrl, {
+        headers: {
+          'Authorization': store.state.authorization
+        }
+      }).then(function (res) {
+        let resData = res.data
+        // console.log(resData)
+        if (res.status == 200 && resData) {
+          store.commit('setMsgCount', resData.new_message_count)
+        }
+      })
+
       next()
     } else {
       // 未登录则跳转到登陆界面，query:{ Rurl: to.fullPath}表示把当前路由信息传递过去方便登录后跳转回来

@@ -4,7 +4,7 @@
       <h1 class="partner-logo pull-left">
         <img :src="companyLogo" :alt="company" class="logo-img" />
       </h1>
-      <div class="user-info pull-right">
+      <div v-if="!!authorization && authorization !=''" class="user-info pull-right">
         <div class="media">
           <div class="media-left">
             <div v-if="!!avatarImgUrl && avatarImgUrl != 'null'" class="avatar">
@@ -27,6 +27,12 @@
             </p>
           </div>
         </div>
+      </div>
+      <div v-if="!!authorization && authorization !=''" class="message pull-right">
+        <router-link to="/messages">
+          <span class="iconfont icon-bell"></span>
+          <span v-if="messages != '0'" class="msg-num">{{messages}}</span>
+        </router-link>
       </div>
       <div class="languages-ctrl pull-right">
         <span
@@ -53,7 +59,7 @@
           <img src="@images/logo.png" alt="Robin8" class="logo-img" />
         </router-link>
       </h1>
-      <div class="user-info pull-right">
+      <div v-if="!!authorization && authorization !=''" class="user-info pull-right">
         <div class="media">
           <div class="media-left">
             <div v-if="!!avatarImgUrl && avatarImgUrl != 'null'" class="avatar">
@@ -77,6 +83,12 @@
           </div>
         </div>
       </div>
+      <div v-if="!!authorization && authorization !=''" class="message pull-right">
+        <router-link to="/messages">
+          <span class="iconfont icon-bell"></span>
+          <span v-if="messages != '0'" class="msg-num">{{messages}}</span>
+        </router-link>
+      </div>
       <div class="languages-ctrl pull-right">
         <span
           class="item"
@@ -94,12 +106,14 @@
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'PageHeader',
   computed: {
-    ...mapState(['avatarImgUrl', 'nickname', 'company', 'companyLogo']),
+    ...mapState(['authorization', 'avatarImgUrl', 'nickname', 'company', 'companyLogo', 'messages']),
   },
   data () {
     return {
@@ -107,7 +121,20 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompany', 'removeCompanyName', 'removeCompanyLogo', 'setLanguage']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompany', 'removeCompanyName', 'removeCompanyLogo', 'setLanguage', 'setMsgCount', 'removeMsgCount']),
+    getMsgCount () {
+      axios.get(apiConfig.messagesCountUrl, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetMsgCountSucc)
+    },
+    handleGetMsgCountSucc (res) {
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        this.setMsgCount(resData.new_message_count)
+      }
+    },
     logOut () {
       // window.localStorage.clear()
       this.removeAuthorization()
@@ -119,6 +146,7 @@ export default {
       this.removeCompany()
       this.removeCompanyName()
       this.removeCompanyLogo()
+      this.removeMsgCount()
       this.$router.replace('/login')
     },
     toggleLang (lang) {
@@ -129,6 +157,9 @@ export default {
   },
   mounted () {
     this.lang = this.$i18n.locale
+    if (!!this.authorization && this.authorization !='') {
+      this.getMsgCount()
+    }
   }
 }
 </script>
@@ -169,6 +200,29 @@ export default {
         &.active {
           color: #fff;
         }
+      }
+    }
+    .message {
+      @include display-flex;
+      position: relative;
+      height: 40px;
+      margin-right: 40px;
+      align-items: center;
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+      .msg-num {
+        display: inline-block;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 8px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: nth($red, 1);
+      }
+      .icon-bell {
+        font-weight: bold;
       }
     }
     .avatar {
