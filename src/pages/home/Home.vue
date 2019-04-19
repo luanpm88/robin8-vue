@@ -32,11 +32,11 @@
       <!-- 内容开始 -->
       <!-- 刚注册的用户 假如已经输入竞争者的品牌 渲染内容 -->
       <div v-if="isCompetitors">
-        <div class="panel default-panel mt20">
+        <!-- <div class="panel default-panel mt20"> -->
           <!-- <div class="panel-head">
             <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
           </div> -->
-          <div class="panel-body p30 clearfix">
+          <!-- <div class="panel-body p30 clearfix">
             <div class="form-horizontal default-form">
               <div class="form-group">
                 <div class="col-sm-4 control-label">{{$t('lang.homePage.noBrandTip')}}:</div>
@@ -58,8 +58,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
 
         <!-- <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic> -->
 
