@@ -1,9 +1,9 @@
 // 小燕
-// const host = 'http://192.168.50.131:3000/brand_api/v2'
+const host = 'http://192.168.50.131:3000/brand_api/v2'
 // 张春明
 // const host = 'http://192.168.50.203:3001/brand_api/v2'
 // qa
-const host = 'https://qa.robin8.net/brand_api/v2'
+// const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
 // const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
@@ -11,7 +11,7 @@ const domain = ''
 // const searchHost = 'https://api_prod.robin8.net/api/v1/r1'
 
 // fergus 接口测试地址
-const searchHost = 'https://api_beta.robin8.net//api/v1/r1'
+const searchHost = 'https://api_beta.robin8.net/api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
 
 const config = {

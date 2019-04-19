@@ -8,7 +8,7 @@
           <h5 class="title">{{$t('lang.router.messages')}}</h5>
         </div>
         <div class="panel-body">
-          <ul class="msg-list">
+          <ul v-if="messagesList.length > 0" class="msg-list">
             <li
               v-for="(item, index) in messagesList"
               :key="item.id"
@@ -31,9 +31,10 @@
               </div>
             </li>
           </ul>
+          <div v-else class="p30 text-center">{{$t('lang.noData')}}</div>
         </div>
 
-        <div class="panel-foot">
+        <div v-if="messagesList.length > 0" class="panel-foot">
           <div class="text-center">
             <a-pagination
               :defaultCurrent="page"
