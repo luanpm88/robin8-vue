@@ -6,7 +6,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Pagination, Spin, InputNumber, Tooltip, 
+import { Pagination, Spin, InputNumber, Tooltip,
   Select } from 'ant-design-vue'
 import store from './store'
 import 'babel-polyfill'
@@ -25,6 +25,7 @@ import '@styles/campaigns.scss'
 import '@styles/brands.scss'
 import '@styles/defaultAnt.scss'
 import '@styles/home.scss'
+import '@styles/btv.scss'
 
 Vue.use(VueI18n)
 Vue.use(Pagination)
