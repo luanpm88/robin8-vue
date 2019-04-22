@@ -459,6 +459,11 @@
     <div class="text-center create-btn-area">
       <button
         type="button"
+        class="btn btn-cyan btn-outline back-btn"
+        @click="goBack"
+      >{{$t('lang.backBtn')}}</button>
+      <button
+        type="button"
         class="btn btn-cyan next-btn"
         @click="doConfirm"
         :disabled="canSubmit ? false : true"
@@ -1261,6 +1266,9 @@ export default {
           this.doSubmit()
         }
       })
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   },
   mounted () {
@@ -1297,6 +1305,10 @@ export default {
 }
 .create-btn-area {
   padding: 30px;
+  .back-btn {
+    width: 150px;
+    margin-right: 10px;
+  }
   .next-btn {
     width: 150px;
   }

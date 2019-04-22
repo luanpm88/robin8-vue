@@ -179,6 +179,10 @@ export const lang = {
     companyName: 'Company Name (Title)',
     availAmount: 'Account Balance'
   },
+  messages: {
+    noData: 'No Messages',
+    sender: 'Sender'
+  },
   companyInfo: {
     title: 'Brand Information',
     name: {

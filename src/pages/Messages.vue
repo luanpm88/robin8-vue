@@ -18,20 +18,20 @@
             >
               <div
                 class="title-bar with-arr"
-                :class="[active && activeId == item.id ? 'open' : '']"
+                :class="[activeId == item.id ? 'open' : '']"
               >
                 <div class="title">
                   <span v-if="!item.is_read" class="dot"></span>
                   {{item.name}}
                 </div>
               </div>
-              <div v-show="active && activeId == item.id" class="msg-content">
-                <h5>来自: {{item.sender}}</h5>
+              <div v-show="activeId == item.id" class="msg-content">
+                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
                 <div class="desc" v-html="item.title"></div>
               </div>
             </li>
           </ul>
-          <div v-else class="p30 text-center">{{$t('lang.noData')}}</div>
+          <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
         </div>
 
         <div v-if="messagesList.length > 0" class="panel-foot">
@@ -83,7 +83,7 @@ export default {
     },
     handleGetListDataSucc (res) {
       let resData = res.data
-      console.log(resData)
+      // console.log(resData)
       if (res.status == 200 && resData) {
         this.messagesList = resData.items
         this.total = parseInt(resData.paginate['X-Total'])
@@ -109,17 +109,25 @@ export default {
       this.getListData()
     },
     toggleOpen (id) {
-      this.activeId = id
-      this.active = !this.active
+      // this.activeId = id
+      // this.active = !this.active
 
-      if (this.activeId == id && this.active) {
-        this.readMsg(id)
-        this.messagesList.forEach(item => {
-          if (item.id == id) {
-            item.is_read = true
-          }
-        })
-      }
+      // if (this.activeId == id && this.active) {
+      //   this.readMsg(id)
+      //   this.messagesList.forEach(item => {
+      //     if (item.id == id) {
+      //       item.is_read = true
+      //     }
+      //   })
+      // }
+
+      this.messagesList.forEach(item => {
+        if (item.id == id) {
+          this.activeId = id
+          this.readMsg(id)
+          item.is_read = true
+        }
+      })
 
       // console.log(this.activeId)
       // console.log(this.active)
