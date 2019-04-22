@@ -13,7 +13,9 @@
           <div class="form-group">
             <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.method.title')}}:</div>
             <div class="col-sm-4">
-              <p class="form-control-static">{{$t('lang.wallet.rechargePage.recharge.method.value')}}</p>
+              <p class="form-control-static">
+                <img class="payment-service-icon" src="@images/123pay.png" />
+              </p>
             </div>
           </div>
           <div class="form-group">

@@ -26,6 +26,7 @@ import '@styles/campaigns.scss'
 import '@styles/brands.scss'
 import '@styles/defaultAnt.scss'
 import '@styles/home.scss'
+import '@styles/btv.scss'
 
 Vue.use(VueI18n)
 Vue.use(Pagination)
