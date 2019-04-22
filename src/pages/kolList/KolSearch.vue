@@ -812,13 +812,13 @@ export default {
       this.totalJoggle(this.tabIndex);
 
       // 将头部的输入的key 传给Evan 后台
-      // if (this.keyword !== '') {
-      //   let saveKeyParams = {
-      //     keywords: this.keyword
-      //   }
-      //   // 保存keyword 的接口
-      //   this.kollistSaveKey(saveKeyParams)
-      // }
+      if (this.keyword !== '') {
+        let saveKeyParams = {
+          keywords: this.keyword
+        }
+        // 保存keyword 的接口
+        this.kollistSaveKey(saveKeyParams)
+      }
     },
     // 获取keyword
     getBaseData() {
