@@ -9,7 +9,7 @@
         </div>
         <div class="panel-body">
           <ul v-if="messagesList.length > 0" class="msg-list">
-            <li
+            <!-- <li
               v-for="(item, index) in messagesList"
               :key="item.id"
               class="item"
@@ -26,6 +26,28 @@
                 </div>
               </div>
               <div v-show="activeId == item.id" class="msg-content">
+                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
+                <div class="desc" v-html="item.title"></div>
+              </div>
+            </li> -->
+
+            <li
+              v-for="(item, index) in messagesList"
+              :key="item.id"
+              class="item"
+              :class="[item.is_read ? 'is-read' : '']"
+              @click="toggleOpen(item.id)"
+            >
+              <div
+                class="title-bar with-arr"
+                :class="[item.open ? 'open' : '']"
+              >
+                <div class="title">
+                  <span v-if="!item.is_read" class="dot"></span>
+                  {{item.name}}
+                </div>
+              </div>
+              <div v-show="item.open" class="msg-content">
                 <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
                 <div class="desc" v-html="item.title"></div>
               </div>
@@ -121,11 +143,25 @@ export default {
       //   })
       // }
 
+      // this.messagesList.forEach(item => {
+      //   if (item.id == id) {
+      //     this.activeId = id
+      //     this.readMsg(id)
+      //     item.is_read = true
+      //   }
+      // })
+
       this.messagesList.forEach(item => {
         if (item.id == id) {
-          this.activeId = id
+          if (item.open) {
+            this.$set(item, 'open', false)
+          } else {
+            this.$set(item, 'open', true)
+          }
           this.readMsg(id)
           item.is_read = true
+        } else {
+          this.$set(item, 'open', false)
         }
       })
 
