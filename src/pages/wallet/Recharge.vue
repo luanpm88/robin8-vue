@@ -11,14 +11,6 @@
       <div class="panel-body">
         <div class="form-horizontal recharge-form">
           <div class="form-group">
-            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.method.title')}}:</div>
-            <div class="col-sm-4">
-              <p class="form-control-static">
-                <img class="payment-service-icon" src="@images/123pay.png" />
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
             <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.credits.title')}}:</div>
             <div class="col-sm-4">
               <a-input-number
@@ -34,7 +26,7 @@
                 class="form-tips danger"
                 v-show="errors.has('credits') || rechargeSubmit.credits < creditsMin"
               >
-                充值最低金额为{{creditsMin}}
+                Số tiền là bắt buộc nhập
               </div>
             </div>
           </div>
@@ -48,6 +40,68 @@
                 v-model="rechargeSubmit.invite_code"
                 :placeholder="$t('lang.wallet.rechargePage.recharge.invite_code.placeholder')"
               >
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-4 control-label">{{$t('lang.wallet.rechargePage.recharge.method.title')}}:</div>
+            <div class="col-sm-4">
+              <p class="form-control-static">
+                <img class="payment-service-icon" src="@images/one-pay.jpg" />
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <p>
+              OnePay is the No. #1 secured payment gateway, we accept payments by credit cards or Internet Banking
+            </p>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-4 control-label">
+              <input
+                name="platform"
+                type="radio"
+                value="global"
+                v-model="rechargeSubmit.onepay_type"
+                v-validate="'required'"
+              />
+              <div
+                class="form-tips danger"
+                v-show="errors.has('onepay_type')"
+              >
+                Chọn loại thanh toán
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label">By your credit / debit / prepaid card</label>
+              <p class="form-control-static">
+                <img width="250" class="" src="@images/onepay_global.png" />
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-4 control-label">
+              <input
+                name="platform"
+                type="radio"
+                value="local"
+                v-model="rechargeSubmit.onepay_type"
+                v-validate="'required'"
+              />
+              <div
+                class="form-tips danger"
+                v-show="errors.has('onepay_type')"
+              >
+                Chọn loại thanh toán
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <label class="control-label">By your Internet Banking</label>
+              <p class="form-control-static">
+                <img width="250" class="" src="@images/onepay_local.png" />
+              </p>
             </div>
           </div>
 
@@ -83,7 +137,8 @@ export default {
       creditsMin: 500,
       rechargeSubmit: {
         credits: 500,
-        invite_code: ''
+        invite_code: '',
+        onepay_type: ''
       },
       canSubmit: true
     }
@@ -113,7 +168,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        window.location.href = resData.alipay_recharge_url
+        // window.location.href = resData.onepay_recharge_url
       } else {
         alert('提交失败，请重新提交')
       }
@@ -127,6 +182,8 @@ export default {
         if (msg) {
           console.log('验证通过')
           this.doSubmit()
+        } else {
+          alert('Bạn vui lòng chọn số tiền và hình thức thanh toán!');
         }
       })
     }

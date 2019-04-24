@@ -59,7 +59,7 @@ const config = {
   profileUrl: `${host}/users/profile`,
 
   // 充值 post 参数credits
-  rechargeUrl: `${host}/users/recharge`,
+  rechargeUrl: `${host}/users/onepay/recharge`,
 
   // 获取发票记录 get / 申请发票 post
   invoiceHistoriesUrl: `${host}/invoice_histories`,
