@@ -148,7 +148,7 @@ export default {
       axios
         .post(apiConfig.regUrl, params)
         .then(function(res) {
-          if (res.data.error) {
+          if (res.data.error == 1) {
             alert(res.data.detail)
           } else {
             _that.setAuthorization(res.data.access_token)
@@ -181,7 +181,7 @@ export default {
       axios
         .get(apiConfig.phoneCodeUrl, {params})
         .then(function(res) {
-          if (res.data.error) {
+          if (res.data.error == 1) {
             _that.time = 0
             _that.btntxt = 'Get valid code'
             _that.disabled = false
@@ -198,7 +198,7 @@ export default {
       axios
         .get(apiConfig.emailCodeUrl, {params})
         .then(function(res) {
-          if (res.data.error) {
+          if (res.data.error == 1) {
             _that.time = 0
             _that.btntxt = 'Get valid code'
             _that.disabled = false

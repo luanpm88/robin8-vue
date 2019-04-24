@@ -312,7 +312,7 @@ export default {
       let resData = res.data
       // console.log(resData)
       if (res.status == 201) {
-        if (!!resData.error && resData.error == 1) {
+        if (resData.error == 1) {
           alert(resData.detail)
           return false
         }
@@ -392,7 +392,7 @@ export default {
             // console.log(error);
           });
       }
-      
+
       // 微信select
       if (Number(this.source) === 1) {
         const _that = this;

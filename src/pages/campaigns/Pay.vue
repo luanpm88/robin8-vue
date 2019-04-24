@@ -133,7 +133,7 @@ export default {
         if (this.payMethod == 'alipay') {
           window.location.href = resData.alipay_recharge_url
         } else if (this.payMethod == 'balance') {
-          if (!!resData.error && resData.error == 1) {
+          if (resData.error == 1) {
             alert(resData.detail)
             return false
           } else {

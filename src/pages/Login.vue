@@ -81,7 +81,12 @@ export default {
         .then(function(res) {
           let resData = res.data
           // console.log(resData)
-          if (resData.error) {
+
+          if (resData.error == 0) {
+            alert(resData.alert)
+            _that.loginStatus = false
+            _that.$router.push('/forget_password')
+          } else if (resData.error == 1) {
             alert(resData.detail)
             _that.loginStatus = false
           } else {

@@ -1395,7 +1395,7 @@ export default {
     handleDoAddCartSucc(res) {
       let resData = res.data;
       if (res.status == 201) {
-        if (!!resData.error && resData.error == 1) {
+        if (resData.error == 1) {
           alert(resData.detail);
           return false;
         }
