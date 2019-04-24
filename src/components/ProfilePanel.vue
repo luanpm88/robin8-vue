@@ -18,7 +18,7 @@
         <div class="media-body media-middle content">
           <h5 class="title">{{$t('lang.profile.name')}}: {{profileData.name}}</h5>
           <p>{{$t('lang.profile.companyName')}}: {{profileData.campany_name}}</p>
-          <p>{{$t('lang.profile.availAmount')}}: {{profileData.avail_amount}} 元</p>
+          <p>{{$t('lang.profile.availAmount')}}: {{profileData.avail_amount}} ₫</p>
           <!-- <p>剩余积分: {{profileData.avail_amount}} 积分</p> -->
         </div>
       </div>
