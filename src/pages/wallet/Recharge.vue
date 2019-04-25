@@ -134,9 +134,9 @@ export default {
   },
   data () {
     return {
-      creditsMin: 500,
+      creditsMin: 100000,
       rechargeSubmit: {
-        credits: 500,
+        credits: 500000,
         invite_code: '',
         onepay_type: ''
       },
@@ -168,7 +168,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        // window.location.href = resData.onepay_recharge_url
+        window.location.href = resData.onepay_recharge_url
       } else {
         alert('提交失败，请重新提交')
       }
