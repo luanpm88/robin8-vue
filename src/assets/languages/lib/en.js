@@ -79,8 +79,8 @@ export const lang = {
   nav: {
     home: 'Trang chính',
     campaigns: 'Chiến dịch',
-    customContent: 'Nội dung tùy chỉnh',
-    shareOnly: 'Chia sẻ nội dung',
+    customContent: 'Chiến dịch tùy chỉnh',
+    shareOnly: 'Chiến dịch tự động',
     kols: 'Tìm kiếm KOL',
     wallet: 'Ví',
     topUp: 'Nạp tiền',
@@ -418,11 +418,11 @@ export const lang = {
         },
         onepay: {
           global: {
-            title: 'Onepay - Quốc tế',
+            title: 'By your credit / debit / prepaid card',
             desc: 'Cho phép thanh toán quốc tế'
           },
           local: {
-            title: 'Onepay - Nội địa',
+            title: 'By your Internet Banking',
             desc: 'Nhận thanh toán từ các ngân hàng/ví điện tử nội địa'
           }
         }
