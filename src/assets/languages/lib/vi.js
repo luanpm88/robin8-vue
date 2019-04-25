@@ -415,6 +415,16 @@ export const lang = {
         balance: {
           title: 'Số dư',
           desc: 'Sử dụng số dư tài khoản để trả phí'
+        },
+        onepay: {
+          global: {
+            title: 'Onepay - Quốc tế',
+            desc: 'Cho phép thanh toán quốc tế'
+          },
+          local: {
+            title: 'Onepay - Nội địa',
+            desc: 'Nhận thanh toán từ các ngân hàng/ví điện tử nội địa'
+          }
         }
       }
     }
