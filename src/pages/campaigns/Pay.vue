@@ -9,7 +9,7 @@
           <p>{{$t('lang.campaigns.payment.name')}}: {{detailData.name}}</p>
           <p>{{$t('lang.campaigns.payment.desc')}}: {{detailData.description}}</p>
           <p>{{$t('lang.campaigns.payment.date')}}: {{detailData.time_range}}</p>
-          <p>{{$t('lang.campaigns.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.need_pay_amount}}</i></span></p>
+          <p>{{$t('lang.campaigns.payment.amount')}}: <span class="price"><i class="num">{{detailData.need_pay_amount}}</i> ₫</span></p>
         </div>
 
         <div class="pay-method">
