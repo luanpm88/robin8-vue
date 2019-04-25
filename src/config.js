@@ -91,6 +91,10 @@ const config = {
   // 小V活动支付宝支付 post，参数:campaign_id
   campaignPayByAlipayUrl: `${host}/campaigns/pay_by_alipay`,
 
+  // Pay by One pay POST :campaign_id
+  campaignPayByOnepayGlobalUrl: `${host}/campaigns/pay_by_onepay/global`,
+  campaignPayByOnepayLocalUrl: `${host}/campaigns/pay_by_onepay/local`,
+
   // 小V活动余额支付 post，参数:campaign_id
   campaignPayByBalanceUrl: `${host}/campaigns/pay_by_balance`,
 

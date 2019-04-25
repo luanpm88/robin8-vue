@@ -21,16 +21,36 @@
                   <input
                     type="radio"
                     name="payMethod"
-                    value="alipay"
+                    value="onepay.global"
                     v-model="payMethod"
                     @change="methodChange"
                   />
                 </div>
                 <div class="media-body media-middle">
-                  <div class="pay-icon iconfont icon-alipay"></div>
+                  <div class="pay-icon"><img width="100" style="margin-bottom: 5px;" class="" src="@images/onepay-global.png" /></div>
                   <div class="info">
-                    <div class="method">{{$t('lang.campaigns.payment.method.alipay.title')}}</div>
-                    <div class="desc">{{$t('lang.campaigns.payment.method.alipay.desc')}}</div>
+                    <div class="method">{{$t('lang.campaigns.payment.method.onepay.global.title')}}</div>
+                    <div class="desc">{{$t('lang.campaigns.payment.method.onepay.global.desc')}}</div>
+                  </div>
+                </div>
+              </label>
+            </li>
+            <li class="item">
+              <label class="media">
+                <div class="media-left media-middle">
+                  <input
+                    type="radio"
+                    name="payMethod"
+                    value="onepay.local"
+                    v-model="payMethod"
+                    @change="methodChange"
+                  />
+                </div>
+                <div class="media-body media-middle">
+                  <div class="pay-icon"><img width="100" style="margin-bottom: 5px;" class="" src="@images/one-pay.jpg" /></div>
+                  <div class="info">
+                    <div class="method">{{$t('lang.campaigns.payment.method.onepay.local.title')}}</div>
+                    <div class="desc">{{$t('lang.campaigns.payment.method.onepay.local.desc')}}</div>
                   </div>
                 </div>
               </label>
@@ -82,7 +102,7 @@ export default {
     return {
       detailData: {},
       availAmount: '',
-      payMethod: 'alipay',
+      payMethod: 'onepay.local',
       payPostUrl: '',
       paySubmitData: {
         'campaign_id': this.$route.params.id
@@ -113,8 +133,11 @@ export default {
       }
       this.canSubmit = false
       console.log(this.payMethod)
-      if (this.payMethod == 'alipay') {
-        this.payPostUrl = apiConfig.campaignPayByAlipayUrl
+      if (this.payMethod == 'onepay.global') {
+        this.payPostUrl = apiConfig.campaignPayByOnepayGlobalUrl
+      } else if (this.payMethod == 'onepay.local') {
+        this.payPostUrl = apiConfig.campaignPayByOnepayLocalUrl
+        this.paySubmitData.pay_way = 'balance'
       } else if (this.payMethod == 'balance') {
         this.payPostUrl = apiConfig.campaignPayByBalanceUrl
         this.paySubmitData.pay_way = 'balance'
@@ -130,8 +153,9 @@ export default {
       console.log(res)
       this.canSubmit = true
       if (res.status == 201) {
-        if (this.payMethod == 'alipay') {
-          window.location.href = resData.alipay_recharge_url
+        if (this.payMethod == 'onepay.global' || this.payMethod == 'onepay.local') {
+          console.log(resData.onepay_recharge_url);
+          window.location.href = resData.onepay_recharge_url
         } else if (this.payMethod == 'balance') {
           if (!!resData.error && resData.error == 1) {
             alert(resData.detail)
