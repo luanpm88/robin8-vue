@@ -305,24 +305,24 @@
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
         class="btn btn-cyan btn-outline edit-btn"
         :to="'/campaigns/'+ $route.params.id +'/edit'"
-      >编辑活动</router-link>
+      >Chỉnh sửa</router-link>
       <button
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
         class="btn btn-cyan cancel-btn"
         @click="doCancel"
         :disabled="canCancel ? false : true"
-      >撤销活动</button>
+      >Đóng</button>
       <router-link
         v-if="detailData.status == 'unpay'"
         :to="'/campaigns/'+ $route.params.id +'/pay'"
         class="btn btn-cyan btn-outline pay-btn"
-      >支付</router-link>
+      >Thanh toán</router-link>
       <router-link
         v-show="detailData.status != 'pending' && detailData.status != 'unpay' && detailData.status != 'rejected'"
         :to="'/campaigns/create?copy_id='+ detailData.id"
         class="btn btn-cyan edit-btn"
-      >再次发布</router-link>
+      >Sao chép & Tạo</router-link>
     </div>
 
   </div>
