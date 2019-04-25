@@ -38,7 +38,7 @@
           class="item"
           :class="[lang == 'en-US' ? 'active' : '']"
           @click="toggleLang('en-US')"
-        >En</span>
+        >Vi</span>
       </div>
       <div class="sub-logo pull-right">
         <span class="text">Powered by</span>
@@ -87,7 +87,7 @@
           class="item"
           :class="[lang == 'en-US' ? 'active' : '']"
           @click="toggleLang('en-US')"
-        >En</span>
+        >Vi</span>
       </div>
     </div>
   </div>

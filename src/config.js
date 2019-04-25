@@ -5,8 +5,11 @@
 // qa
 // const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
-const host = 'http://192.168.239.129:4000/brand_api/v2'
-// const host = 'http://13.229.232.233:4000/brand_api/v2'
+
+const host = 'http://13.229.232.233:4000/brand_api/v2'
+
+//const host = 'https://robin8.net/brand_api/v2'
+
 const domain = ''
 // fergus 接口qa地址
 const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
