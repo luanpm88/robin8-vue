@@ -149,7 +149,7 @@
                 class="form-tips danger"
                 v-show="errors.has('credits') || invoiceSubmitData.credits < creditsMin"
               >
-                最小金额为{{creditsMin}}元
+                最小金额为{{creditsMin}}₫
               </div>
             </div>
           </div>

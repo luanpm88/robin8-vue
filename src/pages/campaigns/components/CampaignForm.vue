@@ -131,7 +131,7 @@
                 class="form-tips danger"
                 v-show="errors.has('allBudget') || submitData.budget < budgetMin"
               >
-                最低费用{{budgetMin}}元
+                Toi thieu {{budgetMin}}₫
               </div>
             </div>
           </div>
