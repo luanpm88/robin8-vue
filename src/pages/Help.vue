@@ -93,7 +93,7 @@ export default {
   components: {
     MainNav
   },
-  data() {
+  data () {
     return {
     }
   },

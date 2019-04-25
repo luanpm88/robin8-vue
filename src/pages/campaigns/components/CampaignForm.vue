@@ -517,11 +517,17 @@
       </div>
     </div>
 
+    <div class="tips mt20 text-center">{{$t('lang.campaigns.createTips')}}</div>
+
     <div class="text-center create-btn-area">
-      <p class="tips">{{$t('lang.campaigns.createTips')}}</p>
       <button
         type="button"
-        class="btn btn-cyan next-btn mt20"
+        class="btn btn-cyan btn-outline back-btn"
+        @click="goBack"
+      >{{$t('lang.backBtn')}}</button>
+      <button
+        type="button"
+        class="btn btn-cyan next-btn"
         @click="doConfirm"
         :disabled="canSubmit ? false : true"
       >{{$t('lang.submitBtn')}}</button>
@@ -839,6 +845,9 @@ export default {
           this.doSubmit()
         }
       })
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   },
   mounted () {
@@ -877,6 +886,10 @@ export default {
 }
 .create-btn-area {
   padding: 30px;
+  .back-btn {
+    width: 150px;
+    margin-right: 10px;
+  }
   .next-btn {
     width: 150px;
   }

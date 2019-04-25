@@ -4,12 +4,17 @@
       <div class="media-left media-middle">
         <div class="kol-intro">
           <div class="avatar">
-            <img :src="profile.avatar_url" alt="" class="avatar-img" />
+            <router-link :to="bigv_url">
+              <img :src="profile.avatar_url" alt="" class="avatar-img" />
+            </router-link>
           </div>
-          <div class="name">{{profile.name}}</div>
-          <div class="desc">{{profile.desc}}</div>
+          <div class="name">{{profile.profile_name}}</div>
+          <div class="desc">{{profile.description_raw}}</div>
           <div class="opaeration-btns">
-            <div class="item iconfont icon-details"></div>
+            <router-link
+              class="item iconfont icon-details"
+              :to="bigv_url"
+            ></router-link>
             <!-- <div class="item iconfont icon-msg"></div>
             <div class="item iconfont icon-star-fill active"></div> -->
           </div>
@@ -17,12 +22,12 @@
       </div>
       <div class="media-body media-middle">
         <div class="related-info">
-          <p>合计:<span class="price">¥{{profile.price_total}}</span></p>
+          <p>{{$t('lang.creations.kols.totalPrice')}}: <span class="price">¥{{profile.price_total}}</span></p>
           <p
             v-for="item in tenders"
             :key="item.id"
           >
-            {{item.brand_show_info}}
+            {{language == 'en-US' ? item.brand_show_info : item.brand_show_info_zh}}
           </p>
           <kol-articles-list
             v-if="profile.status != 'pending'"
@@ -53,7 +58,7 @@
           disabled
           class="btn btn-sm btn-outline btn-blue btn-circle disabled"
         >
-          {{profile.status_zh}}
+          {{language == 'en-US' ? profile.status : profile.status_zh}}
         </button>
       </div>
     </div>
@@ -79,6 +84,7 @@ export default {
   data () {
     return {
       profile: {},
+      bigv_url: '',
       tenders: [],
       checked: false,
       statusText: ''
@@ -108,9 +114,10 @@ export default {
   },
   mounted () {
     // console.log(this.renderData)
-    console.log(this.checkedIds)
+    // console.log(this.checkedIds)
     this.profile = this.renderData.profile
     this.tenders = this.renderData.tenders
+    this.bigv_url = this.renderData.profile.bigv_url
 
     this.checkedIds.forEach(item => {
       if (this.profile.creation_selected_kol_id == item) {
@@ -119,7 +126,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(['authorization'])
+    ...mapState(['authorization', 'language'])
   }
 }
 </script>

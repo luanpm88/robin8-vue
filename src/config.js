@@ -7,11 +7,11 @@
 // 正式
 const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
-// fergus 接口qa地址
-const searchHost = 'http://api_prod.robin8.net:8080/api/v1/r1'
 
+// fergus 接口qa地址
+const searchHost = 'https://api_prod.robin8.net/api/v1/r1'
 // fergus 接口测试地址
-// const searchHost = 'http://api_beta.robin8.net:8080//api/v1/r1'
+// const searchHost = 'https://api_beta.robin8.net/api/v1/r1'
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
 
 const config = {
@@ -32,6 +32,15 @@ const config = {
 
   // 重置密码
   updatePwUrl: `${host}/sessions/update_password`,
+
+  // 消息列表 get
+  messagesUrl: `${host}/messages`,
+
+  // 消息数量 get
+  messagesCountUrl: `${host}/messages/new_message_count`,
+
+  // 消息标记已读 post id
+  messageIsReadUrl: `${host}/messages/is_read`,
 
   // 品牌主信息编辑 post
   usersUrl: `${host}/users`,
@@ -365,7 +374,7 @@ const config = {
 
   socialWeiboSelect: `${searchHost}/price/weibo/price/kol_search_by_profile_name?${searchHostKey}`,
 
-  socialWeixinSelect: `${searchHost}/price/weixin/price/kol_search_by_profile_name?${searchHostKey}`,
+  socialWeixinSelect: `${searchHost}/price/price/kol_search_by_profile_name?${searchHostKey}`,
 }
 
 module.exports = config

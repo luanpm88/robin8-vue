@@ -159,7 +159,7 @@ export default {
       // console.log(this.currentPath)
     },
     toggleActive (index) {
-      console.log(index)
+      // console.log(index)
       this.activeIndex = index
       this.active = !this.active
     }

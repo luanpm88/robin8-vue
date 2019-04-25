@@ -358,7 +358,7 @@ export default {
       if (res.status == 201) {
         let resData = res.data
         console.log(resData)
-        if (!!resData.error && resData.error == '1') {
+        if (resData.error == 1) {
           alert(resData.detail)
         } else {
           this.getInvoiceHistoryData()

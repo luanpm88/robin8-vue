@@ -33,12 +33,14 @@ export const lang = {
   yearsOld: '岁',
   yearsOlder: '岁以上',
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
+  noData: '暂无内容',
   router: {
     login: '登录',
     reg: '注册',
     forgetPassword: '忘记密码',
     changePassword: '重置密码',
     help: '数据说明',
+    messages: '系统消息',
     home: '首页',
     homeCreate: '创建新活动',
     settings: '企业设置',
@@ -73,7 +75,7 @@ export const lang = {
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     benchMark: 'benchMark',
-    socialListening: '社交聆听',
+    socialListening: 'KOL聆听',
     kolCompare: 'kol对比'
   },
   nav: {
@@ -94,7 +96,7 @@ export const lang = {
     ranking: '排名 - 即将推出',
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
-    socialListening: '社交聆听',
+    socialListening: 'KOL聆听',
     help: '数据说明'
   },
   login: {
@@ -176,6 +178,10 @@ export const lang = {
     name: '品牌名称',
     companyName: '公司名称（抬头）',
     availAmount: '账户余额'
+  },
+  messages: {
+    noData: '暂无消息',
+    sender: '来自'
   },
   companyInfo: {
     title: '品牌资料',
@@ -297,7 +303,8 @@ export const lang = {
         edit: '编辑',
         pay: '支付',
         comments: '评价',
-        repost: '再次发布'
+        repost: '再次发布',
+        cancel: '撤销活动'
       }
     },
     link: {
@@ -511,8 +518,17 @@ export const lang = {
       processing: '合作中',
       done: '已完成'
     },
+    kols: {
+      totalPrice: '合计',
+      weiboExposure: '微博总曝光值',
+      wechatExposure: '微信总曝光值',
+      confirm: '确认合作，立即支付'
+    },
     payment: {
       title: '支付订单',
+      kolCount: '邀请KOL人数',
+      kolTotalPrice: 'KOL总价',
+      platformFee: '平台服务费',
       amount: '支付总额',
       method: {
         title: '支付方式',
@@ -904,7 +920,7 @@ export const lang = {
   socialPage: {
     topic: '主题',
     source: '平台',
-    kolId: 'KOL Id'
+    kolId: 'KOL 名字'
   },
   kolCompare: {
     name: '名字',

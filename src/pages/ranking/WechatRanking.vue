@@ -89,16 +89,16 @@
 
 <script>
 import axios from 'axios'
-import apiConfig from '@/config' 
-import { mapState } from 'vuex' 
-import totalDataJS from '@components/Chart/GlobalChartOption' 
-import commonJs from '@javascripts/common.js' 
-import { Spin, Table } from 'ant-design-vue' 
-const moment = require('moment') 
+import apiConfig from '@/config'
+import { mapState } from 'vuex'
+import totalDataJS from '@components/Chart/GlobalChartOption'
+import commonJs from '@javascripts/common.js'
+import { Spin, Table } from 'ant-design-vue'
+const moment = require('moment')
 let totalParams = {
   industry: 'airline',
   no_of_days: 21
-} 
+}
 export default {
   name: 'wechatRanking',
   components: {
@@ -127,42 +127,42 @@ export default {
       TableData: [],
       totalKeywords: '',
       cartParams: {}
-    } 
+    }
   },
   created() {
-    this.topTittleIndustry = totalParams.industry 
+    this.topTittleIndustry = totalParams.industry
     this.rankSideList.forEach((item, index) => {
       if (item.value === this.topTittleIndustry) {
-        this.iscur = index 
+        this.iscur = index
       }
     })
     // 获取最新的report_date
-    this.RankingDate(totalParams) 
+    this.RankingDate(totalParams)
     this.getBaseData()
   },
   methods: {
     // ranking 升降序函数
     handleTableChange(pagination, filters, sorter) {
       if (sorter.order === 'ascend') {
-        this.tableThirtyList.sort(this.ascendCompare(sorter.columnKey)) 
+        this.tableThirtyList.sort(this.ascendCompare(sorter.columnKey))
       } else {
-        this.tableThirtyList.sort(this.descendCompare(sorter.columnKey)) 
+        this.tableThirtyList.sort(this.descendCompare(sorter.columnKey))
       }
     },
     // ranking 升序排列
     ascendCompare (property){
       return function(a,b){
-          var value1 = a[property] 
-          var value2 = b[property] 
-          return value1 - value2 
+          var value1 = a[property]
+          var value2 = b[property]
+          return value1 - value2
       }
     },
     // ranking 降序排列
     descendCompare (property){
       return function(a,b){
-          var value1 = a[property] 
-          var value2 = b[property] 
-          return value2 - value1 
+          var value1 = a[property]
+          var value2 = b[property]
+          return value2 - value1
       }
     },
     // 获取keyword
@@ -177,9 +177,9 @@ export default {
           if (!res.data.competitors.length == 0) {
             res.data.trademarks_list.forEach(element => {
               if (element.status === 1) {
-                _that.totalKeywords = element.keywords 
+                _that.totalKeywords = element.keywords
               }
-            }) 
+            })
           }
         }
       })
@@ -191,11 +191,11 @@ export default {
       } else {
         this.$route.meta.keepAlive = false
       }
-      next() 
+      next()
     },
     // ranking 在调用right 两个列表之前 获取最新的report_date
     RankingDate(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.WeChatRankingDate, params, {
           headers: {
@@ -203,25 +203,25 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('头部data', res) 
+          // console.log('头部data', res)
           if ((res.status = 200)) {
-            _that.refreshDate = res.data.available_report_dates[0] 
-            totalParams.report_date = _that.refreshDate 
+            _that.refreshDate = res.data.available_report_dates[0]
+            totalParams.report_date = _that.refreshDate
             _that.topStartData = new Date(_that.refreshDate.replace(/\-/g, '/'))
-            _that.topStartData = moment(new Date(_that.topStartData.getTime() - 504 * 60 * 60 * 1000)).format('YYYY-MM-DD') 
+            _that.topStartData = moment(new Date(_that.topStartData.getTime() - 504 * 60 * 60 * 1000)).format('YYYY-MM-DD')
             // right top list
-            _that.WeChatTopList(totalParams) 
+            _that.WeChatTopList(totalParams)
             // 30 list
-            _that.WeChatThirtyList(totalParams) 
+            _that.WeChatThirtyList(totalParams)
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     // top list
     WeChatTopList(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.WeChatTopList, params, {
           headers: {
@@ -229,29 +229,29 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('topList', res) 
-          _that.tableTopList = [] 
+          // console.log('topList', res)
+          _that.tableTopList = []
           if ((res.status = 200)) {
-            _that.isTopLoading = false 
+            _that.isTopLoading = false
             _that.tableTopList.push(
               res.data.top_count_summary,
               res.data.most_likes_summary,
               res.data.most_post_influence_summary
-            ) 
-            _that.tableTopList[0].fixedTit = 'Most Active Profile' 
-            _that.tableTopList[0].value = _that.tableTopList[0].value + ' Posts' 
-            _that.tableTopList[1].fixedTit = 'Most Like Profile' 
+            )
+            _that.tableTopList[0].fixedTit = 'Most Active Profile'
+            _that.tableTopList[0].value = _that.tableTopList[0].value + ' Posts'
+            _that.tableTopList[1].fixedTit = 'Most Like Profile'
             _that.tableTopList[1].value = _that.tableTopList[1].value + ' Likes'
-            _that.tableTopList[2].fixedTit = 'Most Influential Profile' 
+            _that.tableTopList[2].fixedTit = 'Most Influential Profile'
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     // right 30 list
     WeChatThirtyList(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.WeChatThirtyList, params, {
           headers: {
@@ -259,10 +259,10 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('30', res) 
+          // console.log('30', res)
           if ((res.status === 200)) {
-             _that.isTable = true 
-            _that.isTableLoding = false 
+             _that.isTable = true
+            _that.isTableLoding = false
             res.data.forEach((element, index) => {
               element.profileDec = {
                 avatar_url: '',
@@ -270,39 +270,39 @@ export default {
                 id: '',
                 profile_id: ''
               }
-              element.profileDec.avatar_url = element.avatar_url 
-              element.profileDec.profile_name = element.profile_name 
-              element.profileDec.id = element.weixin_id 
-              element.profileDec.profile_id = element.profile_id 
-              element.doc_count =  commonJs.threeFormatter(element.doc_count, 2) 
-              element.headline_count =  commonJs.threeFormatter(element.headline_count, 2) 
-              element.total_reads =  commonJs.threeFormatter(element.total_reads, 2) 
-              element.max_reads =  commonJs.threeFormatter(element.max_reads, 2) 
-              element.avg_reads =  commonJs.threeFormatter(element.avg_reads, 2) 
-              element.total_likes =  commonJs.threeFormatter(element.total_likes, 2) 
-              element.avg_likes =  commonJs.threeFormatter(element.avg_likes, 2) 
-              element.total_post_influence =  commonJs.threeFormatter(element.total_post_influence, 2) 
-              element.max_post_influence =  commonJs.threeFormatter(element.max_post_influence, 2) 
-              element.avg_post_influence =  commonJs.threeFormatter(element.avg_post_influence, 2) 
-            }) 
-            _that.tableThirtyList = res.data 
+              element.profileDec.avatar_url = element.avatar_url
+              element.profileDec.profile_name = element.profile_name
+              element.profileDec.id = element.weixin_id
+              element.profileDec.profile_id = element.profile_id
+              element.doc_count =  commonJs.threeFormatter(element.doc_count, 2)
+              element.headline_count =  commonJs.threeFormatter(element.headline_count, 2)
+              element.total_reads =  commonJs.threeFormatter(element.total_reads, 2)
+              element.max_reads =  commonJs.threeFormatter(element.max_reads, 2)
+              element.avg_reads =  commonJs.threeFormatter(element.avg_reads, 2)
+              element.total_likes =  commonJs.threeFormatter(element.total_likes, 2)
+              element.avg_likes =  commonJs.threeFormatter(element.avg_likes, 2)
+              element.total_post_influence =  commonJs.threeFormatter(element.total_post_influence, 2)
+              element.max_post_influence =  commonJs.threeFormatter(element.max_post_influence, 2)
+              element.avg_post_influence =  commonJs.threeFormatter(element.avg_post_influence, 2)
+            })
+            _that.tableThirtyList = res.data
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     listSearch(currentList, index) {
-      this.iscur = index 
-      totalParams.industry = currentList.value 
-      this.topTittleIndustry = currentList.value 
-      this.tableTopList = [] 
-      this.tableThirtyList = [] 
-      this.isLoding = true 
-      this.isTable = false 
-      this.isTableLoding = true 
+      this.iscur = index
+      totalParams.industry = currentList.value
+      this.topTittleIndustry = currentList.value
+      this.tableTopList = []
+      this.tableThirtyList = []
+      this.isLoding = true
+      this.isTable = false
+      this.isTableLoding = true
       // 获取最新的report_date
-      this.RankingDate(totalParams) 
+      this.RankingDate(totalParams)
     },
     // 跳转benchmark页面
     lookBenchmark() {
@@ -317,7 +317,7 @@ export default {
           no_of_days: totalParams.no_of_days,
           report_date: totalParams.report_date
         }
-      }) 
+      })
     },
     // 跳转detail
     openDetails(item) {
@@ -332,7 +332,7 @@ export default {
           type: 1,
           brand_keywords: this.totalKeywords
         }
-      }) 
+      })
     },
     doAddCart (data) {
       this.cartParams.profile_id = data.profile_id
@@ -350,7 +350,7 @@ export default {
       let resData = res.data
       // console.log(resData)
       if (res.status == 201) {
-        if (!!resData.error && resData.error == 1) {
+        if (resData.error == 1) {
           alert(resData.detail)
           return false
         }
@@ -361,7 +361,7 @@ export default {
       this.$router.go(-1)
     }
   }
-} 
+}
 </script>
 
 <style lang="scss" scoped>

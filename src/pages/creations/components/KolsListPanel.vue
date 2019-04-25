@@ -15,7 +15,7 @@
           @handleCheck="handleCheck"
         ></kols-list-item>
 
-        <div v-else class="empty-area text-center">暂无数据...</div>
+        <div v-else class="empty-area text-center">{{$t('lang.noData')}}...</div>
       </div>
 
       <div class="btn-area">
