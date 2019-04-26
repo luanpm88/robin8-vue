@@ -520,11 +520,10 @@
     <div class="tips mt20 text-center">{{$t('lang.campaigns.createTips')}}</div>
 
     <div class="text-center create-btn-area">
-      <button
-        type="button"
+      <router-link
         class="btn btn-cyan btn-outline back-btn"
-        @click="goBack"
-      >{{$t('lang.backBtn')}}</button>
+        to="/campaigns"
+      >{{$t('lang.backListBtn')}}</router-link>
       <button
         type="button"
         class="btn btn-cyan next-btn"
@@ -845,9 +844,6 @@ export default {
           this.doSubmit()
         }
       })
-    },
-    goBack () {
-      this.$router.go(-1)
     }
   },
   mounted () {

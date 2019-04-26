@@ -302,11 +302,10 @@
     </div>
 
     <div class="text-center create-btn-area p30">
-      <button
-        type="button"
+      <router-link
         class="btn btn-cyan btn-outline back-btn"
-        @click="goBack"
-      >{{$t('lang.backBtn')}}</button>
+        to="/campaigns"
+      >{{$t('lang.backListBtn')}}</router-link>
       <button
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
@@ -694,9 +693,6 @@ export default {
         alert('提交失败，请重新提交')
       }
       this.canCancel = true
-    },
-    goBack () {
-      this.$router.go(-1)
     }
   },
   mounted () {

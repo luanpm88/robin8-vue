@@ -18,6 +18,7 @@ export const lang = {
   payment: '支付',
   information: '基本信息',
   backBtn: '返回',
+  backListBtn: '返回列表',
   submitBtn: '提交',
   payBtn: '立即付款',
   totalNoDataTip: '即将推出...',
