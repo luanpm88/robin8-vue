@@ -1305,12 +1305,11 @@ export default {
 }
 .create-btn-area {
   padding: 30px;
-  .back-btn {
+  & > .btn {
     width: 150px;
-    margin-right: 10px;
-  }
-  .next-btn {
-    width: 150px;
+    & + .btn {
+      margin-left: 10px;
+    }
   }
 }
 .creation-form /deep/ .kols-list {

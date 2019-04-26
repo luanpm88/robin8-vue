@@ -5,7 +5,7 @@
         <router-link to="/campaigns/create" class="btn btn-cyan btn-sm pull-right">{{$t('lang.router.campaignCreate')}}</router-link>
       </div>
       <div class="panel-body">
-        <div class="campaigns-list">
+        <div v-if="campaignsList.length > 0" class="campaigns-list">
           <div
             v-for="item in campaignsList"
             :key="item.id"
@@ -94,6 +94,8 @@
             </div>
           </div>
         </div>
+
+        <div v-else class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
     </div>
 
@@ -102,6 +104,7 @@
         :defaultCurrent="page"
         :defaultPageSize="perPage"
         :total="total"
+        :hideOnSinglePage="true"
         @change="onPageChange"
       />
     </div>

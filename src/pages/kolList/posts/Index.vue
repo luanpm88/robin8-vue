@@ -46,6 +46,7 @@
             :defaultPageSize="postPageSize"
             v-model="postCurrentPage"
             :total="postTotalPage"
+            :hideOnSinglePage="true"
             @change="onPageChange"
           />
         </div>
@@ -55,12 +56,12 @@
 </template>
 
 <script>
-import axios from 'axios' 
-import apiConfig from '@/config' 
-import DefaultTabs from '@components/DefaultTabs' 
-import ChartOption from '@components/Chart/GlobalChartOption' 
-import commonJs from '@javascripts/common.js' 
-import { mapState } from 'vuex' 
+import axios from 'axios'
+import apiConfig from '@/config'
+import DefaultTabs from '@components/DefaultTabs'
+import ChartOption from '@components/Chart/GlobalChartOption'
+import commonJs from '@javascripts/common.js'
+import { mapState } from 'vuex'
 export default {
   name: 'post',
   components: {
@@ -85,55 +86,55 @@ export default {
         page_size: 10,
         order_type: 'post_time'
       },
-    } 
+    }
   },
   computed: {
     ...mapState(['authorization'])
   },
   created() {
-    this.isPostLoading = true 
-    this.isPostShow = false 
-    this.isPostList = false 
-    this.postList = [] 
-    this.type = Number(this.$route.query.type) 
-    this.tabIndexThreeInit() 
+    this.isPostLoading = true
+    this.isPostShow = false
+    this.isPostList = false
+    this.postList = []
+    this.type = Number(this.$route.query.type)
+    this.tabIndexThreeInit()
   },
   methods: {
     // post
     tabIndexThreeInit() {
-      this.postParams.profile_id = String(this.$route.params.id) 
+      this.postParams.profile_id = String(this.$route.params.id)
       if (Number(this.$route.query.type) === 0) {
         // 微博post接口
-        this.detailPostWeibo(this.postParams) 
+        this.detailPostWeibo(this.postParams)
 
       } else {
         // 微信post相关接口
-        this.detailPostWeixin(this.postParams) 
+        this.detailPostWeixin(this.postParams)
       }
     },
     // post中More 的展示事件
     showTextContent(item, two) {
       if (item.showContent === false) {
-        item.showContent = true 
+        item.showContent = true
       } else {
-        item.showContent = false 
+        item.showContent = false
       }
-      this.$set(this.postList, two, item) 
+      this.$set(this.postList, two, item)
     },
     // post分页
     onPageChange (page) {
-      this.isPostLoading = true 
-      this.isPostShow = false 
-      this.isPostList = false 
-      this.postList = [] 
-      this.postPage = page - 1 
-      this.postCurrentPage = page 
-      this.postParams.page_no = this.postPage 
-      this.tabIndexThreeInit() 
+      this.isPostLoading = true
+      this.isPostShow = false
+      this.isPostList = false
+      this.postList = []
+      this.postPage = page - 1
+      this.postCurrentPage = page
+      this.postParams.page_no = this.postPage
+      this.tabIndexThreeInit()
     },
     // post 微信
     detailPostWeixin(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.detailPostWeixin, params, {
           headers: {
@@ -141,30 +142,30 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('woshipost list', res) 
+          // console.log('woshipost list', res)
           if (res.status === 200) {
-            _that.isPostLoading = false 
-            _that.postTotalPage = res.data.total_record_count 
+            _that.isPostLoading = false
+            _that.postTotalPage = res.data.total_record_count
             if (res.data.data.length > 0) {
-              _that.isPostShow = false 
-              _that.isPostList = true 
+              _that.isPostShow = false
+              _that.isPostList = true
               res.data.data.forEach((item, index) => {
-                item.showContent = false 
-              }) 
-              _that.postList = res.data.data 
+                item.showContent = false
+              })
+              _that.postList = res.data.data
             } else {
-              _that.isPostShow = true 
-              _that.isPostList = false 
+              _that.isPostShow = true
+              _that.isPostList = false
             }
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     // post 微博
     detailPostWeibo(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.detailPostWeibo, params, {
           headers: {
@@ -172,29 +173,29 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('微博post list', res) 
+          // console.log('微博post list', res)
           if (res.status === 200) {
-            _that.isPostLoading = false 
-            _that.postTotalPage = res.data.total_record_count 
+            _that.isPostLoading = false
+            _that.postTotalPage = res.data.total_record_count
             if (res.data.data.length > 0) {
-              _that.isPostShow = false 
-              _that.isPostList = true 
+              _that.isPostShow = false
+              _that.isPostList = true
               res.data.data.forEach((item, index) => {
-                item.showContent = false 
-              }) 
-              _that.postList = res.data.data 
+                item.showContent = false
+              })
+              _that.postList = res.data.data
             } else {
-              _that.isPostShow = true 
-              _that.isPostList = false 
+              _that.isPostShow = true
+              _that.isPostList = false
             }
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
   }
-} 
+}
 </script>
 <style>
 </style>

@@ -140,6 +140,14 @@
         </div>
       </div>
     </div>
+
+    <div class="text-center create-btn-area">
+      <button
+        type="button"
+        class="btn btn-cyan btn-outline back-btn"
+        @click="goBack"
+      >{{$t('lang.backBtn')}}</button>
+    </div>
   </div>
 </template>
 
@@ -252,6 +260,9 @@ export default {
           }
         })
       }
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   },
   mounted () {
@@ -273,6 +284,15 @@ export default {
     float: left;
     width: 33.33333%;
     padding: 0 10px;
+  }
+}
+.create-btn-area {
+  padding: 30px;
+  & > .btn {
+    width: 150px;
+    & + .btn {
+      margin-left: 10px;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="cart-list-container">
     <div class="panel default-panel cart-list-panel mt20">
-      <div class="panel-body clearfix">
+      <div v-if="cartList.length > 0" class="panel-body clearfix">
         <kols-list-item
           v-for="item in cartList"
           :key="item.profile_id"
@@ -11,6 +11,9 @@
           @handleDelete="delCheckedKol"
         ></kols-list-item>
       </div>
+      <div v-else class="panel-body">
+        <div class="p30 text-center">{{$t('lang.noData')}}...</div>
+      </div>
     </div>
 
     <div class="p30 text-center">
@@ -18,6 +21,7 @@
         :defaultCurrent="page"
         :defaultPageSize="perPage"
         :total="total"
+        :hideOnSinglePage="true"
         @change="onPageChange"
       />
     </div>

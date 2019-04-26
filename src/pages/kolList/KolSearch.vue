@@ -319,6 +319,7 @@
               :defaultPageSize="kolsPerPage"
               v-model="currentPageAdd"
               :total="kolsTotal"
+              :hideOnSinglePage="true"
               @change="onPageChange"
             />
           </div>

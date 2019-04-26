@@ -56,12 +56,13 @@
           <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
         </div>
 
-        <div v-if="messagesList.length > 0" class="panel-foot">
+        <div class="panel-foot">
           <div class="text-center">
             <a-pagination
               :defaultCurrent="page"
               :defaultPageSize="perPage"
               :total="total"
+              :hideOnSinglePage="true"
               @change="onPageChange"
             />
           </div>
