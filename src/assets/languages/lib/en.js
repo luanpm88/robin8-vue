@@ -18,7 +18,7 @@ export const lang = {
   payment: 'Payment',
   information: 'Information',
   backBtn: 'Back',
-  backListBtn: 'Back List',
+  backListBtn: 'Back to List',
   submitBtn: 'Submit',
   payBtn: 'Pay',
   totalNoDataTip: 'Soon to launch...',
