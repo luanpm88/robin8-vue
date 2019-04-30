@@ -75,7 +75,7 @@ export default {
       isLoading: true,
       isKol: false,
       params: {
-        start_date: commonJs.cPastFourteenDays,
+        start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
         brand_keywords: '',
         order_by: 'influence'
