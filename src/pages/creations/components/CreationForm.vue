@@ -457,11 +457,10 @@
     </div>
 
     <div class="text-center create-btn-area">
-      <button
-        type="button"
+      <router-link
         class="btn btn-cyan btn-outline back-btn"
-        @click="goBack"
-      >{{$t('lang.backBtn')}}</button>
+        to="/creations"
+      >{{$t('lang.backListBtn')}}</router-link>
       <button
         type="button"
         class="btn btn-cyan next-btn"
@@ -1266,9 +1265,6 @@ export default {
           this.doSubmit()
         }
       })
-    },
-    goBack () {
-      this.$router.go(-1)
     }
   },
   mounted () {
@@ -1305,12 +1301,11 @@ export default {
 }
 .create-btn-area {
   padding: 30px;
-  .back-btn {
+  & > .btn {
     width: 150px;
-    margin-right: 10px;
-  }
-  .next-btn {
-    width: 150px;
+    & + .btn {
+      margin-left: 10px;
+    }
   }
 }
 .creation-form /deep/ .kols-list {

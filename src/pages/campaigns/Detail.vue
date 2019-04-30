@@ -165,6 +165,7 @@
                   :defaultCurrent="kolsPage"
                   :defaultPageSize="kolsPerPage"
                   :total="kolsTotal"
+                  :hideOnSinglePage="true"
                   @change="onKolsPageChange"
                 />
               </div>
@@ -300,12 +301,11 @@
       </div>
     </div>
 
-    <div class="text-center p30">
+    <div class="text-center create-btn-area p30">
       <router-link
-        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
-        class="btn btn-cyan btn-outline edit-btn"
-        :to="'/campaigns/'+ $route.params.id +'/edit'"
-      >{{$t('lang.campaigns.list.btns.edits')}}</router-link>
+        class="btn btn-cyan btn-outline back-btn"
+        to="/campaigns"
+      >{{$t('lang.backListBtn')}}</router-link>
       <button
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
@@ -314,14 +314,19 @@
         :disabled="canCancel ? false : true"
       >{{$t('lang.campaigns.list.btns.cancel')}}</button>
       <router-link
+        v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
+        class="btn btn-blue edit-btn"
+        :to="'/campaigns/'+ $route.params.id +'/edit'"
+      >{{$t('lang.campaigns.list.btns.edit')}}</router-link>
+      <router-link
         v-if="detailData.status == 'unpay'"
         :to="'/campaigns/'+ $route.params.id +'/pay'"
-        class="btn btn-cyan btn-outline pay-btn"
+        class="btn btn-purple pay-btn"
       >{{$t('lang.campaigns.list.btns.pay')}}</router-link>
       <router-link
         v-show="detailData.status != 'pending' && detailData.status != 'unpay' && detailData.status != 'rejected'"
         :to="'/campaigns/create?copy_id='+ detailData.id"
-        class="btn btn-cyan edit-btn"
+        class="btn btn-cyan btn-outline edit-btn"
       >{{$t('lang.campaigns.list.btns.repost')}}</router-link>
     </div>
 
@@ -813,5 +818,14 @@ export default {
 }
 .cancel-btn, .edit-btn, .pay-btn {
   width: 150px;
+}
+.create-btn-area {
+  padding: 30px;
+  & > .btn {
+    width: 150px;
+    & + .btn {
+      margin-left: 10px;
+    }
+  }
 }
 </style>

@@ -140,6 +140,13 @@
         </div>
       </div>
     </div>
+
+    <div class="text-center create-btn-area">
+      <router-link
+        class="btn btn-cyan btn-outline back-btn"
+        to="/creations"
+      >{{$t('lang.backListBtn')}}</router-link>
+    </div>
   </div>
 </template>
 
@@ -273,6 +280,15 @@ export default {
     float: left;
     width: 33.33333%;
     padding: 0 10px;
+  }
+}
+.create-btn-area {
+  padding: 30px;
+  & > .btn {
+    width: 150px;
+    & + .btn {
+      margin-left: 10px;
+    }
   }
 }
 </style>

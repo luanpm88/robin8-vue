@@ -24,6 +24,7 @@
           :defaultCurrent="currentPage"
           :defaultPageSize="kolsPerPage"
           :total="kolsTotal"
+          :hideOnSinglePage="true"
           @change="onPageChange"
         />
       </div>

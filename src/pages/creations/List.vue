@@ -5,7 +5,7 @@
         <router-link to="/creations/create" class="btn btn-cyan btn-sm pull-right">{{$t('lang.router.creationCreate')}}</router-link>
       </div>
       <div class="panel-body">
-        <table class="default-table">
+        <table v-if="creationsList.length > 0" class="default-table">
           <thead>
             <tr>
               <th width="40%">Profile</th>
@@ -67,6 +67,8 @@
             </tr>
           </tbody>
         </table>
+
+        <div v-else class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
     </div>
 
@@ -75,6 +77,7 @@
         :defaultCurrent="page"
         :defaultPageSize="perPage"
         :total="total"
+        :hideOnSinglePage="true"
         @change="onPageChange"
       />
     </div>

@@ -35,6 +35,7 @@
         :defaultCurrent="page"
         :defaultPageSize="perPage"
         :total="total"
+        :hideOnSinglePage="true"
         @change="onPageChange"
       />
     </div>

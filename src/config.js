@@ -9,9 +9,10 @@ const host = 'https://robin8.net/brand_api/v2'
 const domain = ''
 
 // fergus 接口qa地址
-const searchHost = 'https://api_prod.robin8.net/api/v1/r1'
-// fergus 接口测试地址
 // const searchHost = 'https://api_beta.robin8.net/api/v1/r1'
+// fergus 接口正式地址
+const searchHost = 'https://api_prod.robin8.net/api/v1/r1'
+
 const searchHostKey = '&application_id=local-001&application_key=vue-001'
 
 const config = {
