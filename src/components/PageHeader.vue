@@ -2,7 +2,8 @@
   <div class="page-header">
     <div v-if="!!company && company != ''" class="container clearfix">
       <h1 class="partner-logo pull-left">
-        <img :src="companyLogo" :alt="company" class="logo-img" />
+        <img src="@images/logo.png" alt="Robin8" class="logo-img" />
+        <!--<img :src="companyLogo" :alt="company" class="logo-img" />-->
       </h1>
       <div class="user-info pull-right">
         <div class="media">
