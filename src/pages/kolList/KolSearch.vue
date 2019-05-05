@@ -278,19 +278,19 @@
                   >{{item.pricing.direct_price}}</td>
                   <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
                   <td class="text-center">
-                    <!-- <a-progress
+                    <a-progress
                       type="circle"
                       :percent="item.influence / 10"
                       :width="100"
                       :strokeWidth="9"
                       strokeColor="#b37feb"
                       :format="() => item.influence"
-                    />-->
+                    />
                     <!-- {{$t('lang.kolList.search.influenceTip')}} -->
-                    Coming Soon
+                    <!-- Coming Soon -->
                   </td>
                   <td class="text-center">
-                    <!-- <a-progress
+                    <a-progress
                       type="circle"
                       :percent="item.correlation"
                       :width="100"
@@ -306,8 +306,8 @@
                       strokeColor="#ddd"
                       :format="() => item.correlation"
                       v-if="item.colorStatus === 0"
-                    />-->
-                    Coming Soon
+                    />
+                    <!-- Coming Soon -->
                   </td>
                 </tr>
               </tbody>
@@ -347,16 +347,16 @@ export default {
   data() {
     return {
       comparePop: false,
-      listSortType: 1,
+      listSortType: 0,
       listSortDir: "desc",
       isLoading: true,
       isShow: false,
       isTable: false,
       isFIactive: false,
-      isFluenceActive: true,
+      isFluenceActive: false,
       isFluenceSort: "asc",
       isRIactive: false,
-      isRelevanceActive: false,
+      isRelevanceActive: true,
       isRelevanceSort: "asc",
       // top 用户输入的key
       keyword: "",
@@ -369,7 +369,7 @@ export default {
       followerTo: "",
       influenceFrom: "",
       influenceTo: "",
-      kolOnly: true,
+      kolOnly: false,
       kolOnlyText: "Y",
       currentPage: 0,
       currentPageAdd: 1,
