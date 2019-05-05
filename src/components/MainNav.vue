@@ -124,17 +124,17 @@ export default {
         {
           title: 'nav.ranking',
           icon: 'icon-rocket',
-          href: '/ranking',
-          subNav: [
-            {
-              title: 'nav.wechatRanking',
-              href: '/ranking/WechatRanking'
-            },
-            {
-              title: 'nav.weiboRanking',
-              href: '/ranking/WeiboRanking'
-            }
-          ]
+          href: '#ranking',
+          // subNav: [
+          //   {
+          //     title: 'nav.wechatRanking',
+          //     href: '/ranking/WechatRanking'
+          //   },
+          //   {
+          //     title: 'nav.weiboRanking',
+          //     href: '/ranking/WeiboRanking'
+          //   }
+          // ]
         },
         {
           title: 'nav.socialListening',

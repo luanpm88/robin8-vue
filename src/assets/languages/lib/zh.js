@@ -94,7 +94,7 @@ export const lang = {
     brands: '我的品牌',
     competitors: '我的竞争品牌',
     cart: '我的购物车',
-    ranking: '排名',
+    ranking: '排名 - 即将推出',
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     socialListening: 'KOL聆听',
