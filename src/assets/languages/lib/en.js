@@ -1,6 +1,6 @@
 export const lang = {
-  login: 'Đăng nhập',
-  logout: 'Đăng xuất',
+  login: 'Log In',
+  logout: 'Log Out',
   wechat: 'Wechat',
   weibo: 'Weibo',
   xiaohongshu: 'Xiaohongshu',
@@ -10,419 +10,419 @@ export const lang = {
   instagram: 'Instagram',
   youtube: 'YouTube',
   facebook: 'Facebook',
-  seeMore: 'Xem thêm',
-  more: 'tải thêm',
-  edit: 'sửa',
-  delete: 'xóa',
-  detail: 'chi tiết',
-  payment: 'Thanh toán',
-  information: 'Thông tin',
-  backBtn: 'Trở lại',
-  submitBtn: 'Gửi',
-  payBtn: 'Thanh toán',
-  totalNoDataTip: 'Đang được cập nhật...',
-  searchListNoDataTip: 'Không có kết quả. Hãy thử bỏ giá hoặc giảm lượt theo dõi đế có kết quả nhiều hơn.',
-  brandDisNoDataTip: 'Rỗng',
-  yes: 'Có',
-  no: 'Không',
-  search: 'Tìm kiếm',
-  exposure: 'Mở rộng thêm',
-  all: 'Tất cả',
-  male: 'Nam',
-  female: 'Nữ',
-  yearsOld: 'tuổi',
-  yearsOlder: 'tuổi hoặc lớn hơn',
-  qrTips: '<p>Vui lòng quét mã</p><p>QR để thêm thông tin</p>',
+  seeMore: 'Show More',
+  more: 'load more',
+  edit: 'edit',
+  delete: 'delete',
+  detail: 'detail',
+  payment: 'Payment',
+  information: 'Information',
+  backBtn: 'Back',
+  submitBtn: 'Submit',
+  payBtn: 'Pay',
+  totalNoDataTip: 'Soon to launch...',
+  searchListNoDataTip: 'No results.  Try removing the KOL price or decreasing the followers number for better results.',
+  brandDisNoDataTip: 'NA',
+  yes: 'Yes',
+  no: 'No',
+  search: 'Search',
+  exposure: 'Exposure',
+  all: 'All',
+  male: 'Male',
+  female: 'Female',
+  yearsOld: 'years old',
+  yearsOlder: 'years old or older',
+  qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
   router: {
-    login: 'Đăng nhập',
-    reg: 'Đăng ký',
-    forgetPassword: 'Quên mật khẩu',
-    changePassword: 'Thay đổi mật khẩu',
-    help: 'Trợ giúp',
-    home: 'Trang chính',
-    homeCreate: 'Thêm chiến dịch',
-    settings: 'Cấu hình',
-    companyInfo: 'Thông tin căn bản',
-    myBrands: 'Thương hiệu của tôi',
-    myBrandsCreate: 'Tạo thương hiệu',
-    myCompetitionBrands: 'Thương hiệu cạnh tranh',
-    myCompetitionBrandsCreate: 'Tạo thương hiệu cạnh tranh',
-    myShoppingCart: 'Giỏ hàng',
-    wallet: 'Tài khoản',
-    walletRecharge: 'Nạp tiền',
-    walletSummary: 'Thông tin giao dịch',
-    walletInvoice: 'Yêu cầu hóa đơn',
-    walletInvoiceForm: 'Thông tin hóa đơn',
-    walletReceiverForm: 'Địa chỉ E-mail',
-    creations: 'Chiến dịch',
-    creationList: 'Danh sách chiến dịch',
-    creationCreate: 'Tạo chiến dịch',
-    creationDetail: 'Chi tiết chiến dịch',
-    creationEdit: 'Sửa chiến dịch',
-    chooseKols: 'chọn KOL',
-    creationPay: 'Thanh toán',
-    campaigns: 'Chiến dịch',
-    campaignList: 'Danh sách chiến dịch',
-    campaignCreate: 'Tạo chiến dịch',
-    campaignDetail: 'Chi tiết chiến dịch',
-    campaignEdit: 'Sửa chiến dịch',
-    campaignPay: 'Thanh toán',
-    kolList: 'Danh sách KOL',
-    kolDetail: 'Chi tiết KOL',
-    ranking: 'Thứ hạng',
-    wechatRanking: 'Thứ hạng Wechat',
-    weiboRanking: 'Thứ hạng Weibo',
+    login: 'Log In',
+    reg: 'Sign Up',
+    forgetPassword: 'Forget Password',
+    changePassword: 'Change Password',
+    help: 'Data Explanation',
+    home: 'Home',
+    homeCreate: 'Create Campaign',
+    settings: 'Settings',
+    companyInfo: 'Basic Information',
+    myBrands: 'My Brands',
+    myBrandsCreate: 'Create My Brands',
+    myCompetitionBrands: 'My Competition Brands',
+    myCompetitionBrandsCreate: 'Create My Competition Brands',
+    myShoppingCart: 'My Shopping Cart',
+    wallet: 'My Account',
+    walletRecharge: 'Recharge',
+    walletSummary: 'Transaction Record',
+    walletInvoice: 'Request Invoice',
+    walletInvoiceForm: 'Invoice Information',
+    walletReceiverForm: 'Mailing Address',
+    creations: 'Campaign',
+    creationList: 'Create Campaign',
+    creationCreate: 'Create Campaign',
+    creationDetail: 'Campaign Detail',
+    creationEdit: 'Edit Campaign',
+    chooseKols: 'KOLs',
+    creationPay: 'Payment',
+    campaigns: 'Campaign',
+    campaignList: 'Small V Activity List',
+    campaignCreate: 'Create Campaign',
+    campaignDetail: 'Campaign Detail',
+    campaignEdit: 'Edit Campaign',
+    campaignPay: 'Payment',
+    kolList: 'KOLs List',
+    kolDetail: 'KOL Detail',
+    ranking: 'Ranking',
+    wechatRanking: 'Wechat Ranking',
+    weiboRanking: 'Weibo Ranking',
     benchMark: 'Bench Mark',
-    socialListening: 'Lắng nghe các KOL',
-    kolCompare: 'So sánh KOL'
+    socialListening: 'KOL Listening',
+    kolCompare: 'kolCompare'
   },
   nav: {
-    home: 'Trang chính',
-    campaigns: 'Chiến dịch',
-    customContent: 'Chiến dịch tùy chỉnh',
-    shareOnly: 'Chiến dịch tự động',
-    kols: 'Tìm kiếm KOL',
-    wallet: 'Ví',
-    topUp: 'Nạp tiền',
-    transactions: 'Giao dịch',
-    invoices: 'Hóa đơn',
-    setting: 'Cấu hình',
-    basicInfo: 'Thông tin cơ bản',
-    brands: 'Thương hiệu của tôi',
-    competitors: 'Thương hiệu cạnh tranh',
-    cart: 'Giỏ hàng',
-    ranking: 'Thứ hạng - Đang cập nhật',
-    wechatRanking: 'Thứ hạng Wechat',
-    weiboRanking: 'Thứ hạng Weibo',
-    socialListening: 'Lắng nghe các KOL',
-    help: 'Trợ giúp'
+    home: 'Home',
+    campaigns: 'Campaigns',
+    customContent: 'Custom Content',
+    shareOnly: 'Consumer Content Amplification',
+    kols: 'KOL Search Engine',
+    wallet: 'Wallet',
+    topUp: 'Top Up',
+    transactions: 'Transactions',
+    invoices: 'Invoices',
+    setting: 'Settings',
+    basicInfo: 'Basic Information',
+    brands: 'My Brands',
+    competitors: 'My Competitors',
+    cart: 'My Shopping Cart',
+    ranking: 'Ranking - Coming Soon',
+    wechatRanking: 'Wechat Ranking',
+    weiboRanking: 'Weibo Ranking',
+    socialListening: 'KOL Listening',
+    help: 'Data Explanation'
   },
   login: {
-    title: 'Đăng nhập',
+    title: 'Log In',
     account: {
-      title: 'Tài khoản',
-      placeholder: 'Vui lòng nhập địa chỉ E-mail hoặc số điện thoại',
-      errorTips: 'Địa chỉ E-mail hoặc số điện thoại là bắt buộc nhập'
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
     },
     password: {
-      title: 'Mật khẩu',
-      placeholder: 'Vui lòng nhập mật khẩu',
-      errorTips: 'Mật khẩu là bắt buộc nhập'
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
     },
-    forget: 'Quên mật khẩu?',
-    submit: 'Đăng nhập'
+    forget: 'Forgot Password?',
+    submit: 'Sign In'
   },
   signUp: {
-    title: 'Đăng ký',
+    title: 'Sign Up',
     email: {
       title: 'Email',
-      placeholder: 'Vui lòng nhập email',
-      errorTips: 'Email là bắt buộc nhập'
+      placeholder: 'Please enter your email',
+      errorTips: 'Please enter your email'
     },
     phone: {
-      title: 'Số điện thoại',
-      placeholder: 'Vui lòng nhập số điện thoại',
-      errorTips: 'Số điện thoại là bắt buộc nhập'
+      title: 'Phone',
+      placeholder: 'Please enter your phone number',
+      errorTips: 'Please enter your phone number'
     },
     code: {
-      title: 'Mã kiểm tra',
-      placeholder: 'Vui lòng nhập đúng mã kiểm tra',
-      errorTips: 'Mã kiểm tra không đúng'
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
     },
     password: {
-      title: 'Mật khẩu',
-      placeholder: 'Nhập mật khẩu của bạn',
-      errorTips: 'Mật khẩu là bắt buộc nhập'
+      title: 'Password',
+      placeholder: 'Please enter your password',
+      errorTips: 'Please enter your password'
     },
     toggleTips: {
-      email: 'Đăng ký bằng email',
-      phone: 'Đăng ký bằng số điện thoại'
+      email: 'Sign up with email',
+      phone: 'Sign up with mobile number'
     },
-    submit: 'Đăng ký'
+    submit: 'Sign Up'
   },
   forgetPw: {
-    title: 'Quên mật khẩu',
+    title: 'Forget Password',
     account: {
-      title: 'Tài khoản',
-      placeholder: 'Nhập địa chỉ E-mail hoặc số điện thoại của bạn',
-      errorTips: 'Địa chỉ E-mail hoặc số điện thoại là bắt buộc nhập'
+      title: 'Account',
+      placeholder: 'Please enter your email or phone number',
+      errorTips: 'Please enter your email or phone number'
     },
     code: {
-      title: 'Mã kiểm tra',
-      placeholder: 'Nhập đúng mã kiểm tra',
-      errorTips: 'Mã kiểm tra không đúng'
+      title: 'Valid Code',
+      placeholder: 'Enter valid code',
+      errorTips: 'Enter valid code'
     },
-    login: 'Đăng nhập',
-    reg: 'Đăng ký',
-    submit: 'Kế tiếp'
+    login: 'Sign In',
+    reg: 'Sign Up',
+    submit: 'Next'
   },
   changePw: {
-    title: 'Thay đổi mật khẩu',
+    title: 'Change Password',
     password: {
-      title: 'Mật khẩu',
-      placeholder: 'Nhập mật khẩu mới',
-      errorTips: 'Mật khẩu mới là bắt buộc'
+      title: 'Password',
+      placeholder: 'Please enter new password',
+      errorTips: 'Please enter new password'
     },
     confirmPw: {
-      title: 'Xác nhận mật khẩu',
-      placeholder: 'Nhập lại mật khẩu',
-      errorTips: 'Mật khẩu nhập lại không đúng'
+      title: 'Confirm Password',
+      placeholder: 'Please confirm your password',
+      errorTips: 'Please confirm your password'
     },
-    login: 'Đăng nhập',
-    prev: 'Trở lại',
-    submit: 'Gửi'
+    login: 'Sign In',
+    prev: 'Prev',
+    submit: 'Submit'
   },
   profile: {
-    name: 'Tên thương hiệu',
-    companyName: 'Tên công ty',
-    availAmount: 'Số dư tài khoản'
+    name: 'Brand Name',
+    companyName: 'Company Name (Title)',
+    availAmount: 'Account Balance'
   },
   companyInfo: {
-    title: 'Thông tin thương hiệu',
+    title: 'Brand Information',
     name: {
-      title: 'Tên thương hiệu',
-      placeholder: 'Nhập tên thương hiệu',
-      errorTips: 'Tên thương hiệu là bắt buộc nhập'
+      title: 'Brand Name',
+      placeholder: 'Please enter the Brand Name',
+      errorTips: 'Please enter the Brand Name'
     },
     real_name: {
-      title: 'Tên đầy đủ',
-      placeholder: 'Nhập tên đầy đủ',
-      errorTips: 'Tên đầy đủ là bắt buộc nhập'
+      title: 'Name',
+      placeholder: 'Please enter the Name',
+      errorTips: 'Please enter the Name'
     },
     campany_name: {
-      title: 'Tên công ty',
-      placeholder: 'Nhập tên công ty',
-      errorTips: 'Tên công ty là bắt buộc nhập'
+      title: 'Company Name ',
+      placeholder: 'Please enter the company name',
+      errorTips: 'Please enter the company name'
     },
     url: {
       title: 'Website',
-      placeholder: 'Nhập địa chỉ website',
-      errorTips: 'Địa chỉ website là bắt buộc nhập'
+      placeholder: 'Please enter the website',
+      errorTips: 'Please enter the website'
     },
     description: {
-      title: 'Mô tả thương hiệu',
-      placeholder: 'Nhập mô tả cho thương hiệu',
-      errorTips: 'Mô tả thương hiệu là bắt buộc nhập'
+      title: 'Brand Description',
+      placeholder: 'Please enter the brand description',
+      errorTips: 'Please enter the brand description'
     },
     keywords: {
-      title: 'Từ khóa thương hiệu',
-      placeholder: 'Vui lòng nhập từ khóa',
-      errorTips: 'Từ khóa là bắt buộc nhập'
+      title: 'Brand Keywords',
+      placeholder: 'Please enter the brand keywords',
+      errorTips: 'Please enter the brand keywords'
     },
     avatar_url: {
-      title: 'Logo công ty',
-      placeholder: 'Chọn logo cho công ty',
-      errorTips: 'Logo công ty là bắt buộc chọn'
+      title: 'Brand Logo',
+      placeholder: 'Please upload brand logo',
+      errorTips: 'Please upload brand logo'
     }
   },
   updateBaseInfo: {
     base_info: {
-      title: 'Thông tin cơ bản',
+      title: 'Base Info',
       name: {
-        title: 'Tên',
-        placeholder: 'Nhập tên của bạn',
-        errorTips: 'Tên của bạn là bắt buộc nhập'
+        title: 'Name',
+        placeholder: 'Please fill in your name',
+        errorTips: 'Please fill in your name'
       },
       campany_name: {
-        title: 'Tên công ty',
-        placeholder: 'Nhập tên công ty',
-        errorTips: 'Tên công ty là bắt buộc nhập'
+        title: 'Company Name',
+        placeholder: 'Please fill in your company name',
+        errorTips: 'Please fill in your company name'
       },
       email: {
         title: 'Email',
-        placeholder: 'Nhập email',
-        errorTips: 'Email là bắt buộc nhập'
+        placeholder: 'Please fill in your email',
+        errorTips: 'Please fill in a valid email'
       },
       mobile_number: {
-        title: 'Số điện thoại',
-        placeholder: 'Nhập số điện thoại của bạn',
-        errorTips: 'Vui lòng nhập đúng số điện thoại'
+        title: 'Mobile Number',
+        placeholder: 'Please fill in your mobile number',
+        errorTips: 'Please fill in a valid mobile number'
       }
     },
     my_brand: {
-      title: 'Thương hiện của tôi',
+      title: 'My Brands',
       name: {
-        title: 'Tên thương hiệu',
-        placeholder: 'Nhập tên thương hiệu',
-        errorTips: 'Tên thương hiệu là bắt buộc nhập'
+        title: 'Brand Name',
+        placeholder: 'Please fill in your brand name',
+        errorTips: 'Please fill in your brand name'
       },
       keywords: {
-        title: 'Từ khóa',
-        placeholder: 'Nhập từ khóa cho thương hiệu',
-        errorTips: 'Từ khóa thương hiệu là bắt buộc nhập'
+        title: 'Brand Keywords',
+        placeholder: 'Please fill in your brand keywords',
+        errorTips: 'Please fill in your brand keywords'
       },
       description: {
-        title: 'Mô tả',
-        placeholder: 'Nhập mô tả cho thương hiệu',
-        errorTips: 'Mô tả là bắt buộc nhập'
+        title: 'Brand Description',
+        placeholder: 'Please fill in your brand description',
+        errorTips: 'Please fill in your brand description'
       }
     },
     competitors: {
-      title: 'Thương hiệu canh tranh',
+      title: 'My Competitive Brands',
       name: {
-        title: 'Tên',
-        placeholder: 'Nhập tên',
-        errorTips: 'Tên là bắt buộc nhập'
+        title: 'Name',
+        placeholder: 'Please fill in the name',
+        errorTips: 'Please fill in the name'
       },
       short_name: {
-        title: 'Tên viết tắt',
-        placeholder: 'Nhập tên viết tắt',
-        errorTips: 'Tên viết tắt là bắt buộc nhập'
+        title: 'Short Name',
+        placeholder: 'Please fill in a short name',
+        errorTips: 'Please fill in a short name'
       }
     }
   },
   campaigns: {
-    campaignInfo: 'Thông tin chiến dịch',
-    kolParticipate: 'Them gia KOL',
-    collaborationCompleted: 'Hợp tác thành công',
-    promotionDesc: 'Mô tả chiến dịch',
-    promotionBudget: 'Ngân sách chiến dịch',
-    promotionDetail: 'Chi tiết chiến dịch',
-    promotionTime: 'Thời gian chiến dịch',
-    selectKols: 'Chọn KOL',
-    update: 'Cập nhật',
-    kolList: 'Danh sách KOL',
-    kolAnalysis: 'Phân tích KOL',
+    campaignInfo: 'Campaign Information',
+    kolParticipate: 'KOL Participate',
+    collaborationCompleted: 'Collaboration Completed',
+    promotionDesc: 'Promotion Introduction',
+    promotionBudget: 'Promotion Budget',
+    promotionDetail: 'Promotion Detail',
+    promotionTime: 'Promotion Date',
+    selectKols: 'KOL Selection',
+    update: 'Update',
+    kolList: 'KOL List',
+    kolAnalysis: 'KOL Analysis',
     list: {
       status: {
-        paid: 'Đã thanh toán',
-        participant: 'Đã tham gia',
-        clicks: 'Lượt nhấn',
-        paidClicks: 'Lượt nhấn (trả phí)',
-        exposure: 'Chia sẻ',
-        repost: 'Đăng lại'
+        paid: 'Paid',
+        participant: 'Participant',
+        clicks: 'Clicks',
+        paidClicks: 'Paid Clicks',
+        exposure: 'Exposure',
+        repost: 'Repost'
       },
       btns: {
-        edit: 'Sửa',
-        pay: 'Thanh toán',
-        comments: 'Bình luận',
-        repost: 'Đăng lại'
+        edit: 'Edit',
+        pay: 'Pay',
+        comments: 'Comments',
+        repost: 'Repost'
       }
     },
     link: {
-      title: 'Đường dẫn chiến dịch',
-      placeholder: 'Đường dẫn chiến dịch dùng để tính toán kết quả của chiến dịch.',
-      errorTips: 'Đường dẫn chiến dịch không đúng. Hãy chắc chắn rằng đướng dẫn chính xác.'
+      title: 'Campaign URL',
+      placeholder: 'This url will be used to calculate campaign results.',
+      errorTips: 'This url will be used to calculate campaign results. Please verify url to make sure its accurate.'
     },
     name: {
-      title: 'Tên chiến dịch',
-      placeholder: 'Chọn tên cho chiến dịch.',
-      errorTips: 'Chọn tên chiến dịch hay giúp cho việc thu hút thêm nhiều KOL tham gia hơn.'
+      title: 'Campaign Title',
+      placeholder: 'Please enter your campaign title.',
+      errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
-      title: 'Chi tiết chiến dịch',
-      placeholder: 'Mô tả cho chiến dịch.',
-      errorTips: 'Mô tả chiến dịch hay giúp cho việc thu hút thêm nhiều KOL tham gia hơn.'
+      title: 'Campaign Details',
+      placeholder: 'Please describe your campaign.',
+      errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     picture: {
-      title: 'Hình ảnh chiến dịch',
+      title: 'Campaign Picture',
       placeholder: '',
-      errorTips: 'Vui lòng tải hình ảnh cho chiến dịch'
+      errorTips: 'Please upload an image'
     },
     allBudget: {
-      title: 'Tổng ngân sách',
-      placeholder: 'Tổng ngân sách',
-      errorTips: 'Vui lòng nhập tổng ngân sách'
+      title: 'Totel Budget',
+      placeholder: 'Totel Budget',
+      errorTips: 'Totel Budget'
     },
     platform: {
-      title: 'Mạng kết nối',
-      placeholder: 'Chọn mạng kết nối chiến dịch của bạn',
+      title: 'Social Platform',
+      placeholder: 'Please select the social platform',
       weibo: 'Weibo',
       wechat: 'Wechat',
-      errorTips: 'Vui lòng chọn mạng kết nối'
+      errorTips: 'Please select the social platform'
     },
     mode: {
-      title: 'Phương thức tính phí',
-      placeholder: 'Chọn phương thức thanh toán',
-      clicks: 'CPC (Trả phí theo lượt nhấn chuột)',
-      repost: 'CPP (Trả phí theo bài đăng)',
-      mission: 'CPT (Trả phí theo nhiệm vụ)',
-      errorTips: 'Vui lòng chọn phương thức tính phí'
+      title: 'Payment Method',
+      placeholder: 'Please select the reward method',
+      clicks: 'CPC (Cost Per Click)',
+      repost: 'CPP (Cost Per Post)',
+      mission: 'CPT (Cost Per Task)',
+      errorTips: 'Please select the reward method'
     },
     pictureNumber: {
-      title: 'Yêu cầu người dùng tải hình chụp màn hình chiến dịch của họ',
-      placeholder: 'Chọn số lượng chụp màn hình',
-      onePic: '1 hình chụp',
-      twoPic: '2 hình chụp',
-      threePic: '3 hình chụp',
-      errorTips: 'Chọn số lượng hình chụp màn hình'
+      title: 'Require Campaign Screenshot Upload(s) by User',
+      placeholder: 'Please select the number of images',
+      onePic: 'Upload 1 Screenshot',
+      twoPic: 'Upload 2 Screenshot',
+      threePic: 'Upload 3 Screenshot',
+      errorTips: 'Please select the number of images'
     },
     budget: {
-      title: 'Ngân sách',
-      placeholder: 'Ngân sách',
-      errorTips: 'Chọn ngân sách'
+      title: 'Budget',
+      placeholder: 'Budget',
+      errorTips: 'Budget'
     },
     time: {
-      title: 'Thời gian chiến dịch',
-      startPlaceholder: 'Ngày bắt đầu',
-      endPlaceholder: 'Ngày kết thúc',
-      placeholder: 'Vui lòng chọn khung thời gian chiến dịch',
-      errorTips: 'Khung thời gian cho chiến dịch không đúng'
+      title: 'Promotion Date',
+      startPlaceholder: '选择开始时间',
+      endPlaceholder: '选择结束时间',
+      placeholder: 'Please specify your campaign timeframe',
+      errorTips: 'Please specify your campaign timeframe'
     },
     tags: {
-      title: 'Tứ khóa cho chiến dịch',
+      title: 'Campaign Tags',
       placeholder: '',
-      errorTips: 'Vui lòng chọn từ khóa cho chiến dịch'
+      errorTips: 'Please select the tags'
     },
     kolDistrict: {
-      title: 'Khu vực của KOL',
-      placeholder: 'Chọn khu vực hoạt động của KOL',
-      provincePlaceholder: 'Tất cả',
-      cityPlaceholder: 'Tất cả',
-      provinceErrorTips: 'Vui lòng chọn khu vực liên kết của KOL.',
-      cityErrorTips: 'Vui lòng chọn khu vực liên kết của KOL.'
+      title: 'KOL’s Location',
+      placeholder: 'Please select KOL’s location',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
+      provinceErrorTips: 'Please select the preferred province for the KOLs’ audience.',
+      cityErrorTips: 'Please select the preferred city for the KOLs’ audience.'
     },
     kolAge: {
-      title: 'Độ tuổi KOL',
-      placeholder: 'Tất cả',
-      errorTips: 'Vui lòng chọn độ tuổi của KOL.'
+      title: 'KOL’s Age',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOL’s age range.'
     },
     kolGender: {
-      title: 'Giới tính KOL',
-      placeholder: 'Tất cả',
-      errorTips: 'Vui lòng chọn giới tính của KOL.'
+      title: 'KOL’s Gender',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOL’s gender.'
     },
     kolPush: {
-      title: 'Mục tiêu',
+      title: 'Target',
       placeholder: '',
-      allow: 'Có thể đạt trên mục tiêu đặt ra',
-      notAllow: 'Chỉ đạt đúng mục tiêu đặt ra',
-      errorTips: 'Vui lòng chọn loại mục tiêu'
+      allow: 'Outside Target Match',
+      notAllow: 'Only Target Match',
+      errorTips: 'Please select a target form'
     },
     evaluatePoint: {
-      title: 'Điểm đánh giá',
+      title: '效果打分',
       placeholder: '',
-      errorTips: 'Vui lòng chọn điểm đánh giá'
+      errorTips: '请选择分数'
     },
     evaluateComment: {
-      title: 'Điểm bình luận',
-      placeholder: 'Xếp hạng hiệu suất để cải thiện dịch vụ',
-      errorTips: 'Vui lòng xếp hạng hiệu suất'
+      title: '效果评价',
+      placeholder: '活动效果评价或者建议, 可以帮助我们提升服务',
+      errorTips: '请输入效果评价'
     },
-    createTips: 'Một khi chiến dịch được duyệt, bạn không thể chỉnh sửa chiến dịch được nữa. Tất cả chiến dịch được đăng trước 6:00 PM sẽ được kiểm duyệt trong vòng 2 giờ. Các chiến dịch được đăng sau 6:00 PM sẽ được kiểm duyệt vào ngày hôm sau.',
+    createTips: 'Once your campaign has been approved, you will not be able to make any changes.  All campaigns submitted before 6 pm China will be reviewed within 2 hours.  Campaigns submitted after 6 pm China time, will be processed the next day.',
     payment: {
-      title: 'Thanh toán hóa đơn',
-      name: 'Thanh toán',
-      desc: 'Mô tả chiến dịch',
-      date: 'Thời gian chiến dịch',
-      amount: 'Chi phí',
+      title: 'Pay Invoice',
+      name: 'Text',
+      desc: 'Campaign Description',
+      date: 'Campaign Timeframe',
+      amount: 'Payment Amount',
       method: {
-        title: 'Phương thức thanh toán',
+        title: 'Payment Method',
         alipay: {
           title: 'Alipay',
-          desc: 'Alipay hiện tại không hỗ trợ xuất hóa đơn VAT'
+          desc: 'Alipay do not provide VAT invoice now'
         },
         balance: {
-          title: 'Số dư',
-          desc: 'Sử dụng số dư tài khoản để trả phí'
+          title: 'Account Balance',
+          desc: 'Use account balance to pay'
         },
         onepay: {
           global: {
-            title: 'By your credit / debit / prepaid card',
+            title: 'Onepay - Quốc tế',
             desc: 'Cho phép thanh toán quốc tế'
           },
           local: {
-            title: 'By your Internet Banking',
+            title: 'Onepay - Nội địa',
             desc: 'Nhận thanh toán từ các ngân hàng/ví điện tử nội địa'
           }
         }
@@ -430,452 +430,453 @@ export const lang = {
     }
   },
   creations: {
-    campaignInfo: 'Thông tin chiến dịch',
-    kolParticipate: 'KOL thanh gia',
-    collaborationCompleted: 'Chiến dịch đã hoàn thành',
-    bigVRequirement: 'Yêu cầu thông tin V',
-    bigVSelected: 'Chọn thông tin V',
-    serchBtn: 'Tìm kiếm',
-    kolsNoResult: 'Không có kết quả. Bỏ bớt bộ lọc ngành nghề để có nhiều kết quả hơn.',
+    no_payment: 'Please select payment type',
+    campaignInfo: 'Campaign Information',
+    kolParticipate: 'Participating KOLs',
+    collaborationCompleted: 'Campaign Completed',
+    bigVRequirement: 'Big V related requirement',
+    bigVSelected: 'Selected Big V',
+    serchBtn: 'Search',
+    kolsNoResult: 'No results. Please select fewer industries for better results.',
     name: {
-      title: 'Tên chiến dịch',
-      placeholder: 'Nhập tên chiến dịch.',
-      errorTips: 'Chọn tên chiến dịch hay giúp cho việc thu hút thêm nhiều KOL tham gia hơn.'
+      title: 'Campaign Name',
+      placeholder: 'Please enter your campaign name.',
+      errorTips: 'A good campaign name will help you attract more KOLs to participate to your campaign.'
     },
     description: {
-      title: 'Mô tả chiến dịch',
-      placeholder: 'Nhập mô tả cho chiến dịch.',
-      errorTips: 'Mô tả chiến dịch hay giúp cho việc thu hút thêm nhiều KOL tham gia hơn.'
+      title: 'Campaign Description ',
+      placeholder: 'Please describe your campaign.',
+      errorTips: 'A detailed campaign description will help you attract more KOLs to participate in your campaign.'
     },
     brandName: {
-      title: 'Tên thương hiệu',
-      placeholder: 'Nhập tên thương hiệu',
-      errorTips: 'Để có nhiều thương hiệu có thể chọn hơn. Vui lòng chọn mục Cấu hình và tạo thêm thương hiệu.'
+      title: 'Brand Name',
+      placeholder: 'Please select a brand name',
+      errorTips: 'To add a new brand name in the selection drop down, please go to the settings tab and create a new brand name.'
     },
     platform: {
-      title: 'Mạng liên kết',
-      placeholder: 'Các mạng liên kết',
-      errorTips: 'Vui lòng chọn mạng liên kết'
+      title: 'Social Platform',
+      placeholder: 'Exposure Target',
+      errorTips: 'Please select the platform'
     },
     picture: {
-      title: 'Hình ảnh chiến dịch',
+      title: 'Campaign Picture',
       placeholder: '',
-      errorTips: 'Vui lòng tải hình ảnh cho chiến dịch'
+      errorTips: 'Please upload an image'
     },
     time: {
-      title: 'Thời gian chiến dịch',
-      startPlaceholder: 'Chọn thời gian bắt đầu',
-      endPlaceholder: 'Chọn thời gian kết thúc',
-      placeholder: 'Chọn thời gian cho chiến dịch.',
-      errorTips: 'Vui lòng chọn thời gian cho chiến dịch.'
+      title: 'Campaign Timeframe',
+      startPlaceholder: 'select start time',
+      endPlaceholder: 'select end time',
+      placeholder: 'Please specify your campaign timeframe.',
+      errorTips: 'Please specify your campaign timeframe.'
     },
     kolNumber: {
-      title: 'Số lượng KOL',
-      placeholder: 'Nhập # KOL',
-      errorTips: 'Nhập # KOL'
+      title: 'Number of KOLs',
+      placeholder: 'Enter # of KOLs',
+      errorTips: 'Enter # of KOLs'
     },
     budget: {
-      title: 'Ngân sách cho chiến dịch',
-      placeholder: 'Ngân sách của bạn',
-      errorTips: 'Vui lòng chọn ngân sách'
+      title: 'Campaign Budget',
+      placeholder: 'Your Budget',
+      errorTips: 'Your Budget'
     },
     precaution: {
-      title: 'QUY ĐỊNH CHIẾN DỊCH!',
-      placeholder: 'Nhập quy định chi tiết cho chiến dịch. Ví dụ: điều gì không được nói ra, thông tin quan trọng nào phải được đưa vào, các hướng dẫn điều kiện khác...',
-      errorTips: 'Quy định phải được nhập'
+      title: 'ALERT! Important Details',
+      placeholder: 'Please specify any and all details pursuant to the campaign - for example:  what not to say, important information that must be included and any must- follow instructions or details.',
+      errorTips: 'ALERT! Important Details'
     },
     tags: {
-      title: 'Từ khóa',
+      title: 'Campaign Tags',
       placeholder: '',
-      errorTips: 'Vui lòng nhập từ khóa'
+      errorTips: 'Please select the tags'
     },
     price: {
-      title: 'Khung chi phí',
-      lowestPlaceholder: 'Thấp nhất',
-      highestPlaceholder: 'Cao nhất',
-      placeholder: 'Tất cả',
-      errorTips: 'Vui lòng chọn khung giá thích hợp để chúng tôi có thể liên kết bạn với KOL tốt nhất có thể.'
+      title: 'Price Requirements',
+      lowestPlaceholder: 'Lowest',
+      highestPlaceholder: 'Highest',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred price range for us to recommend the best KOLs for your campaign.'
     },
     followerAge: {
-      title: 'Độ tuổi đối tượng cần tiếp cận',
-      placeholder: 'Tất cả',
-      errorTips: 'Vui lòng chọn độ tuổi của đối tượng tiếp cận.'
+      title: 'Audience’s Age',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOL’s audience age range.'
     },
     followerGender: {
-      title: 'Chọn giới tính đối tượng cần tiếp cận',
-      placeholder: 'Tất cả',
-      errorTips: 'Vui lòng chọn giới tính cho đối tượng cần tiếp cận.'
+      title: 'Audience’s Gender',
+      placeholder: 'All',
+      errorTips: 'Please select the preferred KOL’s audience gender.'
     },
     followerDistrict: {
-      title: 'Khu vực đối tượng cần tiếp cận',
-      placeholder: 'Chọn khu vực của đối tượng cần tiếp cận',
-      provincePlaceholder: 'Tất cả',
-      cityPlaceholder: 'Tất cả',
-      provinceErrorTips: 'Vui lòng chọn khu vực của đối tượng cần tiếp cận.',
-      cityErrorTips: 'Vui lòng chọn khu vực của đối tượng cần tiếp cận.',
+      title: 'Audience’s Location',
+      placeholder: 'Please select audience’s location',
+      provincePlaceholder: 'All',
+      cityPlaceholder: 'All',
+      provinceErrorTips: 'Please select the preferred province for the KOL’s audience.',
+      cityErrorTips: 'Please select the preferred city for the KOL’s audience.',
     },
-    recommendedKOLs: 'KOL được đề xuất',
+    recommendedKOLs: 'Recommended KOLs',
     status: {
-      waiting: 'Đang chờ',
-      processing: 'Đang tiến hành',
-      done: 'Đã hoàn thành'
+      waiting: '待合作',
+      processing: '合作中',
+      done: '已完成'
     },
     payment: {
-      title: 'Thanh toán hóa đơn',
-      amount: 'Chi phí hóa đơn',
+      title: 'Pay Invoice',
+      amount: 'Payment Amount',
       method: {
-        title: 'Phương thức thanh toán',
+        title: 'Payment Method',
         alipay: {
           title: 'Alipay',
-          desc: 'Thanh toán trực tuyến qua cổng thanh toán Alipay'
+          desc: '使用支付宝线上支付安全放心'
         }
       }
     },
     statusArea: {
       pending: {
-        title: 'Chiến dịch đang được kiểm duyệt',
-        desc: 'Chiến dịch sẽ được kiểm tra trong vào 24 giờ'
+        title: 'Your campaign is pending',
+        desc: 'We will review in 24 hours'
       },
       rejected: {
-        title: 'Chiến dịch bị từ chối',
-        desc: 'Vui lòng sửa lại chiến dịch theo yêu cầu'
+        title: 'Your campaign is rejected',
+        desc: 'Please edit your campaign'
       },
       passed: {
-        title: 'Chiến dịch đã được duyệt',
+        title: 'Your campaign is passed',
         desc: ''
       },
       ended: {
-        title: 'Chiến dịch đã kết thúc',
+        title: 'Your campaign is ended',
         desc: ''
       },
       finished: {
-        title: 'Chiến dịch đã hoàn thành',
+        title: 'Your campaign is finished',
         desc: ''
       },
       closed: {
-        title: 'Chiến dịch đã được đóng',
+        title: 'Your campaign is closed',
         desc: ''
       }
     }
   },
   wallet: {
     rechargePage: {
-      profileTitle: 'Thông tin tài khoản',
-      profileChange: 'Sửa',
+      profileTitle: 'Account Information',
+      profileChange: 'Edit',
       recharge: {
-        title: 'Thanh toán trực tuyến',
+        title: 'Online Payment',
         method: {
-          title: 'Phương thức thanh toán',
-          placeholder: 'Chọn phương thức thanh toán',
-          errorTips: 'Vui lòng chọn phương thức thanh toán',
+          title: 'Payment Method',
+          placeholder: 'Please select payment method',
+          errorTips: 'Please select payment method',
           value: 'Alipay'
         },
         credits: {
-          title: 'Số tiền',
-          placeholder: 'Nhập số tiền thanh toán',
-          errorTips: 'Vui lòng nhập số tiền thanh toán'
+          title: 'Payment Amount',
+          placeholder: 'Please fill in payment amount',
+          errorTips: 'Please fill in payment amount'
         },
         invite_code: {
-          title: 'Mã giới thiệu',
-          placeholder: 'Vui lòng nhập mã giới thiệu (không bắt buộc)',
-          errorTips: 'Vui lòng nhập đúng mã giới thiệu'
+          title: 'Invitation Code',
+          placeholder: 'Please enter invitation code (optional)',
+          errorTips: 'Please enter invitation code (optional)'
         }
       }
     },
     summaryPage: {
-      tradeNo: 'Mã giao dịch',
-      direct: 'Loại giao dịch',
-      createdAt: 'Thời gian',
-      credits: 'Số tiền',
-      availAmount: 'Số dư',
-      remark: 'Mô tả'
+      tradeNo: 'Transaction number',
+      direct: 'Transaction type',
+      createdAt: 'Date',
+      credits: 'Amount',
+      availAmount: 'Balance',
+      remark: 'Detail'
     },
     invoicePage: {
       info: {
-        title: 'Thông tin hóa đơn',
-        edit: 'Sửa',
-        create: 'Tạo mới',
+        title: 'Invoice Information',
+        edit: 'Edit',
+        create: '添加发票信息',
         invoiceTitle: {
-          title: 'Tiêu đề',
-          placeholder: 'Nhập tiêu đề',
-          errorTips: 'Vui lòng nhập tiêu đề hóa đơn'
+          title: 'Invoice Title',
+          placeholder: 'Please fill in invoice title',
+          errorTips: 'Please fill in invoice title'
         },
         taxpayerId: {
-          title: 'Mã số thuế',
-          placeholder: 'Nhập mã số thuế',
-          errorTips: 'Vui lòng nhập mã số thuế'
+          title: 'Tax ID',
+          placeholder: 'Please fill in tax iD',
+          errorTips: 'Please fill in tax iD'
         },
         companyAddress: {
-          title: 'Địa chỉ công ty',
-          placeholder: 'Nhập địa chỉ công ty',
-          errorTips: 'Vui lòng nhập địa chỉ công ty'
+          title: 'Company Address',
+          placeholder: 'Please fill in company address',
+          errorTips: 'Please fill in company address'
         },
         companyMobile: {
-          title: 'Điện thoại công ty',
-          placeholder: 'Nhập điện thoại công ty',
-          errorTips: 'Vui lòng nhập điện thoại công ty'
+          title: 'Company Tel',
+          placeholder: 'Please fill in company tel',
+          errorTips: 'Please fill in company tel'
         },
         bankName: {
-          title: 'Tên ngân hàng',
-          placeholder: 'Nhập tên ngân hàng',
-          errorTips: 'Vui lòng nhập tên ngân hàng'
+          title: 'Bank Name',
+          placeholder: 'Please fill in bank name',
+          errorTips: 'Please fill in bank name'
         },
         bankAccount: {
-          title: 'Tài khoản #',
-          placeholder: 'Nhập tài khoản #',
-          errorTips: 'Vui lòng nhập tài khoản #'
+          title: 'Account #',
+          placeholder: 'Please fill in account #',
+          errorTips: 'Please fill in account #'
         }
       },
       receiver: {
-        title: 'Địa chỉ E-mail',
-        edit: 'Sủa',
-        create: 'Tạo mới',
+        title: 'Mailing Address',
+        edit: 'Edit',
+        create: '添加邮寄地址',
         name: {
-          title: 'Tiêu đề email',
-          placeholder: 'Nhập tiêu đề email',
-          errorTips: 'vui lòng nhập tiêu đề email'
+          title: 'Mailing Name',
+          placeholder: 'Please fill in mailing name',
+          errorTips: 'Please fill in mailing name'
         },
         phone_number: {
-          title: 'Số điện thoại',
-          placeholder: 'Nhập số điện thoại',
+          title: 'Phone',
+          placeholder: 'Please fill in phone',
           errorTips: 'Please fill in phone'
         },
         address: {
-          title: 'Địa chỉ E-mail',
-          placeholder: 'Nhập địa chỉ E-mail',
-          errorTips: 'Vui lòng nhập địa chỉ E-mail'
+          title: 'Mailing Address',
+          placeholder: 'Please fill in mailing address',
+          errorTips: 'Please fill in mailing address'
         }
       },
       invoiceSubmit: {
-        title: 'Yêu cầu hóa đơn',
+        title: 'Request Invoice',
         quota: {
           title: '可申请额度',
           tips: '已申请发票的金额不可以申请退款！'
         },
         credits: {
-          title: 'Số tiền',
-          placeholder: 'Nhập số tiền',
-          errorTips: 'Vui lòng nhập số tiền'
+          title: 'Request Amount',
+          placeholder: 'Please fill in request amount',
+          errorTips: 'Please fill in request amount'
         },
         type: {
-          title: 'Loại hóa đơn',
-          placeholder: 'Chọn loại hóa đơn',
-          errorTips: 'Vui lòng chọn loại hóa đơn',
-          common: 'Hóa đơn thường',
-          special: 'Hóa đơn VAT'
+          title: 'Invoice Type',
+          placeholder: 'Please select invoice type',
+          errorTips: 'Please select invoice type',
+          common: 'Regular Invoice',
+          special: 'VAT Invoice'
         },
         price_sheet: {
-          title: 'Báo giá?',
-          placeholder: 'Báo giá?',
-          errorTips: 'Báo giá?'
+          title: 'Quotation?',
+          placeholder: 'Quotation?',
+          errorTips: 'Quotation?'
         }
       },
       invoiceList: {
-        amount: 'Số tiền',
-        type: 'Loại',
-        title: 'Tiêu đề',
-        address: 'Địa chỉ',
-        createDate: 'Ngày tạo',
-        status: 'Trạng thái',
-        tracking: 'Theo dõi #'
+        amount: 'Amount',
+        type: 'Type',
+        title: 'Title',
+        address: 'Address',
+        createDate: 'Create Date',
+        status: 'Status',
+        tracking: 'Tracking #'
       }
     }
   },
   myBrandPage: {
     table: {
       title: {
-        check: 'Kiểm tra',
-        id: 'Mã',
-        name: 'Tên',
-        keywords: 'Từ khóa',
-        description: 'Mô tả',
-        operation: 'Thao tác',
+        check: 'Check',
+        id: 'Id',
+        name: 'Name',
+        keywords: 'Keywords',
+        description: 'Description',
+        operation: 'Operation',
       }
     },
-    addBtn: 'Thêm thương hiệu',
-    contrastButton: "Xem được chọn",
-    tip: 'Bạn chưa chọn thương hiệu',
+    addBtn: 'Add New Brand',
+    contrastButton: "View selected",
+    tip: 'You did not choose the brand',
     addPage: {
-      name: 'Tên thương hiệu:',
-      placeholderName: 'Vui lòng chọn tên thương hiệu',
-      keywords: 'Từ khóa:',
-      placeholderKeywords: 'Vui lòng nhập từ khóa cho thương hiệu',
-      keywordsTips: 'Các từ khóa khác nhau nên được phân cách bằng dấu phẩy (,) để tìm kiếm được hiệu quả hơn.',
-      dec: 'Mô tả thương hiệu:',
-      placeholderDec: 'Vui lòng nhập mô tả thương hiệu'
+      name: 'Brand Name:',
+      placeholderName: 'Please enter the brand name',
+      keywords: 'Brand Keywords:',
+      placeholderKeywords: 'Please fill in the brand keywords',
+      keywordsTips: 'Multiple keywords should be separated by commas to make them more accurate.',
+      dec: 'Brand introduction:',
+      placeholderDec: 'Please fill in the brand introduction'
     }
   },
   myCompetitionBrands: {
-    topTit: 'Bằng việc thêm thương hiệu cạnh tranh, chúng tôi sẽ hiểu rõ hơn sự khác biệt giữa bạn và các thương hiệu này.',
+    topTit: 'By adding your competitors, we will help you understand the differences between you and the competing brands more clearly.',
     table: {
       title: {
-        check: 'Kiểm tra',
-        id: 'Mã',
-        name: 'Tên',
-        shortname: 'Tên viết tắt',
-        operation: 'Thao tác',
+        check: 'Check',
+        id: 'Id',
+        name: 'Name',
+        shortname: 'ShortName',
+        operation: 'Operation',
       }
     },
-    addBtn: 'Thêm thương hiệu cạnh tranh',
-    contrastButton: "Xem dữ liệu và thương hiệu cạnh tranh được chọn",
-    tip: 'Bạn chưa chọn thương hiệu cạnh tranh',
+    addBtn: 'New My Competitive Brand',
+    contrastButton: "View Selected Competitive Brand Data",
+    tip: ' You did not choose a competitive brand',
     addPage: {
-      name: 'Tên thương hiệu: ',
-      placeholderName: 'Vui lòng chọn tên thương hiệu',
-      addTip: 'Thêm thương hiệu cạnh tranh',
-      placeholderDec: 'Vui lòng điều tên viết tắt của thương hiệu'
+      name: 'Brand Name: ',
+      placeholderName: 'Please enter the brand name',
+      addTip: 'Add My Competitive Brand',
+      placeholderDec: 'Please fill in the abbreviation of brand'
     },
-    overThreeTip: 'Bạn không được chọn nhiều hơn 3 thương hiệu cạnh tranh',
-    noneComTip: "Bạn chưa chọn thương hiệu cạnh tranh."
+    overThreeTip: 'You can only choose three competitors at most',
+    noneComTip: "You didn't choose a comparative brand."
   },
   kolList: {
     detail: {
-      btn: 'Trả lại',
-      post: 'Bài đăng',
-      summary: 'Thông tin chung',
-      analytics: 'Phân tích',
+      btn: 'Return',
+      post: 'Posts',
+      summary: 'Summary',
+      analytics: 'Analytics',
       analyticsData: {
-        campaigns: 'Số lượng chiến dịch',
-        performance: 'Hiệu suất (CPC)',
-        performTip: 'Hiệu suất được đánh giá theo phương pháp CPC (theo lượt truy cập). ',
-        clients: 'Số lượng đối tượng tiếp cận',
-        clientTip: 'Số lượng đối tượng tiếp cận của KOL này. Số lượng càng lớn chứng tỏ tiềm năng của KOL càng cao. Mặt khác, một KOL chưa kết nối với thương hiệu nào khác hoặc chỉ kết nối với 1 ít thương hiệu có thể là lợi thế về hiệu quả và chi phí cho chiến dịch.'
+        campaigns: 'No. of Campaigns',
+        performance: 'Performance (CPC)',
+        performTip: 'The performance is measured in terms of CPC (cost-per-click). ',
+        clients: 'No. of Clients',
+        clientTip: 'The number of clients that this KOL works for. A high number of clients indicates a track record that proves the amplification potential of a KOL. On the other hand, a KOL who has not worked for other brands yet or worked only for a few brands might be an attractive and economic choice since he does not yet have a reputation of producing commercial content. '
       },
-      currentBrandName: 'Tên thương hiệu:',
-      mentions: 'Thương hiệu được nhắc đến:',
-      mentionsTip: 'Số lần thương hiệu được nhắc đến trên mạng liên kết trong 7 ngày gần nhất.',
-      sentiment: 'Mức thu hút:',
-      sentimentTip: 'Mức thu hút được đánh giá trong khoảng từ 0 (không hấp dẫn) đến 100 (rất hấp dẫn).',
-      industries: 'TOP ngành nghề',
-      brandDistribution: 'Thương hiệu được mở rộng đến',
-      allBrandTag: 'Mở rộng thương hiệu',
-      keywords: 'Từ khóa',
-      keywordsTip: 'Từ khóa được nhắc đến trong các nội dung chia sẽ tứ các KOL (thương hiệu, sản phẩm, vị trí,...)',
-      activity: 'Hoạt động',
+      currentBrandName: 'Brand Name:',
+      mentions: 'Brand Mentions:',
+      mentionsTip: 'Number of times the brand was mentioned in our social channels in the last 7 days.',
+      sentiment: 'Brand Sentiment:',
+      sentimentTip: 'The sentiment score is a number between 0 (very negative) and 100 (very positive). ',
+      industries: 'Top Industries',
+      brandDistribution: 'Brand Distribution To',
+      allBrandTag: 'Brand Distribution',
+      keywords: 'Keywords',
+      keywordsTip: 'The tag cloud shows keywords (brands, products, locations and other attributes) that frequently occur in the content of the KOL',
+      activity: 'Activity',
       activityData: {
-        id: 'Mã',
-        title: 'Tiêu đề',
-        date: 'Thời gian',
-        performance: 'Hiệu quả'
+        id: 'Id',
+        title: 'Title',
+        date: 'Date',
+        performance: 'Performance'
       },
-      analytics: 'Phân tích',
-      analyticsTotal: 'Tổng cộng',
-      analyticsDay: '30 ngày gần nhất',
+      analytics: 'Analytics',
+      analyticsTotal: 'Total',
+      analyticsDay: 'Last 30 days',
       socialData: {
-        title: 'Dữ liệu mạng kết nối',
-        platform: 'Loại mạng kết nối',
-        price: 'Giá',
-        followers: 'Người theo dõi',
-        likes: 'Lượt thích',
-        shares: 'Chia sẽ',
-        comments: 'Bình luận',
-        postLast: 'Bài viết gần nhất trong 21 ngày',
-        influence: 'Điểm ảnh hưởng'
+        title: 'Social Data',
+        platform: 'Platform',
+        price: 'Price',
+        followers: 'Followers',
+        likes: 'Likes',
+        shares: 'Shares',
+        comments: 'Comments',
+        postLast: 'Post-last 21 days',
+        influence: 'Influence Score'
       },
       otherSocialData: {
-        title: 'Dữ liệu mạng kết nối',
-        platform: 'Loại mạng kết nối',
-        gender: 'Giới tính',
-        price: 'Giá',
-        followers: 'Người theo dõi',
-        tagsDescription: 'Mô tả từ khóa'
+        title: 'Social Data',
+        platform: 'Platform',
+        gender: 'Gender',
+        price: 'Price',
+        followers: 'Followers',
+        tagsDescription: 'Tags Description'
       },
       bestPosts: {
-        title: 'Bài viết hiệu quả nhất',
-        tableTitle: 'Tiêu đề',
-        date: 'Thời gian đăng',
-        readCount: 'Lượt xem',
-        engagement: 'Tổng cộng'
+        title: 'Best Performance Posts',
+        tableTitle: 'Title',
+        date: 'Post Time',
+        readCount: 'Read Count',
+        engagement: 'Sum Engagement'
       },
     },
     analyticVue: {
       weibo: {
         industryTable: {
-          Tit: 'Mở rộng ngành nghề',
-          industry: 'Ngành nghề',
-          DocCount: 'Số bài',
-          DocCountPercent: 'Số bài %',
-          totalLike: 'Lượt thích',
-          totalShare: 'Lượt chia sẻ',
-          totalCommet: 'Lượt bình luận',
-          avgLike: 'Bình quân thích',
-          avgShare: 'Bình quân chia sẽ',
-          avgCommet: 'Bình quân bình luận',
-          maxLike: 'Lượt thích cao nhất',
-          maxShare: 'Lượt chia sẽ cao nhất',
-          maxCommet: 'Lượt bình luận cao nhất'
+          Tit: 'Industries Distribution',
+          industry: 'Industry',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalLike: 'Total Like Count',
+          totalShare: 'Total Share Count',
+          totalCommet: 'Total Comment Count',
+          avgLike: 'Avg Like Count',
+          avgShare: 'Avg Share Count',
+          avgCommet: 'Avg Comment Count',
+          maxLike: 'Max Like Count',
+          maxShare: 'Max Share Count',
+          maxCommet: 'Max Comment Count'
         }
       },
       weixin: {
         industryTable: {
-          industry: 'Ngành nghề',
-          DocCount: 'Số bài',
-          DocCountPercent: 'Số bài %',
-          totalRead: 'Lượt xem',
-          avgRead: 'Bình quân lượt xem',
-          maxRead: 'Lượt xem cao nhất',
-          totalLike: 'Lượt thích',
-          likeRead: 'Tỉ lệ thích/lượt xem %',
+          industry: 'Industry',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalRead: 'Total Reads',
+          avgRead: 'Avg Reads',
+          maxRead: 'Max Reads',
+          totalLike: 'Total Likes',
+          likeRead: 'Likes To Reads %',
         },
         Media: {
-          title: 'Truyền thông nghe nhìn',
-          Type: 'Loại',
-          DocCount: 'Số bài',
-          DocCountPercent: 'Số bài %',
-          totalRead: 'Lượt xem',
-          avgRead: 'Bình quân lượt xem',
-          maxRead: 'Lượt xem cao nhất',
-          totalLike: 'Lượt thích',
-          likeRead: 'Tỉ lệ thích/lượt xem %',
+          title: 'Media Distribution',
+          Type: 'Type',
+          DocCount: 'Doc Count',
+          DocCountPercent: 'Doc Count %',
+          totalRead: 'Total Reads',
+          avgRead: 'Avg Reads',
+          maxRead: 'Max Reads',
+          totalLike: 'Total Likes',
+          likeRead: 'Likes To Reads %',
         },
       },
       chat: {
-        tit: 'Chia sẽ bài viết - Bởi',
-        count: 'Đếm'
+        tit: 'Post Distribution - By',
+        count: 'Count'
       }
     },
     search: {
-      topKey: 'Nhập từ khóa, loại hoặc tên KOL',
-      keyword: 'Nhập ở đây...',
-      search: 'Tìm kiếm',
+      topKey: 'Enter a keyword, category or KOL name',
+      keyword: 'Please type here...',
+      search: 'Search',
       advancedSearch: {
-        btn: 'Tìm kiếm nâng cao',
-        industry: 'Ngành nghề',
+        btn: 'Advanced Search',
+        industry: 'KOL Industry',
         industryType: {
-          Airline: 'Hàng không',
-          Appliances: 'Gia dụng',
-          Car: 'Xe',
-          Babies: 'Em bé',
-          Beauty: 'Làm đẹp',
-          Books: 'Sách',
-          Camera: 'Máy ảnh',
-          Electronics: 'Điện tử',
-          Digital: 'Kỹ thuật số',
-          Education: 'Giáo dục',
-          Entertainment: 'Giải trí',
-          Fashion: 'Thời trang',
-          Finance: 'Tài chính',
-          Fitness: 'Thể hình (fitness)',
-          Food: 'Ăn & Uống',
-          Furniture: 'Nội thất',
-          Games: 'Trò chơi',
-          Health: 'Sức khỏe',
-          Hotel: 'Khách sạn',
+          Airline: 'Airline',
+          Appliances: 'Appliances',
+          Car: 'Car',
+          Babies: 'Babies',
+          Beauty: 'Beauty',
+          Books: 'Books',
+          Camera: 'Camera',
+          Electronics: 'Electronics',
+          Digital: 'Digital',
+          Education: 'Education',
+          Entertainment: 'Entertainment',
+          Fashion: 'Fashion',
+          Finance: 'Finance',
+          Fitness: 'Fitness',
+          Food: 'Food',
+          Furniture: 'Furniture',
+          Games: 'Games',
+          Health: 'Health',
+          Hotel: 'Hotel',
           Internet: 'Internet',
-          Mobile: 'Di động',
-          Music: 'Âm nhạc',
-          Realestate: 'Bất động sản',
-          Sports: 'Thể thao',
-          Travel: 'Du lịch'
+          Mobile: 'Mobile',
+          Music: 'Music',
+          Realestate: 'Realestate',
+          Sports: 'Sports',
+          Travel: 'Travel'
         },
-        engagement: 'Tham gia',
-        followers: 'Lượt theo dõi',
-        influence: 'Điểm ảnh hưởng',
-        influenceTip: 'Điểm ảnh hưởng của 1 KOL được đánh giá từ 0 đếm 1000. Điểm ảnh hưởng càng cao thì chiến dịch càng được truyền thông mạnh và hiệu quả.',
-        checkText: 'Chỉ hiển thị KOL có phí cụ thể trên Robin8'
+        engagement: 'Engagement',
+        followers: 'Followers Count',
+        influence: 'Influence Score',
+        influenceTip: 'The influence score is a number between 0 and 1000 and indicates how influential the KOL is on a social platform. A higher influence score ensures a stronger amplification of a campaign.',
+        checkText: 'Only display KOLs that have prices at Robin8'
       },
-      likeTip: 'Lượng hâm mộ',
-      sumTip: 'Bình quân tham gia',
+      likeTip: 'Fans number',
+      sumTip: 'Average sum engagement',
       tableTop: {
         weixinBig: 'Wechat - big data profile',
         weiboBig: 'Weibo - big data profile - 65,860,968',
@@ -883,52 +884,52 @@ export const lang = {
         weiboR8: 'Weibo - R8 managed',
       },
       table: {
-        check: 'Kiểm tra',
-        profile: 'Thông tin',
-        price: 'Giá',
-        influence: 'Ảnh hưởng',
-        relevance: 'Liên quan'
+        check: 'Check',
+        profile: 'Profile',
+        price: 'Price',
+        influence: 'Influence',
+        relevance: 'Relevance'
       }
     },
     postVue: {
-      tip: 'Chưa có bài đăng trong 21 ngày'
+      tip: 'No Post in 21 Days'
     }
   },
   homePage: {
-    brandTop: 'Thương hiệu',
-    noBrandTip: 'Chọn thương hiệu',
-    noBrand: 'Bạn chưa chọn thương hiệu',
+    brandTop: 'Brand',
+    noBrandTip: 'Please select brand',
+    noBrand: 'You did not choose the brand',
     anlytics: {
-      title: 'Phân tích',
-      trend: 'Đề cập',
-      concept: 'Khái niệm',
-      competitors: 'Cạnh tranh',
-      sentiments: 'Thu hút'
+      title: 'Analytics',
+      trend: 'Mentions',
+      concept: 'Concept',
+      competitors: 'Competitors',
+      sentiments: 'Sentiments'
     },
     recommend: {
-      title: 'KOL được đề xuất'
+      title: 'Recommended KOLs'
     },
     topPosts: {
-      title: 'TOP bài viết'
+      title: 'Top Posts'
     }
   },
   socialPage: {
-    topic: 'Chủ đề',
-    source: 'Nguồn',
-    kolId: 'Mã tài khoản KOL'
+    topic: 'Topic',
+    source: 'Source',
+    kolId: 'KOL Profile ID'
   },
   kolCompare: {
-    name: 'Tên tài khoản',
-    id: 'Mã',
-    dec: 'Mô tả',
+    name: 'Profile Name',
+    id: 'ID',
+    dec: 'Description',
     performance: {
-      tit: 'Hiệu quả'
+      tit: 'Performance'
     },
     price: {
-      tit: 'Chi phí'
+      tit: 'Price Summary'
     }
   },
   radarVue: {
-    tit: 'Phân loại ngành nghề'
+    tit: 'Industry Classification Label Radar'
   }
 }

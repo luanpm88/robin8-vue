@@ -430,6 +430,7 @@ export const lang = {
     }
   },
   creations: {
+    no_payment: 'Vui lòng chọn loại thanh toán',
     campaignInfo: 'Thông tin chiến dịch',
     kolParticipate: 'KOL thanh gia',
     collaborationCompleted: 'Chiến dịch đã hoàn thành',
