@@ -6,7 +6,7 @@
 // const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
 
-const host = 'http://13.229.232.233:4000/brand_api/v2'
+const host = 'http://192.168.239.129:4000/brand_api/v2'
 
 //const host = 'https://robin8.net/brand_api/v2'
 
@@ -136,6 +136,8 @@ const config = {
 
   // 支付post 参数tender_id pay_type / 消费记录 get
   transactionsUrl: `${host}/transactions`,
+  
+  transactionsOnepayUrl: `${host}/transactions/onepay`,
 
   // 创建品牌post 参数name, description
   createBrandUrl: `${host}/users/trademark`,

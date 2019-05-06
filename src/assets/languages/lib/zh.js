@@ -423,11 +423,22 @@ export const lang = {
         balance: {
           title: '账户余额支付',
           desc: '使用账户余额支付'
+        },
+        onepay: {
+          global: {
+            title: 'Onepay - Quốc tế',
+            desc: 'Cho phép thanh toán quốc tế'
+          },
+          local: {
+            title: 'Onepay - Nội địa',
+            desc: 'Nhận thanh toán từ các ngân hàng/ví điện tử nội địa'
+          }
         }
       }
     }
   },
   creations: {
+    no_payment: 'Vui lòng chọn loại thanh toán',
     campaignInfo: '活动基本信息',
     kolParticipate: 'KOL参与',
     collaborationCompleted: '合作完成',

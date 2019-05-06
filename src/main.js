@@ -39,12 +39,12 @@ fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 
 const i18n = new VueI18n({
-  locale: !!store.state.language && store.state.language != '' ? store.state.language : 'en-US', // 设置语言
+  locale: !!store.state.language && store.state.language != '' ? store.state.language : 'vi-VN', // 设置语言
   // locale: 'en-US', // 设置语言
-  fallbackLocale: !!store.state.language && store.state.language != '' ? store.state.language : 'en-US',
+  fallbackLocale: !!store.state.language && store.state.language != '' ? store.state.language : 'vi-VN',
   messages: {
-    'zh-CN': require('./assets/languages/lib/zh'),   // 中文语言包
-    'en-US': require('./assets/languages/lib/en')    // 英文语言包
+    'en-US': require('./assets/languages/lib/en'),   // 英文语言包
+    'vi-VN': require('./assets/languages/lib/vi')    // 英文语言包
   }
 })
 

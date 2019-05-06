@@ -31,12 +31,13 @@
                     name="payMethod"
                     :value="item.val"
                     :checked="item.checked"
+                    v-model="payMethod"
                   />
                 </div>
                 <div class="media-body media-middle">
                   <div
-                    class="pay-icon iconfont "
-                    :class="item.iconClass"
+                    class="pay-icon"
+                    :class="item.iconImg"
                   ></div>
                   <div class="info">
                     <div class="method">{{$t(`lang.${item.name}`)}}</div>
@@ -84,22 +85,23 @@ export default {
       payMethods: [
         {
           id: '0',
-          val: 'alipay',
-          name: 'creations.payment.method.alipay.title',
-          desc: 'creations.payment.method.alipay.desc',
-          iconClass: 'icon-alipay',
+          val: 'global',
+          name: this.$t('lang.campaigns.payment.method.onepay.global.title'),
+          desc: this.$t('lang.campaigns.payment.method.onepay.global.desc'),
+          iconImg: 'onepay-global-bg',
           checked: true
         },
-        // {
-        //   id: '1',
-        //   val: 'wechatpay',
-        //   name: '微信支付',
-        //   desc: '使用微信支付线上支付安全放心',
-        //   iconClass: 'icon-wechat',
-        //   checked: false
-        // }
+        {
+           id: '1',
+           val: 'local',
+           name: this.$t('lang.campaigns.payment.method.onepay.local.title'),
+           desc: this.$t('lang.campaigns.payment.method.onepay.local.desc'),
+           iconImg: 'onepay-local-bg',
+           checked: false
+         }
       ],
-      canSubmit: true
+      canSubmit: true,
+      payMethod: ''
     }
   },
   methods: {
@@ -123,13 +125,19 @@ export default {
       }
     },
     doPay () {
+      if (this.payMethod == ''){
+        alert(this.$t('lang.creations.no_payment'));
+        return false
+      }
+      
       if (!this.canSubmit) {
         return false
       }
       this.canSubmit = false
-      axios.post(apiConfig.transactionsUrl, {
+      axios.post(apiConfig.transactionsOnepayUrl, {
         'tender_id': this.tenderId,
-        'pay_type': 'alipay'
+        'pay_type': 'onepay',
+        'onepay_type': this.payMethod
       }, {
         headers: {
           'Authorization': this.authorization
@@ -141,7 +149,7 @@ export default {
       console.log(res)
       this.canSubmit = true
       if (res.status == 201) {
-        window.location.href = resData.alipay_recharge_url
+        window.location.href = resData.onepay_recharge_url
       }
     }
   },

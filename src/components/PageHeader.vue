@@ -37,14 +37,14 @@
       <div class="languages-ctrl pull-right">
         <span
           class="item"
-          :class="[lang == 'zh-CN' ? 'active' : '']"
-          @click="toggleLang('zh-CN')"
-        >中文</span>
+          :class="[lang == 'vi-VN' ? 'active' : '']"
+          @click="toggleLang('vi-VN')"
+        >Vi</span>
         <span
           class="item"
           :class="[lang == 'en-US' ? 'active' : '']"
           @click="toggleLang('en-US')"
-        >Vi</span>
+        >En</span>
       </div>
       <div class="sub-logo pull-right">
         <span class="text">Powered by</span>
@@ -92,13 +92,13 @@
       <div class="languages-ctrl pull-right">
         <span
           class="item"
-          :class="[lang == 'zh-CN' ? 'active' : '']"
-          @click="toggleLang('zh-CN')"
-        >中文</span>
-        <span
-          class="item"
           :class="[lang == 'en-US' ? 'active' : '']"
           @click="toggleLang('en-US')"
+        >En</span>
+        <span
+          class="item"
+          :class="[lang == 'vi-VN' ? 'active' : '']"
+          @click="toggleLang('vi-VN')"
         >Vi</span>
       </div>
     </div>
