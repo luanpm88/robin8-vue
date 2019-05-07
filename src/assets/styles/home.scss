@@ -517,8 +517,13 @@
     overflow: hidden;
   }
 }
-.kol-search{
-  .nonetip{
-    margin-top: 30px;
+.kol-select-platform{
+  display: inline-block;
+  .ctrl-label{
+    margin-top: 0px;
   }
+}
+.kol-check-label{
+  line-height: 34px;
+  padding-left: 80px;
 }
