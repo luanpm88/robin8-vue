@@ -36,7 +36,24 @@
               </div>
             </div>
           </div>
-          <div class="kol-advance-btn">
+          <!-- 平台切换复选框 -->
+          <div class="text-center">
+            <div class="kol-select-platform" v-for="(platform, index) in tabList" :key='platform.tabIndex'>
+              <label class="ctrl-label">
+                <input
+                  name="platform"
+                  type="radio"
+                  :value="index"
+                  v-model="selectPlatform"
+                  v-validate="'required'"
+                  @change="platformChange"
+                />
+                <span>{{$t(`lang.${platform.name}`)}}</span>
+              </label>
+            </div>
+          </div>
+          <!-- Advanced Search 按钮 -->
+          <div class="kol-advance-btn mt20">
             <span
               class="toggle"
               @click="showMoreSearch"
@@ -45,8 +62,34 @@
         </div>
         <!-- 高级搜索 -->
         <div v-if="advancedSearch" class="form-horizontal mt30">
+          
           <div class="form-group">
             <div
+              class="col-sm-2 control-label"
+            >{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input type="text" class="form-control" v-model="followerFrom" placeholder="N/A">
+                <div class="input-group-addon">-</div>
+                <input type="text" class="form-control" v-model="followerTo" placeholder="N/A">
+              </div>
+            </div>
+            <div class="col-sm-2 control-label">
+              <a-tooltip
+                placement="topLeft"
+                :title="$t('lang.kolList.search.advancedSearch.influenceTip')"
+              >{{$t('lang.kolList.search.advancedSearch.influence')}}</a-tooltip>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input type="text" class="form-control" v-model="influenceFrom" placeholder="N/A">
+                <div class="input-group-addon">-</div>
+                <input type="text" class="form-control" v-model="influenceTo" placeholder="N/A">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
@@ -124,7 +167,7 @@
                   value="travel"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
               </select>
-            </div>
+            </div> -->
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
@@ -135,37 +178,12 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div
-              class="col-sm-2 control-label"
-            >{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" v-model="followerFrom" placeholder="N/A">
-                <div class="input-group-addon">-</div>
-                <input type="text" class="form-control" v-model="followerTo" placeholder="N/A">
-              </div>
+            <div  class="col-sm-6">
+              <label class="kol-check-label">
+                <input type="checkbox" v-model="kolOnly">
+                {{$t('lang.kolList.search.advancedSearch.checkText')}}
+              </label>
             </div>
-            <div class="col-sm-2 control-label">
-              <a-tooltip
-                placement="topLeft"
-                :title="$t('lang.kolList.search.advancedSearch.influenceTip')"
-              >{{$t('lang.kolList.search.advancedSearch.influence')}}</a-tooltip>
-            </div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" v-model="influenceFrom" placeholder="N/A">
-                <div class="input-group-addon">-</div>
-                <input type="text" class="form-control" v-model="influenceTo" placeholder="N/A">
-              </div>
-            </div>
-          </div>
-          <div class="text-center">
-            <label>
-              <input type="checkbox" v-model="kolOnly">
-              {{$t('lang.kolList.search.advancedSearch.checkText')}}
-            </label>
           </div>
           <div class="text-center p30">
             <button
@@ -174,7 +192,6 @@
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
-
           <div class="search-tips text-center">
             <p>We are tuning our search engine. If you find a wrong search result, please take a picture and email us at info@robin8.com.</p>
             <p>Thank you for your support!</p>
@@ -183,137 +200,135 @@
       </div>
     </div>
     <!-- 内容部分 -->
-    <div class="panel default-panel kols-list-panel mt20">
-      <div class="panel-body">
+    <div class="panel default-panel kols-list-panel mt20" v-if="isShowKolList">
+      <div class="panel-body p30">
         <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinR8')}} - {{r8List.wechat_kols_count}}</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboR8')}} - {{r8List.weibo_kols_count}}</span>
         </div>-->
-
-        <default-tabs :tabList="tabList" :tabIndex="tabIndex" @changeTab="changeTab">
-          <div class="nonetip" v-if="isShow">
-            <span>{{$t('lang.searchListNoDataTip')}}</span>
-          </div>
-          <div class="r8-loading" v-if="isLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <div v-if="isTable">
-            <table class="default-table mt20">
-              <thead>
-                <tr>
-                  <!-- <th v-if="tabIndex === 0 || tabIndex === 1" width="6%">{{$t('lang.kolList.search.table.check')}}</th> -->
-                  <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
-                  <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
-                  <th width="18%" class="text-center">
-                    {{$t('lang.kolList.search.table.influence')}}
-                    <span
-                      @click="influencerank(1)"
-                      :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}"
-                    >
-                      <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
-                    </span>
-                  </th>
-                  <th width="18%" class="text-center">
-                    {{$t('lang.kolList.search.table.relevance')}}
-                    <span
-                      @click="influencerank(2)"
-                      :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}"
-                    >
-                      <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
-                <tr v-for="(item, index) in key" :key="index">
-                  <!-- <td v-if="tabIndex === 0 || tabIndex === 1">
-                    <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
-                  </td> -->
-                  <td>
-                    <div class="media kol-profile">
-                      <div class="media-left media-middle">
-                        <div class="avatar" @click="intoKolDetail(item)">
-                          <img :src="item.avatar_url" alt class="avatar-img">
-                        </div>
-                      </div>
-                      <div class="media-body media-middle">
-                        <h5 class="title">
-                          <span
-                            @click="intoKolDetail(item)"
-                            class="kol-tit-span"
-                          >{{item.profile_name}}</span>
-                        </h5>
-                        <p class="desc">{{item.description_raw}}</p>
-                        <div class="status">
-                          <a-tooltip
-                            placement="topLeft"
-                            :title="$t('lang.kolList.search.likeTip')"
-                            class="item"
-                            v-if="tabIndex === 0 || tabIndex === 1 || tabIndex === 2  || tabIndex === 3  || tabIndex === 4 || tabIndex === 5"
-                          >
-                            <i class="iconfont icon-user-heart"></i>
-                            {{item.fans_number}}
-                          </a-tooltip>
-                          <a-tooltip
-                            placement="topLeft"
-                            :title="$t('lang.kolList.search.sumTip')"
-                            class="item"
-                            v-if="tabIndex === 0 || tabIndex === 1"
-                          >
-                            <i class="iconfont icon-app"></i>
-                            {{item.stats.avg_sum_engagement}}
-                          </a-tooltip>
-                        </div>
-                      </div>
-                      <div class="media-right media-middle operation-area">
-                        <span class="iconfont icon-cart active" @click="doAddCart(item)"></span>
+        <div class="nonetip" v-if="isShow">
+          <span>{{$t('lang.searchListNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading mb10" v-if="isLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div v-if="isTable">
+          <table class="default-table mt20 mb10">
+            <thead>
+              <tr>
+                <!-- <th v-if="tabIndex === 0 || tabIndex === 1" width="6%">{{$t('lang.kolList.search.table.check')}}</th> -->
+                <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
+                <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
+                <th width="18%" class="text-center">
+                  {{$t('lang.kolList.search.table.influence')}}
+                  <span
+                    @click="influencerank(1)"
+                    :class="{'kol-data-rank': true, fluenceactive: isFluenceActive}"
+                  >
+                    <i :class="{down: true, 'is-bottom-iactive': !isFIactive}"></i>
+                  </span>
+                </th>
+                <th width="18%" class="text-center">
+                  {{$t('lang.kolList.search.table.relevance')}}
+                  <span
+                    @click="influencerank(2)"
+                    :class="{'kol-data-rank': true, relevanceactive: isRelevanceActive}"
+                  >
+                    <i :class="{down: true, 'is-bottom-iactive': !isRIactive}"></i>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody v-for="(key, twoIndex) in searchListBox" :key="twoIndex">
+              <tr v-for="(item, index) in key" :key="index">
+                <!-- <td v-if="tabIndex === 0 || tabIndex === 1">
+                  <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)">
+                </td> -->
+                <td>
+                  <div class="media kol-profile">
+                    <div class="media-left media-middle">
+                      <div class="avatar" @click="intoKolDetail(item)">
+                        <img :src="item.avatar_url" alt class="avatar-img">
                       </div>
                     </div>
-                  </td>
-                  <td
-                    class="text-center"
-                    v-if="tabIndex === 0 || tabIndex === 1"
-                  >{{item.pricing.direct_price}}</td>
-                  <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
-                  <td class="text-center">
-                    <a-progress
-                      type="circle"
-                      :percent="item.influence / 10"
-                      :width="100"
-                      :strokeWidth="9"
-                      strokeColor="#b37feb"
-                      :format="() => item.influence"
-                    />
-                    <!-- {{$t('lang.kolList.search.influenceTip')}} -->
-                    <!-- Coming Soon -->
-                  </td>
-                  <td class="text-center">
-                    <a-progress
-                      type="circle"
-                      :percent="item.correlation"
-                      :width="100"
-                      :strokeWidth="9"
-                      strokeColor="#b37feb"
-                      :format="() => item.correlation + '%'"
-                      v-if="item.colorStatus === 1"
-                    />
-                    <a-progress
-                      type="circle"
-                      :width="100"
-                      :strokeWidth="9"
-                      strokeColor="#ddd"
-                      :format="() => item.correlation"
-                      v-if="item.colorStatus === 0"
-                    />
-                    <!-- Coming Soon -->
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="text-center p30">
+                    <div class="media-body media-middle">
+                      <h5 class="title">
+                        <span
+                          @click="intoKolDetail(item)"
+                          class="kol-tit-span"
+                        >{{item.profile_name}}</span>
+                      </h5>
+                      <p class="desc">{{item.description_raw}}</p>
+                      <div class="status">
+                        <a-tooltip
+                          placement="topLeft"
+                          :title="$t('lang.kolList.search.likeTip')"
+                          class="item"
+                          v-if="showFunsnumber"
+                        >
+                          <i class="iconfont icon-user-heart"></i>
+                          {{item.fans_number}}
+                        </a-tooltip>
+                        <a-tooltip
+                          placement="topLeft"
+                          :title="$t('lang.kolList.search.sumTip')"
+                          class="item"
+                          v-if="showEngagement"
+                        >
+                          <i class="iconfont icon-app"></i>
+                          {{item.stats.avg_sum_engagement}}
+                        </a-tooltip>
+                      </div>
+                    </div>
+                    <div class="media-right media-middle operation-area">
+                      <span class="iconfont icon-cart active" @click="doAddCart(item)"></span>
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="text-center"
+                  v-if="showDirectPrice"
+                >{{item.pricing.direct_price}}</td>
+                <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
+                <td class="text-center">
+                  <a-progress
+                    type="circle"
+                    :percent="item.influence / 10"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#b37feb"
+                    :format="() => item.influence"
+                  />
+                  <!-- {{$t('lang.kolList.search.influenceTip')}} -->
+                  <!-- Coming Soon -->
+                </td>
+                <td class="text-center">
+                  <a-progress
+                    type="circle"
+                    :percent="item.correlation"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#b37feb"
+                    :format="() => item.correlation + '%'"
+                    v-if="item.colorStatus === 1"
+                  />
+                  <a-progress
+                    type="circle"
+                    :width="100"
+                    :strokeWidth="9"
+                    strokeColor="#ddd"
+                    :format="() => item.correlation"
+                    v-if="item.colorStatus === 0"
+                  />
+                  <!-- Coming Soon -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="text-center">
             <a-pagination
               :defaultCurrent="currentPage"
               :defaultPageSize="kolsPerPage"
@@ -323,7 +338,6 @@
               @change="onPageChange"
             />
           </div>
-        </default-tabs>
       </div>
     </div>
   </div>
@@ -332,7 +346,6 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
-import DefaultTabs from "@components/DefaultTabs";
 import { Progress } from "ant-design-vue";
 import { mapState } from "vuex";
 import commonJs from "@javascripts/common.js";
@@ -340,8 +353,7 @@ import commonJs from "@javascripts/common.js";
 export default {
   name: "kolsearch",
   components: {
-    AProgress: Progress,
-    DefaultTabs
+    AProgress: Progress
   },
   props: ["keyWord"],
   data() {
@@ -360,6 +372,7 @@ export default {
       isRelevanceSort: "asc",
       // top 用户输入的key
       keyword: "",
+      isShowKolList: false,
       // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: "",
       industry: "",
@@ -377,6 +390,7 @@ export default {
       kolsPerPage: 10,
       kolsTotal: 0,
       advancedSearch: true,
+      selectPlatform: 0,
       tabList: [
         {
           index: 0,
@@ -418,12 +432,19 @@ export default {
       r8List: [],
       totalParams: {},
       cartParams: {},
-      compareList: []
+      compareList: [],
+      //  Instagram YouTube Facebook 三个平台不展示 fans_number 其他平台展示
+      showFunsnumber: true,
+      // （微信微博展示）avg_sum_engagement 
+      showEngagement: true,
+      // （微信微博展示）direct_price（其他平台展示）ref_price 
+      showDirectPrice: true
     };
   },
   created() {
     this.tabIndex = 0;
-    this.r8Kol();
+    // 获取kollist 微信和微博 展示的总数
+    // this.r8Kol();
     // 获取keywords
     this.getBaseData();
     if (this.$route.query.brand_keywords) {
@@ -431,15 +452,15 @@ export default {
       this.keyword = this.$route.query.brand_keywords;
       // 初始化参数
       this.paramsInit();
+      // 从home 首页进来 展示kol list
+      this.isShowKolList = true;
       // 调用接口
       this.totalJoggle(this.tabIndex);
     } else {
-      this.tabIndex = 0;
-      // 初始化参数
-      this.paramsInit();
-      // 调用接口
-      this.totalJoggle(this.tabIndex);
+      // 首次进来是 不展示kol list
+      this.isShowKolList = false;
     }
+    
   },
   computed: {
     ...mapState(["authorization"])
@@ -478,6 +499,24 @@ export default {
       }
       this.totalParams.profile_sort_dir = this.listSortDir;
       this.totalParams.r8_registered_kol_only = this.kolOnlyText;
+
+      // 控制页面渲染的部分标签
+      if (this.tabIndex === 0 || this.tabIndex === 1) {
+        // （微信微博展示）avg_sum_engagement 
+        this.showEngagement = true;
+        // （微信微博展示）direct_price（其他平台展示）ref_price 
+        this.showDirectPrice = true;
+      } else {
+        this.showEngagement = false;
+        this.showDirectPrice = false;
+      }
+      
+      if (this.tabIndex === 6 || this.tabIndex === 7 || this.tabIndex === 8) {
+        this.showFunsnumber = false;
+      } else {
+        this.showFunsnumber = true;
+      }
+      
     },
     // 调用接口
     totalJoggle(type) {
@@ -809,6 +848,8 @@ export default {
       this.searchListBox = [];
       // 初始化参数
       this.paramsInit();
+      // 展示kol list 容器
+      this.isShowKolList = true;
       // 调用接口
       this.totalJoggle(this.tabIndex);
 
@@ -961,6 +1002,17 @@ export default {
           list: this.compareList
         }
       });
+    },
+    platformChange() {
+      let tab = this.selectPlatform;
+      this.tabIndex = tab;
+      if (tab == 0) {
+        this.followerFrom = "100000";
+      } else if (tab == 1) {
+        this.followerFrom = "30000";
+      } else {
+        this.followerFrom = "";
+      }
     }
   }
 };
