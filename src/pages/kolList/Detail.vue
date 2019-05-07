@@ -497,6 +497,12 @@ export default {
   created() {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
+    // console.log(this.detailShow)
+    if (!this.detailShow) {
+      alert('您的可浏览次数已用完！')
+      this.$router.go(-1)
+    }
+
     this.isSingleBrand = true;
     this.allBrand = true;
     let newKey = "";
@@ -510,7 +516,7 @@ export default {
     this.tabIndexOneInit();
   },
   computed: {
-    ...mapState(["authorization", "language"]),
+    ...mapState(['authorization', 'language', 'detailShow']),
     listenLangue() {
       return this.language;
     }

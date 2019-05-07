@@ -121,7 +121,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompany', 'removeCompanyName', 'removeCompanyLogo', 'setLanguage', 'setMsgCount', 'removeMsgCount']),
+    ...mapMutations(['removeAuthorization', 'removeNickname', 'removeMobile', 'removeAccount', 'removeEmail', 'removeAvatarImgUrl', 'removeCompany', 'removeCompanyName', 'removeCompanyLogo', 'setLanguage', 'setMsgCount', 'removeMsgCount', 'removeDetailShow']),
     getMsgCount () {
       axios.get(apiConfig.messagesCountUrl, {
         headers: {
@@ -147,6 +147,7 @@ export default {
       this.removeCompanyName()
       this.removeCompanyLogo()
       this.removeMsgCount()
+      this.removeDetailShow()
       this.$router.replace('/login')
     },
     toggleLang (lang) {

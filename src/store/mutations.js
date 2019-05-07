@@ -77,6 +77,12 @@ export default {
       commonJs.setLocalData('robin8Messages', msg, 604700)
     } catch (e) {}
   },
+  setDetailShow (state, msg) {
+    state.detailShow = msg
+    try {
+      commonJs.setLocalData('robin8DetailShow', msg, 604700)
+    } catch (e) {}
+  },
   removeAuthorization (state) {
     state.authorization = ''
     try {
@@ -141,6 +147,12 @@ export default {
     state.messages = ''
     try {
       commonJs.removeLocalData('robin8Messages')
+    } catch (e) {}
+  },
+  removeDetailShow (state) {
+    state.detailShow = ''
+    try {
+      commonJs.removeLocalData('robin8DetailShow')
     } catch (e) {}
   }
 }

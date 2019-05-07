@@ -100,6 +100,15 @@ try {
   }
 } catch (e) {}
 
+let detailShow = ''
+let localDetailShow = commonJs.getLocalData('robin8DetailShow')
+console.log('当前detailShow：' + localDetailShow)
+try {
+  if (!!localDetailShow && localDetailShow != '') {
+    detailShow = localDetailShow
+  }
+} catch (e) {}
+
 export default {
   authorization,
   nickname,
@@ -111,5 +120,6 @@ export default {
   companyName,
   companyLogo,
   language,
-  messages
+  messages,
+  detailShow
 }
