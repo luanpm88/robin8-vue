@@ -77,10 +77,16 @@ export default {
       commonJs.setLocalData('robin8Messages', msg, 604700)
     } catch (e) {}
   },
-  setDetailShow (state, msg) {
-    state.detailShow = msg
+  setDetailShow (state, data) {
+    state.detailShow = data
     try {
-      commonJs.setLocalData('robin8DetailShow', msg, 604700)
+      commonJs.setLocalData('robin8DetailShow', data, 604700)
+    } catch (e) {}
+  },
+  setAdvancedSearchShow (state, data) {
+    state.advancedSearchShow = data
+    try {
+      commonJs.setLocalData('robin8AdvancedSearchShow', data, 604700)
     } catch (e) {}
   },
   removeAuthorization (state) {
@@ -153,6 +159,12 @@ export default {
     state.detailShow = ''
     try {
       commonJs.removeLocalData('robin8DetailShow')
+    } catch (e) {}
+  },
+  removeAdvancedSearchShow (state) {
+    state.advancedSearchShow = ''
+    try {
+      commonJs.removeLocalData('robin8AdvancedSearchShow')
     } catch (e) {}
   }
 }

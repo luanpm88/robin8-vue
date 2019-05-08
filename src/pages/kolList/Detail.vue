@@ -352,7 +352,7 @@ import ChartOption from "@components/Chart/GlobalChartOption";
 import commonJs from "@javascripts/common.js";
 import { Tooltip } from "ant-design-vue";
 import cloud from "@components/Chart/chatCloud";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 // analytics
 import Analytics from "@/pages/kolList/analytic/Index";
 // posts
@@ -481,7 +481,8 @@ export default {
       isAllbrandDisShow: false,
       isAllbrandDisTag: false,
       allbrandDisTags: [],
-      kolProfileLink: ''
+      kolProfileLink: '',
+      canRender: true
     };
   },
   watch: {
@@ -494,14 +495,18 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
-    // console.log(this.detailShow)
-    if (!this.detailShow) {
-      alert('您的可浏览次数已用完！')
-      this.$router.go(-1)
-    }
+    console.log(this.detailShow)
+    // if (!this.detailShow) {
+    //   alert('您的可浏览次数已用完！')
+    //   this.$router.go(-1)
+    // } else {
+    //   this.checkUserLevel()
+    // }
+
+    // this.checkUserLevel()
 
     this.isSingleBrand = true;
     this.allBrand = true;
@@ -522,6 +527,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setDetailShow', 'setAdvancedSearchShow']),
     // 切换中英文 单独环keyword
     changeKeyWord(language) {
       let totalParams = {};
@@ -1564,6 +1570,27 @@ export default {
             }
           }
         });
+    },
+    checkUserLevel () {
+      axios.post(apiConfig.userLevelUrl, {}, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleCheckUserLevelSucc)
+    },
+    handleCheckUserLevelSucc (res) {
+      // console.log(res)
+      let resData = res.data
+      console.log(resData)
+      if (res.status == 201) {
+        this.setDetailShow(resData.kol_detail)
+        this.setAdvancedSearchShow(resData.advanced_search)
+
+        if (!resData.kol_detail) {
+          alert('您的可浏览次数已用完！')
+          this.$router.go(-1)
+        }
+      }
     }
   }
 };

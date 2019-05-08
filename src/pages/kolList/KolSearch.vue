@@ -53,7 +53,7 @@
             </div>
           </div>
           <!-- Advanced Search 按钮 -->
-          <div class="kol-advance-btn mt20">
+          <div v-if="advancedSearchShow" class="kol-advance-btn mt20">
             <span
               class="toggle"
               @click="showMoreSearch"
@@ -61,8 +61,8 @@
           </div>
         </div>
         <!-- 高级搜索 -->
-        <div v-if="advancedSearch" class="form-horizontal mt30">
-          
+        <div v-if="advancedSearch && advancedSearchShow" class="form-horizontal mt30">
+
           <div class="form-group">
             <div
               class="col-sm-2 control-label"
@@ -435,9 +435,9 @@ export default {
       compareList: [],
       //  Instagram YouTube Facebook 三个平台不展示 fans_number 其他平台展示
       showFunsnumber: true,
-      // （微信微博展示）avg_sum_engagement 
+      // （微信微博展示）avg_sum_engagement
       showEngagement: true,
-      // （微信微博展示）direct_price（其他平台展示）ref_price 
+      // （微信微博展示）direct_price（其他平台展示）ref_price
       showDirectPrice: true
     };
   },
@@ -460,10 +460,10 @@ export default {
       // 首次进来是 不展示kol list
       this.isShowKolList = false;
     }
-    
+
   },
   computed: {
-    ...mapState(["authorization"])
+    ...mapState(['authorization', 'advancedSearchShow'])
   },
   methods: {
     // 初始化传参数
@@ -502,21 +502,21 @@ export default {
 
       // 控制页面渲染的部分标签
       if (this.tabIndex === 0 || this.tabIndex === 1) {
-        // （微信微博展示）avg_sum_engagement 
+        // （微信微博展示）avg_sum_engagement
         this.showEngagement = true;
-        // （微信微博展示）direct_price（其他平台展示）ref_price 
+        // （微信微博展示）direct_price（其他平台展示）ref_price
         this.showDirectPrice = true;
       } else {
         this.showEngagement = false;
         this.showDirectPrice = false;
       }
-      
+
       if (this.tabIndex === 6 || this.tabIndex === 7 || this.tabIndex === 8) {
         this.showFunsnumber = false;
       } else {
         this.showFunsnumber = true;
       }
-      
+
     },
     // 调用接口
     totalJoggle(type) {

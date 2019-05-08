@@ -1,7 +1,7 @@
 // 小燕
 // const host = 'http://192.168.50.131:3000/brand_api/v2'
 // 张春明
-// const host = 'http://192.168.50.203:3001/brand_api/v2'
+// const host = 'http://192.168.50.242:3001/brand_api/v2'
 // qa
 const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
@@ -42,6 +42,9 @@ const config = {
 
   // 消息标记已读 post id
   messageIsReadUrl: `${host}/messages/is_read`,
+
+  // 详情点击次数 post
+  userLevelUrl: `${host}/users/visit_number_and_time`,
 
   // 品牌主信息编辑 post
   usersUrl: `${host}/users`,

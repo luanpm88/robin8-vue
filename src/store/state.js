@@ -102,10 +102,19 @@ try {
 
 let detailShow = ''
 let localDetailShow = commonJs.getLocalData('robin8DetailShow')
-console.log('当前detailShow：' + localDetailShow)
+// console.log('当前detailShow：' + localDetailShow)
 try {
   if (!!localDetailShow && localDetailShow != '') {
     detailShow = localDetailShow
+  }
+} catch (e) {}
+
+let advancedSearchShow = ''
+let localAdvancedSearchShow = commonJs.getLocalData('robin8AdvancedSearchShow')
+// console.log('当前advancedSearchShow：' + localAdvancedSearchShow)
+try {
+  if (!!localAdvancedSearchShow && localAdvancedSearchShow != '') {
+    advancedSearchShow = localAdvancedSearchShow
   }
 } catch (e) {}
 
@@ -121,5 +130,6 @@ export default {
   companyLogo,
   language,
   messages,
-  detailShow
+  detailShow,
+  advancedSearchShow
 }
