@@ -390,6 +390,7 @@ export default {
       kolsPerPage: 10,
       kolsTotal: 0,
       advancedSearch: true,
+      advancedSearchShow: true,
       selectPlatform: 0,
       tabList: [
         {
@@ -463,7 +464,7 @@ export default {
 
   },
   computed: {
-    ...mapState(['authorization', 'advancedSearchShow'])
+    ...mapState(['authorization'])
   },
   methods: {
     // 初始化传参数
