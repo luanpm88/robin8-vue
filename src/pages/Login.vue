@@ -72,7 +72,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo', 'setAdvancedSearch']),
     // login joggle
     loginUrl (params) {
       const _that = this
@@ -97,6 +97,7 @@ export default {
             _that.setEmail(resData.email)
             _that.setAvatarImgUrl(resData.avatar_url)
             _that.setCompanyName(resData.campany_name)
+            _that.setAdvancedSearch(resData.level_rights.advanced_search)
             if (!!resData.company && resData.company != '') {
               _that.setCompany(resData.company)
               _that.setCompanyLogo(resData.partner_logo)

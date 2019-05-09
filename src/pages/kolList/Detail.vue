@@ -346,6 +346,7 @@
 <script>
 import axios from "axios";
 import apiConfig from "@/config";
+import store from '@/store'
 import DefaultTabs from "@components/DefaultTabs";
 import Echarts from "@components/Chart/GlobalEcharts";
 import ChartOption from "@components/Chart/GlobalChartOption";
@@ -498,16 +499,6 @@ export default {
   created () {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
-    console.log(this.detailShow)
-    // if (!this.detailShow) {
-    //   alert('您的可浏览次数已用完！')
-    //   this.$router.go(-1)
-    // } else {
-    //   this.checkUserLevel()
-    // }
-
-    // this.checkUserLevel()
-
     this.isSingleBrand = true;
     this.allBrand = true;
     let newKey = "";
@@ -521,13 +512,12 @@ export default {
     this.tabIndexOneInit();
   },
   computed: {
-    ...mapState(['authorization', 'language', 'detailShow']),
+    ...mapState(['authorization', 'language']),
     listenLangue() {
       return this.language;
     }
   },
   methods: {
-    ...mapMutations(['setDetailShow', 'setAdvancedSearchShow']),
     // 切换中英文 单独环keyword
     changeKeyWord(language) {
       let totalParams = {};
@@ -1570,28 +1560,28 @@ export default {
             }
           }
         });
-    },
-    checkUserLevel () {
-      axios.post(apiConfig.userLevelUrl, {}, {
-        headers: {
-          'Authorization': this.authorization
-        }
-      }).then(this.handleCheckUserLevelSucc)
-    },
-    handleCheckUserLevelSucc (res) {
-      // console.log(res)
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    axios.post(apiConfig.userLevelUrl, {}, {
+      headers: {
+        'Authorization': store.state.authorization
+      }
+    }).then(function (res) {
       let resData = res.data
-      console.log(resData)
-      if (res.status == 201) {
-        this.setDetailShow(resData.kol_detail)
-        this.setAdvancedSearchShow(resData.advanced_search)
-
+      // console.log(resData)
+      next(vm => {
+        console.log(to)
+        console.log(from)
+        // console.log(vm)
         if (!resData.kol_detail) {
           alert('您的可浏览次数已用完！')
-          this.$router.go(-1)
+          vm.$router.push(from.fullPath)
+        } else {
+          vm.$router.push(to.fullPath)
         }
-      }
-    }
+      })
+    })
   }
 };
 </script>
