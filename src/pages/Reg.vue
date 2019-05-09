@@ -120,7 +120,7 @@ export default {
    }
   },
   methods: {
-    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo', 'setAdvancedSearch']),
+    ...mapMutations(['setAccount', 'setEmail', 'setAuthorization', 'setNickname', 'setMobile', 'setAvatarImgUrl', 'setCompany', 'setCompanyName', 'setCompanyLogo', 'setAdvancedSearchShow']),
     // 邮箱和手机注册切换
     checkType () {
       if (this.flag === true) {
@@ -155,7 +155,7 @@ export default {
             _that.setAvatarImgUrl(res.data.avatar_url)
             _that.setCompanyName(res.data.campany_name)
             _that.setAccount(params.login)
-            _that.setAdvancedSearch(res.data.level_rights.advanced_search)
+            _that.setAdvancedSearchShow(res.data.level_rights.advanced_search)
 
             let regTag = !!_that.$route.query.reg_tag && _that.$route.query.reg_tag != '' ? _that.$route.query.reg_tag : ''
             console.log(regTag)
