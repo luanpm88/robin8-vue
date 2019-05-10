@@ -80,7 +80,7 @@ export default {
         .post(apiConfig.loginUrl, params)
         .then(function(res) {
           let resData = res.data
-          console.log(resData)
+          // console.log(resData)
 
           if (resData.error == 0) {
             alert(resData.alert)
