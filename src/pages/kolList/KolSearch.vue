@@ -178,12 +178,12 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-            <div  class="col-sm-6">
+            <!-- <div  class="col-sm-6">
               <label class="kol-check-label">
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
-            </div>
+            </div> -->
           </div>
           <div class="text-center p30">
             <button
