@@ -541,7 +541,7 @@ export const lang = {
     statusArea: {
       pending: {
         title: 'Your campaign is pending',
-        desc: 'We will review in 24 hours'
+        desc: 'We will review in 72 hours'
       },
       rejected: {
         title: 'Your campaign is rejected',

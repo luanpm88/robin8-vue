@@ -542,7 +542,7 @@ export const lang = {
     statusArea: {
       pending: {
         title: '您提交的活动待审核',
-        desc: '我们将在24小时之内完成审核'
+        desc: '我们将在72小时之内完成审核'
       },
       rejected: {
         title: '您提交的活动未通过审核',

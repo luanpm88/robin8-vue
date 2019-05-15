@@ -524,7 +524,7 @@ export const lang = {
     statusArea: {
       pending: {
         title: 'Chiến dịch đang được kiểm duyệt',
-        desc: 'Chiến dịch sẽ được kiểm tra trong vào 24 giờ'
+        desc: 'Chiến dịch sẽ được kiểm tra trong vào 72 giờ'
       },
       rejected: {
         title: 'Chiến dịch bị từ chối',
