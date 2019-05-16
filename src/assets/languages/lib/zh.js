@@ -43,7 +43,7 @@ export const lang = {
     help: '数据说明',
     messages: '系统消息',
     home: '首页',
-    homeCreate: '创建新活动',
+    create: '创建新活动',
     settings: '企业设置',
     companyInfo: '基本信息',
     myBrands: '我的品牌',
@@ -81,6 +81,7 @@ export const lang = {
   },
   nav: {
     home: '首页',
+    create: '创建新活动',
     campaigns: '营销数据',
     customContent: '大V活动',
     shareOnly: '小V活动',
