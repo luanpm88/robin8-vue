@@ -35,6 +35,7 @@ export const lang = {
   yearsOlder: '岁以上',
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   noData: '暂无内容',
+  kolDetailAlert: '您的5天试用期已过期。要继续使用，请联系Robin8或发送电子邮件至info@robin8.com Robin8',
   router: {
     login: '登录',
     reg: '注册',

@@ -1578,7 +1578,7 @@ export default {
         // console.log(from)
         // console.log(vm)
         if (!resData.kol_detail) {
-          alert('您的可浏览次数已用完！')
+          alert(vm.$i18n.t('lang.kolDetailAlert'))
           vm.$router.push(from.fullPath)
         } else {
           vm.$router.push(to.fullPath)

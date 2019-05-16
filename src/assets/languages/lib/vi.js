@@ -33,6 +33,8 @@ export const lang = {
   yearsOld: 'tuổi',
   yearsOlder: 'tuổi hoặc lớn hơn',
   qrTips: '<p>Vui lòng quét mã</p><p>QR để thêm thông tin</p>',
+  noData: 'Không có dữ liệu',
+  kolDetailAlert: 'Bản dùng thử 5 ngày của bạn đã hết hạn. Để tiếp tục sử dụng, vui lòng liên hệ với Robin8 nhỏ hoặc gửi email cho Robin8 tại địa chỉ info@robin8.com',
   router: {
     login: 'Đăng nhập',
     reg: 'Đăng ký',
