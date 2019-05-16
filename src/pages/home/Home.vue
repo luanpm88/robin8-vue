@@ -14,6 +14,7 @@
             <h6 class="sub-title">Search Engine</h6>
           </div>
         </router-link>
+        
         <router-link to="/home/create" tag="div" class="item">
           <div class="box">
             <div class="iconfont icon-doc"></div>
@@ -143,6 +144,7 @@ export default {
     }
   },
   methods: {
+    
     // 获取my brand 页面
     getBaseData () {
       const _that = this
