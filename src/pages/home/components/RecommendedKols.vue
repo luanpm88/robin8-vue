@@ -64,7 +64,8 @@ export default {
         hasChecked: false,
         hasInflunce: true,
         hasCart: true,
-        hasDelete: false
+        hasDelete: false,
+        type: 0,
       },
       kolRouterData: {
         type: '',
@@ -140,6 +141,7 @@ export default {
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
+      this.kolRenderStatus.type = tab.index
       this.currentList = [] 
       this.isShow = false 
       this.isLoading = true 

@@ -199,8 +199,11 @@
                     <td>{{dataListBox.stats.avg_shares}}</td>
                     <td>{{dataListBox.stats.avg_comments}}</td>
                     <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                    <td>
-                      <!-- {{dataListBox.stats.avg_post_influences}} -->
+                    <td v-if="type === 0">
+                      {{dataListBox.stats.avg_post_influences}}
+                      <!-- Coming Soon -->
+                    </td>
+                    <td v-else>
                       Coming Soon
                     </td>
                   </tr>
