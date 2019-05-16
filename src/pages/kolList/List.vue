@@ -20,36 +20,36 @@ export default {
     MainNav,
     KolSearch
   },
-  beforeRouteEnter(to, from, next){
-    console.log(from)
-   if (from.name !== 'KolDetail') {
-     to.meta.keepAlive = false
-     console.log(999)
-      // if (!from.meta.keepAlive) {
+  // beforeRouteEnter(to, from, next){
+  //   console.log(from)
+  //  if (from.name !== 'KolDetail') {
+  //    to.meta.keepAlive = false
+  //    console.log(999)
+  //     // if (!from.meta.keepAlive) {
 
-      //   console.log(999)
-      // }
-    } 
-    // else {
-    //   console.log(889)
-    //   to.meta.keepAlive = true
-    // }
-    next()
-  },
+  //     //   console.log(999)
+  //     // }
+  //   } 
+  //   // else {
+  //   //   console.log(889)
+  //   //   to.meta.keepAlive = true
+  //   // }
+  //   next()
+  // },
   beforeRouteLeave(to, from, next) {
     // 判断是下一个路由是不是进入到详情页
     if (to.name === 'KolDetail') {
       // console.log('我是详情页面')
       // console.log('1', this.$route.meta.keepAlive)
       if (!from.meta.keepAlive) {
-        from.meta.keepAlive = true
+        this.$route.meta.keepAlive = true
         // console.log('2', this.$route.meta.keepAlive)
       }
       next()
     } else {
-      from.meta.keepAlive = false
+      this.$route.meta.keepAlive = false
       // console.log('3', from.meta.keepAlive)
-      // this.$destroy()
+      this.$destroy()
       next()
     }
   },
