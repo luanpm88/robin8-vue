@@ -75,7 +75,7 @@
           <!-- <div class="panel-head">
             <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
           </div>-->
-          <div class="panel-body prl30">
+          <div class="panel-body prl30" v-if="false">
             <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
             <div v-if="type === 0 || type === 1">
               <Echarts
