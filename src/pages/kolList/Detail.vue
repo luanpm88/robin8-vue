@@ -1574,8 +1574,8 @@ export default {
       let resData = res.data
       // console.log(resData)
       next(vm => {
-        console.log(to)
-        console.log(from)
+        // console.log(to)
+        // console.log(from)
         // console.log(vm)
         if (!resData.kol_detail) {
           alert('您的可浏览次数已用完！')

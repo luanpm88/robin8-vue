@@ -23,9 +23,11 @@ export default {
   beforeRouteLeave(to, from, next) {
     // 判断是下一个路由是不是进入到详情页
     if (to.name === 'KolDetail') {
-      this.$route.meta.keepAlive = true
+      this.$set(this.$route.meta, 'keepAlive', true)
+      // this.$route.meta.keepAlive = true
     } else {
-      this.$route.meta.keepAlive = false
+      this.$set(this.$route.meta, 'keepAlive', false)
+      // this.$route.meta.keepAlive = false
     }
     next()
   },
