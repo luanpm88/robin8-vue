@@ -755,7 +755,7 @@ export const lang = {
       mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
       sentiment: '品牌情绪:',
       sentimentTip: '情绪分数是介于0（非常消极）和100（非常积极）之间的数字。',
-      industries: '顶级产业',
+      industries: '提及产业',
       brandDistribution: '品牌分布 -',
       allBrandTag: '品牌分布',
       keywords: '关键词',
