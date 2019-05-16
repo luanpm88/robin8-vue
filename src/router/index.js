@@ -6,7 +6,7 @@ import ForgetPassword from '@/pages/ForgetPassword'
 import Help from '@/pages/Help'
 import Messages from '@/pages/Messages'
 import Home from '@/pages/home/Home'
-import HomeCreate from '@/pages/home/Create'
+import Create from '@/pages/Create'
 import KolList from '@/pages/kolList/List'
 import KolDetail from '@/pages/kolList/Detail'
 import kolCompare from '@/pages/kolList/Compare'
@@ -112,11 +112,11 @@ export default new Router({
       }
     },
     {
-      path: '/home/create',
-      name: 'HomeCreate',
-      component: HomeCreate,
+      path: '/create',
+      name: 'Create',
+      component: Create,
       meta: {
-        title: 'homeCreate',
+        title: 'create',
         auth: true
       }
     },
