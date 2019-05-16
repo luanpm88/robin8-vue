@@ -40,7 +40,7 @@ export const lang = {
     changePassword: 'Thay đổi mật khẩu',
     help: 'Trợ giúp',
     home: 'Trang chính',
-    homeCreate: 'Thêm chiến dịch',
+    create: 'Thêm chiến dịch',
     settings: 'Cấu hình',
     companyInfo: 'Thông tin căn bản',
     myBrands: 'Thương hiệu của tôi',
@@ -78,6 +78,7 @@ export const lang = {
   },
   nav: {
     home: 'Trang chính',
+    create: 'Thêm chiến dịch',
     campaigns: 'Chiến dịch',
     customContent: 'Nội dung tùy chỉnh',
     shareOnly: 'Chia sẻ nội dung',

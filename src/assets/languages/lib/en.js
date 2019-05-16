@@ -43,7 +43,7 @@ export const lang = {
     help: 'Data Explanation',
     messages: 'Messages',
     home: 'Home',
-    homeCreate: 'Create Campaign',
+    create: 'Create Campaign',
     settings: 'Settings',
     companyInfo: 'Basic Information',
     myBrands: 'My Brands',
@@ -81,6 +81,7 @@ export const lang = {
   },
   nav: {
     home: 'Home',
+    create: 'Create Campaign',
     campaigns: 'Campaigns',
     customContent: 'Custom Content',
     shareOnly: 'Consumer Content Amplification',

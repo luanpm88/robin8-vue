@@ -16,31 +16,28 @@
           <div class="title">{{$t(`lang.${item.title}`)}}</div>
         </router-link>
 
-        <div
-          v-else
-          class="title-bar"
-          :class="[
-            !!item.subNav && item.subNav.length > 0 ? 'with-arr' : '',
-            (active && activeIndex == index) || (item.href == currentPath || (item.href == '/creations' && currentPath == '/campaigns')) ? 'open' : ''
-          ]"
-          @click="toggleActive(index)"
-        >
-          <div :class="'iconfont ' + item.icon"></div>
-          <div class="title">{{$t('lang.' + item.title)}}</div>
-        </div>
-        <div
-          v-if="!!item.subNav && item.subNav.length > 0"
-          class="sub-nav"
-          :class="[(active && activeIndex == index) || (item.href == currentPath || (item.href == '/creations' && currentPath == '/campaigns')) ? 'active' : '']"
-        >
-          <router-link
-            v-for="(subItem, index) in item.subNav"
-            :key="index"
-            :to="subItem.href"
-            class="item"
+        <div v-else>
+          <div
+            class="title-bar with-arr"
+            :class="item.is_open ? 'open' : ''"
+            @click="toggleOpen(index)"
           >
-            {{$t(`lang.${subItem.title}`)}}
-          </router-link>
+            <div :class="'iconfont ' + item.icon"></div>
+            <div class="title">{{$t('lang.' + item.title)}}</div>
+          </div>
+          <div
+            class="sub-nav"
+            :class="item.is_open ? 'active' : ''"
+          >
+            <router-link
+              v-for="(subItem, subIndex) in item.subNav"
+              :key="subIndex"
+              :to="subItem.href"
+              class="item"
+            >
+              {{$t(`lang.${subItem.title}`)}}
+            </router-link>
+          </div>
         </div>
 
       </li>
@@ -64,6 +61,10 @@ export default {
           icon: 'icon-data',
           href: '/creations',
           subNav: [
+            {
+              title: 'nav.create',
+              href: '/create'
+            },
             {
               title: 'nav.customContent',
               href: '/creations'
@@ -146,22 +147,38 @@ export default {
           icon: 'icon-doc',
           href: '/help'
         }
-      ],
-      active: false,
-      activeIndex: '',
-      currentPath: ''
+      ]
     }
   },
   methods: {
     getPath () {
-      // console.log(this.$route.matched)
-      this.currentPath = this.$route.matched[0].path
-      // console.log(this.currentPath)
+      let matchPath = this.$route.matched[0].path
+      let currentPath = this.$route.path
+      let navList = this.navData
+
+      navList.forEach(item => {
+        if (!!item.subNav && item.subNav.length > 0) {
+          item.subNav.forEach(el => {
+            if (el.href == currentPath || el.href == matchPath) {
+              this.$set(item, 'is_open', true)
+            }
+          })
+        }
+      })
+      // console.log(navList)
     },
-    toggleActive (index) {
-      // console.log(index)
-      this.activeIndex = index
-      this.active = !this.active
+    toggleOpen (index) {
+      this.navData.forEach((item, i) => {
+        if (i == index) {
+          if (item.is_open) {
+            this.$set(item, 'is_open', false)
+          } else {
+            this.$set(item, 'is_open', true)
+          }
+        } else {
+          this.$set(item, 'is_open', false)
+        }
+      })
     }
   },
   created () {
