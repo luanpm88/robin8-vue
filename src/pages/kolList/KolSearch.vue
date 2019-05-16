@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div
+            <!-- <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
@@ -167,7 +167,7 @@
                   value="travel"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
               </select>
-            </div>
+            </div> -->
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
@@ -404,10 +404,10 @@ export default {
           index: 2,
           name: "xiaohongshu"
         },
-        {
-          index: 3,
-          name: "kuaishou"
-        },
+        // {
+        //   index: 3,
+        //   name: "kuaishou"
+        // },
         {
           index: 4,
           name: "bilibili"

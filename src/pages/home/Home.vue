@@ -143,6 +143,7 @@ export default {
     }
   },
   methods: {
+    
     // 获取my brand 页面
     getBaseData () {
       const _that = this
