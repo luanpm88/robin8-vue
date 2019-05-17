@@ -8,6 +8,7 @@
         <div class="avatar">
           <router-link
             :to="url"
+            target="_blank"
           >
             <img
               :src="renderData.avatar_url"
@@ -26,6 +27,7 @@
         <h5 class="name">
           <router-link
             :to="url"
+            target="_blank"
           >
             {{renderData.profile_name}}
             <img

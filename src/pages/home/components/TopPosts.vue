@@ -20,12 +20,24 @@
               <div class="home-post" v-for="(item, index) in key" :key="index">
                 <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
                 <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
-                <div class="home-post-detail" @click="intoKolDetail(item)">
-                  <img :src="item.avatar_url" alt class>
-                  <div>
-                    <strong>{{item.profile_name}}</strong>
-                    <p>{{item.post_time}}</p>
-                  </div>
+                <div class="home-post-detail">
+                  <router-link target="_blank" :to="{
+                  path: '/kol/',
+                  name: 'KolDetail',
+                  params: {
+                    id: item.profile_id,
+                  },
+                  query: {
+                    type: tabIndex,
+                    brand_keywords: childKeyList.brand_keywords
+                  }
+                }">
+                    <img :src="item.avatar_url" alt class>
+                    <div>
+                      <strong>{{item.profile_name}}</strong>
+                      <p>{{item.post_time}}</p>
+                    </div>
+                  </router-link>
                 </div>
                 <p class="home-post-content">{{item.content}}</p>
                 <div class="home-post-form">
@@ -252,20 +264,20 @@ export default {
           alert(error) 
         })
     },
-     // 跳转 kol detail
-    intoKolDetail(item) {
-      this.$router.push({
-        path: '/kol/',
-        name: 'KolDetail',
-        params: {
-          id: item.profile_id,
-        },
-        query: {
-          type: this.tabIndex,
-          brand_keywords: this.childKeyList.brand_keywords
-        }
-      }) 
-    },
+    //  // 跳转 kol detail
+    // intoKolDetail(item) {
+    //   this.$router.push({
+    //     path: '/kol/',
+    //     name: 'KolDetail',
+    //     params: {
+    //       id: item.profile_id,
+    //     },
+    //     query: {
+    //       type: this.tabIndex,
+    //       brand_keywords: this.childKeyList.brand_keywords
+    //     }
+    //   }) 
+    // },
     PostShowMore() {
       this.isLoading = true 
       this.isBrandShow = false

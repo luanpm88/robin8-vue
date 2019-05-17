@@ -249,16 +249,37 @@
                 <td>
                   <div class="media kol-profile">
                     <div class="media-left media-middle">
-                      <div class="avatar" @click="intoKolDetail(item)">
-                        <img :src="item.avatar_url" alt class="avatar-img">
+                      <div class="avatar">
+                        <router-link target="_blank" :to="{
+                          path: '/kol/',
+                          name: 'KolDetail',
+                          params: {
+                            id: item.profile_id
+                          },
+                          query: {
+                            type: Number(tabIndex),
+                            brand_keywords: totalKeywords
+                          }
+                        }">
+                          <img :src="item.avatar_url" alt class="avatar-img">
+                        </router-link>
                       </div>
                     </div>
                     <div class="media-body media-middle">
                       <h5 class="title">
-                        <span
-                          @click="intoKolDetail(item)"
-                          class="kol-tit-span"
-                        >{{item.profile_name}}</span>
+                        <router-link target="_blank" :to="{
+                          path: '/kol/',
+                          name: 'KolDetail',
+                          params: {
+                            id: item.profile_id
+                          },
+                          query: {
+                            type: Number(tabIndex),
+                            brand_keywords: totalKeywords
+                          }
+                        }">
+                          <span class="kol-tit-span">{{item.profile_name}}</span>
+                        </router-link>
                       </h5>
                       <p class="desc">{{item.description_raw}}</p>
                       <div class="status">
@@ -788,35 +809,35 @@ export default {
       this.advancedSearch = !this.advancedSearch;
     },
     // 跳转 kol detail
-    intoKolDetail(item) {
-      if (Number(this.tabIndex) === 0 || Number(this.tabIndex) === 1) {
-        item.profile_id = item.profile_id;
-      }
-      if (
-        Number(this.tabIndex) === 2 ||
-        Number(this.tabIndex) === 3 ||
-        Number(this.tabIndex) === 4 ||
-        Number(this.tabIndex) === 5 ||
-        Number(this.tabIndex) === 6 ||
-        Number(this.tabIndex) === 7 ||
-        Number(this.tabIndex) === 8
-      ) {
-        item.profile_id = encodeURIComponent(item.profile_id);
-        // console.log(item.profile_id)
-      }
-      // item.profile_id = item.profile_id.replace(/\./g , '\\/')
-      this.$router.push({
-        path: "/kol/",
-        name: "KolDetail",
-        params: {
-          id: item.profile_id
-        },
-        query: {
-          type: Number(this.tabIndex),
-          brand_keywords: this.totalKeywords
-        }
-      });
-    },
+    // intoKolDetail(item) {
+    //   if (Number(this.tabIndex) === 0 || Number(this.tabIndex) === 1) {
+    //     item.profile_id = item.profile_id;
+    //   }
+    //   if (
+    //     Number(this.tabIndex) === 2 ||
+    //     Number(this.tabIndex) === 3 ||
+    //     Number(this.tabIndex) === 4 ||
+    //     Number(this.tabIndex) === 5 ||
+    //     Number(this.tabIndex) === 6 ||
+    //     Number(this.tabIndex) === 7 ||
+    //     Number(this.tabIndex) === 8
+    //   ) {
+    //     item.profile_id = encodeURIComponent(item.profile_id);
+    //     // console.log(item.profile_id)
+    //   }
+    //   // item.profile_id = item.profile_id.replace(/\./g , '\\/')
+    //   this.$router.push({
+    //     path: "/kol/",
+    //     name: "KolDetail",
+    //     params: {
+    //       id: item.profile_id
+    //     },
+    //     query: {
+    //       type: Number(this.tabIndex),
+    //       brand_keywords: this.totalKeywords
+    //     }
+    //   });
+    // },
     changeTab(tab) {
       this.kolsTotal = 0;
       this.isLoading = true;
