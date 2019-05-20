@@ -38,7 +38,7 @@
           </div>
           <!-- 平台切换复选框 -->
           <div class="text-center">
-            <div class="kol-select-platform" v-for="(platform, index) in tabList" :key='platform.tabIndex'>
+            <div class="kol-select-platform" v-for="platform in tabList" :key='platform.tabIndex'>
               <label class="ctrl-label">
                 <input
                   name="platform"

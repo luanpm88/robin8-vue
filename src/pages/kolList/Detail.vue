@@ -245,6 +245,35 @@
               </div>
             </div>
           </div>
+          <!-- most_relevant_post  暂时微信没有这个接口 -->
+          <div class="panel default-panel mt20 kol-performance"  v-if="type === 0">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</p>
+              <table class="com-brand-table" v-if="isRelevant">
+                <tr>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.date')}}</th>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.correlation')}}</th>
+                </tr>
+                <tr v-for="(key, index) in relevantList" :key="index">
+                  <td>
+                    <p class="purple">{{key.title}}</p>
+                  </td>
+                  <td style="min-width:200px">{{key.post_time}}</td>
+                  <td>{{key.correlation}}</td>
+                </tr>
+              </table>
+              <div class="nonetip" v-if="isRelevantShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isRelevantLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+            </div>
+          </div>
           <!-- Keywords -->
           <div class="panel default-panel mt20">
             <!-- <div class="panel-head">
@@ -486,7 +515,17 @@ export default {
       isAllbrandDisTag: false,
       allbrandDisTags: [],
       kolProfileLink: '',
-      canRender: true
+      canRender: true,
+      isRelevant: false,
+      isRelevantShow: false,
+      isRelevantLoading: true,
+      relevantPostParams: {
+        start_date: commonJs.cPastYears,
+        end_date: commonJs.cPastOneday,
+        profile_id: "MzAwMDAyMzY3OA==",
+        keywords: ''
+      },
+      relevantList: []
     };
   },
   watch: {
@@ -511,6 +550,7 @@ export default {
     this.trendParams.brand_keywords = newKey;
     this.sentimentParams.brand_keywords = newKey;
     this.brandNameParams.brand_keywords = newKey;
+    this.relevantPostParams.keywords = newKey;
     this.type = Number(this.$route.query.type);
     this.tabIndexOneInit();
   },
@@ -605,6 +645,10 @@ export default {
         this.allBrand = true;
         this.allBrandTagParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboTotalTag(this.allBrandTagParams);
+
+        // 调用微博的most_relevant_post  暂时微信没有这个接口
+        this.relevantPostParams.profile_id = Number(this.$route.params.id);
+        this.relevantPostWeibo(this.relevantPostParams)
 
       } else {
         if (Number(this.$route.query.type) === 1) {
@@ -1292,6 +1336,44 @@ export default {
             } else {
               _that.isPerShow = true;
               _that.isPer = false;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        });
+    },
+    // most_relevant_post 微博  暂时没有微信
+    relevantPostWeibo(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.relevantPostWeibo, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            // console.log('relevantPostWeibo', res)
+            _that.isRelevantLoading = false;
+            if (res.data.data.length > 0) {
+              _that.isRelevantShow = false;
+              _that.isRelevant = true;
+              res.data.data.forEach(item => {
+                if (Number(item.correlation) !== 0) {
+                  item.correlation =
+                    commonJs.threeFormatter(item.correlation, 2) + "+";
+                } else {
+                  item.correlation = commonJs.threeFormatter(
+                    item.correlation,
+                    2
+                  );
+                }
+              });
+              _that.relevantList = res.data.data;
+            } else {
+              _that.isRelevantShow = true;
+              _that.isRelevant = false;
             }
           }
         })

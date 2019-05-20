@@ -795,6 +795,12 @@ export const lang = {
         readCount: '阅读数',
         engagement: '互动数'
       },
+      mostRelevantPosts: {
+        title: '最具相关度的文章',
+        tableTitle: '标题',
+        date: '发布时间',
+        correlation: '相关度',
+      },
     },
     analyticVue: {
       weibo: {

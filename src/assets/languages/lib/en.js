@@ -796,6 +796,12 @@ export const lang = {
         readCount: 'Read Count',
         engagement: 'Sum Engagement'
       },
+      mostRelevantPosts: {
+        title: 'Most Relevant  Posts',
+        tableTitle: 'Title',
+        date: 'Post Time',
+        correlation: 'Correlation',
+      },
     },
     analyticVue: {
       weibo: {
