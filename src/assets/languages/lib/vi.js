@@ -39,6 +39,7 @@ export const lang = {
     forgetPassword: 'Quên mật khẩu',
     changePassword: 'Thay đổi mật khẩu',
     help: 'Trợ giúp',
+    messages: 'Thông báo',
     home: 'Trang chính',
     homeCreate: 'Thêm chiến dịch',
     settings: 'Cấu hình',
@@ -296,7 +297,8 @@ export const lang = {
         edit: 'Sửa',
         pay: 'Thanh toán',
         comments: 'Bình luận',
-        repost: 'Đăng lại'
+        repost: 'Đăng lại',
+        cancel: 'Đóng'
       }
     },
     link: {

@@ -305,7 +305,7 @@
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected'"
         class="btn btn-cyan btn-outline edit-btn"
         :to="'/campaigns/'+ $route.params.id +'/edit'"
-      >{{$t('lang.campaigns.list.btns.edits')}}</router-link>
+      >{{$t('lang.campaigns.list.btns.edit')}}</router-link>
       <button
         v-if="detailData.status == 'unpay' || detailData.status == 'pending' || detailData.status == 'rejected' || detailData.status == 'unexecute'"
         type="button"
