@@ -70,14 +70,19 @@ export default {
     padding: 0 16px;
     margin: 5px;
     border-radius: 20px;
-    border: 1px solid nth($blue, 1);
+    border: 1px solid #a9b1b3;
     font-size: $font-sm;
     font-weight: 500;
-    color: nth($blue, 1);
+    color: #696362;
     cursor: pointer;
+    &:hover {
+      color: #474640;
+      border-color: #739495;
+    }
     &.active, &.current {
       color: #fff;
-      background-color: nth($blue, 1);
+      border-color: #739495;
+      background-color: #739495;
     }
   }
 }
