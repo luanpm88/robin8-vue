@@ -18,7 +18,7 @@ export default {
   name: 'KolList',
   components: {
     MainNav,
-    KolSearch
+    KolSearch  
   },
   created() {
     this.$route.meta.keepAlive = false

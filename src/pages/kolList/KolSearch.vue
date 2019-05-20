@@ -43,12 +43,13 @@
                 <input
                   name="platform"
                   type="radio"
-                  :value="index"
+                  :value="platform.index"
                   v-model="selectPlatform"
                   v-validate="'required'"
                   @change="platformChange"
                 />
-                <span>{{$t(`lang.${platform.name}`)}}</span>
+                <span>
+                  {{$t(`lang.${platform.name}`)}}</span>
               </label>
             </div>
           </div>
