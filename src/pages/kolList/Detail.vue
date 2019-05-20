@@ -260,7 +260,8 @@
                 </tr>
                 <tr v-for="(key, index) in relevantList" :key="index">
                   <td>
-                    <p class="purple">{{key.title}}</p>
+                    <!-- <p class="purple">{{key.title}}</p> -->
+                    <a :href="key.url" target="blank">{{key.title}}</a>
                   </td>
                   <td style="min-width:200px">{{key.post_time}}</td>
                   <td>{{key.correlation}}</td>
