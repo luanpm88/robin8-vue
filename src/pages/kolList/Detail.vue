@@ -4,6 +4,8 @@
       <div class="kol-detail-side">
         <!-- info -->
         <div class="panel default-panel kol-infobox">
+          <div class="panel-head">
+          </div>
           <div class="panel-body">
             <!-- <p class="kol-info-topbg"></p> -->
             <div class="kol-small-avatar">
