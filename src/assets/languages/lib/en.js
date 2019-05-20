@@ -797,7 +797,7 @@ export const lang = {
         engagement: 'Sum Engagement'
       },
       mostRelevantPosts: {
-        title: 'Most Relevant  Posts',
+        title: 'Most Relevant Posts',
         tableTitle: 'Title',
         date: 'Post Time',
         correlation: 'Correlation',
