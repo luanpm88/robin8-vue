@@ -1,4 +1,4 @@
-<!--  -->
+<!-- compare.vue的radar 模块 -->
 <template>
   <div>
     <div class="panel default-panel mt20">

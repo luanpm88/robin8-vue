@@ -2,13 +2,13 @@
 <template>
   <div>
     <div class="panel default-panel mt20" v-for="(item, index) in currentData" :key="index">
-      <!-- <div class="panel-head">
+      <div class="panel-head">
         <h5 class="title text-center">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</h5>
-      </div> -->
+      </div>
       <div class="panel-body prl30">
-        <p
+        <!-- <p
           class="kol-cloumn mb10"
-        >{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</p>
+        >{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</p> -->
         <div class="nonetip" v-if="item.isShow">
           <span>{{$t('lang.totalNoDataTip')}}</span>
         </div>

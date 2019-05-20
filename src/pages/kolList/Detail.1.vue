@@ -5,7 +5,7 @@
         <!-- info -->
         <div class="panel default-panel kol-infobox">
           <div class="panel-body">
-            <!-- <p class="kol-info-topbg"></p> -->
+            <p class="kol-info-topbg"></p>
             <div class="kol-small-avatar">
               <img :src="infoList.avatar_url" alt>
             </div>
@@ -71,11 +71,12 @@
             </div>
           </div>
         </div>
-        <div class="panel default-panel mt20" v-if="false">
-          <div class="panel-head">
+        <div class="panel default-panel mt20">
+          <!-- <div class="panel-head">
             <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
-          </div>
-          <div class="panel-body prl30">
+          </div>-->
+          <div class="panel-body prl30" v-if="false">
+            <p class="kol-cloumn">{{$t('lang.kolList.detail.industries')}}</p>
             <div v-if="type === 0 || type === 1">
               <Echarts
                 :options="competitorList.options"
@@ -107,10 +108,11 @@
         <div class="mt20" v-if="tabIndex === 0">
           <!-- Activity -->
           <div class="panel default-panel mt20" v-if="isActivity">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.activity')}}</h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.activity')}}</p>
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
@@ -131,10 +133,11 @@
           </div>
           <!-- Analytics -->
           <div class="panel default-panel mt20" v-if="isAnalytics">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.analytics')}}</h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.analytics')}}</p>
               <div class="activity-contable">
                 <table class="com-brand-table">
                   <tr>
@@ -171,10 +174,11 @@
           </div>
           <!-- socialData -->
           <div class="panel default-panel mt20">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.socialData.title')}}</p>
               <div class="activity-table">
                 <table class="com-brand-table">
                   <tr>
@@ -209,10 +213,11 @@
           </div>
           <!-- performance -->
           <div class="panel default-panel mt20 kol-performance">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.bestPosts.title')}}</p>
               <table class="com-brand-table" v-if="isPer">
                 <tr>
                   <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
@@ -242,10 +247,11 @@
           </div>
           <!-- most_relevant_post  暂时微信没有这个接口 -->
           <div class="panel default-panel mt20 kol-performance"  v-if="type === 0">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</p>
               <table class="com-brand-table" v-if="isRelevant">
                 <tr>
                   <th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
@@ -270,14 +276,20 @@
           </div>
           <!-- Keywords -->
           <div class="panel default-panel mt20">
-            <div class="panel-head">
+            <!-- <div class="panel-head">
               <h5 class="title text-center">
                 <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
                   {{$t('lang.kolList.detail.keywords')}}
                 </a-tooltip>
               </h5>
-            </div>
+            </div>-->
             <div class="panel-body prl30">
+              <p class="kol-cloumn">
+                <a-tooltip
+                  placement="topLeft"
+                  :title="$t('lang.kolList.detail.keywordsTip')"
+                >{{$t('lang.kolList.detail.keywords')}}</a-tooltip>
+              </p>
               <div class="nonetip" v-if="isShow">
                 <span>{{$t('lang.totalNoDataTip')}}</span>
               </div>
@@ -289,10 +301,8 @@
           </div>
           <!--all Brand  tag  -->
           <div class="panel default-panel mt20" v-if=" allBrand">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
-            </div>
             <div class="panel-body prl30">
+              <p class="kol-cloumn">{{$t('lang.kolList.detail.allBrandTag')}}</p>
               <div class="nonetip" v-if="isAllbrandDisShow">
                 <span>{{$t('lang.totalNoDataTip')}}</span>
               </div>
@@ -304,10 +314,10 @@
           </div>
           <!--single  Brand  Distribution  -->
           <div class="panel default-panel mt20" v-if="isSingleBrand">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
-            </div>
             <div class="panel-body prl30">
+              <p
+                class="kol-cloumn"
+              >{{$t('lang.kolList.detail.brandDistribution')}} {{currentBrandName}}</p>
               <div class="nonetip" v-if="isbrandDisShow">
                 <span>{{$t('lang.brandDisNoDataTip')}}</span>
               </div>

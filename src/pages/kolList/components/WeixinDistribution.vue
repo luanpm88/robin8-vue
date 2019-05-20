@@ -1,4 +1,4 @@
-<!-- distribution -->
+<!-- compare.vue 和detail.vue 微信平台distribution 模块表格-->
 <template>
   <table class="com-brand-table">
     <tr>
