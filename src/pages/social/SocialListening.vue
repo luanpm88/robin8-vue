@@ -1,104 +1,100 @@
 <template>
-  <div class="container mt50 clearfix">
-    <main-nav class="pull-left"></main-nav>
-
-    <div class="socail-container pull-right">
-      <div class="panel default-panel social-search">
-        <div class="panel-body">
-          <div class="form-horizontal">
-            <div class="form-group">
-              <!-- <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
-              <div class="col-sm-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="topic"
-                />
-              </div> -->
-              <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
-              <div class="col-sm-4">
-                <select class="form-control" v-model="source">
-                  <option value="0">{{$t('lang.weibo')}}</option>
-                  <option value="1">{{$t('lang.wechat')}}</option>
-                </select>
-              </div>
-              <div class="col-sm-2 control-label">{{$t('lang.socialPage.kolId')}}</div>
-              <div class="col-sm-4">
-                <!-- <input
-                  type="text"
-                  class="form-control"
-                  v-model="profileId"
-                /> -->
-                <a-select
-                  showSearch
-                  :value="selectIdValue"
-                  placeholder
-                  style="width: 200px"
-                  :defaultActiveFirstOption="false"
-                  :showArrow="false"
-                  :filterOption="false"
-                  @search="handleSearch"
-                  @change="handleChange"
-                  :notFoundContent="null"
-                  :allowClear="true"
-                >
-                  <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
-                </a-select>
-              </div>
+  <div class="socail-container">
+    <div class="panel default-panel social-search">
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <!-- <div class="col-sm-2 control-label">{{$t('lang.socialPage.topic')}}</div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                v-model="topic"
+              />
+            </div> -->
+            <div class="col-sm-2 control-label">{{$t('lang.socialPage.source')}}</div>
+            <div class="col-sm-4">
+              <select class="form-control" v-model="source">
+                <option value="0">{{$t('lang.weibo')}}</option>
+                <option value="1">{{$t('lang.wechat')}}</option>
+              </select>
             </div>
-
-            <div class="text-center mt30">
-              <button
-                type="button"
-                class="btn btn-blue btn-outline"
-                @click="totalSearch"
+            <div class="col-sm-2 control-label">{{$t('lang.socialPage.kolId')}}</div>
+            <div class="col-sm-4">
+              <!-- <input
+                type="text"
+                class="form-control"
+                v-model="profileId"
+              /> -->
+              <a-select
+                showSearch
+                :value="selectIdValue"
+                placeholder
+                style="width: 200px"
+                :defaultActiveFirstOption="false"
+                :showArrow="false"
+                :filterOption="false"
+                @search="handleSearch"
+                @change="handleChange"
+                :notFoundContent="null"
+                :allowClear="true"
               >
-                {{$t('lang.search')}}
-              </button>
+                <a-select-option v-for="d in data" :key="d.value">{{d.text}}</a-select-option>
+              </a-select>
             </div>
+          </div>
+
+          <div class="text-center mt30">
+            <button
+              type="button"
+              class="btn btn-blue btn-outline"
+              @click="totalSearch"
+            >
+              {{$t('lang.search')}}
+            </button>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="panel default-panel social-search mt20">
-        <div class="panel-body">
-          <div class="nonetip" v-if="isShow">
-            <span>{{$t('lang.totalNoDataTip')}}</span>
-          </div>
-          <div class="r8-loading" v-if="isLoading">
-            <a-spin tip="Loading..."/>
-          </div>
-          <div v-if="isContent">
-            <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
-              <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
-              <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
-              <div class="media social-detail">
-                <div class="media-left media-middle"  @click="intoKolDetail(item)">
-                  <img :src="item.imgUrl" alt class>
-                </div>
-                <div class="media-body media-middle"  @click="intoKolDetail(item)">
-                  <strong>{{item.name}}</strong>
-                  <p>{{item.time}}</p>
-                </div>
-                <div class="media-right media-middle operation-area">
-                    <span
-                      class="iconfont icon-cart active"
-                      @click="doAddCart(item)"
-                    ></span>
-                </div>
+    <div class="panel default-panel social-search mt20">
+      <div class="panel-body">
+        <div class="nonetip" v-if="isShow">
+          <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="isLoading">
+          <a-spin tip="Loading..."/>
+        </div>
+        <div v-if="isContent">
+          <div class="home-post"  v-for="(item, index) in itemList" :key='index'>
+            <p v-if="Number(source) === 0" class="home-post-title" v-html="item.title"></p>
+            <a :href="item.url" target="_blank" v-else><p class="home-post-title" v-html="item.title"></p></a>
+            <div class="media social-detail">
+              <div class="media-left media-middle"  @click="intoKolDetail(item)">
+                <img :src="item.imgUrl" alt class>
               </div>
-              <p class="home-post-content" v-html="item.content"></p>
+              <div class="media-body media-middle"  @click="intoKolDetail(item)">
+                <strong>{{item.name}}</strong>
+                <p>{{item.time}}</p>
+              </div>
+              <div class="media-right media-middle operation-area">
+                  <span
+                    class="iconfont icon-cart active"
+                    @click="doAddCart(item)"
+                  ></span>
+              </div>
             </div>
-            <div class="text-center mt20">
-              <a-pagination
-                :defaultCurrent="currentPage"
-                v-model="currentPageAdd"
-                :defaultPageSize="kolsPerPage"
-                :total="kolsTotal"
-                :hideOnSinglePage="true"
-                @change="onPageChange"
-              />
-            </div>
+            <p class="home-post-content" v-html="item.content"></p>
+          </div>
+          <div class="text-center mt20">
+            <a-pagination
+              :defaultCurrent="currentPage"
+              v-model="currentPageAdd"
+              :defaultPageSize="kolsPerPage"
+              :total="kolsTotal"
+              :hideOnSinglePage="true"
+              @change="onPageChange"
+            />
           </div>
         </div>
       </div>
@@ -109,7 +105,6 @@
 <script>
 import axios from 'axios'
 import apiConfig from '@/config'
-import MainNav from '@components/MainNav'
 import { mapState } from 'vuex'
 import commonJs from '@javascripts/common.js'
 let timeout;
@@ -117,7 +112,6 @@ let currentValue;
 export default {
   name: 'socialListening',
   components: {
-    MainNav
   },
   created() {
     this.getBaseData();
@@ -430,7 +424,6 @@ export default {
 
 <style lang="scss" scoped>
 .socail-container {
-  width: 980px;
   min-height: 580px;
   .form-group{
     padding-right: 10px;

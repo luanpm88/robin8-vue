@@ -14,16 +14,15 @@
       <div v-else class="panel-body">
         <div class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
-    </div>
-
-    <div class="p30 text-center">
-      <a-pagination
-        :defaultCurrent="page"
-        :defaultPageSize="perPage"
-        :total="total"
-        :hideOnSinglePage="true"
-        @change="onPageChange"
-      />
+      <div class="panel-foot text-center">
+        <a-pagination
+          :defaultCurrent="page"
+          :defaultPageSize="perPage"
+          :total="total"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
+      </div>
     </div>
   </div>
 </template>

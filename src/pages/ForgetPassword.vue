@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <div v-if="canChange" class="panel default-panel forget-panel">
       <div class="panel-head">
         <h5 class="title text-center">{{$t('lang.changePw.title')}}</h5>
@@ -116,7 +116,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

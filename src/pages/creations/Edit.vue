@@ -1,5 +1,5 @@
 <template>
-  <div class="campaign-detail-container">
+  <div class="campaign-edit-container">
     <create-process
       :renderData="processStatus"
       class="mt20"

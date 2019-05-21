@@ -1,5 +1,6 @@
 <template>
   <div class="main-nav">
+    <div class="logo-area"></div>
     <ul class="nav-list">
       <li
         v-for="(item, index) of navData"
@@ -194,11 +195,10 @@ export default {
 
 <style lang="scss" scoped>
 .main-nav {
-  $item-height: 40px;
-  width: 280px;
-  padding: $item-height 0;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08);
-  background-color: #fff;
+  $item-height: 64px;
+  .logo-area {
+    height: 130px;
+  }
   .nav-list {
     & > .item {
       .title-bar {
@@ -212,18 +212,23 @@ export default {
           line-height: 20px;
           text-align: center;
           font-size: $font-nm-b;
+          color: #e1e8ea;
+        }
+        .title {
+          margin-left: 20px;
+          color: #b1b1b1;
         }
         &.with-arr:after {
           right: 20px;
           @include transition(.4s);
         }
         &.active, &.router-link-active, &.open {
+          background-color: #201f20;
           .iconfont {
-            color: nth($blue, 1);
+            color: #fff;
           }
           .title {
-            font-weight: 500;
-            color: nth($blue, 1);
+            color: #f6f7f7;
           }
         }
       }
@@ -236,13 +241,13 @@ export default {
           display: block;
           height: $item-height;
           line-height: $item-height;
-          padding-left: 40px;
-          border-left: 2px solid transparent;
+          padding-left: 60px;
+          .title {
+            color: #b1b1b1;
+          }
           &:hover, &.active, &.router-link-active {
-            border-left-color: nth($blue, 1);
-            font-weight: bold;
-            color: nth($blue, 1);
-            background-color: #fbfaff;
+            color: #b1b1b1;
+            background-color: #201f20;
           }
         }
       }
