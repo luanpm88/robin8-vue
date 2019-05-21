@@ -18,8 +18,7 @@
           <div v-if="isPost">
             <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
               <div class="home-post" v-for="(item, index) in key" :key="index">
-                <p v-if="postType === 0" class="home-post-title">{{item.title}}</p>
-                <a :href="item.url" target="_blank" v-else><p class="home-post-title">{{item.title}}</p></a>
+                <a :href="item.url" target="_blank"><p class="home-post-title">{{item.title}}</p></a>
                 <div class="home-post-detail">
                   <router-link target="_blank" :to="{
                   path: '/kol/',

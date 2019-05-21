@@ -226,10 +226,10 @@
                   <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
                 </tr>
                 <tr v-for="(key, index) in performanceList" :key="index">
-                  <td v-if="type === 0">
+                  <!-- <td v-if="type === 0">
                     <p class="purple">{{key.title}}</p>
-                  </td>
-                  <td v-if="type === 1">
+                  </td> -->
+                  <td>
                     <a :href="key.url" target="blank">{{key.title}}</a>
                   </td>
                   <td style="min-width:200px">{{key.post_time}}</td>
