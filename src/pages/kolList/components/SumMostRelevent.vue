@@ -1,4 +1,4 @@
-<!-- detail.vue 中summary的 Best Performance Posts  -->
+<!-- detail.vue 中summary的 most relevant post  -->
 <template>
   <div>
     <!-- most_relevant_post  暂时微信没有这个接口-->

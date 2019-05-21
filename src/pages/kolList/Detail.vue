@@ -115,101 +115,7 @@
           <summaries :currentKeywords="keywords"></summaries>
         </div>
         <div class="mt20" v-if="tabIndex === 0">
-          <!-- socialData -->
-          <!-- <div class="panel default-panel mt20">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="activity-table">
-                <table class="com-brand-table">
-                  <tr>
-                    <th>{{$t('lang.kolList.detail.socialData.platform')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.price')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.followers')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.likes')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.shares')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.comments')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.postLast')}}</th>
-                    <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
-                  </tr>
-                  <tr>
-                    <td>{{dataListBox.platform}}</td>
-                    <td>{{dataListBox.pricing.direct_price}}</td>
-                    <td>{{dataListBox.fans_number}}</td>
-                    <td>{{dataListBox.stats.avg_likes}}</td>
-                    <td>{{dataListBox.stats.avg_shares}}</td>
-                    <td>{{dataListBox.stats.avg_comments}}</td>
-                    <td>{{dataListBox.stats.avg_daily_posts}}</td>
-                    <td v-if="type === 0">
-                      {{dataListBox.stats.avg_post_influences}}
-                    </td>
-                    <td v-else>
-                      Coming Soon
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div> -->
-          <!-- performance -->
-          <!-- <div class="panel default-panel mt20 kol-performance">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <table class="com-brand-table" v-if="isPer">
-                <tr>
-                  <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>
-                  <th>{{$t('lang.kolList.detail.bestPosts.date')}}</th>
-                  <th v-if="type === 1">{{$t('lang.kolList.detail.bestPosts.readCount')}}</th>
-                  <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
-                </tr>
-                <tr v-for="(key, index) in performanceList" :key="index">
-                  <td>
-                    <a :href="key.url" target="blank">{{key.title}}</a>
-                  </td>
-                  <td style="min-width:200px">{{key.post_time}}</td>
-                  <td v-if="type === 0">{{key.influence_sum_engagement}}</td>
-                  <td v-if="type === 1">{{key.influence_reads}}</td>
-                </tr>
-              </table>
-              <div class="nonetip" v-if="isPerShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isPerLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-            </div>
-          </div> -->
-          <!-- most_relevant_post  暂时微信没有这个接口 -->
-          <!-- <div class="panel default-panel mt20 kol-performance"  v-if="type === 0">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <table class="com-brand-table" v-if="isRelevant">
-                <tr>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.date')}}</th>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.correlation')}}</th>
-                </tr>
-                <tr v-for="(key, index) in relevantList" :key="index">
-                  <td>
-                    <a :href="key.url" target="blank" class="purple">{{key.title}}</a>
-                  </td>
-                  <td style="min-width:200px">{{key.post_time}}</td>
-                  <td>{{key.correlation}}</td>
-                </tr>
-              </table>
-              <div class="nonetip" v-if="isRelevantShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isRelevantLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-            </div>
-          </div> -->
+         
           <!-- Keywords -->
           <div class="panel default-panel mt20">
             <div class="panel-head">
@@ -424,16 +330,6 @@ export default {
       allbrandDisTags: [],
       kolProfileLink: '',
       canRender: true,
-      // isRelevant: false,
-      // isRelevantShow: false,
-      // isRelevantLoading: true,
-      // relevantPostParams: {
-      //   start_date: commonJs.cPastYears,
-      //   end_date: commonJs.cPastOneday,
-      //   profile_id: "MzAwMDAyMzY3OA==",
-      //   keywords: ''
-      // },
-      // relevantList: [],
       keywords: ''
     };
   },
@@ -536,7 +432,7 @@ export default {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id);
         this.kolWeiboIndustry(totalParams);
-        this.kolWeiboKeyword(totalParams);
+        // this.kolWeiboKeyword(totalParams);
         // 计算sentiment
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
@@ -556,7 +452,7 @@ export default {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinIndustry(totalParams);
-          this.kolWeiXinKeyword(totalParams);
+          // this.kolWeiXinKeyword(totalParams);
           // 计算sentiment
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
@@ -871,69 +767,69 @@ export default {
           // console.log(error)
         });
     },
-    // Keyword weibo
-    kolWeiboKeyword(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiboKeyword, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.isLoading = false;
-            if (res.data.length > 0) {
-              _that.isTag = true;
-              _that.isShow = false;
-              _that.parentTags = [];
-              res.data = res.data.slice(0, 100);
-              res.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentTags = res.data;
-            } else {
-              _that.isTag = false;
-              _that.isShow = true;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    kolWeiXinKeyword(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiXinKeyword, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.isLoading = false;
-            if (res.data.length > 0) {
-              _that.isTag = true;
-              _that.isShow = false;
-              _that.parentTags = [];
-              res.data = res.data.slice(0, 100);
-              res.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentTags = res.data;
-            } else {
-              _that.isTag = false;
-              _that.isShow = true;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
+    // // Keyword weibo
+    // kolWeiboKeyword(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.kolWeiboKeyword, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         _that.isLoading = false;
+    //         if (res.data.length > 0) {
+    //           _that.isTag = true;
+    //           _that.isShow = false;
+    //           _that.parentTags = [];
+    //           res.data = res.data.slice(0, 100);
+    //           res.data.forEach(item => {
+    //             item.name = item.text;
+    //             item.value = item.weight;
+    //           });
+    //           _that.parentTags = res.data;
+    //         } else {
+    //           _that.isTag = false;
+    //           _that.isShow = true;
+    //         }
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
+    // kolWeiXinKeyword(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.kolWeiXinKeyword, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         _that.isLoading = false;
+    //         if (res.data.length > 0) {
+    //           _that.isTag = true;
+    //           _that.isShow = false;
+    //           _that.parentTags = [];
+    //           res.data = res.data.slice(0, 100);
+    //           res.data.forEach(item => {
+    //             item.name = item.text;
+    //             item.value = item.weight;
+    //           });
+    //           _that.parentTags = res.data;
+    //         } else {
+    //           _that.isTag = false;
+    //           _that.isShow = true;
+    //         }
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
     // 初始化 fergus的info 接口
     infoJoggle(params) {
       const _that = this
