@@ -223,10 +223,7 @@
                   <th v-if="type === 0">{{$t('lang.kolList.detail.bestPosts.engagement')}}</th>
                 </tr>
                 <tr v-for="(key, index) in performanceList" :key="index">
-                  <td v-if="type === 0">
-                    <p class="purple">{{key.title}}</p>
-                  </td>
-                  <td v-if="type === 1">
+                  <td>
                     <a :href="key.url" target="blank">{{key.title}}</a>
                   </td>
                   <td style="min-width:200px">{{key.post_time}}</td>
@@ -256,7 +253,7 @@
                 </tr>
                 <tr v-for="(key, index) in relevantList" :key="index">
                   <td>
-                    <p class="purple">{{key.title}}</p>
+                    <a :href="key.url" target="blank" class="purple">{{key.title}}</a>
                   </td>
                   <td style="min-width:200px">{{key.post_time}}</td>
                   <td>{{key.correlation}}</td>
