@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-import apiConfig from '@/config';
-import { mapState } from 'vuex';
-import commonJs from '@javascripts/common.js';
+import axios from 'axios'
+import apiConfig from '@/config'
+import { mapState } from 'vuex'
+import commonJs from '@javascripts/common.js'
 export default {
   name: 'SummarySocial',
   data() {
@@ -73,13 +73,13 @@ export default {
     }
     if (Number(this.$route.query.type) === 1) {
       // kolWeixinSocial
-      this.kolWeixinSocial(totalParams);
+      this.kolWeixinSocial(totalParams)
     }
   },
   methods: {
     // kolWeixinSocial
     kolWeiboSocial(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.kolWeiboSocial, params, {
           headers: {
@@ -88,45 +88,45 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.dataListBox = res.data;
+            _that.dataListBox = res.data
             if (!_that.dataListBox.pricing) {
-              _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = ' N/A';
+              _that.dataListBox.pricing = {}
+              _that.dataListBox.pricing.direct_price = ' N/A'
             }
             if (_that.dataListBox.fans_number === '') {
-              _that.dataListBox.fans_number = ' N/A';
+              _that.dataListBox.fans_number = ' N/A'
             }
             if (_that.dataListBox.stats.avg_shares === '') {
-              _that.dataListBox.stats.avg_shares = ' N/A';
+              _that.dataListBox.stats.avg_shares = ' N/A'
             }
             if (_that.dataListBox.stats.avg_likes === '') {
-              _that.dataListBox.stats.avg_likes = ' N/A';
+              _that.dataListBox.stats.avg_likes = ' N/A'
             }
             if (_that.dataListBox.stats.avg_comments === '') {
-              _that.dataListBox.stats.avg_comments = ' N/A';
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.stats.avg_daily_posts === ' N/A') {
-              _that.dataListBox.stats.avg_daily_posts = ' N/A';
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
             }
             if (_that.dataListBox.stats.avg_post_influences === '') {
-              _that.dataListBox.stats.avg_post_influences = ' N/A';
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
             }
-            _that.dataListBox.platform = 'weibo';
+            _that.dataListBox.platform = 'weibo'
             _that.dataListBox.pricing.direct_price =
               '¥' +
               commonJs.threeFormatter(
                 _that.dataListBox.pricing.direct_price,
                 2
-              );
+              )
           }
         })
         .catch(function(error) {
           // console.log(error)
-        });
+        })
     },
     // kolWeixinSocial
     kolWeixinSocial(params) {
-      const _that = this;
+      const _that = this
       axios
         .post(apiConfig.kolWeixinSocial, params, {
           headers: {
@@ -136,56 +136,56 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('wishiweixn', res)
-            _that.dataListBox = res.data;
+            _that.dataListBox = res.data
             if (!_that.dataListBox.pricing) {
-              _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = ' N/A';
+              _that.dataListBox.pricing = {}
+              _that.dataListBox.pricing.direct_price = ' N/A'
             }
             if (_that.dataListBox.status === 'error') {
-              _that.dataListBox.stats = {};
-              _that.dataListBox.stats.avg_shares = ' N/A';
-              _that.dataListBox.stats.avg_likes = ' N/A';
-              _that.dataListBox.stats.avg_reads = ' N/A';
-              _that.dataListBox.stats.avg_daily_posts = ' N/A';
-              _that.dataListBox.stats.avg_post_influences = ' N/A';
-              _that.dataListBox.stats.avg_comments = ' N/A';
+              _that.dataListBox.stats = {}
+              _that.dataListBox.stats.avg_shares = ' N/A'
+              _that.dataListBox.stats.avg_likes = ' N/A'
+              _that.dataListBox.stats.avg_reads = ' N/A'
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.fans_number === '') {
-              _that.dataListBox.fans_number = ' N/A';
+              _that.dataListBox.fans_number = ' N/A'
             }
             if (!_that.dataListBox.stats.avg_shares) {
-              _that.dataListBox.stats.avg_shares = ' N/A';
+              _that.dataListBox.stats.avg_shares = ' N/A'
             }
             if (_that.dataListBox.stats.avg_likes === '') {
-              _that.dataListBox.stats.avg_likes = ' N/A';
+              _that.dataListBox.stats.avg_likes = ' N/A'
             }
             if (!_that.dataListBox.stats.avg_comments) {
-              _that.dataListBox.stats.avg_comments = ' N/A';
+              _that.dataListBox.stats.avg_comments = ' N/A'
             }
             if (_that.dataListBox.stats.avg_daily_posts === '') {
-              _that.dataListBox.stats.avg_daily_posts = ' N/A';
+              _that.dataListBox.stats.avg_daily_posts = ' N/A'
             }
             if (_that.dataListBox.stats.avg_post_influences === '') {
-              _that.dataListBox.stats.avg_post_influences = ' N/A';
+              _that.dataListBox.stats.avg_post_influences = ' N/A'
             }
-            _that.dataListBox.platform = 'weixin';
+            _that.dataListBox.platform = 'weixin'
             _that.dataListBox.pricing.direct_price =
               '¥' +
               commonJs.threeFormatter(
                 _that.dataListBox.pricing.direct_price,
                 2
-              );
+              )
           }
         })
         .catch(function(error) {
           // console.log(error)
-        });
+        })
     },
   },
   computed: {
     ...mapState(['authorization'])
   }
-};
+}
 </script>
 <style>
 </style>

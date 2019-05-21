@@ -1,4 +1,4 @@
-
+<!-- detail.vue 中summary 模块 -->
 <template>
   <div>
     <!-- Activity 和 analytics 目前这个不展示了-->
@@ -6,6 +6,9 @@
 
     <!-- socialData -->
     <social></social>
+
+    <!-- performance -->
+    <best-posts></best-posts>
 
     <!-- 从analytics 复制出来的-->
     <!-- distribution -->
@@ -34,15 +37,18 @@ import DefaultTabs from '@components/DefaultTabs'
 import commonJs from '@javascripts/common.js'
 import { mapState } from 'vuex'
 // antivity 和 analytics 两个表格
-import Activity from '@/pages/kolList/components/SummaryActivity'
+import Activity from '@/pages/kolList/components/SumActivity'
 // socialData 表格
-import Social from '@/pages/kolList/components/SummarySocial'
+import Social from '@/pages/kolList/components/SumSocial'
+// SumBestPosts 文章
+import BestPosts from '@/pages/kolList/components/SumBestPosts'
 
 export default {
   name: 'summaries',
   components: {
     Activity,
-    Social
+    Social,
+    BestPosts
   },
   data() {
     return {
@@ -53,7 +59,7 @@ export default {
     ...mapState(['authorization'])
   },
   created() {
-    this.type = Number(this.$route.query.type) 
+    // this.type = Number(this.$route.query.type) 
   }
 } 
 </script>

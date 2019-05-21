@@ -527,3 +527,14 @@
   line-height: 34px;
   padding-left: 80px;
 }
+.kol-performance {
+  .com-brand-table {
+    a,
+    .purple {
+      display: block;
+      text-align: left;
+      color: nth($purple, 1);
+      word-break: break-all;
+    }
+  }
+}

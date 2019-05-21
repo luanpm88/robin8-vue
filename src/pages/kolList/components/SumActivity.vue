@@ -70,16 +70,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-import apiConfig from '@/config';
-import { mapState } from 'vuex';
-import commonJs from '@javascripts/common.js';
+import axios from 'axios'
+import apiConfig from '@/config'
+import { mapState } from 'vuex'
+import commonJs from '@javascripts/common.js'
 export default {
   name: 'SummaryActivity',
   data() {
     return {
       activeList: {}
-    };
+    }
   },
   created() {
     this.kolActivityUrl()
@@ -87,8 +87,8 @@ export default {
   methods: {
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口 ---- 目前平台没有在这边，所以只用了 fergus初始化的接口
     kolActivityUrl() {
-      const _that = this;
-      console;
+      const _that = this
+      console
       axios
         .get(
           apiConfig.kolActivityUrl +
@@ -103,30 +103,30 @@ export default {
         )
         .then(function(res) {
           if (res.status === 200) {
-            _that.activeList = res.data;
+            _that.activeList = res.data
             if (_that.activeList.total_info.length === 0) {
-              _that.activeList.total_info[0] = 'N/A';
-              _that.activeList.total_info[1] = 'N/A';
-              _that.activeList.total_info[2] = 'N/A';
+              _that.activeList.total_info[0] = 'N/A'
+              _that.activeList.total_info[1] = 'N/A'
+              _that.activeList.total_info[2] = 'N/A'
             }
             if (_that.activeList.creations_list.length === 0) {
-              _that.activeList.creations_list[0] = {};
-              _that.activeList.creations_list[0].id = 'N/A';
-              _that.activeList.creations_list[0].title = 'N/A';
-              _that.activeList.creations_list[0].date = 'N/A';
-              _that.activeList.creations_list[0].amount = 'N/A';
+              _that.activeList.creations_list[0] = {}
+              _that.activeList.creations_list[0].id = 'N/A'
+              _that.activeList.creations_list[0].title = 'N/A'
+              _that.activeList.creations_list[0].date = 'N/A'
+              _that.activeList.creations_list[0].amount = 'N/A'
             }
           }
         })
         .catch(function(error) {
           // console.log(error)
-        });
+        })
     }
   },
   computed: {
     ...mapState(['authorization'])
   }
-};
+}
 </script>
 <style>
 </style>

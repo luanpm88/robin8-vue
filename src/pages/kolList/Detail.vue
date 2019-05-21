@@ -153,7 +153,7 @@
             </div>
           </div> -->
           <!-- performance -->
-          <div class="panel default-panel mt20 kol-performance">
+          <!-- <div class="panel default-panel mt20 kol-performance">
             <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
             </div>
@@ -181,7 +181,7 @@
                 <a-spin tip="Loading..."/>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- most_relevant_post  暂时微信没有这个接口 -->
           <div class="panel default-panel mt20 kol-performance"  v-if="type === 0">
             <div class="panel-head">
@@ -319,7 +319,7 @@ import { Tooltip } from "ant-design-vue";
 import cloud from "@components/Chart/chatCloud";
 import { mapState, mapMutations } from "vuex";
 // summary
-import Summaries from "@/pages/kolList/summary/Index";
+import Summaries from "@/pages/kolList/sum/Index";
 // analytics
 import Analytics from "@/pages/kolList/analytic/Index";
 // posts
@@ -402,16 +402,16 @@ export default {
         //   name: "kolList.detail.post"
         // }
       ],
-      performanceList: [],
-      performanceParams: {
-        start_date: commonJs.cPastTwentyOneDays,
-        end_date: commonJs.cPastOneday,
-        profile_id: "MzAwMDAyMzY3OA==",
-        order_type: "read"
-      },
-      isPer: false,
-      isPerShow: false,
-      isPerLoading: true,
+      // performanceList: [],
+      // performanceParams: {
+      //   start_date: commonJs.cPastTwentyOneDays,
+      //   end_date: commonJs.cPastOneday,
+      //   profile_id: "MzAwMDAyMzY3OA==",
+      //   order_type: "read"
+      // },
+      // isPer: false,
+      // isPerShow: false,
+      // isPerLoading: true,
       cartParams: {},
       currentBrandName: "",
       otherSocialData: {
@@ -564,10 +564,10 @@ export default {
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
         this.trendsWeibo(this.trendParams);
-        // best performance 参数
-        this.performanceParams.profile_id = String(this.$route.params.id);
-        this.performanceParams.order_type = "sum_engagement";
-        this.performanceWeibo(this.performanceParams);
+        // // best performance 参数
+        // this.performanceParams.profile_id = String(this.$route.params.id);
+        // this.performanceParams.order_type = "sum_engagement";
+        // this.performanceWeibo(this.performanceParams);
         // 调用微博单个品牌 标签接口
         this.isSingleBrand = true;
         this.brandNameParams.profile_id = Number(this.$route.params.id);
@@ -593,9 +593,9 @@ export default {
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
           this.trendsWeixin(this.trendParams);
-          // best performance 参数
-          this.performanceParams.profile_id = this.$route.params.id;
-          this.performanceWeixin(this.performanceParams);
+          // // best performance 参数
+          // this.performanceParams.profile_id = this.$route.params.id;
+          // this.performanceWeixin(this.performanceParams);
           // 调用微信品牌名字接口
           this.isSingleBrand = true;
           this.brandNameParams.profile_id = this.$route.params.id;
@@ -970,109 +970,109 @@ export default {
         });
     },
     // kolWeixinSocial weibo
-    kolWeiboSocial(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiboSocial, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.dataListBox = res.data;
-            if (!_that.dataListBox.pricing) {
-              _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = " N/A";
-            }
-            if (_that.dataListBox.fans_number === "") {
-              _that.dataListBox.fans_number = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_shares === "") {
-              _that.dataListBox.stats.avg_shares = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_likes === "") {
-              _that.dataListBox.stats.avg_likes = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_comments === "") {
-              _that.dataListBox.stats.avg_comments = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_daily_posts === "") {
-              _that.dataListBox.stats.avg_daily_posts = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_post_influences === "") {
-              _that.dataListBox.stats.avg_post_influences = " N/A";
-            }
-            _that.dataListBox.platform = "weibo";
-            _that.dataListBox.pricing.direct_price =
-              "¥" +
-              commonJs.threeFormatter(
-                _that.dataListBox.pricing.direct_price,
-                2
-              );
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    // kolWeixinSocial
-    kolWeixinSocial(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeixinSocial, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            // console.log('wishiweixn', res)
-            _that.dataListBox = res.data;
-            if (!_that.dataListBox.pricing) {
-              _that.dataListBox.pricing = {};
-              _that.dataListBox.pricing.direct_price = " N/A";
-            }
-            if (_that.dataListBox.status === "error") {
-              _that.dataListBox.stats = {};
-              _that.dataListBox.stats.avg_shares = " N/A";
-              _that.dataListBox.stats.avg_likes = " N/A";
-              _that.dataListBox.stats.avg_reads = " N/A";
-              _that.dataListBox.stats.avg_daily_posts = " N/A";
-              _that.dataListBox.stats.avg_post_influences = " N/A";
-              _that.dataListBox.stats.avg_comments = " N/A";
-            }
-            if (_that.dataListBox.fans_number === "") {
-              _that.dataListBox.fans_number = " N/A";
-            }
-            if (!_that.dataListBox.stats.avg_shares) {
-              _that.dataListBox.stats.avg_shares = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_likes === "") {
-              _that.dataListBox.stats.avg_likes = " N/A";
-            }
-            if (!_that.dataListBox.stats.avg_comments) {
-              _that.dataListBox.stats.avg_comments = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_daily_posts === "") {
-              _that.dataListBox.stats.avg_daily_posts = " N/A";
-            }
-            if (_that.dataListBox.stats.avg_post_influences === "") {
-              _that.dataListBox.stats.avg_post_influences = " N/A";
-            }
-            _that.dataListBox.platform = "weixin";
-            _that.dataListBox.pricing.direct_price =
-              "¥" +
-              commonJs.threeFormatter(
-                _that.dataListBox.pricing.direct_price,
-                2
-              );
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
+    // kolWeiboSocial(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.kolWeiboSocial, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         _that.dataListBox = res.data;
+    //         if (!_that.dataListBox.pricing) {
+    //           _that.dataListBox.pricing = {};
+    //           _that.dataListBox.pricing.direct_price = " N/A";
+    //         }
+    //         if (_that.dataListBox.fans_number === "") {
+    //           _that.dataListBox.fans_number = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_shares === "") {
+    //           _that.dataListBox.stats.avg_shares = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_likes === "") {
+    //           _that.dataListBox.stats.avg_likes = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_comments === "") {
+    //           _that.dataListBox.stats.avg_comments = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_daily_posts === "") {
+    //           _that.dataListBox.stats.avg_daily_posts = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_post_influences === "") {
+    //           _that.dataListBox.stats.avg_post_influences = " N/A";
+    //         }
+    //         _that.dataListBox.platform = "weibo";
+    //         _that.dataListBox.pricing.direct_price =
+    //           "¥" +
+    //           commonJs.threeFormatter(
+    //             _that.dataListBox.pricing.direct_price,
+    //             2
+    //           );
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
+    // // kolWeixinSocial
+    // kolWeixinSocial(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.kolWeixinSocial, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         // console.log('wishiweixn', res)
+    //         _that.dataListBox = res.data;
+    //         if (!_that.dataListBox.pricing) {
+    //           _that.dataListBox.pricing = {};
+    //           _that.dataListBox.pricing.direct_price = " N/A";
+    //         }
+    //         if (_that.dataListBox.status === "error") {
+    //           _that.dataListBox.stats = {};
+    //           _that.dataListBox.stats.avg_shares = " N/A";
+    //           _that.dataListBox.stats.avg_likes = " N/A";
+    //           _that.dataListBox.stats.avg_reads = " N/A";
+    //           _that.dataListBox.stats.avg_daily_posts = " N/A";
+    //           _that.dataListBox.stats.avg_post_influences = " N/A";
+    //           _that.dataListBox.stats.avg_comments = " N/A";
+    //         }
+    //         if (_that.dataListBox.fans_number === "") {
+    //           _that.dataListBox.fans_number = " N/A";
+    //         }
+    //         if (!_that.dataListBox.stats.avg_shares) {
+    //           _that.dataListBox.stats.avg_shares = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_likes === "") {
+    //           _that.dataListBox.stats.avg_likes = " N/A";
+    //         }
+    //         if (!_that.dataListBox.stats.avg_comments) {
+    //           _that.dataListBox.stats.avg_comments = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_daily_posts === "") {
+    //           _that.dataListBox.stats.avg_daily_posts = " N/A";
+    //         }
+    //         if (_that.dataListBox.stats.avg_post_influences === "") {
+    //           _that.dataListBox.stats.avg_post_influences = " N/A";
+    //         }
+    //         _that.dataListBox.platform = "weixin";
+    //         _that.dataListBox.pricing.direct_price =
+    //           "¥" +
+    //           commonJs.threeFormatter(
+    //             _that.dataListBox.pricing.direct_price,
+    //             2
+    //           );
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
     // 初始化 fergus的info 接口
     infoJoggle(params) {
       const _that = this
@@ -1198,83 +1198,83 @@ export default {
           // console.log(error)
         });
     },
-    // Best Performance Posts weibo
-    performanceWeibo(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.performanceWeibo, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            // console.log('wobo 微博', res)
-            _that.isPerLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isPerShow = false;
-              _that.isPer = true;
-              res.data.data.forEach(item => {
-                if (Number(item.influence_sum_engagement) !== 0) {
-                  item.influence_sum_engagement =
-                    commonJs.threeFormatter(item.influence_sum_engagement, 2) +
-                    "+";
-                } else {
-                  item.influence_sum_engagement = commonJs.threeFormatter(
-                    item.influence_sum_engagement,
-                    2
-                  );
-                }
-              });
-              _that.performanceList = res.data.data;
-            } else {
-              _that.isPerShow = true;
-              _that.isPer = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    // Best Performance Posts weixin
-    performanceWeixin(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.performanceWeixin, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            // console.log('woshi weixin', res)
-            _that.isPerLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isPerShow = false;
-              _that.isPer = true;
-              res.data.data.forEach(item => {
-                if (Number(item.influence_reads) !== 0) {
-                  item.influence_reads =
-                    commonJs.threeFormatter(item.influence_reads, 2) + "+";
-                } else {
-                  item.influence_reads = commonJs.threeFormatter(
-                    item.influence_reads,
-                    2
-                  );
-                }
-              });
-              _that.performanceList = res.data.data;
-            } else {
-              _that.isPerShow = true;
-              _that.isPer = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
+    // // Best Performance Posts weibo
+    // performanceWeibo(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.performanceWeibo, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         // console.log('wobo 微博', res)
+    //         _that.isPerLoading = false;
+    //         if (res.data.data.length > 0) {
+    //           _that.isPerShow = false;
+    //           _that.isPer = true;
+    //           res.data.data.forEach(item => {
+    //             if (Number(item.influence_sum_engagement) !== 0) {
+    //               item.influence_sum_engagement =
+    //                 commonJs.threeFormatter(item.influence_sum_engagement, 2) +
+    //                 "+";
+    //             } else {
+    //               item.influence_sum_engagement = commonJs.threeFormatter(
+    //                 item.influence_sum_engagement,
+    //                 2
+    //               );
+    //             }
+    //           });
+    //           _that.performanceList = res.data.data;
+    //         } else {
+    //           _that.isPerShow = true;
+    //           _that.isPer = false;
+    //         }
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
+    // // Best Performance Posts weixin
+    // performanceWeixin(params) {
+    //   const _that = this;
+    //   axios
+    //     .post(apiConfig.performanceWeixin, params, {
+    //       headers: {
+    //         Authorization: _that.authorization
+    //       }
+    //     })
+    //     .then(function(res) {
+    //       if (res.status === 200) {
+    //         // console.log('woshi weixin', res)
+    //         _that.isPerLoading = false;
+    //         if (res.data.data.length > 0) {
+    //           _that.isPerShow = false;
+    //           _that.isPer = true;
+    //           res.data.data.forEach(item => {
+    //             if (Number(item.influence_reads) !== 0) {
+    //               item.influence_reads =
+    //                 commonJs.threeFormatter(item.influence_reads, 2) + "+";
+    //             } else {
+    //               item.influence_reads = commonJs.threeFormatter(
+    //                 item.influence_reads,
+    //                 2
+    //               );
+    //             }
+    //           });
+    //           _that.performanceList = res.data.data;
+    //         } else {
+    //           _that.isPerShow = true;
+    //           _that.isPer = false;
+    //         }
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       // console.log(error)
+    //     });
+    // },
     // most_relevant_post 微博  暂时没有微信
     relevantPostWeibo(params) {
       const _that = this;
@@ -1603,15 +1603,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.kol-performance {
-  .com-brand-table {
-    a,
-    .purple {
-      display: block;
-      text-align: left;
-      color: nth($purple, 1);
-      word-break: break-all;
-    }
-  }
-}
+
 </style>
