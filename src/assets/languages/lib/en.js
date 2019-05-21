@@ -336,6 +336,7 @@ export const lang = {
       placeholder: 'Please select the social platform',
       weibo: 'Weibo',
       wechat: 'Wechat',
+      facebook: 'Facebook',
       errorTips: 'Please select the social platform'
     },
     mode: {

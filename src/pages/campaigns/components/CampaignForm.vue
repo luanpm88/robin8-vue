@@ -154,25 +154,12 @@
                     <input
                       name="platform"
                       type="radio"
-                      value="wechat"
-                      v-model="submitData.sub_type"
-                      v-validate="'required'"
-                      @change="subTypeChange"
-                    />
-                    <span>{{$t('lang.campaigns.platform.wechat')}}</span>
-                  </label>
-                </div>
-                <div class="col-sm-4">
-                  <label class="ctrl-label">
-                    <input
-                      name="platform"
-                      type="radio"
                       value="weibo"
                       v-model="submitData.sub_type"
                       v-validate="'required'"
                       @change="subTypeChange"
                     />
-                    <span>{{$t('lang.campaigns.platform.weibo')}}</span>
+                    <span>{{$t('lang.campaigns.platform.facebook')}}</span>
                   </label>
                 </div>
               </div>
@@ -203,7 +190,7 @@
                     <span>{{$t('lang.campaigns.mode.clicks')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <label class="ctrl-label">
                     <input
                       name="mode"
@@ -216,7 +203,7 @@
                     <span>{{$t('lang.campaigns.mode.repost')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <label class="ctrl-label">
                     <input
                       name="mode"

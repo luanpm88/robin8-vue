@@ -331,6 +331,7 @@ export const lang = {
       placeholder: 'Chọn mạng kết nối chiến dịch của bạn',
       weibo: 'Weibo',
       wechat: 'Wechat',
+      facebook: 'Facebook',
       errorTips: 'Vui lòng chọn mạng kết nối'
     },
     mode: {
