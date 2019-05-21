@@ -3,6 +3,7 @@
     <div class="kol-detail clearfix">
       <div class="kol-detail-side">
         <!-- info -->
+        <!-- kol 详情 -->
         <div class="panel default-panel kol-infobox">
           <div class="panel-head">
           </div>
@@ -73,6 +74,7 @@
             </div>
           </div>
         </div>
+        <!-- industries 行业图表 -->
         <div class="panel default-panel mt20" v-if="false">
           <div class="panel-head">
             <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
@@ -94,85 +96,27 @@
         </div>
       </div>
       <div class="kol-detail-con" v-if="type === 0 || type === 1">
+        <!-- 返回按钮 -->
         <div class="top-control-area">
           <button type="button" class="btn btn-purple" @click="goback">
             <span class="iconfont icon-arrow-left"></span>
             {{$t('lang.kolList.detail.btn')}}
           </button>
         </div>
+        <!-- tab 平台切换 -->
         <default-tabs
           :tabList="tabList"
           :tabIndex="tabIndex"
           @changeTab="changeTab"
           class="panel-tab mt20"
         ></default-tabs>
+        <!-- summary 模块  -->
         <div class="mt20" v-if="tabIndex === 0">
-          <!-- Activity -->
-          <div class="panel default-panel mt20" v-if="isActivity">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.activity')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="activity-table">
-                <table class="com-brand-table">
-                  <tr>
-                    <th>{{$t('lang.kolList.detail.activityData.id')}}</th>
-                    <th>{{$t('lang.kolList.detail.activityData.title')}}</th>
-                    <th>{{$t('lang.kolList.detail.activityData.date')}}</th>
-                    <th>{{$t('lang.kolList.detail.activityData.performance')}}</th>
-                  </tr>
-                  <tr v-for="(key, index) in activeList.creations_list" :key="index">
-                    <td>{{key.id}}</td>
-                    <td>{{key.title}}</td>
-                    <td>{{key.date}}</td>
-                    <td>{{key.amount}}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!-- Analytics -->
-          <div class="panel default-panel mt20" v-if="isAnalytics">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.analytics')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="activity-contable">
-                <table class="com-brand-table">
-                  <tr>
-                    <th></th>
-                    <th>{{$t('lang.kolList.detail.analyticsData.campaigns')}}</th>
-                    <th>
-                      <a-tooltip
-                        placement="topLeft"
-                        :title="$t('lang.kolList.detail.analyticsData.performTip')"
-                      >{{$t('lang.kolList.detail.analyticsData.performance')}}</a-tooltip>
-                    </th>
-                    <th>
-                      <a-tooltip
-                        placement="topLeft"
-                        :title="$t('lang.kolList.detail.analyticsData.clientTip')"
-                      >{{$t('lang.kolList.detail.analyticsData.clients')}}</a-tooltip>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td>{{$t('lang.kolList.detail.analyticsTotal')}}</td>
-                    <td v-for="(item, index) in activeList.total_info" :key="index">
-                      <p class="activity-border">{{item}}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{{$t('lang.kolList.detail.analyticsDay')}}</td>
-                    <td v-for="(item, index) in activeList.last_30_days_info" :key="index">
-                      <p class="activity-border">{{item}}</p>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
+          <summaries></summaries>
+        </div>
+        <div class="mt20" v-if="tabIndex === 0">
           <!-- socialData -->
-          <div class="panel default-panel mt20">
+          <!-- <div class="panel default-panel mt20">
             <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
             </div>
@@ -199,7 +143,6 @@
                     <td>{{dataListBox.stats.avg_daily_posts}}</td>
                     <td v-if="type === 0">
                       {{dataListBox.stats.avg_post_influences}}
-                      <!-- Coming Soon -->
                     </td>
                     <td v-else>
                       Coming Soon
@@ -208,7 +151,7 @@
                 </table>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- performance -->
           <div class="panel default-panel mt20 kol-performance">
             <div class="panel-head">
@@ -318,16 +261,16 @@
           </div>
         </div>
 
-        <!-- analytic -->
+        <!-- analytic 模块 -->
         <div class="mt20" v-if="tabIndex === 1">
           <analytics></analytics>
         </div>
-        <!-- post -->
+        <!-- post 模块 目前已经隐藏-->
         <div class="mt20" v-if="tabIndex === 2">
           <posts></posts>
         </div>
       </div>
-      <!-- 除了微信和微博  其他平台只展示 socialData -->
+      <!-- 除了微信和微博  其他平台只展示 socialData 并且 展示的文案不一样 -->
       <div class="kol-detail-con" v-else>
         <div class="top-control-area">
           <button type="button" class="btn btn-purple" @click="goback">
@@ -375,6 +318,8 @@ import commonJs from "@javascripts/common.js";
 import { Tooltip } from "ant-design-vue";
 import cloud from "@components/Chart/chatCloud";
 import { mapState, mapMutations } from "vuex";
+// summary
+import Summaries from "@/pages/kolList/summary/Index";
 // analytics
 import Analytics from "@/pages/kolList/analytic/Index";
 // posts
@@ -384,6 +329,7 @@ export default {
   components: {
     Echarts,
     DefaultTabs,
+    Summaries,
     Analytics,
     Posts,
     ATooltip: Tooltip,
@@ -394,8 +340,6 @@ export default {
       isShow: false,
       isLoading: true,
       isTag: false,
-      isActivity: false,
-      isAnalytics: false,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,
@@ -415,21 +359,20 @@ export default {
       decValue: [],
       decKey: [],
       parentTags: [],
-      dataListBox: {
-        fans_number: "N/A",
-        stats: {
-          avg_shares: "N/A",
-          avg_likes: "N/A",
-          avg_reads: "N/A",
-          avg_daily_posts: "N/A",
-          avg_post_influences: "N/A",
-          avg_comments: "N/A"
-        },
-        pricing: {
-          direct_price: "N/A"
-        }
-      },
-      activeList: {},
+      // dataListBox: {
+      //   fans_number: "N/A",
+      //   stats: {
+      //     avg_shares: "N/A",
+      //     avg_likes: "N/A",
+      //     avg_reads: "N/A",
+      //     avg_daily_posts: "N/A",
+      //     avg_post_influences: "N/A",
+      //     avg_comments: "N/A"
+      //   },
+      //   pricing: {
+      //     direct_price: "N/A"
+      //   }
+      // },
       sentimentParams: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
@@ -616,7 +559,7 @@ export default {
         totalParams.profile_id = Number(this.$route.params.id);
         this.kolWeiboIndustry(totalParams);
         this.kolWeiboKeyword(totalParams);
-        this.kolWeiboSocial(totalParams);
+        // this.kolWeiboSocial(totalParams);
         // 计算sentiment
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
@@ -645,7 +588,7 @@ export default {
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinIndustry(totalParams);
           this.kolWeiXinKeyword(totalParams);
-          this.kolWeixinSocial(totalParams);
+          // this.kolWeixinSocial(totalParams);
           // 计算sentiment
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
@@ -938,7 +881,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log("kolWeiboIndustry error", error);
+          // console.log("kolWeiboIndustry error", error);
           // console.log(error)
         });
     },
