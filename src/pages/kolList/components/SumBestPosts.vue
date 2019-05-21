@@ -57,7 +57,6 @@ export default {
     }
   },
   created() {
-    let totalParams = {}
     this.type = Number(this.$route.query.type)
     if (Number(this.$route.query.type) === 0) {
       // best performance 参数

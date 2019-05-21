@@ -10,6 +10,10 @@
     <!-- performance -->
     <best-posts></best-posts>
 
+    <!-- most_relevant_post  暂时微信没有这个接口 -->
+    <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent>
+
+
     <!-- 从analytics 复制出来的-->
     <!-- distribution -->
     <!-- <distribution :currentType="this.$route.query.type" :currentId="this.$route.params.id" :titleType='0'></distribution> -->
@@ -40,15 +44,19 @@ import { mapState } from 'vuex'
 import Activity from '@/pages/kolList/components/SumActivity'
 // socialData 表格
 import Social from '@/pages/kolList/components/SumSocial'
-// SumBestPosts 文章
+// SumBestPosts 最佳文章
 import BestPosts from '@/pages/kolList/components/SumBestPosts'
+// SumMostRelevent 最具相关度文章
+import MostRelevent from '@/pages/kolList/components/SumMostRelevent'
 
 export default {
   name: 'summaries',
+  props: ['currentKeywords'],
   components: {
     Activity,
     Social,
-    BestPosts
+    BestPosts,
+    MostRelevent
   },
   data() {
     return {
@@ -59,7 +67,7 @@ export default {
     ...mapState(['authorization'])
   },
   created() {
-    // this.type = Number(this.$route.query.type) 
+    this.type = Number(this.$route.query.type) 
   }
 } 
 </script>

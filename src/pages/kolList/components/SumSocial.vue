@@ -61,7 +61,7 @@ export default {
           direct_price: 'N/A'
         }
       },
-    };
+    }
   },
   created() {
     let totalParams = {}
