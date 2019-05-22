@@ -14,7 +14,10 @@
     <!-- <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent> -->
 
     <!-- Keywords -->
-    <keywords></keywords>
+    <!-- <keywords></keywords> -->
+
+    <!-- AllBrand -->
+    <all-brand></all-brand>
 
   </div>
 </template>
@@ -35,6 +38,8 @@ import BestPosts from '@/pages/kolList/components/SumBestPosts'
 import MostRelevent from '@/pages/kolList/components/SumMostRelevent'
 // SumKeywords 关键字
 import Keywords from '@/pages/kolList/components/SumKeywords'
+// SumAllBrand全部品牌 关键字
+import AllBrand from '@/pages/kolList/components/SumAllBrand'
 
 export default {
   name: 'summaries',
@@ -44,7 +49,8 @@ export default {
     Social,
     BestPosts,
     MostRelevent,
-    Keywords
+    Keywords,
+    AllBrand
   },
   data() {
     return {

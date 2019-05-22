@@ -136,7 +136,7 @@
             </div>
           </div> -->
           <!--all Brand  tag  -->
-          <div class="panel default-panel mt20" v-if=" allBrand">
+          <!-- <div class="panel default-panel mt20" v-if=" allBrand">
             <div class="panel-head">
               <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
             </div>
@@ -149,11 +149,11 @@
               </div>
               <cloud v-if="isAllbrandDisTag" :defaultWords="allbrandDisTags" :height="wordHeight"></cloud>
             </div>
-          </div>
+          </div> -->
           <!--single  Brand  Distribution  -->
           <div class="panel default-panel mt20" v-if="isSingleBrand">
             <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
+              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}} - {{currentBrandName}}</h5>
             </div>
             <div class="panel-body prl30">
               <div class="nonetip" v-if="isbrandDisShow">
@@ -318,17 +318,17 @@ export default {
       isbrandDisTag: false,
       parentbrandDisTags: [],
       wordHeight: "400px",
-      allBrandTagParams: {
-        start_date: commonJs.cPastYears,
-        end_date: commonJs.cPastOneday,
-        profile_id: "MzAwMDAyMzY3OA==",
-        language: "en"
-      },
-      allBrand: true,
-      isAllbrandDisLoading: true,
-      isAllbrandDisShow: false,
-      isAllbrandDisTag: false,
-      allbrandDisTags: [],
+      // allBrandTagParams: {
+      //   start_date: commonJs.cPastYears,
+      //   end_date: commonJs.cPastOneday,
+      //   profile_id: "MzAwMDAyMzY3OA==",
+      //   language: "en"
+      // },
+      // allBrand: true,
+      // isAllbrandDisLoading: true,
+      // isAllbrandDisShow: false,
+      // isAllbrandDisTag: false,
+      // allbrandDisTags: [],
       kolProfileLink: '',
       canRender: true,
       keywords: '',
@@ -366,7 +366,7 @@ export default {
       let totalParams = {};
       totalParams.language = language;
       this.brandNameParams.language = language;
-      this.allBrandTagParams.language = language;
+      // this.allBrandTagParams.language = language;
       // this.isLoading = true;
       // this.isTag = false;
       // this.isShow = false;
@@ -375,10 +375,10 @@ export default {
       this.isbrandDisTag = false;
       this.isbrandDisShow = false;
 
-      this.allBrand = true;
-      this.isAllbrandDisLoading = true;
-      this.isAllbrandDisTag = false;
-      this.isAllbrandDisShow = false;
+      // this.allBrand = true;
+      // this.isAllbrandDisLoading = true;
+      // this.isAllbrandDisTag = false;
+      // this.isAllbrandDisShow = false;
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
         // totalParams.profile_id = Number(this.$route.params.id);
@@ -387,9 +387,9 @@ export default {
         this.brandNameParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboBrandName(this.brandNameParams);
 
-        // 调用微博 all 品牌 标签接口
-        this.allBrandTagParams.profile_id = Number(this.$route.params.id);
-        this.detailWeiboTotalTag(this.allBrandTagParams);
+        // // 调用微博 all 品牌 标签接口
+        // this.allBrandTagParams.profile_id = Number(this.$route.params.id);
+        // this.detailWeiboTotalTag(this.allBrandTagParams);
       }
       if (Number(this.$route.query.type) === 1) {
         // 微信相关接口
@@ -399,9 +399,9 @@ export default {
         this.brandNameParams.profile_id = this.$route.params.id;
         this.detailWeixinBrandName(this.brandNameParams);
 
-        // 调用weixin all 品牌 标签接口
-        this.allBrandTagParams.profile_id = this.$route.params.id;
-        this.detailWeixinTotalTag(this.allBrandTagParams);
+        // // 调用weixin all 品牌 标签接口
+        // this.allBrandTagParams.profile_id = this.$route.params.id;
+        // this.detailWeixinTotalTag(this.allBrandTagParams);
       }
     },
     // summary
@@ -433,12 +433,12 @@ export default {
       if (this.$i18n.locale === "zh-CN") {
         totalParams.language = "zh";
         this.brandNameParams.language = "zh";
-        this.allBrandTagParams.language = "zh";
+        // this.allBrandTagParams.language = "zh";
       }
       if (this.$i18n.locale === "en-US") {
         totalParams.language = "en";
         this.brandNameParams.language = "en";
-        this.allBrandTagParams.language = "en";
+        // this.allBrandTagParams.language = "en";
       }
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
@@ -454,10 +454,10 @@ export default {
         this.brandNameParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboBrandName(this.brandNameParams);
 
-        // 调用微博 all 品牌 标签接口
-        this.allBrand = true;
-        this.allBrandTagParams.profile_id = Number(this.$route.params.id);
-        this.detailWeiboTotalTag(this.allBrandTagParams);
+        // // 调用微博 all 品牌 标签接口
+        // this.allBrand = true;
+        // this.allBrandTagParams.profile_id = Number(this.$route.params.id);
+        // this.detailWeiboTotalTag(this.allBrandTagParams);
 
       } else {
         if (Number(this.$route.query.type) === 1) {
@@ -474,10 +474,10 @@ export default {
           this.brandNameParams.profile_id = this.$route.params.id;
           this.detailWeixinBrandName(this.brandNameParams);
 
-          // 调用weixin all 品牌 标签接口
-          this.allBrand = true;
-          this.allBrandTagParams.profile_id = this.$route.params.id;
-          this.detailWeixinTotalTag(this.allBrandTagParams);
+          // // 调用weixin all 品牌 标签接口
+          // this.allBrand = true;
+          // this.allBrandTagParams.profile_id = this.$route.params.id;
+          // this.detailWeixinTotalTag(this.allBrandTagParams);
         } else {
           // console.log(this.$route.params.id)
           totalParams.profile_id = decodeURIComponent(
