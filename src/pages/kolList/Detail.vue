@@ -211,6 +211,36 @@
               </div>
             </div>
           </div>
+          <!-- most_relevant_post  暂时微信没有这个接口 -->
+          <div class="panel default-panel mt20 kol-performance"  v-if="isRelevantBox">
+            <!-- <div class="panel-head">
+              <h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
+            </div>-->
+            <div class="panel-body prl30">
+              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</p>
+              <table class="com-brand-table" v-if="isRelevant">
+                <tr>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.date')}}</th>
+                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.correlation')}}</th>
+                </tr>
+                <tr v-for="(key, index) in relevantList" :key="index">
+                  <td>
+                    <!-- <p class="purple">{{key.title}}</p> -->
+                    <a :href="key.url" target="blank">{{key.title}}</a>
+                  </td>
+                  <td style="min-width:200px">{{key.post_time}}</td>
+                  <td>{{key.correlation}}</td>
+                </tr>
+              </table>
+              <div class="nonetip" v-if="isRelevantShow">
+                <span>{{$t('lang.totalNoDataTip')}}</span>
+              </div>
+              <div class="r8-loading" v-if="isRelevantLoading">
+                <a-spin tip="Loading..."/>
+              </div>
+            </div>
+          </div>
           <!-- performance -->
           <div class="panel default-panel mt20 kol-performance">
             <!-- <div class="panel-head">
@@ -241,36 +271,6 @@
                 <span>{{$t('lang.totalNoDataTip')}}</span>
               </div>
               <div class="r8-loading" v-if="isPerLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-            </div>
-          </div>
-          <!-- most_relevant_post  暂时微信没有这个接口 -->
-          <div class="panel default-panel mt20 kol-performance"  v-if="type === 0">
-            <!-- <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
-            </div>-->
-            <div class="panel-body prl30">
-              <p class="kol-cloumn mb10">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</p>
-              <table class="com-brand-table" v-if="isRelevant">
-                <tr>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.date')}}</th>
-                  <th>{{$t('lang.kolList.detail.mostRelevantPosts.correlation')}}</th>
-                </tr>
-                <tr v-for="(key, index) in relevantList" :key="index">
-                  <td>
-                    <!-- <p class="purple">{{key.title}}</p> -->
-                    <a :href="key.url" target="blank">{{key.title}}</a>
-                  </td>
-                  <td style="min-width:200px">{{key.post_time}}</td>
-                  <td>{{key.correlation}}</td>
-                </tr>
-              </table>
-              <div class="nonetip" v-if="isRelevantShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isRelevantLoading">
                 <a-spin tip="Loading..."/>
               </div>
             </div>
@@ -445,12 +445,12 @@ export default {
       sentimentParams: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW"
+        brand_keywords: ""
       },
       trendParams: {
         start_date: commonJs.cPastFourteenDays,
         end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW",
+        brand_keywords: "",
         type: "doc"
       },
       MentionsList: [],
@@ -475,14 +475,15 @@ export default {
       performanceParams: {
         start_date: commonJs.cPastTwentyOneDays,
         end_date: commonJs.cPastOneday,
-        profile_id: "MzAwMDAyMzY3OA==",
+        profile_id: "",
         order_type: "read"
       },
       isPer: false,
       isPerShow: false,
       isPerLoading: true,
       cartParams: {},
-      currentBrandName: "",
+      currentBrandName: "N/A",
+      currentBrandKeywords: "",
       otherSocialData: {
         platform: "N/A",
         gender: "N/A",
@@ -494,7 +495,7 @@ export default {
         profile_id: "",
         start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW",
+        brand_keywords: "",
         type: "doc",
         language: "en"
       },
@@ -507,7 +508,7 @@ export default {
       allBrandTagParams: {
         start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
-        profile_id: "MzAwMDAyMzY3OA==",
+        profile_id: "",
         language: "en"
       },
       allBrand: true,
@@ -517,13 +518,14 @@ export default {
       allbrandDisTags: [],
       kolProfileLink: '',
       canRender: true,
+      isRelevantBox: true,
       isRelevant: false,
       isRelevantShow: false,
       isRelevantLoading: true,
       relevantPostParams: {
         start_date: commonJs.cPastYears,
         end_date: commonJs.cPastOneday,
-        profile_id: "MzAwMDAyMzY3OA==",
+        profile_id: "",
         keywords: ''
       },
       relevantList: []
@@ -542,18 +544,30 @@ export default {
   created () {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
-    this.isSingleBrand = true;
-    this.allBrand = true;
-    let newKey = "";
-    this.$route.query.brand_keywords.split(",").forEach(item => {
-      newKey += '"' + item + '" ';
-    });
-    this.trendParams.brand_keywords = newKey;
-    this.sentimentParams.brand_keywords = newKey;
-    this.brandNameParams.brand_keywords = newKey;
-    this.relevantPostParams.keywords = newKey;
+    // this.isSingleBrand = true;
+    // this.allBrand = true;
     this.type = Number(this.$route.query.type);
-    this.tabIndexOneInit();
+    // 获取brandName 和 key
+    this.getBaseData();
+    if (this.$route.query.isSearch) {
+      let relevantKey = this.$route.query.search_keywords;
+      let getNewKey = "";
+      relevantKey.split(",").forEach(item => {
+        getNewKey += '"' + item + '" ';
+      });
+      if (Number(this.$route.query.type) === 0) {
+        // 调用微博的most_relevant_post  暂时微信没有这个接口
+        this.isRelevantBox = true;
+        this.relevantPostParams.profile_id = Number(this.$route.params.id);
+        this.relevantPostParams.keywords = getNewKey;
+        this.relevantPostWeibo(this.relevantPostParams)
+      }
+      if (Number(this.$route.query.type) !== 0) {
+        this.isRelevantBox = false;
+      }
+    } else {
+      this.isRelevantBox = false;
+    }
   },
   computed: {
     ...mapState(['authorization', 'language']),
@@ -606,13 +620,31 @@ export default {
       }
     },
     // summary
-    tabIndexOneInit() {
+    tabIndexOneInit(getBrandName, getBrandKeywords) {
       let totalParams = {};
       // // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
       // this.kolActivityUrl(totalParams)
       this.infoJoggle(totalParams);
-      // 获取brandName
-      this.getBaseData();
+      if (getBrandKeywords !== '') {
+        let newKey = "";
+        getBrandKeywords.split(",").forEach(item => {
+          newKey += '"' + item + '" ';
+        });
+        // 
+        this.trendParams.brand_keywords = newKey;
+        // 品牌情绪 计算参数
+        this.sentimentParams.brand_keywords = newKey;
+        // 单个品牌 需要的参数
+        this.brandNameParams.brand_keywords = newKey;
+      } else {
+        this.currentBrandName = 'N/A';
+        this.isSingleBrand = true;
+        this.isbrandDisLoading = false;
+        this.isbrandDisShow = true;
+        this.trendParams.brand_keywords = '';
+        this.sentimentParams.brand_keywords = '';
+        this.brandNameParams.brand_keywords = '';
+      }
       if (this.$i18n.locale === "zh-CN") {
         totalParams.language = "zh";
         this.brandNameParams.language = "zh";
@@ -646,10 +678,6 @@ export default {
         this.allBrand = true;
         this.allBrandTagParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboTotalTag(this.allBrandTagParams);
-
-        // 调用微博的most_relevant_post  暂时微信没有这个接口
-        this.relevantPostParams.profile_id = Number(this.$route.params.id);
-        this.relevantPostWeibo(this.relevantPostParams)
 
       } else {
         if (Number(this.$route.query.type) === 1) {
@@ -950,7 +978,7 @@ export default {
           }
         })
         .catch(function(error) {
-          console.log("kolWeiboIndustry error", error);
+          // console.log("kolWeiboIndustry error", error);
           // console.log(error)
         });
     },
@@ -1505,6 +1533,7 @@ export default {
           if (res.status === 200) {
             _that.isbrandDisLoading = false;
             if (res.data.data.length > 0) {
+              // console.log('6789')
               _that.isbrandDisTag = true;
               _that.isbrandDisShow = false;
               _that.parentbrandDisTags = [];
@@ -1640,10 +1669,13 @@ export default {
             if (!res.data.competitors.length == 0) {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
+                  // console.log(element)
                   _that.currentBrandName = element.name;
+                  _that.currentBrandKeywords = element.keywords;
                 }
               });
             }
+            _that.tabIndexOneInit(_that.currentBrandName, _that.currentBrandKeywords)
           }
         });
     }

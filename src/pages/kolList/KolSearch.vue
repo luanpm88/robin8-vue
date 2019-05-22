@@ -259,7 +259,8 @@
                           },
                           query: {
                             type: Number(tabIndex),
-                            brand_keywords: totalKeywords
+                            search_keywords: keyword,
+                            isSearch: 0
                           }
                         }">
                           <img :src="item.avatar_url" alt class="avatar-img">
@@ -276,7 +277,8 @@
                           },
                           query: {
                             type: Number(tabIndex),
-                            brand_keywords: totalKeywords
+                            search_keywords: keyword,
+                            isSearch: 0
                           }
                         }">
                           <span class="kol-tit-span">{{item.profile_name}}</span>
@@ -394,6 +396,7 @@ export default {
       isRelevanceSort: "asc",
       // top 用户输入的key
       keyword: "",
+      changeKeyword: '',
       isShowKolList: false,
       // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: "",
@@ -472,6 +475,7 @@ export default {
     if (this.$route.query.brand_keywords) {
       this.tabIndex = Number(this.$route.query.type);
       this.keyword = this.$route.query.brand_keywords;
+      this.changeKeyword = this.$route.query.brand_keywords;
       // 初始化参数
       this.paramsInit();
       // 从home 首页进来 展示kol list
@@ -481,6 +485,8 @@ export default {
     } else {
       // 首次进来是 不展示kol list
       this.isShowKolList = false;
+      this.keywords = '';
+      this.changeKeyword = '';
     }
 
   },
@@ -503,14 +509,19 @@ export default {
       this.totalParams.influence_from = this.influenceFrom;
       this.totalParams.influence_to = this.influenceTo;
       if (this.keyword === "") {
+        this.changeKeyword = '';
         this.totalParams.keywords = "";
       } else {
         // this.keyword 转英文逗号
         this.keyword = this.keyword.replace(/，/gi, ",");
+        this.changeKeyword = this.keyword.replace(/，/gi, ",");
         let newKey = "";
-        this.keyword.split(",").forEach(item => {
+        this.changeKeyword.split(",").forEach(item => {
           newKey += '"' + item + '" ';
         });
+        // console.log('keyword', this.keyword)
+        // console.log('changeKeyword', this.changeKeyword)
+        // console.log('newKey', newKey)
         this.totalParams.keywords = newKey;
       }
       if (this.tabIndex === 0 || this.tabIndex === 1) {
