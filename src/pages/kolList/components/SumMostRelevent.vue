@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- most_relevant_post  暂时微信没有这个接口-->
-		<div class="panel default-panel mt20 kol-performance">
+		<div class="panel default-panel mt20 kol-performance" v-if="isRelevantBox">
 			<div class="panel-head">
 					<h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
 			</div>
@@ -51,15 +51,30 @@ export default {
         profile_id: '',
         keywords: ''
       },
-      relevantList: []
+      relevantList: [],
+      isRelevantBox: true
     }
   },
   created() {
-		this.relevantPostParams.keywords = this.keywords
-    if (Number(this.$route.query.type) === 0) {
-			// 调用微博的most_relevant_post  暂时微信没有这个接口
-			this.relevantPostParams.profile_id = Number(this.$route.params.id)
-			this.relevantPostWeibo(this.relevantPostParams)
+    this.relevantPostParams.keywords = this.keywords
+    // console.log(this.$route.query)
+    if(this.$route.query.isSearch) {
+      let relevantKey = this.$route.query.search_keywords;
+      let getNewKey = '';
+      relevantKey.split(',').forEach(item => {
+        getNewKey += '"' + item + '" ';
+      });
+      if (Number(this.$route.query.type) === 0) {
+        // 调用微博的most_relevant_post  暂时微信没有这个接口
+        this.relevantPostParams.profile_id = Number(this.$route.params.id)
+        this.relevantPostParams.keywords = getNewKey;
+        this.relevantPostWeibo(this.relevantPostParams)
+      }
+      if (Number(this.$route.query.type) !== 0) {
+        this.isRelevantBox = false;
+      }
+    } else {
+      this.isRelevantBox = false
     }
   },
   methods: {
@@ -106,5 +121,12 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
+a.purple {
+  display: block;
+  text-align: left;
+  @include limit-line(1);
+  color: nth($purple, 1);
+  word-break: break-all;
+}
 </style>

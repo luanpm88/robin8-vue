@@ -8,13 +8,13 @@
     <!-- <social></social> -->
 
     <!-- performance -->
-    <!-- <best-posts></best-posts> -->
+    <best-posts></best-posts>
 
     <!-- most_relevant_post  暂时微信没有这个接口 -->
-    <!-- <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent> -->
+    <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent>
 
     <!-- Keywords -->
-    <keywords :keywords='currentKeywords'></keywords>
+    <!-- <keywords :keywords='currentKeywords'></keywords> -->
 
   </div>
 </template>
@@ -60,16 +60,4 @@ export default {
 } 
 </script>
 <style lang="scss" scoped>
-.kol-performance /deep/ {
-  .com-brand-table {
-    a,
-    .purple {
-      display: block;
-      text-align: left;
-      color: nth($purple, 1);
-      @include limit-line(1);
-      word-break: break-all;
-    }
-  }
-}
 </style>

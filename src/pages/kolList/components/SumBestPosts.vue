@@ -16,7 +16,7 @@
           </tr>
           <tr v-for="(key, index) in performanceList" :key="index">
             <td>
-              <a :href="key.url" target="blank">{{key.title}}</a>
+              <a :href="key.url" target="blank" class="purple">{{key.title}}</a>
             </td>
             <td style="min-width:200px">{{key.post_time}}</td>
             <td v-if="type === 0">{{key.influence_sum_engagement}}</td>
@@ -155,5 +155,12 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
+a.purple {
+  display: block;
+  text-align: left;
+  @include limit-line(1);
+  color: nth($purple, 1);
+  word-break: break-all;
+}
 </style>

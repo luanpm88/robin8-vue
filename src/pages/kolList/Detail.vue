@@ -295,7 +295,8 @@ export default {
         // }
       ],
       cartParams: {},
-      currentBrandName: "",
+      currentBrandName: "N/A",
+      currentBrandKeywords: "",
       otherSocialData: {
         platform: "N/A",
         gender: "N/A",
@@ -330,7 +331,8 @@ export default {
       allbrandDisTags: [],
       kolProfileLink: '',
       canRender: true,
-      keywords: ''
+      keywords: '',
+      isRelevantBox: true
     };
   },
   watch: {
@@ -346,19 +348,11 @@ export default {
   created () {
     // console.log(this.$route.params)
     // console.log(this.$route.query)
-    this.isSingleBrand = true;
-    this.allBrand = true;
-    let newKey = "";
-    this.$route.query.brand_keywords.split(",").forEach(item => {
-      newKey += '"' + item + '" ';
-    });
-    this.keywords = newKey;
-    this.trendParams.brand_keywords = newKey;
-    this.sentimentParams.brand_keywords = newKey;
-    this.brandNameParams.brand_keywords = newKey;
-    // this.relevantPostParams.keywords = newKey;
+    // this.isSingleBrand = true;
+    // this.allBrand = true;
     this.type = Number(this.$route.query.type);
-    this.tabIndexOneInit();
+    // 获取brandName 和 key
+    this.getBaseData();
   },
   computed: {
     ...mapState(['authorization', 'language']),
@@ -411,13 +405,31 @@ export default {
       }
     },
     // summary
-    tabIndexOneInit() {
+    tabIndexOneInit(getBrandName, getBrandKeywords) {
       let totalParams = {};
       // // 优先调用春明大佬给的kol info 当数据为空的时候调用fergus的接口
       // this.kolActivityUrl(totalParams)
       this.infoJoggle(totalParams);
-      // 获取brandName
-      this.getBaseData();
+      if (getBrandKeywords !== '') {
+        let newKey = "";
+        getBrandKeywords.split(",").forEach(item => {
+          newKey += '"' + item + '" ';
+        });
+        // 
+        this.trendParams.brand_keywords = newKey;
+        // 品牌情绪 计算参数
+        this.sentimentParams.brand_keywords = newKey;
+        // 单个品牌 需要的参数
+        this.brandNameParams.brand_keywords = newKey;
+      } else {
+        this.currentBrandName = 'N/A';
+        this.isSingleBrand = true;
+        this.isbrandDisLoading = false;
+        this.isbrandDisShow = true;
+        this.trendParams.brand_keywords = '';
+        this.sentimentParams.brand_keywords = '';
+        this.brandNameParams.brand_keywords = '';
+      }
       if (this.$i18n.locale === "zh-CN") {
         totalParams.language = "zh";
         this.brandNameParams.language = "zh";
@@ -432,7 +444,7 @@ export default {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id);
         this.kolWeiboIndustry(totalParams);
-        // this.kolWeiboKeyword(totalParams);
+        this.kolWeiboKeyword(totalParams);
         // 计算sentiment
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
@@ -452,7 +464,7 @@ export default {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinIndustry(totalParams);
-          // this.kolWeiXinKeyword(totalParams);
+          this.kolWeiXinKeyword(totalParams);
           // 计算sentiment
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
@@ -767,69 +779,69 @@ export default {
           // console.log(error)
         });
     },
-    // // Keyword weibo
-    // kolWeiboKeyword(params) {
-    //   const _that = this;
-    //   axios
-    //     .post(apiConfig.kolWeiboKeyword, params, {
-    //       headers: {
-    //         Authorization: _that.authorization
-    //       }
-    //     })
-    //     .then(function(res) {
-    //       if (res.status === 200) {
-    //         _that.isLoading = false;
-    //         if (res.data.length > 0) {
-    //           _that.isTag = true;
-    //           _that.isShow = false;
-    //           _that.parentTags = [];
-    //           res.data = res.data.slice(0, 100);
-    //           res.data.forEach(item => {
-    //             item.name = item.text;
-    //             item.value = item.weight;
-    //           });
-    //           _that.parentTags = res.data;
-    //         } else {
-    //           _that.isTag = false;
-    //           _that.isShow = true;
-    //         }
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       // console.log(error)
-    //     });
-    // },
-    // kolWeiXinKeyword(params) {
-    //   const _that = this;
-    //   axios
-    //     .post(apiConfig.kolWeiXinKeyword, params, {
-    //       headers: {
-    //         Authorization: _that.authorization
-    //       }
-    //     })
-    //     .then(function(res) {
-    //       if (res.status === 200) {
-    //         _that.isLoading = false;
-    //         if (res.data.length > 0) {
-    //           _that.isTag = true;
-    //           _that.isShow = false;
-    //           _that.parentTags = [];
-    //           res.data = res.data.slice(0, 100);
-    //           res.data.forEach(item => {
-    //             item.name = item.text;
-    //             item.value = item.weight;
-    //           });
-    //           _that.parentTags = res.data;
-    //         } else {
-    //           _that.isTag = false;
-    //           _that.isShow = true;
-    //         }
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       // console.log(error)
-    //     });
-    // },
+    // Keyword weibo
+    kolWeiboKeyword(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.kolWeiboKeyword, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.isLoading = false;
+            if (res.data.length > 0) {
+              _that.isTag = true;
+              _that.isShow = false;
+              _that.parentTags = [];
+              res.data = res.data.slice(0, 100);
+              res.data.forEach(item => {
+                item.name = item.text;
+                item.value = item.weight;
+              });
+              _that.parentTags = res.data;
+            } else {
+              _that.isTag = false;
+              _that.isShow = true;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        });
+    },
+    kolWeiXinKeyword(params) {
+      const _that = this;
+      axios
+        .post(apiConfig.kolWeiXinKeyword, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            _that.isLoading = false;
+            if (res.data.length > 0) {
+              _that.isTag = true;
+              _that.isShow = false;
+              _that.parentTags = [];
+              res.data = res.data.slice(0, 100);
+              res.data.forEach(item => {
+                item.name = item.text;
+                item.value = item.weight;
+              });
+              _that.parentTags = res.data;
+            } else {
+              _that.isTag = false;
+              _that.isShow = true;
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        });
+    },
     // 初始化 fergus的info 接口
     infoJoggle(params) {
       const _that = this
@@ -1201,6 +1213,7 @@ export default {
     },
 
     // 获取keyword brand name
+    // 获取keyword brand name
     getBaseData() {
       const _that = this;
       axios
@@ -1214,10 +1227,13 @@ export default {
             if (!res.data.competitors.length == 0) {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
+                  // console.log(element)
                   _that.currentBrandName = element.name;
+                  _that.currentBrandKeywords = element.keywords;
                 }
               });
             }
+            _that.tabIndexOneInit(_that.currentBrandName, _that.currentBrandKeywords)
           }
         });
     }
