@@ -59,7 +59,7 @@ export default {
         },
         {
           title: 'nav.campaigns',
-          icon: 'icon-data',
+          icon: 'icon-document',
           href: '/creations',
           subNav: [
             {
@@ -75,6 +75,26 @@ export default {
               href: '/campaigns'
             }
           ]
+        },
+        {
+          title: 'nav.ranking',
+          icon: 'icon-podium',
+          href: '#ranking',
+          // subNav: [
+          //   {
+          //     title: 'nav.wechatRanking',
+          //     href: '/ranking/WechatRanking'
+          //   },
+          //   {
+          //     title: 'nav.weiboRanking',
+          //     href: '/ranking/WeiboRanking'
+          //   }
+          // ]
+        },
+        {
+          title: 'nav.socialListening',
+          icon: 'icon-connection',
+          href: '/social/SocialListening'
         },
         {
           title: 'nav.kols',
@@ -120,33 +140,12 @@ export default {
             {
               title: 'nav.cart',
               href: '/settings/shopping_cart'
+            },
+            {
+              title: 'nav.help',
+              href: '/help'
             }
           ]
-        },
-        {
-          title: 'nav.ranking',
-          icon: 'icon-rocket',
-          href: '#ranking',
-          // subNav: [
-          //   {
-          //     title: 'nav.wechatRanking',
-          //     href: '/ranking/WechatRanking'
-          //   },
-          //   {
-          //     title: 'nav.weiboRanking',
-          //     href: '/ranking/WeiboRanking'
-          //   }
-          // ]
-        },
-        {
-          title: 'nav.socialListening',
-          icon: 'icon-unit',
-          href: '/social/SocialListening'
-        },
-        {
-          title: 'nav.help',
-          icon: 'icon-doc',
-          href: '/help'
         }
       ]
     }

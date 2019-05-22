@@ -37,11 +37,12 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 380px;
+  width: 300px;
   background: #413f40 url('~@images/side_bg.png') no-repeat top center;
   overflow-y: auto;
 }
 .main-container {
-  padding-left: 380px;
+  padding-left: 300px;
+  overflow-x: hidden;
 }
 </style>
