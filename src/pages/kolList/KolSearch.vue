@@ -234,16 +234,13 @@
                   <td>
                     <div class="media kol-profile">
                       <div class="media-left media-middle">
-                        <div class="avatar" @click="intoKolDetail(item)">
+                        <a class="avatar" target="_blank" :href="item.profile_id">
                           <img :src="item.avatar_url" alt class="avatar-img">
-                        </div>
+                        </a>
                       </div>
                       <div class="media-body media-middle">
                         <h5 class="title">
-                          <span
-                            @click="intoKolDetail(item)"
-                            class="kol-tit-span"
-                          >{{item.profile_name}}</span>
+                          <a target="_blank" :href="item.profile_id" class="kol-tit-span">{{item.profile_name}}</a>
                         </h5>
                         <p class="desc">{{item.description_raw}}</p>
                         <div class="status">
@@ -267,9 +264,9 @@
                           </a-tooltip>
                         </div>
                       </div>
-                      <div class="media-right media-middle operation-area">
+                      <!--<div class="media-right media-middle operation-area">
                         <span class="iconfont icon-cart active" @click="doAddCart(item)"></span>
-                      </div>
+                      </div>-->
                     </div>
                   </td>
                   <td
@@ -406,7 +403,8 @@ export default {
         }, {
           index: 7,
           name: ('youtube')
-        }, {
+        },
+        {
           index: 8,
           name: ('facebook')
         }
@@ -649,10 +647,12 @@ export default {
             }
           })
           .then(function(res) {
-            if (res.status === 200) {
+            console.log('sss');
+            //if (res.status === 200) {
+              console.log('sss2');
               // console.log('Facebook', res)
               _that.jogDataInit(res.data);
-            }
+            //}
           })
           .catch(function(error) {
             // console.log(error)
@@ -685,7 +685,9 @@ export default {
       if (data.data.length > 0) {
         _that.isShow = false;
         _that.isTable = true;
+        console.log(data);
         data.data.forEach((element, index) => {
+          console.log(index);
           if (element.influence || element.influence === 0) {
             element.influence = parseInt(element.influence * 1000);
           } else {
