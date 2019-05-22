@@ -117,7 +117,7 @@
         <div class="mt20" v-if="tabIndex === 0">
          
           <!-- Keywords -->
-          <div class="panel default-panel mt20">
+          <!-- <div class="panel default-panel mt20">
             <div class="panel-head">
               <h5 class="title text-center">
                 <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
@@ -134,7 +134,7 @@
               </div>
               <cloud v-if="isTag" :defaultWords="parentTags" :height="wordHeight"></cloud>
             </div>
-          </div>
+          </div> -->
           <!--all Brand  tag  -->
           <div class="panel default-panel mt20" v-if=" allBrand">
             <div class="panel-head">
@@ -243,9 +243,9 @@ export default {
   },
   data() {
     return {
-      isShow: false,
-      isLoading: true,
-      isTag: false,
+      // isShow: false,
+      // isLoading: true,
+      // isTag: false,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,
@@ -367,9 +367,9 @@ export default {
       totalParams.language = language;
       this.brandNameParams.language = language;
       this.allBrandTagParams.language = language;
-      this.isLoading = true;
-      this.isTag = false;
-      this.isShow = false;
+      // this.isLoading = true;
+      // this.isTag = false;
+      // this.isShow = false;
       this.isSingleBrand = true;
       this.isbrandDisLoading = true;
       this.isbrandDisTag = false;
@@ -381,8 +381,8 @@ export default {
       this.isAllbrandDisShow = false;
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
-        totalParams.profile_id = Number(this.$route.params.id);
-        this.kolWeiboKeyword(totalParams);
+        // totalParams.profile_id = Number(this.$route.params.id);
+        // this.kolWeiboKeyword(totalParams);
         // 调用微博单个品牌 标签接口
         this.brandNameParams.profile_id = Number(this.$route.params.id);
         this.detailWeiboBrandName(this.brandNameParams);
@@ -393,8 +393,8 @@ export default {
       }
       if (Number(this.$route.query.type) === 1) {
         // 微信相关接口
-        totalParams.profile_id = this.$route.params.id;
-        this.kolWeiXinKeyword(totalParams);
+        // totalParams.profile_id = this.$route.params.id;
+        // this.kolWeiXinKeyword(totalParams);
         // 调用微信品牌名字接口
         this.brandNameParams.profile_id = this.$route.params.id;
         this.detailWeixinBrandName(this.brandNameParams);
@@ -444,7 +444,7 @@ export default {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id);
         this.kolWeiboIndustry(totalParams);
-        this.kolWeiboKeyword(totalParams);
+        // this.kolWeiboKeyword(totalParams);
         // 计算sentiment
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
@@ -464,7 +464,7 @@ export default {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
           this.kolWeiXinIndustry(totalParams);
-          this.kolWeiXinKeyword(totalParams);
+          // this.kolWeiXinKeyword(totalParams);
           // 计算sentiment
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
