@@ -251,9 +251,9 @@
                             v-if="tabIndex === 0 || tabIndex === 1 || tabIndex === 2  || tabIndex === 3  || tabIndex === 4 || tabIndex === 5"
                           >
                             <i class="iconfont icon-user-heart"></i>
-                            {{item.fans_number}}
+                            {{item.facebook_follow_count}}
                           </a-tooltip>
-                          <a-tooltip
+                          <!--<a-tooltip
                             placement="topLeft"
                             :title="$t('lang.kolList.search.sumTip')"
                             class="item"
@@ -261,7 +261,7 @@
                           >
                             <i class="iconfont icon-app"></i>
                             {{item.stats.avg_sum_engagement}}
-                          </a-tooltip>
+                          </a-tooltip>-->
                         </div>
                       </div>
                       <!--<div class="media-right media-middle operation-area">
@@ -272,7 +272,7 @@
                   <td
                     class="text-center"
                     v-if="tabIndex === 0 || tabIndex === 1"
-                  >{{item.pricing.direct_price}}</td>
+                  ><i class="iconfont icon-facebook"></i>Coming Soon<!--{{item.pricing.direct_price}}--></td>
                   <td class="text-center" v-else>{{item.pricing.ref_price}}</td>
                   <td class="text-center">
                     <!-- <a-progress
@@ -374,38 +374,38 @@ export default {
       kolsTotal: 0,
       advancedSearch: true,
       tabList: [
+        //{
+        //  index: 0,
+        //  name: "weibo"
+        //},
+        //{
+        //  index: 1,
+        //  name: "wechat"
+        //},
+        //{
+        //  index: 2,
+        //  name: "xiaohongshu"
+        //},
+        //{
+        //  index: 3,
+        //  name: "kuaishou"
+        //},
+        //{
+        //  index: 4,
+        //  name: "bilibili"
+        //},
+        //{
+        //  index: 5,
+        //  name: "douyin"
+        //}, {
+        //  index: 6,
+        //  name: ('instagram')
+        //}, {
+        //  index: 7,
+        //  name: ('youtube')
+        //},
         {
           index: 0,
-          name: "weibo"
-        },
-        {
-          index: 1,
-          name: "wechat"
-        },
-        {
-          index: 2,
-          name: "xiaohongshu"
-        },
-        {
-          index: 3,
-          name: "kuaishou"
-        },
-        {
-          index: 4,
-          name: "bilibili"
-        },
-        {
-          index: 5,
-          name: "douyin"
-        }, {
-          index: 6,
-          name: ('instagram')
-        }, {
-          index: 7,
-          name: ('youtube')
-        },
-        {
-          index: 8,
           name: ('facebook')
         }
       ],
@@ -494,10 +494,10 @@ export default {
     // 平台数据 接口
     kollistJoggle(type, params) {
       const _that = this;
-      if (type === 0) {
+      if (type === 8) {
         // weibo
         axios
-          .post(apiConfig.kollistWeiboTable, params, {
+          .post(apiConfig.kollistFacebookTable, params, {
             headers: {
               Authorization: _that.authorization
             }
@@ -638,7 +638,7 @@ export default {
             // console.log(error)
           });
       }
-      if (type === 8) {
+      if (type === 0) {
         // Facebook
         axios
           .post(apiConfig.kollistFacebookTable, params, {
@@ -647,9 +647,7 @@ export default {
             }
           })
           .then(function(res) {
-            console.log('sss');
             //if (res.status === 200) {
-              console.log('sss2');
               // console.log('Facebook', res)
               _that.jogDataInit(res.data);
             //}
