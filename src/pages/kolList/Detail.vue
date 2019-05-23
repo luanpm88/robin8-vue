@@ -74,26 +74,8 @@
             </div>
           </div>
         </div>
-        <!-- industries 行业图表 -->
-        <div class="panel default-panel mt20" v-if="false">
-          <div class="panel-head">
-            <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
-          </div>
-          <div class="panel-body prl30">
-            <div v-if="type === 0 || type === 1">
-              <Echarts
-                :options="competitorList.options"
-                :chartsStyle="competitorList.chartsStyle"
-                ref="competitorEChart"
-              ></Echarts>
-            </div>
-            <div v-else>
-              <div class="nonetip">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- industries 行业图表  暂时隐藏-->
+        <industries v-if="false"></industries>
       </div>
       <div class="kol-detail-con" v-if="type === 0 || type === 1">
         <!-- 返回按钮 -->
@@ -158,6 +140,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -178,6 +161,8 @@ import Summaries from "@/pages/kolList/sum/Index";
 import Analytics from "@/pages/kolList/analytic/Index";
 // posts
 import Posts from "@/pages/kolList/posts/Index";
+// 左侧的 Industries 图表
+import Industries from '@/pages/kolList/components/Industries'
 export default {
   name: "KolDetail",
   components: {
@@ -187,17 +172,12 @@ export default {
     Analytics,
     Posts,
     ATooltip: Tooltip,
-    cloud
+    cloud,
+    Industries
   },
   data() {
     return {
       Sentiment: 0,
-      competitorList: {
-        options: ChartOption.detaiOptions,
-        chartsStyle: {
-          height: "180px"
-        }
-      },
       infoList: {
         avatar_url: "",
         profile_name: "-",
@@ -256,10 +236,6 @@ export default {
     };
   },
   created () {
-    // console.log(this.$route.params)
-    // console.log(this.$route.query)
-    // this.isSingleBrand = true;
-    // this.allBrand = true;
     this.type = Number(this.$route.query.type);
     // 获取brandName 和 key
     this.getBaseData();
@@ -293,8 +269,6 @@ export default {
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
         totalParams.profile_id = Number(this.$route.params.id);
-        this.kolWeiboIndustry(totalParams);
-        // this.kolWeiboKeyword(totalParams);
         // 计算sentiment
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
@@ -304,12 +278,14 @@ export default {
         if (Number(this.$route.query.type) === 1) {
           // 微信相关接口
           totalParams.profile_id = this.$route.params.id;
-          this.kolWeiXinIndustry(totalParams);
-          // this.kolWeiXinKeyword(totalParams);
           // 计算sentiment
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
           this.trendsWeixin(this.trendParams);
+        } else {
+          totalParams.profile_id = decodeURIComponent(
+            decodeURIComponent(this.$route.params.id)
+          );
         }
       }
     },
@@ -554,114 +530,6 @@ export default {
             // 操作social data 数据
             _that.otherSocialData.platform = "facebook";
             _that.kolProfileLink = 'https://www.facebook.com/'+ res.data.profile_id
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    // industry weibo
-    kolWeiboIndustry(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiboIndustry, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            // console.log('我是微博', res)
-            _that.competitorList.options.yAxis.data = res.data.labels.reverse();
-            _that.competitorList.options.series[0].data = res.data.data.reverse();
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            );
-          }
-        })
-        .catch(function(error) {
-          // console.log("kolWeiboIndustry error", error);
-          // console.log(error)
-        });
-    },
-    kolWeiXinIndustry(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiXinIndustry, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.competitorList.options.yAxis.data = res.data.labels.reverse();
-            _that.competitorList.options.series[0].data = res.data.data.reverse();
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            );
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    // Keyword weibo
-    kolWeiboKeyword(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiboKeyword, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.isLoading = false;
-            if (res.data.length > 0) {
-              _that.isTag = true;
-              _that.isShow = false;
-              _that.parentTags = [];
-              res.data = res.data.slice(0, 100);
-              res.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentTags = res.data;
-            } else {
-              _that.isTag = false;
-              _that.isShow = true;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    kolWeiXinKeyword(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.kolWeiXinKeyword, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.isLoading = false;
-            if (res.data.length > 0) {
-              _that.isTag = true;
-              _that.isShow = false;
-              _that.parentTags = [];
-              res.data = res.data.slice(0, 100);
-              res.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentTags = res.data;
-            } else {
-              _that.isTag = false;
-              _that.isShow = true;
-            }
           }
         })
         .catch(function(error) {
