@@ -6,21 +6,21 @@
     <div class="icon-grid-panel">
       <router-link to="/kol/list" tag="div" class="item">
         <div class="box">
-          <div class="iconfont icon-search"></div>
+          <div class="iconfont icon-search-shield"></div>
           <h5 class="title">查找KOL</h5>
           <h6 class="sub-title">Search Engine</h6>
         </div>
       </router-link>
       <router-link to="/create" tag="div" class="item">
         <div class="box">
-          <div class="iconfont icon-doc"></div>
+          <div class="iconfont icon-create-s"></div>
           <h5 class="title">创建新活动</h5>
           <h6 class="sub-title">Create Campaign</h6>
         </div>
       </router-link>
       <router-link to="/campaigns" tag="div" class="item">
         <div class="box">
-          <div class="iconfont icon-trophy"></div>
+          <div class="iconfont icon-cup"></div>
           <h5 class="title">活动列表</h5>
           <h6 class="sub-title">My Campaigns</h6>
         </div>
@@ -252,6 +252,8 @@ export default {
     @include display-flex;
     $height: 200px;
     $gap: 10px;
+    padding: 0 100px 30px;
+    background-color: #fff;
     & > .item {
       @include display-flex;
       @include flex(1);
@@ -259,7 +261,9 @@ export default {
       margin-right: $gap;
       align-items: center;
       justify-content: center;
-      background-color: nth($cyan, 1);
+      background: linear-gradient(180deg, #2fccd3 0%, #75e6e9 100%);
+      box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, .1);
+      border-radius: 5px;
       cursor: pointer;
       .box {
         text-align: center;
@@ -282,6 +286,9 @@ export default {
         margin-right: 0;
       }
     }
+  }
+  .home-show {
+    padding: 20px 100px;
   }
 }
 </style>

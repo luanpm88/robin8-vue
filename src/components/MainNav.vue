@@ -1,6 +1,15 @@
 <template>
   <div class="main-nav">
-    <div class="logo-area"></div>
+    <div class="logo-area">
+      <h1 v-if="!!company && company != ''" class="logo">
+        <img :src="companyLogo" :alt="company" class="logo-img" />
+      </h1>
+      <h1 v-else class="logo">
+        <router-link to="/">
+          <img src="@images/logo.png" alt="Robin8" class="logo-img" />
+        </router-link>
+      </h1>
+    </div>
     <ul class="nav-list">
       <li
         v-for="(item, index) of navData"
@@ -47,8 +56,15 @@
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
+import { mapState } from 'vuex'
+
 export default {
   name: 'MainNav',
+  computed: {
+    ...mapState(['company', 'companyLogo']),
+  },
   data () {
     return {
       navData: [
@@ -196,7 +212,18 @@ export default {
 .main-nav {
   $item-height: 64px;
   .logo-area {
+    @include display-flex;
     height: 130px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    .logo {
+      height: 40px;
+      .logo-img {
+        vertical-align: top;
+        height: 100%;
+      }
+    }
   }
   .nav-list {
     & > .item {
