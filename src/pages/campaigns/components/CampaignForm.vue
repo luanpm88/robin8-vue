@@ -556,18 +556,18 @@ export default {
       province: '',
       cityData: [],
       city: '',
-      budgetMin: 500,
-      perBudgetMin: 0.3,
+      budgetMin: 500000,
+      perBudgetMin: 3000,
       submitData: {
         url: '',
         name: '',
         description: '',
         img_url: '',
-        budget: 500,
+        budget: 500000,
         sub_type: '',
         per_budget_type: '',
         example_screenshot_count: 1,
-        per_action_budget: 0.3,
+        per_action_budget: 3000,
         start_time: '',
         deadline: '',
         target: {
@@ -739,40 +739,40 @@ export default {
       this.submitData.example_screenshot_count = 1
       switch (_perBudgetType) {
         case 'click':
-          this.perBudgetMin = 0.3
-          this.submitData.per_action_budget = 0.3
+          this.perBudgetMin = 300
+          this.submitData.per_action_budget = 300
           break
         case 'post':
-          this.perBudgetMin = 3
-          this.submitData.per_action_budget = 3
+          this.perBudgetMin = 3000
+          this.submitData.per_action_budget = 3000
           break
         case 'cpt':
-          this.perBudgetMin = 3
-          this.submitData.per_action_budget = 3
+          this.perBudgetMin = 3000
+          this.submitData.per_action_budget = 3000
           break
         default:
-          this.perBudgetMin = 0.3
-          this.submitData.per_action_budget = 0.3
+          this.perBudgetMin = 300
+          this.submitData.per_action_budget = 300
       }
     },
     imgCountChange () {
       let _imgCount = this.submitData.example_screenshot_count
       switch (_imgCount) {
         case '1':
-          this.perBudgetMin = 3
-          this.submitData.per_action_budget = 3
+          this.perBudgetMin = 3000
+          this.submitData.per_action_budget = 3000
           break
         case '2':
-          this.perBudgetMin = 5
-          this.submitData.per_action_budget = 5
+          this.perBudgetMin = 5000
+          this.submitData.per_action_budget = 5000
           break
         case '3':
-          this.perBudgetMin = 8
-          this.submitData.per_action_budget = 8
+          this.perBudgetMin = 8000
+          this.submitData.per_action_budget = 8000
           break
         default:
-          this.perBudgetMin = 0.3
-          this.submitData.per_action_budget = 0.3
+          this.perBudgetMin = 300
+          this.submitData.per_action_budget = 300
       }
     },
     doSubmit () {

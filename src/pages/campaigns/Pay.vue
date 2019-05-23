@@ -69,7 +69,7 @@
                 <div class="media-body media-middle">
                   <div class="info">
                     <div class="method">{{$t('lang.campaigns.payment.method.balance.title')}}</div>
-                    <div class="desc">{{$t('lang.campaigns.payment.method.balance.desc')}}(￥{{availAmount}})</div>
+                    <div class="desc">{{$t('lang.campaigns.payment.method.balance.desc')}}({{availAmount}}₫)</div>
                   </div>
                 </div>
               </label>
