@@ -111,60 +111,8 @@
           class="panel-tab mt20"
         ></default-tabs>
         <!-- summary 模块  -->
-        <div class="mt20" v-if="tabIndex === 0">
-          <summaries :currentKeywords="keywords"></summaries>
-        </div>
-        <div class="mt20" v-if="tabIndex === 0">
-         
-          <!-- Keywords -->
-          <!-- <div class="panel default-panel mt20">
-            <div class="panel-head">
-              <h5 class="title text-center">
-                <a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
-                  {{$t('lang.kolList.detail.keywords')}}
-                </a-tooltip>
-              </h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="nonetip" v-if="isShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-              <cloud v-if="isTag" :defaultWords="parentTags" :height="wordHeight"></cloud>
-            </div>
-          </div> -->
-          <!--all Brand  tag  -->
-          <!-- <div class="panel default-panel mt20" v-if=" allBrand">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="nonetip" v-if="isAllbrandDisShow">
-                <span>{{$t('lang.totalNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isAllbrandDisLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-              <cloud v-if="isAllbrandDisTag" :defaultWords="allbrandDisTags" :height="wordHeight"></cloud>
-            </div>
-          </div> -->
-          <!--single  Brand  Distribution  -->
-          <div class="panel default-panel mt20" v-if="isSingleBrand">
-            <div class="panel-head">
-              <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}} - {{currentBrandName}}</h5>
-            </div>
-            <div class="panel-body prl30">
-              <div class="nonetip" v-if="isbrandDisShow">
-                <span>{{$t('lang.brandDisNoDataTip')}}</span>
-              </div>
-              <div class="r8-loading" v-if="isbrandDisLoading">
-                <a-spin tip="Loading..."/>
-              </div>
-              <cloud v-if="isbrandDisTag" :defaultWords="parentbrandDisTags" :height="wordHeight"></cloud>
-            </div>
-          </div>
+        <div class="mt20" v-show="tabIndex === 0">
+          <summaries :currentKeywords="currentBrandKeywords" :currentName='currentBrandName'></summaries>
         </div>
 
         <!-- analytic 模块 -->
@@ -243,9 +191,6 @@ export default {
   },
   data() {
     return {
-      // isShow: false,
-      // isLoading: true,
-      // isTag: false,
       Sentiment: 0,
       competitorList: {
         options: ChartOption.detaiOptions,
@@ -304,46 +249,11 @@ export default {
         followers: "N/A",
         tagsDescription: "N/A"
       },
-      brandNameParams: {
-        profile_id: "",
-        start_date: commonJs.cPastYears,
-        end_date: commonJs.cPastOneday,
-        brand_keywords: "BMW",
-        type: "doc",
-        language: "en"
-      },
-      isSingleBrand: true,
-      isbrandDisShow: false,
-      isbrandDisLoading: true,
-      isbrandDisTag: false,
-      parentbrandDisTags: [],
-      wordHeight: "400px",
-      // allBrandTagParams: {
-      //   start_date: commonJs.cPastYears,
-      //   end_date: commonJs.cPastOneday,
-      //   profile_id: "MzAwMDAyMzY3OA==",
-      //   language: "en"
-      // },
-      // allBrand: true,
-      // isAllbrandDisLoading: true,
-      // isAllbrandDisShow: false,
-      // isAllbrandDisTag: false,
-      // allbrandDisTags: [],
       kolProfileLink: '',
       canRender: true,
       keywords: '',
       isRelevantBox: true
     };
-  },
-  watch: {
-    listenLangue: function(old, newd) {
-      if (old === "zh-CN") {
-        this.changeKeyWord("zh");
-      }
-      if (old === "en-US") {
-        this.changeKeyWord("en");
-      }
-    }
   },
   created () {
     // console.log(this.$route.params)
@@ -361,49 +271,6 @@ export default {
     }
   },
   methods: {
-    // 切换中英文 单独环keyword
-    changeKeyWord(language) {
-      let totalParams = {};
-      totalParams.language = language;
-      this.brandNameParams.language = language;
-      // this.allBrandTagParams.language = language;
-      // this.isLoading = true;
-      // this.isTag = false;
-      // this.isShow = false;
-      this.isSingleBrand = true;
-      this.isbrandDisLoading = true;
-      this.isbrandDisTag = false;
-      this.isbrandDisShow = false;
-
-      // this.allBrand = true;
-      // this.isAllbrandDisLoading = true;
-      // this.isAllbrandDisTag = false;
-      // this.isAllbrandDisShow = false;
-      if (Number(this.$route.query.type) === 0) {
-        // 微博相关接口
-        // totalParams.profile_id = Number(this.$route.params.id);
-        // this.kolWeiboKeyword(totalParams);
-        // 调用微博单个品牌 标签接口
-        this.brandNameParams.profile_id = Number(this.$route.params.id);
-        this.detailWeiboBrandName(this.brandNameParams);
-
-        // // 调用微博 all 品牌 标签接口
-        // this.allBrandTagParams.profile_id = Number(this.$route.params.id);
-        // this.detailWeiboTotalTag(this.allBrandTagParams);
-      }
-      if (Number(this.$route.query.type) === 1) {
-        // 微信相关接口
-        // totalParams.profile_id = this.$route.params.id;
-        // this.kolWeiXinKeyword(totalParams);
-        // 调用微信品牌名字接口
-        this.brandNameParams.profile_id = this.$route.params.id;
-        this.detailWeixinBrandName(this.brandNameParams);
-
-        // // 调用weixin all 品牌 标签接口
-        // this.allBrandTagParams.profile_id = this.$route.params.id;
-        // this.detailWeixinTotalTag(this.allBrandTagParams);
-      }
-    },
     // summary
     tabIndexOneInit(getBrandName, getBrandKeywords) {
       let totalParams = {};
@@ -419,26 +286,9 @@ export default {
         this.trendParams.brand_keywords = newKey;
         // 品牌情绪 计算参数
         this.sentimentParams.brand_keywords = newKey;
-        // 单个品牌 需要的参数
-        this.brandNameParams.brand_keywords = newKey;
       } else {
-        this.currentBrandName = 'N/A';
-        this.isSingleBrand = true;
-        this.isbrandDisLoading = false;
-        this.isbrandDisShow = true;
         this.trendParams.brand_keywords = '';
         this.sentimentParams.brand_keywords = '';
-        this.brandNameParams.brand_keywords = '';
-      }
-      if (this.$i18n.locale === "zh-CN") {
-        totalParams.language = "zh";
-        this.brandNameParams.language = "zh";
-        // this.allBrandTagParams.language = "zh";
-      }
-      if (this.$i18n.locale === "en-US") {
-        totalParams.language = "en";
-        this.brandNameParams.language = "en";
-        // this.allBrandTagParams.language = "en";
       }
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
@@ -449,15 +299,6 @@ export default {
         this.sentimentWeibo(this.sentimentParams);
         // 计算Mentions
         this.trendsWeibo(this.trendParams);
-        // 调用微博单个品牌 标签接口
-        this.isSingleBrand = true;
-        this.brandNameParams.profile_id = Number(this.$route.params.id);
-        this.detailWeiboBrandName(this.brandNameParams);
-
-        // // 调用微博 all 品牌 标签接口
-        // this.allBrand = true;
-        // this.allBrandTagParams.profile_id = Number(this.$route.params.id);
-        // this.detailWeiboTotalTag(this.allBrandTagParams);
 
       } else {
         if (Number(this.$route.query.type) === 1) {
@@ -469,21 +310,6 @@ export default {
           this.sentimentWeixin(this.sentimentParams);
           // 计算Mentions
           this.trendsWeixin(this.trendParams);
-          // 调用微信品牌名字接口
-          this.isSingleBrand = true;
-          this.brandNameParams.profile_id = this.$route.params.id;
-          this.detailWeixinBrandName(this.brandNameParams);
-
-          // // 调用weixin all 品牌 标签接口
-          // this.allBrand = true;
-          // this.allBrandTagParams.profile_id = this.$route.params.id;
-          // this.detailWeixinTotalTag(this.allBrandTagParams);
-        } else {
-          // console.log(this.$route.params.id)
-          totalParams.profile_id = decodeURIComponent(
-            decodeURIComponent(this.$route.params.id)
-          );
-          // console.log(totalParams.profile_id)
         }
       }
     },
@@ -967,7 +793,6 @@ export default {
           // console.log(error)
         });
     },
-    
     // sentiment 微博
     sentimentWeibo(params) {
       const _that = this;
@@ -1076,143 +901,6 @@ export default {
         alert("您已成功添加至购物车");
       }
     },
-    // 获取My brandname 单个品牌标签 微博页面
-    detailWeiboBrandName(params) {
-      // console.log('weibo', params)
-      const _that = this;
-      axios
-        .post(apiConfig.detailWeiboBrandName, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          // console.log('weibo bran dis', res)
-          if (res.status === 200) {
-            _that.isbrandDisLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isbrandDisTag = true;
-              _that.isbrandDisShow = false;
-              _that.parentbrandDisTags = [];
-              res.data.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentbrandDisTags = res.data.data.slice(0, 100);
-            } else {
-              _that.isbrandDisTag = false;
-              _that.isbrandDisShow = true;
-              _that.isSingleBrand = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-    // 获取My brandname 单个品牌标签 微信页面
-    detailWeixinBrandName(params) {
-      // console.log('weixin', params)
-      const _that = this;
-      axios
-        .post(apiConfig.detailWeixinBrandName, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          if (res.status === 200) {
-            _that.isbrandDisLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isbrandDisTag = true;
-              _that.isbrandDisShow = false;
-              _that.parentbrandDisTags = [];
-              res.data.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.parentbrandDisTags = res.data.data.slice(0, 100);
-            } else {
-              _that.isbrandDisTag = false;
-              _that.isbrandDisShow = true;
-              _that.isSingleBrand = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-
-    // 获取Weibo total品牌标签接口
-    detailWeiboTotalTag(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.detailWeiboTotalTag, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          // console.log("weibo total", res);
-          if (res.status === 200) {
-            _that.isAllbrandDisLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isAllbrandDisTag = true;
-              _that.isAllbrandDisShow = false;
-              _that.allbrandDisTags = [];
-              res.data.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.allbrandDisTags = res.data.data.slice(0, 100) ;
-            } else {
-              _that.isAllbrandDisTag = false;
-              _that.isAllbrandDisShow = true;
-              _that.allBrand = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-
-    // 获取Weixin total品牌标签接口
-    detailWeixinTotalTag(params) {
-      const _that = this;
-      axios
-        .post(apiConfig.detailWeixinTotalTag, params, {
-          headers: {
-            Authorization: _that.authorization
-          }
-        })
-        .then(function(res) {
-          // console.log("weixin total", res);
-          if (res.status === 200) {
-            _that.isAllbrandDisLoading = false;
-            if (res.data.data.length > 0) {
-              _that.isAllbrandDisTag = true;
-              _that.isAllbrandDisShow = false;
-              _that.allbrandDisTags = [];
-              res.data.data.forEach(item => {
-                item.name = item.text;
-                item.value = item.weight;
-              });
-              _that.allbrandDisTags = res.data.data.slice(0, 100) ;
-            } else {
-              _that.isAllbrandDisTag = false;
-              _that.isAllbrandDisShow = true;
-              _that.allBrand = false;
-            }
-          }
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },
-
-    // 获取keyword brand name
     // 获取keyword brand name
     getBaseData() {
       const _that = this;

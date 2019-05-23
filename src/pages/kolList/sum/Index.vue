@@ -5,19 +5,22 @@
     <!-- <activity></activity> -->
 
     <!-- socialData -->
-    <!-- <social></social> -->
+    <social></social>
 
     <!-- performance -->
-    <!-- <best-posts></best-posts> -->
+    <best-posts></best-posts>
 
     <!-- most_relevant_post  暂时微信没有这个接口 -->
-    <!-- <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent> -->
+    <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent>
 
     <!-- Keywords -->
-    <!-- <keywords></keywords> -->
+    <keywords></keywords>
 
     <!-- AllBrand -->
     <all-brand></all-brand>
+
+    <!-- 单一品牌 -->
+    <single-brand :brandKey="currentKeywords" :brandName='currentName'></single-brand>
 
   </div>
 </template>
@@ -40,17 +43,20 @@ import MostRelevent from '@/pages/kolList/components/SumMostRelevent'
 import Keywords from '@/pages/kolList/components/SumKeywords'
 // SumAllBrand全部品牌 关键字
 import AllBrand from '@/pages/kolList/components/SumAllBrand'
+// SumSingleBrand 单一品牌 关键字
+import SingleBrand from '@/pages/kolList/components/SumSingleBrand'
 
 export default {
   name: 'summaries',
-  props: ['currentKeywords'],
+  props: ['currentKeywords', 'currentName'],
   components: {
     Activity,
     Social,
     BestPosts,
     MostRelevent,
     Keywords,
-    AllBrand
+    AllBrand,
+    SingleBrand
   },
   data() {
     return {
