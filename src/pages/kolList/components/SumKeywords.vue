@@ -62,20 +62,20 @@ export default {
   methods: {
 		// 切换中英文 单独环keyword
     changeKeyWord(language) {
-      let totalParams = {};
-      totalParams.language = language;
-      this.isLoading = true;
-      this.isTag = false;
-      this.isShow = false;
+      let totalParams = {}
+      totalParams.language = language
+      this.isLoading = true
+      this.isTag = false
+      this.isShow = false
       if (Number(this.$route.query.type) === 0) {
         // 微博相关接口
-        totalParams.profile_id = Number(this.$route.params.id);
-        this.kolWeiboKeyword(totalParams);
+        totalParams.profile_id = Number(this.$route.params.id)
+        this.kolWeiboKeyword(totalParams)
       }
       if (Number(this.$route.query.type) === 1) {
         // 微信相关接口
-        totalParams.profile_id = this.$route.params.id;
-        this.kolWeiXinKeyword(totalParams);
+        totalParams.profile_id = this.$route.params.id
+        this.kolWeiXinKeyword(totalParams)
       }
     },
 		// Keyword weibo
@@ -94,7 +94,7 @@ export default {
               _that.isTag = true
               _that.isShow = false
               _that.parentTags = []
-              res.data = res.data.slice(0, 100);
+              res.data = res.data.slice(0, 100)
               res.data.forEach(item => {
                 item.name = item.text
                 item.value = item.weight

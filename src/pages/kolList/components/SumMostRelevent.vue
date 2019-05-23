@@ -59,19 +59,19 @@ export default {
     this.relevantPostParams.keywords = this.keywords
     // console.log(this.$route.query)
     if(this.$route.query.isSearch) {
-      let relevantKey = this.$route.query.search_keywords;
-      let getNewKey = '';
+      let relevantKey = this.$route.query.search_keywords
+      let getNewKey = ''
       relevantKey.split(',').forEach(item => {
-        getNewKey += '"' + item + '" ';
-      });
+        getNewKey += '"' + item + '" '
+      })
       if (Number(this.$route.query.type) === 0) {
         // 调用微博的most_relevant_post  暂时微信没有这个接口
         this.relevantPostParams.profile_id = Number(this.$route.params.id)
-        this.relevantPostParams.keywords = getNewKey;
+        this.relevantPostParams.keywords = getNewKey
         this.relevantPostWeibo(this.relevantPostParams)
       }
       if (Number(this.$route.query.type) !== 0) {
-        this.isRelevantBox = false;
+        this.isRelevantBox = false
       }
     } else {
       this.isRelevantBox = false
