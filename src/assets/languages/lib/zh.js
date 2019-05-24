@@ -750,6 +750,8 @@ export const lang = {
         clients: '客户数量',
         clientTip: '此KOL适用的客户端数量。 大量客户表示跟踪记录证明了KOL的放大潜力。 另一方面，一个尚未为其他品牌工作或仅为少数品牌工作的KOL可能是一个有吸引力和经济的选择，因为他还没有生产商业内容的声誉。'
       },
+      kolProfile: 'KOL 简况',
+      addCart: '加入购物车',
       currentBrandName: '品牌名字:',
       mentions: '品牌提及:',
       mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
@@ -794,6 +796,12 @@ export const lang = {
         date: '发布时间',
         readCount: '阅读数',
         engagement: '互动数'
+      },
+      mostRelevantPosts: {
+        title: '最具相关度的文章',
+        tableTitle: '标题',
+        date: '发布时间',
+        correlation: '相关度',
       },
     },
     analyticVue: {
@@ -846,6 +854,8 @@ export const lang = {
       topKey: '输入关键字、行业分类或KOL名称',
       keyword: '请在这里键入…',
       search: '搜索',
+      searchByName: 'KOL 名字',
+      searchByRelevant: '文章相关度',
       advancedSearch: {
         btn: '高级搜索',
         industry: 'KOL 产业',
