@@ -524,14 +524,27 @@ export const lang = {
       processing: 'Đang tiến hành',
       done: 'Đã hoàn thành'
     },
+    kols: {
+      totalPrice: 'Giá',
+      weiboExposure: 'Weibo Exposure',
+      wechatExposure: 'Wechat Exposure',
+      confirm: 'Xác nhận và thanh toán'
+    },
     payment: {
       title: 'Thanh toán hóa đơn',
-      amount: 'Chi phí hóa đơn',
+      kolCount: 'Số lượng KOL',
+      kolTotalPrice: 'Tổng giá',
+      platformFee: 'Phí dịch vụ',
+      amount: 'Số tiền phải trả',
       method: {
-        title: 'Phương thức thanh toán',
+        title: 'Hình thức thanh toán',
         alipay: {
           title: 'Alipay',
-          desc: 'Thanh toán trực tuyến qua cổng thanh toán Alipay'
+          desc: 'Use Alipay online payment safe and secure'
+        },
+        onepay: {
+          title: 'Onepay',
+          desc: 'Use Onepay online payment safe and secure'
         }
       }
     },
@@ -899,6 +912,9 @@ export const lang = {
     }
   },
   homePage: {
+    look_for_kol: 'Tìm kiếm KOL',
+    create_campaign: 'Tạo Chiến dịch',
+    my_campaign: 'Chiến dịch của tôi',
     brandTop: 'Thương hiệu',
     noBrandTip: 'Chọn thương hiệu',
     noBrand: 'Bạn chưa chọn thương hiệu',

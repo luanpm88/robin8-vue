@@ -22,7 +22,7 @@
       </div>
       <div class="media-body media-middle">
         <div class="related-info">
-          <p>{{$t('lang.creations.kols.totalPrice')}}: <span class="price">¥{{profile.price_total}}</span></p>
+          <p>{{$t('lang.creations.kols.totalPrice')}}: <span class="price">{{profile.price_total}}₫</span></p>
           <p
             v-for="item in tenders"
             :key="item.id"

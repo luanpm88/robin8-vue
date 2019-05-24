@@ -96,7 +96,7 @@
                       :class="[item.checked ? 'checked' : '']"
                       @click="terraceCheck(item.id)"
                     >
-                      <img :src="item.avatar" alt="" class="icon-img" />
+                      <img :src="item.address" alt="" class="icon-img" />
                       <div class="iconfont icon-check"></div>
                     </div>
                   </div>

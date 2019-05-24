@@ -10,22 +10,22 @@
         <router-link to="/kol/list" tag="div" class="item">
           <div class="box">
             <div class="iconfont icon-search"></div>
-            <h5 class="title">查找KOL</h5>
-            <h6 class="sub-title">Search Engine</h6>
+            <!--<h5 class="title">查找KOL</h5>-->
+            <h6 class="sub-title">{{$t('lang.homePage.look_for_kol')}}</h6>
           </div>
         </router-link>
         <router-link to="/home/create" tag="div" class="item">
           <div class="box">
             <div class="iconfont icon-doc"></div>
-            <h5 class="title">创建新活动</h5>
-            <h6 class="sub-title">Create Campaign</h6>
+            <!--<h5 class="title">创建新活动</h5>-->
+            <h6 class="sub-title">{{$t('lang.homePage.create_campaign')}}</h6>
           </div>
         </router-link>
         <router-link to="/campaigns" tag="div" class="item">
           <div class="box">
             <div class="iconfont icon-trophy"></div>
-            <h5 class="title">活动列表</h5>
-            <h6 class="sub-title">My Campaigns</h6>
+            <!--<h5 class="title">活动列表</h5>-->
+            <h6 class="sub-title">{{$t('lang.homePage.my_campaign')}}</h6>
           </div>
         </router-link>
       </div>

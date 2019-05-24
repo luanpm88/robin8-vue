@@ -84,12 +84,13 @@ export default {
       tabList: [
         {
           index: 0,
-          name: ('weibo')
-        },
-        {
-          index: 1,
-          name: ('wechat')
+          name: ('facebook')
         }
+        //,
+        //{
+        //  index: 1,
+        //  name: ('wechat')
+        //}
       ]
     }
   },
@@ -110,14 +111,14 @@ export default {
             let newKey = ''
             this.childKeyList.brand_keywords.split(',').forEach(item => {
               newKey += '"' + item.replace(/^\s+|\s+$/g, '') + '" '
-            }) 
+            })
             this.params.brand_keywords = newKey
             // 传给当前列 kolsListItem.vue 的值 传原始的 this.childKeyList.brand_keywords 因为在 kolsListItem.vue中会再次传给detail detail 再做截取的判断
             this.kolRouterData.keywords = this.childKeyList.brand_keywords
             if (Number(this.tabIndex) === 0) {
-              // weibo 
+              // weibo
               this.weiboKol(this.params)
-            } 
+            }
             if (Number(this.tabIndex) === 1) {
               // 微信接口
               this.weixinKol(this.params)
@@ -140,9 +141,9 @@ export default {
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
-      this.currentList = [] 
-      this.isShow = false 
-      this.isLoading = true 
+      this.currentList = []
+      this.isShow = false
+      this.isLoading = true
       this.isBrandShow = false
       if (this.isSelectBrand) {
         if (tab.index === 0) {
@@ -169,7 +170,7 @@ export default {
           brand_keywords: this.childKeyList.brand_keywords,
           type: this.tabIndex
         }
-      }) 
+      })
     },
     // 微博的接口
     weiboKol(params) {

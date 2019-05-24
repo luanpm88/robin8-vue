@@ -11,9 +11,9 @@
       </div>
       <div class="panel-body">
         <div class="order-info">
-          <p>{{$t('lang.creations.payment.kolCount')}}: {{detailData.kols_count}}人</p>
-          <p>{{$t('lang.creations.payment.kolTotalPrice')}}: ¥{{detailData.price}} | {{$t('lang.creations.payment.platformFee')}}: ¥{{detailData.fee}}</p>
-          <p>{{$t('lang.creations.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+          <p>{{$t('lang.creations.payment.kolCount')}}: {{detailData.kols_count}}</p>
+          <p>{{$t('lang.creations.payment.kolTotalPrice')}}: {{detailData.price}}₫ | {{$t('lang.creations.payment.platformFee')}}: {{detailData.fee}}₫</p>
+          <p>{{$t('lang.creations.payment.amount')}}: <span class="price"><i class="num">{{detailData.amount}}</i>₫</span></p>
         </div>
 
         <div class="pay-method">
@@ -40,8 +40,8 @@
                     :class="item.iconImg"
                   ></div>
                   <div class="info">
-                    <div class="method">{{$t(`lang.${item.name}`)}}</div>
-                    <div class="desc">{{$t(`lang.${item.desc}`)}}</div>
+                    <div class="method">{{item.name}}</div>
+                    <div class="desc">{{item.desc}}</div>
                   </div>
                 </div>
               </label>
@@ -129,7 +129,7 @@ export default {
         alert(this.$t('lang.creations.no_payment'));
         return false
       }
-      
+
       if (!this.canSubmit) {
         return false
       }

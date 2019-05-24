@@ -902,6 +902,9 @@ export const lang = {
     }
   },
   homePage: {
+    look_for_kol: 'Search Engine',
+    create_campaign: 'Create Campaign',
+    my_campaign: 'My Campaigns',
     brandTop: 'Brand',
     noBrandTip: 'Please select brand',
     noBrand: 'You did not choose the brand',
