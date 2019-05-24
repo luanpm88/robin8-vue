@@ -126,7 +126,6 @@ export default {
                 }
               })
             }
-            _that.tabIndexOneInit(_that.currentBrandName, _that.currentBrandKeywords)
           }
         })
     },
