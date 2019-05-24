@@ -855,6 +855,8 @@ export const lang = {
       topKey: 'Enter a keyword, category or KOL name',
       keyword: 'Please type here...',
       search: 'Search',
+      searchByName: 'KOL Name',
+      searchByRelevant: 'Relevance of articles',
       advancedSearch: {
         btn: 'Advanced Search',
         industry: 'KOL Industry',

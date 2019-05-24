@@ -854,6 +854,8 @@ export const lang = {
       topKey: '输入关键字、行业分类或KOL名称',
       keyword: '请在这里键入…',
       search: '搜索',
+      searchByName: 'KOL 名字',
+      searchByRelevant: '文章相关度',
       advancedSearch: {
         btn: '高级搜索',
         industry: 'KOL 产业',

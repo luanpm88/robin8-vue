@@ -36,8 +36,25 @@
               </div>
             </div>
           </div>
-          <!-- 平台切换复选框 -->
+          <!-- 搜索的类型 -->
           <div class="text-center">
+            <div class="kol-select-platform" v-for="searchType in searchTypeList" :key='searchType.tabIndex'>
+              <label class="ctrl-label">
+                <input
+                  name="searchType"
+                  type="radio"
+                  :value="searchType.index"
+                  v-model="selectSearchType"
+                  v-validate="'required'"
+                  @change="SearchTypeChange"
+                />
+                <span>
+                  {{$t(`lang.${searchType.name}`)}}</span>
+              </label>
+            </div>
+          </div>
+          <!-- 平台切换复选框 -->
+          <div class="text-center mt10">
             <div class="kol-select-platform" v-for="platform in tabList" :key='platform.tabIndex'>
               <label class="ctrl-label">
                 <input
@@ -203,6 +220,7 @@
     <!-- 内容部分 -->
     <div class="panel default-panel kols-list-panel mt20" v-if="isShowKolList">
       <div class="panel-body p30">
+        <!-- 以前头部会显示 微信微博平台数据，中间先让隐藏了，后续不知道会不会让显示，所以先注释代码 -->
         <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
@@ -219,6 +237,7 @@
           <table class="default-table mt20 mb10">
             <thead>
               <tr>
+                <!-- 注释的代码是 微信和微博平台 勾选多个KOL 进行对比（compare） -->
                 <!-- <th v-if="tabIndex === 0 || tabIndex === 1" width="6%">{{$t('lang.kolList.search.table.check')}}</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
@@ -463,7 +482,19 @@ export default {
       // （微信微博展示）avg_sum_engagement
       showEngagement: true,
       // （微信微博展示）direct_price（其他平台展示）ref_price
-      showDirectPrice: true
+      showDirectPrice: true,
+      // 搜索的类型 
+      searchTypeList: [
+        {
+          index: 0,
+          name: 'kolList.search.searchByRelevant'
+        },
+        {
+          index: 1,
+          name: 'kolList.search.searchByName'
+        },
+      ],
+      selectSearchType: 0,
     };
   },
   created() {
@@ -508,6 +539,11 @@ export default {
       this.totalParams.engagement_to = this.engagementTo;
       this.totalParams.influence_from = this.influenceFrom;
       this.totalParams.influence_to = this.influenceTo;
+      if (Number(this.selectSearchType) === 0) {
+        this.totalParams.search_type = 'post_based';
+      } else {
+        this.totalParams.search_type = 'profile_based';
+      }
       if (this.keyword === "") {
         this.changeKeyword = '';
         this.totalParams.keywords = "";
@@ -820,36 +856,6 @@ export default {
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch;
     },
-    // 跳转 kol detail
-    // intoKolDetail(item) {
-    //   if (Number(this.tabIndex) === 0 || Number(this.tabIndex) === 1) {
-    //     item.profile_id = item.profile_id;
-    //   }
-    //   if (
-    //     Number(this.tabIndex) === 2 ||
-    //     Number(this.tabIndex) === 3 ||
-    //     Number(this.tabIndex) === 4 ||
-    //     Number(this.tabIndex) === 5 ||
-    //     Number(this.tabIndex) === 6 ||
-    //     Number(this.tabIndex) === 7 ||
-    //     Number(this.tabIndex) === 8
-    //   ) {
-    //     item.profile_id = encodeURIComponent(item.profile_id);
-    //     // console.log(item.profile_id)
-    //   }
-    //   // item.profile_id = item.profile_id.replace(/\./g , '\\/')
-    //   this.$router.push({
-    //     path: "/kol/",
-    //     name: "KolDetail",
-    //     params: {
-    //       id: item.profile_id
-    //     },
-    //     query: {
-    //       type: Number(this.tabIndex),
-    //       brand_keywords: this.totalKeywords
-    //     }
-    //   });
-    // },
     changeTab(tab) {
       this.kolsTotal = 0;
       this.isLoading = true;
@@ -1046,6 +1052,9 @@ export default {
       } else {
         this.followerFrom = "";
       }
+    },
+    SearchTypeChange() {
+      console.log(this.selectSearchType)
     }
   }
 };
