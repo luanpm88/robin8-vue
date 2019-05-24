@@ -6,7 +6,7 @@
     <div class="icon-grid-panel">
       <router-link to="/creations/create" tag="div" class="item">
         <div class="box">
-          <div class="iconfont icon-doc"></div>
+          <div class="iconfont icon-create"></div>
           <h5 class="title">创建大V活动</h5>
           <h6 class="sub-title">Custom Content</h6>
           <div class="tips">
@@ -17,7 +17,7 @@
       </router-link>
       <router-link to="/campaigns/create" tag="div" class="item">
         <div class="box">
-          <div class="iconfont icon-doc"></div>
+          <div class="iconfont icon-create-s"></div>
           <h5 class="title">创建小V活动</h5>
           <h6 class="sub-title">Consumer Content Amplification</h6>
         </div>
