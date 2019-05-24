@@ -28,6 +28,6 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-container {
-  width: 980px;
+  padding: 30px 100px 0px;
 }
 </style>

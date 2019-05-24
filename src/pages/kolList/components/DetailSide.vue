@@ -13,11 +13,11 @@
           <p>
             {{infoList.profile_name}}
             <i
-              class="iconfont icon-female"
+              class="iconfont icon-male"
               v-if="infoList.gender == 'm' || infoList.gender == 'M'"
             ></i>
             <i
-              class="iconfont icon-male"
+              class="iconfont icon-female"
               v-if="infoList.gender == 'f' || infoList.gender == 'F'"
             ></i>
           </p>

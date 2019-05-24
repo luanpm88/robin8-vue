@@ -227,111 +227,111 @@
 }
 
 // detail
-// .kol-detail{
-//   .chart-tag{
-//     margin-left: -33px;
-//   }
-// }
-// .kol-back-btn{
-//   cursor: pointer;
-//   line-height: 35px;
-//   text-decoration: underline;
-//   &:hover{
-//     color: #a347c9ff;
-//   }
-// }
-// .kol-detail-wrap {
-//   width: 900px;
-//   margin: 0px auto;
-//   color: nth($text-color, 1);
-// }
-// .kol-detail-title {
-//   font-weight: 600;
-//   font-size: $font-sm;
-//   color: #4a4a4aff;
-//   margin: 13px 0px;
-// }
-// .kol-detail-side {
-//   width: 280px;
-//   float: left;
-// }
-// .kol-detail-con {
-//   width: 980px;
-//   float: right;
-// }
-// .kol-infobox {
-//   position: relative;
-//   background: $white;
-//   .panel-body{
-//     padding: 0px;
-//   }
-//   .kol-small-imgbox{
-//     text-align: center;
-//     padding: 20px 0px 10px;
-//   }
-//   .kol-small-avatar{
-//     display: inline-block;
-//     width: 43px;
-//     height: 43px;
-//     border-radius: 50%;
-//     background: url(../../../src/assets/images/user.png) no-repeat 0 0;
-//     background-size: 43px 43px;
-//     img {
-//       width: 100%;
-//       height: 100%;
-//       border-radius: 50%;
-//     }
-//   }
-//   ul {
-//     padding: 15px 30px 10px;
-//     li {
-//       float: left;
-//       line-height: 20px;
-//       border-radius: 13px;
-//       border: 1px solid #716acaff;
-//       color: #716acaff;
-//       padding: 0px 10px;
-//       margin-right: 5px;
-//       margin-bottom: 10px;
-//     }
-//   }
-// }
-// .kol-info {
-//   p {
-//     text-align: center;
-//     color: #575962ff;
-//   }
-// }
-// .kol-brand {
-//   padding: 0px 30px 20px;
-//   p {
-//     span {
-//       line-height: 25px;
-//     }
-//     b {
-//       float: right;
-//       color: #948de1ff;
-//       font-weight: normal;
-//       line-height: 25px;
-//       font-size: $font-nm-s;
-//     }
-//   }
-// }
-// .kol-cloumn {
-//   border-left: 3px solid nth($purple, 2);
-//   padding-left: 10px;
-//   font-size: $font-nm;
-// }
-// .activity-color {
-//   line-height: 30px;
-//   color: nth($purple, 1);
-// }
-// .activity-border {
-//   border: 1px solid nth($purple, 1);
-//   color: nth($purple, 1);
-//   line-height: 32px;
-//   font-size: $font-nm-b;
-// }
+.kol-detail{
+  .chart-tag{
+    margin-left: -33px;
+  }
+}
+.kol-back-btn{
+  cursor: pointer;
+  line-height: 35px;
+  text-decoration: underline;
+  &:hover{
+    color: #a347c9ff;
+  }
+}
+.kol-detail-wrap {
+  width: 900px;
+  margin: 0px auto;
+  color: nth($text-color, 1);
+}
+.kol-detail-title {
+  font-weight: 600;
+  font-size: $font-sm;
+  color: #4a4a4aff;
+  margin: 13px 0px;
+}
+.kol-detail-side {
+  width: 280px;
+  float: left;
+}
+.kol-detail-con {
+  width: 980px;
+  float: right;
+}
+.kol-infobox {
+  position: relative;
+  background: $white;
+  .panel-body{
+    padding: 0px;
+  }
+  .kol-small-imgbox{
+    text-align: center;
+    padding: 20px 0px 10px;
+  }
+  .kol-small-avatar{
+    display: inline-block;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: url(../../../src/assets/images/user.png) no-repeat 0 0;
+    background-size: 43px 43px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  ul {
+    padding: 15px 30px 10px;
+    li {
+      float: left;
+      line-height: 20px;
+      border-radius: 13px;
+      border: 1px solid #716acaff;
+      color: #716acaff;
+      padding: 0px 10px;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+  }
+}
+.kol-info {
+  p {
+    text-align: center;
+    color: #575962ff;
+  }
+}
+.kol-brand {
+  padding: 0px 30px 20px;
+  p {
+    span {
+      line-height: 25px;
+    }
+    b {
+      float: right;
+      color: #948de1ff;
+      font-weight: normal;
+      line-height: 25px;
+      font-size: $font-nm-s;
+    }
+  }
+}
+.kol-cloumn {
+  border-left: 3px solid nth($purple, 2);
+  padding-left: 10px;
+  font-size: $font-nm;
+}
+.activity-color {
+  line-height: 30px;
+  color: nth($purple, 1);
+}
+.activity-border {
+  border: 1px solid nth($purple, 1);
+  color: nth($purple, 1);
+  line-height: 32px;
+  font-size: $font-nm-b;
+}
 .icon-female {
   color: nth($purple, 1);
 }

@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- Activity 和 analytics 目前这个不展示了-->
-    <!-- <activity></activity> -->
+    <activity></activity>
 
     <!-- socialData -->
     <social></social>
