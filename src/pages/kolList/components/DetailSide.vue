@@ -3,12 +3,11 @@
   <div>
     <!-- DetailSide. -->
     <div class="panel default-panel kol-infobox">
-      <!-- <div class="panel-head">
-      </div> -->
       <div class="panel-body">
-        <p class="kol-info-topbg"></p>
-        <div class="kol-small-avatar">
-          <img :src="infoList.avatar_url" alt>
+        <div class="kol-small-imgbox">
+          <div class="kol-small-avatar">
+            <img :src="infoList.avatar_url" alt>
+          </div>
         </div>
         <div class="kol-info">
           <p>
@@ -35,11 +34,13 @@
               class="btn btn-xs btn-purple btn-outline"
             >
               <span class="iconfont icon-user"></span>
-              KOL Profile
+              <!-- KOL Profile -->
+              {{$t('lang.kolList.detail.kolProfile')}}
             </a>
             <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
               <span class="iconfont icon-cart"></span>
-              Add to cart
+              <!-- Add to cart -->
+              {{$t('lang.kolList.detail.addCart')}}
             </button>
           </p>
         </div>

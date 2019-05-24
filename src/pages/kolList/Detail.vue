@@ -41,39 +41,32 @@
 </template>
 
 <script>
-import axios from "axios";
-import apiConfig from "@/config";
+import axios from 'axios'
+import apiConfig from '@/config'
 import store from '@/store'
-import DefaultTabs from "@components/DefaultTabs";
-import Echarts from "@components/Chart/GlobalEcharts";
-import ChartOption from "@components/Chart/GlobalChartOption";
-import commonJs from "@javascripts/common.js";
-import { Tooltip } from "ant-design-vue";
-import cloud from "@components/Chart/chatCloud";
-import { mapState, mapMutations } from "vuex";
+import DefaultTabs from '@components/DefaultTabs'
+import commonJs from '@javascripts/common.js'
+import { mapState, mapMutations } from 'vuex'
 // 左侧的 详情
 import DetailSide from '@/pages/kolList/components/DetailSide'
 // summary
-import Summaries from "@/pages/kolList/sum/Index";
+import Summaries from '@/pages/kolList/sum/Index'
 // analytics
-import Analytics from "@/pages/kolList/analytic/Index";
+import Analytics from '@/pages/kolList/analytic/Index'
 // posts
-import Posts from "@/pages/kolList/posts/Index";
+import Posts from '@/pages/kolList/posts/Index'
 // 左侧的 Industries 图表
 import Industries from '@/pages/kolList/components/Industries'
 // OtherPlatformSocical 除微信和微博 其他平台要展示的social data
 import OtherSocical from '@/pages/kolList/components/OtherPlatformSocical'
 
 export default {
-  name: "KolDetail",
+  name: 'KolDetail',
   components: {
-    Echarts,
     DefaultTabs,
     Summaries,
     Analytics,
     Posts,
-    ATooltip: Tooltip,
-    cloud,
     Industries,
     DetailSide,
     OtherSocical
@@ -84,38 +77,38 @@ export default {
       tabList: [
         {
           index: 0,
-          name: "kolList.detail.summary"
+          name: 'kolList.detail.summary'
         },
         {
           index: 1,
-          name: "kolList.detail.analytics"
+          name: 'kolList.detail.analytics'
         }
         // ,
         // {
         //   index: 2,
-        //   name: "kolList.detail.post"
+        //   name: 'kolList.detail.post
         // }
       ],
-      currentBrandName: "N/A",
-      currentBrandKeywords: "",
+      currentBrandName: 'N/A',
+      currentBrandKeywords: '',
       otherSocialDataList: {}
     };
   },
   created () {
-    this.type = Number(this.$route.query.type);
+    this.type = Number(this.$route.query.type)
     // 获取brandName 和 key
-    this.getBaseData();
+    this.getBaseData()
   },
   computed: {
-    ...mapState(['authorization']),
+    ...mapState(['authorization'])
   },
   methods: {
     changeTab(tab) {
-      this.tabIndex = tab.index;
+      this.tabIndex = tab.index
     },
     // 获取keyword brand name
     getBaseData() {
-      const _that = this;
+      const _that = this
       axios
         .get(apiConfig.baseInfosUrl, {
           headers: {
@@ -128,14 +121,13 @@ export default {
               res.data.trademarks_list.forEach(element => {
                 if (element.status === 1) {
                   // console.log(element)
-                  _that.currentBrandName = element.name;
-                  _that.currentBrandKeywords = element.keywords;
+                  _that.currentBrandName = element.name
+                  _that.currentBrandKeywords = element.keywords
                 }
-              });
+              })
             }
-            // _that.tabIndexOneInit(_that.currentBrandName, _that.currentBrandKeywords)
           }
-        });
+        })
     },
     // 将detailSide 返回的其他平台数据传给 OtherPlatformSocical.vue 文件
     giveOtherProp(data) {
@@ -164,7 +156,7 @@ export default {
       })
     })
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 
