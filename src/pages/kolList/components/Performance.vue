@@ -1,4 +1,4 @@
-<!--  -->
+<!-- compare.vue 的performance 模块 -->
 <template>
   <div>
     <div class="panel default-panel" v-if="Number(currentType) === 0">

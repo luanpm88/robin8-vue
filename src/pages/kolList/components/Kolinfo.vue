@@ -1,4 +1,4 @@
-<!--  -->
+<!-- compare.vue 对比个人信息用到的模版-->
 <template>
   <div>
     <div class="media compare-info">
