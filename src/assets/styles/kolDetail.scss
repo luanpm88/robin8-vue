@@ -72,3 +72,67 @@
 .icon-male {
   color: blue;
 }
+.activity-contable {
+  table {
+    th {
+      &:nth-child(1) {
+        width: 20%;
+      }
+    }
+    td {
+      padding: 10px;
+    }
+  }
+}
+.d-post-link{
+  font-size: 16px;
+  a, p{
+    color: nth($purple, 1);
+  }
+}
+.d-post-showMore{
+  cursor: pointer;
+  &:hover{
+    color: nth($green, 1);
+  }
+}
+.d-post-digest,
+.d-post-discribe{
+    line-height:30px;
+}
+.d-post-show-icon{
+  color: nth($blue, 1);
+  font-size: $font-nm-s;
+}
+.d-post-showMore{
+  cursor: pointer;
+}
+.d-post-show-time{
+  color: #666;
+  line-height: 30px;
+}
+.d-post-right-img{
+  max-width: 80px;
+  display: block;
+  margin:0px auto;
+}
+.d-post-right-read{
+  color: #666;
+  line-height: 25px;
+  span{
+    margin-right: 10px;
+    color: nth($orange, 1);
+    font-size: $font-nm-s;
+  }
+  i{
+    margin-right: 5px;
+    vertical-align: 1px;
+    font-size: 12px;
+  }
+
+}
+.d-post-right{
+  .iconfont{
+      margin-right: 5px;
+  }
+}

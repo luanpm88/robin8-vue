@@ -27,6 +27,10 @@ import '@styles/brands.scss'
 import '@styles/defaultAnt.scss'
 import '@styles/home.scss'
 import '@styles/kolDetail.scss'
+import '@styles/kolCompare.scss'
+import '@styles/kolRanking.scss'
+import '@styles/kolSearch.scss'
+import '@styles/social.scss'
 
 Vue.use(VueI18n)
 Vue.use(Pagination)

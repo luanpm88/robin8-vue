@@ -423,44 +423,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.socail-container {
-  min-height: 580px;
-  .form-group{
-    padding-right: 10px;
-  }
-}
-.social-search, .social-content {
-  .panel-body {
-    padding: 30px;
-  }
-}
-.social-detail{
-  cursor: pointer;
-  img{
-    border-radius: 50%;
-    max-width: 50px;
-  }
-}
 .home-post-title {
   color: nth($purple, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
   margin:20px 0px 10px;
 }
-.home-post-detail{
-  display: inline-block;
-}
 .home-post-content {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
   i{
-    color: nth($purple, 1) !important;
-  }
-}
-.icon-cart{
-  &.active{
-    cursor: pointer;
     color: nth($purple, 1) !important;
   }
 }

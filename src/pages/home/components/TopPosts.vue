@@ -49,7 +49,7 @@
                     <b>{{item.post_influence.shares}}</b>
                   </span>
                   <span>
-                    <i class="iconfont icon-comment"></i>
+                    <i class="iconfont icon-comments"></i>
                     <b>{{item.post_influence.comments}}</b>
                   </span>
                 </div>
