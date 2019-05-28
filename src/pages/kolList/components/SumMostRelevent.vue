@@ -15,7 +15,7 @@
 					</tr>
 					<tr v-for="(key, index) in relevantList" :key="index">
 							<td>
-							<a :href="key.url" target="blank" class="purple">{{key.title}}</a>
+							<a :href="key.url" target="blank" class="cyan">{{key.title}}</a>
 							</td>
 							<td style="min-width:200px">{{key.post_time}}</td>
 							<td>{{key.correlation}}</td>
@@ -122,11 +122,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-a.purple {
+a.cyan {
   display: block;
   text-align: left;
   @include limit-line(1);
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   word-break: break-all;
 }
 </style>

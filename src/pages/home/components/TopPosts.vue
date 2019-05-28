@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-purple" @click="PostShowMore">{{$t('lang.more')}}</button>
+          <button type="button" class="btn btn-sm btn-outline btn-circle btn-cyan" @click="PostShowMore">{{$t('lang.more')}}</button>
         </div>
       </default-tabs>
     </div>
@@ -319,7 +319,7 @@ export default {
   overflow: hidden;
 }
 .home-post-title {
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
 }

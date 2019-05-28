@@ -9,8 +9,8 @@
 .kol-advance-btn {
   text-align: center;
   .toggle {
-    color: nth($purple, 1);
-    border-bottom: 1px solid nth($purple, 1);
+    color: nth($cyan, 1);
+    border-bottom: 1px solid nth($cyan, 1);
     cursor: pointer;
   }
 }
@@ -51,10 +51,10 @@
 .fluenceactive,
 .relevanceactive {
   .is-top-iactive {
-    border-color: transparent transparent nth($purple, 1);
+    border-color: transparent transparent nth($cyan, 1);
   }
   .is-bottom-iactive {
-    border-color: nth($purple, 1) transparent transparent;
+    border-color: nth($cyan, 1) transparent transparent;
   }
 }
 .kol-profile {
@@ -79,7 +79,7 @@
       margin-left: 10px;
       cursor: pointer;
       &.icon-cart.active {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
     }
   }

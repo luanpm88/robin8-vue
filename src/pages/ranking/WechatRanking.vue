@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-container clearfix">
     <div class="top-control-area">
-      <button type="button" class="btn btn-purple" @click="pageBack">
+      <button type="button" class="btn btn-cyan" @click="pageBack">
         <span class="iconfont icon-arrow-left"></span>
         Back
       </button>
@@ -372,7 +372,7 @@ export default {
     display: inline-block;
     vertical-align: top;
     padding: 0px;
-    color: nth($purple, 1) !important;
+    color: nth($cyan, 1) !important;
   }
 }
 </style>

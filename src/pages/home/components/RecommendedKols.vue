@@ -34,7 +34,7 @@
         <div class="text-center mt20">
           <button
             type="button"
-            class="btn btn-sm btn-outline btn-circle btn-purple"
+            class="btn btn-sm btn-outline btn-circle btn-cyan"
             @click="toKolDetailMore"
           >{{$t('lang.more')}}</button>
         </div>

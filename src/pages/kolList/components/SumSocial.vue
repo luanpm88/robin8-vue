@@ -20,7 +20,8 @@
               <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
             </tr>
             <tr>
-              <td>{{dataListBox.platform}}</td>
+              <td v-if="dataListBox.platform === 'weibo'"><i class="iconfont icon-weibo"></i></td>
+              <td v-if="dataListBox.platform === 'weixin'"><i class="iconfont icon-icon-wechat"></i></td>
               <td>{{dataListBox.pricing.direct_price}}</td>
               <td>{{dataListBox.fans_number}}</td>
               <td>{{dataListBox.stats.avg_likes}}</td>

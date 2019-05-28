@@ -424,7 +424,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-post-title {
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
   margin:20px 0px 10px;
@@ -434,7 +434,7 @@ export default {
   font-size: $font-sm;
   line-height: 20px;
   i{
-    color: nth($purple, 1) !important;
+    color: nth($cyan, 1) !important;
   }
 }
 </style>
