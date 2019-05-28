@@ -51,10 +51,10 @@
 .fluenceactive,
 .relevanceactive {
   .is-top-iactive {
-    border-color: transparent transparent #b180ef;
+    border-color: transparent transparent nth($purple, 1);
   }
   .is-bottom-iactive {
-    border-color: #b180ef transparent transparent;
+    border-color: nth($purple, 1) transparent transparent;
   }
 }
 .kol-profile {

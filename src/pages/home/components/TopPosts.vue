@@ -19,25 +19,12 @@
             <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
               <div class="home-post" v-for="(item, index) in key" :key="index">
                 <a :href="item.url" target="_blank"><p class="home-post-title">{{item.title}}</p></a>
-                <div class="home-post-detail">
-                  <router-link target="_blank" :to="{
-                  path: '/kol/',
-                  name: 'KolDetail',
-                  params: {
-                    id: item.profile_id,
-                  },
-                  query: {
-                    type: tabIndex,
-                    brand_keywords: childKeyList.brand_keywords
-                  }
-                }">
-                    <img :src="item.avatar_url" alt class>
-                    <div>
-                      <strong>{{item.profile_name}}</strong>
-                      <p>{{item.post_time}}</p>
-                    </div>
-                  </router-link>
-                </div>
+                <kols-list-item
+                :key="item.profile_id"
+                :renderStatus="kolRenderStatus"
+                :renderData="item"
+                :routerData="kolRouterData"
+                ></kols-list-item>
                 <p class="home-post-content">{{item.content}}</p>
                 <div class="home-post-form">
                   <span>
@@ -79,17 +66,16 @@ import axios from 'axios'
 import apiConfig from '@/config'
 import commonJs from '@javascripts/common.js'
 import DefaultTabs from '@components/DefaultTabs'
+import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
 export default {
   components: {
-    DefaultTabs
+    DefaultTabs,
+    KolsListItem
   },
   props: ['childKeyList', 'isSelectBrand'],
   data() {
     return {
-      kolHasLiked: true,
-      kolHasMsg: true,
-      kolHasChecked: false,
       isShow: false,
       isLoading: true,
       isBrandShow: false,
@@ -116,8 +102,21 @@ export default {
           index: 1,
           name: ('wechat')
         }
-      ]
-
+      ],
+      kolRenderStatus: {
+        hasLiked: false,
+        hasMsg: true,
+        hasChecked: false,
+        hasInflunce: false,
+        hasCart: false,
+        hasDelete: false,
+        type: 0,
+        isPostTime: true
+      },
+      kolRouterData: {
+        type: '',
+        keywords: ''
+      },
     }
   },
   computed: {
@@ -136,6 +135,7 @@ export default {
             this.childKeyList.brand_keywords.split(',').forEach(item => {
               newKey += '"' + item + '" '
             }) 
+            this.kolRouterData.keywords = this.childKeyList.brand_keywords
             this.topPostParams.brand_keywords = newKey 
             if (Number(this.tabIndex) === 0) {
               this.postWeiboCurrentPage = 0
@@ -165,6 +165,8 @@ export default {
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index
+      this.kolRenderStatus.type = tab.index
+      this.kolRouterData.type = tab.index
       this.postListBox = [] 
       this.isShow = false 
       this.isLoading = true 
