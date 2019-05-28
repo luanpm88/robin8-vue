@@ -5,29 +5,9 @@
     border-bottom: 1px solid #ddd;
   }
 }
-.home-post-detail {
-  cursor: pointer;
-  padding: 12px 0px;
-  img {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  div {
-    display: inline-block;
-    vertical-align: middle;
-    strong {
-      font-weight: normal;
-      font-size: $font-nm-s;
-      color: #575962FF;
-    }
-    p {
-      font-size: 0.8rem;
-    }
+.home-post{
+  .kols-list-item:after{
+    background: #f6f7f7 !important;
   }
 }
 .home-post-form {

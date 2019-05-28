@@ -341,7 +341,7 @@
                     :percent="item.influence / 10"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
+                    strokeColor="#38D0D5"
                     :format="() => item.influence"
                   />
                   <!-- {{$t('lang.kolList.search.influenceTip')}} -->
@@ -353,7 +353,7 @@
                     :percent="item.correlation"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation + '%'"
                     v-if="item.colorStatus === 1"
                   />
@@ -361,7 +361,7 @@
                     type="circle"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#ddd"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation"
                     v-if="item.colorStatus === 0"
                   />
