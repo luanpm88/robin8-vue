@@ -1308,6 +1308,9 @@ export default {
     }
   }
 }
+.creation-form {
+  padding: 0 100px;
+}
 .creation-form /deep/ .kols-list {
   height: 352px;
   padding: 24px 60px;
