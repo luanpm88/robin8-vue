@@ -170,6 +170,7 @@ export default {
 
 <style lang="scss" scoped>
 .campaigns-list-container {
+  padding: 0 100px;
   .panel-body {
     padding: 30px;
   }

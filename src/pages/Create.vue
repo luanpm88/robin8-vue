@@ -54,18 +54,21 @@ export default {
 
 <style lang="scss" scoped>
 .home-container {
+  padding: 40px 100px;
   .icon-grid-panel {
     @include display-flex;
     $height: 360px;
-    $gap: 10px;
+    $gap: 32px;
     & > .item {
       @include display-flex;
       @include flex(1);
       height: $height;
       margin-right: $gap;
+      border-radius: 5px;
       align-items: center;
       justify-content: center;
-      background-color: nth($cyan, 1);
+      background: linear-gradient(180deg, #2fccd3 0%, #75e6e9 100%);
+      box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, .1);
       cursor: pointer;
       .box {
         text-align: center;

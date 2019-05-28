@@ -141,7 +141,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.campaigns-list-panel {
+.campaigns-list-container {
+  padding: 0 100px;
   .panel-body {
     padding: 30px;
   }

@@ -1,10 +1,6 @@
 <template>
   <div class="campaign-create-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
-
+    <create-process :renderData="processStatus"></create-process>
     <creation-form formType="create"></creation-form>
   </div>
 </template>

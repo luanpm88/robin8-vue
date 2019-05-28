@@ -889,6 +889,9 @@ export default {
     }
   }
 }
+.creation-form {
+  padding: 0 100px;
+}
 .creation-form /deep/ .kols-list {
   padding: 24px 60px;
   font-size: 0;
