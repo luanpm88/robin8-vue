@@ -9,7 +9,7 @@
 
     <div class="mt20 clearfix">
       <!-- left -->
-      <div class="ranking-left col-sm-1">
+      <div class="ranking-left col-sm-2">
         <h5>Industries</h5>
         <ul class="ranking-nav">
           <li
@@ -24,13 +24,13 @@
         </ul>
       </div>
       <!-- right -->
-      <div class="ranking-right col-sm-11">
+      <div class="ranking-right col-sm-10">
         <!-- top dec -->
         <div class="r-top clearfix">
           <p
-            class="r-top-dec col-sm-8"
+            class="r-top-dec col-sm-7"
           >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
-          <p class="r-top-right col-sm-4">
+          <p class="r-top-right col-sm-5">
             <span>7 | 14 | 21</span>
             <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
           </p>
@@ -45,7 +45,18 @@
               <p class="r-right-topList-tit">{{item.fixedTit}}</p>
               <div class="r-right-topList-box clearfix">
                 <span class="r-right-topList-img col-sm-6">
-                  <img :src="item.avatar_url" alt @click="openDetails(item)">
+                  <router-link target="_blank" :to="{path: '/kol/',
+                    name: 'KolDetail',
+                    params: {
+                      id: item.profile_id,
+                    },
+                    query: {
+                      type: 0,
+                      brand_keywords: totalKeywords
+                    }
+                  }">
+                    <img :src="item.avatar_url" alt>
+                  </router-link>
                 </span>
                 <span class="iconfont icon-cart active col-sm-1" @click="doAddCart(item)"></span>
                 <span class="r-right-topList-txt col-sm-6">
@@ -71,7 +82,18 @@
           >
             <template slot="profileDec" slot-scope="dec">
               <div class="r-tableThirtyList-name">
-                <img :src="dec.avatar_url" alt @click="openDetails(dec)">
+                <router-link target="_blank" :to="{path: '/kol/',
+                    name: 'KolDetail',
+                    params: {
+                      id: dec.profile_id,
+                    },
+                    query: {
+                      type: 0,
+                      brand_keywords: totalKeywords
+                    }
+                  }">
+                  <img :src="dec.avatar_url">
+                </router-link>
                 <span class="iconfont icon-cart active" @click="doAddCart(dec)"></span>
                 <p>{{dec.profile_name}}</p>
                 <!-- <p>{{dec.id}}</p> -->
