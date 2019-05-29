@@ -4,7 +4,7 @@
     <!-- performance -->
     <div class="panel default-panel mt20 kol-performance">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
       </div>
       <div class="panel-body prl30">
         <table class="com-brand-table" v-if="isPer">

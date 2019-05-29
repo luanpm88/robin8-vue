@@ -2,7 +2,7 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionDesc')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionDesc')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -111,7 +111,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionBudget')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionBudget')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -141,7 +141,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionDetail')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionDetail')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -319,7 +319,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionTime')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionTime')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -353,7 +353,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.selectKols')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.selectKols')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">

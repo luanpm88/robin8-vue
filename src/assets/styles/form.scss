@@ -60,6 +60,11 @@
 
 }
 
+select.form-control {
+  border-color: #e1e8ea;
+  background-color: #fff;
+}
+
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   background-color: #eeeeee;
   opacity: 1;
@@ -137,7 +142,7 @@ textarea.form-control {
   }
 
   input.form-control {
-    border-color: #ccc;
+    // border-color: #ccc;
 
     &.danger {
       border-color: #a94442;
@@ -177,8 +182,8 @@ textarea.form-control {
   line-height: 1;
   color: #555555;
   text-align: center;
-  background-color: #eeeeee;
-  border: 1px solid #ccc;
+  background-color: #e7edef;
+  // border: 1px solid #ccc;
   border-radius: 4px;
 }
 

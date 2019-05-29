@@ -31,7 +31,7 @@
     <div v-if="isCompetitors">
       <!-- <div class="panel default-panel mt20"> -->
         <!-- <div class="panel-head">
-          <h5 class="title text-center">{{$t('lang.homePage.brandTop')}}</h5>
+          <h5 class="title">{{$t('lang.homePage.brandTop')}}</h5>
         </div> -->
         <!-- <div class="panel-body p30 clearfix">
           <div class="form-horizontal default-form">

@@ -115,19 +115,18 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .alert-modal.active .modal-content { -webkit-transition-duration: 400ms; transition-duration: 400ms; @include transform(translate3d(-50%, -50%, 0) scale(1)); opacity: 1; }
 
 /*panel styles*/
-.panel { .panel-head { padding: 20px; background-color: #f6f7f7;
+.panel { .panel-head { padding: 20px;
     .title-bar { margin: -10px; }
     .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962;
       .iconfont { display: inline-block; margin: -4px 4px 0 0; vertical-align: middle; font-size: 2rem; }
       &.purple { color: nth($purple, 1); }
     }
-    & + .panel-body { margin-top: 1px; }
   }
-  .panel-body { background-color: #f6f7f7;
-    & + .panel-foot { margin-top: 1px; }
+  .panel-body { border: 2px solid #fff; border-radius: 5px 5px 0 0; background-color: #f6f7f7;
+    & + .panel-foot { margin-top: -2px; }
   }
-  .panel-foot { padding: 10px; background-color: #f6f7f7; }
-  &.default-panel { border: 2px solid #fff; border-radius: 5px; overflow: hidden; }
+  .panel-foot { border: 2px solid #fff; padding: 10px; background-color: #f6f7f7; }
+  &.default-panel { border-radius: 0 0 5px 5px; overflow: hidden; }
   &.radius-panel { border-radius: 5px; overflow: hidden; }
 }
 

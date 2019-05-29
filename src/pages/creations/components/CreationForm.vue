@@ -2,7 +2,7 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
+        <h5 class="title">{{$t('lang.creations.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -77,7 +77,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
+        <h5 class="title">{{$t('lang.creations.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -250,7 +250,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.bigVRequirement')}}</h5>
+        <h5 class="title">{{$t('lang.creations.bigVRequirement')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -440,7 +440,7 @@
 
     <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.bigVSelected')}}</h5>
+        <h5 class="title">{{$t('lang.creations.bigVSelected')}}</h5>
       </div>
       <div class="panel-body">
         <div class="checked-kols-list clearfix">

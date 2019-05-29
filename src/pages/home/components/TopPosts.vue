@@ -1,7 +1,7 @@
 <template>
   <div class="panel default-panel home-top-post">
     <div class="panel-head">
-      <h5 class="title purple">
+      <h5 class="title">
         <span class="iconfont icon-calendar"></span>
         {{$t('lang.homePage.topPosts.title')}}
       </h5>
@@ -134,18 +134,18 @@ export default {
             let newKey = ''
             this.childKeyList.brand_keywords.split(',').forEach(item => {
               newKey += '"' + item + '" '
-            }) 
+            })
             this.kolRouterData.keywords = this.childKeyList.brand_keywords
-            this.topPostParams.brand_keywords = newKey 
+            this.topPostParams.brand_keywords = newKey
             if (Number(this.tabIndex) === 0) {
               this.postWeiboCurrentPage = 0
-              this.topPostParams.page_no = this.postWeiboCurrentPage 
+              this.topPostParams.page_no = this.postWeiboCurrentPage
               // 微博
               this.topPostWeibo(this.topPostParams)
-            } 
+            }
             if (Number(this.tabIndex) === 1) {
               this.postWeixinCurrentPage = 0
-              this.topPostParams.page_no = this.postWeixinCurrentPage 
+              this.topPostParams.page_no = this.postWeixinCurrentPage
               // 微信
               this.topPostWeixin(this.topPostParams)
             }
@@ -167,20 +167,20 @@ export default {
       this.tabIndex = tab.index
       this.kolRenderStatus.type = tab.index
       this.kolRouterData.type = tab.index
-      this.postListBox = [] 
-      this.isShow = false 
-      this.isLoading = true 
+      this.postListBox = []
+      this.isShow = false
+      this.isLoading = true
       this.isBrandShow = false
       if (this.isSelectBrand) {
         if (tab.index === 0) {
           this.postWeiboCurrentPage = 0
-          this.topPostParams.page_no = this.postWeiboCurrentPage 
+          this.topPostParams.page_no = this.postWeiboCurrentPage
           // 微博
           this.topPostWeibo(this.topPostParams)
         }
         if (tab.index === 1) {
           this.postWeixinCurrentPage = 0
-          this.topPostParams.page_no = this.postWeixinCurrentPage 
+          this.topPostParams.page_no = this.postWeixinCurrentPage
           // 微信
           this.topPostWeixin(this.topPostParams)
         }
@@ -201,31 +201,31 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false 
+          _that.isLoading = false
           if (res.data.data.length === 0 || !res.data.data.length) {
             if (Number(_that.postWeiboCurrentPage) === 0) {
-              _that.isShow = true 
+              _that.isShow = true
               _that.isBrandShow = false
               _that.isPost = false
             }
-            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏 
+            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏
             if (Number(_that.postWeiboCurrentPage) !== 0) {
-              _that.isShow = true 
+              _that.isShow = true
               _that.isBrandShow = false
               _that.isPost = true
             }
           } else {
-            _that.isShow = false 
+            _that.isShow = false
             _that.isBrandShow = false
             _that.isPost = true
             _that.postType = 0
-            _that.postListBox.push(res.data.data) 
-            _that.postWeiboCurrentPage ++ 
+            _that.postListBox.push(res.data.data)
+            _that.postWeiboCurrentPage ++
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-          alert(error) 
+          // console.log(error)
+          alert(error)
         })
     },
     // 微信的接口
@@ -238,31 +238,31 @@ export default {
           }
         })
         .then(function(res) {
-          _that.isLoading = false 
+          _that.isLoading = false
           if (res.data.data.length === 0 || !res.data.data.length) {
             if (Number(_that.postWeixinCurrentPage) === 0) {
-              _that.isShow = true 
+              _that.isShow = true
               _that.isBrandShow = false
               _that.isPost = false
             }
-            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏 
+            // 下面这种是当点击更多的时候，首先loading加载 内容也不能隐藏
             if (Number(_that.postWeixinCurrentPage) !== 0) {
-              _that.isShow = true 
+              _that.isShow = true
               _that.isBrandShow = false
               _that.isPost = true
             }
           } else {
-            _that.isShow = false 
+            _that.isShow = false
             _that.isBrandShow = false
             _that.isPost = true
             _that.postType = 1
-            _that.postListBox.push(res.data.data) 
-            _that.postWeixinCurrentPage ++ 
+            _that.postListBox.push(res.data.data)
+            _that.postWeixinCurrentPage ++
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-          alert(error) 
+          // console.log(error)
+          alert(error)
         })
     },
     //  // 跳转 kol detail
@@ -277,22 +277,22 @@ export default {
     //       type: this.tabIndex,
     //       brand_keywords: this.childKeyList.brand_keywords
     //     }
-    //   }) 
+    //   })
     // },
     PostShowMore() {
-      this.isLoading = true 
+      this.isLoading = true
       this.isBrandShow = false
       this.isShow = false
       this.isPost = true
 
       if (this.isSelectBrand) {
         if (this.tabIndex === 0) {
-          this.topPostParams.page_no = this.postWeiboCurrentPage 
+          this.topPostParams.page_no = this.postWeiboCurrentPage
           // 微博
           this.topPostWeibo(this.topPostParams)
         }
         if (this.tabIndex === 1) {
-          this.topPostParams.page_no = this.postWeixinCurrentPage 
+          this.topPostParams.page_no = this.postWeixinCurrentPage
           // 微信
           this.topPostWeixin(this.topPostParams)
         }
