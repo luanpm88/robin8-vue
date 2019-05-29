@@ -12,7 +12,7 @@
     <!-- 搜索条件 -->
     <div class="panel default-panel kols-list-panel">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.search.topKey')}}</h5>
       </div>
       <div class="panel-body">
         <!-- 最头部input 条件 -->
@@ -483,7 +483,7 @@ export default {
       showEngagement: true,
       // （微信微博展示）direct_price（其他平台展示）ref_price
       showDirectPrice: true,
-      // 搜索的类型 
+      // 搜索的类型
       searchTypeList: [
         {
           index: 0,

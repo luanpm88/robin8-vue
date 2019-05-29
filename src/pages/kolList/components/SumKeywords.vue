@@ -4,7 +4,7 @@
     <!-- Keywords-->
 		<div class="panel default-panel mt20">
 			<div class="panel-head">
-				<h5 class="title text-center">
+				<h5 class="title">
 					<a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
 						{{$t('lang.kolList.detail.keywords')}}
 					</a-tooltip>

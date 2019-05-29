@@ -1,4 +1,4 @@
-<!-- compare.vue 页面 distribution 连带加载封装 
+<!-- compare.vue 页面 distribution 连带加载封装
 *props: ['currentType', 'currentId'],
 currentType 0 代表微博 ， 1代表微信
 currentId 当前数据的Id
@@ -6,7 +6,7 @@ currentId 当前数据的Id
 <template>
   <div class="panel default-panel">
     <div class="panel-head">
-      <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
+      <h5 class="title">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
     </div>
     <div class="panel-body prl30">
       <div class="r8-loading" v-if="isAnalyOneLoading">
@@ -52,17 +52,17 @@ export default {
         end_date: commonJs.cPastOneday,
         profile_id: 'MzAwMDAyMzY3OA=='
       },
-    } 
+    }
   },
   created() {
-    this.analyOneParams.profile_id = String(this.currentId) 
+    this.analyOneParams.profile_id = String(this.currentId)
     if (Number(this.currentType) === 0) {
       // 微博Industries Distribution
-      this.detailAnalyOneWeibo(this.analyOneParams) 
-    } 
+      this.detailAnalyOneWeibo(this.analyOneParams)
+    }
     if (Number(this.currentType) === 1) {
       // 微信Industries Distribution
-      this.detailAnalyOneWeixin(this.analyOneParams) 
+      this.detailAnalyOneWeixin(this.analyOneParams)
     }
   },
   computed: {
@@ -71,7 +71,7 @@ export default {
   methods: {
     // Industries Distribution weibo
     detailAnalyOneWeibo(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.detailAnalyOneWeibo, params, {
           headers: {
@@ -80,25 +80,25 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            // console.log('wobo 微博', res) 
-            _that.isAnalyOneLoading = false 
+            // console.log('wobo 微博', res)
+            _that.isAnalyOneLoading = false
             if (res.data.length > 0) {
-              _that.isAnalyOneShow = false 
-              _that.isAnalyOne = true 
-              _that.analyOne = res.data 
+              _that.isAnalyOneShow = false
+              _that.isAnalyOne = true
+              _that.analyOne = res.data
             } else {
-              _that.isAnalyOneShow = true 
-              _that.isAnalyOne = false 
+              _that.isAnalyOneShow = true
+              _that.isAnalyOne = false
             }
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     // Industries Distribution weixin
     detailAnalyOneWeixin(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.detailAnalyOneWeixin, params, {
           headers: {
@@ -108,23 +108,23 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('woshi weixin', res)
-            _that.isAnalyOneLoading = false 
+            _that.isAnalyOneLoading = false
             if (res.data.length > 0) {
-              _that.isAnalyOneShow = false 
-              _that.isAnalyOne = true 
-              _that.analyOne = res.data 
+              _that.isAnalyOneShow = false
+              _that.isAnalyOne = true
+              _that.analyOne = res.data
             } else {
-              _that.isAnalyOneShow = true 
-              _that.isAnalyOne = false 
+              _that.isAnalyOneShow = true
+              _that.isAnalyOne = false
             }
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     }
   }
-} 
+}
 </script>
 <style>
 </style>

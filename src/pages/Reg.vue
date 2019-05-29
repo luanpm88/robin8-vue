@@ -2,7 +2,7 @@
   <div class="page">
     <div class="panel default-panel login-panel">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.signUp.title')}}</h5>
+        <h5 class="title">{{$t('lang.signUp.title')}}</h5>
       </div>
       <div class="panel-body">
         <div class="login-container">

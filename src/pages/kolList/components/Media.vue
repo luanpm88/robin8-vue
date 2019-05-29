@@ -2,7 +2,7 @@
 <template>
   <div class="panel default-panel mt20">
     <div class="panel-head">
-      <h5 class="title text-center">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</h5>
+      <h5 class="title">{{$t('lang.kolList.analyticVue.weixin.Media.title')}}</h5>
     </div>
     <div class="panel-body prl30">
       <div class="nonetip" v-if="isMediaShow">
@@ -61,17 +61,17 @@ export default {
       isMedia: false,
       isMediaShow: false,
       isMediaLoading: true,
-    } 
+    }
   },
   created() {
     // Media Distribution
-    this.analyOneParams.profile_id = String(this.currentId) 
-    this.detailMediaWeixin(this.analyOneParams) 
+    this.analyOneParams.profile_id = String(this.currentId)
+    this.detailMediaWeixin(this.analyOneParams)
   },
   methods: {
     // Media Distribution weixin
     detailMediaWeixin(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.detailMediaWeixin, params, {
           headers: {
@@ -81,20 +81,20 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('woshi weixin', res)
-            _that.isMediaLoading = false 
+            _that.isMediaLoading = false
             if (res.data.length > 0) {
-              _that.isMediaShow = false 
-              _that.isMedia = true 
-              _that.media = res.data 
+              _that.isMediaShow = false
+              _that.isMedia = true
+              _that.media = res.data
             } else {
-              _that.isMediaShow = true 
-              _that.isMedia = false 
+              _that.isMediaShow = true
+              _that.isMedia = false
             }
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
   }
 }
