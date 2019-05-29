@@ -127,18 +127,6 @@
             </div>
             <div
               class="col-sm-2 control-label"
-            >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" v-model="engagementFrom" placeholder="N/A">
-                <div class="input-group-addon">-</div>
-                <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div
-              class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
             <div class="col-sm-4">
               <div class="input-group">
@@ -147,20 +135,7 @@
                 <input type="text" class="form-control" v-model="followerTo" placeholder="N/A">
               </div>
             </div>
-            <div class="col-sm-2 control-label">
-              <a-tooltip
-                placement="topLeft"
-                :title="$t('lang.kolList.search.advancedSearch.influenceTip')"
-              >{{$t('lang.kolList.search.advancedSearch.influence')}}</a-tooltip>
-            </div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" v-model="influenceFrom" placeholder="N/A">
-                <div class="input-group-addon">-</div>
-                <input type="text" class="form-control" v-model="influenceTo" placeholder="N/A">
-              </div>
-            </div>
-          </div>
+          </div>          
           <div class="text-center">
             <label>
               <input type="checkbox" v-model="kolOnly">
@@ -234,7 +209,7 @@
                   <td>
                     <div class="media kol-profile">
                       <div class="media-left media-middle">
-                        <a class="avatar" target="_blank" :href="item.profile_id">
+                        <a class="avatar" target="_blank" :href="item.homepage">
                           <img :src="item.avatar_url" alt class="avatar-img">
                         </a>
                       </div>
@@ -361,7 +336,7 @@ export default {
       industry: "",
       engagementFrom: "",
       engagementTo: "",
-      followerFrom: "100000",
+      followerFrom: "",
       followerTo: "",
       influenceFrom: "",
       influenceTo: "",
@@ -407,6 +382,10 @@ export default {
         {
           index: 0,
           name: ('facebook')
+        },
+        {
+          index: 1,
+          name: ('instagram')
         }
       ],
       tabIndex: 0,
@@ -494,8 +473,152 @@ export default {
     // 平台数据 接口
     kollistJoggle(type, params) {
       const _that = this;
-      if (type === 8) {
-        // weibo
+      //if (type === 8) {
+      //  // weibo
+      //  axios
+      //    .post(apiConfig.kollistFacebookTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('我是weibo接口', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 1) {
+      //  // weixin
+      //  axios
+      //    .post(apiConfig.kollistWeixinTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('我是weixin接口', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 2) {
+      //  // xiaohongshu
+      //  axios
+      //    .post(apiConfig.kollistRedBookTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('我是小红书接口', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      console.log(error);
+      //    });
+      //}
+      //if (type === 3) {
+      //  // kuaishou
+      //  axios
+      //    .post(apiConfig.kollistKuaishouTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('kollistKuaishouTable', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 4) {
+      //  // bilibili
+      //  axios
+      //    .post(apiConfig.kollistBilibiliTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('kollistBilibiliTable', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 5) {
+      //  // douyin
+      //  axios
+      //    .post(apiConfig.kollistDouyinTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('kollistDouyinTable', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 6) {
+      //  // Instagram
+      //  axios
+      //    .post(apiConfig.kollistInstagramTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('kollistInstagramTable', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      //if (type === 7) {
+      //  // Youtub
+      //  axios
+      //    .post(apiConfig.kollistYoutubeTable, params, {
+      //      headers: {
+      //        Authorization: _that.authorization
+      //      }
+      //    })
+      //    .then(function(res) {
+      //      if (res.status === 200) {
+      //        // console.log('Youtub', res)
+      //        _that.jogDataInit(res.data);
+      //      }
+      //    })
+      //    .catch(function(error) {
+      //      // console.log(error)
+      //    });
+      //}
+      if (type === 0) {
+        // Facebook
         axios
           .post(apiConfig.kollistFacebookTable, params, {
             headers: {
@@ -503,145 +626,19 @@ export default {
             }
           })
           .then(function(res) {
-            if (res.status === 200) {
-              // console.log('我是weibo接口', res)
+            //if (res.status === 200) {
+              // console.log('Facebook', res)
               _that.jogDataInit(res.data);
-            }
+            //}
           })
           .catch(function(error) {
             // console.log(error)
           });
       }
       if (type === 1) {
-        // weixin
-        axios
-          .post(apiConfig.kollistWeixinTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('我是weixin接口', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 2) {
-        // xiaohongshu
-        axios
-          .post(apiConfig.kollistRedBookTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('我是小红书接口', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
-      if (type === 3) {
-        // kuaishou
-        axios
-          .post(apiConfig.kollistKuaishouTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('kollistKuaishouTable', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 4) {
-        // bilibili
-        axios
-          .post(apiConfig.kollistBilibiliTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('kollistBilibiliTable', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 5) {
-        // douyin
-        axios
-          .post(apiConfig.kollistDouyinTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('kollistDouyinTable', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 6) {
-        // Instagram
-        axios
-          .post(apiConfig.kollistInstagramTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('kollistInstagramTable', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 7) {
-        // Youtub
-        axios
-          .post(apiConfig.kollistYoutubeTable, params, {
-            headers: {
-              Authorization: _that.authorization
-            }
-          })
-          .then(function(res) {
-            if (res.status === 200) {
-              // console.log('Youtub', res)
-              _that.jogDataInit(res.data);
-            }
-          })
-          .catch(function(error) {
-            // console.log(error)
-          });
-      }
-      if (type === 0) {
         // Facebook
         axios
-          .post(apiConfig.kollistFacebookTable, params, {
+          .post(apiConfig.kollistInstagramTable, params, {
             headers: {
               Authorization: _that.authorization
             }
@@ -784,9 +781,9 @@ export default {
       this.isTable = false;
       this.tabIndex = tab.index;
       if (tab.index == 0) {
-        this.followerFrom = "100000";
+        this.followerFrom = "";
       } else if (tab.index == 1) {
-        this.followerFrom = "30000";
+        this.followerFrom = "";
       } else {
         this.followerFrom = "";
       }

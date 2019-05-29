@@ -234,15 +234,16 @@ const config = {
   kollistDouyinTable: `${searchHost}/douyin/profile/kol_search_profile?${searchHostKey}`,
 
   // Instagram
-  kollistInstagramTable: `${searchHost}/instagram/profile/kol_search_profile?${searchHostKey}`,
+  kollistInstagramTable: `${host}/kols/instagram/search?${searchHostKey}`,
 
   // Youtube
   kollistYoutubeTable: `${searchHost}/youtube/profile/kol_search_profile?${searchHostKey}`,
 
   // Facebook
   // kollistFacebookTable: `${searchHost}/facebook/profile/kol_search_profile?${searchHostKey}`,
-  kollistFacebookTable: `${host}/kols/search?${searchHostKey}`,
-
+  kollistFacebookTable: `${host}/kols/facebook/search?${searchHostKey}`,
+  
+  
   // 首页接口结束------------------------
 
   // 我的竞争品牌 增加品牌 提交接口
