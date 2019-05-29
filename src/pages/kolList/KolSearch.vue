@@ -29,7 +29,7 @@
                 <div class="input-group-btn">
                   <button
                     type="button"
-                    class="btn btn-purple"
+                    class="btn btn-cyan"
                     @click="totalSearch"
                   >{{$t('lang.kolList.search.search')}}</button>
                 </div>
@@ -107,7 +107,7 @@
             </div>
           </div>
           <div class="form-group">
-            <!-- <div
+            <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
@@ -185,7 +185,7 @@
                   value="travel"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
               </select>
-            </div> -->
+            </div>
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
@@ -196,17 +196,25 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-            <!-- <div  class="col-sm-6">
-              <label class="kol-check-label">
+            <!--  有时候会把勾选的放在 半边
+              <div class="kol-check-box col-sm-6">
+              <label>
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
             </div> -->
           </div>
+          <!-- 勾选的占用一行的样式  -->
+          <div class="kol-check-box">
+            <label>
+              <input type="checkbox" v-model="kolOnly">
+              {{$t('lang.kolList.search.advancedSearch.checkText')}}
+            </label>
+          </div>
           <div class="text-center p30">
             <button
               type="button"
-              class="btn btn-blue btn-outline"
+              class="btn btn-cyan"
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
@@ -311,7 +319,7 @@
                           class="item"
                           v-if="showFunsnumber"
                         >
-                          <i class="iconfont icon-user-heart"></i>
+                          <i class="iconfont icon-heart"></i>
                           {{item.fans_number}}
                         </a-tooltip>
                         <a-tooltip
@@ -320,7 +328,7 @@
                           class="item"
                           v-if="showEngagement"
                         >
-                          <i class="iconfont icon-app"></i>
+                          <i class="iconfont icon-share"></i>
                           {{item.stats.avg_sum_engagement}}
                         </a-tooltip>
                       </div>

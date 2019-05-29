@@ -1,53 +1,66 @@
 .ranking-container {
-  width: 1280px;
-  margin: 0 auto;
+  padding: 30px 100px 0px;
+  color: nth($text-color, 1);
+}
+.rankingcur {
+  background: $white;
   color: nth($text-color, 1);
 }
 .ranking-left{
-  background: $white;
-  padding: 0px !important;
-}
-.ranking-right{
-  background: $white;
-  height: 910px;
-  padding:20px 20px 0px;
-}
-.rankingcur {
-  background: #b5d2d6;
-  color: #fff;
-}
-.ranking-left{
-  background: #ddd;
+  background: #413f40;
   font-size: $font-nm-s;
+  padding: 0px;
   h5{
-    font-size: 20px;
-    padding-left: 4%;
-    line-height: 35px;
+    font-size: $font-lg-s;
+    line-height: 60px;
+    text-align: center;
+    color: #E1E8EA;
   }
   ul{
     li{
       cursor: pointer;
       line-height: 35px;
       padding-left: 10%;
+      font-size: $font-nm-s;
+      color: #A9B1B3;
       i{
           vertical-align: -1px;
           margin-right: 1%;
       }
       &:hover{
-          background: #b5d2d6;
-          color: #fff;
+          background: $white;
+          color: nth($text-color, 1);
       }
     }
   }
 }
 .ranking-right{
   font-size: $font-nm-s;
+  background: $white;
+  height: 935px;
+  padding: 0px;
+}
+.r-top {
+  padding: 12px 30px;
+}
+.r-top-dec{
+  font-size: $font-nm-s;
+  color: nth($text-color, 2);
+  line-height: 35px;
 }
 .r-top-right{
   text-align: right;
+  font-size: $font-nm-s;
+  color: nth($text-color, 2);
+  span{
+    padding: 0px 25px;
+    line-height: 35px;
+    display: inline-block;
+  }
   .r-benchmark{
-    margin-left: 30px;
     cursor: pointer;
+    border: 1px solid nth($border, 1);
+    border-radius:5px;
     &:hover{
       text-decoration: underline;
     }
@@ -55,7 +68,7 @@
   }
 }
 .r-right-topList{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid nth($border , 1);
   padding-bottom: 20px;
   .col-sm-4{
     padding: 0px;
@@ -63,11 +76,11 @@
 }
 .r-right-topList-tit{
   line-height: 35px;
-  font-size: 19px;
+  font-size: $font-nm-s;
   text-align: center;
-  background: #b5d2d6;
-  color: #fff;
-  margin: 20px 0px;
+  background: $bg-color;
+  color: nth($text-color, 3);
+  margin: 0px 0px 20px;
 }
 .r-right-topList-box{
   text-align: center;
@@ -78,7 +91,6 @@
   }
   .r-right-topList-img{
       max-width: 80px;
-      // border: 2px solid $disabled-color;
       border-radius: 10px;
       background: $white;
       cursor: pointer;
