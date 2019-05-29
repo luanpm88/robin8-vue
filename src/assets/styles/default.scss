@@ -44,8 +44,9 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 
 /*default table styles*/
 .default-table { width: 100%; max-width: 100%; border: 0; border-spacing: 0; border-collapse: collapse;
-  th { font-weight: bold; }
-  tbody { tr { &:nth-child(odd) { background-color: rgba(nth($cyan, 1), .2); }
+  th { background-color: #e7edef; }
+  tbody { tr { border-bottom: 1px solid #e1e8ea;
+      &:last-child { border-bottom: none; }
     }
   }
   th, td { line-height: 20px; padding: 10px; text-align: left; word-break: break-all;
@@ -122,11 +123,9 @@ input[type=radio]:checked:before { content: $icon-radioed; }
       &.purple { color: nth($purple, 1); }
     }
   }
-  .panel-body { border: 2px solid #fff; border-radius: 5px 5px 0 0; background-color: #f6f7f7;
-    & + .panel-foot { margin-top: -2px; }
-  }
-  .panel-foot { border: 2px solid #fff; padding: 10px; background-color: #f6f7f7; }
-  &.default-panel { border-radius: 0 0 5px 5px; overflow: hidden; }
+  .panel-body { border: 2px solid #fff; border-bottom: none; border-radius: 5px 5px 0 0; background-color: #f6f7f7; }
+  .panel-foot { border: 2px solid #fff; border-bottom: none; border-top-color: #e1e8ea; padding: 20px; background-color: #f6f7f7; }
+  &.default-panel { border-bottom: 2px solid #fff; border-radius: 0 0 5px 5px; overflow: hidden; }
   &.radius-panel { border-radius: 5px; overflow: hidden; }
 }
 
@@ -169,6 +168,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .hide { display: none !important; }
 .show { display: block !important; }
 .p10 { padding: 10px; }
+.p20 { padding: 20px; }
 .p30 { padding: 30px; }
 .mt1 { margin-top: 1px; }
 .mt10 { margin-top: 10px; }

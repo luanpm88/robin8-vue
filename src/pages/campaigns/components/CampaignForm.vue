@@ -875,9 +875,9 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-create-form {
+  padding: 10px 0;
   .form-group {
-    padding: 20px 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 40px;
   }
 }
 .create-btn-area {

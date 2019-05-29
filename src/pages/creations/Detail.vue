@@ -1,151 +1,150 @@
 <template>
   <div class="campaign-detail-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
+    <create-process :renderData="processStatus"></create-process>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-body">
-        <status-area :statusData="detailData.status"></status-area>
+    <div class="campaign-detail-content">
+      <div class="panel default-panel mt20">
+        <div class="panel-body">
+          <status-area :statusData="detailData.status"></status-area>
 
-        <div class="line-title">{{$t('lang.information')}}</div>
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.name}}</p>
+          <div class="line-title">{{$t('lang.information')}}</div>
+          <div class="form-horizontal campaign-create-form">
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.name}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.description}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.trademark_name}}</p>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.description}}</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.trademark_name}}</p>
-            </div>
-          </div>
-        </div>
 
-        <div class="line-title">{{$t('lang.creations.campaignInfo')}}</div>
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
-            <div class="col-sm-8">
-              <div class="row">
-                <div
-                  v-for="item in detailData.terraces"
-                  :key="item.terrace_id"
-                  class="col-sm-6 platform-item"
-                >
-                  <div class="col-sm-3 text-center">
-                    <div class="check-icon checked">
-                      <img :src="item.avatar" alt="" class="icon-img" />
+          <div class="line-title">{{$t('lang.creations.campaignInfo')}}</div>
+          <div class="form-horizontal campaign-create-form">
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
+              <div class="col-sm-8">
+                <div class="row">
+                  <div
+                    v-for="item in detailData.terraces"
+                    :key="item.terrace_id"
+                    class="col-sm-6 platform-item"
+                  >
+                    <div class="col-sm-3 text-center">
+                      <div class="check-icon checked">
+                        <img :src="item.avatar" alt="" class="icon-img" />
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
+                      <!--  -->
+                      <p class="form-control-static">{{$t('lang.exposure')}}: {{item.exposure_value}}</p>
                     </div>
                   </div>
-                  <div class="col-sm-8">
-                    <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
-                    <!--  -->
-                    <p class="form-control-static">{{$t('lang.exposure')}}: {{item.exposure_value}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}:</div>
+              <div class="col-sm-8">
+                <div class="upload-imgs-list">
+                  <div class="upload-img-item">
+                    <img :src="detailData.img_url" alt="" class="upload-img" />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}:</div>
-            <div class="col-sm-8">
-              <div class="upload-imgs-list">
-                <div class="upload-img-item">
-                  <img :src="detailData.img_url" alt="" class="upload-img" />
-                </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.time_range}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.pre_kols_count}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.budget.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.pre_amount}}</p>
+              </div>
+            </div>
+            <div v-if="detailData.notice" class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.notice}}</p>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.time_range}}</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.pre_kols_count}}</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.budget.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.pre_amount}}</p>
-            </div>
-          </div>
-          <div v-if="detailData.notice" class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.notice}}</p>
-            </div>
-          </div>
-        </div>
 
-        <div class="line-title">{{$t('lang.creations.bigVRequirement')}}</div>
-        <div class="form-horizontal campaign-create-form">
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.tags.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.industries}}</p>
+          <div class="line-title">{{$t('lang.creations.bigVRequirement')}}</div>
+          <div class="form-horizontal campaign-create-form">
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.tags.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.industries}}</p>
+              </div>
             </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">{{detailData.price_range}}</p>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">18～40</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">女</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
+              <div class="col-sm-8">
+                <p class="form-control-static">北京 / 上海 / 深圳</p>
+              </div>
+            </div> -->
           </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">{{detailData.price_range}}</p>
-            </div>
-          </div>
-          <!-- <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">18～40</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">女</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
-            <div class="col-sm-8">
-              <p class="form-control-static">北京 / 上海 / 深圳</p>
-            </div>
-          </div> -->
-        </div>
 
-        <div v-if="kolsList.length > 0">
-          <div class="line-title">{{$t('lang.creations.bigVSelected')}}</div>
-          <div class="kols-list clearfix">
-            <kols-list-item
-              v-for="(item, index) in kolsList"
-              :key="item.profile_id"
-              :renderStatus="kolRenderStatus"
-              :renderData="item"
-              :routerData="kolRouterData"
-            ></kols-list-item>
+          <div v-if="kolsList.length > 0">
+            <div class="line-title">{{$t('lang.creations.bigVSelected')}}</div>
+            <div class="kols-list clearfix">
+              <kols-list-item
+                v-for="(item, index) in kolsList"
+                :key="item.profile_id"
+                :renderStatus="kolRenderStatus"
+                :renderData="item"
+                :routerData="kolRouterData"
+              ></kols-list-item>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="text-center create-btn-area">
-      <router-link
-        class="btn btn-cyan btn-outline back-btn"
-        to="/creations"
-      >{{$t('lang.backListBtn')}}</router-link>
+      <div class="text-center create-btn-area">
+        <router-link
+          class="btn btn-cyan btn-outline back-btn"
+          to="/creations"
+        >{{$t('lang.backListBtn')}}</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -271,8 +270,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-detail-content {
+  padding: 0 100px;
+}
 .platform-item {
-  margin: 10px 0;
+  margin: 5px 0;
 }
 .kols-list {
   padding: 24px 60px;

@@ -90,7 +90,7 @@
                   :key="item.id"
                   class="col-sm-6 platform-item"
                 >
-                  <div class="col-sm-2 text-center">
+                  <div class="col-sm-2 pr0 pl0 text-center">
                     <div
                       class="check-icon"
                       :class="[item.checked ? 'checked' : '']"
@@ -1291,12 +1291,12 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-create-form {
+  padding: 10px 0;
   .form-group {
-    padding: 20px 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 40px;
   }
   .platform-item {
-    margin: 10px 0;
+    margin: 5px 0;
   }
 }
 .create-btn-area {
@@ -1334,5 +1334,8 @@ export default {
 }
 .pr0 {
   padding-right: 0;
+}
+.pl0 {
+  padding-left: 0;
 }
 </style>
