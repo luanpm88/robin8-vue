@@ -1,66 +1,72 @@
 <template>
-  <div class="panel default-panel mt20">
-    <div class="panel-body brand-create-body">
-      <div class="form-horizontal brand-create-form">
-        <div class="form-group">
-          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.name')}}</div>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              :class="[errors.has('name') ? 'danger' : '']"
-              v-model="submitData.name"
-              :placeholder="$t('lang.myBrandPage.addPage.placeholderName')"
-              v-validate="'required'"
-            >
+  <div class="create-brand-container">
+    <div class="panel default-panel">
+      <div class="panel-body brand-create-body">
+        <div class="form-horizontal brand-create-form">
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.name')}}</div>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                :class="[errors.has('name') ? 'danger' : '']"
+                v-model="submitData.name"
+                :placeholder="$t('lang.myBrandPage.addPage.placeholderName')"
+                v-validate="'required'"
+              >
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.keywords')}}</div>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              name="keywords"
-              class="form-control"
-              :class="[errors.has('keywords') ? 'danger' : '']"
-              v-model="submitData.keywords"
-              :placeholder="$t('lang.myBrandPage.addPage.placeholderKeywords')"
-              v-validate="'required'"
-            >
-            <p class="creat-text-tip">{{$t('lang.myBrandPage.addPage.keywordsTips')}}</p>
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.keywords')}}</div>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                name="keywords"
+                class="form-control"
+                :class="[errors.has('keywords') ? 'danger' : '']"
+                v-model="submitData.keywords"
+                :placeholder="$t('lang.myBrandPage.addPage.placeholderKeywords')"
+                v-validate="'required'"
+              >
+              <p class="form-tips">{{$t('lang.myBrandPage.addPage.keywordsTips')}}</p>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.dec')}}</div>
-          <div class="col-sm-9">
-            <textarea
-              name="description"
-              rows="8"
-              class="form-control"
-              :class="[errors.has('description') ? 'danger' : '']"
-              v-model="submitData.description"
-              :placeholder="$t('lang.myBrandPage.addPage.placeholderDec')"
-              v-validate="'required'"
-            ></textarea>
+          <div class="form-group">
+            <div class="col-sm-2 control-label">{{$t('lang.myBrandPage.addPage.dec')}}</div>
+            <div class="col-sm-9">
+              <textarea
+                name="description"
+                rows="8"
+                class="form-control"
+                :class="[errors.has('description') ? 'danger' : '']"
+                v-model="submitData.description"
+                :placeholder="$t('lang.myBrandPage.addPage.placeholderDec')"
+                v-validate="'required'"
+              ></textarea>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="text-center create-btn-area">
+      <div class="panel-foot text-center">
         <button
           type="button"
-          class="btn btn-cyan submit-btn mr10" @click="backList">{{$t('lang.backBtn')}}</button>
+          class="btn btn-cyan btn-outline mr10"
+          @click="backList"
+        >
+          {{$t('lang.backBtn')}}
+        </button>
         <button
           type="button"
           class="btn btn-cyan submit-btn"
           @click="doConfirm"
           :disabled="canSubmit ? false : true"
-        >{{$t('lang.submitBtn')}}</button>
+        >
+          {{$t('lang.submitBtn')}}
+        </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -117,7 +123,7 @@ export default {
           }
         }).then(this.handleDoSubmitSucc);
       }
-      
+
     },
     handleDoSubmitSucc (res) {
       console.log(res)
@@ -151,17 +157,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.brand-create-body {
-  padding: 60px 0;
-}
-.create-btn-area {
-  margin-top: 40px;
+.create-brand-container {
+  padding: 30px 100px;
   .submit-btn {
     width: 160px;
   }
 }
-.creat-text-tip{
-    color: #64e0d7;
-    margin-top: 5px;
+.brand-create-body {
+  padding: 30px 0;
 }
 </style>
