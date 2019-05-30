@@ -53,7 +53,7 @@
         <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
       </div>
 
-      <div class="panel-foot">
+      <div v-if="messagesList.length > 1" class="panel-foot">
         <div class="text-center">
           <a-pagination
             :defaultCurrent="page"
@@ -177,6 +177,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.messages-container {
+  padding: 0 100px 30px;
+}
 .messages-panel {
   .panel-body {
     padding: 20px;

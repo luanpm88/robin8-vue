@@ -1,6 +1,6 @@
 <template>
   <div class="wallet-container">
-    <div class="panel default-panel mt20">
+    <div class="panel default-panel">
       <div class="panel-body">
         <table class="default-table">
           <thead>
@@ -28,16 +28,15 @@
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="p30 text-center">
-      <a-pagination
-        :defaultCurrent="page"
-        :defaultPageSize="perPage"
-        :total="total"
-        :hideOnSinglePage="true"
-        @change="onPageChange"
-      />
+      <div v-if="dataList.length > 1" class="panel-foot text-center">
+        <a-pagination
+          :defaultCurrent="page"
+          :defaultPageSize="perPage"
+          :total="total"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -94,5 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.wallet-container {
+  padding: 30px 100px;
+}
 </style>

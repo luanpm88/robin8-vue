@@ -96,7 +96,7 @@
 
     <div v-else class="p30 text-center">{{$t('lang.noData')}}...</div>
 
-    <div class="p30 text-center">
+    <div v-if="campaignsList.length > 1" class="p30 text-center">
       <a-pagination
         :defaultCurrent="page"
         :defaultPageSize="perPage"

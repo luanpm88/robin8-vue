@@ -14,7 +14,7 @@
       <div v-else class="panel-body">
         <div class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
-      <div class="panel-foot text-center">
+      <div v-if="cartList.length > 1" class="panel-foot text-center">
         <a-pagination
           :defaultCurrent="page"
           :defaultPageSize="perPage"
