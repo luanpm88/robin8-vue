@@ -875,6 +875,18 @@ export const lang = {
           Sports: 'Sports',
           Travel: 'Travel'
         },
+        category: 'Category',
+        categoryName: {
+          celeb_vip: 'Celeb/VIP',
+          specialist_professional_influencer: 'Specialist/Professional Influencer',
+          micro_influencer: 'Micro Influencer',
+          blockchain_crypto: 'Blockchain-Crypto',
+          beauty_fashion: 'Beauty & Fashion',
+          f_b: 'F&B',
+          business: 'Business',
+          technology: 'Technology',
+          _69group: '69Group'
+        },
         engagement: 'Engagement',
         followers: 'Followers Count',
         influence: 'Influence Score',

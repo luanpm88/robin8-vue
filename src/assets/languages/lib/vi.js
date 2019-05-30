@@ -885,6 +885,18 @@ export const lang = {
           Sports: 'Thể thao',
           Travel: 'Du lịch'
         },
+        category: 'Chuyên mục',
+        categoryName: {
+          celeb_vip: 'Người nổi tiếng/VIP',
+          specialist_professional_influencer: 'Chuyên gia có ảnh hưởng',
+          micro_influencer: 'KOL nhỏ',
+          blockchain_crypto: 'Blockchain-Crypto',
+          beauty_fashion: 'Làm đẹp & Thời trang',
+          f_b: 'F & B',
+          business: 'Kinh doanh',
+          technology: 'Kỹ thuật',
+          _69group: '69Group'
+        },
         engagement: 'Tham gia',
         followers: 'Lượt theo dõi',
         influence: 'Điểm ảnh hưởng',

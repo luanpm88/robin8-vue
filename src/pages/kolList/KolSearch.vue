@@ -48,11 +48,38 @@
           <div class="form-group">
             <div
               class="col-sm-2 control-label"
-            >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
+            >{{$t('lang.kolList.search.advancedSearch.category')}}</div>
             <div class="col-sm-4">
               <select class="form-control" v-model="industry" placeholder="N/A">
                 <option value></option>
                 <option
+                  value="celeb_vip"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.celeb_vip')}}</option>
+                <option
+                  value="specialist_professional_influencer"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.specialist_professional_influencer')}}</option>
+                <option
+                  value="micro_influencer"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.micro_influencer')}}</option>
+                <option
+                  value="blockchain_crypto"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.blockchain_crypto')}}</option>
+                <option
+                  value="beauty_fashion"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.beauty_fashion')}}</option>
+                <option
+                  value="f_b"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.f_b')}}</option>
+                <option
+                  value="business"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.business')}}</option>
+                <option
+                  value="technology"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.technology')}}</option>
+                <option
+                  value="69group"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName._69group')}}</option>
+                <!--<option
                   value="airline"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Airline')}}</option>
                 <option
@@ -122,7 +149,7 @@
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Sports')}}</option>
                 <option
                   value="travel"
-                >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
+                >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>-->
               </select>
             </div>
             <div
