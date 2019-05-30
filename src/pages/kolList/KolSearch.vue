@@ -162,7 +162,23 @@
                 <input type="text" class="form-control" v-model="followerTo" placeholder="N/A">
               </div>
             </div>
-          </div>          
+          </div>
+          <div class="form-group">
+            <div
+              class="col-sm-2 control-label"
+            >{{$t('lang.kolList.search.advancedSearch.country')}}</div>
+            <div class="col-sm-4">
+              <select class="form-control" v-model="country" placeholder="N/A">
+                <option value></option>
+                <option
+                  value="vietnam"
+                >{{$t('lang.kolList.search.advancedSearch.countryName.vietnam')}}</option>
+                <option
+                  value="us"
+                >{{$t('lang.kolList.search.advancedSearch.countryName.us')}}</option>
+              </select>
+            </div>            
+          </div> 
           <div class="text-center">
             <label>
               <input type="checkbox" v-model="kolOnly">
@@ -361,6 +377,7 @@ export default {
       // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: "",
       industry: "",
+      country: "",
       engagementFrom: "",
       engagementTo: "",
       followerFrom: "",
@@ -458,6 +475,7 @@ export default {
       this.totalParams.page_no = this.currentPage;
       this.totalParams.page_size = 10;
       this.totalParams.industry = this.industry;
+      this.totalParams.country = this.country;
       this.totalParams.engagement_from = this.engagementFrom;
       this.totalParams.engagement_to = this.engagementTo;
       this.totalParams.influence_from = this.influenceFrom;

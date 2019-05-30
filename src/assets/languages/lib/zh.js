@@ -900,7 +900,12 @@ export const lang = {
         followers: '粉丝数',
         influence: '影响评分',
         influenceTip: '影响力分数是0到1000之间的数字，代表KOL在社交平台上的影响力。 较高的影响力分数可确保更有效地扩大活动。',
-        checkText: '仅显示Robin8价格的KOL'
+        checkText: '仅显示Robin8价格的KOL',
+        country: 'Quốc gia',
+        countryName: {
+          vietnam: 'Việt Nam',
+          us: 'Mỹ',
+        }
       },
       likeTip: '粉丝数',
       sumTip: '平均总参与度',

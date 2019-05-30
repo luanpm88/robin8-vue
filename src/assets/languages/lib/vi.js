@@ -901,7 +901,12 @@ export const lang = {
         followers: 'Lượt theo dõi',
         influence: 'Điểm ảnh hưởng',
         influenceTip: 'Điểm ảnh hưởng của 1 KOL được đánh giá từ 0 đếm 1000. Điểm ảnh hưởng càng cao thì chiến dịch càng được truyền thông mạnh và hiệu quả.',
-        checkText: 'Chỉ hiển thị KOL có phí cụ thể trên Robin8'
+        checkText: 'Chỉ hiển thị KOL có phí cụ thể trên Robin8',
+        country: 'Quốc gia',
+        countryName: {
+          vietnam: 'Việt Nam',
+          us: 'Mỹ',
+        }
       },
       likeTip: 'Lượng hâm mộ',
       sumTip: 'Bình quân tham gia',

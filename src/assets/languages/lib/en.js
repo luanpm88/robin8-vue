@@ -891,7 +891,12 @@ export const lang = {
         followers: 'Followers Count',
         influence: 'Influence Score',
         influenceTip: 'The influence score is a number between 0 and 1000 and indicates how influential the KOL is on a social platform. A higher influence score ensures a stronger amplification of a campaign.',
-        checkText: 'Only display KOLs that have prices at Robin8'
+        checkText: 'Only display KOLs that have prices at Robin8',
+        country: 'Country',
+        countryName: {
+          vietnam: 'Vietnam',
+          us: 'US',
+        }
       },
       likeTip: 'Fans number',
       sumTip: 'Average sum engagement',
