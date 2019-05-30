@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container">
-    <div class="panel default-panel profile-panel mt20">
+    <div class="panel default-panel profile-panel">
       <div class="panel-head">
         <div class="title-bar">
           <h5 class="title">{{$t('lang.companyInfo.title')}}</h5>
@@ -159,15 +159,14 @@
         </div>
 
       </div>
-    </div>
-
-    <div class="text-center p30">
-      <button
-        type="button"
-        class="btn btn-cyan submit-btn"
-        @click="doConfirm"
-        :disabled="canSubmit ? false : true"
-      >{{$t('lang.submitBtn')}}</button>
+      <div class="panel-foot text-center">
+        <button
+          type="button"
+          class="btn btn-cyan submit-btn"
+          @click="doConfirm"
+          :disabled="canSubmit ? false : true"
+        >{{$t('lang.submitBtn')}}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -286,6 +285,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profile-container {
+  padding: 0 100px 30px;
+}
 .profile-panel {
   .panel-body {
     padding: 40px;

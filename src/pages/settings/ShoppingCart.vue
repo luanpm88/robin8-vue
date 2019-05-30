@@ -1,7 +1,7 @@
 <template>
   <div class="cart-list-container">
-    <div class="panel default-panel cart-list-panel mt20">
-      <div v-if="cartList.length > 0" class="panel-body clearfix">
+    <div class="panel default-panel cart-list-panel">
+      <div v-if="cartList.length > 0" class="panel-body">
         <kols-list-item
           v-for="item in cartList"
           :key="item.profile_id"
@@ -115,14 +115,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cart-list-container {
+  padding: 30px 100px;
+}
 .cart-list-panel {
   .panel-body {
-    padding: 30px;
+    padding: 14px 30px;
   }
   .kols-list-item {
-    float: left;
-    width: 50%;
     padding: 0 10px;
+    &:last-child:after {
+      background-color: transparent;
+    }
   }
 }
 </style>

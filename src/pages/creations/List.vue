@@ -70,7 +70,7 @@
 
         <div v-else class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
-      <div class="panel-foot p20 text-center">
+      <div class="panel-foot text-center">
         <a-pagination
           :defaultCurrent="page"
           :defaultPageSize="perPage"
