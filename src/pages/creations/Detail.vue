@@ -271,7 +271,7 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-detail-content {
-  padding: 0 100px;
+  padding: 0 100px 30px;
 }
 .platform-item {
   margin: 5px 0;

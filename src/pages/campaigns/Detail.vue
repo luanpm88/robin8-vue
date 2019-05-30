@@ -710,7 +710,7 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-detail-container {
-  padding: 0 100px;
+  padding: 0 100px 30px;
 }
 .campaign-detail-panel {
   .content {

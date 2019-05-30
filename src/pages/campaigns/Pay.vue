@@ -154,7 +154,7 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-pay-container {
-  padding: 0 100px;
+  padding: 0 100px 30px;
 }
 .order-info {
   line-height: 40px;

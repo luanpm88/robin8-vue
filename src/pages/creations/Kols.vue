@@ -192,7 +192,7 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-kols-content {
-  padding: 0 100px;
+  padding: 0 100px 30px;
 }
 .kols-select-panel {
   .panel-foot {
