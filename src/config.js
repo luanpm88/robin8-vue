@@ -237,7 +237,7 @@ const config = {
   kollistInstagramTable: `${host}/kols/instagram/search?${searchHostKey}`,
 
   // Youtube
-  kollistYoutubeTable: `${searchHost}/youtube/profile/kol_search_profile?${searchHostKey}`,
+  kollistYoutubeTable: `${host}/kols/youtube/search?${searchHostKey}`,
 
   // Facebook
   // kollistFacebookTable: `${searchHost}/facebook/profile/kol_search_profile?${searchHostKey}`,
