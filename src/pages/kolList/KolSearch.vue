@@ -79,13 +79,13 @@
                 <option
                   value="69group"
                 >{{$t('lang.kolList.search.advancedSearch.categoryName._69group')}}</option>
-                <!--<option
-                  value="airline"
-                >{{$t('lang.kolList.search.advancedSearch.industryType.Airline')}}</option>
                 <option
-                  value="appliances"
-                >{{$t('lang.kolList.search.advancedSearch.industryType.Appliances')}}</option>
-                <option value="auto">{{$t('lang.kolList.search.advancedSearch.industryType.Car')}}</option>
+                  value="lifestyle"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.lifestyle')}}</option>
+                <option
+                  value="celebrity"
+                >{{$t('lang.kolList.search.advancedSearch.categoryName.celebrity')}}</option>
+                <!--<option value="auto">{{$t('lang.kolList.search.advancedSearch.industryType.celebrity')}}</option>
                 <option
                   value="babies"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Babies')}}</option>
@@ -258,7 +258,7 @@
                       </div>
                       <div class="media-body media-middle">
                         <h5 class="title">
-                          <a target="_blank" :href="item.profile_id" class="kol-tit-span">{{item.profile_name}}</a>
+                          <a target="_blank" :href="item.homepage" class="kol-tit-span">{{item.profile_name}}</a>
                         </h5>
                         <p class="desc">{{item.description_raw}}</p>
                         <div class="status">
@@ -430,6 +430,10 @@ export default {
         {
           index: 1,
           name: ('instagram')
+        },
+        {
+          index: 2,
+          name: ('youtube')
         }
       ],
       tabIndex: 0,
@@ -684,6 +688,24 @@ export default {
         // Facebook
         axios
           .post(apiConfig.kollistInstagramTable, params, {
+            headers: {
+              Authorization: _that.authorization
+            }
+          })
+          .then(function(res) {
+            //if (res.status === 200) {
+              // console.log('Facebook', res)
+              _that.jogDataInit(res.data);
+            //}
+          })
+          .catch(function(error) {
+            // console.log(error)
+          });
+      }
+      if (type === 2) {
+        // Facebook
+        axios
+          .post(apiConfig.kollistYoutubeTable, params, {
             headers: {
               Authorization: _that.authorization
             }

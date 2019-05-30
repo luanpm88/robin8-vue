@@ -885,7 +885,9 @@ export const lang = {
           f_b: 'F&B',
           business: 'Business',
           technology: 'Technology',
-          _69group: '69Group'
+          _69group: '69Group',
+          lifestyle: 'Lifestyle',
+          celebrity: 'Celebrity'
         },
         engagement: 'Engagement',
         followers: 'Followers Count',

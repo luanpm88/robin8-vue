@@ -887,7 +887,7 @@ export const lang = {
         },
         category: 'Chuyên mục',
         categoryName: {
-          celeb_vip: 'Người nổi tiếng/VIP',
+          celeb_vip: 'Người đặc biệt/VIP',
           specialist_professional_influencer: 'Chuyên gia có ảnh hưởng',
           micro_influencer: 'KOL nhỏ',
           blockchain_crypto: 'Blockchain-Crypto',
@@ -895,7 +895,9 @@ export const lang = {
           f_b: 'F & B',
           business: 'Kinh doanh',
           technology: 'Kỹ thuật',
-          _69group: '69Group'
+          _69group: '69Group',
+          lifestyle: 'Lối sống',
+          celebrity: 'Người nổi tiếng'
         },
         engagement: 'Tham gia',
         followers: 'Lượt theo dõi',
