@@ -32,7 +32,8 @@
           >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
           <p class="r-top-right col-sm-5">
             <span>7 | 14 | 21</span>
-            <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
+            <span class="r-benchmark" @click="lookBenchmark()">
+              <i class="iconfont icon-rank"></i> &nbsp;Benchmark</span>
           </p>
         </div>
         <!-- top list -->

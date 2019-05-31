@@ -1,14 +1,14 @@
 <template>
   <div class="container mt50 clearfix">
     <div class="kol-detail clearfix">
-      <div class="col-xs-3">
+      <div class="kol-detail-left col-xs-4">
         <!-- info -->
         <!-- kol 详情 -->
         <detail-side :currentKeywords="currentBrandKeywords" :currentName="currentBrandName" @otherSocial="giveOtherProp"></detail-side>
         <!-- industries 行业图表  暂时隐藏-->
         <industries v-if="true"></industries>
       </div>
-      <div class="col-xs-9" v-if="type === 0 || type === 1">
+      <div class="kol-detail-right col-xs-8" v-if="type === 0 || type === 1">
         <!-- tab 平台切换 -->
         <default-tabs
           :tabList="tabList"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <!-- 除了微信和微博  其他平台只展示 socialData 并且 展示的文案不一样 -->
-      <div class="col-xs-9" v-else>
+      <div class="kol-detail-right col-xs-8" v-else>
         <!-- social data -->
         <other-socical :socialData="otherSocialDataList"></other-socical>
       </div>

@@ -61,6 +61,9 @@
     cursor: pointer;
     border: 1px solid nth($border, 1);
     border-radius:5px;
+    i{
+      font-size: $font-sm;
+    }
     &:hover{
       text-decoration: underline;
     }
@@ -117,5 +120,16 @@
   img{
       width: 40px;
       border-radius: 50%;
+  }
+}
+
+.benchmark-container{
+  padding: 30px 100px 0px;
+}
+
+@media screen and (max-width: 1441px){
+  .r-top-dec, .r-top-right{
+    padding: 0px;
+    font-size: $font-sm;
   }
 }
