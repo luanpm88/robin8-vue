@@ -1,10 +1,7 @@
 <template>
   <div class="panel default-panel home-top-post">
     <div class="panel-head">
-      <h5 class="title">
-        <span class="iconfont icon-rocket"></span>
-        {{$t('lang.homePage.recommend.title')}}
-      </h5>
+      <h5 class="title">{{$t('lang.homePage.recommend.title')}}</h5>
     </div>
 
     <div class="panel-body list-content recommendkol">

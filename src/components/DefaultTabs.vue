@@ -1,13 +1,13 @@
 <template>
   <div class="default-tabs">
-    <div class="btn-group pills-btn">
-      <div
-        class="btn btn-outline "
-        :class="[tabIndex == tab.index ? 'active' : '', !!theme && theme != '' ? 'btn-' + theme : 'btn-purple']"
-        v-for="(tab, index) in tabList"
-        :key="index"
-        @click="changeTab(tab)"
-      >{{$t(`lang.${tab.name}`)}}</div>
+    <div
+      class="item"
+      :class="[tabIndex == tab.index ? 'active' : '', !!theme && theme != '' ? theme : '']"
+      v-for="(tab, index) in tabList"
+      :key="index"
+      @click="changeTab(tab)"
+    >
+      {{$t(`lang.${tab.name}`)}}
     </div>
     <div class="tabs-content">
       <slot></slot>
@@ -35,21 +35,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.pills-btn {
-  overflow: hidden;
-
-  &>.btn {
-    padding: 4px 12px;
-  }
-
-  &>.btn:first-child {
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-  }
-
-  &>.btn:last-child {
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
+.default-tabs {
+  & > .item {
+    display: inline-block;
+    color: #a9b1b3;
+    &.active {
+      color: #262625;
+    }
   }
 }
 </style>
