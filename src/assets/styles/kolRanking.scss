@@ -132,4 +132,15 @@
     padding: 0px;
     font-size: $font-sm;
   }
+  .r-top-right span{
+    padding: 0px 10px;
+  }
+  .ranking-right {
+    .ant-table{
+      overflow-x: scroll;
+    }
+    .ant-table-content{
+      width: 1366px;
+    }
+  }
 }

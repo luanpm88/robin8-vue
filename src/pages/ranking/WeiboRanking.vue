@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-container pull-right clearfix">
+  <div class="ranking-container clearfix">
     <div class="top-control-area">
       <button type="button" class="btn btn-cyan" @click="pageBack">
         <span class="iconfont icon-arrow-left"></span>
@@ -33,7 +33,8 @@
           <p class="r-top-right col-sm-5">
             <span>7 | 14 | 21</span>
             <span class="r-benchmark" @click="lookBenchmark()">
-              <i class="iconfont icon-rank"></i> &nbsp;Benchmark</span>
+              <i class="iconfont icon-rank"></i> &nbsp;Benchmark
+            </span>
           </p>
         </div>
         <!-- top list -->
@@ -45,7 +46,7 @@
             <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
               <p class="r-right-topList-tit">{{item.fixedTit}}</p>
               <div class="r-right-topList-box clearfix">
-                <span class="r-right-topList-img col-sm-6">
+                <span class="r-right-topList-img col-sm-5">
                   <router-link target="_blank" :to="{path: '/kol/',
                     name: 'KolDetail',
                     params: {

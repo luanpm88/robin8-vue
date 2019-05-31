@@ -32,7 +32,9 @@
           >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{topStartData}} to {{refreshDate}})</p>
           <p class="r-top-right col-sm-4">
             <span>7 | 14 | 21</span>
-            <span class="r-benchmark" @click="lookBenchmark()">Benchmark</span>
+            <span class="r-benchmark" @click="lookBenchmark()">
+              <i class="iconfont icon-rank"></i> &nbsp;Benchmark
+            </span>
           </p>
         </div>
         <!-- top list -->
@@ -44,7 +46,7 @@
             <div class="col-sm-4" v-for="(item, index) in tableTopList" :key="index">
               <p class="r-right-topList-tit">{{item.fixedTit}}</p>
               <div class="r-right-topList-box clearfix">
-                <span class="r-right-topList-img col-sm-6">
+                <span class="r-right-topList-img col-sm-5">
                   <router-link target="_blank" :to="{path: '/kol/',
                     name: 'KolDetail',
                     params: {
@@ -62,7 +64,7 @@
                   class="iconfont icon-cart active col-sm-1"
                   @click="doAddCart(item)"
                 ></span>
-                <span class="r-right-topList-txt col-sm-4">
+                <span class="r-right-topList-txt col-sm-6">
                   <b>{{item.profile_name}}</b>
                   <b>{{item.source}}</b>
                   <b>{{item.value}}</b>
