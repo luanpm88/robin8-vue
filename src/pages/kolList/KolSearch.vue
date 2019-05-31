@@ -227,7 +227,7 @@
     </div>
     <!-- 内容部分 -->
     <div class="panel default-panel kols-list-panel mt20" v-if="isShowKolList">
-      <div class="panel-body p30">
+      <div class="panel-body">
         <!-- 以前头部会显示 微信微博平台数据，中间先让隐藏了，后续不知道会不会让显示，所以先注释代码 -->
         <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
@@ -242,7 +242,7 @@
           <a-spin tip="Loading..."/>
         </div>
         <div v-if="isTable">
-          <table class="default-table mt20 mb10">
+          <table class="default-table">
             <thead>
               <tr>
                 <!-- 注释的代码是 微信和微博平台 勾选多个KOL 进行对比（compare） -->
@@ -379,16 +379,16 @@
             </tbody>
           </table>
         </div>
-          <div class="text-center">
-            <a-pagination
-              :defaultCurrent="currentPage"
-              :defaultPageSize="kolsPerPage"
-              v-model="currentPageAdd"
-              :total="kolsTotal"
-              :hideOnSinglePage="true"
-              @change="onPageChange"
-            />
-          </div>
+      </div>
+      <div class="panel-foot text-center">
+        <a-pagination
+          :defaultCurrent="currentPage"
+          :defaultPageSize="kolsPerPage"
+          v-model="currentPageAdd"
+          :total="kolsTotal"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
       </div>
     </div>
   </div>
