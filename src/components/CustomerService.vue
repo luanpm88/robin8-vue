@@ -58,7 +58,7 @@ export default {
     border-radius: 50%;
     text-align: center;
     box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .2);
-    background-color: nth($purple, 1);
+    background-color: nth($cyan, 1);
     cursor: pointer;
     .iconfont {
       font-size: $font-lg-ns;
@@ -70,7 +70,7 @@ export default {
       box-shadow: none;
       background-color: #fff;
       .iconfont {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
     }
   }

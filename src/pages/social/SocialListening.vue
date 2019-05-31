@@ -1,57 +1,4 @@
 <template>
-<div>
-
-  <div class="socail-container clearfix">
-    <div class="social-search col-sm-4">
-      <div class="panel default-panel">
-        <div class="panel-body">
-          <div class="search-top">
-            <i class="iconfont icon-bell"></i>
-            <i class="iconfont icon-share"></i>
-            <i class="iconfont icon-download"></i>
-            <i class="iconfont icon-setting"></i>
-            <i class="iconfont icon-close"></i>
-          </div>
-          <div class="search-item-box">
-            <div class="search-item">
-              <div class="media">
-                <div class="media-left media-middle">
-                  <img class="media-object" src="https://tvax2.sinaimg.cn/crop.0.0.512.512.50/6210277cly8fupsmegycvj20e80e8gmc.jpg" alt="">
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">Middle aligned media</h4>
-                </div>
-              </div>
-              <div class="search-item-icon clearfix">
-                <span class="col-sm-6">
-                  <i class="iconfont icon-heart"></i>
-                  <b></b>
-                </span>
-                <span class="col-sm-6">
-                  <i class="iconfont icon-share"></i>
-                  <b></b>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div>
-    </div>
-    <div class="social-search col-sm-4">
-      <div class="panel default-panel">
-        <div class="panel-body">
-          1
-        </div>
-      </div>
-    </div>
-    <div class="social-search col-sm-4">
-      <div class="panel default-panel">
-        <div class="panel-body">
-          2
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="socail-container">
     <div class="panel default-panel social-search">
       <div class="panel-body">
@@ -153,7 +100,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>

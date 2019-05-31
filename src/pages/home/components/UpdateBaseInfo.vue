@@ -328,7 +328,7 @@ export default {
   }
 }
 .add-brand-btn {
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   cursor: pointer;
   .iconfont {
     display: inline-block;

@@ -86,7 +86,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -103,15 +103,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -214,7 +214,7 @@ const MockData = {
       {
         name: 'competitors',
         type: 'bar',
-        color: "rgba(179,127,235,0.5)",
+        color: "rgba(56,208,213,0.5)",
         data: []
       }
     ]
@@ -262,14 +262,14 @@ const MockData = {
             value: 30,
             name: 'rose1',
             itemStyle: {
-              color: 'rgba(179,127,235,0.5)'
+              color: 'rgba(56,208,213,0.5)'
             }
           },
           {
             value: 5,
             name: 'rose2',
             itemStyle: {
-              color: 'rgba(179,127,235,0.3)'
+              color: 'rgba(56,208,213,0.3)'
             }
           }
         ]
@@ -340,8 +340,14 @@ const MockData = {
       {
         name: 'Industries',
         type: 'bar',
-        color: "rgba(179,127,235,0.5)",
-        data: []
+        borderRidius: [10, 30, 50, 80],
+        color: "rgba(56,208,213,0.5)",
+        data: [],
+        itemStyle: {
+          normal: {
+            barBorderRadius:[0, 10, 10, 0]
+          }
+        }
       }
     ]
   },
@@ -902,7 +908,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -919,15 +925,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1007,7 +1013,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1024,15 +1030,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1112,7 +1118,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1129,15 +1135,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1217,7 +1223,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1234,15 +1240,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1322,7 +1328,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1339,15 +1345,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1427,7 +1433,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1444,15 +1450,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1532,7 +1538,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1549,15 +1555,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1637,7 +1643,7 @@ const MockData = {
         data: [],
         itemStyle: {
           normal: {
-            color: "rgba(179,127,235,0.5)",
+            color: "rgba(56,208,213,0.5)",
             lineStyle: {
               color: "#B37FEBFF",
               width: 1
@@ -1654,15 +1660,15 @@ const MockData = {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(179,127,235,0.5)" // 0% 处的颜色
+                color: "rgba(56,208,213,0.5)" // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(179,127,235,0.3)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.3)" // 100% 处的颜色
               },
               {
                 offset: 1,
-                color: "rgba(179,127,235,0.1)" // 100% 处的颜色
+                color: "rgba(56,208,213,0.1)" // 100% 处的颜色
               }
             ],
             global: false // 缺省为 false
@@ -1717,7 +1723,7 @@ const MockData = {
     series: [
       {
         type: 'radar',
-        color: 'rgba(179,127,235,0.5)',
+        color: 'rgba(56,208,213,0.5)',
         tooltip: {
           trigger: 'item'
         },

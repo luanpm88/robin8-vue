@@ -160,7 +160,7 @@ a.purple {
   display: block;
   text-align: left;
   @include limit-line(1);
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   word-break: break-all;
 }
 </style>

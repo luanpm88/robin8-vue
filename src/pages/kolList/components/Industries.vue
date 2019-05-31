@@ -83,7 +83,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('我是微博', res)
+            // console.log('我是微博', res)
             _that.isLoading = false
             if (res.data.data.length > 0) {
               _that.isChart = true

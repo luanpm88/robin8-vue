@@ -26,7 +26,7 @@
               {{infoList.age}}
             </p>
             <p>
-              <i class="iconfont icon-connection"></i>
+              <i class="iconfont icon-location"></i>
               {{infoList.region}}
             </p>
           </div>
@@ -36,13 +36,13 @@
             v-if="!!kolProfileLink && kolProfileLink != ''"
             :href="kolProfileLink"
             target="_blank"
-            class="btn btn-xs btn-purple btn-outline"
+            class="btn btn-xs btn-cyan btn-outline"
           >
             <span class="iconfont icon-user"></span>
             <!-- KOL Profile -->
             {{$t('lang.kolList.detail.kolProfile')}}
           </a>
-          <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
+          <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
             <span class="iconfont icon-cart"></span>
             <!-- Add to cart -->
             {{$t('lang.kolList.detail.addCart')}}

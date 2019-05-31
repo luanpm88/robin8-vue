@@ -227,13 +227,13 @@ export default {
       margin-left: 10px;
       cursor: pointer;
       &.icon-msg {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
       &.icon-star-fill.active {
         color: nth($yellow, 1);
       }
       &.icon-cart.active {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
     }
   }

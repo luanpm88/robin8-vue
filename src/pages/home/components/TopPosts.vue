@@ -12,7 +12,7 @@
         <div class="list-content-inner">
           <div v-if="isPost">
             <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
-              <div class="home-post-item" v-for="(item, index) in key" :key="item.profile_id">
+              <div class="home-post-item" v-for="item in key" :key="item.profile_id">
                 <h4 class="home-post-title">
                   <router-link :to="item.url" target="_blank">{{item.title}}</router-link>
                 </h4>
