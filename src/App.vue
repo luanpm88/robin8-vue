@@ -39,7 +39,7 @@ export default {
   methods: {
     isShowNav () {
       let _pathName = this.$route.name
-      console.log(_pathName)
+      // console.log(_pathName)
       if (_pathName == 'Login' || _pathName == 'Reg' || _pathName == 'ForgetPassword') {
         this.showNav = false
       } else {

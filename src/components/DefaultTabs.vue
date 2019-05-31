@@ -1,13 +1,15 @@
 <template>
   <div class="default-tabs">
-    <div
-      class="item"
-      :class="[tabIndex == tab.index ? 'active' : '', !!theme && theme != '' ? theme : '']"
-      v-for="(tab, index) in tabList"
-      :key="index"
-      @click="changeTab(tab)"
-    >
-      {{$t(`lang.${tab.name}`)}}
+    <div class="tab-label">
+      <div
+        class="item"
+        :class="[tabIndex == tab.index ? 'active' : '', !!theme && theme != '' ? theme : '']"
+        v-for="(tab, index) in tabList"
+        :key="index"
+        @click="changeTab(tab)"
+      >
+        <span class="text">{{$t(`lang.${tab.name}`)}}</span>
+      </div>
     </div>
     <div class="tabs-content">
       <slot></slot>
@@ -36,11 +38,26 @@ export default {
 
 <style scoped lang="scss">
 .default-tabs {
-  & > .item {
-    display: inline-block;
-    color: #a9b1b3;
-    &.active {
-      color: #262625;
+  .tab-label {
+    & > .item {
+      display: inline-block;
+      padding: 4px 16px;
+      border-right: 1px solid #c7c7c7;
+      .text {
+        padding: 2px 4px;
+        color: #a9b1b3;
+        cursor: pointer;
+      }
+      &.active {
+        color: #262625;
+        .text {
+          border-bottom: 2px solid nth($cyan, 1);
+          color: #262625;
+        }
+      }
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 }
