@@ -1,64 +1,43 @@
-.prl30 {padding: 10px 30px 20px; overflow: hidden;}
-.home-top-post{
-  .home-post {
-    padding: 10px 0px 2px;
-    border-bottom: 1px solid #ddd;
-  }
+.prl30 {
+  padding: 10px 30px 20px;
+  overflow: hidden;
 }
-.home-post{
-  .kols-list-item:after{
-    background: #f6f7f7 !important;
-  }
-}
-.home-post-form {
-  padding: 10px 0px 0px;
-  span {
-    display: inline-block;
-    width: 32%;
-    text-align: center;
-    &:nth-child(1) {
-      text-align: center;
+
+.home-top-post {
+  .home-post-item {
+    padding: 10px 0px;
+    border-bottom: 2px solid #e1e8ea;
+    .kols-list-item {
+      .inner {
+        height: 64px;
+        padding: 10px 0;
+      }
+      &:after {
+        background: transparent !important;
+      }
+    }
+    &:last-child {
+      border-bottom: none;
     }
   }
-  i {
-    vertical-align: middle;
-    margin-right: 5px;
-    font-size: 12px;
-    color: #999;
-  }
-  .icon-comment {
-    font-weight: 600;
-  }
-  b {
-    font-weight: normal;
-    vertical-align: middle;
-    color: #b9b7b7;
-  }
+
 }
+
 .list-content-inner {
   height: 380px;
   overflow-y: auto;
 }
-.nonetip{
-  margin-top: 10px;
-  text-align: center;
+
+.nonetip,
+.r8-loading {
+  position: absolute;
+  top: 40%;
+  left: 0;
   width: 100%;
+  text-align: center;
 }
-.recommendkol{
-  .r8-loading{
-    width: 87%;
-    position: absolute;
-    top: 20%;
-  }
-  .nonetip{
-    text-align: center;
-    width: 87%;
-    position: absolute;
-    top: 20%;
-  }
-}
-.oneinput,
-.oneselect {
+
+.oneinput, .oneselect {
   height: 34px;
   color: #555;
   background-color: #fff;
@@ -66,15 +45,19 @@
   border: 1px solid #ebedf2;
   border-radius: 4px;
 }
+
 .avatar {
   position: relative;
+
   img {
     position: relative;
     z-index: 1;
   }
+
   .check-icon {
     z-index: 1;
   }
+
   &:after {
     position: absolute;
     z-index: 0;
@@ -88,24 +71,28 @@
     content: "";
     overflow: hidden;
   }
+
 }
+
 .com-brand-table {
   color: nth($text-color, 1);
   width: 100%;
+
   tr {
     border-bottom: 1px solid #ddd;
+
     th {
       color: nth($text-color, 1);
       font-size: 14px;
       text-align: center;
       padding: 5px 0px;
     }
+
   }
+
   td {
     text-align: center;
     padding: 5px 10px;
   }
-}
-.btn-area{
-  text-align: right;
+
 }

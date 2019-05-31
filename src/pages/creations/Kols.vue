@@ -208,7 +208,7 @@ export default {
 }
 .kols-select-panel /deep/ .default-tabs {
   text-align: center;
-  .btn-group.pills-btn {
+  .tab-label {
     margin: 26px 0;
   }
   .tabs-content {

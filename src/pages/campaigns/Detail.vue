@@ -759,7 +759,7 @@ export default {
 }
 .kols-list-panel /deep/ .default-tabs {
   text-align: center;
-  .btn-group.pills-btn {
+  .tab-label {
     margin-bottom: 30px;
   }
 }

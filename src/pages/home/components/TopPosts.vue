@@ -1,43 +1,40 @@
 <template>
   <div class="panel default-panel home-top-post">
     <div class="panel-head">
-      <h5 class="title">
-        <span class="iconfont icon-calendar"></span>
-        {{$t('lang.homePage.topPosts.title')}}
-      </h5>
+      <h5 class="title">{{$t('lang.homePage.topPosts.title')}}</h5>
     </div>
-
-    <div class="panel-body list-content">
-      <default-tabs
-        :tabList="tabList"
-        :tabIndex="tabIndex"
-        @changeTab="changeTab"
-        class="panel-tab"
-      >
+    <default-tabs
+      :tabList="tabList"
+      :tabIndex="tabIndex"
+      @changeTab="changeTab"
+    >
+      <div class="panel-body list-content">
         <div class="list-content-inner">
           <div v-if="isPost">
             <div v-for="(key, oneIndex) in postListBox" :key="oneIndex">
-              <div class="home-post" v-for="(item, index) in key" :key="index">
-                <a :href="item.url" target="_blank"><p class="home-post-title">{{item.title}}</p></a>
+              <div class="home-post-item" v-for="(item, index) in key" :key="item.profile_id">
+                <h4 class="home-post-title">
+                  <router-link :to="item.url" target="_blank">{{item.title}}</router-link>
+                </h4>
                 <kols-list-item
-                :key="item.profile_id"
-                :renderStatus="kolRenderStatus"
-                :renderData="item"
-                :routerData="kolRouterData"
+                  :key="item.profile_id"
+                  :renderStatus="kolRenderStatus"
+                  :renderData="item"
+                  :routerData="kolRouterData"
                 ></kols-list-item>
-                <p class="home-post-content">{{item.content}}</p>
-                <div class="home-post-form">
-                  <span>
+                <div class="home-post-content">{{item.content}}</div>
+                <div class="home-post-status">
+                  <span class="item">
                     <i class="iconfont icon-heart"></i>
-                    <b>{{item.post_influence.likes}}</b>
+                    {{item.post_influence.likes}}
                   </span>
-                  <span v-if="postType === 0">
+                  <span class="item" v-if="postType === 0">
                     <i class="iconfont icon-share"></i>
-                    <b>{{item.post_influence.shares}}</b>
+                    {{item.post_influence.shares}}
                   </span>
-                  <span>
+                  <span class="item">
                     <i class="iconfont icon-comments"></i>
-                    <b>{{item.post_influence.comments}}</b>
+                    {{item.post_influence.comments}}
                   </span>
                 </div>
               </div>
@@ -53,11 +50,18 @@
             <span>{{$t('lang.homePage.noBrand')}}</span>
           </div>
         </div>
-        <div class="text-center mt20">
-          <button type="button" class="btn btn-sm btn-outline btn-circle btn-cyan" @click="PostShowMore">{{$t('lang.more')}}</button>
-        </div>
-      </default-tabs>
-    </div>
+
+      </div>
+      <div class="panel-foot">
+        <button
+        type="button"
+        class="btn btn-sm btn-block btn-cyan"
+        @click="PostShowMore"
+        >
+          {{$t('lang.more')}}
+        </button>
+      </div>
+    </default-tabs>
   </div>
 </template>
 
@@ -68,6 +72,7 @@ import commonJs from '@javascripts/common.js'
 import DefaultTabs from '@components/DefaultTabs'
 import KolsListItem from '@components/KolsListItem'
 import { mapState } from 'vuex'
+
 export default {
   components: {
     DefaultTabs,
@@ -308,24 +313,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-top-post /deep/ .pills-btn {
-  position: absolute ;
-  right: 30px;
-  top: 16px;
+.home-top-post /deep/ .tab-label {
+  margin-bottom: 10px;
 }
 .list-content {
-  padding: 10px 20px 20px;
-  height: 460px;
+  padding: 10px 0;
+  height: 400px;
   overflow: hidden;
+  .list-content-inner {
+    padding: 0 20px;
+  }
 }
 .home-post-title {
-  color: nth($cyan, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
+  color: #262625;
+  a {
+    color: #262625;
+  }
 }
 .home-post-content {
   @include limit-line(3);
   font-size: $font-sm;
   line-height: 20px;
+}
+.home-post-status {
+  @include display-flex;
+  margin-top: 4px;
+  & > .item {
+    @include flex(1);
+    text-align: center;
+    color: #696362;
+  }
+  .iconfont {
+    display: inline-block;
+    margin: -2px 5px 0 0;
+    vertical-align: middle;
+    font-size: 12px;
+    color: #8e8e8e;
+  }
 }
 </style>
