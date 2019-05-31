@@ -4,19 +4,9 @@
     <!-- DetailSide. -->
     <div class="panel default-panel kol-infobox">
       <div class="panel-body">
-        <!-- <div class="media">
-          <div class="media-left">
-            <a href="#">
-              <img class="media-object" src="..." alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-          </div>
-        </div> -->
         <div class="media kol-dec">
           <div class="media-left media-middle">
-            <div class="media-img">
+            <div class="media-imgbox">
               <img :src="infoList.avatar_url" alt>
             </div>
           </div>
