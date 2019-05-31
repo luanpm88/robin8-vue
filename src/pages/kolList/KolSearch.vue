@@ -380,7 +380,7 @@
           </table>
         </div>
       </div>
-      <div class="panel-foot text-center">
+      <div class="panel-foot text-center" v-if="isTable">
         <a-pagination
           :defaultCurrent="currentPage"
           :defaultPageSize="kolsPerPage"

@@ -478,7 +478,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-post-title {
-  color: nth($cyan, 1);
+  color: nth($text-color, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
   margin:20px 0px 10px;

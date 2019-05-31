@@ -86,17 +86,17 @@
             </div>
             <p class="home-post-content" v-html="item.content"></p>
           </div>
-          <div class="text-center mt20">
-            <a-pagination
-              :defaultCurrent="currentPage"
-              v-model="currentPageAdd"
-              :defaultPageSize="kolsPerPage"
-              :total="kolsTotal"
-              :hideOnSinglePage="true"
-              @change="onPageChange"
-            />
-          </div>
         </div>
+      </div>
+      <div class="panel-foot text-center"  v-if="isContent">
+        <a-pagination
+          :defaultCurrent="currentPage"
+          v-model="currentPageAdd"
+          :defaultPageSize="kolsPerPage"
+          :total="kolsTotal"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
       </div>
     </div>
   </div>
@@ -424,7 +424,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-post-title {
-  color: nth($cyan, 1);
+  color: nth($text-color, 1);
   @include limit-line(1);
   font-size: $font-nm-s;
   margin:20px 0px 10px;
