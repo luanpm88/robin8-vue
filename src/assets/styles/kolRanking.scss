@@ -23,9 +23,13 @@
       padding-left: 10%;
       font-size: $font-nm-s;
       color: #A9B1B3;
-      i{
-          vertical-align: -1px;
-          margin-right: 1%;
+      span{
+        display: inline-block;
+        width: 25px;
+        i{
+          vertical-align: 0px;
+          font-size: $font-sm;
+        }
       }
       &:hover{
           background: $white;

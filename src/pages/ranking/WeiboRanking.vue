@@ -18,7 +18,8 @@
             @click="listSearch(item, index)"
             :class="{rankingcur:iscur === index}"
           >
-            <!-- <i class="iconfont icon" v-html="item.icon">&#xe71a;</i> -->
+            <span><i class="iconfont icon" v-html="item.icon"></i>
+            </span>
             {{item.label}}
           </li>
         </ul>

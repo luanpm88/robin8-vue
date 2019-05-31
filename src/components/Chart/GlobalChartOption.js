@@ -348,103 +348,103 @@ const MockData = {
   // ranking
   ranking: {
     rankSideList: [{
-      icon: '&#xe71a;',
+      icon: '&#xe62a;',
       label: 'Airline',
       value: 'airline'
     }, {
-      icon: '&#xe70c;',
+      icon: '&#xe632;',
       label: 'Appliances',
       value: 'appliances'
     }, {
-      icon: '&#xe63a;',
+      icon: '&#xe64f;',
       label: 'Car',
       value: 'auto'
     }, {
-      icon: '&#xe651;',
+      icon: '&#xe63b;',
       label: 'Babies',
       value: 'babies'
     }, {
-      icon: '&#xe627;',
+      icon: '&#xe63c;',
       label: 'Beauty',
       value: 'beauty'
     }, {
-      icon: '&#xe607;',
+      icon: '&#xe636;',
       label: 'Books',
       value: 'books'
     }, {
-      icon: '&#xe60c;',
+      icon: '&#xe638;',
       label: 'Camera',
       value: 'camera'
     }, {
-      icon: '&#xe602;',
+      icon: '&#xe642;',
       label: 'Electronics',
       value: 'ce'
     }, {
-      icon: '&#xe628;',
+      icon: '&#xe63e;',
       label: 'Digital',
       value: 'digital'
     }, {
-      icon: '&#xe613;',
+      icon: '&#xe643;',
       label: 'Education',
       value: 'education'
     }, {
-      icon: '&#xe62f;',
+      icon: '&#xe640;',
       label: 'Entertainment',
       value: 'entertainment'
     }, {
-      icon: '&#xe66f;',
+      icon: '&#xe646;',
       label: 'Fashion',
       value: 'fashion'
     }, {
-      icon: '&#xe655;',
+      icon: '&#xe64e;',
       label: 'Finance',
       value: 'finance'
     }, {
-      icon: '&#xe71a;',
+      icon: '&#xe63f;',
       label: 'Fitness',
       value: 'fitness'
     }, {
-      icon: '&#xe728;',
+      icon: '&#xe651;',
       label: 'Food',
       value: 'food'
     }, {
-      icon: '&#xe616;',
+      icon: '&#xe64a;',
       label: 'Furniture',
       value: 'furniture'
     }, {
-      icon: '&#xe620;',
+      icon: '&#xe64c;',
       label: 'Games',
       value: 'games'
     }, {
-      icon: '&#xe60f;',
+      icon: '&#xe641;',
       label: 'Health',
       value: 'health'
     }, {
-      icon: '&#xe6ac;',
+      icon: '&#xe647;',
       label: 'Hotel',
       value: 'hotel'
     }, {
-      icon: '&#xe7ac;',
+      icon: '&#xe644;',
       label: 'Internet',
       value: 'internet'
     }, {
-      icon: '&#xe624;',
+      icon: '&#xe650;',
       label: 'Mobile',
       value: 'mobile'
     }, {
-      icon: '&#xe7b8;',
+      icon: '&#xe64b;',
       label: 'Music',
       value: 'music'
     }, {
-      icon: '&#xe770;',
+      icon: '&#xe63d;',
       label: 'Real Estate',
       value: 'realestate'
     }, {
-      icon: '&#xe619;',
+      icon: '&#xe648;',
       label: 'Sports',
       value: 'sports'
     }, {
-      icon: '&#xe7b9;',
+      icon: '&#xe64d;',
       label: 'Travel',
       value: 'travel'
     }],
