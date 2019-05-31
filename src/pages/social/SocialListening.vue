@@ -47,7 +47,7 @@
           <div class="text-center mt30">
             <button
               type="button"
-              class="btn btn-blue btn-outline"
+              class="btn btn-cyan btn-outline"
               @click="totalSearch"
             >
               {{$t('lang.search')}}

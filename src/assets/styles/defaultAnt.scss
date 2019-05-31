@@ -9,7 +9,7 @@
   color: nth($text-color, 2);
 }
 .ant-table-tbody > tr > td{
-  border-bottom: 1px solid $border;
+  border-bottom: 2px solid $border;
 }
 .ant-table-thead > tr > th .ant-table-column-sorter{
   color: nth($text-color, 4);
@@ -114,4 +114,10 @@
 
   }
 
+}
+.ant-pagination-item-active{
+  border-color: nth($cyan, 1);
+}
+.ant-pagination-item-active a{
+  color: nth($cyan, 1);
 }
