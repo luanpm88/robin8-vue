@@ -4,15 +4,23 @@
     <!-- SumIndustries -->
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title">{{$t('lang.kolList.detail.industries')}}</h5>
+        <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
       </div>
       <div class="panel-body prl30">
         <div v-if="type === 0 || type === 1">
-          <Echarts
-            :options="competitorList.options"
-            :chartsStyle="competitorList.chartsStyle"
-            ref="competitorEChart"
-          ></Echarts>
+          <div class="nonetip" v-if="isShow">
+            <span>{{$t('lang.totalNoDataTip')}}</span>
+          </div>
+          <div class="r8-loading" v-if="isLoading">
+            <a-spin tip="Loading..."/>
+          </div>
+          <div v-if="isChart">
+            <Echarts
+              :options="competitorList.options"
+              :chartsStyle="competitorList.chartsStyle"
+              ref="competitorEChart"
+            ></Echarts>
+          </div>
         </div>
         <div v-else>
           <div class="nonetip">
@@ -46,6 +54,9 @@ export default {
           height: '180px'
         }
       },
+      isLoading: true,
+      isShow: false,
+      isChart: false,
     }
   },
   created() {
@@ -55,7 +66,7 @@ export default {
     if (Number(this.$route.query.type) === 0) {
       // 微博相关接口
       this.kolWeiboIndustry(totalParams)
-    }
+    } 
     if (Number(this.$route.query.type) === 1) {
       this.kolWeiXinIndustry(totalParams)
     }
@@ -72,12 +83,20 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            // console.log('我是微博', res)
-            _that.competitorList.options.yAxis.data = res.data.labels.reverse();
-            _that.competitorList.options.series[0].data = res.data.data.reverse();
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            );
+            console.log('我是微博', res)
+            _that.isLoading = false
+            if (res.data.data.length > 0) {
+              _that.isChart = true
+              _that.isShow = false
+              _that.competitorList.options.yAxis.data = res.data.labels.reverse();
+              _that.competitorList.options.series[0].data = res.data.data.reverse();
+              _that.$refs.competitorEChart.updateOptions(
+                _that.competitorList.options
+              );
+            } else {
+              _that.isChart = false
+              _that.isShow = true
+            }
           }
         })
         .catch(function(error) {
@@ -95,11 +114,19 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            _that.competitorList.options.yAxis.data = res.data.labels.reverse()
-            _that.competitorList.options.series[0].data = res.data.data.reverse()
-            _that.$refs.competitorEChart.updateOptions(
-              _that.competitorList.options
-            )
+            _that.isLoading = false
+            if (res.data.data.length > 0) {
+              _that.isChart = true
+              _that.isShow = false
+              _that.competitorList.options.yAxis.data = res.data.labels.reverse()
+              _that.competitorList.options.series[0].data = res.data.data.reverse()
+              _that.$refs.competitorEChart.updateOptions(
+                _that.competitorList.options
+              )
+            } else {
+              _that.isChart = false
+              _that.isShow = true
+            }
           }
         })
         .catch(function(error) {
