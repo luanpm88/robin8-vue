@@ -1,9 +1,12 @@
 <template>
   <div id="app" class="page">
-    <div class="side-nav">
+    <div v-if="showNav" class="side-nav">
       <main-nav></main-nav>
     </div>
-    <div class="main-container">
+    <div
+      class="main-container"
+      :class="showNav ? '' : 'no-nav'"
+    >
       <page-header></page-header>
 
       <keep-alive>
@@ -27,11 +30,35 @@ export default {
     MainNav,
     PageHeader,
     PageFooter
+  },
+  data () {
+    return {
+      showNav: true
+    }
+  },
+  methods: {
+    isShowNav () {
+      let _pathName = this.$route.name
+      console.log(_pathName)
+      if (_pathName == 'Login' || _pathName == 'Reg' || _pathName == 'ForgetPassword') {
+        this.showNav = false
+      } else {
+        this.showNav = true
+      }
+    }
+  },
+  mounted () {
+    this.isShowNav()
+  },
+  watch: {
+    $route () {
+      this.isShowNav()
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .side-nav {
   position: fixed;
   top: 0;
@@ -44,5 +71,8 @@ export default {
 .main-container {
   padding-left: 300px;
   overflow-x: hidden;
+  &.no-nav {
+    padding-left: 0;
+  }
 }
 </style>
