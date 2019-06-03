@@ -67,13 +67,14 @@ export default {
 .campaign-status-area {
   padding: 40px 100px;
   text-align: center;
+  border-bottom: 2px solid #c8d6da;
   .iconfont {
     display: inline-block;
     margin-right: 10px;
     vertical-align: middle;
     font-size: 5rem;
     &.success {
-      color: nth($blue, 1);
+      color: nth($cyan, 1);
     }
   }
   .info {

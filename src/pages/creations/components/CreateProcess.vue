@@ -107,7 +107,6 @@ export default {
     }
     &.active, &.current {
       .num {
-        border-color: #38d0d5;
         .dot {
           color: #fff;
           border-color: rgba(255, 255, 255, .36);
@@ -116,6 +115,16 @@ export default {
       }
       .title {
         color: $active;
+      }
+    }
+    &.active {
+      .num {
+        border-color: transparent;
+      }
+    }
+    &.current {
+      .num {
+        border-color: #38d0d5;
       }
     }
   }

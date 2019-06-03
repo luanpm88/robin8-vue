@@ -3,11 +3,13 @@
     <create-process :renderData="processStatus"></create-process>
 
     <div class="campaign-detail-content">
-      <div class="panel default-panel mt20">
-        <div class="panel-body">
-          <status-area :statusData="detailData.status"></status-area>
+      <status-area :statusData="detailData.status"></status-area>
 
-          <div class="line-title">{{$t('lang.information')}}</div>
+      <div class="panel default-panel mt20">
+        <div class="panel-head">
+          <h5 class="title">{{$t('lang.information')}}</h5>
+        </div>
+        <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
               <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
@@ -28,8 +30,14 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="line-title">{{$t('lang.creations.campaignInfo')}}</div>
+      <div class="panel default-panel mt20">
+        <div class="panel-head">
+          <h5 class="title">{{$t('lang.creations.campaignInfo')}}</h5>
+        </div>
+        <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
               <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
@@ -89,8 +97,14 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="line-title">{{$t('lang.creations.bigVRequirement')}}</div>
+      <div class="panel default-panel mt20">
+        <div class="panel-head">
+          <h5 class="title">{{$t('lang.creations.bigVRequirement')}}</h5>
+        </div>
+        <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
               <div class="col-sm-3 control-label">{{$t('lang.creations.tags.title')}}:</div>
@@ -123,18 +137,22 @@
               </div>
             </div> -->
           </div>
+        </div>
+      </div>
 
-          <div v-if="kolsList.length > 0">
-            <div class="line-title">{{$t('lang.creations.bigVSelected')}}</div>
-            <div class="kols-list clearfix">
-              <kols-list-item
-                v-for="(item, index) in kolsList"
-                :key="item.profile_id"
-                :renderStatus="kolRenderStatus"
-                :renderData="item"
-                :routerData="kolRouterData"
-              ></kols-list-item>
-            </div>
+      <div v-if="kolsList.length > 0" class="panel default-panel mt20">
+        <div class="panel-head">
+          <h5 class="title">{{$t('lang.creations.bigVSelected')}}</h5>
+        </div>
+        <div class="panel-body">
+          <div class="kols-list clearfix">
+            <kols-list-item
+              v-for="(item, index) in kolsList"
+              :key="item.profile_id"
+              :renderStatus="kolRenderStatus"
+              :renderData="item"
+              :routerData="kolRouterData"
+            ></kols-list-item>
           </div>
         </div>
       </div>
