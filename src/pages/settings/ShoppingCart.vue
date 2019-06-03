@@ -1,28 +1,34 @@
 <template>
   <div class="cart-list-container">
-    <div class="panel default-panel cart-list-panel">
-      <div v-if="cartList.length > 0" class="panel-body">
-        <kols-list-item
-          v-for="item in cartList"
-          :key="item.profile_id"
-          :renderStatus="kolRenderStatus"
-          :renderData="item"
-          :routerData="kolRouterData"
-          @handleDelete="delCheckedKol"
-        ></kols-list-item>
+    <div v-if="cartList.length > 0" class="row">
+      <div
+        v-for="item in cartList"
+        class="col-sm-6"
+      >
+        <div class="panel default-panel cart-list-panel">
+          <div class="panel-body">
+            <kols-list-item
+              :key="item.profile_id"
+              :renderStatus="kolRenderStatus"
+              :renderData="item"
+              :routerData="kolRouterData"
+              @handleDelete="delCheckedKol"
+            ></kols-list-item>
+          </div>
+        </div>
       </div>
-      <div v-else class="panel-body">
-        <div class="p30 text-center">{{$t('lang.noData')}}...</div>
-      </div>
-      <div v-if="cartList.length > 1" class="panel-foot text-center">
-        <a-pagination
-          :defaultCurrent="page"
-          :defaultPageSize="perPage"
-          :total="total"
-          :hideOnSinglePage="true"
-          @change="onPageChange"
-        />
-      </div>
+    </div>
+
+    <div v-else class="empty-area text-center">{{$t('lang.noData')}}...</div>
+
+    <div v-if="cartList.length > 1" class="p30 text-center">
+      <a-pagination
+        :defaultCurrent="page"
+        :defaultPageSize="perPage"
+        :total="total"
+        :hideOnSinglePage="true"
+        @change="onPageChange"
+      />
     </div>
   </div>
 </template>
@@ -119,8 +125,9 @@ export default {
   padding: 30px 100px;
 }
 .cart-list-panel {
+  margin: 10px 0;
   .panel-body {
-    padding: 14px 30px;
+    padding: 8px;
   }
   .kols-list-item {
     padding: 0 10px;

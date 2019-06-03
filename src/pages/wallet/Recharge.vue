@@ -1,6 +1,6 @@
 <template>
   <div class="wallet-container">
-    <profile-panel></profile-panel>
+    <profile-panel class="mt20"></profile-panel>
 
     <div class="panel default-panel recharge-panel mt20">
       <div class="panel-head">

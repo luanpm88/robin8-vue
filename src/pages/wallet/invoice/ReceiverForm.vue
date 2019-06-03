@@ -1,6 +1,6 @@
 <template>
   <div class="wallet-container">
-    <div class="panel default-panel invoice-panel">
+    <div class="panel default-panel invoice-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
           <h5 class="title">{{$t('lang.wallet.invoicePage.receiver.title')}}</h5>

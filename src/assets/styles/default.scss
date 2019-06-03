@@ -116,7 +116,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .alert-modal.active .modal-content { -webkit-transition-duration: 400ms; transition-duration: 400ms; @include transform(translate3d(-50%, -50%, 0) scale(1)); opacity: 1; }
 
 /*panel styles*/
-.panel { .panel-head { padding: 20px;
+.panel { .panel-head { padding: 10px 14px;
     .title-bar { margin: -10px; }
     .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962;
       .iconfont { display: inline-block; margin: -4px 4px 0 0; vertical-align: middle; font-size: 2rem; }
