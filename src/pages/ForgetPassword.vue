@@ -1,9 +1,6 @@
 <template>
-  <div class="page">
+  <div>
     <div v-if="canChange" class="panel default-panel forget-panel">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.changePw.title')}}</h5>
-      </div>
       <div class="panel-body">
         <div v-if="changeSuccess" class="change-password-success">
           <div class="success-tips">
@@ -61,9 +58,6 @@
     </div>
 
     <div v-else class="panel default-panel forget-panel">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.forgetPw.title')}}</h5>
-      </div>
       <div class="panel-body">
         <div class="forget-container">
           <div class="form-horizontal default-form forget-form">
@@ -116,7 +110,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

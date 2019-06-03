@@ -4,7 +4,7 @@
     <!-- all Brand  tag-->
 		<div class="panel default-panel mt20" v-if=" allBrand">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.detail.allBrandTag')}}</h5>
       </div>
       <div class="panel-body prl30">
         <div class="nonetip" v-if="isAllbrandDisShow">

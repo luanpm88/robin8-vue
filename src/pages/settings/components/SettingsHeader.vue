@@ -37,6 +37,8 @@ export default {
 
 <style lang="scss" scoped>
 .container-header {
+  padding: 20px 100px;
+  background-color: #fff;
   .container-title {
     display: inline-block;
     height: 28px;

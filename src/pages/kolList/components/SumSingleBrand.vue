@@ -4,7 +4,7 @@
     <!-- SumSingleBrand -->
 		<div class="panel default-panel mt20" v-if="isSingleBrand">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.detail.allBrandTag')}} 
+        <h5 class="title">{{$t('lang.kolList.detail.allBrandTag')}}
           - {{brandName}}
           </h5>
       </div>
@@ -167,7 +167,7 @@ export default {
         })
     },
   },
-  
+
 	watch: {
     brandKey: {
       handler () {

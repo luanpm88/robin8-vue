@@ -1,3 +1,20 @@
+.ant-table{
+  color: nth($text-color, 1);
+}
+.ant-table-header{
+  background: $bg-color;
+}
+.ant-table-thead > tr > th{
+  background: $bg-color;
+  color: nth($text-color, 2);
+}
+.ant-table-tbody > tr > td{
+  border-bottom: 2px solid $border;
+}
+.ant-table-thead > tr > th .ant-table-column-sorter{
+  color: nth($text-color, 4);
+}
+
 .activity-table {
   .ant-table {
     font-size: $font-sm;
@@ -98,3 +115,9 @@
   }
 
 }
+// .ant-pagination-item-active{
+//   border-color: nth($cyan, 1);
+// }
+// .ant-pagination-item-active a{
+//   color: nth($cyan, 1);
+// }

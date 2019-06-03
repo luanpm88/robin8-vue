@@ -38,7 +38,8 @@
             />
           </router-link>
         </h5>
-        <p class="desc">{{renderData.description_raw}}</p>
+        <p class="desc" v-if="renderStatus.isPostTime">{{renderData.post_time}}</p>
+        <p class="desc" v-else>{{renderData.description_raw}}</p>
       </div>
       <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
@@ -226,13 +227,13 @@ export default {
       margin-left: 10px;
       cursor: pointer;
       &.icon-msg {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
       &.icon-star-fill.active {
         color: nth($yellow, 1);
       }
       &.icon-cart.active {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
     }
   }

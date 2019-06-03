@@ -3,7 +3,7 @@
   <div>
     <div class="panel default-panel" v-if="Number(currentType) === 0">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolCompare.performance.tit')}}</h5>
+        <h5 class="title">{{$t('lang.kolCompare.performance.tit')}}</h5>
       </div>
       <div class="panel-body p30">
         <p>粉丝:{{socialData.fans_number}}</p>
@@ -19,7 +19,7 @@
     <!-- weixin Performance -->
     <div class="panel default-panel mt20" v-if="Number(currentType) === 1">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolCompare.price.tit')}}</h5>
+        <h5 class="title">{{$t('lang.kolCompare.price.tit')}}</h5>
       </div>
       <div class="panel-body p30">
         <p>粉丝:{{socialData.fans_number}}</p>
@@ -63,7 +63,7 @@ export default {
   methods: {
     // kolWeixinSocial weibo
     kolWeiboSocial(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.kolWeiboSocial, params, {
           headers: {
@@ -95,12 +95,12 @@ export default {
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     // kolWeixinSocial
     kolWeixinSocial(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.kolWeixinSocial, params, {
           headers: {
@@ -127,8 +127,8 @@ export default {
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
   },
   computed: {

@@ -4,7 +4,7 @@
     <!-- most_relevant_post  暂时微信没有这个接口-->
 		<div class="panel default-panel mt20 kol-performance" v-if="isRelevantBox">
 			<div class="panel-head">
-					<h5 class="title text-center">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
+					<h5 class="title">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
 			</div>
 			<div class="panel-body prl30">
 					<table class="com-brand-table" v-if="isRelevant">
@@ -15,7 +15,7 @@
 					</tr>
 					<tr v-for="(key, index) in relevantList" :key="index">
 							<td>
-							<a :href="key.url" target="blank" class="purple">{{key.title}}</a>
+							<a :href="key.url" target="blank" class="cyan">{{key.title}}</a>
 							</td>
 							<td style="min-width:200px">{{key.post_time}}</td>
 							<td>{{key.correlation}}</td>
@@ -122,11 +122,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-a.purple {
+a.cyan {
   display: block;
   text-align: left;
   @include limit-line(1);
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
   word-break: break-all;
 }
 </style>

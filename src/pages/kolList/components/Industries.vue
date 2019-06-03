@@ -4,7 +4,7 @@
     <!-- SumIndustries -->
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.detail.industries')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.detail.industries')}}</h5>
       </div>
       <div class="panel-body prl30">
         <div v-if="type === 0 || type === 1">
@@ -66,7 +66,7 @@ export default {
     if (Number(this.$route.query.type) === 0) {
       // 微博相关接口
       this.kolWeiboIndustry(totalParams)
-    } 
+    }
     if (Number(this.$route.query.type) === 1) {
       this.kolWeiXinIndustry(totalParams)
     }
@@ -83,7 +83,7 @@ export default {
         })
         .then(function(res) {
           if (res.status === 200) {
-            console.log('我是微博', res)
+            // console.log('我是微博', res)
             _that.isLoading = false
             if (res.data.data.length > 0) {
               _that.isChart = true

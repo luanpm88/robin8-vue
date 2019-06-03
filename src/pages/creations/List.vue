@@ -1,6 +1,6 @@
 <template>
   <div class="campaigns-list-container">
-    <div class="panel default-panel campaigns-list-panel mt20">
+    <div class="panel default-panel campaigns-list-panel">
       <div class="panel-head clearfix">
         <router-link to="/creations/create" class="btn btn-cyan btn-sm pull-right">{{$t('lang.router.creationCreate')}}</router-link>
       </div>
@@ -70,16 +70,15 @@
 
         <div v-else class="p30 text-center">{{$t('lang.noData')}}...</div>
       </div>
-    </div>
-
-    <div class="p30 text-center">
-      <a-pagination
-        :defaultCurrent="page"
-        :defaultPageSize="perPage"
-        :total="total"
-        :hideOnSinglePage="true"
-        @change="onPageChange"
-      />
+      <div v-if="creationsList.length > 1" class="panel-foot text-center">
+        <a-pagination
+          :defaultCurrent="page"
+          :defaultPageSize="perPage"
+          :total="total"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -141,9 +140,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.campaigns-list-panel {
+.campaigns-list-container {
+  padding: 0 100px 30px;
   .panel-body {
-    padding: 30px;
+    padding: 20px;
   }
 }
 .campaign-profile {
@@ -157,6 +157,7 @@ export default {
 .operation-area {
   .btn {
     display: inline-block;
+    width: 100px;
     margin: 4px;
   }
 }

@@ -1,24 +1,16 @@
 <template>
-  <div class="container mt50 clearfix">
-    <main-nav class="pull-left"></main-nav>
-
-    <div class="campaign-container pull-right">
-      <!-- <router-view></router-view> -->
-      <!-- kol search 页面 -->
-      <kol-search :keyWord="keyList"></kol-search>
-    </div>
+  <div class="campaign-container">
+    <kol-search :keyWord="keyList"></kol-search>
   </div>
 </template>
 
 <script>
-import MainNav from '@components/MainNav'
 import KolSearch from './KolSearch'
 
 export default {
   name: 'KolList',
   components: {
-    MainNav,
-    KolSearch  
+    KolSearch
   },
   created() {
     this.$route.meta.keepAlive = false
@@ -36,6 +28,6 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-container {
-  width: 980px;
+  padding: 0 100px 30px;
 }
 </style>

@@ -4,47 +4,51 @@
     <!-- DetailSide. -->
     <div class="panel default-panel kol-infobox">
       <div class="panel-body">
-        <div class="kol-small-imgbox">
-          <div class="kol-small-avatar">
-            <img :src="infoList.avatar_url" alt>
+        <div class="media kol-dec">
+          <div class="media-left media-middle">
+            <div class="media-imgbox">
+              <img :src="infoList.avatar_url" alt>
+            </div>
+          </div>
+          <div class="media-body">
+            <p>
+              {{infoList.profile_name}}
+            </p>
+            <p>
+              <i
+                class="iconfont icon-male"
+                v-if="infoList.gender == 'm' || infoList.gender == 'M'"
+              ></i>
+              <i
+                class="iconfont icon-female"
+                v-if="infoList.gender == 'f' || infoList.gender == 'F'"
+              ></i>
+              {{infoList.age}}
+            </p>
+            <p>
+              <i class="iconfont icon-location"></i>
+              {{infoList.region}}
+            </p>
           </div>
         </div>
-        <div class="kol-info">
-          <p>
-            {{infoList.profile_name}}
-            <i
-              class="iconfont icon-female"
-              v-if="infoList.gender == 'm' || infoList.gender == 'M'"
-            ></i>
-            <i
-              class="iconfont icon-male"
-              v-if="infoList.gender == 'f' || infoList.gender == 'F'"
-            ></i>
-          </p>
-          <p>{{infoList.age}}</p>
-          <p>
-            <i class="iconfont icon-location"></i>
-            {{infoList.region}}
-          </p>
-          <p>
-            <a
-              v-if="!!kolProfileLink && kolProfileLink != ''"
-              :href="kolProfileLink"
-              target="_blank"
-              class="btn btn-xs btn-purple btn-outline"
-            >
-              <span class="iconfont icon-user"></span>
-              <!-- KOL Profile -->
-              {{$t('lang.kolList.detail.kolProfile')}}
-            </a>
-            <button type="button" class="btn btn-xs btn-purple" @click="doAddCart(infoList)">
-              <span class="iconfont icon-cart"></span>
-              <!-- Add to cart -->
-              {{$t('lang.kolList.detail.addCart')}}
-            </button>
-          </p>
-        </div>
-        <ul class="clearfix">
+        <p class="kol-link-box">
+          <a
+            v-if="!!kolProfileLink && kolProfileLink != ''"
+            :href="kolProfileLink"
+            target="_blank"
+            class="btn btn-xs btn-cyan btn-outline"
+          >
+            <span class="iconfont icon-user"></span>
+            <!-- KOL Profile -->
+            {{$t('lang.kolList.detail.kolProfile')}}
+          </a>
+          <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
+            <span class="iconfont icon-cart"></span>
+            <!-- Add to cart -->
+            {{$t('lang.kolList.detail.addCart')}}
+          </button>
+        </p>
+        <ul class="clearfix kol-sign">
           <li v-for="(item, index) in dec" :key="index">{{item}}</li>
         </ul>
         <div class="kol-brand" v-if="type === 0 || type === 1">

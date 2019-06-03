@@ -4,7 +4,7 @@
     <!-- socialData -->
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.detail.socialData.title')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.detail.socialData.title')}}</h5>
       </div>
       <div class="panel-body prl30">
         <div class="activity-table">
@@ -20,7 +20,8 @@
               <th>{{$t('lang.kolList.detail.socialData.influence')}}</th>
             </tr>
             <tr>
-              <td>{{dataListBox.platform}}</td>
+              <td v-if="dataListBox.platform === 'weibo'"><i class="iconfont icon-weibo"></i></td>
+              <td v-if="dataListBox.platform === 'weixin'"><i class="iconfont icon-icon-wechat"></i></td>
               <td>{{dataListBox.pricing.direct_price}}</td>
               <td>{{dataListBox.fans_number}}</td>
               <td>{{dataListBox.stats.avg_likes}}</td>

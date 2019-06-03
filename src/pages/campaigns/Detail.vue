@@ -301,7 +301,7 @@
       </div>
     </div>
 
-    <div class="text-center create-btn-area p30">
+    <div class="text-center create-btn-area p10 mt20">
       <router-link
         class="btn btn-cyan btn-outline back-btn"
         to="/campaigns"
@@ -709,6 +709,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-detail-container {
+  padding: 0 100px 30px;
+}
 .campaign-detail-panel {
   .content {
     padding: 20px;
@@ -756,7 +759,7 @@ export default {
 }
 .kols-list-panel /deep/ .default-tabs {
   text-align: center;
-  .btn-group.pills-btn {
+  .tab-label {
     margin-bottom: 30px;
   }
 }

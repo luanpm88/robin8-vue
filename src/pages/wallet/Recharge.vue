@@ -1,6 +1,6 @@
 <template>
   <div class="wallet-container">
-    <profile-panel class="mt20"></profile-panel>
+    <profile-panel></profile-panel>
 
     <div class="panel default-panel recharge-panel mt20">
       <div class="panel-head">
@@ -136,6 +136,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wallet-container {
+  padding: 0 100px 30px;
+}
 .recharge-form {
   padding: 60px;
   .form-group {

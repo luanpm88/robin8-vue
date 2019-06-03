@@ -1,16 +1,12 @@
 <template>
-  <div class="container mt50">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import MainNav from '@components/MainNav'
 
 export default {
   name: 'Ranking',
   components: {
-    MainNav,
   },
   data () {
     return {

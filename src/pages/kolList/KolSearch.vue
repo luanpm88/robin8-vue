@@ -12,7 +12,7 @@
     <!-- 搜索条件 -->
     <div class="panel default-panel kols-list-panel">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
+        <h5 class="title">{{$t('lang.kolList.search.topKey')}}</h5>
       </div>
       <div class="panel-body">
         <!-- 最头部input 条件 -->
@@ -29,7 +29,7 @@
                 <div class="input-group-btn">
                   <button
                     type="button"
-                    class="btn btn-purple"
+                    class="btn btn-cyan"
                     @click="totalSearch"
                   >{{$t('lang.kolList.search.search')}}</button>
                 </div>
@@ -107,7 +107,7 @@
             </div>
           </div>
           <div class="form-group">
-            <!-- <div
+            <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
@@ -185,7 +185,7 @@
                   value="travel"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
               </select>
-            </div> -->
+            </div>
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
@@ -196,17 +196,25 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-            <!-- <div  class="col-sm-6">
-              <label class="kol-check-label">
+            <!--  有时候会把勾选的放在 半边
+              <div class="kol-check-box col-sm-6">
+              <label>
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
             </div> -->
           </div>
+          <!-- 勾选的占用一行的样式  -->
+          <div class="kol-check-box">
+            <label>
+              <input type="checkbox" v-model="kolOnly">
+              {{$t('lang.kolList.search.advancedSearch.checkText')}}
+            </label>
+          </div>
           <div class="text-center p30">
             <button
               type="button"
-              class="btn btn-blue btn-outline"
+              class="btn btn-cyan"
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
@@ -219,7 +227,7 @@
     </div>
     <!-- 内容部分 -->
     <div class="panel default-panel kols-list-panel mt20" v-if="isShowKolList">
-      <div class="panel-body p30">
+      <div class="panel-body">
         <!-- 以前头部会显示 微信微博平台数据，中间先让隐藏了，后续不知道会不会让显示，所以先注释代码 -->
         <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
@@ -234,7 +242,7 @@
           <a-spin tip="Loading..."/>
         </div>
         <div v-if="isTable">
-          <table class="default-table mt20 mb10">
+          <table class="default-table">
             <thead>
               <tr>
                 <!-- 注释的代码是 微信和微博平台 勾选多个KOL 进行对比（compare） -->
@@ -311,7 +319,7 @@
                           class="item"
                           v-if="showFunsnumber"
                         >
-                          <i class="iconfont icon-user-heart"></i>
+                          <i class="iconfont icon-heart"></i>
                           {{item.fans_number}}
                         </a-tooltip>
                         <a-tooltip
@@ -320,7 +328,7 @@
                           class="item"
                           v-if="showEngagement"
                         >
-                          <i class="iconfont icon-app"></i>
+                          <i class="iconfont icon-share"></i>
                           {{item.stats.avg_sum_engagement}}
                         </a-tooltip>
                       </div>
@@ -341,7 +349,7 @@
                     :percent="item.influence / 10"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
+                    strokeColor="#38D0D5"
                     :format="() => item.influence"
                   />
                   <!-- {{$t('lang.kolList.search.influenceTip')}} -->
@@ -353,7 +361,7 @@
                     :percent="item.correlation"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation + '%'"
                     v-if="item.colorStatus === 1"
                   />
@@ -361,7 +369,7 @@
                     type="circle"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#ddd"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation"
                     v-if="item.colorStatus === 0"
                   />
@@ -371,16 +379,16 @@
             </tbody>
           </table>
         </div>
-          <div class="text-center">
-            <a-pagination
-              :defaultCurrent="currentPage"
-              :defaultPageSize="kolsPerPage"
-              v-model="currentPageAdd"
-              :total="kolsTotal"
-              :hideOnSinglePage="true"
-              @change="onPageChange"
-            />
-          </div>
+      </div>
+      <div class="panel-foot text-center" v-if="isTable">
+        <a-pagination
+          :defaultCurrent="currentPage"
+          :defaultPageSize="kolsPerPage"
+          v-model="currentPageAdd"
+          :total="kolsTotal"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
       </div>
     </div>
   </div>
@@ -483,7 +491,7 @@ export default {
       showEngagement: true,
       // （微信微博展示）direct_price（其他平台展示）ref_price
       showDirectPrice: true,
-      // 搜索的类型 
+      // 搜索的类型
       searchTypeList: [
         {
           index: 0,
@@ -1061,126 +1069,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.kols-list-panel {
-  .panel-body {
-    padding: 20px;
-    .form-group {
-      margin-bottom: 20px;
-    }
-  }
-}
-.kol-advance-btn {
-  text-align: center;
-  .toggle {
-    color: nth($purple, 1);
-    border-bottom: 1px solid nth($purple, 1);
-    cursor: pointer;
-  }
-}
-.kols-list-statistics {
-  height: 40px;
-  margin-bottom: 10px;
-  .item {
-    display: inline-block;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 5px 10px;
-    color: #333;
-  }
-}
-.kol-data-rank {
-  display: inline-block;
-  line-height: 20px;
-  cursor: pointer;
-  vertical-align: 2px;
-  i {
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-  .up {
-    display: block;
-    border-width: 0 5px 6px;
-    border-color: transparent transparent #a7a5a5;
-  }
-  .down {
-    display: block;
-    border-width: 6px 5px 0;
-    border-color: #a7a5a5 transparent transparent;
-    margin: 1px auto 0;
-  }
-}
-.fluenceactive,
-.relevanceactive {
-  .is-top-iactive {
-    border-color: transparent transparent #b180ef;
-  }
-  .is-bottom-iactive {
-    border-color: #b180ef transparent transparent;
-  }
-}
 .kol-profile {
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-    }
-  }
   .desc {
     @include limit-line(2);
-  }
-  .status {
-    .item {
-      margin-right: 10px;
-    }
-  }
-  .operation-area {
-    .iconfont {
-      margin-left: 10px;
-      cursor: pointer;
-      &.icon-cart.active {
-        color: nth($purple, 1);
-      }
-    }
-  }
-  .title {
-    .kol-tit-span {
-      cursor: pointer;
-      color: nth($text-color, 2);
-    }
-  }
-}
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 2s;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-.fade-leave-active {
-  transition: opacity 2s;
-}
-.compare-pop {
-  position: fixed;
-  right: 0px;
-  bottom: 45%;
-  .panel-body {
-    padding: 30px;
-  }
-  .copmare-close {
-    position: absolute;
-    cursor: pointer;
-    right: 10px;
-    top: 10px;
-    color: nth($font-color, 1);
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="campaign-pay-container">
-    <div class="panel default-panel mt20">
+    <div class="panel default-panel">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.payment.title')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.payment.title')}}</h5>
       </div>
       <div class="panel-body">
         <div class="order-info">
@@ -153,6 +153,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-pay-container {
+  padding: 0 100px 30px;
+}
 .order-info {
   line-height: 40px;
   padding: 20px 100px;
