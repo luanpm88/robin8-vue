@@ -3,12 +3,10 @@
   <div>
     <!-- SumSingleBrand -->
 		<div class="panel default-panel mt20" v-if="isSingleBrand">
-      <div class="panel-head">
+      <div class="panel-body prl30">
         <h5 class="title">{{$t('lang.kolList.detail.allBrandTag')}}
           - {{brandName}}
           </h5>
-      </div>
-      <div class="panel-body prl30">
         <div class="nonetip" v-if="isbrandDisShow">
           <span>{{$t('lang.brandDisNoDataTip')}}</span>
         </div>

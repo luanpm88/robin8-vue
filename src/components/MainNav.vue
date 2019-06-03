@@ -93,30 +93,11 @@ export default {
           ]
         },
         {
-          title: 'nav.ranking',
-          icon: 'icon-podium',
-          href: '#ranking',
-          // subNav: [
-          //   {
-          //     title: 'nav.wechatRanking',
-          //     href: '/ranking/WechatRanking'
-          //   },
-          //   {
-          //     title: 'nav.weiboRanking',
-          //     href: '/ranking/WeiboRanking'
-          //   }
-          // ]
-        },
-        {
-          title: 'nav.socialListening',
-          icon: 'icon-connection',
-          href: '/social/SocialListening'
-        },
-        {
           title: 'nav.kols',
           icon: 'icon-user',
           href: '/kol/list'
         },
+
         {
           title: 'nav.wallet',
           icon: 'icon-wallet',
@@ -162,6 +143,26 @@ export default {
               href: '/help'
             }
           ]
+        },
+        {
+          title: 'nav.ranking',
+          icon: 'icon-podium',
+          href: '#ranking',
+          // subNav: [
+          //   {
+          //     title: 'nav.wechatRanking',
+          //     href: '/ranking/WechatRanking'
+          //   },
+          //   {
+          //     title: 'nav.weiboRanking',
+          //     href: '/ranking/WeiboRanking'
+          //   }
+          // ]
+        },
+        {
+          title: 'nav.socialListening',
+          icon: 'icon-connection',
+          href: '/social/SocialListening'
         }
       ]
     }

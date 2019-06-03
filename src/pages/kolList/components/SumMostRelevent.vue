@@ -3,10 +3,8 @@
   <div>
     <!-- most_relevant_post  暂时微信没有这个接口-->
 		<div class="panel default-panel mt20 kol-performance" v-if="isRelevantBox">
-			<div class="panel-head">
-					<h5 class="title">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
-			</div>
 			<div class="panel-body prl30">
+        <h5 class="title">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
 					<table class="com-brand-table" v-if="isRelevant">
 					<tr>
 							<th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>

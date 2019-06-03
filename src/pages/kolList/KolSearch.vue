@@ -11,10 +11,8 @@
     </transition>
     <!-- 搜索条件 -->
     <div class="panel default-panel kols-list-panel">
-      <div class="panel-head">
-        <h5 class="title">{{$t('lang.kolList.search.topKey')}}</h5>
-      </div>
       <div class="panel-body">
+        <h5 class="title">{{$t('lang.kolList.search.topKey')}}</h5>
         <!-- 最头部input 条件 -->
         <div class="form-horizontal">
           <div class="form-group mt20">

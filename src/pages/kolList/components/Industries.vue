@@ -3,11 +3,9 @@
   <div>
     <!-- SumIndustries -->
     <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title">{{$t('lang.kolList.detail.industries')}}</h5>
-      </div>
       <div class="panel-body prl30">
-        <div v-if="type === 0 || type === 1">
+        <h5 class="title">{{$t('lang.kolList.detail.industries')}}</h5>
+        <div class="mt20" v-if="type === 0 || type === 1">
           <div class="nonetip" v-if="isShow">
             <span>{{$t('lang.totalNoDataTip')}}</span>
           </div>

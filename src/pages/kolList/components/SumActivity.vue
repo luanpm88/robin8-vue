@@ -3,10 +3,8 @@
   <div>
     <!-- Activity -->
     <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title">{{$t('lang.kolList.detail.activity')}}</h5>
-      </div>
       <div class="panel-body prl30">
+        <h5 class="title">{{$t('lang.kolList.detail.activity')}}</h5>
         <div class="activity-table">
           <table class="com-brand-table">
             <tr>

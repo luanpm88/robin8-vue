@@ -3,10 +3,8 @@
   <div>
     <!-- performance -->
     <div class="panel default-panel mt20 kol-performance">
-      <div class="panel-head">
-        <h5 class="title">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
-      </div>
       <div class="panel-body prl30">
+         <h5 class="title">{{$t('lang.kolList.detail.bestPosts.title')}}</h5>
         <table class="com-brand-table" v-if="isPer">
           <tr>
             <th>{{$t('lang.kolList.detail.bestPosts.tableTitle')}}</th>

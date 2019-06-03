@@ -3,14 +3,12 @@
   <div>
     <!-- Keywords-->
 		<div class="panel default-panel mt20">
-			<div class="panel-head">
-				<h5 class="title">
+			<div class="panel-body prl30">
+        <h5 class="title">
 					<a-tooltip placement="topLeft" :title="$t('lang.kolList.detail.keywordsTip')">
 						{{$t('lang.kolList.detail.keywords')}}
 					</a-tooltip>
 				</h5>
-			</div>
-			<div class="panel-body prl30">
 				<div class="nonetip" v-if="isShow">
 					<span>{{$t('lang.totalNoDataTip')}}</span>
 				</div>
