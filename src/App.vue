@@ -70,7 +70,6 @@ export default {
 }
 .main-container {
   padding-left: 300px;
-  overflow-x: hidden;
   &.no-nav {
     padding-left: 0;
   }
