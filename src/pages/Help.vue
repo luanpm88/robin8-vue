@@ -96,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 .help-container {
-  padding: 0 100px 30px;
+  padding: 30px 100px;
 }
 .help-panel {
   line-height: 2;

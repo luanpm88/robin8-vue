@@ -1,6 +1,6 @@
 <template>
   <div class="campaigns-list-container">
-    <div class="p20 clearfix">
+    <div class="p10 clearfix mt20">
       <router-link to="/campaigns/create" class="btn btn-cyan btn-sm pull-right">{{$t('lang.router.campaignCreate')}}</router-link>
     </div>
 

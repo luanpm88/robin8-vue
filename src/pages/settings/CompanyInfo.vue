@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container">
-    <div class="panel default-panel profile-panel">
+    <div class="panel default-panel profile-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
           <h5 class="title">{{$t('lang.companyInfo.title')}}</h5>
