@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt50 clearfix">
+  <div class="container clearfix">
     <div class="kol-detail clearfix">
       <div class="kol-detail-left col-xs-4">
         <!-- info -->
@@ -14,7 +14,7 @@
           :tabList="tabList"
           :tabIndex="tabIndex"
           @changeTab="changeTab"
-          class="panel-tab mt20"
+          class="panel-tab"
         ></default-tabs>
         <!-- summary 模块  -->
         <div class="mt20" v-show="tabIndex === 0">

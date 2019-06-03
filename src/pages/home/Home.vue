@@ -248,6 +248,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-container {
+  overflow: hidden;
   .icon-grid-panel {
     @include display-flex;
     $height: 200px;

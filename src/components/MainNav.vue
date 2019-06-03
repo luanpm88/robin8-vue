@@ -197,9 +197,9 @@ export default {
       })
     }
   },
-  created () {
-    this.getPath()
-  },
+  // created () {
+  //   this.getPath()
+  // },
   watch: {
     $route () {
       this.getPath()
