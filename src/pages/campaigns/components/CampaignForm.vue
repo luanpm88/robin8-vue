@@ -893,7 +893,7 @@ export default {
   padding: 0 100px;
 }
 .creation-form /deep/ .kols-list {
-  padding: 24px 60px;
+  padding: 24px 30px;
   font-size: 0;
   & > .kols-list-item {
     display: inline-block;

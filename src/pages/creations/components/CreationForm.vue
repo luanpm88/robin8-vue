@@ -1313,7 +1313,7 @@ export default {
 }
 .creation-form /deep/ .kols-list {
   height: 352px;
-  padding: 24px 60px;
+  padding: 24px 30px;
   font-size: 0;
   // & > .kols-list-item {
   //   display: inline-block;
@@ -1322,7 +1322,7 @@ export default {
   // }
 }
 .checked-kols-list {
-  padding: 24px 60px;
+  padding: 24px 30px;
   & > .kols-list-item {
     float: left;
     width: 33.33333%;

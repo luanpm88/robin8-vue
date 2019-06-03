@@ -117,7 +117,7 @@ export default {
   padding: 60px 0;
 }
 .btn-area {
-  padding: 30px;
+  padding-bottom: 24px;
   text-align: center;
 }
 </style>
