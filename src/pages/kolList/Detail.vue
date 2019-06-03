@@ -78,16 +78,17 @@ export default {
         {
           index: 0,
           name: 'kolList.detail.summary'
-        },
-        {
-          index: 1,
-          name: 'kolList.detail.analytics'
         }
-        ,
-        {
-          index: 2,
-          name: 'kolList.detail.post'
-        }
+        // ,
+        // {
+        //   index: 1,
+        //   name: 'kolList.detail.analytics'
+        // }
+        // ,
+        // {
+        //   index: 2,
+        //   name: 'kolList.detail.post'
+        // }
       ],
       currentBrandName: 'N/A',
       currentBrandKeywords: '',
