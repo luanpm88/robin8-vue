@@ -739,6 +739,7 @@ export const lang = {
   },
   kolList: {
     detail: {
+      infoTit: '个人信息',
       btn: '返回',
       post: '文章',
       summary: '总结',

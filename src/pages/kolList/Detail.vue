@@ -79,11 +79,11 @@ export default {
           index: 0,
           name: 'kolList.detail.summary'
         }
-        // ,
-        // {
-        //   index: 1,
-        //   name: 'kolList.detail.analytics'
-        // }
+        ,
+        {
+          index: 1,
+          name: 'kolList.detail.analytics'
+        }
         // ,
         // {
         //   index: 2,

@@ -5,10 +5,8 @@ currentId 当前数据的Id
 -->
 <template>
   <div class="panel default-panel">
-    <div class="panel-head">
-      <h5 class="title">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
-    </div>
     <div class="panel-body prl30">
+      <h5 class="title mb10">{{$t('lang.kolList.analyticVue.weibo.industryTable.Tit')}}</h5>
       <div class="r8-loading" v-if="isAnalyOneLoading">
         <a-spin tip="Loading..."/>
       </div>

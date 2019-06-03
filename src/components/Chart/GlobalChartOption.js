@@ -88,7 +88,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -910,7 +910,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1015,7 +1015,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1120,7 +1120,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1225,7 +1225,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1330,7 +1330,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1435,7 +1435,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1540,7 +1540,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }
@@ -1645,7 +1645,7 @@ const MockData = {
           normal: {
             color: "rgba(56,208,213,0.5)",
             lineStyle: {
-              color: "#B37FEBFF",
+              color: "#38d0d5",
               width: 1
             }
           }

@@ -739,6 +739,7 @@ export const lang = {
   },
   kolList: {
     detail: {
+      infoTit: 'Profile info',
       btn: 'Return',
       post: 'Posts',
       summary: 'Summary',
