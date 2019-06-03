@@ -101,11 +101,13 @@ export default {
       tabList: [
         {
           index: 0,
-          name: ('weibo')
+          name: ('weibo'),
+          iconClass: 'weibo'
         },
         {
           index: 1,
-          name: ('wechat')
+          name: ('wechat'),
+          iconClass: 'wechat'
         }
       ],
       kolRenderStatus: {

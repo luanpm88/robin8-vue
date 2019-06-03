@@ -8,6 +8,11 @@
         :key="index"
         @click="changeTab(tab)"
       >
+        <span
+          v-if="!!tab.iconClass && tab.iconClass != ''"
+          class="iconfont"
+          :class="'icon-'+ tab.iconClass"
+        ></span>
         <span class="text">{{$t(`lang.${tab.name}`)}}</span>
       </div>
     </div>
@@ -43,6 +48,12 @@ export default {
       display: inline-block;
       padding: 4px 16px;
       border-right: 1px solid #c7c7c7;
+      .iconfont {
+        display: inline-block;
+        margin: 0 4px 0 0;
+        vertical-align: middle;
+        font-size: $font-nm;
+      }
       .text {
         padding: 2px 4px;
         color: #a9b1b3;
