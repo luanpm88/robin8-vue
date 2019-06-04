@@ -21,7 +21,7 @@
             >
               <td>
                 <div class="media campaign-profile">
-                  <div class="media-left media-middle">
+                  <div class="media-left media-top">
                     <div class="cover">
                       <img :src="item.img_url" alt="" class="cover-img">
                     </div>
@@ -148,8 +148,14 @@ export default {
 }
 .campaign-profile {
   .cover {
+    position: relative;
     width: 100px;
+    padding-bottom: 75%;
+    overflow: hidden;
     .cover-img {
+      position: absolute;
+      @include center(y);
+      left: 0;
       width: 100%;
     }
   }

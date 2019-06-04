@@ -15,12 +15,12 @@
         v-for="(item, index) of navData"
         :key="index"
         class="item"
+        @click="toggleOpen(index)"
       >
         <router-link
           v-if="!item.subNav || item.subNav.length < 0"
           class="title-bar"
           :to="item.href"
-          tag="div"
         >
           <div :class="'iconfont ' + item.icon"></div>
           <div class="title">{{$t(`lang.${item.title}`)}}</div>
@@ -30,7 +30,6 @@
           <div
             class="title-bar with-arr"
             :class="item.is_open ? 'open' : ''"
-            @click="toggleOpen(index)"
           >
             <div :class="'iconfont ' + item.icon"></div>
             <div class="title">{{$t('lang.' + item.title)}}</div>
@@ -196,6 +195,8 @@ export default {
           this.$set(item, 'is_open', false)
         }
       })
+
+      console.log(this.navData)
     }
   },
   // created () {
