@@ -12,6 +12,7 @@ export const lang = {
   facebook: 'Facebook',
   seeMore: 'Xem thêm',
   more: 'tải thêm',
+  or: 'hoặc là',
   edit: 'sửa',
   delete: 'xóa',
   detail: 'chi tiết',

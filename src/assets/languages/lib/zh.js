@@ -12,6 +12,7 @@ export const lang = {
   facebook: 'Facebook',
   seeMore: '显示更多',
   more: '查看更多',
+  or: '或者',
   edit: '编辑',
   delete: '删除',
   detail: '详情',

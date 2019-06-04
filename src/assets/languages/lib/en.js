@@ -12,6 +12,7 @@ export const lang = {
   facebook: 'Facebook',
   seeMore: 'Show More',
   more: 'Show More',
+  or: 'or',
   edit: 'Edit',
   delete: 'Delete',
   detail: 'Detail',
