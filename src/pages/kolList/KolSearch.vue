@@ -216,10 +216,7 @@
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
-          <div class="search-tips text-center">
-            <p>We are tuning our search engine. If you find a wrong search result, please take a picture and email us at info@robin8.com.</p>
-            <p>Thank you for your support!</p>
-          </div>
+          <div class="search-tips text-center" v-html="$t('lang.kolList.search.searchTips')"></div>
         </div>
       </div>
     </div>

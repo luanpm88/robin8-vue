@@ -134,6 +134,7 @@ export const lang = {
       placeholder: 'Enter valid code',
       errorTips: 'Enter valid code'
     },
+    codeBtn: 'Get valid code',
     password: {
       title: 'Password',
       placeholder: 'Please enter your password',
@@ -264,7 +265,8 @@ export const lang = {
         title: 'Brand Description',
         placeholder: 'Please fill in your brand description',
         errorTips: 'Please fill in your brand description'
-      }
+      },
+      addBtn: 'Add Brand'
     },
     competitors: {
       title: 'My Competitive Brands',
@@ -858,6 +860,7 @@ export const lang = {
       search: 'Search',
       searchByName: 'KOL Name',
       searchByRelevant: 'Relevance of articles',
+      searchTips: '<p>We are tuning our search engine. If you find a wrong search result, please take a picture and email us at info@robin8.com.</p><p>Thank you for your support!</p>',
       advancedSearch: {
         btn: 'Advanced Search',
         industry: 'KOL Industry',
