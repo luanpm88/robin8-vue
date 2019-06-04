@@ -289,7 +289,7 @@ export default {
     }
   }
   .home-show {
-    padding: 20px 100px;
+    padding: 0px 100px;
   }
 }
 </style>
