@@ -23,7 +23,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(item, index) in dataListBox"
+              v-for="item in dataListBox"
               :key="item.id"
             >
               <td class="text-center">

@@ -14,19 +14,23 @@
             <div class="col-sm-4">
               <input
                 type="text"
-                name="name"
+                :name="'name_' + index"
                 class="form-control"
+                :class="[errors.has('name_' + index) ? 'danger' : '']"
                 :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderName')"
                 v-model="item.name"
+                v-validate="'required'"
               >
             </div>
             <div class="col-sm-5">
               <input
                 type="text"
-                name="name"
+                :name="'direction_name_' + index"
                 class="form-control"
+                :class="[errors.has('direction_name_' + index) ? 'danger' : '']"
                 :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderDec')"
                 v-model="item.short_name"
+                v-validate="'required'"
               >
             </div>
             <div class="col-sm-1" v-if="isAdd">
@@ -83,7 +87,8 @@ export default {
           name: '',
           short_name: ''
         }
-      ]
+      ],
+      // canSubmit: true
     }
   },
   created() {
@@ -154,7 +159,7 @@ export default {
           console.log(error)
         })
     },
-    submit() {
+    submitJonggle() {
       if (!this.$route.params.itemList) {
         let params = {
           competitors: this.brandList
@@ -168,6 +173,16 @@ export default {
         }
         this.editSubmit(params, this.$route.params.itemList);
       }
+    },
+    submit() {
+      console.log(this.$validator.validateAll())
+      this.$validator.validateAll().then((msg) => {
+        // console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          this.submitJonggle()
+        }
+      })
     },
     backList() {
       this.$router.go(-1);

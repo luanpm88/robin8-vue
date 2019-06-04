@@ -10,7 +10,7 @@
       </div>
     </transition>
     <!-- 搜索条件 -->
-    <div class="panel default-panel kols-list-panel">
+    <div class="panel default-panel kols-search-panel">
       <div class="panel-body">
         <h5 class="title search-tit">{{$t('lang.kolList.search.topKey')}}</h5>
         <!-- 最头部input 条件 -->
@@ -212,7 +212,7 @@
           <div class="text-center p30">
             <button
               type="button"
-              class="btn btn-cyan"
+              class="btn btn-cyan search-btn"
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
@@ -289,7 +289,7 @@
                         </router-link>
                       </div>
                     </div>
-                    <div class="media-body media-middle">
+                    <div class="media-body media-middle search-media-left">
                       <h5 class="title">
                         <router-link target="_blank" :to="{
                           path: '/kol/',
@@ -447,7 +447,6 @@ export default {
           index: 1,
           name: "wechat"
         }
-
         // {
         //   index: 2,
         //   name: "xiaohongshu"
