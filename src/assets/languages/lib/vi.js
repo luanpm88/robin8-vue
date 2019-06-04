@@ -132,6 +132,7 @@ export const lang = {
       placeholder: 'Vui lòng nhập đúng mã kiểm tra',
       errorTips: 'Mã kiểm tra không đúng'
     },
+    codeBtn: 'Nhận mã xác minh',
     password: {
       title: 'Mật khẩu',
       placeholder: 'Nhập mật khẩu của bạn',
@@ -258,7 +259,8 @@ export const lang = {
         title: 'Mô tả',
         placeholder: 'Nhập mô tả cho thương hiệu',
         errorTips: 'Mô tả là bắt buộc nhập'
-      }
+      },
+      addBtn: 'Thêm thương hiệu'
     },
     competitors: {
       title: 'Thương hiệu canh tranh',
@@ -831,6 +833,7 @@ export const lang = {
       topKey: 'Nhập từ khóa, loại hoặc tên KOL',
       keyword: 'Nhập ở đây...',
       search: 'Tìm kiếm',
+      searchTips: '<p>Chúng tôi đang điều chỉnh công cụ tìm kiếm của chúng tôi. Nếu bạn tìm thấy kết quả tìm kiếm sai, vui lòng chụp ảnh và gửi email đến địa chỉ info@robin8.com.</p><p>Cảm ơn bạn đã hỗ trợ của bạn!</p>',
       advancedSearch: {
         btn: 'Tìm kiếm nâng cao',
         industry: 'Ngành nghề',

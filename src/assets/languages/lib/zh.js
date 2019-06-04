@@ -134,6 +134,7 @@ export const lang = {
       placeholder: '请输入验证码',
       errorTips: '请输入验证码'
     },
+    codeBtn: '获取验证码',
     password: {
       title: '密码',
       placeholder: '请输入密码',
@@ -264,7 +265,8 @@ export const lang = {
         title: '品牌描述',
         placeholder: '请输入品牌描述',
         errorTips: '请输入品牌描述'
-      }
+      },
+      addBtn: '添加品牌'
     },
     competitors: {
       title: '竞争对手',
@@ -857,6 +859,7 @@ export const lang = {
       search: '搜索',
       searchByName: 'KOL 名字',
       searchByRelevant: '文章相关度',
+      searchTips: '<p>我们正在调整我们的搜索引擎。如果您发现错误的搜索结果，请拍照并发送电子邮件至info@robin8.com。</p><p>感谢您的支持！</p>',
       advancedSearch: {
         btn: '高级搜索',
         industry: 'KOL 产业',

@@ -202,7 +202,7 @@
           <div class="form-group">
             <div class="col-xs-offset-7 col-sm-3">
               <div class="add-brand-btn text-right" @click="addCompetitor">
-                <span class="iconfont icon-pencil"></span>Add Brand
+                <span class="iconfont icon-pencil"></span>{{$t('lang.updateBaseInfo.my_brand.addBtn')}}
               </div>
             </div>
           </div>
