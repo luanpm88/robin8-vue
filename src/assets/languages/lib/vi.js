@@ -12,9 +12,11 @@ export const lang = {
   facebook: 'Facebook',
   seeMore: 'Xem thêm',
   more: 'tải thêm',
+  or: 'hoặc là',
   edit: 'sửa',
   delete: 'xóa',
   detail: 'chi tiết',
+  quotations: 'Báo giá',
   payment: 'Thanh toán',
   information: 'Thông tin',
   backBtn: 'Trở lại',
@@ -32,6 +34,7 @@ export const lang = {
   female: 'Nữ',
   yearsOld: 'tuổi',
   yearsOlder: 'tuổi hoặc lớn hơn',
+  overview: 'Overview',
   qrTips: '<p>Vui lòng quét mã</p><p>QR để thêm thông tin</p>',
   noData: 'Không có dữ liệu',
   kolDetailAlert: 'Bản dùng thử 5 ngày của bạn đã hết hạn. Để tiếp tục sử dụng, vui lòng liên hệ với Robin8 nhỏ hoặc gửi email cho Robin8 tại địa chỉ info@robin8.com',
@@ -304,6 +307,19 @@ export const lang = {
         repost: 'Đăng lại'
       }
     },
+    detail: {
+      rewardBy: 'Reward by',
+      perPushKols: 'Expected to push KOL number',
+      participation: 'Participation',
+      avatar: 'Avatar',
+      name: 'Name',
+      perBudgetType: 'Per budget type',
+      totalClick: 'Total click',
+      totalRewards: 'Total rewards',
+      screenshot: 'Screenshot',
+      evaluationDetails: 'Evaluation details',
+      evaluationTips: 'Once the activity is evaluated, it cannot be modified.'
+    },
     link: {
       title: 'Đường dẫn chiến dịch',
       placeholder: 'Đường dẫn chiến dịch dùng để tính toán kết quả của chiến dịch.',
@@ -551,6 +567,19 @@ export const lang = {
         title: 'Chiến dịch đã được đóng',
         desc: ''
       }
+    },
+    list: {
+      profile: 'Profile',
+      active: 'Active',
+      priceList: 'Price List',
+      operation: 'Operation',
+      budget: 'Ngân sách',
+      kolsCount: 'Số lượng kols ước tính',
+      price: 'Giá bán',
+      timeline: 'Mốc thời gian',
+      status: 'Trạng thái',
+      actualAmount: 'Lấy ngân sách',
+      quoteCount: 'Số lượng kols thật'
     }
   },
   wallet: {

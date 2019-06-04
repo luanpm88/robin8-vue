@@ -15,7 +15,7 @@
             <div class="cover">
               <img :src="item.img_url" alt="" class="cover-img" />
               <div class="corner-mark tl">
-                <div class="text">{{item.status_zh}}</div>
+                <div class="text">{{$i18n.locale === 'zh-CN' ? item.status_zh : item.status}}</div>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
                   :to="'/campaigns/' + item.id"
                 >{{item.name}}</router-link>
               </h5>
-              <div class="date">{{item.time_range}} 按照<span class="per-budget-type">{{item.per_budget_type_show}}</span>奖励</div>
+              <div class="date">{{item.time_range}} {{$t('lang.campaigns.detail.rewardBy')}}:<span class="per-budget-type">{{item.per_budget_type_show}}</span></div>
               <div class="desc">{{item.description}}</div>
             </div>
             <div class="campaign-status">
