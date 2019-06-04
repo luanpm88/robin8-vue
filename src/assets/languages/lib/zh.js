@@ -39,6 +39,8 @@ export const lang = {
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   noData: '暂无内容',
   kolDetailAlert: '您的5天试用期已过期。要继续使用，请联系Robin8或发送电子邮件至info@robin8.com Robin8',
+  cartSuccess: '您已成功添加至购物车',
+  stayTuned: '敬请期待',
   router: {
     login: '登录',
     reg: '注册',
@@ -587,7 +589,7 @@ export const lang = {
     },
     list: {
       profile: '活动信息',
-      active: 'KOL相关',
+      active: '活动相关',
       priceList: '价格相关',
       operation: '操作',
       budget: '预算',

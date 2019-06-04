@@ -244,6 +244,7 @@ export default {
         }
         .title {
           margin-left: 20px;
+          font-size: 1.4rem;
           color: #b1b1b1;
         }
         &.with-arr:after {

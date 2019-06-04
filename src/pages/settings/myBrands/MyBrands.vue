@@ -10,12 +10,12 @@
         </router-link>
       </div>
       <div v-if="brandsList.length > 0" class="panel-body">
-        <table class="default-table">
+        <table class="default-table brands-table">
           <thead>
             <tr>
-              <th width="4%" class="text-center">{{$t('lang.myBrandPage.table.title.check')}}</th>
+              <th width="6%" class="text-center">{{$t('lang.myBrandPage.table.title.check')}}</th>
               <th width="8%" class="text-center">{{$t('lang.myBrandPage.table.title.id')}}</th>
-              <th width="20%">{{$t('lang.myBrandPage.table.title.name')}}</th>
+              <th width="18%">{{$t('lang.myBrandPage.table.title.name')}}</th>
               <th width="20%">{{$t('lang.myBrandPage.table.title.keywords')}}</th>
               <th width="38%">{{$t('lang.myBrandPage.table.title.description')}}</th>
               <th width="10%" class="text-center">{{$t('lang.myBrandPage.table.title.operation')}}</th>
@@ -176,6 +176,11 @@ export default {
 <style lang="scss" scoped>
 .brands-list-container {
   padding: 30px 100px;
+  .brands-table {
+    th.text-center {
+      padding: 10px 0;
+    }
+  }
   .operation-btn {
     cursor: pointer;
   }

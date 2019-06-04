@@ -34,7 +34,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
     <div class="social-search col-sm-4">
@@ -365,7 +365,7 @@ export default {
           alert(resData.detail)
           return false
         }
-        alert('您已成功添加至购物车')
+        alert(this.$t('lang.cartSuccess'))
       }
     },
     // 获取my brand 页面

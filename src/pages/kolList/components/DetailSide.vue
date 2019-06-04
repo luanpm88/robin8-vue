@@ -150,7 +150,7 @@ export default {
         currentKeywords.split(",").forEach(item => {
           newKey += '"' + item + '" '
         })
-        // 
+        //
         this.trendParams.brand_keywords = newKey
         // 品牌情绪 计算参数
         this.sentimentParams.brand_keywords = newKey
@@ -556,7 +556,7 @@ export default {
           alert(resData.detail)
           return false
         }
-        alert("您已成功添加至购物车")
+        alert(this.$t('lang.cartSuccess'))
       }
     },
     // activity analytics 还有info 假如没有info 调用 Fergus的info 接口 ---- 目前平台没有在这边，所以只用了 fergus初始化的接口
