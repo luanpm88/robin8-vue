@@ -39,6 +39,8 @@ export const lang = {
   qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
   noData: 'No Data',
   kolDetailAlert: 'Your 5 day trial is expired.To continue using, please contact little Robin8 or email Robin8 at info@robin8.com',
+  cartSuccess: 'You have successfully added to your shopping cart',
+  stayTuned: 'Stay tuned',
   router: {
     login: 'Log In',
     reg: 'Sign Up',

@@ -18,7 +18,7 @@
                   :to="'/campaigns/' + detailData.id"
                 >{{detailData.name}}</router-link>
               </h5>
-              <div class="date">{{$t('lang.campaigns.update')}}:{{detailData.updated_at}} {{$t('lang.campaigns.detail.rewardBy')}}: <span class="per-budget-type">{{detailData.per_budget_type_show}}</span></div>
+              <div class="date">{{$t('lang.campaigns.update')}}:{{detailData.updated_at}} {{$t('lang.campaigns.detail.rewardBy')}}: <span class="per-budget-type">{{$i18n.locale === 'zh-CN' ? detailData.per_budget_type_show_zh : detailData.per_budget_type_show}}</span></div>
               <div class="desc">{{detailData.description}}</div>
               <div class="desc">{{$t('lang.campaigns.link.title')}}:<a :href="detailData.url" target="_blank">{{detailData.url}}</a></div>
             </div>

@@ -124,7 +124,7 @@ export default {
           alert(resData.detail)
           return false
         }
-        alert('您已成功添加至购物车')
+        alert(this.$t('lang.cartSuccess'))
       }
     },
     doDelete (id) {
@@ -133,7 +133,7 @@ export default {
       })
     },
     doChat () {
-      alert('敬请期待')
+      alert(this.$t('lang.stayTuned'))
     },
     updateData (data) {
       // let _url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : ''
