@@ -449,7 +449,8 @@ export default {
         {
           index: 1,
           name: "wechat"
-        },
+        }
+
         // {
         //   index: 2,
         //   name: "xiaohongshu"
