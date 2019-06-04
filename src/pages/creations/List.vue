@@ -8,10 +8,10 @@
         <table v-if="creationsList.length > 0" class="default-table">
           <thead>
             <tr>
-              <th width="40%">Profile</th>
-              <th width="28%">Active</th>
-              <th width="20%">Price List</th>
-              <th width="12%" class="text-center">Operation</th>
+              <th width="40%">{{$t('lang.creations.list.profile')}}</th>
+              <th width="28%">{{$t('lang.creations.list.active')}}</th>
+              <th width="20%">{{$t('lang.creations.list.price')}}</th>
+              <th width="12%" class="text-center">{{$t('lang.creations.list.operation')}}</th>
             </tr>
           </thead>
           <tbody>
@@ -28,40 +28,40 @@
                   </div>
                   <div class="media-body media-middle">
                     <h5 class="title">{{item.name}}</h5>
-                    <p>Budget: {{item.pre_amount}}</p>
-                    <p>estimated number of kols: {{item.pre_kols_count}}</p>
-                    <p>price: {{item.price_range}}</p>
+                    <p>{{$t('lang.creations.list.budget')}}: {{item.pre_amount}}</p>
+                    <p>{{$t('lang.creations.list.kolsCount')}}: {{item.pre_kols_count}}</p>
+                    <p>{{$t('lang.creations.list.price')}}: {{item.price_range}}</p>
                   </div>
                 </div>
               </td>
               <td>
-                <p>timeline: {{item.time_range}}</p>
-                <p>status: {{item.status_zh}}</p>
+                <p>{{$t('lang.creations.list.timeline')}}: {{item.time_range}}</p>
+                <p>{{$t('lang.creations.list.status')}}: {{item.status_zh}}</p>
               </td>
               <td>
-                <p>take budget: {{item.actual_amount}}</p>
-                <p>real number of kols: {{item.quote_count}}</p>
+                <p>{{$t('lang.creations.list.actualAmount')}}: {{item.actual_amount}}</p>
+                <p>{{$t('lang.creations.list.quoteCount')}}: {{item.quote_count}}</p>
               </td>
               <td class="text-center operation-area">
                 <router-link
                   :to="'/creations/'+ item.id"
                   class="btn btn-cyan btn-sm"
                 >
-                  Detail
+                  {{$t('lang.detail')}}
                 </router-link>
                 <router-link
                   v-if="item.status === 'pending' || item.status === 'unpassed'"
                   :to="'/creations/'+ item.id + '/edit'"
                   class="btn btn-blue btn-sm"
                 >
-                  Edit
+                  {{$t('lang.edit')}}
                 </router-link>
                 <router-link
                   v-else
                   :to="'/creations/'+ item.id + '/kols'"
                   class="btn btn-cyan btn-outline btn-sm"
                 >
-                  Quotations
+                  {{$t('lang.quotations')}}
                 </router-link>
               </td>
             </tr>

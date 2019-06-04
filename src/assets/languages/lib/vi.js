@@ -15,6 +15,7 @@ export const lang = {
   edit: 'sửa',
   delete: 'xóa',
   detail: 'chi tiết',
+  quotations: 'Báo giá',
   payment: 'Thanh toán',
   information: 'Thông tin',
   backBtn: 'Trở lại',
@@ -551,6 +552,19 @@ export const lang = {
         title: 'Chiến dịch đã được đóng',
         desc: ''
       }
+    },
+    list: {
+      profile: 'Profile',
+      active: 'Active',
+      priceList: 'Price List',
+      operation: 'Operation',
+      budget: 'Ngân sách',
+      kolsCount: 'Số lượng kols ước tính',
+      price: 'Giá bán',
+      timeline: 'Mốc thời gian',
+      status: 'Trạng thái',
+      actualAmount: 'Lấy ngân sách',
+      quoteCount: 'Số lượng kols thật'
     }
   },
   wallet: {

@@ -15,6 +15,7 @@ export const lang = {
   edit: '编辑',
   delete: '删除',
   detail: '详情',
+  quotations: '行情',
   payment: '支付',
   information: '基本信息',
   backBtn: '返回',
@@ -568,6 +569,19 @@ export const lang = {
         title: '活动已关闭',
         desc: ''
       }
+    },
+    list: {
+      profile: 'KOL信息',
+      active: 'KOL相关',
+      priceList: '价格相关',
+      operation: '操作',
+      budget: '预算',
+      kolsCount: '估计的KOL数量',
+      price: '价格',
+      timeline: '时间范围',
+      status: '状态',
+      actualAmount: '实际金额',
+      quoteCount: '实际KOL数量'
     }
   },
   wallet: {
@@ -737,7 +751,8 @@ export const lang = {
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
     },
-    overThreeTip: '您最多只能选择3条竞争者'
+    overThreeTip: '您最多只能选择3条竞争者',
+    noneComTip: '您还没有选择比较品牌。'
   },
   kolList: {
     detail: {

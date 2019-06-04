@@ -15,6 +15,7 @@ export const lang = {
   edit: 'Edit',
   delete: 'Delete',
   detail: 'Detail',
+  quotations: 'Quotations',
   payment: 'Payment',
   information: 'Information',
   backBtn: 'Back',
@@ -567,6 +568,19 @@ export const lang = {
         title: 'Your campaign is closed',
         desc: ''
       }
+    },
+    list: {
+      profile: 'Profile',
+      active: 'Active',
+      priceList: 'Price List',
+      operation: 'Operation',
+      budget: 'Budget',
+      kolsCount: 'Estimated number of kols',
+      price: 'Price',
+      timeline: 'Timeline',
+      status: 'Status',
+      actualAmount: 'Take budget',
+      quoteCount: 'Real number of kols'
     }
   },
   wallet: {
