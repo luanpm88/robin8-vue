@@ -7,7 +7,7 @@
             <div class="cover">
               <img :src="detailData.img_url" alt="" class="cover-img" />
               <div class="corner-mark tl">
-                <div class="text">{{campaignStatus}}</div>
+                <div class="text">{{$i18n.locale === 'zh-CN' ? detailData.status_zh : detailData.status}}</div>
               </div>
             </div>
           </div>
@@ -354,7 +354,6 @@ export default {
   data () {
     return {
       detailData: {},
-      campaignStatus: '',
       kolsParams: {
         'campaign_id': this.$route.params.id
       },
@@ -480,13 +479,6 @@ export default {
         console.log(resData)
         this.detailData = resData
         this.evaluationStatus = resData.evaluation_status
-
-        if (this.$i18n.locale === 'zh-CN') {
-          this.campaignStatus = resData.status_zh
-        }
-        if (this.$i18n.locale === 'en-US') {
-          this.campaignStatus = resData.status
-        }
 
         let _ageData = resData.age_analysis
         let _ageArr = []

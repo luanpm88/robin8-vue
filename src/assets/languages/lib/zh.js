@@ -586,7 +586,7 @@ export const lang = {
       }
     },
     list: {
-      profile: 'KOL信息',
+      profile: '活动信息',
       active: 'KOL相关',
       priceList: '价格相关',
       operation: '操作',
