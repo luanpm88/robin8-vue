@@ -34,6 +34,7 @@ export const lang = {
   female: '女',
   yearsOld: '岁',
   yearsOlder: '岁以上',
+  overview: '总览',
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   noData: '暂无内容',
   kolDetailAlert: '您的5天试用期已过期。要继续使用，请联系Robin8或发送电子邮件至info@robin8.com Robin8',
@@ -312,6 +313,19 @@ export const lang = {
         repost: '再次发布',
         cancel: '撤销活动'
       }
+    },
+    detail: {
+      rewardBy: '奖励方式',
+      perPushKols: '预计推送KOL人数',
+      participation: '参与情况',
+      avatar: '头像',
+      name: '昵称',
+      perBudgetType: '计费点击',
+      totalClick: '总点击',
+      totalRewards: '奖励',
+      screenshot: '截图',
+      evaluationDetails: '评价详情',
+      evaluationTips: '活动一旦评价将不能修改'
     },
     link: {
       title: '活动链接',

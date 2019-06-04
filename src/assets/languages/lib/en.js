@@ -34,6 +34,7 @@ export const lang = {
   female: 'Female',
   yearsOld: 'years old',
   yearsOlder: 'years old or older',
+  overview: 'Overview',
   qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
   noData: 'No Data',
   kolDetailAlert: 'Your 5 day trial is expired.To continue using, please contact little Robin8 or email Robin8 at info@robin8.com',
@@ -311,6 +312,19 @@ export const lang = {
         repost: 'Repost',
         cancel: 'Cancel'
       }
+    },
+    detail: {
+      rewardBy: 'Reward by',
+      perPushKols: 'Expected to push KOL number',
+      participation: 'Participation',
+      avatar: 'Avatar',
+      name: 'Name',
+      perBudgetType: 'Per budget type',
+      totalClick: 'Total click',
+      totalRewards: 'Total rewards',
+      screenshot: 'Screenshot',
+      evaluationDetails: 'Evaluation details',
+      evaluationTips: 'Once the activity is evaluated, it cannot be modified.'
     },
     link: {
       title: 'Campaign URL',
