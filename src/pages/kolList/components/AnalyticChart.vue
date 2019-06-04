@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <div class="panel default-panel mt20" v-for="(item, index) in currentData" :key="index">
+    <div class="panel default-panel mt20 detail-analytic-chart" v-for="(item, index) in currentData" :key="index">
       <div class="panel-body prl30">
         <h5 class="title">{{item.mode}} {{$t('lang.kolList.analyticVue.chat.tit')}} {{item.type}} {{$t('lang.kolList.analyticVue.chat.count')}} {{item.countParams.start_date}} - {{item.countParams.end_date}}</h5>
         <div class="nonetip" v-if="item.isShow">
