@@ -12,7 +12,7 @@
     <!-- 搜索条件 -->
     <div class="panel default-panel kols-list-panel">
       <div class="panel-body">
-        <h5 class="title">{{$t('lang.kolList.search.topKey')}}</h5>
+        <h5 class="title search-tit">{{$t('lang.kolList.search.topKey')}}</h5>
         <!-- 最头部input 条件 -->
         <div class="form-horizontal">
           <div class="form-group mt20">
@@ -450,31 +450,31 @@ export default {
           index: 1,
           name: "wechat"
         },
-        {
-          index: 2,
-          name: "xiaohongshu"
-        },
+        // {
+        //   index: 2,
+        //   name: "xiaohongshu"
+        // },
         // {
         //   index: 3,
         //   name: "kuaishou"
         // },
-        {
-          index: 4,
-          name: "bilibili"
-        },
-        {
-          index: 5,
-          name: "douyin"
-        }, {
-          index: 6,
-          name: ('instagram')
-        }, {
-          index: 7,
-          name: ('youtube')
-        }, {
-          index: 8,
-          name: ('facebook')
-        }
+        // {
+        //   index: 4,
+        //   name: "bilibili"
+        // },
+        // {
+        //   index: 5,
+        //   name: "douyin"
+        // }, {
+        //   index: 6,
+        //   name: ('instagram')
+        // }, {
+        //   index: 7,
+        //   name: ('youtube')
+        // }, {
+        //   index: 8,
+        //   name: ('facebook')
+        // }
       ],
       tabIndex: 0,
       searchListBox: [],
