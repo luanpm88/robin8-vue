@@ -140,16 +140,16 @@
     color: nth($font-color, 1);
   }
 }
-// .kol-check-box{
-//   text-align: center;
-// }
-// 有时候会把勾选的放在 半边 的样式
 .kol-check-box{
-  label{
-    line-height: 34px;
-    padding-left: 80px;
-  }
+  text-align: center;
 }
+// 有时候会把勾选的放在 半边 的样式
+// .kol-check-box{
+//   label{
+//     line-height: 34px;
+//     padding-left: 80px;
+//   }
+// }
 .kol-select-platform{
   display: inline-block;
   margin-right: 15px;

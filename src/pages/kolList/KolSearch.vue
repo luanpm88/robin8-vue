@@ -195,20 +195,20 @@
               </div>
             </div>
              <!-- 有时候会把勾选的放在 半边 -->
-              <div class="kol-check-box col-sm-6">
+              <!-- <div class="kol-check-box col-sm-6">
               <label>
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
-            </div>
+            </div> -->
           </div>
           <!-- 勾选的占用一行的样式  -->
-          <!-- <div class="kol-check-box">
+          <div class="kol-check-box">
             <label>
               <input type="checkbox" v-model="kolOnly">
               {{$t('lang.kolList.search.advancedSearch.checkText')}}
             </label>
-          </div> -->
+          </div>
           <div class="text-center p30">
             <button
               type="button"
