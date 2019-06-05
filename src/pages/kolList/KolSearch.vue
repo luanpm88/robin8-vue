@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div
+            <!-- <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.industry')}}</div>
             <div class="col-sm-4">
@@ -183,7 +183,7 @@
                   value="travel"
                 >{{$t('lang.kolList.search.advancedSearch.industryType.Travel')}}</option>
               </select>
-            </div>
+            </div> -->
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.engagement')}}</div>
@@ -194,13 +194,13 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-            <!--  有时候会把勾选的放在 半边
+             <!-- 有时候会把勾选的放在 半边 -->
               <div class="kol-check-box col-sm-6">
               <label>
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
-            </div> -->
+            </div>
           </div>
           <!-- 勾选的占用一行的样式  -->
           <!-- <div class="kol-check-box">
