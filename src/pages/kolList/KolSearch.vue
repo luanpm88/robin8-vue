@@ -203,12 +203,12 @@
             </div> -->
           </div>
           <!-- 勾选的占用一行的样式  -->
-          <div class="kol-check-box">
+          <!-- <div class="kol-check-box">
             <label>
               <input type="checkbox" v-model="kolOnly">
               {{$t('lang.kolList.search.advancedSearch.checkText')}}
             </label>
-          </div>
+          </div> -->
           <div class="text-center p30">
             <button
               type="button"
@@ -994,7 +994,7 @@ export default {
           alert(resData.detail);
           return false;
         }
-        alert(this.$t('lang.cartSuccess'))
+        alert("您已成功添加至购物车");
       }
     },
     onPageChange(page) {
