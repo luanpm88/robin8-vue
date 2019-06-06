@@ -302,6 +302,8 @@ const config = {
 
   // Best Performance Posts weibo
   relevantPostWeibo: `${searchHost}/weibo/profile/most_relevant_post_by_profile_id?${searchHostKey}`,
+  // Best Performance Posts weixin
+  relevantPostWeixin: `${searchHost}/weixin/profile/most_relevant_post_by_profile_id?${searchHostKey}`,
 
   // Industries Distribution weibo
   detailAnalyOneWeibo: `${searchHost}/weibo/post/industry_distribution?${searchHostKey}`,

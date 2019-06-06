@@ -62,14 +62,16 @@ export default {
       relevantKey.split(',').forEach(item => {
         getNewKey += '"' + item + '" '
       })
+      this.relevantPostParams.keywords = getNewKey
       if (Number(this.$route.query.type) === 0) {
         // 调用微博的most_relevant_post  暂时微信没有这个接口
         this.relevantPostParams.profile_id = Number(this.$route.params.id)
-        this.relevantPostParams.keywords = getNewKey
         this.relevantPostWeibo(this.relevantPostParams)
       }
-      if (Number(this.$route.query.type) !== 0) {
-        this.isRelevantBox = false
+      if (Number(this.$route.query.type) === 1) {
+        // 调用微博的most_relevant_post  暂时微信没有这个接口
+        this.relevantPostParams.profile_id = this.$route.params.id
+        this.relevantPostWeixin(this.relevantPostParams)
       }
     } else {
       this.isRelevantBox = false
@@ -87,6 +89,43 @@ export default {
         .then(function(res) {
           if (res.status === 200) {
             // console.log('relevantPostWeibo', res)
+            _that.isRelevantLoading = false
+            if (res.data.data.length > 0) {
+              _that.isRelevantShow = false
+              _that.isRelevant = true
+              res.data.data.forEach(item => {
+                if (Number(item.correlation) !== 0) {
+                  item.correlation =
+                    commonJs.threeFormatter(item.correlation, 2) + '+'
+                } else {
+                  item.correlation = commonJs.threeFormatter(
+                    item.correlation,
+                    2
+                  )
+                }
+              })
+              _that.relevantList = res.data.data
+            } else {
+              _that.isRelevantShow = true
+              _that.isRelevant = false
+            }
+          }
+        })
+        .catch(function(error) {
+          // console.log(error)
+        })
+    },
+    relevantPostWeixin(params) {
+      const _that = this
+      axios
+        .post(apiConfig.relevantPostWeixin, params, {
+          headers: {
+            Authorization: _that.authorization
+          }
+        })
+        .then(function(res) {
+          if (res.status === 200) {
+            console.log('relevantweixin', res)
             _that.isRelevantLoading = false
             if (res.data.data.length > 0) {
               _that.isRelevantShow = false

@@ -6,7 +6,7 @@
         <!-- kol 详情 -->
         <detail-side :currentKeywords="currentBrandKeywords" :currentName="currentBrandName" @otherSocial="giveOtherProp"></detail-side>
         <!-- industries 行业图表  暂时隐藏-->
-        <industries v-if="type === 0"></industries>
+        <industries></industries>
       </div>
       <div class="kol-detail-right col-xs-8" v-if="type === 0 || type === 1">
         <!-- tab 平台切换 -->

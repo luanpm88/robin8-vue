@@ -868,7 +868,7 @@ export default {
       if (tab.index == 0) {
         this.followerFrom = "100000";
       } else if (tab.index == 1) {
-        this.followerFrom = "30000";
+        this.followerFrom = "1000";
       } else {
         this.followerFrom = "";
       }
@@ -1051,7 +1051,7 @@ export default {
       if (tab == 0) {
         this.followerFrom = "100000";
       } else if (tab == 1) {
-        this.followerFrom = "30000";
+        this.followerFrom = "1000";
       } else {
         this.followerFrom = "";
       }

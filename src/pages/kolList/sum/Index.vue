@@ -11,7 +11,7 @@
     <best-posts></best-posts>
 
     <!-- most_relevant_post  暂时微信没有这个接口 -->
-    <most-relevent v-if="type === 0" :keywords='currentKeywords'></most-relevent>
+    <most-relevent :keywords='currentKeywords'></most-relevent>
 
     <!-- Keywords -->
     <keywords></keywords>
