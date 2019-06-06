@@ -348,7 +348,6 @@
                     :format="() => item.influence"
                   />
                   <!-- {{$t('lang.kolList.search.influenceTip')}} -->
-                  <!-- Coming Soon -->
                 </td>
                 <td class="text-center">
                   <a-progress
