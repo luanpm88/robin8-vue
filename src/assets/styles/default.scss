@@ -40,12 +40,13 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 }
 
 /*container styles*/
-.container { width: 1280px; margin: 0 auto; }
+// .container { width: 1280px; margin: 0 auto; }
 
 /*default table styles*/
 .default-table { width: 100%; max-width: 100%; border: 0; border-spacing: 0; border-collapse: collapse;
-  th { font-weight: bold; }
-  tbody { tr { &:nth-child(odd) { background-color: rgba(nth($cyan, 1), .2); }
+  th { background-color: #e7edef; }
+  tbody { tr { border-bottom: 2px solid #e1e8ea;
+      &:last-child { border-bottom: none; }
     }
   }
   th, td { line-height: 20px; padding: 10px; text-align: left; word-break: break-all;
@@ -115,20 +116,17 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .alert-modal.active .modal-content { -webkit-transition-duration: 400ms; transition-duration: 400ms; @include transform(translate3d(-50%, -50%, 0) scale(1)); opacity: 1; }
 
 /*panel styles*/
-.panel { .panel-head { padding: 20px; background-color: #fff;
+.panel { .panel-head { padding: 10px 14px;
     .title-bar { margin: -10px; }
     .title { line-height: 20px; font-size: $font-nm-l; font-weight: 400; color: #575962;
       .iconfont { display: inline-block; margin: -4px 4px 0 0; vertical-align: middle; font-size: 2rem; }
       &.purple { color: nth($purple, 1); }
     }
-    & + .panel-body { margin-top: 1px; }
   }
-  .panel-body { background-color: #fff;
-    & + .panel-foot { margin-top: 1px; }
-  }
-  .panel-foot { padding: 10px; background-color: #fff; }
-  &.default-panel { border-radius: 0; box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, .08); }
-  &.radius-panel { border-radius: 10px; overflow: hidden; }
+  .panel-body { border: 2px solid #fff; border-bottom: none; border-radius: 5px 5px 0 0; background-color: #f6f7f7; }
+  .panel-foot { border: 2px solid #fff; border-bottom: none; border-top-color: #e1e8ea; padding: 20px; background-color: #f6f7f7; }
+  &.default-panel { border-bottom: 2px solid #fff; border-radius: 0 0 5px 5px; }
+  &.radius-panel { border-radius: 5px; overflow: hidden; }
 }
 
 /*corner mark styles*/
@@ -170,6 +168,7 @@ input[type=radio]:checked:before { content: $icon-radioed; }
 .hide { display: none !important; }
 .show { display: block !important; }
 .p10 { padding: 10px; }
+.p20 { padding: 20px; }
 .p30 { padding: 30px; }
 .mt1 { margin-top: 1px; }
 .mt10 { margin-top: 10px; }

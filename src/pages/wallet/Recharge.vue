@@ -136,6 +136,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wallet-container {
+  padding: 0 100px 30px;
+}
 .recharge-form {
   padding: 60px;
   .form-group {

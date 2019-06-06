@@ -1,35 +1,54 @@
 <template>
-  <div class="com-brand">
-    <div class="com-add">
-      <span><router-link :to="{path: '/settings/my_competition_brands/create'}">{{$t('lang.myCompetitionBrands.addBtn')}}</router-link></span>
-    </div>
-    <table class="com-brand-table">
-      <tr>
-        <th>{{$t('lang.myCompetitionBrands.table.title.check')}}</th>
-        <th>{{$t('lang.myCompetitionBrands.table.title.id')}}</th>
-        <th>{{$t('lang.myCompetitionBrands.table.title.name')}}</th>
-        <th>{{$t('lang.myCompetitionBrands.table.title.shortname')}}</th>
-        <th>{{$t('lang.myCompetitionBrands.table.title.operation')}}</th>
-      </tr>
-      <tr v-for="(key, index) in dataListBox" :key="index">
-        <td>
-          <input type="checkbox" v-model="key.isCheck" @click="checkItem(key)" :disabled="key.isDisable">
-        </td>
-        <td>{{key.id}}</td>
-        <td>{{key.name}}</td>
-        <td>{{key.short_name}}</td>
-        <td>
-        <p class="campaign-info-detail">
-          <span @click="toDetail(key)">{{$t('lang.edit')}}</span>
-          <span @click="toDelete(key)">{{$t('lang.delete')}}</span>
-        </p>
-      </td>
-      </tr>
-    </table>
-    <div class="com-add mt20">
-      <button type="button" class="btn btn-purple" @click="checkInsight">
-      {{$t('lang.myCompetitionBrands.contrastButton')}}
-    </button>
+  <div class="brands-list-container">
+    <div class="panel default-panel brands-list-panel">
+      <div class="panel-head text-right">
+        <router-link
+          to="/settings/my_competition_brands/create"
+          class="btn btn-cyan"
+        >
+          {{$t('lang.myCompetitionBrands.addBtn')}}
+        </router-link>
+      </div>
+
+      <div v-if="dataListBox.length > 0" class="panel-body">
+        <table class="default-table">
+          <thead>
+            <tr>
+              <th width="10%" class="text-center">{{$t('lang.myCompetitionBrands.table.title.check')}}</th>
+              <th width="10%" class="text-center">{{$t('lang.myCompetitionBrands.table.title.id')}}</th>
+              <th width="30%">{{$t('lang.myCompetitionBrands.table.title.name')}}</th>
+              <th width="40%">{{$t('lang.myCompetitionBrands.table.title.shortname')}}</th>
+              <th width="10%" class="text-center">{{$t('lang.myCompetitionBrands.table.title.operation')}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="item in dataListBox"
+              :key="item.id"
+            >
+              <td class="text-center">
+                <input type="checkbox" v-model="item.isCheck" @click="checkItem(item)" :disabled="item.isDisable">
+              </td>
+              <td class="text-center">{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.short_name}}</td>
+              <td class="text-center operation-area">
+                <span class="operation-btn iconfont icon-edit" @click="toDetail(item)"></span>
+                <span class="operation-btn iconfont icon-delete" @click="toDelete(item)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else class="panel-body">
+        <div class="p30 text-center">{{$t('lang.noData')}}...</div>
+      </div>
+
+      <div class="panel-foot text-center">
+        <button type="button" class="btn btn-cyan" @click="checkInsight">
+          {{$t('lang.myCompetitionBrands.contrastButton')}}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -158,72 +177,17 @@ export default {
       } else {
         alert(this.$t('lang.myCompetitionBrands.noneComTip'));
       }
-      
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.com-add {
-  text-align: right;
-  margin-bottom: 20px;
-  span{
+.brands-list-container {
+  padding: 30px 100px;
+  .operation-btn {
     cursor: pointer;
-    &:hover{
-      text-decoration: underline
-    }
   }
-}
-.com-brand {
-  min-height: 500px;
-  background: $white;
-  padding: 30px;
-  margin-top: 20px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-}
-.com-brand-table{
-  color: #333;
-  width: 100%;
-  tr{
-    border-bottom: 1px solid #ddd;
-    th{
-      color: #333;
-      font-size: $font-nm-b;
-       text-align: center;
-      padding: 5px 0px;
-      &:nth-child(1){
-        width: 8%;
-      }
-      &:nth-child(2){
-        width: 20%;
-      }
-    }
-  }
-  td{
-    text-align: center;
-    padding: 16px 0px;
-    &:nth-child(1){
-      width: 8%;
-    }
-    &:nth-child(2){
-      width: 20%;
-    }
-  }
-}
-.campaign-info-detail{
-  line-height: 22px;
-  span{
-    cursor: pointer;
-    color: #b37feb;
-    &:hover{
-      text-decoration: underline;
-    }
-    &:nth-child(2) {
-        margin-left: 8px;
-        color: #6168e6;
-    }
-  }
-
 }
 </style>

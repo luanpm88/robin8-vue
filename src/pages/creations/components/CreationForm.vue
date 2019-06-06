@@ -2,7 +2,7 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
+        <h5 class="title">{{$t('lang.creations.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -77,7 +77,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.campaignInfo')}}</h5>
+        <h5 class="title">{{$t('lang.creations.campaignInfo')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -90,7 +90,7 @@
                   :key="item.id"
                   class="col-sm-6 platform-item"
                 >
-                  <div class="col-sm-2 text-center">
+                  <div class="col-sm-2 pr0 pl0 text-center">
                     <div
                       class="check-icon"
                       :class="[item.checked ? 'checked' : '']"
@@ -250,7 +250,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.bigVRequirement')}}</h5>
+        <h5 class="title">{{$t('lang.creations.bigVRequirement')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -440,7 +440,7 @@
 
     <div v-if="submitData.selected_kols.length > 0" class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.bigVSelected')}}</h5>
+        <h5 class="title">{{$t('lang.creations.bigVSelected')}}</h5>
       </div>
       <div class="panel-body">
         <div class="checked-kols-list clearfix">
@@ -1291,12 +1291,12 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-create-form {
+  padding: 10px 0;
   .form-group {
-    padding: 20px 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 40px;
   }
   .platform-item {
-    margin: 10px 0;
+    margin: 5px 0;
   }
 }
 .create-btn-area {
@@ -1308,9 +1308,12 @@ export default {
     }
   }
 }
+.creation-form {
+  padding: 0 100px;
+}
 .creation-form /deep/ .kols-list {
   height: 352px;
-  padding: 24px 60px;
+  padding: 24px 30px;
   font-size: 0;
   // & > .kols-list-item {
   //   display: inline-block;
@@ -1319,7 +1322,7 @@ export default {
   // }
 }
 .checked-kols-list {
-  padding: 24px 60px;
+  padding: 24px 30px;
   & > .kols-list-item {
     float: left;
     width: 33.33333%;
@@ -1331,5 +1334,8 @@ export default {
 }
 .pr0 {
   padding-right: 0;
+}
+.pl0 {
+  padding-left: 0;
 }
 </style>

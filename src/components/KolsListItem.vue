@@ -8,6 +8,7 @@
         <div class="avatar">
           <router-link
             :to="url"
+            target="_blank"
           >
             <img
               :src="renderData.avatar_url"
@@ -26,6 +27,7 @@
         <h5 class="name">
           <router-link
             :to="url"
+            target="_blank"
           >
             {{renderData.profile_name}}
             <img
@@ -36,7 +38,8 @@
             />
           </router-link>
         </h5>
-        <p class="desc">{{renderData.description_raw}}</p>
+        <p class="desc" v-if="renderStatus.isPostTime">{{renderData.post_time}}</p>
+        <p class="desc" v-else>{{renderData.description_raw}}</p>
       </div>
       <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
@@ -121,7 +124,7 @@ export default {
           alert(resData.detail)
           return false
         }
-        alert('您已成功添加至购物车')
+        alert(this.$t('lang.cartSuccess'))
       }
     },
     doDelete (id) {
@@ -130,7 +133,7 @@ export default {
       })
     },
     doChat () {
-      alert('敬请期待')
+      alert(this.$t('lang.stayTuned'))
     },
     updateData (data) {
       // let _url = !!data.bigv_url && data.bigv_url != '' ? data.bigv_url : ''
@@ -224,13 +227,13 @@ export default {
       margin-left: 10px;
       cursor: pointer;
       &.icon-msg {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
       &.icon-star-fill.active {
         color: nth($yellow, 1);
       }
       &.icon-cart.active {
-        color: nth($purple, 1);
+        color: nth($cyan, 1);
       }
     }
   }

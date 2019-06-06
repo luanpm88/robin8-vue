@@ -155,7 +155,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.type.title')}}:</div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
               <div class="row">
                 <div class="col-sm-5">
                   <label class="ctrl-label">
@@ -193,7 +193,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-4 control-label">{{$t('lang.wallet.invoicePage.invoiceSubmit.price_sheet.title')}}:</div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
               <div class="row">
                 <div class="col-sm-5">
                   <label class="ctrl-label">
@@ -394,6 +394,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wallet-container {
+  padding: 0 100px 30px;
+}
 .invoice-form {
   padding: 20px 60px;
   .form-group {
@@ -401,7 +404,7 @@ export default {
   }
 }
 .invoice-history-list {
-  padding: 20px 30px;
+  padding: 20px;
   border-bottom: 1px solid $bg-color;
 }
 .create-btn, .submit-btn {

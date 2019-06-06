@@ -10,11 +10,9 @@
       </div>
     </transition>
     <!-- 搜索条件 -->
-    <div class="panel default-panel kols-list-panel">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.kolList.search.topKey')}}</h5>
-      </div>
+    <div class="panel default-panel kols-search-panel">
       <div class="panel-body">
+        <h5 class="title search-tit">{{$t('lang.kolList.search.topKey')}}</h5>
         <!-- 最头部input 条件 -->
         <div class="form-horizontal">
           <div class="form-group mt20">
@@ -29,26 +27,44 @@
                 <div class="input-group-btn">
                   <button
                     type="button"
-                    class="btn btn-purple"
+                    class="btn btn-cyan"
                     @click="totalSearch"
                   >{{$t('lang.kolList.search.search')}}</button>
                 </div>
               </div>
             </div>
           </div>
-          <!-- 平台切换复选框 -->
+          <!-- 搜索的类型 -->
           <div class="text-center">
-            <div class="kol-select-platform" v-for="(platform, index) in tabList" :key='platform.tabIndex'>
+            <div class="kol-select-platform" v-for="searchType in searchTypeList" :key='searchType.tabIndex'>
+              <label class="ctrl-label">
+                <input
+                  name="searchType"
+                  type="radio"
+                  :value="searchType.index"
+                  v-model="selectSearchType"
+                  v-validate="'required'"
+                  @change="SearchTypeChange"
+                />
+                <span>
+                  {{$t(`lang.${searchType.name}`)}}</span>
+              </label>
+            </div>
+          </div>
+          <!-- 平台切换复选框 -->
+          <div class="text-center mt10">
+            <div class="kol-select-platform" v-for="platform in tabList" :key='platform.tabIndex'>
               <label class="ctrl-label">
                 <input
                   name="platform"
                   type="radio"
-                  :value="index"
+                  :value="platform.index"
                   v-model="selectPlatform"
                   v-validate="'required'"
                   @change="platformChange"
                 />
-                <span>{{$t(`lang.${platform.name}`)}}</span>
+                <span>
+                  {{$t(`lang.${platform.name}`)}}</span>
               </label>
             </div>
           </div>
@@ -178,30 +194,36 @@
                 <input type="text" class="form-control" v-model="engagementTo" placeholder="N/A">
               </div>
             </div>
-            <!-- <div  class="col-sm-6">
-              <label class="kol-check-label">
+             <!-- 有时候会把勾选的放在 半边 -->
+              <!-- <div class="kol-check-box col-sm-6">
+              <label>
                 <input type="checkbox" v-model="kolOnly">
                 {{$t('lang.kolList.search.advancedSearch.checkText')}}
               </label>
             </div> -->
           </div>
+          <!-- 勾选的占用一行的样式  -->
+          <div class="kol-check-box">
+            <label>
+              <input type="checkbox" v-model="kolOnly">
+              {{$t('lang.kolList.search.advancedSearch.checkText')}}
+            </label>
+          </div>
           <div class="text-center p30">
             <button
               type="button"
-              class="btn btn-blue btn-outline"
+              class="btn btn-cyan search-btn"
               @click="totalSearch"
             >{{$t('lang.kolList.search.search')}}</button>
           </div>
-          <div class="search-tips text-center">
-            <p>We are tuning our search engine. If you find a wrong search result, please take a picture and email us at info@robin8.com.</p>
-            <p>Thank you for your support!</p>
-          </div>
+          <div class="search-tips text-center" v-html="$t('lang.kolList.search.searchTips')"></div>
         </div>
       </div>
     </div>
     <!-- 内容部分 -->
     <div class="panel default-panel kols-list-panel mt20" v-if="isShowKolList">
-      <div class="panel-body p30">
+      <div class="panel-body">
+        <!-- 以前头部会显示 微信微博平台数据，中间先让隐藏了，后续不知道会不会让显示，所以先注释代码 -->
         <!-- <div class="kols-list-statistics">
           <span v-if="tabIndex === 1" class="item">{{$t('lang.kolList.search.tableTop.weixinBig')}} - 5,564,575</span>
           <span v-if="tabIndex === 0" class="item">{{$t('lang.kolList.search.tableTop.weiboBig')}} - 65,860,968</span>
@@ -215,9 +237,10 @@
           <a-spin tip="Loading..."/>
         </div>
         <div v-if="isTable">
-          <table class="default-table mt20 mb10">
+          <table class="default-table">
             <thead>
               <tr>
+                <!-- 注释的代码是 微信和微博平台 勾选多个KOL 进行对比（compare） -->
                 <!-- <th v-if="tabIndex === 0 || tabIndex === 1" width="6%">{{$t('lang.kolList.search.table.check')}}</th> -->
                 <th width="40%">{{$t('lang.kolList.search.table.profile')}}</th>
                 <th width="12%" class="text-center">{{$t('lang.kolList.search.table.price')}}</th>
@@ -249,16 +272,39 @@
                 <td>
                   <div class="media kol-profile">
                     <div class="media-left media-middle">
-                      <div class="avatar" @click="intoKolDetail(item)">
-                        <img :src="item.avatar_url" alt class="avatar-img">
+                      <div class="avatar">
+                        <router-link target="_blank" :to="{
+                          path: '/kol/',
+                          name: 'KolDetail',
+                          params: {
+                            id: item.profile_id
+                          },
+                          query: {
+                            type: Number(tabIndex),
+                            search_keywords: keyword,
+                            isSearch: 0
+                          }
+                        }">
+                          <img :src="item.avatar_url" alt class="avatar-img">
+                        </router-link>
                       </div>
                     </div>
-                    <div class="media-body media-middle">
+                    <div class="media-body media-middle search-media-left">
                       <h5 class="title">
-                        <span
-                          @click="intoKolDetail(item)"
-                          class="kol-tit-span"
-                        >{{item.profile_name}}</span>
+                        <router-link target="_blank" :to="{
+                          path: '/kol/',
+                          name: 'KolDetail',
+                          params: {
+                            id: item.profile_id
+                          },
+                          query: {
+                            type: Number(tabIndex),
+                            search_keywords: keyword,
+                            isSearch: 0
+                          }
+                        }">
+                          <span class="kol-tit-span">{{item.profile_name}}</span>
+                        </router-link>
                       </h5>
                       <p class="desc">{{item.description_raw}}</p>
                       <div class="status">
@@ -268,7 +314,7 @@
                           class="item"
                           v-if="showFunsnumber"
                         >
-                          <i class="iconfont icon-user-heart"></i>
+                          <i class="iconfont icon-heart"></i>
                           {{item.fans_number}}
                         </a-tooltip>
                         <a-tooltip
@@ -277,7 +323,7 @@
                           class="item"
                           v-if="showEngagement"
                         >
-                          <i class="iconfont icon-app"></i>
+                          <i class="iconfont icon-share"></i>
                           {{item.stats.avg_sum_engagement}}
                         </a-tooltip>
                       </div>
@@ -298,9 +344,12 @@
                     :percent="item.influence / 10"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
-                    :format="() => item.influence"
+                    strokeColor="#38D0D5"
+                    :format="() => item.kol_influences"
                   />
+                 <!-- influences: {{item.influence}} -->
+                 <!-- <br> -->
+                  <!-- kol_influences :{{item.stats.kol_influences}} -->
                   <!-- {{$t('lang.kolList.search.influenceTip')}} -->
                   <!-- Coming Soon -->
                 </td>
@@ -310,7 +359,7 @@
                     :percent="item.correlation"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#b37feb"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation + '%'"
                     v-if="item.colorStatus === 1"
                   />
@@ -318,7 +367,7 @@
                     type="circle"
                     :width="100"
                     :strokeWidth="9"
-                    strokeColor="#ddd"
+                    strokeColor="#38D0D5"
                     :format="() => item.correlation"
                     v-if="item.colorStatus === 0"
                   />
@@ -328,16 +377,16 @@
             </tbody>
           </table>
         </div>
-          <div class="text-center">
-            <a-pagination
-              :defaultCurrent="currentPage"
-              :defaultPageSize="kolsPerPage"
-              v-model="currentPageAdd"
-              :total="kolsTotal"
-              :hideOnSinglePage="true"
-              @change="onPageChange"
-            />
-          </div>
+      </div>
+      <div class="panel-foot text-center" v-if="isTable">
+        <a-pagination
+          :defaultCurrent="currentPage"
+          :defaultPageSize="kolsPerPage"
+          v-model="currentPageAdd"
+          :total="kolsTotal"
+          :hideOnSinglePage="true"
+          @change="onPageChange"
+        />
       </div>
     </div>
   </div>
@@ -372,6 +421,7 @@ export default {
       isRelevanceSort: "asc",
       // top 用户输入的key
       keyword: "",
+      changeKeyword: '',
       isShowKolList: false,
       // 我的品牌用户选中的关键字， 目前detail页面用的是这个页面的 totalKeywords
       totalKeywords: "",
@@ -399,32 +449,32 @@ export default {
         {
           index: 1,
           name: "wechat"
-        },
-        {
-          index: 2,
-          name: "xiaohongshu"
-        },
+        }
+        // {
+        //   index: 2,
+        //   name: "xiaohongshu"
+        // },
         // {
         //   index: 3,
         //   name: "kuaishou"
         // },
-        {
-          index: 4,
-          name: "bilibili"
-        },
-        {
-          index: 5,
-          name: "douyin"
-        }, {
-          index: 6,
-          name: ('instagram')
-        }, {
-          index: 7,
-          name: ('youtube')
-        }, {
-          index: 8,
-          name: ('facebook')
-        }
+        // {
+        //   index: 4,
+        //   name: "bilibili"
+        // },
+        // {
+        //   index: 5,
+        //   name: "douyin"
+        // }, {
+        //   index: 6,
+        //   name: ('instagram')
+        // }, {
+        //   index: 7,
+        //   name: ('youtube')
+        // }, {
+        //   index: 8,
+        //   name: ('facebook')
+        // }
       ],
       tabIndex: 0,
       searchListBox: [],
@@ -438,7 +488,19 @@ export default {
       // （微信微博展示）avg_sum_engagement
       showEngagement: true,
       // （微信微博展示）direct_price（其他平台展示）ref_price
-      showDirectPrice: true
+      showDirectPrice: true,
+      // 搜索的类型
+      searchTypeList: [
+        {
+          index: 0,
+          name: 'kolList.search.searchByRelevant'
+        },
+        {
+          index: 1,
+          name: 'kolList.search.searchByName'
+        },
+      ],
+      selectSearchType: 0,
     };
   },
   created() {
@@ -450,6 +512,7 @@ export default {
     if (this.$route.query.brand_keywords) {
       this.tabIndex = Number(this.$route.query.type);
       this.keyword = this.$route.query.brand_keywords;
+      this.changeKeyword = this.$route.query.brand_keywords;
       // 初始化参数
       this.paramsInit();
       // 从home 首页进来 展示kol list
@@ -459,6 +522,8 @@ export default {
     } else {
       // 首次进来是 不展示kol list
       this.isShowKolList = false;
+      this.keywords = '';
+      this.changeKeyword = '';
     }
 
   },
@@ -480,15 +545,25 @@ export default {
       this.totalParams.engagement_to = this.engagementTo;
       this.totalParams.influence_from = this.influenceFrom;
       this.totalParams.influence_to = this.influenceTo;
+      if (Number(this.selectSearchType) === 0) {
+        this.totalParams.search_type = 'post_based';
+      } else {
+        this.totalParams.search_type = 'profile_based';
+      }
       if (this.keyword === "") {
+        this.changeKeyword = '';
         this.totalParams.keywords = "";
       } else {
         // this.keyword 转英文逗号
         this.keyword = this.keyword.replace(/，/gi, ",");
+        this.changeKeyword = this.keyword.replace(/，/gi, ",");
         let newKey = "";
-        this.keyword.split(",").forEach(item => {
+        this.changeKeyword.split(",").forEach(item => {
           newKey += '"' + item + '" ';
         });
+        // console.log('keyword', this.keyword)
+        // console.log('changeKeyword', this.changeKeyword)
+        // console.log('newKey', newKey)
         this.totalParams.keywords = newKey;
       }
       if (this.tabIndex === 0 || this.tabIndex === 1) {
@@ -731,6 +806,23 @@ export default {
           } else {
             element.influence = "N/A";
           }
+          // 处理 微信和微博平台的 kol_influences
+          if (_that.tabIndex === 0) {
+            // 微博
+            if (element.stats.kol_influences || element.stats.kol_influences === 0) {
+              element.kol_influences = parseInt(element.stats.kol_influences);
+            } else {
+              element.kol_influences = "N/A";
+            }
+          }
+          if (_that.tabIndex === 1) {
+            // 微信
+            if (element.kol_influences || element.kol_influences === 0) {
+              element.kol_influences = parseInt(element.kol_influences);
+            } else {
+              element.kol_influences = "N/A";
+            }
+          }
           element.isCheck = false;
           if (this.keyword !== "") {
             element.colorStatus = 1;
@@ -787,36 +879,6 @@ export default {
     showMoreSearch() {
       this.advancedSearch = !this.advancedSearch;
     },
-    // 跳转 kol detail
-    intoKolDetail(item) {
-      if (Number(this.tabIndex) === 0 || Number(this.tabIndex) === 1) {
-        item.profile_id = item.profile_id;
-      }
-      if (
-        Number(this.tabIndex) === 2 ||
-        Number(this.tabIndex) === 3 ||
-        Number(this.tabIndex) === 4 ||
-        Number(this.tabIndex) === 5 ||
-        Number(this.tabIndex) === 6 ||
-        Number(this.tabIndex) === 7 ||
-        Number(this.tabIndex) === 8
-      ) {
-        item.profile_id = encodeURIComponent(item.profile_id);
-        // console.log(item.profile_id)
-      }
-      // item.profile_id = item.profile_id.replace(/\./g , '\\/')
-      this.$router.push({
-        path: "/kol/",
-        name: "KolDetail",
-        params: {
-          id: item.profile_id
-        },
-        query: {
-          type: Number(this.tabIndex),
-          brand_keywords: this.totalKeywords
-        }
-      });
-    },
     changeTab(tab) {
       this.kolsTotal = 0;
       this.isLoading = true;
@@ -826,7 +888,7 @@ export default {
       if (tab.index == 0) {
         this.followerFrom = "100000";
       } else if (tab.index == 1) {
-        this.followerFrom = "30000";
+        this.followerFrom = "1000";
       } else {
         this.followerFrom = "";
       }
@@ -1009,136 +1071,22 @@ export default {
       if (tab == 0) {
         this.followerFrom = "100000";
       } else if (tab == 1) {
-        this.followerFrom = "30000";
+        this.followerFrom = "1000";
       } else {
         this.followerFrom = "";
       }
+    },
+    SearchTypeChange() {
+      console.log(this.selectSearchType)
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.kols-list-panel {
-  .panel-body {
-    padding: 20px;
-    .form-group {
-      margin-bottom: 20px;
-    }
-  }
-}
-.kol-advance-btn {
-  text-align: center;
-  .toggle {
-    color: nth($purple, 1);
-    border-bottom: 1px solid nth($purple, 1);
-    cursor: pointer;
-  }
-}
-.kols-list-statistics {
-  height: 40px;
-  margin-bottom: 10px;
-  .item {
-    display: inline-block;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 5px 10px;
-    color: #333;
-  }
-}
-.kol-data-rank {
-  display: inline-block;
-  line-height: 20px;
-  cursor: pointer;
-  vertical-align: 2px;
-  i {
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-  .up {
-    display: block;
-    border-width: 0 5px 6px;
-    border-color: transparent transparent #a7a5a5;
-  }
-  .down {
-    display: block;
-    border-width: 6px 5px 0;
-    border-color: #a7a5a5 transparent transparent;
-    margin: 1px auto 0;
-  }
-}
-.fluenceactive,
-.relevanceactive {
-  .is-top-iactive {
-    border-color: transparent transparent #b180ef;
-  }
-  .is-bottom-iactive {
-    border-color: #b180ef transparent transparent;
-  }
-}
 .kol-profile {
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-    }
-  }
   .desc {
     @include limit-line(2);
-  }
-  .status {
-    .item {
-      margin-right: 10px;
-    }
-  }
-  .operation-area {
-    .iconfont {
-      margin-left: 10px;
-      cursor: pointer;
-      &.icon-cart.active {
-        color: nth($purple, 1);
-      }
-    }
-  }
-  .title {
-    .kol-tit-span {
-      cursor: pointer;
-      color: nth($text-color, 2);
-    }
-  }
-}
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 2s;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-.fade-leave-active {
-  transition: opacity 2s;
-}
-.compare-pop {
-  position: fixed;
-  right: 0px;
-  bottom: 45%;
-  .panel-body {
-    padding: 30px;
-  }
-  .copmare-close {
-    position: absolute;
-    cursor: pointer;
-    right: 10px;
-    top: 10px;
-    color: nth($font-color, 1);
   }
 }
 </style>

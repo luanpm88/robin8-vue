@@ -1,43 +1,57 @@
 <template>
-<div class="com-brand">
-  <div class="com-add">
-    <span><router-link :to="{path: '/settings/my_brands/create'}">{{$t('lang.myBrandPage.addBtn')}}</router-link></span>
+  <div class="brands-list-container">
+    <div class="panel default-panel brands-list-panel">
+      <div class="panel-head text-right">
+        <router-link
+          to="/settings/my_brands/create"
+          class="btn btn-cyan"
+        >
+          {{$t('lang.myBrandPage.addBtn')}}
+        </router-link>
+      </div>
+      <div v-if="brandsList.length > 0" class="panel-body">
+        <table class="default-table brands-table">
+          <thead>
+            <tr>
+              <th width="6%" class="text-center">{{$t('lang.myBrandPage.table.title.check')}}</th>
+              <th width="8%" class="text-center">{{$t('lang.myBrandPage.table.title.id')}}</th>
+              <th width="18%">{{$t('lang.myBrandPage.table.title.name')}}</th>
+              <th width="20%">{{$t('lang.myBrandPage.table.title.keywords')}}</th>
+              <th width="38%">{{$t('lang.myBrandPage.table.title.description')}}</th>
+              <th width="10%" class="text-center">{{$t('lang.myBrandPage.table.title.operation')}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(item, index) in brandsList"
+              :key="item.id"
+            >
+              <td class="text-center">
+                <input type="checkbox"  v-model="item.isCheck" @click="checkItem(item)">
+              </td>
+              <td class="text-center">{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.keywords}}</td>
+              <td>{{item.description}}</td>
+              <td class="text-center operation-area">
+                <span class="operation-btn iconfont icon-edit" @click="toDetail(item)"></span>
+                <span class="operation-btn iconfont icon-delete" @click="toDelete(item)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else class="panel-body">
+        <div class="p30 text-center">{{$t('lang.noData')}}...</div>
+      </div>
+
+      <div class="panel-foot text-center">
+        <button type="button" class="btn btn-cyan" @click="checkInsight">
+          {{$t('lang.myBrandPage.contrastButton')}}
+        </button>
+      </div>
+    </div>
   </div>
-  <table class="com-brand-table">
-    <tr>
-      <th>{{$t('lang.myBrandPage.table.title.check')}}</th>
-      <th>{{$t('lang.myBrandPage.table.title.id')}}</th>
-      <th>{{$t('lang.myBrandPage.table.title.name')}}</th>
-      <th>{{$t('lang.myBrandPage.table.title.keywords')}}</th>
-      <th>{{$t('lang.myBrandPage.table.title.description')}}</th>
-      <th>{{$t('lang.myBrandPage.table.title.operation')}}</th>
-    </tr>
-    <tr
-      v-for="(item, index) in brandsList"
-      :key="index"
-      class="item"
-    >
-      <td>
-        <input type="checkbox"  v-model="item.isCheck" @click="checkItem(item)">
-      </td>
-      <td>{{item.id}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.keywords}}</td>
-      <td>{{item.description}}</td>
-      <td>
-        <p class="campaign-info-detail">
-          <span @click="toDetail(item)">{{$t('lang.edit')}}</span>
-          <span @click="toDelete(item)">{{$t('lang.delete')}}</span>
-        </p>
-      </td>
-    </tr>
-  </table>
-  <div class="com-add mt20">
-    <button type="button" class="btn btn-purple" @click="checkInsight">
-      {{$t('lang.myBrandPage.contrastButton')}}
-    </button>
-  </div>
-</div>
 </template>
 
 <script>
@@ -160,53 +174,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.com-add {
-  text-align: right;
-  margin-bottom: 20px;
-  span{
+.brands-list-container {
+  padding: 30px 100px;
+  .brands-table {
+    th.text-center {
+      padding: 10px 0;
+    }
+  }
+  .operation-btn {
     cursor: pointer;
-    &:hover{
-      text-decoration: underline
-    }
   }
-}
-.com-brand {
-  min-height: 500px;
-  background: $white;
-  padding: 30px;
-  margin-top: 20px;
-  box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.08);
-}
-.com-brand-table{
-  width: 100%;
-  color: #333;
-  tr{
-    border-bottom: 1px solid #ddd;
-    th{
-      color: #333;
-      font-size: $font-nm-b;
-       text-align: center;
-        padding: 5px 10px;
-    }
-  }
-  td{
-    text-align: center;
-    padding: 16px 10px;
-  }
-}
-.campaign-info-detail{
-  line-height: 22px;
-  span{
-    cursor: pointer;
-    color: #b37feb;
-    &:hover{
-      text-decoration: underline;
-    }
-    &:nth-child(2) {
-        margin-left: 8px;
-        color: #6168e6;
-    }
-  }
-
 }
 </style>

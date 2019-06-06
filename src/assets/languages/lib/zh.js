@@ -12,9 +12,11 @@ export const lang = {
   facebook: 'Facebook',
   seeMore: '显示更多',
   more: '查看更多',
+  or: '或者',
   edit: '编辑',
   delete: '删除',
   detail: '详情',
+  quotations: '行情',
   payment: '支付',
   information: '基本信息',
   backBtn: '返回',
@@ -33,9 +35,12 @@ export const lang = {
   female: '女',
   yearsOld: '岁',
   yearsOlder: '岁以上',
+  overview: '总览',
   qrTips: '<p>请扫描二维码</p><p>以获取帮助</p>',
   noData: '暂无内容',
   kolDetailAlert: '您的5天试用期已过期。要继续使用，请联系Robin8或发送电子邮件至info@robin8.com Robin8',
+  cartSuccess: '您已成功添加至购物车',
+  stayTuned: '敬请期待',
   router: {
     login: '登录',
     reg: '注册',
@@ -134,6 +139,7 @@ export const lang = {
       placeholder: '请输入验证码',
       errorTips: '请输入验证码'
     },
+    codeBtn: '获取验证码',
     password: {
       title: '密码',
       placeholder: '请输入密码',
@@ -264,7 +270,8 @@ export const lang = {
         title: '品牌描述',
         placeholder: '请输入品牌描述',
         errorTips: '请输入品牌描述'
-      }
+      },
+      addBtn: '添加品牌'
     },
     competitors: {
       title: '竞争对手',
@@ -309,6 +316,19 @@ export const lang = {
         repost: '再次发布',
         cancel: '撤销活动'
       }
+    },
+    detail: {
+      rewardBy: '奖励方式',
+      perPushKols: '预计推送KOL人数',
+      participation: '参与情况',
+      avatar: '头像',
+      name: '昵称',
+      perBudgetType: '计费点击',
+      totalClick: '总点击',
+      totalRewards: '奖励',
+      screenshot: '截图',
+      evaluationDetails: '评价详情',
+      evaluationTips: '活动一旦评价将不能修改'
     },
     link: {
       title: '活动链接',
@@ -566,6 +586,19 @@ export const lang = {
         title: '活动已关闭',
         desc: ''
       }
+    },
+    list: {
+      profile: '活动信息',
+      active: '活动相关',
+      priceList: '价格相关',
+      operation: '操作',
+      budget: '预算',
+      kolsCount: '估计的KOL数量',
+      price: '价格',
+      timeline: '时间范围',
+      status: '状态',
+      actualAmount: '实际金额',
+      quoteCount: '实际KOL数量'
     }
   },
   wallet: {
@@ -735,10 +768,12 @@ export const lang = {
       addTip: '添加我的竞争品牌',
       placeholderDec: '请填写竞争品牌介绍'
     },
-    overThreeTip: '您最多只能选择3条竞争者'
+    overThreeTip: '您最多只能选择3条竞争者',
+    noneComTip: '您还没有选择比较品牌。'
   },
   kolList: {
     detail: {
+      infoTit: '个人信息',
       btn: '返回',
       post: '文章',
       summary: '总结',
@@ -750,6 +785,8 @@ export const lang = {
         clients: '客户数量',
         clientTip: '此KOL适用的客户端数量。 大量客户表示跟踪记录证明了KOL的放大潜力。 另一方面，一个尚未为其他品牌工作或仅为少数品牌工作的KOL可能是一个有吸引力和经济的选择，因为他还没有生产商业内容的声誉。'
       },
+      kolProfile: 'KOL 个人主页',
+      addCart: '加入购物车',
       currentBrandName: '品牌名字:',
       mentions: '品牌提及:',
       mentionsTip: '在过去的7天里，这个品牌在我们的社交渠道中被提及的次数。',
@@ -794,6 +831,12 @@ export const lang = {
         date: '发布时间',
         readCount: '阅读数',
         engagement: '互动数'
+      },
+      mostRelevantPosts: {
+        title: '最具相关度的文章',
+        tableTitle: '标题',
+        date: '发布时间',
+        correlation: '相关度',
       },
     },
     analyticVue: {
@@ -846,6 +889,9 @@ export const lang = {
       topKey: '输入关键字、行业分类或KOL名称',
       keyword: '请在这里键入…',
       search: '搜索',
+      searchByName: 'KOL 名字',
+      searchByRelevant: '文章相关度',
+      searchTips: '<p>我们正在调整我们的搜索引擎。如果您发现错误的搜索结果，请拍照并发送电子邮件至info@robin8.com。</p><p>感谢您的支持！</p>',
       advancedSearch: {
         btn: '高级搜索',
         industry: 'KOL 产业',

@@ -1,7 +1,7 @@
 <template>
   <div class="panel default-panel">
     <div class="panel-head">
-      <h5 class="title purple">
+      <h5 class="title cyan">
         <span class="iconfont icon-target"></span>
         {{$t('lang.homePage.anlytics.title')}}
         <tab :tabList="topTab" :tabIndex="topTabCur" @changeTab="topTabClick" class="panel-tab"></tab>
@@ -192,7 +192,7 @@ export default {
       },
       parentTags: [],
       labelList: [],
-      tagColor: 'purple',
+      tagColor: 'cyan',
       wordHeight: '450px',
       currentLangue: ''
     } 
@@ -753,7 +753,7 @@ export default {
 }
 .h-analytic-type {
   text-align: center;
-  color: nth($purple, 1);
+  color: nth($cyan, 1);
 }
 .panel-head {
   position: relative;

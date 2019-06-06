@@ -1,9 +1,6 @@
 <template>
   <div class="page">
     <div class="panel default-panel login-panel">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.signUp.title')}}</h5>
-      </div>
       <div class="panel-body">
         <div class="login-container">
           <div class="tabs">
@@ -58,7 +55,7 @@
                   class="btn btn-block btn-cyan"
                   :disabled="disabled"
                   @click="codeUrl"
-                >{{btntxt}}</button>
+                >{{$t('lang.signUp.codeBtn')}}</button>
               </div>
             </div>
             <div class="form-group">
@@ -100,7 +97,7 @@ export default {
       typeVal: '',
       code: '',
       password: '',
-      btntxt: 'Get valid code',
+      btntxt: '',
       isCheck: false,
       disabled: true,
       time: 0,
@@ -134,11 +131,21 @@ export default {
     timer: function() {
       if (this.time > 0) {
         this.time--
-        this.btntxt = 'Get valid code again' + this.time
+        if (this.$i18n.locale === 'zh-CN') {
+          this.btntxt = this.time + '秒后重新获取'
+        }
+        if (this.$i18n.locale === 'en-US') {
+          this.btntxt = 'Get valid code again' + this.time
+        }
         setTimeout(this.timer, 1000)
       } else {
         this.time = 0
-        this.btntxt = 'Get valid code'
+        if (this.$i18n.locale === 'zh-CN') {
+          this.btntxt = '获取验证码'
+        }
+        if (this.$i18n.locale === 'en-US') {
+          this.btntxt = 'Get valid code'
+        }
         this.disabled = false
       }
     },
@@ -184,7 +191,12 @@ export default {
         .then(function(res) {
           if (res.data.error == 1) {
             _that.time = 0
-            _that.btntxt = 'Get valid code'
+            if (_that.$i18n.locale === 'zh-CN') {
+              _that.btntxt = '获取验证码'
+            }
+            if (_that.$i18n.locale === 'en-US') {
+              _that.btntxt = 'Get valid code'
+            }
             _that.disabled = false
             alert(res.data.detail)
           }
@@ -201,7 +213,12 @@ export default {
         .then(function(res) {
           if (res.data.error == 1) {
             _that.time = 0
-            _that.btntxt = 'Get valid code'
+            if (_that.$i18n.locale === 'zh-CN') {
+              _that.btntxt = '获取验证码'
+            }
+            if (_that.$i18n.locale === 'en-US') {
+              _that.btntxt = 'Get valid code'
+            }
             _that.disabled = false
             alert(res.data.detail)
           }
@@ -243,6 +260,14 @@ export default {
         // 调用邮箱的接口
         this.emailCodeUrl(params)
       }
+    }
+  },
+  mounted () {
+    if (this.$i18n.locale === 'zh-CN') {
+      this.btntxt = '获取验证码'
+    }
+    if (this.$i18n.locale === 'en-US') {
+      this.btntxt = 'Get valid code'
     }
   }
 }

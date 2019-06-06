@@ -1,9 +1,9 @@
-<!--  -->
+<!-- compare.vue的radar 模块 -->
 <template>
   <div>
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.radarVue.tit')}}</h5>
+        <h5 class="title">{{$t('lang.radarVue.tit')}}</h5>
       </div>
       <div class="panel-body p30">
         <div class="nonetip" v-if="isShow">
@@ -70,7 +70,7 @@ export default {
   methods: {
     // industry weibo
     kolWeiboIndustry(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.kolWeiboIndustry, params, {
           headers: {
@@ -104,11 +104,11 @@ export default {
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
     kolWeiXinIndustry(params) {
-      const _that = this 
+      const _that = this
       axios
         .post(apiConfig.kolWeiXinIndustry, params, {
           headers: {
@@ -142,8 +142,8 @@ export default {
           }
         })
         .catch(function(error) {
-          // console.log(error) 
-        }) 
+          // console.log(error)
+        })
     },
   }
 };

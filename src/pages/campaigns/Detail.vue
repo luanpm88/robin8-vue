@@ -7,7 +7,7 @@
             <div class="cover">
               <img :src="detailData.img_url" alt="" class="cover-img" />
               <div class="corner-mark tl">
-                <div class="text">{{detailData.status_zh}}</div>
+                <div class="text">{{$i18n.locale === 'zh-CN' ? detailData.status_zh : detailData.status}}</div>
               </div>
             </div>
           </div>
@@ -18,7 +18,7 @@
                   :to="'/campaigns/' + detailData.id"
                 >{{detailData.name}}</router-link>
               </h5>
-              <div class="date">{{$t('lang.campaigns.update')}}:{{detailData.updated_at}} 按照<span class="per-budget-type">{{detailData.per_budget_type_show}}</span>奖励</div>
+              <div class="date">{{$t('lang.campaigns.update')}}:{{detailData.updated_at}} {{$t('lang.campaigns.detail.rewardBy')}}: <span class="per-budget-type">{{$i18n.locale === 'zh-CN' ? detailData.per_budget_type_show_zh : detailData.per_budget_type_show}}</span></div>
               <div class="desc">{{detailData.description}}</div>
               <div class="desc">{{$t('lang.campaigns.link.title')}}:<a :href="detailData.url" target="_blank">{{detailData.url}}</a></div>
             </div>
@@ -49,7 +49,7 @@
       <div class="panel-head">
         <div class="title-bar">
           <h5 class="title">{{$t('lang.campaigns.selectKols')}}</h5>
-          <div class="tail-area">预计推送KOL人数 {{detailData.per_push_kols_count}} 人</div>
+          <div class="tail-area">{{$t('lang.campaigns.detail.perPushKols')}}: {{detailData.per_push_kols_count}}</div>
         </div>
       </div>
       <div class="panel-body">
@@ -77,7 +77,7 @@
     <div class="panel default-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
-          <h5 class="title">总览</h5>
+          <h5 class="title">{{$t('lang.overview')}}</h5>
         </div>
       </div>
       <div class="panel-body">
@@ -129,12 +129,12 @@
               <table class="default-table kol-list">
                 <thead>
                   <tr>
-                    <th class="text-center">头像</th>
-                    <th class="text-center">昵称</th>
-                    <th v-if="detailData.per_budget_type != 'post' && detailData.per_budget_type != 'simple_cpi' && detailData.per_budget_type != 'cpt'" class="text-center">计费点击</th>
-                    <th class="text-center">总点击</th>
-                    <th class="text-center">奖励</th>
-                    <th class="text-center">截图</th>
+                    <th class="text-center">{{$t('lang.campaigns.detail.avatar')}}</th>
+                    <th class="text-center">{{$t('lang.campaigns.detail.name')}}</th>
+                    <th v-if="detailData.per_budget_type != 'post' && detailData.per_budget_type != 'simple_cpi' && detailData.per_budget_type != 'cpt'" class="text-center">{{$t('lang.campaigns.detail.perBudgetType')}}</th>
+                    <th class="text-center">{{$t('lang.campaigns.detail.totalClick')}}</th>
+                    <th class="text-center">{{$t('lang.campaigns.detail.totalRewards')}}</th>
+                    <th class="text-center">{{$t('lang.campaigns.detail.screenshot')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -170,7 +170,7 @@
                 />
               </div>
             </div>
-            <div v-else class="empty-area text-center">暂时还没有KOL转发活动!</div>
+            <div v-else class="empty-area text-center">{{$t('lang.noData')}}</div>
           </div>
           <div v-if="tabIndex == 1">
             <div class="chart-list clearfix">
@@ -211,7 +211,7 @@
     <div class="panel default-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
-          <h5 class="title">参与情况</h5>
+          <h5 class="title">{{$t('lang.campaigns.detail.participation')}}</h5>
         </div>
       </div>
       <div class="panel-body">
@@ -228,7 +228,7 @@
     <div v-if="detailData.status == 'settled'" class="panel default-panel mt20">
       <div class="panel-head">
         <div class="title-bar">
-          <h5 class="title">评价详情</h5>
+          <h5 class="title">{{'lang.campaigns.detail.evaluationDetails'}}</h5>
         </div>
       </div>
       <div class="panel-body">
@@ -273,7 +273,7 @@
           </div>
 
           <div class="text-center comment-submit-area">
-            <p class="tips">活动一旦评价将不能修改</p>
+            <p class="tips">{{$t('lang.campaigns.detail.evaluationTips')}}</p>
             <button
               type="button"
               class="btn btn-cyan submit-btn mt20"
@@ -301,7 +301,7 @@
       </div>
     </div>
 
-    <div class="text-center create-btn-area p30">
+    <div class="text-center create-btn-area p10 mt20">
       <router-link
         class="btn btn-cyan btn-outline back-btn"
         to="/campaigns"
@@ -709,6 +709,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-detail-container {
+  padding: 0 100px 30px;
+}
 .campaign-detail-panel {
   .content {
     padding: 20px;
@@ -756,7 +759,7 @@ export default {
 }
 .kols-list-panel /deep/ .default-tabs {
   text-align: center;
-  .btn-group.pills-btn {
+  .tab-label {
     margin-bottom: 30px;
   }
 }

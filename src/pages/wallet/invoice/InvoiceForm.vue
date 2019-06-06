@@ -131,15 +131,15 @@
 
         </div>
       </div>
-    </div>
 
-    <div class="text-center p30">
-      <button
-        type="button"
-        class="btn btn-cyan submit-btn"
-        @click="doConfirm"
-        :disabled="canSubmit ? false : true"
-      >{{$t('lang.submitBtn')}}</button>
+      <div class="panel-foot text-center">
+        <button
+          type="button"
+          class="btn btn-cyan submit-btn"
+          @click="doConfirm"
+          :disabled="canSubmit ? false : true"
+        >{{$t('lang.submitBtn')}}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -249,6 +249,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wallet-container {
+  padding: 0 100px 30px;
+}
 .invoice-form {
   padding: 20px 60px;
   .form-group {

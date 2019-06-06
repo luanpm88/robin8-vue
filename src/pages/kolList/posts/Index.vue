@@ -30,7 +30,7 @@
                 <i class="iconfont icon-share"></i>{{item.influence_shares}}
               </span>
               <span>
-                <i class="iconfont icon-comment"></i>{{item.influence_comments}}
+                <i class="iconfont icon-comments"></i>{{item.influence_comments}}
               </span>
             </p>
             <p class="d-post-right-read" v-else>

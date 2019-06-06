@@ -1,71 +1,67 @@
 <template>
-  <div class="container mt50 clearfix">
-    <main-nav class="pull-left"></main-nav>
-
-    <div class="messages-container pull-right">
-      <div class="panel default-panel messages-panel">
-        <div class="panel-head">
-          <h5 class="title">{{$t('lang.router.messages')}}</h5>
-        </div>
-        <div class="panel-body">
-          <ul v-if="messagesList.length > 0" class="msg-list">
-            <!-- <li
-              v-for="(item, index) in messagesList"
-              :key="item.id"
-              class="item"
-              :class="[item.is_read ? 'is-read' : '']"
-              @click="toggleOpen(item.id)"
+  <div class="messages-container">
+    <div class="panel default-panel messages-panel">
+      <div class="panel-head">
+        <h5 class="title">{{$t('lang.router.messages')}}</h5>
+      </div>
+      <div class="panel-body">
+        <ul v-if="messagesList.length > 0" class="msg-list">
+          <!-- <li
+            v-for="(item, index) in messagesList"
+            :key="item.id"
+            class="item"
+            :class="[item.is_read ? 'is-read' : '']"
+            @click="toggleOpen(item.id)"
+          >
+            <div
+              class="title-bar with-arr"
+              :class="[activeId == item.id ? 'open' : '']"
             >
-              <div
-                class="title-bar with-arr"
-                :class="[activeId == item.id ? 'open' : '']"
-              >
-                <div class="title">
-                  <span v-if="!item.is_read" class="dot"></span>
-                  {{item.name}}
-                </div>
+              <div class="title">
+                <span v-if="!item.is_read" class="dot"></span>
+                {{item.name}}
               </div>
-              <div v-show="activeId == item.id" class="msg-content">
-                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
-                <div class="desc" v-html="item.title"></div>
-              </div>
-            </li> -->
+            </div>
+            <div v-show="activeId == item.id" class="msg-content">
+              <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
+              <div class="desc" v-html="item.title"></div>
+            </div>
+          </li> -->
 
-            <li
-              v-for="(item, index) in messagesList"
-              :key="item.id"
-              class="item"
-              :class="[item.is_read ? 'is-read' : '']"
-              @click="toggleOpen(item.id)"
+          <li
+            v-for="(item, index) in messagesList"
+            :key="item.id"
+            class="item"
+            :class="[item.is_read ? 'is-read' : '']"
+            @click="toggleOpen(item.id)"
+          >
+            <div
+              class="title-bar with-arr"
+              :class="[item.open ? 'open' : '']"
             >
-              <div
-                class="title-bar with-arr"
-                :class="[item.open ? 'open' : '']"
-              >
-                <div class="title">
-                  <span v-if="!item.is_read" class="dot"></span>
-                  {{item.name}}
-                </div>
+              <div class="title">
+                <span v-if="!item.is_read" class="dot"></span>
+                {{item.name}}
               </div>
-              <div v-show="item.open" class="msg-content">
-                <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
-                <div class="desc" v-html="item.title"></div>
-              </div>
-            </li>
-          </ul>
-          <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
-        </div>
+            </div>
+            <div v-show="item.open" class="msg-content">
+              <h5>{{$t('lang.messages.sender')}}: {{item.sender}}</h5>
+              <div class="desc" v-html="item.title"></div>
+            </div>
+          </li>
+        </ul>
+        <div v-else class="p30 text-center">{{$t('lang.messages.noData')}}</div>
+      </div>
 
-        <div class="panel-foot">
-          <div class="text-center">
-            <a-pagination
-              :defaultCurrent="page"
-              :defaultPageSize="perPage"
-              :total="total"
-              :hideOnSinglePage="true"
-              @change="onPageChange"
-            />
-          </div>
+      <div v-if="messagesList.length > 1" class="panel-foot">
+        <div class="text-center">
+          <a-pagination
+            :defaultCurrent="page"
+            :defaultPageSize="perPage"
+            :total="total"
+            :hideOnSinglePage="true"
+            @change="onPageChange"
+          />
         </div>
       </div>
     </div>
@@ -75,13 +71,11 @@
 <script>
 import axios from 'axios'
 import apiConfig from '@/config'
-import MainNav from '@components/MainNav'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Messages',
   components: {
-    MainNav
   },
   data () {
     return {
@@ -184,7 +178,7 @@ export default {
 
 <style lang="scss" scoped>
 .messages-container {
-  width: 980px;
+  padding: 0 100px 30px;
 }
 .messages-panel {
   .panel-body {

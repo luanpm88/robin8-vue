@@ -1,5 +1,5 @@
 <template>
-  <div class="campaign-detail-container">
+  <div class="campaign-edit-container">
     <campaign-form formType="edit"></campaign-form>
   </div>
 </template>

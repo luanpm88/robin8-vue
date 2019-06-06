@@ -1,41 +1,69 @@
 <template>
-  <div class="panel default-panel mt20">
-    <div class="panel-body brand-create-body">
-      <div class="creat-txt">{{$t('lang.myCompetitionBrands.topTit')}}</div>
-      <div class="form-horizontal brand-create-form">
-        <div class="form-group" v-for="(item, index) in brandList" :key="index">
-          <div class="col-sm-2 control-label">{{$t('lang.myCompetitionBrands.addPage.name')}}</div>
-          <div class="col-sm-3">
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderName')"
-              v-model="item.name"
+  <div class="create-brand-container">
+    <div class="panel default-panel">
+      <div class="panel-body brand-create-body">
+        <div class="create-tips ">{{$t('lang.myCompetitionBrands.topTit')}}</div>
+        <div class="form-horizontal brand-create-form mt30">
+          <div class="form-group"
+            v-for="(item, index) in brandList"
+            :key="index"
+          >
+            <div class="col-sm-2 control-label">
+              {{$t('lang.myCompetitionBrands.addPage.name')}}
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                :name="'name_' + index"
+                class="form-control"
+                :class="[errors.has('name_' + index) ? 'danger' : '']"
+                :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderName')"
+                v-model="item.name"
+                v-validate="'required'"
+              >
+            </div>
+            <div class="col-sm-5">
+              <input
+                type="text"
+                :name="'direction_name_' + index"
+                class="form-control"
+                :class="[errors.has('direction_name_' + index) ? 'danger' : '']"
+                :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderDec')"
+                v-model="item.short_name"
+                v-validate="'required'"
+              >
+            </div>
+            <div class="col-sm-1" v-if="isAdd">
+              <span class="iconfont icon-delete" @click="delBrand(index)"></span>
+            </div>
+          </div>
+          <div class="text-center mt20" v-if="isAdd">
+            <button
+              type="button"
+              class="btn btn-link"
+              @click="addBrand"
             >
+              <span class="iconfont icon-add"></span>
+              {{$t('lang.myCompetitionBrands.addPage.addTip')}}
+            </button>
           </div>
-          <div class="col-sm-5">
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              :placeholder="$t('lang.myCompetitionBrands.addPage.placeholderDec')"
-              v-model="item.short_name"
-            >
-          </div>
-          <div class="col-sm-1" v-if="isAdd">
-            <span class="iconfont icon-delete" @click="delBrand(index)"></span>
-          </div>
-        </div>
-        <div class="form-add" v-if="isAdd">
-          <span class="iconfont icon-edit" @click="addBrand">&nbsp;{{$t('lang.myCompetitionBrands.addPage.addTip')}}</span>
         </div>
       </div>
-      <div class="text-center create-btn-area">
+      <div class="panel-foot text-center">
         <button
           type="button"
-          class="btn btn-cyan submit-btn mr10" @click="backList">{{$t('lang.backBtn')}}</button>
-        <button type="button" class="btn btn-cyan submit-btn" @click="submit">{{$t('lang.submitBtn')}}</button>
+          class="btn btn-cyan btn-outline mr10"
+          @click="backList"
+        >
+          {{$t('lang.backBtn')}}
+        </button>
+        <button
+          type="button"
+          class="btn btn-cyan submit-btn"
+          @click="submit"
+        >
+          {{$t('lang.submitBtn')}}
+        </button>
       </div>
     </div>
   </div>
@@ -59,7 +87,8 @@ export default {
           name: '',
           short_name: ''
         }
-      ]
+      ],
+      // canSubmit: true
     }
   },
   created() {
@@ -130,7 +159,7 @@ export default {
           console.log(error)
         })
     },
-    submit() {
+    submitJonggle() {
       if (!this.$route.params.itemList) {
         let params = {
           competitors: this.brandList
@@ -145,6 +174,16 @@ export default {
         this.editSubmit(params, this.$route.params.itemList);
       }
     },
+    submit() {
+      console.log(this.$validator.validateAll())
+      this.$validator.validateAll().then((msg) => {
+        // console.log(msg)
+        if (msg) {
+          console.log('验证通过')
+          this.submitJonggle()
+        }
+      })
+    },
     backList() {
       this.$router.go(-1);
     }
@@ -156,28 +195,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.brand-create-body{
-    padding: 60px 0;
-}
-.creat-txt{
-  color: #3c3939;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: $font-nm-b;
-}
-.icon-delete{
-  line-height: 34px;
-  cursor: pointer;
-}
-.form-add{
-  text-align: right;
-  padding-right: 30%;
-  span{
-    color: #40c1b8;
+.create-brand-container {
+  padding: 30px 100px;
+  .create-tips {
+    text-align: center;
+  }
+  .icon-delete {
+    line-height: 34px;
     cursor: pointer;
   }
+  .form-add {
+    text-align: right;
+    padding-right: 30%;
+    span{
+      color: #40c1b8;
+      cursor: pointer;
+    }
+  }
+  .submit-btn {
+    width: 160px;
+  }
 }
-.create-btn-area{
-  padding-top: 30px;
+.brand-create-body {
+  padding: 30px 0;
 }
 </style>

@@ -11,10 +11,12 @@ export const lang = {
   youtube: 'YouTube',
   facebook: 'Facebook',
   seeMore: 'Show More',
-  more: 'load more',
-  edit: 'edit',
-  delete: 'delete',
-  detail: 'detail',
+  more: 'Show More',
+  or: 'or',
+  edit: 'Edit',
+  delete: 'Delete',
+  detail: 'Detail',
+  quotations: 'Quotations',
   payment: 'Payment',
   information: 'Information',
   backBtn: 'Back',
@@ -33,9 +35,12 @@ export const lang = {
   female: 'Female',
   yearsOld: 'years old',
   yearsOlder: 'years old or older',
+  overview: 'Overview',
   qrTips: '<p>Please scan the</p><p>QR code for assistance</p>',
   noData: 'No Data',
   kolDetailAlert: 'Your 5 day trial is expired.To continue using, please contact little Robin8 or email Robin8 at info@robin8.com',
+  cartSuccess: 'You have successfully added to your shopping cart',
+  stayTuned: 'Stay tuned',
   router: {
     login: 'Log In',
     reg: 'Sign Up',
@@ -134,6 +139,7 @@ export const lang = {
       placeholder: 'Enter valid code',
       errorTips: 'Enter valid code'
     },
+    codeBtn: 'Get valid code',
     password: {
       title: 'Password',
       placeholder: 'Please enter your password',
@@ -264,7 +270,8 @@ export const lang = {
         title: 'Brand Description',
         placeholder: 'Please fill in your brand description',
         errorTips: 'Please fill in your brand description'
-      }
+      },
+      addBtn: 'Add Brand'
     },
     competitors: {
       title: 'My Competitive Brands',
@@ -308,6 +315,19 @@ export const lang = {
         repost: 'Repost',
         cancel: 'Cancel'
       }
+    },
+    detail: {
+      rewardBy: 'Reward by',
+      perPushKols: 'Expected to push KOL number',
+      participation: 'Participation',
+      avatar: 'Avatar',
+      name: 'Name',
+      perBudgetType: 'Per budget type',
+      totalClick: 'Total click',
+      totalRewards: 'Total rewards',
+      screenshot: 'Screenshot',
+      evaluationDetails: 'Evaluation details',
+      evaluationTips: 'Once the activity is evaluated, it cannot be modified.'
     },
     link: {
       title: 'Campaign URL',
@@ -565,6 +585,19 @@ export const lang = {
         title: 'Your campaign is closed',
         desc: ''
       }
+    },
+    list: {
+      profile: 'Profile',
+      active: 'Active',
+      priceList: 'Price List',
+      operation: 'Operation',
+      budget: 'Budget',
+      kolsCount: 'Estimated number of kols',
+      price: 'Price',
+      timeline: 'Timeline',
+      status: 'Status',
+      actualAmount: 'Take budget',
+      quoteCount: 'Real number of kols'
     }
   },
   wallet: {
@@ -739,6 +772,7 @@ export const lang = {
   },
   kolList: {
     detail: {
+      infoTit: 'Profile Info',
       btn: 'Return',
       post: 'Posts',
       summary: 'Summary',
@@ -750,6 +784,8 @@ export const lang = {
         clients: 'No. of Clients',
         clientTip: 'The number of clients that this KOL works for. A high number of clients indicates a track record that proves the amplification potential of a KOL. On the other hand, a KOL who has not worked for other brands yet or worked only for a few brands might be an attractive and economic choice since he does not yet have a reputation of producing commercial content. '
       },
+      kolProfile: 'KOL Profile',
+      addCart: 'Add to cart',
       currentBrandName: 'Brand Name:',
       mentions: 'Brand Mentions:',
       mentionsTip: 'Number of times the brand was mentioned in our social channels in the last 7 days.',
@@ -795,6 +831,12 @@ export const lang = {
         date: 'Post Time',
         readCount: 'Read Count',
         engagement: 'Sum Engagement'
+      },
+      mostRelevantPosts: {
+        title: 'Most Relevant Posts',
+        tableTitle: 'Title',
+        date: 'Post Time',
+        correlation: 'Correlation',
       },
     },
     analyticVue: {
@@ -847,6 +889,9 @@ export const lang = {
       topKey: 'Enter a keyword, category or KOL name',
       keyword: 'Please type here...',
       search: 'Search',
+      searchByName: 'KOL Name',
+      searchByRelevant: 'Relevance of articles',
+      searchTips: '<p>We are tuning our search engine. If you find a wrong search result, please take a picture and email us at info@robin8.com.</p><p>Thank you for your support!</p>',
       advancedSearch: {
         btn: 'Advanced Search',
         industry: 'KOL Industry',

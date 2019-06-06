@@ -1,0 +1,42 @@
+.compare-content{
+  color: nth($text-color, 1);
+}
+.compare-info{
+  border-bottom: 1px solid nth($btn-active, 1);
+  padding-bottom: 20px;
+  img{
+    max-width: 80px;
+    border-radius: 50%;
+  }
+  p{
+    font-size: $font-nm-s;
+  }
+}
+.compare-wrap{
+  width: 100%;
+  min-height: 800px;
+  overflow: scroll;
+}
+.compare-content{
+  width: 1000%;
+}
+.compare-list{
+  float: left;
+  width: 640px;
+  padding: 0px 10px;
+  .desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    font-size: $font-sm;
+  }
+  .activity-table{
+    width: 100%;
+    overflow: scroll;
+    height: 200px;
+  }
+}

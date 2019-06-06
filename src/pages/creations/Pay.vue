@@ -1,63 +1,61 @@
 <template>
   <div class="campaign-pay-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
+    <create-process :renderData="processStatus"></create-process>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.creations.payment.title')}}</h5>
-      </div>
-      <div class="panel-body">
-        <div class="order-info">
-          <p>{{$t('lang.creations.payment.kolCount')}}: {{detailData.kols_count}}人</p>
-          <p>{{$t('lang.creations.payment.kolTotalPrice')}}: ¥{{detailData.price}} | {{$t('lang.creations.payment.platformFee')}}: ¥{{detailData.fee}}</p>
-          <p>{{$t('lang.creations.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+    <div class="campaign-pay-content">
+      <div class="panel default-panel mt20">
+        <div class="panel-head">
+          <h5 class="title">{{$t('lang.creations.payment.title')}}</h5>
         </div>
+        <div class="panel-body">
+          <div class="order-info">
+            <p>{{$t('lang.creations.payment.kolCount')}}: {{detailData.kols_count}}人</p>
+            <p>{{$t('lang.creations.payment.kolTotalPrice')}}: ¥{{detailData.price}} | {{$t('lang.creations.payment.platformFee')}}: ¥{{detailData.fee}}</p>
+            <p>{{$t('lang.creations.payment.amount')}}: <span class="price">¥<i class="num">{{detailData.amount}}</i></span></p>
+          </div>
 
-        <div class="pay-method">
-          <h5 class="title">{{$t('lang.creations.payment.method.title')}}:</h5>
-          <ul class="method-list">
-            <li
-              v-for="item in payMethods"
-              :key="item.id"
-              class="item"
-            >
-              <label class="media">
-                <div class="media-left media-middle">
-                  <input
-                    type="radio"
-                    name="payMethod"
-                    :value="item.val"
-                    :checked="item.checked"
-                  />
-                </div>
-                <div class="media-body media-middle">
-                  <div
-                    class="pay-icon iconfont "
-                    :class="item.iconClass"
-                  ></div>
-                  <div class="info">
-                    <div class="method">{{$t(`lang.${item.name}`)}}</div>
-                    <div class="desc">{{$t(`lang.${item.desc}`)}}</div>
+          <div class="pay-method">
+            <h5 class="title">{{$t('lang.creations.payment.method.title')}}:</h5>
+            <ul class="method-list">
+              <li
+                v-for="item in payMethods"
+                :key="item.id"
+                class="item"
+              >
+                <label class="media">
+                  <div class="media-left media-middle">
+                    <input
+                      type="radio"
+                      name="payMethod"
+                      :value="item.val"
+                      :checked="item.checked"
+                    />
                   </div>
-                </div>
-              </label>
-            </li>
-          </ul>
-        </div>
+                  <div class="media-body media-middle">
+                    <div
+                      class="pay-icon iconfont "
+                      :class="item.iconClass"
+                    ></div>
+                    <div class="info">
+                      <div class="method">{{$t(`lang.${item.name}`)}}</div>
+                      <div class="desc">{{$t(`lang.${item.desc}`)}}</div>
+                    </div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
 
-        <div class="pay-operation-area">
-          <button
-            type="button"
-            class="btn btn-cyan"
-            @click="doPay"
-          >{{$t('lang.payBtn')}}</button>
+          <div class="pay-operation-area">
+            <button
+              type="button"
+              class="btn btn-cyan"
+              @click="doPay"
+            >{{$t('lang.payBtn')}}</button>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -155,6 +153,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-pay-content {
+  padding: 0 100px 30px;
+}
 .order-info {
   line-height: 40px;
   padding: 20px 100px;

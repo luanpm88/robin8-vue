@@ -2,7 +2,7 @@
   <div class="creation-form">
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionDesc')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionDesc')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -111,7 +111,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionBudget')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionBudget')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -141,7 +141,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionDetail')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionDetail')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -319,7 +319,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.promotionTime')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.promotionTime')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -353,7 +353,7 @@
 
     <div class="panel default-panel mt20">
       <div class="panel-head">
-        <h5 class="title text-center">{{$t('lang.campaigns.selectKols')}}</h5>
+        <h5 class="title">{{$t('lang.campaigns.selectKols')}}</h5>
       </div>
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
@@ -875,9 +875,9 @@ export default {
 
 <style lang="scss" scoped>
 .campaign-create-form {
+  padding: 10px 0;
   .form-group {
-    padding: 20px 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 40px;
   }
 }
 .create-btn-area {
@@ -889,8 +889,11 @@ export default {
     }
   }
 }
+.creation-form {
+  padding: 0 100px;
+}
 .creation-form /deep/ .kols-list {
-  padding: 24px 60px;
+  padding: 24px 30px;
   font-size: 0;
   & > .kols-list-item {
     display: inline-block;

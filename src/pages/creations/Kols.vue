@@ -1,50 +1,35 @@
 <template>
   <div class="campaign-kols-container">
-    <create-process
-      :renderData="processStatus"
-      class="mt20"
-    ></create-process>
+    <create-process :renderData="processStatus"></create-process>
 
-    <div class="panel default-panel mt20">
-      <div class="panel-body">
-        <status-area :statusData="detailData.status"></status-area>
-      </div>
-    </div>
+    <div class="campaign-kols-content">
+      <status-area :statusData="detailData.status"></status-area>
 
-    <div class="panel default-panel kols-select-panel mt20">
-      <div class="panel-body">
-        <default-tabs
-          :tabList="tabList"
-          :tabIndex="tabIndex"
-          theme="blue"
-          @changeTab="changeTab"
-        >
-          <div class="kols-list-container">
-            <div v-if="currentList.length > 0">
-              <kol-item
-                v-for="item in currentList"
-                :key="item.profile.creation_selected_kol_id"
-                :renderData="item"
-                :checkedIds="kolsCheckedIds"
-                @selectKol="selectKol"
-              ></kol-item>
+      <default-tabs
+        :tabList="tabList"
+        :tabIndex="tabIndex"
+        theme="blue"
+        @changeTab="changeTab"
+        class="mt30"
+      >
+        <div class="panel default-panel kols-select-panel mt20">
+          <div class="panel-body">
+            <div class="kols-list-container">
+              <div v-if="currentList.length > 0">
+                <kol-item
+                  v-for="item in currentList"
+                  :key="item.profile.creation_selected_kol_id"
+                  :renderData="item"
+                  :checkedIds="kolsCheckedIds"
+                  @selectKol="selectKol"
+                ></kol-item>
+              </div>
+              <div v-else class="empty-area text-center">{{$t('lang.noData')}}</div>
             </div>
-            <div v-else class="empty-area text-center">{{$t('lang.noData')}}</div>
           </div>
-        </default-tabs>
-      </div>
-
-      <div v-if="currentList.length > 0 && tabIndex == 0" class="panel-foot clearfix">
-        <div class="select-statistics pull-left">{{$t('lang.creations.kols.weiboExposure')}}: <span class="num">0</span> | {{$t('lang.creations.kols.wechatExposure')}}: <span class="num">0</span> | {{$t('lang.creations.kols.totalPrice')}}: <span class="num">{{totalPrice}}</span></div>
-        <button
-          type="button"
-          class="btn btn-cyan pull-right"
-          :disabled="!kolsCheckedIds.length > 0"
-          @click="doPay"
-        >{{$t('lang.creations.kols.confirm')}}</button>
-      </div>
+        </div>
+      </default-tabs>
     </div>
-
   </div>
 </template>
 
@@ -193,6 +178,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.campaign-kols-content {
+  padding: 0 100px 30px;
+}
 .kols-select-panel {
   .panel-foot {
     padding: 30px;
@@ -203,15 +191,6 @@ export default {
         color: nth($blue, 1);
       }
     }
-  }
-}
-.kols-select-panel /deep/ .default-tabs {
-  text-align: center;
-  .btn-group.pills-btn {
-    margin: 26px 0;
-  }
-  .tabs-content {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
 .kols-list-container {

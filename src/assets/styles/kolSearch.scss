@@ -1,0 +1,167 @@
+
+.kols-list-panel{
+  .panel-body {
+    padding: 20px;
+  }
+  .search-media-left {
+    padding-left: 16px !important;
+  }
+}
+.kols-search-panel {
+  .panel-body {
+    padding: 20px 40px;
+  }
+}
+.kols-list-panel,.kols-search-panel {
+  .panel-body {
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .search-tit{
+      text-align: center;
+      font-size: $font-nm-l;
+    }
+  }
+}
+.search-btn{
+  width: 110px;
+}
+.kol-advance-btn {
+  text-align: center;
+  .toggle {
+    color: nth($cyan, 1);
+    border-bottom: 1px solid nth($cyan, 1);
+    cursor: pointer;
+  }
+}
+.kols-list-statistics {
+  height: 40px;
+  margin-bottom: 10px;
+  .item {
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #333;
+  }
+}
+.kol-data-rank {
+  display: inline-block;
+  line-height: 20px;
+  cursor: pointer;
+  vertical-align: 2px;
+  i {
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .up {
+    display: block;
+    border-width: 0 5px 6px;
+    border-color: transparent transparent #a7a5a5;
+  }
+  .down {
+    display: block;
+    border-width: 6px 5px 0;
+    border-color: #a7a5a5 transparent transparent;
+    margin: 1px auto 0;
+  }
+}
+.fluenceactive,
+.relevanceactive {
+  .is-top-iactive {
+    border-color: transparent transparent nth($cyan, 1);
+  }
+  .is-bottom-iactive {
+    border-color: nth($cyan, 1) transparent transparent;
+  }
+}
+.kol-profile {
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .status {
+    .item {
+      margin-right: 10px;
+      i{
+        font-size: 12px;
+      }
+    }
+  }
+  .operation-area {
+    .iconfont {
+      margin-left: 10px;
+      cursor: pointer;
+      &.icon-cart.active {
+        color: nth($cyan, 1);
+      }
+    }
+  }
+  .title {
+    .kol-tit-span {
+      cursor: pointer;
+      color: nth($text-color, 2);
+    }
+  }
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 2s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 2s;
+}
+.compare-pop {
+  position: fixed;
+  right: 0px;
+  bottom: 45%;
+  .panel-body {
+    padding: 30px;
+  }
+  .copmare-close {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+    color: nth($font-color, 1);
+  }
+}
+.kol-check-box{
+  text-align: center;
+}
+// 有时候会把勾选的放在 半边 的样式
+// .kol-check-box{
+//   label{
+//     line-height: 34px;
+//     padding-left: 80px;
+//   }
+// }
+.kol-select-platform{
+  display: inline-block;
+  margin-right: 15px;
+  .ctrl-label{
+    margin-top: 0px;
+  }
+}
+
+.kol-search{
+  select.form-control {
+    border-color: transparent;
+    background-color: #e7edef;
+  }
+
+}
