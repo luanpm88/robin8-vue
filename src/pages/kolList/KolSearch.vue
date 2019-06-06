@@ -345,12 +345,8 @@
                     :width="100"
                     :strokeWidth="9"
                     strokeColor="#38D0D5"
-                    :format="() => item.kol_influences"
+                    :format="() => item.influence"
                   />
-                 <!-- influences: {{item.influence}} -->
-                 <!-- <br> -->
-                  <!-- kol_influences :{{item.stats.kol_influences}} -->
-                  <!-- {{$t('lang.kolList.search.influenceTip')}} -->
                 </td>
                 <td class="text-center">
                   <a-progress
@@ -804,15 +800,6 @@ export default {
             element.influence = parseInt(element.influence * 1000);
           } else {
             element.influence = "N/A";
-          }
-          // 处理 微信和微博平台的 kol_influences
-          if (_that.tabIndex === 0) {
-            // 微博
-            if (element.stats.kol_influences || element.stats.kol_influences === 0) {
-              element.kol_influences = parseInt(element.stats.kol_influences);
-            } else {
-              element.kol_influences = "N/A";
-            }
           }
           if (_that.tabIndex === 1) {
             // 微信
