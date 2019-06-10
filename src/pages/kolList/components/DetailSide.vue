@@ -252,8 +252,9 @@ export default {
         _that.decValue.forEach((item, index) => {
           item.keyName = _that.decKey[index]
         })
+        // console.log(_that.decValue)
         _that.decValue.forEach((item, index) => {
-          if (item.n_posts === 1) {
+          if (item.n_posts >= 1) {
             _that.dec.push(item.keyName)
           }
         })
