@@ -241,12 +241,20 @@ export default {
         _that.infoList.profile_id = res.data.profile_id
         _that.infoList.description_raw = res.data.description_raw
         _that.infoList.gender = "-"
+
       } else {
         _that.infoList.avatar_url = res.data.avatar_url
         _that.infoList.profile_name = res.data.profile_name
         _that.infoList.profile_id = res.data.profile_id
         _that.infoList.description_raw = res.data.description_raw
         _that.infoList.gender = res.data.gender
+
+        if (type !== 0) {
+          this.backParentData(res)
+        }
+      }
+      if (type === 1 || type === 0) {
+        // 处理标签
         _that.decValue = Object.values(res.data.industries)
         _that.decKey = Object.keys(res.data.industries)
         _that.decValue.forEach((item, index) => {
@@ -258,10 +266,6 @@ export default {
             _that.dec.push(item.keyName)
           }
         })
-
-        if (type !== 0) {
-          this.backParentData(res)
-        }
       }
     },
     // info 微博的接口
