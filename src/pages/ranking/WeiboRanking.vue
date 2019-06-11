@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-container clearfix">
+  <div class="ranking-container clearfix ranking-weibo">
     <div class="top-control-area">
       <button type="button" class="btn btn-cyan" @click="pageBack">
         <span class="iconfont icon-arrow-left"></span>
@@ -10,7 +10,7 @@
     <div class="mt20 clearfix">
       <!-- left -->
       <div class="ranking-left col-sm-2">
-        <h5>Industries</h5>
+        <h5>{{$t(`lang.ranking.weiboside.title`)}}</h5>
         <ul class="ranking-nav">
           <li
             v-for="(item, index) in rankSideList"
@@ -20,14 +20,16 @@
           >
             <span><i class="iconfont icon" v-html="item.icon"></i>
             </span>
-            {{item.label}}
+            <!-- {{item.label}} -->
+            {{$t(`lang.${item.label}`)}}
           </li>
         </ul>
       </div>
       <!-- right -->
       <div class="ranking-right col-sm-10">
+        <!-- 头部三条和 和 beachmark 先隐藏 -->
         <!-- top dec -->
-        <div class="r-top clearfix">
+        <!-- <div class="r-top clearfix">
           <p
             class="r-top-dec col-sm-7"
           >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
@@ -37,9 +39,9 @@
               <i class="iconfont icon-rank"></i> &nbsp;Benchmark
             </span>
           </p>
-        </div>
+        </div> -->
         <!-- top list -->
-        <div class="r-right-topList clearfix">
+        <!-- <div class="r-right-topList clearfix">
           <div class="r8-loading" v-if="isTopLoading">
             <a-spin tip="Loading..."/>
           </div>
@@ -70,7 +72,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div>
           <div class="r8-loading" v-if="isTableLoding">
             <a-spin tip="Loading..."/>
@@ -81,7 +83,7 @@
             :dataSource="tableThirtyList"
             @change="handleTableChange"
             :pagination="false"
-            :scroll="{ y: 500 }"
+            :scroll="{ y: 620 }"
           >
             <template slot="profileDec" slot-scope="dec">
               <div class="r-tableThirtyList-name">
@@ -117,7 +119,7 @@ import totalDataJS from '@components/Chart/GlobalChartOption'
 import commonJs from '@javascripts/common.js'
 import { Spin, Table } from 'ant-design-vue'
 let totalParams = {
-  industry: 'airline',
+  industry: 'fashion',
   no_of_days: 21
 }
 export default {
@@ -131,8 +133,8 @@ export default {
   },
   data() {
     return {
-      rankSideList: totalDataJS.ranking.rankSideList,
-      iscur: 0,
+      rankSideList: totalDataJS.ranking.rankWeiboSideList,
+      iscur: 7,
       refreshDate: '',
       endDate: commonJs.cPastTwentyOneDays,
       startDate: commonJs.cPastOneday,

@@ -27,7 +27,7 @@
         display: inline-block;
         width: 25px;
         i{
-          vertical-align: 0px;
+          vertical-align: 1px;
           font-size: $font-sm;
         }
       }
@@ -43,6 +43,14 @@
   background: $white;
   height: 935px;
   padding: 0px;
+}
+.ranking-weibo{
+  .ranking-right{
+    height: 725px;
+    .ant-table-wrapper{
+      border-top: 2px solid #ffffff;
+    }
+  }
 }
 .r-top {
   padding: 12px 30px;

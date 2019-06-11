@@ -353,6 +353,85 @@ const MockData = {
   },
   // ranking
   ranking: {
+    // 微博
+    rankWeiboSideList: [{
+      icon: '&#xe629;',
+      label: 'ranking.weiboside.art',
+      value: 'art'
+    }, {
+      icon: '&#xe64f;',
+      label: 'ranking.weiboside.car',
+      value: 'auto'
+    }, {
+      icon: '&#xe63b;',
+      label: 'ranking.weiboside.babies',
+      value: 'babies'
+    }, {
+      icon: '&#xe63c;',
+      label: 'ranking.weiboside.beauty',
+      value: 'beauty'
+    }, {
+      icon: '&#xe636;',
+      label: 'ranking.weiboside.books',
+      value: 'books'
+    }, {
+      icon: '&#xe643;',
+      label: 'ranking.weiboside.education',
+      value: 'education'
+    }, {
+      icon: '&#xe640;',
+      label: 'ranking.weiboside.entertainment',
+      value: 'entertainment'
+    }, {
+      icon: '&#xe646;',
+      label: 'ranking.weiboside.fashion',
+      value: 'fashion'
+    }, {
+      icon: '&#xe64e;',
+      label: 'ranking.weiboside.finance',
+      value: 'finance'
+    }, {
+      icon: '&#xe63f;',
+      label: 'ranking.weiboside.fitness',
+      value: 'fitness'
+    }, {
+      icon: '&#xe651;',
+      label: 'ranking.weiboside.food',
+      value: 'food'
+    }, {
+      icon: '&#xe64c;',
+      label: 'ranking.weiboside.games',
+      value: 'games'
+    }, {
+      icon: '&#xe641;',
+      label: 'ranking.weiboside.health',
+      value: 'health'
+    }, {
+      icon: '&#xe64a;',
+      label: 'ranking.weiboside.home',
+      value: 'home'
+    }, {
+      icon: '&#xe644;',
+      label: 'ranking.weiboside.law',
+      value: 'law'
+    }, {
+      icon: '&#xe64b;',
+      label: 'ranking.weiboside.music',
+      value: 'music'
+    }, {
+      icon: '&#xe63d;',
+      label: 'ranking.weiboside.realestate',
+      value: 'realestate'
+    }, {
+      icon: '&#xe648;',
+      label: 'ranking.weiboside.sports',
+      value: 'sports'
+    }, {
+      icon: '&#xe64d;',
+      label: 'ranking.weiboside.travel',
+      value: 'travel'
+    }],
+    // 微信 
     rankSideList: [{
       icon: '&#xe62a;',
       label: 'Airline',
@@ -528,64 +607,77 @@ const MockData = {
       {
         title: 'Rank No.',
         dataIndex: 'rank_no',
-        width: '5%',
+        width: '10%',
         sorter: true,
         scopedSlots: { customRender: 'rank_no' },
       }, {
         title: 'Profile Name Weixin ID',
         dataIndex: 'profileDec',
         scopedSlots: { customRender: 'profileDec' },
-        width: '13%'
-      }, {
-        title: 'Total Post Count',
-        dataIndex: 'doc_count',
-        sorter: true,
-        scopedSlots: { customRender: 'doc_count' },
-      }, {
-        title: 'Total Sum Engagement',
-        dataIndex: 'total_sum_engagement',
-        sorter: true,
-        scopedSlots: { customRender: 'total_sum_engagement' },
-      }, {
-        title: 'Max Sum Engagement',
-        dataIndex: 'max_sum_engagement',
-        sorter: true,
-        scopedSlots: { customRender: 'max_sum_engagement' },
-      }, {
+        width: '24%',
+      }, 
+      // {
+      //   title: 'Total Post Count',
+      //   dataIndex: 'doc_count',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'doc_count' },
+      // }, 
+      // {
+      //   title: 'Total Sum Engagement',
+      //   dataIndex: 'total_sum_engagement',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'total_sum_engagement' },
+      // }, 
+      // {
+      //   title: 'Max Sum Engagement',
+      //   dataIndex: 'max_sum_engagement',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'max_sum_engagement' },
+      // }, 
+      {
         title: 'Avg Sum Engagement',
         dataIndex: 'avg_sum_engagement',
         sorter: true,
         scopedSlots: { customRender: 'avg_sum_engagement' },
-      }, {
-        title: 'Total Comments',
-        dataIndex: 'total_comments',
-        sorter: true,
-        scopedSlots: { customRender: 'total_comments' },
-      }, {
-        title: 'Max Comments',
-        dataIndex: 'max_comments',
-        sorter: true,
-        scopedSlots: { customRender: 'max_comments' },
-      }, {
+        width: '22%',
+      }, 
+      // {
+      //   title: 'Total Comments',
+      //   dataIndex: 'total_comments',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'total_comments' },
+      // }, 
+      // {
+      //   title: 'Max Comments',
+      //   dataIndex: 'max_comments',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'max_comments' },
+      // }, 
+      {
         title: 'Avg Comments',
         dataIndex: 'avg_comments',
         sorter: true,
         scopedSlots: { customRender: 'avg_comments' },
-      }, {
-        title: 'Total Likes',
-        dataIndex: 'total_likes',
-        sorter: true,
-        scopedSlots: { customRender: 'total_likes' },
-      }, {
-        title: 'Max Likes',
-        dataIndex: 'max_likes',
-        sorter: true,
-        scopedSlots: { customRender: 'max_likes' },
-      }, {
+        width: '22%',
+      }, 
+      // {
+      //   title: 'Total Likes',
+      //   dataIndex: 'total_likes',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'total_likes' },
+      // }, 
+      // {
+      //   title: 'Max Likes',
+      //   dataIndex: 'max_likes',
+      //   sorter: true,
+      //   scopedSlots: { customRender: 'max_likes' },
+      // }, 
+      {
         title: 'Avg Likes',
         dataIndex: 'avg_likes',
         sorter: true,
         scopedSlots: { customRender: 'avg_likes' },
+        width: '22%',
       }
     ]
   },

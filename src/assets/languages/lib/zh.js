@@ -101,7 +101,7 @@ export const lang = {
     brands: '我的品牌',
     competitors: '我的竞争品牌',
     cart: '我的购物车',
-    ranking: '排名 - 即将推出',
+    ranking: '排名',
     wechatRanking: '微信排名',
     weiboRanking: '微博排名',
     socialListening: 'KOL聆听',
@@ -964,6 +964,30 @@ export const lang = {
     },
     topPosts: {
       title: '热门文章'
+    }
+  },
+  ranking: {
+    weiboside: {
+      title: '行业',
+      art: '艺术',
+      car: '汽车',
+      babies: '母婴',
+      beauty: '美妆',
+      books: '书籍',
+      education: '教育',
+      entertainment: '娱乐',
+      fashion: '时尚',
+      finance: '金融',
+      fitness: '健身',
+      food: '美食',
+      games: '游戏',
+      health: '健康',
+      home: '家居',
+      law: '法律',
+      music: '音乐',
+      realestate: '房产',
+      sports: '运动',
+      travel: '旅行'
     }
   },
   socialPage: {
