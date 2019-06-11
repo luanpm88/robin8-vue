@@ -125,7 +125,9 @@ input[type=radio]:checked:before { content: $icon-radioed; }
   }
   .panel-body { border: 2px solid #fff; border-bottom: none; border-radius: 5px 5px 0 0; background-color: #f6f7f7; }
   .panel-foot { border: 2px solid #fff; border-bottom: none; border-top-color: #e1e8ea; padding: 20px; background-color: #f6f7f7; }
-  &.default-panel { border-bottom: 2px solid #fff; border-radius: 0 0 5px 5px; }
+  &.default-panel { border-bottom: 2px solid #fff; border-radius: 0 0 5px 5px;
+    @include respond-to(mobile) { max-width: 100%; }
+  }
   &.radius-panel { border-radius: 5px; overflow: hidden; }
 }
 
