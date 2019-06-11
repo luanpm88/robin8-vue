@@ -196,7 +196,7 @@ export default {
         }
       })
 
-      console.log(this.navData)
+      // console.log(this.navData)
     }
   },
   // created () {
@@ -225,6 +225,9 @@ export default {
         vertical-align: top;
         height: 100%;
       }
+    }
+    @include respond-to(mobile) {
+      display: none;
     }
   }
   .nav-list {
