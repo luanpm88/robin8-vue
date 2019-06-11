@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import commonJs from '@javascripts/common.js'
 import MainNav from '@components/MainNav'
 import PageHeader from '@components/PageHeader'
 import PageHeaderMobile from '@components/PageHeaderMobile'
@@ -56,9 +57,14 @@ export default {
       } else {
         this.showNav = true
       }
+      if (commonJs.isMobile()) {
+        this.openNav = false
+      } else {
+        this.openNav = true
+      }
     },
     openNavCtrl (data) {
-      console.log(data)
+      // console.log(data)
       this.openNav = data
     }
   },
