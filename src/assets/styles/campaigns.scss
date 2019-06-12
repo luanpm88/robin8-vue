@@ -5,6 +5,10 @@
   .form-group {
     padding: 10px 40px;
 
+    @include respond-to(mobile) {
+      padding: 10px;
+    }
+
     .check-icon {
       display: inline-block;
       position: relative;
@@ -74,10 +78,14 @@
     display: inline-block;
     position: relative;
     width: 400px;
-    height: 300px;
+    padding-bottom: 75%;
     margin: 0 6px 6px 0;
     border: 1px solid rgba(0, 0, 0, .5);
     overflow: hidden;
+
+    @include respond-to(mobile) {
+      width: 100%;
+    }
 
     .upload-img {
       position: absolute;
