@@ -79,7 +79,7 @@
           </div>
           <a-table
             v-if="isTable"
-            :columns="columns"
+            :columns="columns" 
             :dataSource="tableThirtyList"
             @change="handleTableChange"
             :pagination="false"
@@ -284,7 +284,7 @@ export default {
           }
         })
         .then(function(res) {
-          // console.log('WeboThirtyList', res)
+          console.log('WeboThirtyList', res)
           if (res.status === 200) {
             _that.isTable = true
             _that.isTableLoding = false
@@ -330,6 +330,11 @@ export default {
               )
               element.max_likes = commonJs.threeFormatter(element.max_likes, 2)
               element.avg_likes = commonJs.threeFormatter(element.avg_likes, 2)
+              element.kol_influence = commonJs.threeFormatter(element.kol_influence, 2)
+              element.fans_number = element.fans_number
+              element.avg_comments = commonJs.threeFormatter(element.avg_comments, 2)
+              element.relevance = commonJs.threeFormatter(element.relevance, 2)
+              element.industry = commonJs.threeFormatter(element.industry, 2)
             })
             _that.tableThirtyList = res.data
           }

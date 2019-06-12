@@ -614,7 +614,21 @@ const MockData = {
         title: 'Profile Name Weixin ID',
         dataIndex: 'profileDec',
         scopedSlots: { customRender: 'profileDec' },
-        width: '24%',
+        width: '10%',
+      },
+      {
+        title: 'Industry',
+        dataIndex: 'industry',
+        // sorter: true,
+        scopedSlots: { customRender: 'industry' },
+        width: '10%',
+      },
+      {
+        title: 'Relevance',
+        dataIndex: 'relevance',
+        sorter: true,
+        scopedSlots: { customRender: 'relevance' },
+        width: '10%',
       }, 
       // {
       //   title: 'Total Post Count',
@@ -639,7 +653,7 @@ const MockData = {
         dataIndex: 'avg_sum_engagement',
         sorter: true,
         scopedSlots: { customRender: 'avg_sum_engagement' },
-        width: '22%',
+        width: '10%',
       }, 
       // {
       //   title: 'Total Comments',
@@ -657,8 +671,8 @@ const MockData = {
         title: 'Avg Comments',
         dataIndex: 'avg_comments',
         sorter: true,
-        scopedSlots: { customRender: 'avg_comments' },
-        width: '22%',
+        scopedSlots: { customRender: 'avg_comments'},
+        width: '10%',
       }, 
       // {
       //   title: 'Total Likes',
@@ -677,8 +691,23 @@ const MockData = {
         dataIndex: 'avg_likes',
         sorter: true,
         scopedSlots: { customRender: 'avg_likes' },
-        width: '22%',
+        width: '10%',
+      },
+      {
+        title: 'Kol Influence',
+        dataIndex: 'kol_influence',
+        sorter: true,
+        scopedSlots: { customRender: 'kol_influence' },
+        width: '10%',
+      },
+      {
+        title: 'Fans Number',
+        dataIndex: 'fans_number',
+        sorter: true,
+        scopedSlots: { customRender: 'fans_number' },
+        width: '10%',
       }
+      
     ]
   },
   // weixin benchMark
