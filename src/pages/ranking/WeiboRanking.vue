@@ -29,17 +29,20 @@
       <div class="ranking-right col-sm-10">
         <!-- 头部三条和 和 beachmark 先隐藏 -->
         <!-- top dec -->
-        <!-- <div class="r-top clearfix">
+        <div class="r-top clearfix">
           <p
             class="r-top-dec col-sm-7"
-          >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
-          <p class="r-top-right col-sm-5">
+          >{{topTittle}} on {{topTittleIndustry}}</p>
+          <!-- <p
+            class="r-top-dec col-sm-7"
+          >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p> -->
+          <!-- <p class="r-top-right col-sm-5">
             <span>7 | 14 | 21</span>
             <span class="r-benchmark" @click="lookBenchmark()">
               <i class="iconfont icon-rank"></i> &nbsp;Benchmark
             </span>
-          </p>
-        </div> -->
+          </p> -->
+        </div>
         <!-- top list -->
         <!-- <div class="r-right-topList clearfix">
           <div class="r8-loading" v-if="isTopLoading">
@@ -83,7 +86,7 @@
             :dataSource="tableThirtyList"
             @change="handleTableChange"
             :pagination="false"
-            :scroll="{ y: 620 }"
+            :scroll="{ y: 550 }"
           >
             <template slot="profileDec" slot-scope="dec">
               <div class="r-tableThirtyList-name">
