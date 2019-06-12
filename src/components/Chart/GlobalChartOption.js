@@ -616,13 +616,13 @@ const MockData = {
         scopedSlots: { customRender: 'profileDec' },
         width: '10%',
       },
-      {
-        title: 'Industry',
-        dataIndex: 'industry',
-        // sorter: true,
-        scopedSlots: { customRender: 'industry' },
-        width: '10%',
-      },
+      // {
+      //   title: 'Industry',
+      //   dataIndex: 'industry',
+      //   // sorter: true,
+      //   scopedSlots: { customRender: 'industry' },
+      //   width: '10%',
+      // },
       {
         title: 'Relevance',
         dataIndex: 'relevance',
