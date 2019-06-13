@@ -144,6 +144,17 @@ export default {
   padding: 0 100px 30px;
   .panel-body {
     padding: 20px;
+    @include respond-to(mobile) {
+      padding: 0;
+      overflow-x: auto;
+      .default-table {
+        max-width: none;
+        min-width: 200%;
+      }
+    }
+  }
+  @include respond-to(mobile) {
+    padding: 0 12px 30px;
   }
 }
 .campaign-profile {

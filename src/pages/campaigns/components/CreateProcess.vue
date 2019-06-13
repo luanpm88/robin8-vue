@@ -66,6 +66,9 @@ export default {
 .process-container {
   padding: 0 100px 30px;
   background-color: #fff;
+  @include respond-to(mobile) {
+    padding: 0 30px 30px;
+  }
 }
 .campaign-create-process {
   $color: #a9b1b3;
@@ -74,13 +77,26 @@ export default {
   border-radius: 5px;
   text-align: center;
   font-size: 0;
-  background: #e7edef;
+  background-color: #e7edef;
+  @include respond-to(mobile) {
+    text-align: left;
+    background-color: transparent;
+  }
   & > .item {
     display: inline-block;
     width: 25%;
     text-align: center;
     font-size: 1.1rem;
     font-weight: 600;
+    @include respond-to(mobile) {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 2px;
+      border-radius: 5px;
+      text-align: left;
+      background-color: #e7edef;
+    }
     .num {
       display: inline-block;
       padding: 4px;
@@ -125,6 +141,11 @@ export default {
     &.current {
       .num {
         border-color: #38d0d5;
+      }
+    }
+    &:last-child {
+      @include respond-to(mobile) {
+        margin-bottom: 0;
       }
     }
   }
