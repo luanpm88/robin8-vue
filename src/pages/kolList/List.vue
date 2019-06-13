@@ -1,5 +1,5 @@
 <template>
-  <div class="campaign-container">
+  <div class="kol-search-container">
     <kol-search :keyWord="keyList"></kol-search>
   </div>
 </template>
@@ -27,7 +27,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.campaign-container {
-  padding: 30px 100px;
-}
+
 </style>

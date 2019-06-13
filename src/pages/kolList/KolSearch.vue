@@ -79,7 +79,7 @@
         <!-- 高级搜索 -->
         <div v-if="advancedSearch && advancedSearchShow" class="form-horizontal mt30">
 
-          <div class="form-group">
+          <div class="form-group kol-search-group">
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
@@ -236,7 +236,7 @@
         <div class="r8-loading mb10" v-if="isLoading">
           <a-spin tip="Loading..."/>
         </div>
-        <div v-if="isTable">
+        <div v-if="isTable" class="kol-table-wrarp">
           <table class="default-table">
             <thead>
               <tr>
