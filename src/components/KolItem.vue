@@ -134,6 +134,9 @@ export default {
 <style lang="scss" scoped>
 .kol-item {
   padding: 24px 60px 24px 0;
+  @include respond-to(mobile) {
+    padding: 10px 20px 10px 0;
+  }
   .kol-intro {
     width: 240px;
     text-align: center;

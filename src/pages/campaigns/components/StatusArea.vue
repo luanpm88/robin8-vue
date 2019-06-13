@@ -68,6 +68,9 @@ export default {
   padding: 40px 100px;
   text-align: center;
   border-bottom: 2px solid #c8d6da;
+  @include respond-to(mobile) {
+    padding: 30px;
+  }
   .iconfont {
     display: inline-block;
     margin-right: 10px;
