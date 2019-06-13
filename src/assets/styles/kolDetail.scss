@@ -196,3 +196,23 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 765px){
+  .kol-link-box {
+    text-align: left;
+  }
+  .kol-detail {
+    padding: 30px 20px 0px;
+  }
+  .kol-detail-right{
+    margin-top: 20px;
+  }
+  .activity-table{
+    overflow-x: scroll
+  }
+  .com-brand-table{
+    overflow-x: scroll;
+    table{
+      width: 450px;
+    }
+  }
+}
