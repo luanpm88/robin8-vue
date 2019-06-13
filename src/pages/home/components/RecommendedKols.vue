@@ -10,6 +10,7 @@
       @changeTab="changeTab"
     >
       <div class="panel-body list-content">
+        <h5 class="recom-influence">Influence Score</h5>
         <div class="list-content-inner">
           <div v-if="isKol">
             <kols-list-item
@@ -68,7 +69,7 @@ export default {
         hasMsg: false,
         hasChecked: false,
         hasInflunce: true,
-        hasCart: true,
+        hasCart: false,
         hasDelete: false,
         type: 0,
       },

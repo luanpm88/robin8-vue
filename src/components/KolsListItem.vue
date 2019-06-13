@@ -43,7 +43,7 @@
       </div>
       <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
-          <h5>Influence Score</h5>
+          <!-- <h5>Influence Score</h5> -->
           <p v-if="renderStatus.type === 0">{{renderData.avg_post_influences}}</p>
           <p v-else>Coming Soon</p>
         </div>
