@@ -82,7 +82,7 @@
           </div>
           <a-table
             v-if="isTable"
-            :columns="columns" 
+            :columns="columns"
             :dataSource="tableThirtyList"
             @change="handleTableChange"
             :pagination="false"
@@ -102,7 +102,7 @@
                   }">
                   <img :src="dec.avatar_url">
                 </router-link>
-                <span class="iconfont icon-cart active" @click="doAddCart(dec)"></span>
+                <!-- <span class="iconfont icon-cart active" @click="doAddCart(dec)"></span> -->
                 <p>{{dec.profile_name}}</p>
                 <!-- <p>{{dec.id}}</p> -->
               </div>

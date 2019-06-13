@@ -328,9 +328,9 @@
                         </a-tooltip>
                       </div>
                     </div>
-                    <div class="media-right media-middle operation-area">
+                    <!-- <div class="media-right media-middle operation-area">
                       <span class="iconfont icon-cart active" @click="doAddCart(item)"></span>
-                    </div>
+                    </div> -->
                   </div>
                 </td>
                 <td

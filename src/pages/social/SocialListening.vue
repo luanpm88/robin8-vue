@@ -77,12 +77,12 @@
                 <strong>{{item.name}}</strong>
                 <p>{{item.time}}</p>
               </div>
-              <div class="media-right media-middle operation-area">
-                  <span
-                    class="iconfont icon-cart active"
-                    @click="doAddCart(item)"
-                  ></span>
-              </div>
+              <!-- <div class="media-right media-middle operation-area">
+                <span
+                  class="iconfont icon-cart active"
+                  @click="doAddCart(item)"
+                ></span>
+              </div> -->
             </div>
             <p class="home-post-content" v-html="item.content"></p>
           </div>

@@ -81,10 +81,10 @@ export default {
               title: 'nav.create',
               href: '/create'
             },
-            {
-              title: 'nav.customContent',
-              href: '/creations'
-            },
+            // {
+            //   title: 'nav.customContent',
+            //   href: '/creations'
+            // },
             {
               title: 'nav.shareOnly',
               href: '/campaigns'
@@ -133,10 +133,10 @@ export default {
               title: 'nav.competitors',
               href: '/settings/my_competition_brands'
             },
-            {
-              title: 'nav.cart',
-              href: '/settings/shopping_cart'
-            },
+            // {
+            //   title: 'nav.cart',
+            //   href: '/settings/shopping_cart'
+            // },
             {
               title: 'nav.help',
               href: '/help'

@@ -43,11 +43,10 @@
             <!-- KOL Profile -->
             {{$t('lang.kolList.detail.kolProfile')}}
           </a>
-          <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
+          <!-- <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
             <span class="iconfont icon-cart"></span>
-            <!-- Add to cart -->
             {{$t('lang.kolList.detail.addCart')}}
-          </button>
+          </button> -->
         </p>
         <ul class="clearfix kol-sign">
           <li v-for="(item, index) in dec" :key="index">{{item}}</li>
