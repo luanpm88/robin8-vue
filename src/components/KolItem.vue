@@ -135,11 +135,23 @@ export default {
 .kol-item {
   padding: 24px 60px 24px 0;
   @include respond-to(mobile) {
-    padding: 10px 20px 10px 0;
+    padding: 10px;
+  }
+  .media {
+    @include respond-to(mobile) {
+      display: block;
+      .media-left + .media-body, .media-body + .media-right {
+        padding-left: 0;
+      }
+    }
   }
   .kol-intro {
     width: 240px;
     text-align: center;
+    @include respond-to(mobile) {
+      width: 100%;
+      margin-bottom: 10px;
+    }
     .avatar {
       position: relative;
       width: 50px;
@@ -182,9 +194,23 @@ export default {
     border-left: 1px solid #979797;
     font-size: $font-nm-s;
     color: #9b9b9b;
+    @include respond-to(mobile) {
+      padding-left: 0;
+      border-left: none;
+      text-align: center;
+    }
     .price {
       font-size: $font-nm-b;
       color: nth($blue, 1);
+    }
+  }
+  .kol-ctrl {
+    @include respond-to(mobile) {
+      padding-top: 10px;
+      justify-content: center;
+      .btn {
+        display: inline-block;
+      }
     }
   }
   &.active {
