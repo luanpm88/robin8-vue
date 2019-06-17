@@ -3,7 +3,7 @@
     <div v-if="cartList.length > 0" class="row">
       <div
         v-for="item in cartList"
-        class="col-sm-6"
+        class="col-sm-6 col-xs-12"
       >
         <div class="panel default-panel cart-list-panel">
           <div class="panel-body">
@@ -123,6 +123,9 @@ export default {
 <style lang="scss" scoped>
 .cart-list-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
 }
 .cart-list-panel {
   margin: 10px 0;

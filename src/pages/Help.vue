@@ -97,12 +97,18 @@ export default {
 <style lang="scss" scoped>
 .help-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
 }
 .help-panel {
   line-height: 2;
   .panel-body {
     padding: 40px;
     text-align: justify;
+    @include respond-to(mobile) {
+      padding: 16px;
+    }
     .title {
       margin-top: 30px;
       font-size: $font-nm-b;

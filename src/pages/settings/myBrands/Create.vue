@@ -159,11 +159,20 @@ export default {
 <style lang="scss" scoped>
 .create-brand-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
   .submit-btn {
     width: 160px;
   }
 }
 .brand-create-body {
   padding: 30px 0;
+  @include respond-to(mobile) {
+    padding: 0;
+    .brand-create-form .form-group {
+      padding: 10px 20px;
+    }
+  }
 }
 </style>

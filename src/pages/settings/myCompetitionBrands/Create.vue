@@ -8,10 +8,10 @@
             v-for="(item, index) in brandList"
             :key="index"
           >
-            <div class="col-sm-2 control-label">
+            <div class="col-sm-2 col-xs-12 control-label">
               {{$t('lang.myCompetitionBrands.addPage.name')}}
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-5">
               <input
                 type="text"
                 :name="'name_' + index"
@@ -22,7 +22,7 @@
                 v-validate="'required'"
               >
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-5 col-xs-5">
               <input
                 type="text"
                 :name="'direction_name_' + index"
@@ -33,7 +33,7 @@
                 v-validate="'required'"
               >
             </div>
-            <div class="col-sm-1" v-if="isAdd">
+            <div class="col-sm-1 col-xs-2" v-if="isAdd">
               <span class="iconfont icon-delete" @click="delBrand(index)"></span>
             </div>
           </div>
@@ -197,8 +197,14 @@ export default {
 <style lang="scss" scoped>
 .create-brand-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
   .create-tips {
     text-align: center;
+    @include respond-to(mobile) {
+      padding: 16px;
+    }
   }
   .icon-delete {
     line-height: 34px;
@@ -218,5 +224,11 @@ export default {
 }
 .brand-create-body {
   padding: 30px 0;
+  @include respond-to(mobile) {
+    padding: 0;
+    .brand-create-form .form-group {
+      padding: 10px 20px;
+    }
+  }
 }
 </style>

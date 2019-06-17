@@ -8,7 +8,7 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-3 col-xs-12">
             <div class="upload-avatar-area">
               <div class="avatar">
                 <img
@@ -46,11 +46,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-9">
+          <div class="col-sm-9 col-xs-12">
             <div class="form-horizontal profile-form">
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.name.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.name.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <input
                     type="text"
                     name="name"
@@ -69,8 +69,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.real_name.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.real_name.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <input
                     type="text"
                     name="real_name"
@@ -89,8 +89,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.campany_name.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.campany_name.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <input
                     type="text"
                     name="campany_name"
@@ -109,8 +109,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.url.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.url.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <input
                     type="text"
                     name="url"
@@ -122,8 +122,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.description.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.description.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <textarea
                     name="description"
                     class="form-control"
@@ -134,8 +134,8 @@
                 </div>
               </div>
               <!-- <div class="form-group">
-                <div class="col-sm-3 control-label">{{$t('lang.companyInfo.keywords.title')}}:</div>
-                <div class="col-sm-8">
+                <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.companyInfo.keywords.title')}}:</div>
+                <div class="col-sm-8 col-xs-12">
                   <input
                     type="text"
                     name="keywords"
@@ -287,10 +287,16 @@ export default {
 <style lang="scss" scoped>
 .profile-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 16px 30px;
+  }
 }
 .profile-panel {
   .panel-body {
     padding: 40px;
+    @include respond-to(mobile) {
+      padding: 20px;
+    }
   }
 }
 .profile-form {
@@ -300,6 +306,9 @@ export default {
 }
 .upload-avatar-area {
   text-align: center;
+  @include respond-to(mobile) {
+    padding: 0 0 30px;
+  }
   .avatar {
     position: relative;
     width: 100%;

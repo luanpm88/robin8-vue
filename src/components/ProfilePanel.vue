@@ -66,11 +66,17 @@ export default {
 <style lang="scss" scoped>
 .user-info-panel {
   padding: 30px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
   .cover {
     position: relative;
     width: 120px;
     padding-bottom: 100%;
     overflow: hidden;
+    @include respond-to(mobile) {
+      width: 60px;
+    }
     .cover-img {
       position: absolute;
       top: 0;
@@ -81,6 +87,9 @@ export default {
   .content {
     padding: 20px;
     font-size: $font-nm;
+    @include respond-to(mobile) {
+      padding: 0 20px;
+    }
     .title {
       margin-bottom: 10px;
       font-size: $font-lg-s;

@@ -179,10 +179,16 @@ export default {
 <style lang="scss" scoped>
 .messages-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 16px 30px;
+  }
 }
 .messages-panel {
   .panel-body {
     padding: 20px;
+    @include respond-to(mobile) {
+      padding: 10px;
+    }
   }
 }
 .msg-list {
