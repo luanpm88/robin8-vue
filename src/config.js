@@ -6,7 +6,7 @@
 // const host = 'https://qa.robin8.net/brand_api/v2'
 // 正式
 
-const host = 'http://13.229.232.233:4000/brand_api/v2'
+const host = 'https://app.robin8.vn/brand_api/v2'
 
 //const host = 'https://robin8.net/brand_api/v2'
 
