@@ -168,6 +168,9 @@ export default {
 <style lang="scss" scoped>
 .campaigns-list-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 12px 30px;
+  }
 }
 .campaigns-list {
   & > .list-item {
@@ -177,6 +180,11 @@ export default {
     box-shadow: 0px 1px 15px 0px rgba(#000, .08);
     background-color: #f6f7f7;
     overflow: hidden;
+    .media {
+      @include respond-to(mobile) {
+        display: block;
+      }
+    }
     .content {
       padding: 20px;
     }
@@ -185,6 +193,9 @@ export default {
       width: 300px;
       padding-bottom: 75%;
       overflow: hidden;
+      @include respond-to(mobile) {
+        width: 100%;
+      }
       .cover-img {
         position: absolute;
         top: 0;
@@ -193,10 +204,16 @@ export default {
       }
     }
     .campaign-info {
+      @include respond-to(mobile) {
+        text-align: justify;
+      }
       .title {
         margin-bottom: 10px;
         font-size: $font-lg-s;
         font-weight: normal;
+        @include respond-to(mobile) {
+          @include limit-line(2);
+        }
       }
       .per-budget-type {
         color: nth($cyan, 1);
@@ -213,11 +230,28 @@ export default {
         .num {
           font-size: $font-nm-l;
         }
+        @include respond-to(mobile) {
+          float: left;
+          width: 33.33333%;
+          margin: 10px 0;
+        }
+      }
+      @include respond-to(mobile) {
+        display: block;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: #e1e8ea;
       }
     }
     .campaign-operation {
       padding: 20px;
+      @include respond-to(mobile) {
+        @include display-flex;
+        padding: 0 15px 20px;
+      }
       & > .btn {
+        @include flex(1);
         margin: 0 5px;
       }
     }

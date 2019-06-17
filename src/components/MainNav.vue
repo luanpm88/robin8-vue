@@ -77,10 +77,10 @@ export default {
           icon: 'icon-document',
           href: '/creations',
           subNav: [
-            {
-              title: 'nav.create',
-              href: '/create'
-            },
+            // {
+            //   title: 'nav.create',
+            //   href: '/create'
+            // },
             // {
             //   title: 'nav.customContent',
             //   href: '/creations'

@@ -4,7 +4,7 @@
     <!-- <profile-panel></profile-panel> -->
 
     <div class="icon-grid-panel">
-      <!-- <router-link to="/creations/create" tag="div" class="item">
+      <router-link to="/creations/create" tag="div" class="item">
         <div class="box">
           <div class="iconfont icon-create"></div>
           <h5 class="title">创建大V活动</h5>
@@ -14,7 +14,7 @@
             <p>(e.g. article, video, live streaming, review, etc.)</p>
           </div>
         </div>
-      </router-link> -->
+      </router-link>
       <router-link to="/campaigns/create" tag="div" class="item">
         <div class="box">
           <div class="iconfont icon-create-s"></div>

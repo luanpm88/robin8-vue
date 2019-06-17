@@ -7,8 +7,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.link.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.link.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="link"
@@ -27,8 +27,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.name.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.name.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="name"
@@ -47,8 +47,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.description.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.description.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="desc"
@@ -67,8 +67,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.picture.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.picture.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
@@ -116,8 +116,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.allBudget.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.allBudget.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <a-input-number
                 name="allBudget"
                 class="form-control text-center"
@@ -146,10 +146,10 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.platform.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.platform.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="platform"
@@ -162,7 +162,7 @@
                     <span>{{$t('lang.campaigns.platform.wechat')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="platform"
@@ -187,10 +187,10 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.mode.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.mode.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
-                <div v-if="submitData.sub_type == 'wechat'" class="col-sm-4">
+                <div v-if="submitData.sub_type == 'wechat'" class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="mode"
@@ -203,7 +203,7 @@
                     <span>{{$t('lang.campaigns.mode.clicks')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="mode"
@@ -216,7 +216,7 @@
                     <span>{{$t('lang.campaigns.mode.repost')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="mode"
@@ -241,10 +241,10 @@
           </div>
 
           <div v-if="submitData.per_budget_type == 'cpt'" class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.pictureNumber.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.pictureNumber.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="imgCount"
@@ -257,7 +257,7 @@
                     <span>{{$t('lang.campaigns.pictureNumber.onePic')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="imgCount"
@@ -270,7 +270,7 @@
                     <span>{{$t('lang.campaigns.pictureNumber.twoPic')}}</span>
                   </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-12">
                   <label class="ctrl-label">
                     <input
                       name="imgCount"
@@ -294,8 +294,8 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.budget.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.budget.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <a-input-number
                 name="budget"
                 class="form-control text-center"
@@ -324,8 +324,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.time.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.time.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <datepicker
                 name="campaignTime"
                 range
@@ -378,10 +378,10 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-xs-6">
                   <select
                     name="province"
                     class="form-control"
@@ -400,7 +400,7 @@
                   </select>
                   <div class="form-tips">{{$t('lang.campaigns.kolDistrict.provinceErrorTips')}}</div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-xs-6">
                   <select
                     name="city"
                     class="form-control"
@@ -428,8 +428,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.kolDistrict.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
                   v-for="(item, index) in checkedCitys"
@@ -447,8 +447,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolAge.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.kolAge.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <select
                 name="age"
                 class="form-control"
@@ -471,8 +471,8 @@
                 {{$t('lang.campaigns.kolAge.errorTips')}}
               </div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.campaigns.kolGender.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-2 col-xs-12 control-label">{{$t('lang.campaigns.kolGender.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <select
                 name="gender"
                 class="form-control"
@@ -493,8 +493,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.campaigns.kolPush.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.campaigns.kolPush.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <select
                 name="push"
                 class="form-control"
@@ -878,12 +878,22 @@ export default {
   padding: 10px 0;
   .form-group {
     padding: 10px 40px;
+    @include respond-to(mobile) {
+      padding: 10px 16px;
+    }
   }
 }
 .create-btn-area {
   padding: 30px;
+  @include respond-to(mobile) {
+    @include display-flex;
+    padding: 30px 0;
+  }
   & > .btn {
     width: 150px;
+    @include respond-to(mobile) {
+      @include flex(1);
+    }
     & + .btn {
       margin-left: 10px;
     }
@@ -891,10 +901,16 @@ export default {
 }
 .creation-form {
   padding: 0 100px;
+  @include respond-to(mobile) {
+    padding: 0 12px;
+  }
 }
 .creation-form /deep/ .kols-list {
   padding: 24px 30px;
   font-size: 0;
+  @include respond-to(mobile) {
+    padding: 10px 20px;
+  }
   & > .kols-list-item {
     display: inline-block;
     width: 33.33333%;
