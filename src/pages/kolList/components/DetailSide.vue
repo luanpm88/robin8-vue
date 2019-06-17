@@ -3,7 +3,7 @@
   <div>
     <!-- DetailSide. -->
     <div class="panel default-panel kol-infobox">
-      <div class="panel-body">
+      <div class="panel-body prl30">
         <h5 class="title">{{$t('lang.kolList.detail.infoTit')}}</h5>
         <div class="media kol-dec">
           <div class="media-left media-middle">

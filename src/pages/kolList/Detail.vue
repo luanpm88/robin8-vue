@@ -1,14 +1,14 @@
 <template>
-  <div class="container clearfix">
-    <div class="kol-detail clearfix">
-      <div class="kol-detail-left col-xs-4">
+  <div class="kol-detail-container clearfix">
+    <div class="row">
+      <div class="col-lg-4 col-xs-12">
         <!-- info -->
         <!-- kol 详情 -->
         <detail-side :currentKeywords="currentBrandKeywords" :currentName="currentBrandName" @otherSocial="giveOtherProp"></detail-side>
         <!-- industries 行业图表  暂时隐藏-->
         <industries></industries>
       </div>
-      <div class="kol-detail-right col-xs-8" v-if="type === 0 || type === 1">
+      <div class="col-lg-8 col-xs-12" v-if="type === 0 || type === 1">
         <!-- tab 平台切换 -->
         <default-tabs
           :tabList="tabList"
