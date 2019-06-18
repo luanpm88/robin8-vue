@@ -89,6 +89,9 @@ export default {
       commonJs.setLocalData('robin8AdvancedSearchShow', data, 604700)
     } catch (e) {}
   },
+  setNavOpen (state, data) {
+    state.navOpen = data
+  },
   removeAuthorization (state) {
     state.authorization = ''
     try {

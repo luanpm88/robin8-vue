@@ -19,21 +19,23 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: 'PageHeaderMobile',
   props: {
     hasNav: Boolean
   },
-  data () {
-    return {
-      navOpen: false
-    }
-  },
   methods: {
+    ...mapMutations(['setNavOpen']),
     toggleNav () {
-      this.navOpen = !this.navOpen
+      // console.log(this.navOpen)
+      this.setNavOpen(!this.navOpen)
       this.$emit('openNavCtrl', this.navOpen)
     }
+  },
+  computed: {
+    ...mapState(['navOpen'])
   }
 }
 </script>
