@@ -72,6 +72,7 @@
 <script>
 import axios from 'axios'
 import apiConfig from '@/config'
+import commonJs from '@javascripts/common.js'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

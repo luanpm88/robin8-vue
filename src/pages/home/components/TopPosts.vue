@@ -322,6 +322,9 @@ export default {
   padding: 10px 0;
   height: 400px;
   overflow: hidden;
+  @include respond-to(mobile) {
+    height: auto;
+  }
   .list-content-inner {
     padding: 0 20px;
   }

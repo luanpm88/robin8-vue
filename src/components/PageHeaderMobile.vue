@@ -15,10 +15,19 @@
         <img src="@images/logo.png" alt="Robin8" class="logo-img" />
       </router-link>
     </h1>
+
+    <div v-if="!!authorization && authorization !=''" class="message">
+      <router-link to="/messages">
+        <span class="iconfont icon-bell"></span>
+        <span v-if="messages != '0'" class="msg-num">{{messages}}</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import apiConfig from '@/config'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -27,15 +36,33 @@ export default {
     hasNav: Boolean
   },
   methods: {
-    ...mapMutations(['setNavOpen']),
+    ...mapMutations(['setNavOpen', 'setMsgCount']),
     toggleNav () {
       // console.log(this.navOpen)
       this.setNavOpen(!this.navOpen)
       this.$emit('openNavCtrl', this.navOpen)
+    },
+    getMsgCount () {
+      axios.get(apiConfig.messagesCountUrl, {
+        headers: {
+          'Authorization': this.authorization
+        }
+      }).then(this.handleGetMsgCountSucc)
+    },
+    handleGetMsgCountSucc (res) {
+      let resData = res.data
+      if (res.status == 200 && resData) {
+        this.setMsgCount(resData.new_message_count)
+      }
+    }
+  },
+  mounted () {
+    if (!!this.authorization && this.authorization != '') {
+      this.getMsgCount()
     }
   },
   computed: {
-    ...mapState(['navOpen'])
+    ...mapState(['authorization', 'navOpen', 'messages'])
   }
 }
 </script>
@@ -55,6 +82,31 @@ export default {
     height: 30px;
     .logo-img {
       height: 100%;
+      vertical-align: top;
+    }
+  }
+  .message {
+    @include display-flex;
+    position: absolute;
+    @include center(y);
+    right: 20px;
+    cursor: pointer;
+    flex-wrap: wrap;
+    align-content: space-between;
+    a {
+      text-decoration: none;
+    }
+    .msg-num {
+      display: inline-block;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 8px;
+      border-radius: 10px;
+      color: #fff;
+      background-color: nth($red, 1);
+    }
+    .icon-bell {
+      font-weight: bold;
     }
   }
   .nav-ctrl-btn {
