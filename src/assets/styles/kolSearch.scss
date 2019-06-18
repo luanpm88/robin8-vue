@@ -169,7 +169,10 @@
 }
 @media screen and (max-width: 765px){
   .kol-search-container{
-    padding: 30px 20px;
+    padding: 20px 16px;
+    .mt30{
+      margin-top: 20px;
+    }
   }
   .kol-search{
     .kol-table-wrarp{
@@ -191,5 +194,8 @@
     .p30{
       padding: 15px;
     }
+  }
+  .kols-search-panel .panel-body{
+    padding: 20px;
   }
 }

@@ -129,6 +129,9 @@
 
 @media screen and (max-width: 765px){
   .socail-container{
-    padding: 30px 20px 0px;
+    padding: 20px 16px 0px;
+  }
+  .social-search .panel-body, .social-content .panel-body{
+    padding: 20px;
   }
 }
