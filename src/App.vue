@@ -6,7 +6,7 @@
     >
       <main-nav></main-nav>
 
-      <div v-if="!!authorization && authorization !=''" class="user-info clearfix">
+      <div v-if="!!authorization && authorization !=''" class="user-info clearfix only-mobile">
         <div class="user-box">
           <div class="media">
             <div class="media-left">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="languages-ctrl clearfix">
+      <div class="languages-ctrl clearfix only-mobile">
         <span
           class="item"
           :class="[lang == 'zh-CN' ? 'active' : '']"
