@@ -166,6 +166,7 @@
                   :defaultPageSize="kolsPerPage"
                   :total="kolsTotal"
                   :hideOnSinglePage="true"
+                  :size="paginationSize"
                   @change="onKolsPageChange"
                 />
               </div>
@@ -361,6 +362,7 @@ export default {
       kolsPage: 1,
       kolsPerPage: 4,
       kolsTotal: 0,
+      paginationSize: '',
       tabIndex: 0,
       tabList: [
         {
@@ -698,6 +700,11 @@ export default {
   mounted () {
     this.kolsParams.page = this.kolsPage
     this.kolsParams.per_page = this.kolsPerPage
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getDetailData()
     this.getKolsData()
     this.getStatisticsData()

@@ -95,6 +95,7 @@
           :defaultPageSize="kolsPerPage"
           :total="kolsTotal"
           :hideOnSinglePage="true"
+          :size="paginationSize"
           @change="onPageChange"
         />
       </div>
@@ -114,6 +115,11 @@ export default {
   components: {
   },
   created() {
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getBaseData();
   },
   computed: {
@@ -142,7 +148,8 @@ export default {
       itemList: [],
       cartParams: {},
       data: [],
-      selectIdValue: undefined
+      selectIdValue: undefined,
+      paginationSize: ''
     };
   },
   methods: {

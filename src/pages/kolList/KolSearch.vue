@@ -380,6 +380,7 @@
           v-model="currentPageAdd"
           :total="kolsTotal"
           :hideOnSinglePage="true"
+          :size="paginationSize"
           @change="onPageChange"
         />
       </div>
@@ -496,6 +497,7 @@ export default {
         },
       ],
       selectSearchType: 0,
+      paginationSize: ''
     };
   },
   created() {
@@ -504,6 +506,11 @@ export default {
     // this.r8Kol();
     // 获取keywords
     this.getBaseData();
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     if (this.$route.query.brand_keywords) {
       this.tabIndex = Number(this.$route.query.type);
       this.keyword = this.$route.query.brand_keywords;

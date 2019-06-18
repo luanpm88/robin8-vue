@@ -60,6 +60,7 @@
             :defaultPageSize="perPage"
             :total="total"
             :hideOnSinglePage="true"
+            :size="paginationSize"
             @change="onPageChange"
           />
         </div>
@@ -85,7 +86,8 @@ export default {
       perPage: 20,
       total: 0,
       active: false,
-      activeId: ''
+      activeId: '',
+      paginationSize: ''
     }
   },
   methods: {
@@ -168,6 +170,11 @@ export default {
   mounted () {
     this.params.page = this.page
     this.params.per_page = this.perPage
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getListData()
   },
   computed: {
