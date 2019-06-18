@@ -267,6 +267,9 @@ export default {
   padding: 10px 0;
   height: 400px;
   overflow: hidden;
+  @include respond-to(mobile) {
+    height: auto;
+  }
   .kols-list-item {
     &:after {
       height: 2px;
@@ -281,6 +284,9 @@ export default {
   height: 380px;
   padding: 0 20px;
   overflow-y: auto;
+  @include respond-to(mobile) {
+    height: auto;
+  }
   .default-table {
     th {
       padding: 0;

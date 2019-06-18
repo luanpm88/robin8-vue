@@ -26,6 +26,9 @@
 .list-content-inner {
   height: 380px;
   overflow-y: auto;
+  @include respond-to(mobile) {
+    height: auto;
+  }
 }
 
 .nonetip,
