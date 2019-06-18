@@ -72,31 +72,35 @@ export default {
           icon: 'icon-home',
           href: '/home'
         },
+        // {
+        //   title: 'nav.campaigns',
+        //   icon: 'icon-document',
+        //   href: '/creations',
+        //   subNav: [
+        //     {
+        //       title: 'nav.create',
+        //       href: '/create'
+        //     },
+        //     {
+        //       title: 'nav.customContent',
+        //       href: '/creations'
+        //     },
+        //     {
+        //       title: 'nav.shareOnly',
+        //       href: '/campaigns'
+        //     }
+        //   ]
+        // },
         {
-          title: 'nav.campaigns',
+          title: 'nav.shareOnly',
           icon: 'icon-document',
-          href: '/creations',
-          subNav: [
-            // {
-            //   title: 'nav.create',
-            //   href: '/create'
-            // },
-            // {
-            //   title: 'nav.customContent',
-            //   href: '/creations'
-            // },
-            {
-              title: 'nav.shareOnly',
-              href: '/campaigns'
-            }
-          ]
+          href: '/campaigns',
         },
         {
           title: 'nav.kols',
           icon: 'icon-user',
           href: '/kol/list'
         },
-
         {
           title: 'nav.wallet',
           icon: 'icon-wallet',

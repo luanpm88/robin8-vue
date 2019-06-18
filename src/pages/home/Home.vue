@@ -11,7 +11,14 @@
           <h6 class="sub-title">Search Engine</h6>
         </div>
       </router-link>
-      <router-link to="/create" class="item">
+      <!-- <router-link to="/create" class="item">
+        <div class="iconfont icon-create-s"></div>
+        <div class="info">
+          <h5 class="title">创建新活动</h5>
+          <h6 class="sub-title">Create Campaign</h6>
+        </div>
+      </router-link> -->
+      <router-link to="/campaigns/create" class="item">
         <div class="iconfont icon-create-s"></div>
         <div class="info">
           <h5 class="title">创建新活动</h5>

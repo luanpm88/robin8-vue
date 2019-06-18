@@ -41,13 +41,12 @@
         <p class="desc" v-if="renderStatus.isPostTime">{{renderData.post_time}}</p>
         <p class="desc" v-else>{{renderData.description_raw}}</p>
       </div>
-      <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
+      <!-- <div v-if="renderStatus.hasInflunce" class="media-right media-middle influnce-score">
         <div class="text-center">
-          <!-- <h5>Influence Score</h5> -->
           <p v-if="renderStatus.type === 0">{{renderData.avg_post_influences}}</p>
           <p v-else>Coming Soon</p>
         </div>
-      </div>
+      </div> -->
       <div v-if="renderStatus.hasLiked || renderStatus.hasMsg || renderStatus.hasCart || renderStatus.hasDelete" class="media-right media-middle operation-area">
         <span
           v-if="renderStatus.hasLiked"
