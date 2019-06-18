@@ -53,6 +53,8 @@ const i18n = new VueI18n({
 })
 
 router.beforeEach((to, from, next) => {
+  store.commit('setNavOpen', false)
+
   if (to.meta.title) {
     // document.title = to.meta.title
     const _name = to.meta.title || 'Robin8'

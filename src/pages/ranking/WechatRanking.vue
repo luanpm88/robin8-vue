@@ -61,10 +61,10 @@
                     <img :src="item.avatar_url" alt>
                   </router-link>
                 </span>
-                <span
+                <!-- <span
                   class="iconfont icon-cart active col-sm-1"
                   @click="doAddCart(item)"
-                ></span>
+                ></span> -->
                 <span class="r-right-topList-txt col-sm-6">
                   <b>{{item.profile_name}}</b>
                   <b>{{item.source}}</b>
@@ -97,10 +97,10 @@
                   }">
                   <img :src="dec.avatar_url">
                 </router-link>
-                <span
+                <!-- <span
                   class="iconfont icon-cart active"
                   @click="doAddCart(dec)"
-                ></span>
+                ></span> -->
                 <p>{{dec.profile_name}}</p>
                 <p>{{dec.id}}</p>
               </div>

@@ -166,6 +166,7 @@
                   :defaultPageSize="kolsPerPage"
                   :total="kolsTotal"
                   :hideOnSinglePage="true"
+                  :size="paginationSize"
                   @change="onKolsPageChange"
                 />
               </div>
@@ -361,6 +362,7 @@ export default {
       kolsPage: 1,
       kolsPerPage: 4,
       kolsTotal: 0,
+      paginationSize: '',
       tabIndex: 0,
       tabList: [
         {
@@ -698,6 +700,11 @@ export default {
   mounted () {
     this.kolsParams.page = this.kolsPage
     this.kolsParams.per_page = this.kolsPerPage
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getDetailData()
     this.getKolsData()
     this.getStatisticsData()
@@ -711,8 +718,16 @@ export default {
 <style lang="scss" scoped>
 .campaign-detail-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 16px 30px;
+  }
 }
 .campaign-detail-panel {
+  .media {
+    @include respond-to(mobile) {
+      display: block;
+    }
+  }
   .content {
     padding: 20px;
   }
@@ -721,6 +736,9 @@ export default {
     width: 300px;
     padding-bottom: 75%;
     overflow: hidden;
+    @include respond-to(mobile) {
+      width: 100%;
+    }
     .cover-img {
       position: absolute;
       top: 0;
@@ -729,6 +747,9 @@ export default {
     }
   }
   .campaign-info {
+    @include respond-to(mobile) {
+      text-align: justify;
+    }
     .title {
       margin-bottom: 10px;
       font-size: $font-lg-s;
@@ -739,13 +760,30 @@ export default {
     }
     .desc {
       @include limit-line(3);
+      @include respond-to(mobile) {
+        margin-top: 4px;
+      }
     }
   }
   .campaign-status {
     @include display-flex;
+    @include respond-to(mobile) {
+      display: block;
+      margin-top: 10px;
+    }
     & > .item {
       @include flex(1);
       text-align: center;
+      @include respond-to(mobile) {
+        display: block;
+        margin-top: 4px;
+        text-align: left;
+      }
+      .title, .text {
+        @include respond-to(mobile) {
+          display: inline-block;
+        }
+      }
       .num {
         font-size: $font-nm-l;
       }
@@ -790,23 +828,50 @@ export default {
   .chart-item {
     float: left;
     width: 50%;
+    @include respond-to(mobile) {
+      width: 100%;
+    }
     &:nth-child(odd) {
       padding-right: 20px;
+      @include respond-to(mobile) {
+        padding-right: 0;
+      }
     }
     &:nth-child(even) {
       padding-left: 20px;
+      @include respond-to(mobile) {
+        padding-left: 0;
+      }
     }
   }
 }
 .statistics-panel {
   @include display-flex;
   padding: 20px;
+  @include respond-to(mobile) {
+    display: block;
+    padding: 10px 20px;
+  }
   & > .item {
     @include flex(1);
     padding: 20px 0;
     text-align: center;
+    @include respond-to(mobile) {
+      padding: 4px 0;
+      text-align: left;
+    }
     .title {
       margin-bottom: 10px;
+      @include respond-to(mobile) {
+        margin-right: 8px;
+        font-weight: bold;
+      }
+    }
+    .title, .text {
+      @include respond-to(mobile) {
+        display: inline-block;
+        margin-bottom: 0;
+      }
     }
     .num {
       font-size: $font-nm-l;
@@ -824,8 +889,15 @@ export default {
 }
 .create-btn-area {
   padding: 30px;
+  @include respond-to(mobile) {
+    @include display-flex;
+    padding: 20px 0 50px;
+  }
   & > .btn {
     width: 150px;
+    @include respond-to(mobile) {
+      @include flex(1);
+    }
     & + .btn {
       margin-left: 10px;
     }

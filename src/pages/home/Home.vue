@@ -4,23 +4,30 @@
     <!-- <profile-panel></profile-panel> -->
 
     <div class="icon-grid-panel">
-      <router-link to="/kol/list" tag="div" class="item">
-        <div class="box">
-          <div class="iconfont icon-search-shield"></div>
+      <router-link to="/kol/list" class="item">
+        <div class="iconfont icon-search-shield"></div>
+        <div class="info">
           <h5 class="title">查找KOL</h5>
           <h6 class="sub-title">Search Engine</h6>
         </div>
       </router-link>
-      <router-link to="/create" tag="div" class="item">
-        <div class="box">
-          <div class="iconfont icon-create-s"></div>
+      <!-- <router-link to="/create" class="item">
+        <div class="iconfont icon-create-s"></div>
+        <div class="info">
+          <h5 class="title">创建新活动</h5>
+          <h6 class="sub-title">Create Campaign</h6>
+        </div>
+      </router-link> -->
+      <router-link to="/campaigns/create" class="item">
+        <div class="iconfont icon-create-s"></div>
+        <div class="info">
           <h5 class="title">创建新活动</h5>
           <h6 class="sub-title">Create Campaign</h6>
         </div>
       </router-link>
-      <router-link to="/campaigns" tag="div" class="item">
-        <div class="box">
-          <div class="iconfont icon-cup"></div>
+      <router-link to="/campaigns" class="item">
+        <div class="iconfont icon-cup"></div>
+        <div class="info">
           <h5 class="title">活动列表</h5>
           <h6 class="sub-title">My Campaigns</h6>
         </div>
@@ -60,11 +67,11 @@
 
       <!-- <home-analytic class="mt20" :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-analytic> -->
 
-      <div class="home-show row mt20">
-        <div class="col-xs-6">
+      <div class="home-show row">
+        <div class="col-sm-6 col-xs-12 mt20">
           <home-recommended-kols :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-recommended-kols>
         </div>
-        <div  class="col-xs-6">
+        <div  class="col-sm-6 col-xs-12 mt20">
           <home-top-posts :childKeyList='keyList' :isSelectBrand="isTotalBrand"></home-top-posts>
         </div>
       </div>
@@ -255,25 +262,41 @@ export default {
     $gap: 10px;
     padding: 0 100px 30px;
     background-color: #fff;
+    @include respond-to(mobile) {
+      display: block;
+      padding: 30px;
+    }
     & > .item {
       @include display-flex;
       @include flex(1);
       height: $height;
       margin-right: $gap;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: linear-gradient(180deg, #2fccd3 0%, #75e6e9 100%);
       box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, .1);
       border-radius: 5px;
-      cursor: pointer;
-      .box {
-        text-align: center;
-        color: #fff;
+      color: #fff;
+      @include respond-to(mobile) {
+        height: 140px;
+        margin-right: 0;
+        margin-bottom: 16px;
+        flex-direction: row;
       }
       .iconfont {
         height: 100px;
         line-height: 100px;
         font-size: 6rem;
+        @include respond-to(mobile) {
+          margin-right: 20px;
+        }
+      }
+      .info {
+        text-align: center;
+        @include respond-to(mobile) {
+          text-align: left;
+        }
       }
       .title {
         font-size: 1.9rem;
@@ -285,11 +308,17 @@ export default {
       }
       &:last-child {
         margin-right: 0;
+        @include respond-to(mobile) {
+          margin-bottom: 0;
+        }
       }
     }
   }
   .home-show {
-    padding: 0px 100px;
+    padding: 0px 100px 30px;
+    @include respond-to(mobile) {
+      padding: 0px 16px 30px;
+    }
   }
 }
 </style>

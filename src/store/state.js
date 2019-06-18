@@ -118,6 +118,8 @@ try {
   }
 } catch (e) {}
 
+let navOpen = false
+
 export default {
   authorization,
   nickname,
@@ -131,5 +133,6 @@ export default {
   language,
   messages,
   detailShow,
-  advancedSearchShow
+  advancedSearchShow,
+  navOpen
 }

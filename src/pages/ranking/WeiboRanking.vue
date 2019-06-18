@@ -1,17 +1,17 @@
 <template>
-  <div class="ranking-container clearfix">
-    <div class="top-control-area">
+  <div class="ranking-container clearfix ranking-weibo">
+    <!-- <div class="top-control-area">
       <button type="button" class="btn btn-cyan" @click="pageBack">
         <span class="iconfont icon-arrow-left"></span>
         Back
       </button>
-    </div>
+    </div> -->
 
     <div class="mt20 clearfix">
       <!-- left -->
       <div class="ranking-left col-sm-2">
-        <h5>Industries</h5>
-        <ul class="ranking-nav">
+        <h5>{{$t(`lang.ranking.weiboside.title`)}} <span class="iconfont icon-arrow-right only-mobile" @click="showRankNav"></span> </h5>
+        <ul class="ranking-nav" v-if="rankingNav">
           <li
             v-for="(item, index) in rankSideList"
             :key="index"
@@ -20,26 +20,31 @@
           >
             <span><i class="iconfont icon" v-html="item.icon"></i>
             </span>
-            {{item.label}}
+            <!-- {{item.label}} -->
+            {{$t(`lang.${item.label}`)}}
           </li>
         </ul>
       </div>
       <!-- right -->
       <div class="ranking-right col-sm-10">
+        <!-- 头部三条和 和 beachmark 先隐藏 -->
         <!-- top dec -->
         <div class="r-top clearfix">
           <p
             class="r-top-dec col-sm-7"
-          >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p>
-          <p class="r-top-right col-sm-5">
+          >{{topTittle}} on {{topTittleIndustry}}</p>
+          <!-- <p
+            class="r-top-dec col-sm-7"
+          >{{topTittle}} on {{topTittleIndustry}} ( 21 days analysis: {{endDate}} to {{refreshDate}})</p> -->
+          <!-- <p class="r-top-right col-sm-5">
             <span>7 | 14 | 21</span>
             <span class="r-benchmark" @click="lookBenchmark()">
               <i class="iconfont icon-rank"></i> &nbsp;Benchmark
             </span>
-          </p>
+          </p> -->
         </div>
         <!-- top list -->
-        <div class="r-right-topList clearfix">
+        <!-- <div class="r-right-topList clearfix">
           <div class="r8-loading" v-if="isTopLoading">
             <a-spin tip="Loading..."/>
           </div>
@@ -70,7 +75,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div>
           <div class="r8-loading" v-if="isTableLoding">
             <a-spin tip="Loading..."/>
@@ -81,7 +86,7 @@
             :dataSource="tableThirtyList"
             @change="handleTableChange"
             :pagination="false"
-            :scroll="{ y: 500 }"
+            :scroll="{ y: 550 }"
           >
             <template slot="profileDec" slot-scope="dec">
               <div class="r-tableThirtyList-name">
@@ -97,7 +102,7 @@
                   }">
                   <img :src="dec.avatar_url">
                 </router-link>
-                <span class="iconfont icon-cart active" @click="doAddCart(dec)"></span>
+                <!-- <span class="iconfont icon-cart active" @click="doAddCart(dec)"></span> -->
                 <p>{{dec.profile_name}}</p>
                 <!-- <p>{{dec.id}}</p> -->
               </div>
@@ -117,7 +122,7 @@ import totalDataJS from '@components/Chart/GlobalChartOption'
 import commonJs from '@javascripts/common.js'
 import { Spin, Table } from 'ant-design-vue'
 let totalParams = {
-  industry: 'airline',
+  industry: 'fashion',
   no_of_days: 21
 }
 export default {
@@ -131,8 +136,8 @@ export default {
   },
   data() {
     return {
-      rankSideList: totalDataJS.ranking.rankSideList,
-      iscur: 0,
+      rankSideList: totalDataJS.ranking.rankWeiboSideList,
+      iscur: 7,
       refreshDate: '',
       endDate: commonJs.cPastTwentyOneDays,
       startDate: commonJs.cPastOneday,
@@ -146,10 +151,18 @@ export default {
       columns: totalDataJS.ranking.weibothirtyColums,
       TableData: [],
       totalKeywords: '',
-      cartParams: {}
+      cartParams: {},
+      rankingNav: true
     }
   },
   created() {
+    // 判断是不是手机端
+    if (commonJs.isMobile()) {
+      this.rankingNav = false
+    } else {
+      this.rankingNav = true
+    }
+
     this.topTittleIndustry = totalParams.industry
     this.rankSideList.forEach((item, index) => {
       if (item.value === this.topTittleIndustry) {
@@ -328,6 +341,11 @@ export default {
               )
               element.max_likes = commonJs.threeFormatter(element.max_likes, 2)
               element.avg_likes = commonJs.threeFormatter(element.avg_likes, 2)
+              element.kol_influence = commonJs.threeFormatter(element.kol_influence, 2)
+              element.fans_number = element.fans_number
+              element.avg_comments = commonJs.threeFormatter(element.avg_comments, 2)
+              element.relevance = commonJs.threeFormatter(element.relevance, 2)
+              element.industry = commonJs.threeFormatter(element.industry, 2)
             })
             _that.tableThirtyList = res.data
           }
@@ -335,18 +353,6 @@ export default {
         .catch(function(error) {
           // console.log(error)
         })
-    },
-    listSearch(currentList, index) {
-      this.iscur = index
-      totalParams.industry = currentList.value
-      this.topTittleIndustry = currentList.value
-      this.tableTopList = []
-      this.tableThirtyList = []
-      this.isLoding = true
-      this.isTable = false
-      this.isTableLoding = true
-      // 获取最新的report_date
-      this.RankingDate(totalParams)
     },
     // 跳转benchmark页面
     lookBenchmark() {
@@ -404,6 +410,26 @@ export default {
     },
     pageBack() {
       this.$router.go(-1)
+    },
+    // ranking 菜单栏点击事件
+    listSearch(currentList, index) {
+      if (commonJs.isMobile()) {
+        this.rankingNav = false
+      }
+      this.iscur = index
+      totalParams.industry = currentList.value
+      this.topTittleIndustry = currentList.value
+      this.tableTopList = []
+      this.tableThirtyList = []
+      this.isLoding = true
+      this.isTable = false
+      this.isTableLoding = true
+      // 获取最新的report_date
+      this.RankingDate(totalParams)
+    },
+    // 手机 控制 ranking 左侧菜单栏的事件
+    showRankNav() {
+      this.rankingNav = !this.rankingNav
     }
   }
 }

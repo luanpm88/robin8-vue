@@ -5,7 +5,8 @@
 		<div class="panel default-panel mt20 kol-performance" v-if="isRelevantBox">
 			<div class="panel-body prl30">
         <h5 class="title">{{$t('lang.kolList.detail.mostRelevantPosts.title')}}</h5>
-					<table class="com-brand-table" v-if="isRelevant">
+        <div  class="com-brand-table"  v-if="isRelevant">
+					<table>
 					<tr>
 							<th>{{$t('lang.kolList.detail.mostRelevantPosts.tableTitle')}}</th>
 							<th>{{$t('lang.kolList.detail.mostRelevantPosts.date')}}</th>
@@ -19,12 +20,13 @@
 							<td>{{key.correlation}}</td>
 					</tr>
 					</table>
-					<div class="nonetip" v-if="isRelevantShow">
-					<span>{{$t('lang.totalNoDataTip')}}</span>
-					</div>
-					<div class="r8-loading" v-if="isRelevantLoading">
-					<a-spin tip="Loading..."/>
-					</div>
+        </div>
+        <div class="nonetip" v-if="isRelevantShow">
+        <span>{{$t('lang.totalNoDataTip')}}</span>
+        </div>
+        <div class="r8-loading" v-if="isRelevantLoading">
+        <a-spin tip="Loading..."/>
+        </div>
 			</div>
     </div>
   </div>

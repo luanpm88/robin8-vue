@@ -138,11 +138,20 @@ export default {
 <style lang="scss" scoped>
 .wallet-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
 }
 .recharge-form {
   padding: 60px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
   .form-group {
     margin-bottom: 20px;
+    @include respond-to(mobile) {
+      margin-bottom: 10px;
+    }
   }
 }
 .recharge-btn {

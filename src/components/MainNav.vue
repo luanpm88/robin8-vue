@@ -72,31 +72,35 @@ export default {
           icon: 'icon-home',
           href: '/home'
         },
+        // {
+        //   title: 'nav.campaigns',
+        //   icon: 'icon-document',
+        //   href: '/creations',
+        //   subNav: [
+        //     {
+        //       title: 'nav.create',
+        //       href: '/create'
+        //     },
+        //     {
+        //       title: 'nav.customContent',
+        //       href: '/creations'
+        //     },
+        //     {
+        //       title: 'nav.shareOnly',
+        //       href: '/campaigns'
+        //     }
+        //   ]
+        // },
         {
-          title: 'nav.campaigns',
+          title: 'nav.shareOnly',
           icon: 'icon-document',
-          href: '/creations',
-          subNav: [
-            {
-              title: 'nav.create',
-              href: '/create'
-            },
-            {
-              title: 'nav.customContent',
-              href: '/creations'
-            },
-            {
-              title: 'nav.shareOnly',
-              href: '/campaigns'
-            }
-          ]
+          href: '/campaigns',
         },
         {
           title: 'nav.kols',
           icon: 'icon-user',
           href: '/kol/list'
         },
-
         {
           title: 'nav.wallet',
           icon: 'icon-wallet',
@@ -133,10 +137,10 @@ export default {
               title: 'nav.competitors',
               href: '/settings/my_competition_brands'
             },
-            {
-              title: 'nav.cart',
-              href: '/settings/shopping_cart'
-            },
+            // {
+            //   title: 'nav.cart',
+            //   href: '/settings/shopping_cart'
+            // },
             {
               title: 'nav.help',
               href: '/help'
@@ -146,17 +150,17 @@ export default {
         {
           title: 'nav.ranking',
           icon: 'icon-podium',
-          href: '#ranking',
-          // subNav: [
-          //   {
-          //     title: 'nav.wechatRanking',
-          //     href: '/ranking/WechatRanking'
-          //   },
-          //   {
-          //     title: 'nav.weiboRanking',
-          //     href: '/ranking/WeiboRanking'
-          //   }
-          // ]
+          href: '/ranking',
+          subNav: [
+            // {
+            //   title: 'nav.wechatRanking',
+            //   href: '/ranking/WechatRanking'
+            // },
+            {
+              title: 'nav.weiboRanking',
+              href: '/ranking/WeiboRanking'
+            }
+          ]
         },
         {
           title: 'nav.socialListening',
@@ -196,7 +200,7 @@ export default {
         }
       })
 
-      console.log(this.navData)
+      // console.log(this.navData)
     }
   },
   // created () {
@@ -225,6 +229,9 @@ export default {
         vertical-align: top;
         height: 100%;
       }
+    }
+    @include respond-to(mobile) {
+      display: none;
     }
   }
   .nav-list {

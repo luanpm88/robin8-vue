@@ -101,7 +101,7 @@ export const lang = {
     brands: 'My Brands',
     competitors: 'My Competitors',
     cart: 'My Shopping Cart',
-    ranking: 'Ranking - Coming Soon',
+    ranking: 'Ranking',
     wechatRanking: 'Wechat Ranking',
     weiboRanking: 'Weibo Ranking',
     socialListening: 'KOL Listening',
@@ -964,6 +964,30 @@ export const lang = {
     },
     topPosts: {
       title: 'Top Posts'
+    }
+  },
+  ranking: {
+    weiboside: {
+      title: 'Industries',
+      art: 'Art',
+      car: 'Car',
+      babies: 'Babies',
+      beauty: 'Beauty',
+      books: 'Books',
+      education: 'Education',
+      entertainment: 'Entertainment',
+      fashion: 'Fashion',
+      finance: 'Finance',
+      fitness: 'Fitness',
+      food: 'Food',
+      games: 'Games',
+      health: 'Health',
+      home: 'Home',
+      law: 'Law',
+      music: 'Music',
+      realestate: 'Realestate',
+      sports: 'Sports',
+      travel: 'Travel'
     }
   },
   socialPage: {

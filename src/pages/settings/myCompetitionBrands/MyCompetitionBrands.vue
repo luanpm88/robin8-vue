@@ -186,6 +186,18 @@ export default {
 <style lang="scss" scoped>
 .brands-list-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
+  .panel-body {
+    @include respond-to(mobile) {
+      overflow-x: auto;
+      .default-table {
+        max-width: none;
+        min-width: 200%;
+      }
+    }
+  }
   .operation-btn {
     cursor: pointer;
   }

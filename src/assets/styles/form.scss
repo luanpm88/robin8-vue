@@ -90,6 +90,10 @@ textarea.form-control {
     text-align: right;
     font-size: 1.4rem;
     color: #575962;
+
+    &.col-xs-12 {
+      text-align: left;
+    }
   }
 
 }

@@ -60,6 +60,7 @@
             :defaultPageSize="perPage"
             :total="total"
             :hideOnSinglePage="true"
+            :size="paginationSize"
             @change="onPageChange"
           />
         </div>
@@ -85,7 +86,8 @@ export default {
       perPage: 20,
       total: 0,
       active: false,
-      activeId: ''
+      activeId: '',
+      paginationSize: ''
     }
   },
   methods: {
@@ -168,6 +170,11 @@ export default {
   mounted () {
     this.params.page = this.page
     this.params.per_page = this.perPage
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getListData()
   },
   computed: {
@@ -179,10 +186,16 @@ export default {
 <style lang="scss" scoped>
 .messages-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 16px 30px;
+  }
 }
 .messages-panel {
   .panel-body {
     padding: 20px;
+    @include respond-to(mobile) {
+      padding: 10px;
+    }
   }
 }
 .msg-list {

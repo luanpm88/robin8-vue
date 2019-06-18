@@ -1,4 +1,6 @@
-
+.kol-search-container {
+  padding: 30px 100px;
+}
 .kols-list-panel{
   .panel-body {
     padding: 20px;
@@ -164,4 +166,36 @@
     background-color: #e7edef;
   }
 
+}
+@media screen and (max-width: 765px){
+  .kol-search-container{
+    padding: 20px 16px;
+    .mt30{
+      margin-top: 20px;
+    }
+  }
+  .kol-search{
+    .kol-table-wrarp{
+      overflow-x: scroll;
+    }
+    .default-table{
+      width: 700px;
+    }
+    
+  }
+  .form-horizontal{
+    .control-label{
+      text-align: left;
+      margin: 5px 0px;
+    }
+    .kol-search-group {
+      margin-bottom: 0px !important;
+    }
+    .p30{
+      padding: 15px;
+    }
+  }
+  .kols-search-panel .panel-body{
+    padding: 20px;
+  }
 }

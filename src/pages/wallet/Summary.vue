@@ -34,6 +34,7 @@
           :defaultPageSize="perPage"
           :total="total"
           :hideOnSinglePage="true"
+          :size="paginationSize"
           @change="onPageChange"
         />
       </div>
@@ -55,7 +56,8 @@ export default {
       dataList: [],
       page: 1,
       perPage: 10,
-      total: 0
+      total: 0,
+      paginationSize: ''
     }
   },
   methods: {
@@ -84,6 +86,11 @@ export default {
   mounted () {
     this.params.page = this.page
     this.params.per_page = this.perPage
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getTransactionsData()
   },
   computed: {
@@ -95,5 +102,17 @@ export default {
 <style lang="scss" scoped>
 .wallet-container {
   padding: 30px 100px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
+  .panel-body {
+    @include respond-to(mobile) {
+      overflow-x: auto;
+      .default-table {
+        max-width: none;
+        min-width: 200%;
+      }
+    }
+  }
 }
 </style>

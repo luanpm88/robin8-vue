@@ -155,6 +155,9 @@ export default {
 <style lang="scss" scoped>
 .campaign-pay-container {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 10px 16px;
+  }
 }
 .order-info {
   line-height: 40px;
@@ -162,6 +165,9 @@ export default {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
   font-size: $font-nm-s;
   color: #4a4a4a;
+  @include respond-to(mobile) {
+    padding: 20px;
+  }
   .price {
     color: nth($blue, 1);
     .num {
@@ -174,6 +180,9 @@ export default {
   padding: 20px 100px;
   font-size: $font-nm-s;
   color: #4a4a4a;
+  @include respond-to(mobile) {
+    padding: 20px;
+  }
   .title {
     line-height: 40px;
     font-weight: 600;

@@ -47,6 +47,7 @@
             v-model="postCurrentPage"
             :total="postTotalPage"
             :hideOnSinglePage="true"
+            :size="paginationSize"
             @change="onPageChange"
           />
         </div>
@@ -86,6 +87,7 @@ export default {
         page_size: 10,
         order_type: 'post_time'
       },
+      paginationSize: ''
     }
   },
   computed: {
@@ -95,6 +97,11 @@ export default {
     this.isPostLoading = true
     this.isPostShow = false
     this.isPostList = false
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.postList = []
     this.type = Number(this.$route.query.type)
     this.tabIndexThreeInit()

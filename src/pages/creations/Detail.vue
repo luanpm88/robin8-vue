@@ -12,20 +12,20 @@
         <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.name.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.name}}</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.description.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.description}}</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.brandName.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.trademark_name}}</p>
               </div>
             </div>
@@ -40,20 +40,20 @@
         <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.platform.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <div class="row">
                   <div
                     v-for="item in detailData.terraces"
                     :key="item.terrace_id"
-                    class="col-sm-6 platform-item"
+                    class="col-sm-6 col-xs-12 platform-item"
                   >
-                    <div class="col-sm-3 text-center">
+                    <div class="col-sm-3 col-xs-3 text-center">
                       <div class="check-icon checked">
                         <img :src="item.avatar" alt="" class="icon-img" />
                       </div>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 col-xs-9">
                       <!-- <p class="form-control-static">{{item.name}}曝光值:{{item.exposure_value}}</p> -->
                       <!--  -->
                       <p class="form-control-static">{{$t('lang.exposure')}}: {{item.exposure_value}}</p>
@@ -63,8 +63,8 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.picture.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <div class="upload-imgs-list">
                   <div class="upload-img-item">
                     <img :src="detailData.img_url" alt="" class="upload-img" />
@@ -73,26 +73,26 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.time.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.time_range}}</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.pre_kols_count}}</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.budget.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.budget.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.pre_amount}}</p>
               </div>
             </div>
             <div v-if="detailData.notice" class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.precaution.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.notice}}</p>
               </div>
             </div>
@@ -107,32 +107,32 @@
         <div class="panel-body">
           <div class="form-horizontal campaign-create-form">
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.tags.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.tags.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.industries}}</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.price.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">{{detailData.price_range}}</p>
               </div>
             </div>
             <!-- <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">18～40</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">女</p>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-xs-4 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
+              <div class="col-sm-8 col-xs-8">
                 <p class="form-control-static">北京 / 上海 / 深圳</p>
               </div>
             </div> -->
@@ -290,22 +290,34 @@ export default {
 <style lang="scss" scoped>
 .campaign-detail-content {
   padding: 0 100px 30px;
+  @include respond-to(mobile) {
+    padding: 0 12px 30px;
+  }
 }
 .platform-item {
   margin: 5px 0;
 }
 .kols-list {
   padding: 24px 60px;
+  @include respond-to(mobile) {
+    padding: 10px 20px;
+  }
   & > .kols-list-item {
     float: left;
     width: 33.33333%;
     padding: 0 10px;
+    @include respond-to(mobile) {
+      width: 100%;
+    }
   }
 }
 .create-btn-area {
   padding: 30px;
   & > .btn {
     width: 150px;
+    @include respond-to(mobile) {
+      width: auto;
+    }
     & + .btn {
       margin-left: 10px;
     }

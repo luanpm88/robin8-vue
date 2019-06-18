@@ -77,12 +77,12 @@
                 <strong>{{item.name}}</strong>
                 <p>{{item.time}}</p>
               </div>
-              <div class="media-right media-middle operation-area">
-                  <span
-                    class="iconfont icon-cart active"
-                    @click="doAddCart(item)"
-                  ></span>
-              </div>
+              <!-- <div class="media-right media-middle operation-area">
+                <span
+                  class="iconfont icon-cart active"
+                  @click="doAddCart(item)"
+                ></span>
+              </div> -->
             </div>
             <p class="home-post-content" v-html="item.content"></p>
           </div>
@@ -95,6 +95,7 @@
           :defaultPageSize="kolsPerPage"
           :total="kolsTotal"
           :hideOnSinglePage="true"
+          :size="paginationSize"
           @change="onPageChange"
         />
       </div>
@@ -114,6 +115,11 @@ export default {
   components: {
   },
   created() {
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     this.getBaseData();
   },
   computed: {
@@ -142,7 +148,8 @@ export default {
       itemList: [],
       cartParams: {},
       data: [],
-      selectIdValue: undefined
+      selectIdValue: undefined,
+      paginationSize: ''
     };
   },
   methods: {

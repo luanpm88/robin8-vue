@@ -7,11 +7,11 @@
     <!-- socialData -->
     <social></social>
 
-    <!-- performance -->
-    <best-posts></best-posts>
-
     <!-- most_relevant_post  暂时微信没有这个接口 -->
     <most-relevent :keywords='currentKeywords'></most-relevent>
+
+    <!-- performance -->
+    <best-posts></best-posts>
 
     <!-- Keywords -->
     <keywords></keywords>

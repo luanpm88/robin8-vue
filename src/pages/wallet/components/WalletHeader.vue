@@ -39,6 +39,9 @@ export default {
 .container-header {
   padding: 20px 100px;
   background-color: #fff;
+  @include respond-to(mobile) {
+    padding: 10px 30px;
+  }
   .container-title {
     display: inline-block;
     height: 28px;
@@ -50,6 +53,9 @@ export default {
     font-size: $font-lg-s;
     font-weight: 600;
     color: #4a4a4a;
+    @include respond-to(mobile) {
+      display: none;
+    }
   }
   .breadcrumb {
     display: inline-block;

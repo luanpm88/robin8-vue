@@ -9,8 +9,8 @@
       <div class="panel-body">
         <div class="form-horizontal invoice-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.wallet.invoicePage.receiver.name.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="name"
@@ -29,8 +29,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.wallet.invoicePage.receiver.phone_number.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="phone_number"
@@ -49,8 +49,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.wallet.invoicePage.receiver.address.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="address"
@@ -186,8 +186,14 @@ export default {
 }
 .invoice-form {
   padding: 20px 60px;
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
   .form-group {
     margin-bottom: 20px;
+    @include respond-to(mobile) {
+      margin-bottom: 10px;
+    }
   }
 }
 .submit-btn {

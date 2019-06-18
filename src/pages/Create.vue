@@ -55,10 +55,16 @@ export default {
 <style lang="scss" scoped>
 .home-container {
   padding: 40px 100px;
+  @include respond-to(mobile) {
+    padding: 30px;
+  }
   .icon-grid-panel {
     @include display-flex;
     $height: 360px;
     $gap: 32px;
+    @include respond-to(mobile) {
+      display: block;
+    }
     & > .item {
       @include display-flex;
       @include flex(1);
@@ -70,6 +76,12 @@ export default {
       background: linear-gradient(180deg, #2fccd3 0%, #75e6e9 100%);
       box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, .1);
       cursor: pointer;
+      @include respond-to(mobile) {
+        width: 100%;
+        height: 300px;
+        margin-right: 0;
+        margin-bottom: 16px;
+      }
       .box {
         text-align: center;
         color: #fff;
@@ -92,6 +104,9 @@ export default {
       }
       &:last-child {
         margin-right: 0;
+        @include respond-to(mobile) {
+          margin-bottom: 0;
+        }
       }
     }
   }

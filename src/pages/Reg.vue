@@ -1,82 +1,80 @@
 <template>
-  <div class="page">
-    <div class="panel default-panel login-panel">
-      <div class="panel-body">
-        <div class="login-container">
-          <div class="tabs">
-            <div class="item">
-              <router-link to="/login">{{$t('lang.login.title')}}</router-link>
-            </div>
-            <div class="item active">
-              <router-link to="/reg">{{$t('lang.signUp.title')}}</router-link>
+  <div class="panel default-panel login-panel">
+    <div class="panel-body">
+      <div class="login-container">
+        <div class="tabs">
+          <div class="item">
+            <router-link to="/login">{{$t('lang.login.title')}}</router-link>
+          </div>
+          <div class="item active">
+            <router-link to="/reg">{{$t('lang.signUp.title')}}</router-link>
+          </div>
+        </div>
+
+        <div class="form-horizontal default-form login-form">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input
+                v-if="flag"
+                type="tel"
+                name="typeVal"
+                class="form-control"
+                v-model.trim="typeVal"
+                :placeholder="$t('lang.signUp.phone.placeholder')"
+                ref="type1"
+              >
+              <input
+                v-else
+                type="email"
+                name="typeVal"
+                class="form-control"
+                v-model.trim="typeVal"
+                :placeholder="$t('lang.signUp.email.placeholder')"
+              >
+              <div class="form-tips text-right" v-if="flag">or
+                <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.email')}}</span>
+              </div>
+              <div class="form-tips text-right" v-else>or
+                <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.phone')}}</span>
+              </div>
             </div>
           </div>
-
-          <div class="form-horizontal default-form login-form">
-            <div class="form-group">
-              <div class="col-sm-12">
-                <input
-                  v-if="flag"
-                  type="tel"
-                  name="typeVal"
-                  class="form-control"
-                  v-model.trim="typeVal"
-                  :placeholder="$t('lang.signUp.phone.placeholder')"
-                  ref="type1"
-                >
-                <input
-                  v-else
-                  type="email"
-                  name="typeVal"
-                  class="form-control"
-                  v-model.trim="typeVal"
-                  :placeholder="$t('lang.signUp.email.placeholder')"
-                >
-                <div class="form-tips text-right" v-if="flag">or
-                  <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.email')}}</span>
-                </div>
-                <div class="form-tips text-right" v-else>or
-                  <span class="link" @click="checkType">{{$t('lang.signUp.toggleTips.phone')}}</span>
-                </div>
-              </div>
+          <div class="form-group">
+            <div class="col-sm-6 col-xs-6">
+              <input
+                type="text"
+                name="code"
+                class="form-control"
+                v-model.trim="code"
+                :placeholder="$t('lang.signUp.code.placeholder')"
+              >
             </div>
-            <div class="form-group">
-              <div class="col-sm-6 col-xs-6">
-                <input
-                  type="text"
-                  name="code"
-                  class="form-control"
-                  v-model.trim="code"
-                  :placeholder="$t('lang.signUp.code.placeholder')"
-                >
-              </div>
-              <div class="col-sm-6 col-xs-6">
-                <button
-                  class="btn btn-block btn-cyan"
-                  :disabled="disabled"
-                  @click="codeUrl"
-                >{{$t('lang.signUp.codeBtn')}}</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-12">
-                <input
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  v-model="password"
-                  :placeholder="$t('lang.signUp.password.placeholder')"
-                >
-              </div>
-            </div>
-            <div class="form-group text-center">
+            <div class="col-sm-6 col-xs-6">
               <button
-                type="button"
-                class="btn btn-cyan confirm-btn"
-                @click="reg"
-                :disabled="loginStatus"
-              >{{$t('lang.signUp.submit')}}</button>
+                class="btn btn-block btn-cyan"
+                :disabled="disabled"
+                @click="codeUrl"
+              >{{$t('lang.signUp.codeBtn')}}</button>
             </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                v-model="password"
+                :placeholder="$t('lang.signUp.password.placeholder')"
+              >
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button
+              type="button"
+              class="btn btn-cyan confirm-btn"
+              @click="reg"
+              :disabled="loginStatus"
+            >{{$t('lang.signUp.submit')}}</button>
           </div>
         </div>
       </div>

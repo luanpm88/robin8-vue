@@ -11,16 +11,38 @@
     >
       <div class="panel-body list-content">
         <div class="list-content-inner">
-          <div v-if="isKol">
-            <kols-list-item
-              v-for="item in currentList"
-              :key="item.profile_id"
-              :renderStatus="kolRenderStatus"
-              :renderData="item"
-              :routerData="kolRouterData"
-            ></kols-list-item>
-          </div>
-
+          <table v-if="isKol" class="default-table">
+            <thead>
+              <tr>
+                <th width="60%"></th>
+                <th width="20%" class="text-center small">
+                  <p>Influence</p>
+                  <p>Score</p>
+                </th>
+                <th width="20%" class="text-center small">
+                  <p>Trust</p>
+                  <p>Index</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in currentList">
+                <td>
+                  <kols-list-item
+                    :key="item.profile_id"
+                    :renderStatus="kolRenderStatus"
+                    :renderData="item"
+                    :routerData="kolRouterData"
+                  ></kols-list-item>
+                </td>
+                <td class="text-center small">
+                  <p v-if="kolRenderStatus.type === 0">{{item.avg_post_influences}}</p>
+                  <p v-else>Coming<br/>Soon</p>
+                </td>
+                <td class="text-center small">Coming<br/>Soon</td>
+              </tr>
+            </tbody>
+          </table>
           <div class="nonetip" v-if="isBrandShow">
             <span>{{$t('lang.homePage.noBrand')}}</span>
           </div>
@@ -68,7 +90,7 @@ export default {
         hasMsg: false,
         hasChecked: false,
         hasInflunce: true,
-        hasCart: true,
+        hasCart: false,
         hasDelete: false,
         type: 0,
       },
@@ -242,7 +264,7 @@ export default {
   margin-bottom: 10px;
 }
 .list-content {
-  padding: 10px 20px;
+  padding: 10px 0;
   height: 400px;
   overflow: hidden;
   .kols-list-item {
@@ -257,11 +279,20 @@ export default {
 }
 .list-content-inner {
   height: 380px;
+  padding: 0 20px;
   overflow-y: auto;
-}
-.kol-score {
-  position: absolute;
-  right: 30px;
-  color: #333;
+  .default-table {
+    th {
+      padding: 0;
+      font-weight: bold;
+      background-color: transparent;
+    }
+    .small {
+      font-size: 1.2rem;
+    }
+    td {
+      padding: 0;
+    }
+  }
 }
 </style>

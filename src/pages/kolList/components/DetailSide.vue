@@ -3,7 +3,7 @@
   <div>
     <!-- DetailSide. -->
     <div class="panel default-panel kol-infobox">
-      <div class="panel-body">
+      <div class="panel-body prl30">
         <h5 class="title">{{$t('lang.kolList.detail.infoTit')}}</h5>
         <div class="media kol-dec">
           <div class="media-left media-middle">
@@ -43,11 +43,10 @@
             <!-- KOL Profile -->
             {{$t('lang.kolList.detail.kolProfile')}}
           </a>
-          <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
+          <!-- <button type="button" class="btn btn-xs btn-cyan" @click="doAddCart(infoList)">
             <span class="iconfont icon-cart"></span>
-            <!-- Add to cart -->
             {{$t('lang.kolList.detail.addCart')}}
-          </button>
+          </button> -->
         </p>
         <ul class="clearfix kol-sign">
           <li v-for="(item, index) in dec" :key="index">{{item}}</li>
@@ -241,26 +240,31 @@ export default {
         _that.infoList.profile_id = res.data.profile_id
         _that.infoList.description_raw = res.data.description_raw
         _that.infoList.gender = "-"
+
       } else {
         _that.infoList.avatar_url = res.data.avatar_url
         _that.infoList.profile_name = res.data.profile_name
         _that.infoList.profile_id = res.data.profile_id
         _that.infoList.description_raw = res.data.description_raw
         _that.infoList.gender = res.data.gender
+
+        if (type !== 0) {
+          this.backParentData(res)
+        }
+      }
+      if (type === 1 || type === 0) {
+        // 处理标签
         _that.decValue = Object.values(res.data.industries)
         _that.decKey = Object.keys(res.data.industries)
         _that.decValue.forEach((item, index) => {
           item.keyName = _that.decKey[index]
         })
+        // console.log(_that.decValue)
         _that.decValue.forEach((item, index) => {
-          if (item.n_posts === 1) {
+          if (item.n_posts >= 1) {
             _that.dec.push(item.keyName)
           }
         })
-
-        if (type !== 0) {
-          this.backParentData(res)
-        }
       }
     },
     // info 微博的接口

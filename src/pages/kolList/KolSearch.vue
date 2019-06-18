@@ -79,7 +79,7 @@
         <!-- 高级搜索 -->
         <div v-if="advancedSearch && advancedSearchShow" class="form-horizontal mt30">
 
-          <div class="form-group">
+          <div class="form-group kol-search-group">
             <div
               class="col-sm-2 control-label"
             >{{$t('lang.kolList.search.advancedSearch.followers')}}</div>
@@ -236,7 +236,7 @@
         <div class="r8-loading mb10" v-if="isLoading">
           <a-spin tip="Loading..."/>
         </div>
-        <div v-if="isTable">
+        <div v-if="isTable" class="kol-table-wrarp">
           <table class="default-table">
             <thead>
               <tr>
@@ -328,9 +328,9 @@
                         </a-tooltip>
                       </div>
                     </div>
-                    <div class="media-right media-middle operation-area">
+                    <!-- <div class="media-right media-middle operation-area">
                       <span class="iconfont icon-cart active" @click="doAddCart(item)"></span>
-                    </div>
+                    </div> -->
                   </div>
                 </td>
                 <td
@@ -345,13 +345,8 @@
                     :width="100"
                     :strokeWidth="9"
                     strokeColor="#38D0D5"
-                    :format="() => item.kol_influences"
+                    :format="() => item.influence"
                   />
-                 <!-- influences: {{item.influence}} -->
-                 <!-- <br> -->
-                  <!-- kol_influences :{{item.stats.kol_influences}} -->
-                  <!-- {{$t('lang.kolList.search.influenceTip')}} -->
-                  <!-- Coming Soon -->
                 </td>
                 <td class="text-center">
                   <a-progress
@@ -385,6 +380,7 @@
           v-model="currentPageAdd"
           :total="kolsTotal"
           :hideOnSinglePage="true"
+          :size="paginationSize"
           @change="onPageChange"
         />
       </div>
@@ -501,6 +497,7 @@ export default {
         },
       ],
       selectSearchType: 0,
+      paginationSize: ''
     };
   },
   created() {
@@ -509,6 +506,11 @@ export default {
     // this.r8Kol();
     // 获取keywords
     this.getBaseData();
+    if (commonJs.isMobile()) {
+      this.paginationSize = 'small'
+    } else {
+      this.paginationSize = ''
+    }
     if (this.$route.query.brand_keywords) {
       this.tabIndex = Number(this.$route.query.type);
       this.keyword = this.$route.query.brand_keywords;
@@ -805,15 +807,6 @@ export default {
             element.influence = parseInt(element.influence * 1000);
           } else {
             element.influence = "N/A";
-          }
-          // 处理 微信和微博平台的 kol_influences
-          if (_that.tabIndex === 0) {
-            // 微博
-            if (element.stats.kol_influences || element.stats.kol_influences === 0) {
-              element.kol_influences = parseInt(element.stats.kol_influences);
-            } else {
-              element.kol_influences = "N/A";
-            }
           }
           if (_that.tabIndex === 1) {
             // 微信

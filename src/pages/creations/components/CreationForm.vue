@@ -7,8 +7,8 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.name.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.name.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="name"
@@ -27,8 +27,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.description.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.description.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <input
                 type="text"
                 name="desc"
@@ -47,8 +47,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.brandName.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.brandName.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <select
                 name="brand"
                 class="form-control"
@@ -82,15 +82,15 @@
       <div class="panel-body">
         <div class="form-horizontal campaign-create-form">
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.platform.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.platform.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
                 <div
                   v-for="(item, index) in terracesList"
                   :key="item.id"
-                  class="col-sm-6 platform-item"
+                  class="col-sm-6 col-xs-12 platform-item"
                 >
-                  <div class="col-sm-2 pr0 pl0 text-center">
+                  <div class="col-sm-2 col-xs-3 pr0 pl0 text-center">
                     <div
                       class="check-icon"
                       :class="[item.checked ? 'checked' : '']"
@@ -100,7 +100,7 @@
                       <div class="iconfont icon-check"></div>
                     </div>
                   </div>
-                  <div class="col-sm-10 pr0">
+                  <div class="col-sm-10 col-xs-9 pr0">
                     <input
                       type="number"
                       :name="'platform' + item.id"
@@ -132,8 +132,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.picture.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 col-xs-12 control-label">{{$t('lang.creations.picture.title')}}:</div>
+            <div class="col-sm-8 col-xs-12 col-xs-12">
               <div v-if="submitData.img_url != ''" class="upload-imgs-list">
                 <div class="upload-img-item">
                   <img :src="submitData.img_url" alt="" class="upload-img" />
@@ -171,8 +171,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.time.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.time.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <datepicker
                 name="campaignTime"
                 range
@@ -195,8 +195,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.kolNumber.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <input
                 type="number"
                 name="kols_count"
@@ -213,8 +213,8 @@
                 {{$t('lang.creations.kolNumber.errorTips')}}
               </div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.budget.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-2 col-xs-12 control-label">{{$t('lang.creations.budget.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <input
                 type="number"
                 name="pre_amount"
@@ -233,8 +233,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.precaution.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.precaution.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <textarea
                 name="notice"
                 v-model="submitData.notice"
@@ -274,8 +274,8 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.price.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.price.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <select
                 name="price"
                 class="form-control"
@@ -296,8 +296,8 @@
             </div>
           </div>
           <!-- <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.followerAge.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <select class="form-control">
                 <option value="全部">{{$t('lang.creations.followerAge.placeholder')}}</option>
                 <option value="10,20">10-20 {{$t('lang.yearsOld')}}</option>
@@ -309,8 +309,8 @@
               </select>
               <div class="form-tips">{{$t('lang.creations.followerAge.errorTips')}}</div>
             </div>
-            <div class="col-sm-2 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
-            <div class="col-sm-3">
+            <div class="col-sm-2 col-xs-12 control-label">{{$t('lang.creations.followerGender.title')}}:</div>
+            <div class="col-sm-3 col-xs-12">
               <select class="form-control">
                 <option value="全部">{{$t('lang.creations.followerGender.placeholder')}}</option>
                 <option value="1">{{$t('lang.male')}}</option>
@@ -321,8 +321,8 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <div class="row">
                 <div class="col-sm-6">
                   <select
@@ -369,8 +369,8 @@
             >
           </div>
           <div class="form-group">
-            <div class="col-sm-3 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
-            <div class="col-sm-8">
+            <div class="col-sm-3 col-xs-12 control-label">{{$t('lang.creations.followerDistrict.title')}}:</div>
+            <div class="col-sm-8 col-xs-12">
               <ul v-if="checkedCitys.length > 0" class="city-list">
                 <li
                   v-for="(item, index) in checkedCitys"
@@ -401,9 +401,9 @@
     <div v-if="showKols">
       <div
         v-if="kolsList.length > 0"
-        class="row mt20"
+        class="row"
       >
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-xs-12 mt20">
           <recommended-panel
             :title="$t('lang.creations.recommendedKOLs')"
             :terracesList="terracesList"
@@ -417,7 +417,7 @@
             @changePlatform="changePlatform"
           ></recommended-panel>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-xs-12 mt20">
           <kols-list-panel
             title="Shopping Cart"
             :kolsList="cartKolsList"
@@ -1294,6 +1294,9 @@ export default {
   padding: 10px 0;
   .form-group {
     padding: 10px 40px;
+    @include respond-to(mobile) {
+      padding: 10px 16px;
+    }
   }
   .platform-item {
     margin: 5px 0;
@@ -1303,6 +1306,9 @@ export default {
   padding: 30px;
   & > .btn {
     width: 150px;
+    @include respond-to(mobile) {
+      width: auto;
+    }
     & + .btn {
       margin-left: 10px;
     }
@@ -1310,11 +1316,17 @@ export default {
 }
 .creation-form {
   padding: 0 100px;
+  @include respond-to(mobile) {
+    padding: 0 12px;
+  }
 }
 .creation-form /deep/ .kols-list {
   height: 352px;
   padding: 24px 30px;
   font-size: 0;
+  @include respond-to(mobile) {
+    padding: 10px 20px;
+  }
   // & > .kols-list-item {
   //   display: inline-block;
   //   width: 33.33333%;
@@ -1323,10 +1335,16 @@ export default {
 }
 .checked-kols-list {
   padding: 24px 30px;
+  @include respond-to(mobile) {
+    padding: 10px 20px;
+  }
   & > .kols-list-item {
     float: left;
     width: 33.33333%;
     padding: 0 10px;
+    @include respond-to(mobile) {
+      width: 100%;
+    }
   }
 }
 .empty-area {
